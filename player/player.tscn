@@ -20,9 +20,9 @@
 [ext_resource type="Texture2D" uid="uid://c4jkghkqifcm7" path="res://assets/crosshair.tres" id="17_tqiix"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="19_c35mf"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="20_x7c3f"]
-[ext_resource type="Resource" uid="uid://cl4mvpfmxwfbt" path="res://structures/walls/wood_wall/wood_wall_item.tres" id="22_bjvpn"]
-[ext_resource type="Resource" uid="uid://bo5iuu40eje8e" path="res://structures/walls/iron_wall/iron_wall_item.tres" id="23_g4c7l"]
-[ext_resource type="Resource" uid="uid://cr6nj51mld6xm" path="res://structures/walls/stone_wall/stone_wall_item.tres" id="23_s7qer"]
+[ext_resource type="Resource" uid="uid://dvu8avo8cfq2c" path="res://icon.svg" id="22_bjvpn"]
+[ext_resource type="Resource" uid="uid://dvu8avo8cfq2c" path="res://icon.svg" id="23_g4c7l"]
+[ext_resource type="Resource" uid="uid://dul5v7kefyk2k" path="res://bs.tres" id="23_s7qer"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")

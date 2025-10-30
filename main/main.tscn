@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dcj7i8ycf4bvd" path="res://common/sound/music.gd" id="2_pjrb6"]
 [ext_resource type="Script" uid="uid://b2yve24bqyhow" path="res://common/sound/sound.gd" id="3_c651c"]
-[ext_resource type="AudioStream" uid="uid://pa3jnicnrst0" path="res://assets/sfx/music/Alien.mp3" id="4_3wy1v"]
+[ext_resource type="AudioStream" uid="uid://dvu8avo8cfq2c" path="res://icon.svg" id="4_3wy1v"]
 [ext_resource type="PackedScene" uid="uid://cfpjn5drb36tv" path="res://levels/world.tscn" id="4_c651c"]
 
 [sub_resource type="Resource" id="Resource_kfbq2"]

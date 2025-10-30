@@ -35,7 +35,9 @@ func _process(_delta: float) -> void:
 		quantity_label.text = ""
 		return
 	
-	icon_rect.texture = instance.item.icon
+	if instance.item != null:
+		icon_rect.texture = instance.item.icon
+	
 	if instance.quantity > 1:
 		quantity_label.text = str(instance.quantity)
 	else:
