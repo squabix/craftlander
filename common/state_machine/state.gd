@@ -1,0 +1,61 @@
+extends Node
+class_name State
+
+signal was_locked
+signal was_unlocked
+
+signal entered
+signal exited
+
+@export var root: Node
+@export var priority: float
+@export var locked: bool:
+	set(to):
+		if to == true:
+			was_locked.emit()
+		else:
+			was_unlocked.emit()
+		locked = true
+@export var process_update: bool
+@export var physics_process_update: bool
+
+var transition_checks: Dictionary = {} # {check: state}
+var enter_callable: Callable
+
+func enter() -> void:
+	pass
+
+func exit() -> void:
+	pass
+
+func add_check(target: State, callable: Callable) -> void:
+	transition_checks[callable] = target
+
+func transition_to(to: State) -> void:
+	if enter_callable != null:
+		await get_tree().process_frame
+		enter_callable.call(to)
+
+func _process(delta: float) -> void:
+	if process_update:
+		update(delta)
+
+func _physics_process(delta: float) -> void:
+	if physics_process_update:
+		physics_update(delta)
+
+func update(_delta: float) -> void:
+	pass
+
+func physics_update(_delta: float) -> void:
+	pass
+
+func check_transitions() -> void:
+	pass
+	#for check in transition_checks:
+		#if check.call() == true:
+			#transition_to(transition_checks[check])
+			#return
+
+func _to_string() -> String:
+	return "State ({root})".format(self)

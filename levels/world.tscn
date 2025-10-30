@@ -1,0 +1,104 @@
+[gd_scene load_steps=19 format=3 uid="uid://cfpjn5drb36tv"]
+
+[ext_resource type="Shader" uid="uid://bv7qqp8qrt8qt" path="res://island/quad_channel_heightmap.gdshader" id="2_pmfem"]
+[ext_resource type="Script" uid="uid://wcijrouade5d" path="res://island/island_generator.gd" id="3_pmfem"]
+[ext_resource type="PackedScene" uid="uid://dmbp0klxo0b0c" path="res://player/player.tscn" id="4_712nc"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2mgkc"]
+sky_top_color = Color(0.69, 0.819167, 1, 1)
+sky_horizon_color = Color(0.414, 0.6165, 0.9, 1)
+sky_curve = 0.332871
+ground_bottom_color = Color(1, 1, 1, 1)
+ground_horizon_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Sky" id="Sky_tsgde"]
+sky_material = SubResource("ProceduralSkyMaterial_2mgkc")
+
+[sub_resource type="Environment" id="Environment_pmfem"]
+background_mode = 2
+sky = SubResource("Sky_tsgde")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.5
+reflected_light_source = 2
+
+[sub_resource type="Gradient" id="Gradient_w32yo"]
+offsets = PackedFloat32Array(0, 0.25555557, 0.32, 0.8688889, 0.96666664)
+colors = PackedColorArray(0.07507671, 0.0493498, 0.0071515767, 1, 0.2627281, 0.19998965, 0.058725476, 1, 0.22619998, 0.58, 0.33233997, 1, 0.30301136, 0.6781697, 0.24178264, 1, 0, 0.64753884, 0.31718782, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_712nc"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i8ckm"]
+width = 2048
+height = 2048
+noise = SubResource("FastNoiseLite_712nc")
+color_ramp = SubResource("Gradient_w32yo")
+
+[sub_resource type="Gradient" id="Gradient_pmfem"]
+offsets = PackedFloat32Array(0, 0.36, 0.73777777)
+colors = PackedColorArray(0, 0, 0, 1, 0.41725737, 0.4172574, 0.41725737, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w32yo"]
+gradient = SubResource("Gradient_pmfem")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_vons5"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_legw5"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_687qm"]
+noise = SubResource("FastNoiseLite_legw5")
+color_ramp = SubResource("Gradient_vons5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lmpr0"]
+render_priority = 0
+shader = ExtResource("2_pmfem")
+shader_parameter/albedo_texture = SubResource("NoiseTexture2D_i8ckm")
+shader_parameter/heightmap = SubResource("NoiseTexture2D_687qm")
+shader_parameter/gradient = SubResource("GradientTexture2D_w32yo")
+shader_parameter/height_ratio = 2.0
+shader_parameter/gradient_strength = 10.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_re8x6"]
+size = Vector2(100, 100)
+subdivide_width = 200
+subdivide_depth = 200
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_712nc"]
+transparency = 1
+albedo_color = Color(0.3276, 0.6442799, 0.78, 0.89411765)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_i8ckm"]
+material = SubResource("StandardMaterial3D_712nc")
+size = Vector2(100, 100)
+
+[node name="World" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pmfem")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.932103, -3.19864e-09, 0.362194, -0.276622, -0.645524, 0.711884, 0.233805, -0.76374, -0.601695, 0, 0, 0)
+shadow_enabled = true
+
+[node name="IslandGenerator" type="Node3D" parent="." node_paths=PackedStringArray("mesh_instance", "collision_shape")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.583069, 0)
+script = ExtResource("3_pmfem")
+mesh_instance = NodePath("MeshInstance3D")
+collision_shape = NodePath("StaticBody3D/CollisionShape3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="IslandGenerator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.189251, 0)
+material_override = SubResource("ShaderMaterial_lmpr0")
+mesh = SubResource("PlaneMesh_re8x6")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="IslandGenerator"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="IslandGenerator/StaticBody3D"]
+
+[node name="Player" parent="." instance=ExtResource("4_712nc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.518457, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_i8ckm")

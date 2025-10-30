@@ -1,0 +1,85 @@
+[gd_scene load_steps=14 format=3 uid="uid://dmbp0klxo0b0c"]
+
+[ext_resource type="Script" uid="uid://ucyt6h7yjc6k" path="res://player/player.gd" id="1_g1dw6"]
+[ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="2_g1dw6"]
+[ext_resource type="Resource" uid="uid://mx3f8ldvvndd" path="res://player/player_walking_movement_mode.tres" id="2_g6k8r"]
+[ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_g6k8r"]
+[ext_resource type="Script" uid="uid://chlki14yu5ulm" path="res://player/player_controller.gd" id="4_qjkh3"]
+[ext_resource type="Script" uid="uid://cb1suk3avv5yq" path="res://common/mouse_mode_controller.gd" id="5_g6k8r"]
+[ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="7_boad6"]
+[ext_resource type="Script" uid="uid://bx3dqx6ebaugu" path="res://player/states/player_walking_state.gd" id="8_hg6s5"]
+[ext_resource type="Script" uid="uid://ccbg8iw3gs48v" path="res://player/states/player_crouching_state.gd" id="9_hg6s5"]
+
+[sub_resource type="Resource" id="Resource_qjkh3"]
+script = ExtResource("2_g1dw6")
+x = true
+y = false
+z = false
+metadata/_custom_type_script = "uid://bh8pcyeueeoey"
+
+[sub_resource type="Resource" id="Resource_g6k8r"]
+script = ExtResource("4_g6k8r")
+bool_vector = SubResource("Resource_qjkh3")
+x_min = -90.0
+x_max = 90.0
+y_min = 0.0
+y_max = 0.0
+z_min = 0.0
+z_max = 0.0
+metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r1lm2"]
+radius = 0.3
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yw30f"]
+radius = 0.3
+height = 1.0
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("horizontal_rotation_target", "vertical_rotation_target")]
+script = ExtResource("1_g1dw6")
+type = "player"
+movement_mode = ExtResource("2_g6k8r")
+horizontal_rotation_target = NodePath(".")
+vertical_rotation_target = NodePath("Head/Camera3D")
+rotation_range = SubResource("Resource_g6k8r")
+metadata/_custom_type_script = "uid://bki5ij8task16"
+
+[node name="StandingCollisionShape" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_r1lm2")
+
+[node name="CrouchedCollisionShape" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_yw30f")
+
+[node name="Controller3D" type="Node" parent="." node_paths=PackedStringArray("entity")]
+script = ExtResource("4_qjkh3")
+entity = NodePath("..")
+
+[node name="MouseController" type="Node" parent="."]
+script = ExtResource("5_g6k8r")
+metadata/_custom_type_script = "uid://cb1suk3avv5yq"
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2)
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+unique_name_in_owner = true
+script = ExtResource("7_boad6")
+initial_state = NodePath("WalkingState")
+metadata/_custom_type_script = "uid://bqonxtntgndfr"
+
+[node name="WalkingState" type="Node" parent="StateMachine"]
+unique_name_in_owner = true
+script = ExtResource("8_hg6s5")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="CrouchingState" type="Node" parent="StateMachine"]
+unique_name_in_owner = true
+script = ExtResource("9_hg6s5")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"

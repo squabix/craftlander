@@ -1,0 +1,690 @@
+[gd_scene load_steps=40 format=3 uid="uid://dmbp0klxo0b0c"]
+
+[ext_resource type="Script" uid="uid://ucyt6h7yjc6k" path="res://player/player.gd" id="1_g1dw6"]
+[ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="2_g1dw6"]
+[ext_resource type="Resource" uid="uid://mx3f8ldvvndd" path="res://player/states/player_walking_movement_mode.tres" id="2_g6k8r"]
+[ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_g6k8r"]
+[ext_resource type="Script" uid="uid://chlki14yu5ulm" path="res://player/player_controller.gd" id="4_qjkh3"]
+[ext_resource type="Script" uid="uid://cb1suk3avv5yq" path="res://common/mouse_mode_controller.gd" id="5_g6k8r"]
+[ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="7_boad6"]
+[ext_resource type="Script" uid="uid://bwd4jx8u5uct2" path="res://common/inventory_system/item_holder3d.gd" id="7_kb6p2"]
+[ext_resource type="Script" uid="uid://bx3dqx6ebaugu" path="res://player/states/player_walking_state.gd" id="8_hg6s5"]
+[ext_resource type="Script" uid="uid://ioo6s3m7wbha" path="res://common/inventory_system/inventory_holder_link.gd" id="9_bjvpn"]
+[ext_resource type="Script" uid="uid://ccbg8iw3gs48v" path="res://player/states/player_crouched_state.gd" id="9_hg6s5"]
+[ext_resource type="Script" uid="uid://cody42elqcrek" path="res://player/states/player_sprinting_state.gd" id="10_8t03j"]
+[ext_resource type="Script" uid="uid://bypxgjqugqucx" path="res://common3d/interactions/interactor3d.gd" id="10_32hag"]
+[ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="11_2ieo8"]
+[ext_resource type="Script" path="res://common/damage_system/health.gd" id="12_ebec5"]
+[ext_resource type="Script" uid="uid://b1eix6p0204fp" path="res://common/inventory_system/displays/item_display.gd" id="16_e7oew"]
+[ext_resource type="Texture2D" uid="uid://dvu8avo8cfq2c" path="res://icon.svg" id="16_tqiix"]
+[ext_resource type="Texture2D" uid="uid://c4jkghkqifcm7" path="res://assets/crosshair.tres" id="17_tqiix"]
+[ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="19_c35mf"]
+[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="20_x7c3f"]
+[ext_resource type="Resource" uid="uid://cl4mvpfmxwfbt" path="res://structures/walls/wood_wall/wood_wall_item.tres" id="22_bjvpn"]
+[ext_resource type="Resource" uid="uid://bo5iuu40eje8e" path="res://structures/walls/iron_wall/iron_wall_item.tres" id="23_g4c7l"]
+[ext_resource type="Resource" uid="uid://cr6nj51mld6xm" path="res://structures/walls/stone_wall/stone_wall_item.tres" id="23_s7qer"]
+
+[sub_resource type="Resource" id="Resource_qjkh3"]
+script = ExtResource("2_g1dw6")
+y = false
+z = false
+metadata/_custom_type_script = "uid://bh8pcyeueeoey"
+
+[sub_resource type="Resource" id="Resource_g6k8r"]
+script = ExtResource("4_g6k8r")
+bool_vector = SubResource("Resource_qjkh3")
+x_min = -90.0
+x_max = 90.0
+metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r1lm2"]
+radius = 0.3
+height = 1.6
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yw30f"]
+radius = 0.3
+height = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ebec5"]
+size = Vector3(0.42, 1.5, 0.42)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32hag"]
+bg_color = Color(0.18, 0.18, 0.18, 0.443137)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tqiix"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Theme" id="Theme_e7oew"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_32hag")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_tqiix")
+
+[sub_resource type="Gradient" id="Gradient_x7c3f"]
+offsets = PackedFloat32Array(0.480159, 0.585317)
+colors = PackedColorArray(0.36, 0.36, 0.36, 0.560784, 0.28, 0.28, 0.28, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bjvpn"]
+gradient = SubResource("Gradient_x7c3f")
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_tqiix"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D/ArmContainer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.08, -0.3)]
+}
+
+[sub_resource type="Animation" id="Animation_32hag"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D/ArmContainer:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -0.08, -0.3), Vector3(0, -0.07, -0.3), Vector3(0, -0.08, -0.3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tqiix"]
+_data = {
+&"RESET": SubResource("Animation_tqiix"),
+&"idle": SubResource("Animation_32hag")
+}
+
+[sub_resource type="Resource" id="Resource_bjvpn"]
+script = ExtResource("20_x7c3f")
+item = ExtResource("22_bjvpn")
+quantity = 5
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_knn7v"]
+script = ExtResource("20_x7c3f")
+item = ExtResource("23_g4c7l")
+quantity = 10
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_s7qer"]
+script = ExtResource("20_x7c3f")
+item = ExtResource("23_s7qer")
+quantity = 20
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("horizontal_rotation_target", "vertical_rotation_target")]
+script = ExtResource("1_g1dw6")
+type = "player"
+movement_mode = ExtResource("2_g6k8r")
+do_push_rigid_bodies = true
+horizontal_rotation_target = NodePath(".")
+vertical_rotation_target = NodePath("Head/Camera3D")
+rotation_range = SubResource("Resource_g6k8r")
+metadata/_custom_type_script = "uid://bki5ij8task16"
+
+[node name="StandingCollisionShape" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+shape = SubResource("CapsuleShape3D_r1lm2")
+
+[node name="CrouchedCollisionShape" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_yw30f")
+
+[node name="Controller3D" type="Node" parent="." node_paths=PackedStringArray("entity")]
+script = ExtResource("4_qjkh3")
+entity = NodePath("..")
+
+[node name="MouseController" type="Node" parent="."]
+script = ExtResource("5_g6k8r")
+metadata/_custom_type_script = "uid://cb1suk3avv5yq"
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+fov = 85.0
+
+[node name="ItemSceneContainer" type="Node3D" parent="Head/Camera3D"]
+
+[node name="BuildRay" type="RayCast3D" parent="Head/Camera3D"]
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="InteratorRay" type="RayCast3D" parent="Head/Camera3D"]
+target_position = Vector3(0, 0, -2.5)
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Interactor" type="Node" parent="Head/Camera3D/InteratorRay" node_paths=PackedStringArray("root")]
+unique_name_in_owner = true
+script = ExtResource("10_32hag")
+root = NodePath("../../../..")
+metadata/_custom_type_script = "uid://bypxgjqugqucx"
+
+[node name="ArmContainer" type="Node3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08, -0.3)
+
+[node name="ItemHolder" type="Node3D" parent="Head/Camera3D/ArmContainer" node_paths=PackedStringArray("sprite", "instance_parent")]
+transform = Transform3D(0.978148, 0.207912, 0, -0.207912, 0.978147, 0, 0, 0, 1, 0.24, 0, 0)
+script = ExtResource("7_kb6p2")
+sprite = NodePath("Sprite3D")
+instance_parent = NodePath("../..")
+metadata/_edit_group_ = true
+
+[node name="Sprite3D" type="Sprite3D" parent="Head/Camera3D/ArmContainer/ItemHolder"]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+no_depth_test = true
+texture_filter = 0
+
+[node name="InventoryHolderLink" type="Node" parent="Head/Camera3D/ArmContainer/ItemHolder" node_paths=PackedStringArray("inventory", "item_holder")]
+script = ExtResource("9_bjvpn")
+inventory = NodePath("../../../../../Inventory")
+item_holder = NodePath("..")
+metadata/_custom_type_script = "uid://ioo6s3m7wbha"
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "root")]
+unique_name_in_owner = true
+script = ExtResource("7_boad6")
+initial_state = NodePath("WalkingState")
+root = NodePath("..")
+metadata/_custom_type_script = "uid://bqonxtntgndfr"
+
+[node name="WalkingState" type="Node" parent="StateMachine" node_paths=PackedStringArray("root")]
+unique_name_in_owner = true
+script = ExtResource("8_hg6s5")
+root = NodePath("../..")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="CrouchedState" type="Node" parent="StateMachine" node_paths=PackedStringArray("root")]
+unique_name_in_owner = true
+script = ExtResource("9_hg6s5")
+root = NodePath("../..")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="SprintingState" type="Node" parent="StateMachine" node_paths=PackedStringArray("root")]
+unique_name_in_owner = true
+script = ExtResource("10_8t03j")
+root = NodePath("../..")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="Hurtbox3D" type="Area3D" parent="." node_paths=PackedStringArray("health")]
+script = ExtResource("11_2ieo8")
+health = NodePath("../Health")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_ebec5")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("12_ebec5")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("17_tqiix")
+
+[node name="BuildBar" type="ProgressBar" parent="HUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.5
+offset_top = 176.0
+offset_right = 93.5
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_e7oew")
+max_value = 1.0
+show_percentage = false
+
+[node name="InventoryDisplay" type="HBoxContainer" parent="HUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 226.0
+offset_right = 200.0
+offset_bottom = 266.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 5
+
+[node name="ItemDisplay1" type="Control" parent="HUD/InventoryDisplay" node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+inventory = NodePath("../../../Inventory")
+inventory_holder_link = NodePath("../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
+selected_modulate = Color(0.345098, 1, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryDisplay/ItemDisplay1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryDisplay/ItemDisplay1"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("16_tqiix")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryDisplay/ItemDisplay1"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="ItemDisplay2" type="Control" parent="HUD/InventoryDisplay" node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+inventory = NodePath("../../../Inventory")
+index = 1
+inventory_holder_link = NodePath("../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
+selected_modulate = Color(0.345098, 1, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryDisplay/ItemDisplay2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryDisplay/ItemDisplay2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("16_tqiix")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryDisplay/ItemDisplay2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="ItemDisplay3" type="Control" parent="HUD/InventoryDisplay" node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+inventory = NodePath("../../../Inventory")
+index = 2
+inventory_holder_link = NodePath("../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
+selected_modulate = Color(0.345098, 1, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryDisplay/ItemDisplay3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryDisplay/ItemDisplay3"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("16_tqiix")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryDisplay/ItemDisplay3"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="ItemDisplay4" type="Control" parent="HUD/InventoryDisplay" node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+inventory = NodePath("../../../Inventory")
+index = 3
+inventory_holder_link = NodePath("../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
+selected_modulate = Color(0.345098, 1, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryDisplay/ItemDisplay4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryDisplay/ItemDisplay4"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("16_tqiix")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryDisplay/ItemDisplay4"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="ItemDisplay5" type="Control" parent="HUD/InventoryDisplay" node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+inventory = NodePath("../../../Inventory")
+index = 4
+inventory_holder_link = NodePath("../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
+selected_modulate = Color(0.345098, 1, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryDisplay/ItemDisplay5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryDisplay/ItemDisplay5"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("16_tqiix")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryDisplay/ItemDisplay5"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="ItemDisplay6" type="Control" parent="HUD/InventoryDisplay" node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+inventory = NodePath("../../../Inventory")
+index = 5
+inventory_holder_link = NodePath("../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
+selected_modulate = Color(0.345098, 1, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryDisplay/ItemDisplay6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryDisplay/ItemDisplay6"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("16_tqiix")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryDisplay/ItemDisplay6"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="ItemDisplay7" type="Control" parent="HUD/InventoryDisplay" node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+inventory = NodePath("../../../Inventory")
+index = 6
+inventory_holder_link = NodePath("../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
+selected_modulate = Color(0.345098, 1, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryDisplay/ItemDisplay7"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryDisplay/ItemDisplay7"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("16_tqiix")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryDisplay/ItemDisplay7"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="ItemDisplay8" type="Control" parent="HUD/InventoryDisplay" node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+inventory = NodePath("../../../Inventory")
+index = 7
+inventory_holder_link = NodePath("../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
+selected_modulate = Color(0.345098, 1, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryDisplay/ItemDisplay8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryDisplay/ItemDisplay8"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("16_tqiix")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryDisplay/ItemDisplay8"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="ItemDisplay9" type="Control" parent="HUD/InventoryDisplay" node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+inventory = NodePath("../../../Inventory")
+index = 8
+inventory_holder_link = NodePath("../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
+selected_modulate = Color(0.345098, 1, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryDisplay/ItemDisplay9"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryDisplay/ItemDisplay9"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("16_tqiix")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryDisplay/ItemDisplay9"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_tqiix")
+}
+autoplay = "idle"
+
+[node name="BuildTimer" type="Timer" parent="."]
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("19_c35mf")
+items = Array[ExtResource("20_x7c3f")]([SubResource("Resource_bjvpn"), SubResource("Resource_knn7v"), SubResource("Resource_s7qer")])
+size = 9

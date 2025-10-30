@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="MovementMode3D" load_steps=2 format=3 uid="uid://c86fer36qsomd"]
+
+[ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common3d/movement_mode3d.gd" id="1_srm2e"]
+
+[resource]
+script = ExtResource("1_srm2e")
+max_speed = Vector2(8, 8)
+acceleration = Vector2(0.1, 1)
+friction = Vector2(0.5, 0)
+accelerate_threshold = 0.1
+metadata/_custom_type_script = "uid://edbvsbdtvgtj"
