@@ -1,8 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://cfpjn5drb36tv"]
+[gd_scene load_steps=17 format=3 uid="uid://cfpjn5drb36tv"]
 
-[ext_resource type="Shader" uid="uid://bv7qqp8qrt8qt" path="res://island/quad_channel_heightmap.gdshader" id="2_pmfem"]
+[ext_resource type="Material" uid="uid://drm8bdv4es6et" path="res://island/mat1.tres" id="2_tsgde"]
 [ext_resource type="Script" uid="uid://wcijrouade5d" path="res://island/island_generator.gd" id="3_pmfem"]
-[ext_resource type="PackedScene" uid="uid://dmbp0klxo0b0c" path="res://player/player.tscn" id="4_712nc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2mgkc"]
 sky_top_color = Color(0.69, 0.819167, 1, 1)
@@ -22,48 +21,40 @@ ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.5
 reflected_light_source = 2
 
-[sub_resource type="Gradient" id="Gradient_w32yo"]
-offsets = PackedFloat32Array(0, 0.25555557, 0.32, 0.8688889, 0.96666664)
-colors = PackedColorArray(0.07507671, 0.0493498, 0.0071515767, 1, 0.2627281, 0.19998965, 0.058725476, 1, 0.22619998, 0.58, 0.33233997, 1, 0.30301136, 0.6781697, 0.24178264, 1, 0, 0.64753884, 0.31718782, 1)
+[sub_resource type="Gradient" id="Gradient_tsgde"]
+colors = PackedColorArray(0.65012735, 0.6501287, 0.650128, 1, 1, 1, 1, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_712nc"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pmfem"]
+seed = 1
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_i8ckm"]
-width = 2048
-height = 2048
-noise = SubResource("FastNoiseLite_712nc")
-color_ramp = SubResource("Gradient_w32yo")
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w32yo"]
+noise = SubResource("FastNoiseLite_pmfem")
+color_ramp = SubResource("Gradient_tsgde")
 
 [sub_resource type="Gradient" id="Gradient_pmfem"]
-offsets = PackedFloat32Array(0, 0.36, 0.73777777)
-colors = PackedColorArray(0, 0, 0, 1, 0.41725737, 0.4172574, 0.41725737, 1, 1, 1, 1, 1)
+offsets = PackedFloat32Array(0, 0.2128514, 0.6686747)
+colors = PackedColorArray(0.51586664, 0.51586676, 0.51586634, 1, 0.30200383, 0.30200383, 0.30200383, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_w32yo"]
 gradient = SubResource("Gradient_pmfem")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[sub_resource type="Gradient" id="Gradient_vons5"]
+[sub_resource type="Gradient" id="Gradient_712nc"]
+offsets = PackedFloat32Array(0.23694779, 0.34136546, 0.562249, 0.6385542)
+colors = PackedColorArray(1, 1, 1, 1, 0.50271857, 0.50271857, 0.5027185, 1, 0.08598376, 0.08598376, 0.085983746, 1, 0, 0, 0, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_legw5"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_687qm"]
-noise = SubResource("FastNoiseLite_legw5")
-color_ramp = SubResource("Gradient_vons5")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lmpr0"]
-render_priority = 0
-shader = ExtResource("2_pmfem")
-shader_parameter/albedo_texture = SubResource("NoiseTexture2D_i8ckm")
-shader_parameter/heightmap = SubResource("NoiseTexture2D_687qm")
-shader_parameter/gradient = SubResource("GradientTexture2D_w32yo")
-shader_parameter/height_ratio = 2.0
-shader_parameter/gradient_strength = 10.0
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i8ckm"]
+gradient = SubResource("Gradient_712nc")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_re8x6"]
 size = Vector2(100, 100)
 subdivide_width = 200
 subdivide_depth = 200
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_pmfem"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_712nc"]
 transparency = 1
@@ -82,23 +73,44 @@ environment = SubResource("Environment_pmfem")
 transform = Transform3D(0.932103, -3.19864e-09, 0.362194, -0.276622, -0.645524, 0.711884, 0.233805, -0.76374, -0.601695, 0, 0, 0)
 shadow_enabled = true
 
-[node name="IslandGenerator" type="Node3D" parent="." node_paths=PackedStringArray("mesh_instance", "collision_shape")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.583069, 0)
+[node name="IslandGenerator" type="Node3D" parent="." node_paths=PackedStringArray("mesh_instance", "collision_shape", "heightmap_rect")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08229065, 0)
 script = ExtResource("3_pmfem")
+image_width = 512
+image_height = 512
+noise_texture = SubResource("NoiseTexture2D_w32yo")
+taper_gradient_texture = SubResource("GradientTexture2D_w32yo")
+absolute_gradient_texture = SubResource("GradientTexture2D_i8ckm")
 mesh_instance = NodePath("MeshInstance3D")
 collision_shape = NodePath("StaticBody3D/CollisionShape3D")
+heightmap_rect = NodePath("Interface/HeightmapRect")
+metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="IslandGenerator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.189251, 0)
-material_override = SubResource("ShaderMaterial_lmpr0")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.9546776, 0)
+material_override = ExtResource("2_tsgde")
 mesh = SubResource("PlaneMesh_re8x6")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="IslandGenerator"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="IslandGenerator/StaticBody3D"]
+shape = SubResource("HeightMapShape3D_pmfem")
 
-[node name="Player" parent="." instance=ExtResource("4_712nc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.518457, 0)
+[node name="Interface" type="Control" parent="IslandGenerator"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HeightmapRect" type="TextureRect" parent="IslandGenerator/Interface"]
+layout_mode = 1
+offset_right = 128.0
+offset_bottom = 128.0
+expand_mode = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 mesh = SubResource("PlaneMesh_i8ckm")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21.822174, 80.747826)
