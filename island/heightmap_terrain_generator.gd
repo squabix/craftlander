@@ -7,8 +7,6 @@ var update_texture_action: Callable = update_mesh
 
 @export var map_size: Vector3
 @export var map_resolution: Vector2i
-@export var image_width: int
-@export var image_height: int
 @export var mesh_instance: MeshInstance3D
 @export var collision_shape: CollisionShape3D
 @export var generate_on_ready: bool = true
@@ -33,6 +31,9 @@ func _ready() -> void:
 		await get_tree().process_frame
 		generate()
 
+func get_mesh_heightmap_texture() -> ImageTexture:
+	return mesh_instance.material_override.get_shader_parameter("heightmap")
+
 func generate() -> void:
 	add_new_mesh()
 	var image_texture: ImageTexture = update_shader_texture()
@@ -53,19 +54,19 @@ func update_shader_texture() -> ImageTexture:
 	return image_texture
 
 func update_collision_shape(image_texture: ImageTexture) -> void:
-	var img: Image = image_texture.get_image()
-	img.convert(Image.FORMAT_RF)
+	var image: Image = image_texture.get_image()
+	image.convert(Image.FORMAT_RF)
 	var shape := HeightMapShape3D.new()
-	shape.update_map_data_from_image(img, 0.0, map_size.y)
+	shape.update_map_data_from_image(image, 0.0, map_size.y)
 	collision_shape.shape = shape
-	collision_shape.scale.x = mesh.size.x / img.get_width()
-	collision_shape.scale.z = mesh.size.y / img.get_height()
+	collision_shape.scale.x = mesh.size.x / image.get_width()
+	collision_shape.scale.z = mesh.size.y / image.get_height()
 
 func generate_image_texture() -> ImageTexture:
 	return ImageTexture.create_from_image(
 		Image.create_empty(
-			image_width,
-			image_height,
+			map_resolution.x,
+			map_resolution.y,
 			false,
 			Image.FORMAT_L8
 		)

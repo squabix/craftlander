@@ -7,6 +7,10 @@ extends HeightmapTerrainGenerator
 @export var absolute_gradient_texture: GradientTexture2D
 @export var heightmap_rect: TextureRect
 
+func _ready() -> void:
+	await super()
+	heightmap_rect.texture = get_mesh_heightmap_texture()
+
 func get_pixel(x: int, y: int, texture_images: Dictionary[Texture2D, Image]) -> Color:
 	var sample: Callable = func(texture: Texture2D) -> float: return texture_images[texture].get_pixel(x, y).r
 	
@@ -38,18 +42,17 @@ func generate_image_texture() -> ImageTexture:
 	
 	# Resize all images to same size
 	for image in texture_images.values():
-		image.resize(image_width, image_height)
-		print("Resized " + str(image) + " to " + str(image_width) + " x " + str(image_height))
+		image.resize(map_resolution.x, map_resolution.y)
 	
 	var output_image: Image = Image.create_empty(
-		image_width,
-		image_height,
+		map_resolution.x,
+		map_resolution.y,
 		false,
 		Image.FORMAT_L8
 	)
 	
-	for x in image_width:
-		for y in image_height:
+	for x in map_resolution.x:
+		for y in map_resolution.y:
 			output_image.set_pixel(x, y, get_pixel(x, y, texture_images))
 	
 	return ImageTexture.create_from_image(output_image)
