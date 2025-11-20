@@ -2,10 +2,10 @@ shader_type spatial;
 
 uniform sampler2D albedo_texture;
 uniform sampler2D heightmap;
-uniform float height_ratio;
+uniform float max_height;
 
 void vertex() {
-	VERTEX.y += texture(heightmap, UV).r * height_ratio;
+	VERTEX.y += texture(heightmap, UV).r * max_height;
 }
 
 void fragment() {
