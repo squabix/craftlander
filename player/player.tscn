@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dmbp0klxo0b0c"]
+[gd_scene load_steps=38 format=3 uid="uid://dmbp0klxo0b0c"]
 
 [ext_resource type="Script" uid="uid://ucyt6h7yjc6k" path="res://player/player.gd" id="1_g1dw6"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="2_g1dw6"]
@@ -16,12 +16,10 @@
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="11_2ieo8"]
 [ext_resource type="Script" path="res://common/damage_system/health.gd" id="12_ebec5"]
 [ext_resource type="Script" uid="uid://b1eix6p0204fp" path="res://common/inventory_system/displays/item_display.gd" id="16_e7oew"]
-[ext_resource type="Texture2D" uid="uid://dvu8avo8cfq2c" path="res://icon.svg" id="16_tqiix"]
 [ext_resource type="Texture2D" uid="uid://c4jkghkqifcm7" path="res://assets/crosshair.tres" id="17_tqiix"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="19_c35mf"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="20_x7c3f"]
-[ext_resource type="Resource" uid="uid://dvu8avo8cfq2c" path="res://icon.svg" id="22_bjvpn"]
-[ext_resource type="Resource" uid="uid://dvu8avo8cfq2c" path="res://icon.svg" id="23_g4c7l"]
+[ext_resource type="Texture2D" uid="uid://dvu8avo8cfq2c" path="res://icon.svg" id="23_g4c7l"]
 [ext_resource type="Resource" uid="uid://dul5v7kefyk2k" path="res://bs.tres" id="23_s7qer"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
@@ -109,7 +107,7 @@ _data = {
 
 [sub_resource type="Resource" id="Resource_bjvpn"]
 script = ExtResource("20_x7c3f")
-item = ExtResource("22_bjvpn")
+item = ExtResource("23_g4c7l")
 quantity = 5
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
@@ -126,10 +124,13 @@ quantity = 20
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("horizontal_rotation_target", "vertical_rotation_target")]
+floor_constant_speed = true
+floor_block_on_wall = false
+floor_max_angle = 1.0471976
+floor_snap_length = 0.5
 script = ExtResource("1_g1dw6")
 type = "player"
 movement_mode = ExtResource("2_g6k8r")
-do_push_rigid_bodies = true
 horizontal_rotation_target = NodePath(".")
 vertical_rotation_target = NodePath("Head/Camera3D")
 rotation_range = SubResource("Resource_g6k8r")
@@ -145,8 +146,11 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_yw30f")
 
-[node name="Controller3D" type="Node" parent="." node_paths=PackedStringArray("entity")]
+[node name="Controller3D" type="Node" parent="." node_paths=PackedStringArray("head", "current_collision_shape", "rotation_base", "entity")]
 script = ExtResource("4_qjkh3")
+head = NodePath("../Head")
+current_collision_shape = NodePath("../StandingCollisionShape")
+rotation_base = NodePath("../Head")
 entity = NodePath("..")
 
 [node name="MouseController" type="Node" parent="."]
@@ -314,7 +318,7 @@ expand_mode = 1
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("16_tqiix")
+texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
 [node name="QuantityLabel" type="Label" parent="HUD/InventoryDisplay/ItemDisplay1"]
@@ -357,7 +361,7 @@ expand_mode = 1
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("16_tqiix")
+texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
 [node name="QuantityLabel" type="Label" parent="HUD/InventoryDisplay/ItemDisplay2"]
@@ -400,7 +404,7 @@ expand_mode = 1
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("16_tqiix")
+texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
 [node name="QuantityLabel" type="Label" parent="HUD/InventoryDisplay/ItemDisplay3"]
@@ -443,7 +447,7 @@ expand_mode = 1
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("16_tqiix")
+texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
 [node name="QuantityLabel" type="Label" parent="HUD/InventoryDisplay/ItemDisplay4"]
@@ -486,7 +490,7 @@ expand_mode = 1
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("16_tqiix")
+texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
 [node name="QuantityLabel" type="Label" parent="HUD/InventoryDisplay/ItemDisplay5"]
@@ -529,7 +533,7 @@ expand_mode = 1
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("16_tqiix")
+texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
 [node name="QuantityLabel" type="Label" parent="HUD/InventoryDisplay/ItemDisplay6"]
@@ -572,7 +576,7 @@ expand_mode = 1
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("16_tqiix")
+texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
 [node name="QuantityLabel" type="Label" parent="HUD/InventoryDisplay/ItemDisplay7"]
@@ -615,7 +619,7 @@ expand_mode = 1
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("16_tqiix")
+texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
 [node name="QuantityLabel" type="Label" parent="HUD/InventoryDisplay/ItemDisplay8"]
@@ -658,7 +662,7 @@ expand_mode = 1
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("16_tqiix")
+texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
 [node name="QuantityLabel" type="Label" parent="HUD/InventoryDisplay/ItemDisplay9"]
