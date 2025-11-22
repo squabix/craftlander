@@ -4,6 +4,7 @@ uniform sampler2D heightmap;
 uniform sampler2D gradient;
 uniform sampler2D normal_map;
 uniform float max_height;
+uniform float zero_displacement;
 
 varying float v_height;
 
@@ -11,6 +12,9 @@ void vertex() {
 	float h = texture(heightmap, UV).r;
 	v_height = clamp(h, 0.0, 1.0); // store for fragment
 	VERTEX.y += h * max_height;
+	if (h == 0.0) {
+		VERTEX.y += zero_displacement;
+	}
 }
 
 void fragment() {
