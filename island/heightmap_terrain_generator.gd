@@ -57,33 +57,43 @@ func update_shader_texture() -> ImageTexture:
 	)
 	return image_texture
 
-func get_pixel_normal(x: int, y: int) -> Vector3:
-
-	# Clamp pixels so we can sample neighbors safely
-	var x0 := clampi(x - 1, 0, map_resolution.x - 1)
-	var x1 := clampi(x + 1, 0, map_resolution.x - 1)
-	var y0 := clampi(y - 1, 0, map_resolution.y - 1)
-	var y1 := clampi(y + 1, 0, map_resolution.y - 1)
-
-	# Sample heights (L8 format: r channel holds height 0..1)
-	var h_l: float = sample_heightmap.call(x0, y) * map_size.y   # left
-	var h_r: float = sample_heightmap.call(x1, y) * map_size.y   # right
-	var h_d: float = sample_heightmap.call(x, y0) * map_size.y   # down
-	var h_u: float = sample_heightmap.call(x, y1) * map_size.y   # up
-
-	# World-space pixel spacing on X/Z
+func get_pixel_normal(x: int, y: int, radius: int = 2) -> Vector3:
 	var dx := map_size.x / float(map_resolution.x - 1)
 	var dy := map_size.z / float(map_resolution.y - 1)
 
-	# Compute derivatives
-	var dhdx := (h_r - h_l) / dx
-	var dhdy := (h_u - h_d) / dy
+	var normal_sum := Vector3.ZERO
+	var count := 0
 
-	# Construct normal in object-local space
-	var normal := Vector3(-dhdx, 2.0, -dhdy).normalized()
+	# Sample a square region of size (radius*2+1)^2
+	for oy in range(-radius, radius + 1):
+		for ox in range(-radius, radius + 1):
+			var sx := clampi(x + ox, 0, map_resolution.x - 1)
+			var sy := clampi(y + oy, 0, map_resolution.y - 1)
 
-	# Convert to world space
-	return (global_transform.basis * normal).normalized()
+			# Neighbor samples for derivative at (sx, sy)
+			var x0 := clampi(sx - 1, 0, map_resolution.x - 1)
+			var x1 := clampi(sx + 1, 0, map_resolution.x - 1)
+			var y0 := clampi(sy - 1, 0, map_resolution.y - 1)
+			var y1 := clampi(sy + 1, 0, map_resolution.y - 1)
+
+			var h_l: float = sample_heightmap.call(x0, sy) * map_size.y
+			var h_r: float = sample_heightmap.call(x1, sy) * map_size.y
+			var h_d: float = sample_heightmap.call(sx, y0) * map_size.y
+			var h_u: float = sample_heightmap.call(sx, y1) * map_size.y
+
+			var dhdx := (h_r - h_l) / dx
+			var dhdy := (h_u - h_d) / dy
+
+			var n := Vector3(-dhdx, 2.0, -dhdy).normalized()
+			normal_sum += n
+			count += 1
+
+	if count == 0:
+		return Vector3.UP
+
+	var avg_normal := (normal_sum / count).normalized()
+	return (global_transform.basis * avg_normal).normalized()
+
 
 func update_collision_shape(image_texture: ImageTexture) -> void:
 	var image: Image = image_texture.get_image()
@@ -105,31 +115,22 @@ func generate_image_texture() -> ImageTexture:
 	)
 
 func place_node(node: Node3D, px: int, py: int) -> void:
-	# 1. Position on heightmap
 	var pos := get_pixel_position(px, py)
 	node.global_position = pos
 
-	# 2. Get terrain normal
 	var normal := get_pixel_normal(px, py).normalized()
 
-	# 3. Preserve the node's current forward direction
 	var forward := node.global_transform.basis.z.normalized()
 
-	# If forward is almost parallel to normal, use a fallback direction
 	if abs(forward.dot(normal)) > 0.99:
 		forward = Vector3.FORWARD
 
 	print("Forward: ", forward)
 	print("Normal: ", normal)
 
-	# 4. Use look_at to align node's UP to the terrain normal
-	# "at" = position + forward direction
-	# "up" = terrain normal
 	node.look_at(node.global_position + forward, normal)
 	
 	print("Rot degrees: ", node.rotation_degrees)
-
-
 
 func get_pixel_position(x: int, y: int) -> Vector3:
 	return global_transform * Vector3(
