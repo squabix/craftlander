@@ -5,6 +5,7 @@ class_name PropPopulator
 @export var island_generator: HeightmapTerrainGenerator
 @export var prop_quantities: Dictionary[IslandProp, int]
 @export var rng_seed: int
+@export var prop_spread: float
 @export_tool_button("Populate")
 var populate_tool_button: Callable = populate
 @export_tool_button("Reset")
@@ -36,6 +37,9 @@ func populate() -> void:
 			if spawn_position.y < prop.min_height:
 				continue
 			
+			if not props.is_empty() and get_shortest_prop_distance(spawn_position) < prop_spread:
+				continue
+			
 			var instance: Node3D = prop.scene.instantiate()
 			add_child(instance)
 			island_generator.place_node(instance, px, py)
@@ -45,6 +49,14 @@ func populate() -> void:
 			props[spawn_position] = instance
 			
 			prop_count += 1
+
+func get_shortest_prop_distance(to: Vector3) -> float:
+	var shortest_distance := INF
+	for prop_position in props.keys():
+		var distance := (prop_position as Vector3).distance_squared_to(to)
+		if distance < shortest_distance:
+			shortest_distance = distance
+	return shortest_distance
 
 func _ready() -> void:
 	await get_tree().process_frame
