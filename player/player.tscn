@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://dmbp0klxo0b0c"]
+[gd_scene load_steps=40 format=3 uid="uid://dmbp0klxo0b0c"]
 
 [ext_resource type="Script" uid="uid://ucyt6h7yjc6k" path="res://player/player.gd" id="1_g1dw6"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="2_g1dw6"]
@@ -42,6 +42,15 @@ height = 1.6
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yw30f"]
 radius = 0.3
 height = 1.0
+
+[sub_resource type="Gradient" id="Gradient_bjvpn"]
+offsets = PackedFloat32Array(0.5566265, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.078431375)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_s7qer"]
+gradient = SubResource("Gradient_bjvpn")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ebec5"]
 size = Vector3(0.42, 1.5, 0.42)
@@ -200,6 +209,14 @@ script = ExtResource("9_bjvpn")
 inventory = NodePath("../../../../../Inventory")
 item_holder = NodePath("..")
 metadata/_custom_type_script = "uid://ioo6s3m7wbha"
+
+[node name="VignetteRect" type="TextureRect" parent="Head/Camera3D"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_s7qer")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "root")]
 unique_name_in_owner = true
