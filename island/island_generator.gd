@@ -55,4 +55,6 @@ func generate_image_texture() -> ImageTexture:
 		for y in map_resolution.y:
 			output_image.set_pixel(x, y, get_pixel(x, y, texture_images))
 	
+	sample_heightmap = func(x: int, y: int) -> float: return output_image.get_pixel(x, y).v
+	
 	return ImageTexture.create_from_image(output_image)
