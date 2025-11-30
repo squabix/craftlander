@@ -33,7 +33,9 @@ folder_colors={
 "res://assets/": "orange",
 "res://common/": "yellow",
 "res://common3d/": "red",
+"res://destructable_resource/": "pink",
 "res://entities/": "green",
+"res://island/": "yellow",
 "res://items/": "teal",
 "res://main/": "gray",
 "res://player/": "blue"

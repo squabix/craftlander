@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="IslandProp" load_steps=3 format=3 uid="uid://cb30upq44sjbu"]
+
+[ext_resource type="PackedScene" uid="uid://c42tdr6p0dmkk" path="res://destructable_resource/stone/stone.tscn" id="1_qe5n6"]
+[ext_resource type="Script" uid="uid://csprfavexgrle" path="res://island/props/island_prop.gd" id="1_qgwd2"]
+
+[resource]
+script = ExtResource("1_qgwd2")
+scene = ExtResource("1_qe5n6")
+min_height = 2.0
+min_scale = 0.4
+max_scale = 0.8
+metadata/_custom_type_script = "uid://csprfavexgrle"
