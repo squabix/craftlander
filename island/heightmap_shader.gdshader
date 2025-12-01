@@ -21,5 +21,5 @@ void fragment() {
 	vec3 grad_color = texture(gradient, vec2(1.0 - v_height, 0.5)).rgb;
 
 	ALBEDO = grad_color;
-	NORMAL_MAP = texture(normal_map, UV).rgb;
+	//NORMAL_MAP = texture(normal_map, UV).rgb;
 }

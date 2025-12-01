@@ -60,5 +60,4 @@ func get_shortest_prop_distance(to: Vector3) -> float:
 
 func _ready() -> void:
 	await get_tree().process_frame
-	print("Updated")
 	populate()

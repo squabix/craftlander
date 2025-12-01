@@ -117,20 +117,11 @@ func generate_image_texture() -> ImageTexture:
 func place_node(node: Node3D, px: int, py: int) -> void:
 	var pos := get_pixel_position(px, py)
 	node.global_position = pos
-
 	var normal := get_pixel_normal(px, py).normalized()
-
 	var forward := node.global_transform.basis.z.normalized()
-
 	if abs(forward.dot(normal)) > 0.99:
 		forward = Vector3.FORWARD
-
-	print("Forward: ", forward)
-	print("Normal: ", normal)
-
 	node.look_at(node.global_position + forward, normal)
-	
-	print("Rot degrees: ", node.rotation_degrees)
 
 func get_pixel_position(x: int, y: int) -> Vector3:
 	return global_transform * Vector3(
