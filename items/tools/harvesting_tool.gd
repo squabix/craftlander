@@ -3,13 +3,16 @@ class_name HarvestingTool
 
 # TODO: Add "visuals" node to item scenes
 
-@export var efficiency: int
+var harvest_ray: HitRay3D
 
-#func set_up_scene() -> void:
-	#if scene_instance:
-		#visuals = scene_instance.get_node("Visuals")
-		#print("visuals")
+func set_up_scene() -> void:
+	if scene_instance == null:
+		return
+	super()
+	harvest_ray = scene_instance.get_node("HarvestRay")
 
 func start_use() -> bool:
-	print("Harvest")
+	print("Attempted hit")
+	if harvest_ray.hit():
+		print("Hit")
 	return true

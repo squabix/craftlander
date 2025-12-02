@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://jlwffnpxmq3x"]
+[gd_scene load_steps=5 format=3 uid="uid://jlwffnpxmq3x"]
 
-[ext_resource type="PackedScene" uid="uid://bb7outwvl2be5" path="res://items/tools/shoddy_axe/shoddy_axe.blend" id="1_pr832"]
+[ext_resource type="PackedScene" uid="uid://b7myf2btlifky" path="res://items/tools/shoddy_axe/shoddy_axe.blend" id="1_pr832"]
+[ext_resource type="Script" uid="uid://dd8qskwv1nlqx" path="res://common3d/damage_system/hit_ray3d.gd" id="2_5vnfi"]
+[ext_resource type="Script" uid="uid://bl5x717nsijmk" path="res://common/damage_system/damage.gd" id="3_ew34c"]
+
+[sub_resource type="Resource" id="Resource_vh8m0"]
+script = ExtResource("3_ew34c")
+metadata/_custom_type_script = "uid://bl5x717nsijmk"
 
 [node name="ShoddyAxe" type="Node3D"]
 
@@ -12,5 +18,14 @@ cast_shadow = 0
 
 [node name="Cube_001" parent="Visuals" index="1"]
 cast_shadow = 0
+
+[node name="HarvestRay" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -2)
+collision_mask = 8
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("2_5vnfi")
+damage = SubResource("Resource_vh8m0")
+metadata/_custom_type_script = "uid://dd8qskwv1nlqx"
 
 [editable path="Visuals"]

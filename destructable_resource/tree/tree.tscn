@@ -22,6 +22,8 @@ shape = SubResource("CylinderShape3D_r4p3j")
 
 [node name="Hurtbox3D" type="Area3D" parent="." node_paths=PackedStringArray("health")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+collision_layer = 8
+monitoring = false
 script = ExtResource("1_r4p3j")
 health = NodePath("../Health")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
@@ -31,5 +33,6 @@ shape = SubResource("CylinderShape3D_bv88s")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_27px0")
+free_parent_on_death = true
 
 [node name="tree1" parent="." instance=ExtResource("4_bv88s")]
