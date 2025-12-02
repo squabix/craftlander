@@ -1,9 +1,9 @@
 extends Entity3D
 class_name Player
 
-const STANDING_HEAD_HEIGHT: float = 1.4
-const CROUCHED_HEAD_HEIGHT: float = 0.7
-const CROUCH_CAMERA_SPEED: float = 0.1
+const STANDING_HEAD_HEIGHT := 1.4
+const CROUCHED_HEAD_HEIGHT := 0.7
+const CROUCH_CAMERA_SPEED := 0.1
 
 @onready var head: Node3D = $Head
 @onready var state_machine: StateMachine = $StateMachine

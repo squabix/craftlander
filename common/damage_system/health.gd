@@ -13,15 +13,15 @@ signal revived
 signal was_dealt_damage(amount)
 signal was_given_hp(amount)
 
-@export var hp: float = 5.0
-@export var immortal: bool = false
-@export var invulnerable: bool = false
-@export var one_shot: bool = false
-@export var free_parent_on_death: bool = false
+@export var hp := 5.0
+@export var immortal := false
+@export var invulnerable := false
+@export var one_shot := false
+@export var free_parent_on_death := false
 
-var dead: bool = false
+var dead := false
 
-@onready var max_hp: float = hp
+@onready var max_hp := hp
 
 static func search(root: Node) -> Health:
 	
@@ -79,7 +79,7 @@ func set_hp(to: float, can_hurt: bool=true, can_heal: bool=true) -> void:
 			heal(to - hp)
 
 func fill() -> void:
-	var difference: float = max_hp - hp
+	var difference := max_hp - hp
 	if difference > 0.0:
 		heal(difference)
 

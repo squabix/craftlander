@@ -4,7 +4,7 @@ class_name HitRay3D
 signal hit_node
 
 @export var damage: Damage
-@export var one_shot: bool
+@export var one_shot := false
 
 var hit_nodes: Array[Node]
 
@@ -21,7 +21,7 @@ func _ready() -> void:
 		printerr(name, " has no damage")
 
 func hit(custom_damage_amount: float=0.0) -> bool:
-	var area: Area3D = get_collider() as Area3D
+	var area := get_collider() as Area3D
 	
 	# ERROR if area does not exist
 	if not is_instance_valid(area):
@@ -35,7 +35,7 @@ func hit(custom_damage_amount: float=0.0) -> bool:
 	if area in hit_nodes and one_shot:
 		return false
 	
-	var damage_amount: float = custom_damage_amount
+	var damage_amount := custom_damage_amount
 	if damage_amount == 0.0:
 		damage_amount = damage.sample()
 	area.hurt(damage_amount)

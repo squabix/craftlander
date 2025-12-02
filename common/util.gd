@@ -1,9 +1,9 @@
 class_name Util
 extends Object
 
-const VECTOR3X: Vector3i = Vector3i(1, 0, 0)
-const VECTOR3Y: Vector3i = Vector3i(0, 1, 0)
-const VECTOR3Z: Vector3i = Vector3i(0, 0, 1)
+const VECTOR3X := Vector3i(1, 0, 0)
+const VECTOR3Y := Vector3i(0, 1, 0)
+const VECTOR3Z := Vector3i(0, 0, 1)
 
 const BUILT_IN_INPUT_ACTIONS: Array[String] = [
 	"ui_accept", "ui_select", "ui_cancel", "ui_focus_next", "ui_focus_prev", "ui_left", "ui_right", "ui_up", "ui_down", 
@@ -30,7 +30,7 @@ static func disable_all_colliders(parent: Node) -> Array[Node]:
 	if not is_instance_valid(parent):
 		return []
 	
-	var disabled_colliders: Array[Node]
+	var disabled_colliders: Array[Node] = []
 	
 	for child in parent.get_children():
 		if not is_instance_valid(child):
@@ -44,10 +44,10 @@ static func disable_all_colliders(parent: Node) -> Array[Node]:
 	return disabled_colliders
 
 static func disable_collider(collider: Node) -> bool:
-	var polygon2d: bool = collider is CollisionPolygon2D
-	var polygon3d: bool = collider is CollisionPolygon3D
-	var shape2d: bool = collider is CollisionShape2D
-	var shape3d: bool = collider is CollisionShape3D
+	var polygon2d := collider is CollisionPolygon2D
+	var polygon3d := collider is CollisionPolygon3D
+	var shape2d := collider is CollisionShape2D
+	var shape3d := collider is CollisionShape3D
 	
 	if not (polygon2d or polygon3d or shape2d or shape3d):
 		return false
@@ -55,10 +55,10 @@ static func disable_collider(collider: Node) -> bool:
 	return true
 
 static func enable_collider(collider: Node) -> void:
-	var polygon2d: bool = collider is CollisionPolygon2D
-	var polygon3d: bool = collider is CollisionPolygon3D
-	var shape2d: bool = collider is CollisionShape2D
-	var shape3d: bool = collider is CollisionShape3D
+	var polygon2d := collider is CollisionPolygon2D
+	var polygon3d := collider is CollisionPolygon3D
+	var shape2d := collider is CollisionShape2D
+	var shape3d := collider is CollisionShape3D
 	
 	if not (polygon2d or polygon3d or shape2d or shape3d):
 		return
@@ -67,21 +67,21 @@ static func enable_collider(collider: Node) -> void:
 static func distance_sort_2d(nodes: Array, position: Vector2) -> Array:
 	if nodes.is_empty():
 		return [null]
-	var custom_sort: Callable = func(a, b) -> bool:
+	var custom_sort := func(a, b) -> bool:
 		if not (is_instance_valid(b) or b is Node2D):
 			return true
 		elif not (is_instance_valid(a) or a is Node2D):
 			return false
-		var dist_a = a.global_position.distance_squared_to(position)
-		var dist_b = b.global_position.distance_squared_to(position)
+		var dist_a: float = a.global_position.distance_squared_to(position)
+		var dist_b: float = b.global_position.distance_squared_to(position)
 		return dist_a < dist_b
 	
-	var duplicate: Array = nodes.duplicate()
+	var duplicate := nodes.duplicate()
 	duplicate.sort_custom(custom_sort)
 	return duplicate
 
-static func get_position3d(of: Variant, default: Vector3 = Vector3.ZERO) -> Vector3:
-	var position: Vector3 = Vector3.ZERO
+static func get_position3d(of: Variant) -> Vector3:
+	var position := Vector3.ZERO
 	
 	if of is Vector3:
 		position = of
@@ -100,16 +100,16 @@ static func reset_local_transform_3d(node: Node3D) -> void:
 static func distance_sort_3d(nodes: Array, position: Vector3) -> Array:
 	if nodes.is_empty():
 		return [null]
-	var custom_sort: Callable = func(a, b) -> bool:
+	var custom_sort := func(a, b) -> bool:
 		if not (is_instance_valid(b) or b is Node3D):
 			return true
 		elif not (is_instance_valid(a) or a is Node3D):
 			return false
-		var dist_a = a.global_position.distance_squared_to(position)
-		var dist_b = b.global_position.distance_squared_to(position)
+		var dist_a: float = a.global_position.distance_squared_to(position)
+		var dist_b: float = b.global_position.distance_squared_to(position)
 		return dist_a < dist_b
 	
-	var duplicate: Array = nodes.duplicate()
+	var duplicate := nodes.duplicate()
 	duplicate.sort_custom(custom_sort)
 	return duplicate
 
@@ -120,9 +120,9 @@ static func search_up_for_node(child: Node, check: Callable, ignore_children: bo
 	print_debug(child.name)
 	if check.call(child) == true:
 		return child
-	var parent: Node = child.get_parent()
+	var parent := child.get_parent()
 	if is_instance_valid(parent) and not ignore_children:
-		var parent_result: Node = search_down_for_node(parent, check)
+		var parent_result := search_down_for_node(parent, check)
 		if parent_result != null:
 			return parent_result
 	return search_up_for_node(parent, check, ignore_children)
@@ -135,7 +135,7 @@ static func search_down_for_node(parent: Node, check: Callable) -> Node:
 	if check.call(parent) == true:
 		return parent
 	for child in parent.get_children():
-		var child_result: Node = search_down_for_node(child, check)
+		var child_result := search_down_for_node(child, check)
 		if child_result != null:
 			return child_result
 	return null
@@ -156,10 +156,10 @@ static func turn_off_all_particles(parent: Node) -> void:
 		
 		turn_off_all_particles(child)
 		
-		var cpu2d: bool = child is CPUParticles2D
-		var cpu3d: bool = child is CPUParticles3D
-		var gpu2d: bool = child is GPUParticles2D
-		var gpu3d: bool = child is GPUParticles3D
+		var cpu2d := child is CPUParticles2D
+		var cpu3d := child is CPUParticles3D
+		var gpu2d := child is GPUParticles2D
+		var gpu3d := child is GPUParticles3D
 		
 		if cpu2d or cpu3d or gpu2d or gpu3d:
 			child.one_shot = true
@@ -177,7 +177,7 @@ static func round_places(x: float, places: int=1) -> float:
 	return float(round(x * pow(10, places))) / pow(10, places)
 
 static func round_vec3(v: Vector3, places: int=1) -> Vector3:
-	var r: Callable = func(x): return round_places(x, places)
+	var r := func(x): return round_places(x, places)
 	return CustomVector3.new().default(r).classify().vector_call(v)
 
 static func vec3to2(v: Vector3, axis: Vector3i) -> Vector2:
@@ -225,7 +225,7 @@ static func roll_basis_toward(from: Basis, toward: Vector3, axis: Vector3i, amou
 	return Basis(normalized_cross_product, amount * toward.length()) * from
 
 static func get_ray_query_parameters_3d(from: Vector3, to: Vector3) -> PhysicsRayQueryParameters3D:
-	var parameters = PhysicsRayQueryParameters3D.new()
+	var parameters := PhysicsRayQueryParameters3D.new()
 	parameters.from = from
 	parameters.to = to
 	return parameters
@@ -259,13 +259,13 @@ static func rad_to_deg_vec2(vector: Vector2) -> Vector2:
 	)
 
 static func get_mouse_position_3d(camera: Camera3D, default_plane: Plane=Plane(Vector3.UP, 0.0), in_space: bool=true, z_depth: float=1000.0, use_front_plane: bool=true) -> Vector3:
-	var mouse_position_2d = camera.get_viewport().get_mouse_position()
-	var from: Vector3 = camera.project_ray_origin(mouse_position_2d)
-	var to: Vector3 = camera.project_position(mouse_position_2d, z_depth)
+	var mouse_position_2d := camera.get_viewport().get_mouse_position()
+	var from := camera.project_ray_origin(mouse_position_2d)
+	var to := camera.project_position(mouse_position_2d, z_depth)
 	
 	# Try to intersect ray with an object in 3D space
 	if in_space:
-		var space_intersection: Dictionary = camera.get_world_3d().direct_space_state.intersect_ray(get_ray_query_parameters_3d(from, to))
+		var space_intersection := camera.get_world_3d().direct_space_state.intersect_ray(get_ray_query_parameters_3d(from, to))
 		if not space_intersection.is_empty():
 			return space_intersection.position
 	
@@ -277,8 +277,8 @@ static func get_mouse_position_3d(camera: Camera3D, default_plane: Plane=Plane(V
 	
 	# Try to intersect ray with a plane in front of the camera
 	if use_front_plane:
-		var camera_forward: Vector3 = -camera.global_transform.basis.z.normalized()
-		var front_plane: Plane = Plane(
+		var camera_forward := -camera.global_transform.basis.z.normalized()
+		var front_plane := Plane(
 			camera_forward,
 			(camera.global_transform.origin + camera_forward * z_depth).dot(camera_forward)
 		)
@@ -290,6 +290,6 @@ static func get_mouse_position_3d(camera: Camera3D, default_plane: Plane=Plane(V
 	return Vector3.ZERO
 
 static func get_camera_rect(camera: Camera2D) -> Rect2:
-	var pos = camera.position # Camera's center
-	var half_size = camera.get_viewport_rect().size * 0.5
+	var pos := camera.position # Camera's center
+	var half_size := camera.get_viewport_rect().size * 0.5
 	return Rect2(pos - half_size, pos + half_size)

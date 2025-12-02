@@ -2,22 +2,22 @@ extends Resource
 class_name Item
 
 @export var scene: PackedScene
-@export var name: String
-@export var max_quantity: int = 1
+@export var name := "Item"
+@export var max_quantity := 1
 @export var icon: Texture2D
-@export var consumable: bool
-@export var visuals_scene_path: String = "Visuals"
+@export var consumable := false
+@export var visuals_scene_path := "Visuals"
 
-var max_uses: int = 1
+var max_uses := 1
 var scene_instance: Node
 var visuals: Node
 
-var _attempted_use: bool = false
-var _used_this_update: bool = false
-var _updates_attempted_use: int = 0
-var _ended_use: bool = true
+var _attempted_use := false
+var _used_this_update := false
+var _updates_attempted_use := 0
+var _ended_use := true
 
-var update_delta: float = 0.0
+var update_delta := 0.0
 
 func update(delta: float) -> void:
 	idle()
@@ -29,7 +29,7 @@ func update(delta: float) -> void:
 		if _updates_attempted_use != 0:
 			continue_use()
 	
-	var reached_max_uses: bool = _updates_attempted_use == max_uses and max_uses > 0
+	var reached_max_uses := _updates_attempted_use == max_uses and max_uses > 0
 	if not _ended_use and (reached_max_uses or not _used_this_update):
 		end_use()
 		_ended_use = true
@@ -44,7 +44,7 @@ func update(delta: float) -> void:
 	_attempted_use = false
 
 func get_instance(quantity: int=1) -> ItemInstance:
-	var instance: ItemInstance = ItemInstance.new()
+	var instance := ItemInstance.new()
 	instance.item = self
 	instance.quantity = quantity
 	return instance

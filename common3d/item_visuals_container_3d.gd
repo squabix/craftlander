@@ -13,7 +13,7 @@ func reset_visuals() -> void:
 
 func update_visuals() -> void:
 	reset_visuals()
-	var instance: ItemInstance = inventory_holder_link.get_current_instance()
+	var instance := inventory_holder_link.get_current_instance()
 	if instance == null or instance.item == null or instance.item.visuals == null:
 		return
 	if instance.item.visuals.get_parent() != null:

@@ -1,6 +1,6 @@
 extends State
 
-@onready var movement_mode: MovementMode3D = preload("res://player/states/player_crouched_movement_mode.tres")
+@onready var movement_mode := preload("res://player/states/player_crouched_movement_mode.tres")
 
 @onready var standing_collision: CollisionShape3D = %StandingCollisionShape
 @onready var crouched_collision: CollisionShape3D = %CrouchedCollisionShape

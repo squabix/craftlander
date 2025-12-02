@@ -17,7 +17,7 @@ signal consumed_instance(instance: ItemInstance)
 		
 		# Remove old item
 		if has_item():
-			var old_item: Item = get_item()
+			var old_item := get_item()
 			if item_instance != null and is_instance_valid(old_item.scene_instance):
 				instance_parent.remove_child.call_deferred(old_item.scene_instance)
 		item_instance = to

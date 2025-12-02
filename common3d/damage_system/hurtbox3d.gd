@@ -5,14 +5,14 @@ signal was_hurt
 signal was_dealt_damage(amount: float)
 
 @export var health: Health
-@export var inactive: bool
-@export var free_parent_on_hurt: bool
-@export var damage_multiplier: float = 1.0
+@export var inactive := false
+@export var free_parent_on_hurt := false
+@export var damage_multiplier := 1.0
 
 @export_group("Auto Hurt")
-@export var bodies_auto_hurt: bool
-@export var areas_auto_hurt: bool
-@export var auto_hurt_damage: float = 1.0
+@export var bodies_auto_hurt := false
+@export var areas_auto_hurt := false
+@export var auto_hurt_damage := 1.0
 
 func _ready() -> void:
 	_set_up_auto_hurt()

@@ -1,12 +1,12 @@
 extends Controller3D
 
-const HEAD_COLLISION_HEIGHT_MARGIN: float = 0.25
-const HEAD_HEIGHT_LERP_SPEED: float = 0.3
+const HEAD_COLLISION_HEIGHT_MARGIN := 0.25
+const HEAD_HEIGHT_LERP_SPEED := 0.3
 
-const MOUSE_SENSITIVITY: float = 0.35
+const MOUSE_SENSITIVITY := 0.35
 
 
-var crouch_speed: float = 0.2
+var crouch_speed := 0.2
 
 @export var head: Node3D
 @export var current_collision_shape: CollisionShape3D

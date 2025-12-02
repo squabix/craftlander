@@ -7,8 +7,8 @@ enum Mode {ENTERING, INSIDE, EXTERNAL}
 
 @export var damage: Damage
 @export var current_mode: Mode
-@export var one_shot: bool
-@export var enabled: bool = true
+@export var one_shot := false
+@export var enabled := true
 @export var auto_enable_wait_time: float
 
 var hit_nodes: Array[Node]
@@ -34,7 +34,7 @@ func _process(_delta: float) -> void:
 		hit_overlap()
 
 func hit_overlap() -> Array[Area3D]:
-	var overlap: Array[Area3D] = get_overlapping_areas()
+	var overlap := get_overlapping_areas()
 	for area in overlap:
 		hit(area)
 	return overlap

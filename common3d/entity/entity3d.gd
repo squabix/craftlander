@@ -4,14 +4,14 @@ class_name Entity3D
 signal landed
 signal left_ground
 
-@export var type: String = "default_entity"
+@export var type := "default_entity"
 @export var movement_mode: MovementMode3D
-@export var gravity_multiplier: float = 1.0
-@export var move_up_as_jump: bool = true
+@export var gravity_multiplier := 1.0
+@export var move_up_as_jump := true
 
 @export_group("Rigid Bodies")
-@export var do_push_rigid_bodies: bool = false
-@export var rigid_body_push_force: float = 4.0
+@export var do_push_rigid_bodies := false
+@export var rigid_body_push_force := 4.0
 
 @export_group("Rotation")
 @export var accelerate_rotation_base: Node3D = self
@@ -45,8 +45,8 @@ func rotate_vertical(deg: float) -> void:
 	vertical_rotation_target.rotation_degrees.x += deg
 
 func face_target(target: Variant) -> void:
-	var identified_target: bool = false
-	var target_position: Vector3 = Vector3.ZERO
+	var identified_target := false
+	var target_position := Vector3.ZERO
 	
 	if target is Vector3:
 		target_position = target

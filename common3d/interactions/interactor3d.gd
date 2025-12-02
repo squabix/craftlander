@@ -4,10 +4,10 @@ class_name Interactor3D
 signal interacted_with(interactable: Interactable3D)
 
 @export var root: Node
-@export var id: int
+@export var id := 0
 
 func interact() -> Interactable3D:
-	var parent: Node3D = get_parent() as Node3D
+	var parent := get_parent() as Node3D
 	if not is_instance_valid(parent):
 		printerr("Cannot interact with invalid parent")
 		return null

@@ -4,13 +4,13 @@ class_name ItemDisplay
 @export var icon_rect: TextureRect
 @export var quantity_label: Label
 @export var inventory: Inventory
-@export var index: int = 0
+@export var index := 0
 @export var instance_override: ItemInstance
 
 @export_group("Selection")
 @export var inventory_holder_link: InventoryHolderLink
-@export var unselected_modulate: Color = Color.WHITE
-@export var selected_modulate: Color = Color.WHITE
+@export var unselected_modulate := Color.WHITE
+@export var selected_modulate := Color.WHITE
 
 func get_instance() -> ItemInstance:
 	if instance_override:
@@ -29,7 +29,7 @@ func is_selected() -> bool:
 func _process(_delta: float) -> void:
 	modulate = selected_modulate if is_selected() else unselected_modulate
 	
-	var instance: ItemInstance = get_instance()
+	var instance := get_instance()
 	if instance == null:
 		icon_rect.texture = null
 		quantity_label.text = ""

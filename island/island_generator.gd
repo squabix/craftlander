@@ -3,7 +3,7 @@ extends HeightmapTerrainGenerator
 
 @export var noise_textures: Array[Texture2D]
 @export var taper_gradient_texture: GradientTexture2D
-@export var taper_gradient_strength: float = 0.9
+@export var taper_gradient_strength := 0.9
 @export var absolute_gradient_texture: GradientTexture2D
 @export var heightmap_rect: TextureRect
 
@@ -12,9 +12,9 @@ func _ready() -> void:
 	heightmap_rect.texture = get_mesh_heightmap_texture()
 
 func get_pixel(x: int, y: int, texture_images: Dictionary[Texture2D, Image]) -> Color:
-	var sample: Callable = func(texture: Texture2D) -> float: return texture_images[texture].get_pixel(x, y).r
+	var sample := func(texture: Texture2D) -> float: return texture_images[texture].get_pixel(x, y).r
 	
-	var value: float = 0.0
+	var value := 0.0
 	
 	for texture in noise_textures:
 		value += sample.call(texture)
@@ -44,7 +44,7 @@ func generate_image_texture() -> ImageTexture:
 	for image in texture_images.values():
 		image.resize(map_resolution.x, map_resolution.y)
 	
-	var output_image: Image = Image.create_empty(
+	var output_image := Image.create_empty(
 		map_resolution.x,
 		map_resolution.y,
 		false,

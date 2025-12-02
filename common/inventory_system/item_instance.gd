@@ -5,7 +5,7 @@ signal emptied
 
 @export var item: Item
 
-@export var quantity: int = 1
+@export var quantity := 1
 
 func _init() -> void:
 	make_unique.call_deferred()
@@ -13,7 +13,6 @@ func _init() -> void:
 func make_unique() -> void:
 	if item != null:
 		item = item.duplicate_deep()
-		print("duplicated")
 
 static func do_items_match(items: Array[Item]) -> bool:
 	for a in items:
@@ -29,7 +28,7 @@ func add(amount: int) -> int:
 		printerr("Cannot add negative amount to item - use subtract instead")
 		breakpoint
 		return amount
-	var raw_quantity: int = quantity + amount
+	var raw_quantity := quantity + amount
 	var remainder: int = max(raw_quantity - item.max_quantity, 0)
 	quantity = min(raw_quantity, item.max_quantity)
 	return remainder
@@ -44,7 +43,7 @@ func subtract(amount: int) -> int:
 		emptied.emit()
 		return amount
 	
-	var raw_quantity: int = quantity - amount
+	var raw_quantity := quantity - amount
 	var remainder: int = min(raw_quantity, 0)
 	quantity = max(raw_quantity, 0)
 	if quantity == 0:

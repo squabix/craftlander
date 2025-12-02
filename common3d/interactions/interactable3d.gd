@@ -1,8 +1,8 @@
 extends Area3D
 class_name Interactable3D
 
-@export var enabled: bool = true
-@export var id: int
+@export var enabled := true
+@export var id := 0
 
 func enable() -> void:
 	enabled = true

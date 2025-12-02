@@ -1,6 +1,6 @@
 extends Node
 
-var muted: bool
+var muted := false
 
 func _ready() -> void:
 	process_mode = PROCESS_MODE_ALWAYS
@@ -26,7 +26,7 @@ func play(sound: Sound) -> void:
 	if muted or not sound:
 		return
 	
-	var player: AudioStreamPlayer = sound.get_player()
+	var player := sound.get_player()
 	add_child(player)
 	player.play()
 	

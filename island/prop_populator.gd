@@ -4,12 +4,12 @@ class_name PropPopulator
 
 @export var island_generator: HeightmapTerrainGenerator
 @export var prop_quantities: Dictionary[IslandProp, int]
-@export var rng_seed: int
-@export var prop_spread: float
+@export var rng_seed := 0
+@export var prop_spread := 0.0
 @export_tool_button("Populate")
-var populate_tool_button: Callable = populate
+var populate_tool_button := populate
 @export_tool_button("Reset")
-var reset_tool_button: Callable = reset
+var reset_tool_button := reset
 
 var props: Dictionary[Vector3, Node3D] = {}
 
@@ -19,16 +19,16 @@ func reset() -> void:
 	props = {}
 
 func populate() -> void:
-	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	var rng := RandomNumberGenerator.new()
 	rng.seed = rng_seed
 	
 	reset()
 	
 	for prop in prop_quantities:
-		var prop_count: int = 0
+		var prop_count := 0
 		while prop_count < prop_quantities[prop]:
-			var px: int = rng.randi_range(0, island_generator.map_resolution.x - 1)
-			var py: int = rng.randi_range(0, island_generator.map_resolution.y - 1)
+			var px := rng.randi_range(0, island_generator.map_resolution.x - 1)
+			var py := rng.randi_range(0, island_generator.map_resolution.y - 1)
 			var spawn_position := island_generator.get_pixel_position(px, py)
 			
 			if spawn_position in props:

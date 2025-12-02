@@ -34,8 +34,8 @@ func _process(_delta: float) -> void:
 	update_texture()
 
 func get_local_rotated_position(from: Vector3) -> Vector3:
-	var local_cam_pos: Vector3 = from - global_position
-	var camera_rotation: float = 0.0 # camera.global_rotation.y
+	var local_cam_pos := from - global_position
+	var camera_rotation := 0.0 # camera.global_rotation.y
 	return local_cam_pos.rotated(Vector3.UP, global_rotation.y - camera_rotation)
 
 func get_direction_to_camera(local_rotated_cam_position: Vector3) -> Vector3:
@@ -53,10 +53,10 @@ func update_texture() -> void:
 		)
 	)
 	var best_texture: Texture2D
-	var closest_distance: float = INF
+	var closest_distance := INF
 	
 	for direction in direction_texture_map:
-		var distance: float = direction_to_camera.distance_to(direction)
+		var distance := direction_to_camera.distance_to(direction)
 		if distance < closest_distance:
 			best_texture = direction_texture_map[direction]
 			closest_distance = distance
