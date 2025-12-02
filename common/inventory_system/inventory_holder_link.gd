@@ -1,6 +1,8 @@
 extends Node
 class_name InventoryHolderLink
 
+signal updated_current
+
 const NUM_KEY_INDEX_MAP: Dictionary = {
 	KEY_1: 0,
 	KEY_2: 1,
@@ -27,6 +29,7 @@ func _ready() -> void:
 		printerr(name, " has an invalid ItemHolder and will not function")
 		return
 	hold_current.call_deferred()
+	updated_current.emit.call_deferred()
 	item_holder.consumed_instance.connect(
 		func(instance: ItemInstance):
 			inventory.remove_item(instance.item),
@@ -41,6 +44,7 @@ func scroll(direction: int, skip_null: bool=false) -> void:
 	if skip_null:
 		while get_current_instance() == null and current_index != old_index:
 			scroll(direction, false)
+	updated_current.emit()
 
 func get_current_instance() -> ItemInstance:
 	current_index = clampi(current_index, 0, inventory.size)
@@ -62,6 +66,8 @@ func heed_num_key_input() -> void:
 			continue
 		
 		current_index = index
+		updated_current.emit()
+		return
 
 func hold_current() -> void:
-	item_holder.set_instance(get_current_instance())
+	item_holder.item_instance = get_current_instance()

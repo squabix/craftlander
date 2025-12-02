@@ -7,6 +7,14 @@ signal emptied
 
 @export var quantity: int = 1
 
+func _init() -> void:
+	make_unique.call_deferred()
+
+func make_unique() -> void:
+	if item != null:
+		item = item.duplicate_deep()
+		print("duplicated")
+
 static func do_items_match(items: Array[Item]) -> bool:
 	for a in items:
 		for b in items:

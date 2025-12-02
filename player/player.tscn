@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://dmbp0klxo0b0c"]
+[gd_scene load_steps=40 format=3 uid="uid://dmbp0klxo0b0c"]
 
 [ext_resource type="Script" uid="uid://ucyt6h7yjc6k" path="res://player/player.gd" id="1_g1dw6"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="2_g1dw6"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://ccbg8iw3gs48v" path="res://player/states/player_crouched_state.gd" id="9_hg6s5"]
 [ext_resource type="Script" uid="uid://cody42elqcrek" path="res://player/states/player_sprinting_state.gd" id="10_8t03j"]
 [ext_resource type="Script" uid="uid://bypxgjqugqucx" path="res://common3d/interactions/interactor3d.gd" id="10_32hag"]
+[ext_resource type="Script" uid="uid://ljihr86cv3xk" path="res://common3d/item_visuals_container_3d.gd" id="10_s7qer"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="11_2ieo8"]
 [ext_resource type="Script" path="res://common/damage_system/health.gd" id="12_ebec5"]
 [ext_resource type="Script" uid="uid://b1eix6p0204fp" path="res://common/inventory_system/displays/item_display.gd" id="16_e7oew"]
@@ -20,8 +21,8 @@
 [ext_resource type="Script" uid="uid://b7pvp0pnngnem" path="res://common/ui/fps_label.gd" id="19_bjvpn"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="19_c35mf"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="20_x7c3f"]
+[ext_resource type="Resource" uid="uid://bah3rou15fcfh" path="res://items/tools/shoddy_axe/shoddy_axe_item.tres" id="22_bjvpn"]
 [ext_resource type="Texture2D" uid="uid://dvu8avo8cfq2c" path="res://icon.svg" id="23_g4c7l"]
-[ext_resource type="Resource" uid="uid://dul5v7kefyk2k" path="res://bs.tres" id="23_s7qer"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -117,20 +118,7 @@ _data = {
 
 [sub_resource type="Resource" id="Resource_bjvpn"]
 script = ExtResource("20_x7c3f")
-item = ExtResource("23_g4c7l")
-quantity = 5
-metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
-
-[sub_resource type="Resource" id="Resource_knn7v"]
-script = ExtResource("20_x7c3f")
-item = ExtResource("23_g4c7l")
-quantity = 10
-metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
-
-[sub_resource type="Resource" id="Resource_s7qer"]
-script = ExtResource("20_x7c3f")
-item = ExtResource("23_s7qer")
-quantity = 20
+item = ExtResource("22_bjvpn")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("horizontal_rotation_target", "vertical_rotation_target")]
@@ -193,15 +181,19 @@ metadata/_custom_type_script = "uid://bypxgjqugqucx"
 [node name="ArmContainer" type="Node3D" parent="Head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08, -0.3)
 
-[node name="ItemHolder" type="Node3D" parent="Head/Camera3D/ArmContainer" node_paths=PackedStringArray("sprite", "instance_parent")]
-transform = Transform3D(0.978148, 0.207912, 0, -0.207912, 0.978147, 0, 0, 0, 1, 0.24, 0, 0)
+[node name="ItemHolder" type="Node3D" parent="Head/Camera3D/ArmContainer" node_paths=PackedStringArray("instance_parent")]
+transform = Transform3D(0.9848081, 0.015134426, 0.17298739, 0, 0.9961941, -0.08715573, -0.17364824, 0.08583159, 0.9810602, 0.29, -0.23, 0)
 script = ExtResource("7_kb6p2")
-sprite = NodePath("Sprite3D")
 instance_parent = NodePath("../..")
 metadata/_edit_group_ = true
 
+[node name="ItemVisualsContainer3D" type="Node3D" parent="Head/Camera3D/ArmContainer/ItemHolder" node_paths=PackedStringArray("inventory_holder_link")]
+transform = Transform3D(1.0000001, 4.0978193e-08, 0, -6.519258e-09, 1, -7.450581e-09, -1.4901161e-08, 7.450581e-09, 1, 0.08080295, 0.017175198, 0.014566064)
+script = ExtResource("10_s7qer")
+inventory_holder_link = NodePath("../InventoryHolderLink")
+
 [node name="Sprite3D" type="Sprite3D" parent="Head/Camera3D/ArmContainer/ItemHolder"]
-transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+transform = Transform3D(0.050000004, 2.910383e-10, 0, -9.313226e-10, 0.05, 0, 0, 2.3283064e-10, 0.05, 0.08080298, 0.017175198, 0.014566064)
 no_depth_test = true
 texture_filter = 0
 
@@ -298,7 +290,6 @@ max_value = 1.0
 show_percentage = false
 
 [node name="InventoryDisplay" type="HBoxContainer" parent="HUD"]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -715,5 +706,5 @@ autoplay = "idle"
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("19_c35mf")
-items = Array[ExtResource("20_x7c3f")]([SubResource("Resource_bjvpn"), SubResource("Resource_knn7v"), SubResource("Resource_s7qer")])
+items = Array[ExtResource("20_x7c3f")]([SubResource("Resource_bjvpn")])
 size = 9

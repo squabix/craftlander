@@ -27,8 +27,8 @@ func populate() -> void:
 	for prop in prop_quantities:
 		var prop_count: int = 0
 		while prop_count < prop_quantities[prop]:
-			var px: int = rng.randi_range(0, island_generator.map_resolution.x)
-			var py: int = rng.randi_range(0, island_generator.map_resolution.y)
+			var px: int = rng.randi_range(0, island_generator.map_resolution.x - 1)
+			var py: int = rng.randi_range(0, island_generator.map_resolution.y - 1)
 			var spawn_position := island_generator.get_pixel_position(px, py)
 			
 			if spawn_position in props:

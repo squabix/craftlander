@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://jlwffnpxmq3x"]
+
+[ext_resource type="PackedScene" uid="uid://bb7outwvl2be5" path="res://items/tools/shoddy_axe/shoddy_axe.blend" id="1_pr832"]
+
+[node name="ShoddyAxe" type="Node3D"]
+
+[node name="Visuals" parent="." instance=ExtResource("1_pr832")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="Cube" parent="Visuals" index="0"]
+cast_shadow = 0
+
+[node name="Cube_001" parent="Visuals" index="1"]
+cast_shadow = 0
+
+[editable path="Visuals"]

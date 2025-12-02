@@ -1,14 +1,16 @@
 extends Resource
 class_name Item
 
+@export var scene: PackedScene
 @export var name: String
 @export var max_quantity: int = 1
 @export var icon: Texture2D
 @export var consumable: bool
+@export var visuals_scene_path: String = "Visuals"
 
 var max_uses: int = 1
-var scene: PackedScene
 var scene_instance: Node
+var visuals: Node
 
 var _attempted_use: bool = false
 var _used_this_update: bool = false
@@ -47,12 +49,19 @@ func get_instance(quantity: int=1) -> ItemInstance:
 	instance.quantity = quantity
 	return instance
 
+func set_up_scene() -> void:
+	if not scene_instance:
+		return
+	visuals = scene_instance.get_node(visuals_scene_path)
+	visuals.hide()
+
 func instantiate_scene() -> Node:
 	if scene == null:
 		return
 	if is_instance_valid(scene_instance):
 		scene_instance.queue_free()
 	scene_instance = scene.instantiate()
+	set_up_scene()
 	return scene_instance
 
 func use() -> bool:
@@ -75,6 +84,3 @@ func end_use() -> bool:
 
 func idle() -> void:
 	pass
-
-func _to_string() -> String:
-	return name
