@@ -71,10 +71,10 @@ static func distance_sort_2d(nodes: Array, position: Vector2) -> Array:
 	var custom_sort := func(a, b) -> bool:
 		if not (is_instance_valid(b) or b is Node2D):
 			return true
-		elif not (is_instance_valid(a) or a is Node2D):
+		if not (is_instance_valid(a) or a is Node2D):
 			return false
-		var dist_a: float = a.global_position.distance_squared_to(position)
-		var dist_b: float = b.global_position.distance_squared_to(position)
+		var dist_a := (a as Node2D).global_position.distance_squared_to(position)
+		var dist_b := (b as Node2D).global_position.distance_squared_to(position)
 		return dist_a < dist_b
 	
 	var duplicate := nodes.duplicate()

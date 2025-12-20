@@ -134,7 +134,6 @@ func rotate_targets() -> void:
 		horizontal_rotation_target.rotation_degrees.y = rotation_range.clampy(
 			horizontal_rotation_target.rotation_degrees.y
 		)
-	
 
 func _physics_process(delta: float) -> void:
 	
