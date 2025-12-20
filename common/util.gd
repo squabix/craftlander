@@ -1,3 +1,4 @@
+@abstract
 class_name Util
 extends Object
 
@@ -244,6 +245,58 @@ static func lerp_look_at_3d(node: Node3D, position: Vector3, weight: float) -> V
 		get_rotation_between_points_3d(node.global_position, position),
 		weight
 	)
+
+static func get_property_names(of: Node) -> PackedStringArray:
+	var property_names: PackedStringArray = []
+	for property in of.get_property_list():
+		var property_name: String = property["name"]
+		if property_name.is_empty():
+			continue
+		var first_char := property_name[0]
+		if first_char == "_":
+			continue
+		if first_char == first_char.to_upper():
+			continue
+		property_names.append(property_name)
+	return property_names
+
+static func ghost(original: Node, duplicate: Node, properties: PackedStringArray, update_signal: Signal, do_ghost_children: bool = true) -> void:
+	if not (is_instance_valid(original) and is_instance_valid(duplicate)):
+		return
+	
+	if do_ghost_children:
+		for i in original.get_child_count():
+			ghost(original.get_child(i), duplicate.get_child(i), properties, update_signal)
+	
+	while true:
+		await update_signal
+		if not (is_instance_valid(original) and is_instance_valid(duplicate)):
+			return
+		
+		for property in properties:
+			if not (property in original and property in duplicate):
+				continue
+			duplicate.set(property, original[property])
+
+static func debug_node(node: Node) -> void:
+	if not is_instance_valid(node):
+		return
+	
+	var debug_strings: PackedStringArray = [node, "named " + node.name]
+	var append: Callable = func(...strings: Array) -> void:
+		debug_strings.append_array(strings)
+	if node is Node3D:
+		node = node as Node3D
+		append.call(
+			"at " + str(node.global_position),
+			"rotated " + str(node.global_rotation_degrees),
+			"scaled " + str(node.global_scale)
+		)
+		if node is CharacterBody3D:
+			append.call(
+				"moving " + node.velocity
+			)
+	print(" ".join(debug_strings))
 
 static func lerp_angle_3d(from: Vector3, to: Vector3, weight: float) -> Vector3:
 	return Vector3(

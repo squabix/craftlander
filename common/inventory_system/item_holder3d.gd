@@ -17,9 +17,8 @@ signal consumed_instance(instance: ItemInstance)
 		
 		# Remove old item
 		if has_item():
-			var old_item := get_item()
-			if item_instance != null and is_instance_valid(old_item.scene_instance):
-				instance_parent.remove_child.call_deferred(old_item.scene_instance)
+			if item_instance != null and is_instance_valid(item.scene_instance):
+				item.scene_instance.queue_free()
 		item_instance = to
 		
 		if item_instance == null or item_instance.item == null:
@@ -28,15 +27,16 @@ signal consumed_instance(instance: ItemInstance)
 		
 		update_icon(item_instance.item.icon)
 		if item_instance.item.scene != null:
-			instance_parent.add_child.call_deferred(item_instance.item.instantiate_scene())
-		
+			item_instance.item.add_scene(instance_parent)
+			#instance_parent.add_child.call_deferred(item_instance.item.instantiate_scene())
 
-func get_item() -> Item:
-	if item_override != null:
-		return item_override
-	if item_instance == null:
-		return null
-	return item_instance.item
+var item: Item:
+	get:
+		if item_override != null:
+			return item_override
+		if item_instance == null:
+			return null
+		return item_instance.item
 
 func has_item() -> bool:
 	return item_instance != null and item_instance.item != null
@@ -62,4 +62,4 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not has_item():
 		return
-	get_item().update(delta)
+	item.update(delta)

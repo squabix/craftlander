@@ -1,18 +1,22 @@
 extends Item
 class_name HarvestingTool
 
-# TODO: Add "visuals" node to item scenes
+@export var harvest_animation: String = "harvest"
 
 var harvest_ray: HitRay3D
+var animation_player: AnimationPlayer
 
 func set_up_scene() -> void:
 	if scene_instance == null:
 		return
 	super()
 	harvest_ray = scene_instance.get_node("HarvestRay")
+	animation_player = visuals.get_node("AnimationPlayer")
 
 func start_use() -> bool:
-	print("Attempted hit")
+	if is_instance_valid(animation_player):
+		animation_player.stop()
+		animation_player.play(harvest_animation)
 	if harvest_ray.hit():
-		print("Hit")
+		pass # Hit successful
 	return true

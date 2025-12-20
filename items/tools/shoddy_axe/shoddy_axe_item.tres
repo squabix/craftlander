@@ -6,7 +6,7 @@
 
 [resource]
 script = ExtResource("1_udkp1")
-efficiency = 1
+harvest_animation = "harvest"
 scene = ExtResource("2_gclnw")
 name = "Shoddy Axe"
 icon = ExtResource("1_u75bx")

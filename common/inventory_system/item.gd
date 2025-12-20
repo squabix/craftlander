@@ -1,6 +1,8 @@
 extends Resource
 class_name Item
 
+signal scene_set_up
+
 @export var scene: PackedScene
 @export var name := "Item"
 @export var max_quantity := 1
@@ -24,8 +26,6 @@ func update(delta: float) -> void:
 	update_delta = delta
 	if _used_this_update:
 		_ended_use = false
-		#if _updates_attempted_use == 0:
-			#start_use()
 		if _updates_attempted_use != 0:
 			continue_use()
 	
@@ -51,16 +51,23 @@ func get_instance(quantity: int=1) -> ItemInstance:
 
 func set_up_scene() -> void:
 	if not scene_instance:
+		printerr(name, " cannot set up scene without scene instance")
 		return
 	visuals = scene_instance.get_node(visuals_scene_path)
+	if not is_instance_valid(visuals):
+		printerr(name, " could not find visuals")
 	visuals.hide()
+	scene_set_up.emit()
 
-func instantiate_scene() -> Node:
+func add_scene(parent: Node) -> Node:
 	if scene == null:
+		printerr(name, " cannot instantiate null scene")
 		return
 	if is_instance_valid(scene_instance):
 		scene_instance.queue_free()
+		
 	scene_instance = scene.instantiate()
+	parent.add_child(scene_instance)
 	set_up_scene()
 	return scene_instance
 
