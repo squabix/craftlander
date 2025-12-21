@@ -10,7 +10,7 @@ const CROUCH_CAMERA_SPEED := 0.1
 
 @onready var inventory_holder_link: InventoryHolderLink = $Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink
 
-func adjust_camera_to_crouch() -> void:
+func adjust_head_to_crouch() -> void:
 	head.position.y = lerp(
 		head.position.y,
 		CROUCHED_HEAD_HEIGHT if state_machine.current == %CrouchedState else STANDING_HEAD_HEIGHT,
@@ -18,13 +18,10 @@ func adjust_camera_to_crouch() -> void:
 	)
 
 func _process(_delta: float) -> void:
-	if Input.is_action_pressed("use_right"):
-		$Head/Camera3D/ArmContainer/ItemHolder.use_item()
+	adjust_head_to_crouch()
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("interact"):
-		%Interactor.interact()
-	elif event.is_action_pressed("scroll_up"):
-		inventory_holder_link.scroll(-1)
-	elif event.is_action_pressed("scroll_down"):
-		inventory_holder_link.scroll(1)
+func use_item() -> void:
+	$Head/Camera3D/ArmContainer/ItemHolder.use_item()
+
+func interact() -> void:
+	%Interactor.interact()
