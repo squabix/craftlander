@@ -8,6 +8,8 @@ signal exited_state(state: State)
 
 var current: State
 
+var state_names: Dictionary[String, State]
+
 func _ready() -> void:
 	if initial_state == null:
 		initial_state = get_child(0)
@@ -20,6 +22,8 @@ func _ready() -> void:
 	for child in get_children():
 		if child is State:
 			child.enter_callable = enter_state
+			child.root = root
+			state_names[child.name] = child
 
 func enter() -> void:
 	enter_state(initial_state)

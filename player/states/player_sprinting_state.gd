@@ -14,7 +14,7 @@ func enter() -> void:
 	root.movement_mode = movement_mode
 
 func update(_delta: float) -> void:
-	if Input.is_action_just_pressed("crouch"):
-		transition_to(%CrouchedState)
+	if Input.is_action_just_pressed("crouch") and root.is_on_floor():
+		transition_to(%Crouch)
 	elif not is_walking_forward():
-		transition_to(%WalkingState)
+		transition_to(%Walk)

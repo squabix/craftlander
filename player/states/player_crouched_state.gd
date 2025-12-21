@@ -16,6 +16,6 @@ func exit() -> void:
 
 func update(_delta: float) -> void:
 	if Input.is_action_just_pressed("crouch") or Input.is_action_just_pressed("jump"):
-		transition_to(%WalkingState)
+		transition_to(%Walk)
 	elif Input.is_action_just_pressed("sprint"):
-		transition_to(%SprintingState)
+		transition_to(%Sprint)

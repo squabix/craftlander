@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cmlllb7wq80s" path="res://destructable_resource/tree/tree.gd" id="1_a54gr"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="2_sq77v"]
-[ext_resource type="Script" path="res://common/damage_system/health.gd" id="3_qeat1"]
+[ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="3_qeat1"]
 [ext_resource type="PackedScene" uid="uid://bo0n5cj4oc8wo" path="res://destructable_resource/stone/stone1.blend" id="4_a54gr"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_a54gr"]
@@ -12,14 +12,14 @@ data = PackedVector3Array(1.4600999, 1.0784, -0.8253, 1.0259, 0.5688, -1.3563, 1
 script = ExtResource("1_a54gr")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_a54gr")
 
 [node name="Hurtbox3D" type="Area3D" parent="." node_paths=PackedStringArray("health")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 script = ExtResource("2_sq77v")
 health = NodePath("../Health")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
@@ -32,6 +32,6 @@ shape = SubResource("ConcavePolygonShape3D_a54gr")
 script = ExtResource("3_qeat1")
 
 [node name="stone1" parent="." instance=ExtResource("4_a54gr")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.7, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.4, 0)
 
 [editable path="stone1"]

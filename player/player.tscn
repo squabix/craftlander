@@ -214,23 +214,23 @@ texture = SubResource("GradientTexture2D_s7qer")
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "root")]
 unique_name_in_owner = true
 script = ExtResource("7_boad6")
-initial_state = NodePath("WalkingState")
+initial_state = NodePath("Walk")
 root = NodePath("..")
 metadata/_custom_type_script = "uid://bqonxtntgndfr"
 
-[node name="WalkingState" type="Node" parent="StateMachine" node_paths=PackedStringArray("root")]
+[node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("root")]
 unique_name_in_owner = true
 script = ExtResource("8_hg6s5")
 root = NodePath("../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="CrouchedState" type="Node" parent="StateMachine" node_paths=PackedStringArray("root")]
+[node name="Crouch" type="Node" parent="StateMachine" node_paths=PackedStringArray("root")]
 unique_name_in_owner = true
 script = ExtResource("9_hg6s5")
 root = NodePath("../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="SprintingState" type="Node" parent="StateMachine" node_paths=PackedStringArray("root")]
+[node name="Sprint" type="Node" parent="StateMachine" node_paths=PackedStringArray("root")]
 unique_name_in_owner = true
 script = ExtResource("10_8t03j")
 root = NodePath("../..")
