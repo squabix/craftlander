@@ -8,7 +8,7 @@ signal exited_state(state: State)
 
 var current: State
 
-var state_names: Dictionary[String, State]
+var states: Dictionary[String, State]
 
 func _ready() -> void:
 	if initial_state == null:
@@ -18,26 +18,41 @@ func _ready() -> void:
 		process_update = true
 		physics_process_update = true
 	
-	enter_state(initial_state)
 	for child in get_children():
 		if child is State:
 			child.enter_callable = enter_state
 			child.root = root
-			state_names[child.name] = child
+			states[child.name] = child
+	enter_state(initial_state.name)
 
 func enter() -> void:
-	enter_state(initial_state)
+	enter_state(initial_state.name)
+
+func is_valid() -> bool:
+	return is_instance_valid(current)
+
+func is_currently(state_name: String) -> bool:
+	if not is_valid():
+		return false
+	return current.name == state_name
 
 func update(delta: float) -> void:
-	if is_instance_valid(current):
+	if is_valid():
 		current.update(delta)
 		current.check_transitions()
 
 func physics_update(delta: float) -> void:
-	if is_instance_valid(current):
+	if is_valid():
 		current.physics_update(delta)
 
-func enter_state(state: State) -> bool:
+func exit_current() -> void:
+	current.exit()
+	current.exited.emit()
+	exited_state.emit(current)
+	current = null
+
+func enter_state(state_name: String) -> bool:
+	var state := states[state_name]
 	if not is_instance_valid(state):
 		printerr("Cannot enter invalid state: " + str(state))
 		return false
@@ -46,12 +61,10 @@ func enter_state(state: State) -> bool:
 		print("Already current")
 		return false
 	
-	if is_instance_valid(current):
+	if is_valid():
 		if current.priority > state.priority:
 			return false
-		current.exit()
-		current.exited.emit()
-		exited_state.emit(current)
+		exit_current()
 	
 	current = state
 	

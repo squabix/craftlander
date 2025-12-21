@@ -32,10 +32,10 @@ func exit() -> void:
 func add_check(target: State, callable: Callable) -> void:
 	transition_checks[callable] = target
 
-func transition_to(to: State) -> void:
+func transition_to(state_name: String) -> void:
 	if enter_callable != null:
 		await get_tree().process_frame
-		enter_callable.call(to)
+		enter_callable.call(state_name)
 
 func _process(delta: float) -> void:
 	if process_update:
@@ -57,6 +57,3 @@ func check_transitions() -> void:
 		#if check.call() == true:
 			#transition_to(transition_checks[check])
 			#return
-
-func _to_string() -> String:
-	return "State ({root})".format(self)

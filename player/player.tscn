@@ -212,26 +212,22 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_s7qer")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "root")]
-unique_name_in_owner = true
 script = ExtResource("7_boad6")
-initial_state = NodePath("Walk")
+initial_state = NodePath("Walking")
 root = NodePath("..")
 metadata/_custom_type_script = "uid://bqonxtntgndfr"
 
-[node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("root")]
-unique_name_in_owner = true
+[node name="Walking" type="Node" parent="StateMachine" node_paths=PackedStringArray("root")]
 script = ExtResource("8_hg6s5")
 root = NodePath("../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Crouch" type="Node" parent="StateMachine" node_paths=PackedStringArray("root")]
-unique_name_in_owner = true
+[node name="Crouching" type="Node" parent="StateMachine" node_paths=PackedStringArray("root")]
 script = ExtResource("9_hg6s5")
 root = NodePath("../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Sprint" type="Node" parent="StateMachine" node_paths=PackedStringArray("root")]
-unique_name_in_owner = true
+[node name="Sprinting" type="Node" parent="StateMachine" node_paths=PackedStringArray("root")]
 script = ExtResource("10_8t03j")
 root = NodePath("../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"

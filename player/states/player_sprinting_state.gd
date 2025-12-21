@@ -15,6 +15,6 @@ func enter() -> void:
 
 func update(_delta: float) -> void:
 	if Input.is_action_just_pressed("crouch") and root.is_on_floor():
-		transition_to(%Crouch)
+		transition_to("Crouching")
 	elif not is_walking_forward():
-		transition_to(%Walk)
+		transition_to("Walking")

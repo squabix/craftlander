@@ -13,7 +13,7 @@ const CROUCH_CAMERA_SPEED := 0.1
 func adjust_head_to_crouch() -> void:
 	head.position.y = lerp(
 		head.position.y,
-		CROUCHED_HEAD_HEIGHT if state_machine.current == %Crouch else STANDING_HEAD_HEIGHT,
+		CROUCHED_HEAD_HEIGHT if state_machine.is_currently("Crouching") else STANDING_HEAD_HEIGHT,
 		CROUCH_CAMERA_SPEED
 	)
 
