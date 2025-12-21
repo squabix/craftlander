@@ -4,18 +4,20 @@ class_name State
 signal was_locked
 signal was_unlocked
 
+@warning_ignore("unused_signal")
 signal entered
+@warning_ignore("unused_signal")
 signal exited
 
 @export var root: Node
 @export var priority: float
 @export var locked: bool:
 	set(to):
+		locked = true
 		if to == true:
 			was_locked.emit()
 		else:
 			was_unlocked.emit()
-		locked = true
 @export var process_update: bool
 @export var physics_process_update: bool
 
@@ -33,9 +35,11 @@ func add_check(target: State, callable: Callable) -> void:
 	transition_checks[callable] = target
 
 func transition_to(state_name: String) -> void:
-	if enter_callable != null:
-		await get_tree().process_frame
-		enter_callable.call(state_name)
+	if not enter_callable.is_valid():
+		printerr(self, "has invalid enter callable")
+		return
+	await get_tree().process_frame
+	enter_callable.call(state_name)
 
 func _process(delta: float) -> void:
 	if process_update:

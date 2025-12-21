@@ -10,6 +10,7 @@ var current: State
 
 var states: Dictionary[String, State]
 
+
 func _ready() -> void:
 	if initial_state == null:
 		initial_state = get_child(0)
@@ -56,9 +57,7 @@ func enter_state(state_name: String) -> bool:
 	if not is_instance_valid(state):
 		printerr("Cannot enter invalid state: " + str(state))
 		return false
-	
 	if state == current:
-		print("Already current")
 		return false
 	
 	if is_valid():
