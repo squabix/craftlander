@@ -1,8 +1,6 @@
-extends Node
+extends SignalTrigger
 class_name SignalStateTrigger
 
-@export var custom_target: Node
-@export var signal_name: StringName
 @export var state_machine: StateMachine
 @export var state_name: String
 @export var from_state_whitelist: Array[String]
@@ -16,8 +14,7 @@ func _ready() -> void:
 		printerr(self, "has no state to transition to")
 		return
 	
-	var target := custom_target if is_instance_valid(custom_target) else get_parent()
-	target.connect(signal_name, trigger)
+	super()
 
 func trigger(..._args: Array) -> void:
 	if from_state_whitelist.is_empty():
