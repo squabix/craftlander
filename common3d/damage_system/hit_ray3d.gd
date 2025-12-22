@@ -38,7 +38,7 @@ func hit(custom_damage_amount: float=0.0) -> bool:
 	var damage_amount := custom_damage_amount
 	if damage_amount == 0.0:
 		damage_amount = damage.sample()
-	area.hurt(damage_amount)
+	area.hurt(damage_amount, Vector3.FORWARD.rotated(Util.VECTOR3Y, global_rotation.y))
 	hit_nodes.append(area)
 	hit_node.emit()
 	

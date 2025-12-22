@@ -10,7 +10,6 @@ var current: State
 
 var states: Dictionary[String, State]
 
-
 func _ready() -> void:
 	if initial_state == null:
 		initial_state = get_child(0)

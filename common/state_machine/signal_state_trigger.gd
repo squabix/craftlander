@@ -21,7 +21,6 @@ func _ready() -> void:
 
 func trigger(..._args: Array) -> void:
 	if from_state_whitelist.is_empty():
-		print("Empty")
 		state_machine.enter_state(state_name)
 		return
 	
