@@ -1,16 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://c16m48qir7vc7"]
+[gd_scene load_steps=16 format=3 uid="uid://c16m48qir7vc7"]
 
 [ext_resource type="Script" uid="uid://cmlllb7wq80s" path="res://destructable_resource/tree/tree.gd" id="1_27px0"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="1_r4p3j"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="2_27px0"]
+[ext_resource type="Script" uid="uid://dapeyi3eetek1" path="res://common/signal_triggrs/signal_animation_trigger.gd" id="4_agfax"]
 [ext_resource type="PackedScene" uid="uid://6hxbh5av6fba" path="res://destructable_resource/tree/tree1.blend" id="4_bv88s"]
-[ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/state_machine/signal_state_trigger.gd" id="5_afesh"]
+[ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/signal_triggrs/signal_state_trigger.gd" id="5_afesh"]
 [ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="5_s0q6f"]
 [ext_resource type="Script" uid="uid://2c2w68kia23g" path="res://destructable_resource/tree/standing_state.gd" id="7_afesh"]
 [ext_resource type="Script" uid="uid://bwsaqjbx2ith8" path="res://destructable_resource/tree/tree_falling_state.gd" id="7_n32rl"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_r4p3j"]
-height = 5.0
+height = 15.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_bv88s"]
 height = 5.0
@@ -18,18 +19,62 @@ height = 5.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_8mlu7"]
 radius = 3.0
 
+[sub_resource type="Animation" id="Animation_agfax"]
+resource_name = "hurt"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("tree1/Trunk:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.9, 1, 0.9), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4ojav"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("tree1/Trunk:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ojav"]
+_data = {
+&"RESET": SubResource("Animation_4ojav"),
+&"hurt": SubResource("Animation_agfax")
+}
+
 [node name="Tree" type="Node3D"]
 script = ExtResource("1_27px0")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_27px0")
 
-[node name="SignalStateTrigger" type="Node" parent="Health" node_paths=PackedStringArray("state_machine")]
+[node name="FallTrigger" type="Node" parent="Health" node_paths=PackedStringArray("state_machine")]
 script = ExtResource("5_afesh")
-signal_name = &"died"
 state_machine = NodePath("../../StateMachine")
 state_name = "Falling"
+signal_name = &"died"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
+
+[node name="HitAnimTrigger" type="Node" parent="Health" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("4_agfax")
+animation_player = NodePath("../../AnimationPlayer")
+animation_name = "hurt"
+signal_name = &"was_hurt"
+metadata/_custom_type_script = "uid://dapeyi3eetek1"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "root")]
 script = ExtResource("5_s0q6f")
@@ -48,7 +93,7 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5267515, 0)
 shape = SubResource("CylinderShape3D_r4p3j")
 
 [node name="Hurtbox3D" type="Area3D" parent="." node_paths=PackedStringArray("health")]
@@ -73,3 +118,10 @@ monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ContinueFallArea"]
 shape = SubResource("SphereShape3D_8mlu7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_4ojav")
+}
+
+[editable path="tree1"]
