@@ -4,7 +4,6 @@ class_name ItemInstance
 signal emptied
 
 @export var item: Item
-
 @export var quantity := 1
 
 func _init() -> void:

@@ -59,6 +59,12 @@ func set_up_scene() -> void:
 	visuals.hide()
 	scene_set_up.emit()
 
+func get_visuals_duplicate() -> Node:
+	if scene == null:
+		printerr(name, " cannot get visuals duplicate from null scene")
+		return
+	return scene.instantiate().get_node(visuals_scene_path).duplicate()
+
 func add_scene(parent: Node) -> Node:
 	if scene == null:
 		printerr(name, " cannot instantiate null scene")

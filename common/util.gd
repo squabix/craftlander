@@ -44,6 +44,21 @@ static func disable_all_colliders(parent: Node) -> Array[Node]:
 	
 	return disabled_colliders
 
+static func is_node_of_class(node: Node, class_string: String) -> bool:
+	if node.get_script() and node.get_script().get_global_name() == class_string:
+			return true
+	if node.is_class(class_string):
+		return true
+	return false
+
+static func find_child_of_class(parent: Node, class_string: String) -> Node:
+	for child in parent.get_children():
+		if is_node_of_class(child, class_string):
+			return child
+		if find_child_of_class(child, class_string) != null:
+			return child
+	return null
+
 static func disable_collider(collider: Node) -> bool:
 	var polygon2d := collider is CollisionPolygon2D
 	var polygon3d := collider is CollisionPolygon3D
