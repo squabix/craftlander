@@ -59,6 +59,17 @@ static func find_child_of_class(parent: Node, class_string: String) -> Node:
 			return child
 	return null
 
+static func find_children_of_class(parent: Node, class_string: String) -> Array[Node]:
+	var children: Array[Node] = []
+	for child in parent.get_children():
+		if is_node_of_class(child, class_string):
+			children.append(child)
+		else:
+			var grandchildren := find_children_of_class(child, class_string)
+			if not grandchildren.is_empty():
+				children.append_array(grandchildren)
+	return children
+
 static func disable_collider(collider: Node) -> bool:
 	var polygon2d := collider is CollisionPolygon2D
 	var polygon3d := collider is CollisionPolygon3D

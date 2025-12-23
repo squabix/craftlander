@@ -2,15 +2,28 @@ extends Interactable3D
 class_name ItemPickup3D
 
 @export var item_instance: ItemInstance
-
-var collision_shape: CollisionShape3D
+@export var auto_generate_collision := true
+@export var collision_scale: float = 0.1
 
 func _ready() -> void:
 	var visuals: Node3D = item_instance.item.get_visuals_duplicate()
 	add_child(visuals)
-	for mesh in visuals.get_children():
-		mesh = mesh as MeshInstance3D
-		#collision_shape = mesh.create_convex_collision()
+	visuals.global_transform = self.global_transform
+	
+	var mesh_instances := Util.find_children_of_class(visuals, "MeshInstance3D")
+	# Generate collision from mesh instances
+	if auto_generate_collision:
+		print(mesh_instances)
+		for mesh_instance in mesh_instances:
+			if mesh_instance.mesh == null:
+				continue
+			
+			var collision_shape := CollisionShape3D.new()
+			collision_shape.shape = mesh_instance.mesh.create_convex_shape()
+			add_child(collision_shape)
+			collision_shape.scale = mesh_instance.scale * collision_scale
+			collision_shape.global_position = mesh_instance.global_position
+			print(scale)
 
 func interact(_source: Node, _etc: Dictionary={}) -> void:
 	var inventory: Inventory = Util.find_child_of_class(_source, "Inventory")

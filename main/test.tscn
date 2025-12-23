@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b6d7dfwyfulxo"]
+[gd_scene load_steps=11 format=3 uid="uid://b6d7dfwyfulxo"]
 
 [ext_resource type="Script" uid="uid://csfawk4hjit5w" path="res://main/test.gd" id="1_0pcxm"]
 [ext_resource type="PackedScene" uid="uid://c16m48qir7vc7" path="res://destructable_resource/tree/tree.tscn" id="2_dax2s"]
@@ -21,8 +21,6 @@ script = ExtResource("6_1x3tc")
 item = ExtResource("5_m6xkr")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_m6xkr"]
-
 [node name="Test" type="Node3D"]
 script = ExtResource("1_0pcxm")
 
@@ -41,12 +39,9 @@ shape = SubResource("WorldBoundaryShape3D_rarbv")
 [node name="Player" parent="." instance=ExtResource("3_dax2s")]
 
 [node name="ItemPickup" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4990859, 1, -1.2120819)
+transform = Transform3D(1.9106855e-15, 4.371139e-08, 1, 1, -4.371139e-08, 0, 4.371139e-08, 1, -4.371139e-08, 1.4990859, 1, -1.2120819)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("4_rarbv")
 item_instance = SubResource("Resource_khmyp")
 metadata/_custom_type_script = "uid://favgu1tbe1tq"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ItemPickup"]
-shape = SubResource("SphereShape3D_m6xkr")
