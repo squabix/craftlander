@@ -13,11 +13,11 @@ func enter() -> void:
 
 func physics_update(_delta: float) -> void:
 	if %ContinueFallArea.has_overlapping_bodies():
-		fall_speed = 0.0
+		transition_to("Chopped")
 	else:
 		fall_speed += FALL_ACCEL
-		root.global_basis = Util.roll_basis_toward(
-				root.global_basis,
+		root.trunk.global_basis = Util.roll_basis_toward(
+				root.trunk.global_basis,
 				fall_direction,
 				Util.VECTOR3Y,
 				fall_speed

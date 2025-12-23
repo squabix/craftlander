@@ -45,7 +45,6 @@ func hurt(damage: float, direction: Vector3=Vector3.ZERO) -> float:
 	
 	if direction != Vector3.ZERO:
 		last_hurt_direction = direction
-	
 	was_hurt.emit()
 	was_dealt_damage.emit(damage)
 	

@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://b6d7dfwyfulxo"]
+
+[ext_resource type="Script" uid="uid://csfawk4hjit5w" path="res://main/test.gd" id="1_0pcxm"]
+[ext_resource type="PackedScene" uid="uid://c16m48qir7vc7" path="res://destructable_resource/tree/tree.tscn" id="2_dax2s"]
+[ext_resource type="PackedScene" uid="uid://dmbp0klxo0b0c" path="res://player/player.tscn" id="3_dax2s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gt0vt"]
+albedo_color = Color(0.29520002, 0.72, 0.43680012, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8nrhl"]
+material = SubResource("StandardMaterial3D_gt0vt")
+size = Vector2(50, 50)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_rarbv"]
+
+[node name="Test" type="Node3D"]
+script = ExtResource("1_0pcxm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_8nrhl")
+
+[node name="Tree" parent="." instance=ExtResource("2_dax2s")]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -6.115755, 0, -6.115755)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_rarbv")
+
+[node name="Player" parent="." instance=ExtResource("3_dax2s")]
