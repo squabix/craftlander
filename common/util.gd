@@ -70,6 +70,32 @@ static func find_children_of_class(parent: Node, class_string: String) -> Array[
 				children.append_array(grandchildren)
 	return children
 
+static func snap_to_floor(
+		node: Node3D,
+		margin: float = 0.05,
+		max_distance: float = 1000.0,
+		collision_mask: int = 0xFFFFFFFF
+	) -> bool:
+	
+	var world := node.get_world_3d()
+	if world == null:
+		return false
+	
+	var origin := node.global_transform.origin
+	var to := origin + Vector3.DOWN * max_distance
+	
+	var query := PhysicsRayQueryParameters3D.create(origin, to)
+	query.collision_mask = collision_mask
+	query.exclude = [node]
+	
+	var result := world.direct_space_state.intersect_ray(query)
+	if result.is_empty():
+		return false
+	
+	node.global_transform.origin = result.position + Vector3.UP * margin
+	
+	return true
+
 static func disable_collider(collider: Node) -> bool:
 	var polygon2d := collider is CollisionPolygon2D
 	var polygon3d := collider is CollisionPolygon3D

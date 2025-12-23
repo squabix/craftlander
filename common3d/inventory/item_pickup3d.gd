@@ -1,14 +1,20 @@
 extends Interactable3D
 class_name ItemPickup3D
 
+const FLOOR_MARGIN: float = 0.05
+
 @export var item_instance: ItemInstance
 @export var auto_generate_collision := true
 @export var collision_scale: float = 0.1
+@export var generate_floor_raycast := true
 
 func _ready() -> void:
 	var visuals: Node3D = item_instance.item.get_visuals_duplicate()
 	add_child(visuals)
 	visuals.global_transform = self.global_transform
+	
+	if generate_floor_raycast:
+		Util.snap_to_floor(self, FLOOR_MARGIN)
 	
 	var mesh_instances := Util.find_children_of_class(visuals, "MeshInstance3D")
 	# Generate collision from mesh instances

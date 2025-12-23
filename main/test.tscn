@@ -39,7 +39,7 @@ shape = SubResource("WorldBoundaryShape3D_rarbv")
 [node name="Player" parent="." instance=ExtResource("3_dax2s")]
 
 [node name="ItemPickup" type="Area3D" parent="."]
-transform = Transform3D(1.9106855e-15, 4.371139e-08, 1, 1, -4.371139e-08, 0, 4.371139e-08, 1, -4.371139e-08, 1.4990859, 1, -1.2120819)
+transform = Transform3D(3.821371e-15, 8.742278e-08, 2, 2, -8.742278e-08, 0, 8.742278e-08, 2, -8.742278e-08, 1.499, 4, -1.212)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("4_rarbv")
