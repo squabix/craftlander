@@ -2,6 +2,7 @@ extends Node
 class_name Inventory
 
 @export var item_instances: Array[ItemInstance] = []
+@export var constant := false
 @export var size := 5:
 	set(to):
 		size = to
@@ -19,7 +20,16 @@ func _ready() -> void:
 			if instance is RandomItemInstance:
 				item_instances[item_instances.find(instance)] = instance.duplicate()
 
+func get_item(index: int) -> Item:
+	var instance := item_instances[index]
+	if instance == null:
+		return null
+	return instance.item
+
 func add_item(new_item: Item, quantity: int = 1) -> int:
+	if constant:
+		return quantity
+	
 	if new_item.max_quantity > 1:
 		for inst in item_instances:
 			if inst == null:
@@ -55,6 +65,9 @@ func delete_instance(instance: ItemInstance) -> void:
 	item_instances.erase(instance)
 
 func remove_item(item: Item, quantity: int=1) -> int:
+	if constant:
+		return quantity
+	
 	for i in range(item_instances.size()):
 		var inst := item_instances[i]
 		if inst == null or inst.item != item:
@@ -65,7 +78,15 @@ func remove_item(item: Item, quantity: int=1) -> int:
 			return 0
 	return quantity
 
+func give_item(item: Item, quantity: int, to: Inventory) -> int:
+	var available_quantity := remove_item(item, quantity)
+	var leftover_quantity := to.add_item(item, available_quantity)
+	return leftover_quantity
+
 func remove_instance(instance: ItemInstance, quantity: int=1) -> int:
+	if constant:
+		return quantity
+	
 	if instance.quantity > quantity:
 		instance.quantity -= quantity
 		return 0

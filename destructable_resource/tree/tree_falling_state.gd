@@ -10,6 +10,7 @@ func enter() -> void:
 	await get_tree().process_frame
 	fall_speed = 0.0
 	fall_direction = root.hurtbox.last_hurt_direction
+	%HurtboxCollision.disabled = true
 
 func physics_update(_delta: float) -> void:
 	

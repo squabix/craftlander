@@ -18,6 +18,7 @@ const NUM_KEY_INDEX_MAP: Dictionary[int, int] = {
 
 @export var inventory: Inventory
 @export var item_holder: ItemHolder3D
+@export var root: Node
 @export var current_index := 0
 @export var use_num_key_input := true
 

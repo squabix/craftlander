@@ -14,11 +14,14 @@ static func subscribe(to: String, subscriber: Callable) -> bool:
 		printerr("Invalid Callable cannot subscribe to EventBus")
 	return false
 
-static func trigger(event: String, etc: Variant) -> bool:
+static func trigger(event: String, etc: Variant = null) -> bool:
 	if event in subscribed_events:
 		for subscriber in subscribed_events[event]:
 			if subscriber.is_valid():
-				subscriber.call(etc)
+				if etc == null:
+					subscriber.call()
+				else:
+					subscriber.call(etc)
 		return true
 	return false
 

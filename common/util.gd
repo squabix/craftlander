@@ -55,8 +55,9 @@ static func find_child_of_class(parent: Node, class_string: String) -> Node:
 	for child in parent.get_children():
 		if is_node_of_class(child, class_string):
 			return child
-		if find_child_of_class(child, class_string) != null:
-			return child
+		var grandchild := find_child_of_class(child, class_string)
+		if grandchild != null:
+			return grandchild
 	return null
 
 static func find_children_of_class(parent: Node, class_string: String) -> Array[Node]:

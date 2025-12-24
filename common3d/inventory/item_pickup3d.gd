@@ -5,7 +5,7 @@ signal picked_up
 
 const FLOOR_MARGIN: float = 0.05
 
-@export var item_instance: ItemInstance
+@export var item: Item
 @export var auto_generate_collision := true
 @export var collision_scale: float = 1.0
 @export var generate_floor_raycast := true
@@ -13,10 +13,10 @@ const FLOOR_MARGIN: float = 0.05
 var visuals: Node3D
 
 func _ready() -> void:
-	if item_instance == null:
+	if item == null:
 		printerr(self, " has no item instance")
 		return
-	visuals = item_instance.item.get_visuals_duplicate()
+	visuals = item.get_visuals_duplicate()
 	add_child(visuals)
 	visuals.global_transform = self.global_transform
 	
@@ -46,6 +46,6 @@ func generate_collision() -> Array[CollisionShape3D]:
 
 func interact(_source: Node, _etc: Dictionary={}) -> void:
 	var inventory: Inventory = Util.find_child_of_class(_source, "Inventory")
-	inventory.add_item(item_instance.item, item_instance.quantity)
+	inventory.add_item(item, 1)
 	queue_free()
 	picked_up.emit()

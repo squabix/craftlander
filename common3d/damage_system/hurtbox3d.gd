@@ -2,7 +2,7 @@ extends Area3D
 class_name Hurtbox3D
 
 signal was_hurt
-signal was_dealt_damage(amount: float)
+signal was_dealt_damage(damage: Damage)
 
 @export var health: Health
 @export var inactive := false
@@ -54,7 +54,7 @@ func hurt(damage: Damage, direction: Vector3=Vector3.ZERO) -> float:
 	if direction != Vector3.ZERO:
 		last_hurt_direction = direction
 	was_hurt.emit()
-	was_dealt_damage.emit(damage_amount)
+	was_dealt_damage.emit(damage)
 	
 	if free_parent_on_hurt:
 		get_parent().queue_free()

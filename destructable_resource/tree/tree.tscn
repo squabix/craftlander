@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://c16m48qir7vc7"]
+[gd_scene load_steps=39 format=4 uid="uid://c16m48qir7vc7"]
 
 [ext_resource type="Script" uid="uid://cmlllb7wq80s" path="res://destructable_resource/tree/tree.gd" id="1_27px0"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="1_r4p3j"]
@@ -10,21 +10,49 @@
 [ext_resource type="Script" uid="uid://bwsaqjbx2ith8" path="res://destructable_resource/tree/tree_falling_state.gd" id="7_n32rl"]
 [ext_resource type="Script" uid="uid://ihbhsm4c4qtv" path="res://destructable_resource/tree/chopped_state.gd" id="8_agfax"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="10_4ojav"]
+[ext_resource type="Material" uid="uid://2poe1edl4m8q" path="res://destructable_resource/tree/bark.tres" id="10_mw2c8"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="11_ytrwe"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="12_jeogd"]
 [ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/wood/wood_item.tres" id="13_mw2c8"]
 [ext_resource type="Script" uid="uid://bcamns7ryy05c" path="res://common/inventory_system/random_item_instance.gd" id="14_18auj"]
 
+[sub_resource type="Curve" id="Curve_mw2c8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.75779045, 0.8774637), -0.5111994, -0.5111994, 0, 0, Vector2(1, 0.2536419), -3.0296543, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_18auj"]
+curve = SubResource("Curve_mw2c8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mw2c8"]
+emission_shape = 3
+emission_box_extents = Vector3(0, 5, 0)
+direction = Vector3(-1, 0, 0)
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+damping_min = 10.0
+damping_max = 10.0
+scale_min = 0.5
+scale_max = 0.79999995
+scale_curve = SubResource("CurveTexture_18auj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_18auj"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.1
+normal_enabled = true
+proximity_fade_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_kblrq"]
+material = SubResource("StandardMaterial3D_18auj")
+radial_segments = 16
+rings = 8
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_r4p3j"]
 height = 10.25
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8mlu7"]
-radius = 3.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yhjeu"]
-resource_name = "Material.002"
-cull_mode = 2
-albedo_color = Color(0.5126511, 0.283828, 0.1894076, 1)
+radius = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_isvi4"]
 resource_name = "Material.003"
@@ -79,7 +107,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 261,
 "index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0AMAAxADIAMAAzADEANAA1ADYANwA4ADkANwA6ADgAOwA8AD0AOwA+ADwAPwBAAEEAQgBDAEQAQgBFAEMARgBHAEgARgBJAEcASgBLAEwASgBNAEsATgBPAFAAUQBSAFMAVABVAFYAVwBYAFkAWgBbAFwAWgBdAFsAXgBfAGAAXgBhAF8AYgBjAGQAYgBlAGMAZgBnAGgAaQBqAGsAbABtAG4AbwBwAHEAcgBzAHQAcgB1AHMAdgB3AHgAdgB5AHcAegB7AHwAegB9AHsAfgB/AIAAgQCCAIMAhACFAIYAhwCIAIkAigCLAIwAjQCOAI8AkACRAJIAkwCUAJUAkwCWAJQAlwCYAJkAlwCaAJgAmwCcAJ0AmwCeAJwAnwCgAKEAogCjAKQApQCmAKcAqACpAKoAqwCsAK0AqwCuAKwArwCwALEArwCyALAAswC0ALUAswC2ALQAtwC4ALkAtwC6ALgAuwC8AL0AvgC/AMAAwQDCAMMAxADFAMYA"),
-"material": SubResource("StandardMaterial3D_yhjeu"),
+"material": ExtResource("10_mw2c8"),
 "name": "Material.002",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -189,7 +217,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 39,
 "index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFQAUABcAFQAXABgA"),
-"material": SubResource("StandardMaterial3D_yhjeu"),
+"material": ExtResource("10_mw2c8"),
 "name": "Material.002",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -260,17 +288,27 @@ metadata/_custom_type_script = "uid://bcamns7ryy05c"
 [node name="Tree" type="Node3D"]
 script = ExtResource("1_27px0")
 
-[node name="StandingHealth" type="Node" parent="."]
+[node name="ChopParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+cast_shadow = 0
+emitting = false
+amount = 32
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_mw2c8")
+draw_pass_1 = SubResource("SphereMesh_kblrq")
+
+[node name="Health" type="Node" parent="."]
 script = ExtResource("2_27px0")
 
-[node name="FallTrigger" type="Node" parent="StandingHealth" node_paths=PackedStringArray("state_machine")]
+[node name="FallTrigger" type="Node" parent="Health" node_paths=PackedStringArray("state_machine")]
 script = ExtResource("5_afesh")
 state_machine = NodePath("../../StateMachine")
 state_name = "Falling"
 signal_name = &"died"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 
-[node name="HitAnimTrigger" type="Node" parent="StandingHealth" node_paths=PackedStringArray("animation_player")]
+[node name="HitAnimTrigger" type="Node" parent="Health" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_agfax")
 animation_player = NodePath("../../AnimationPlayer")
 animation_name = "hurt"
@@ -303,12 +341,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 collision_layer = 8
 monitoring = false
 script = ExtResource("1_r4p3j")
-health = NodePath("../../StandingHealth")
+health = NodePath("../../Health")
 use_whitelist = true
 type_whitelist = Array[String](["axe"])
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Trunk/Hurtbox3D"]
+[node name="HurtboxCollision" type="CollisionShape3D" parent="Trunk/Hurtbox3D"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.625, 0)
 shape = SubResource("CylinderShape3D_r4p3j")
 
@@ -343,6 +382,9 @@ position_offset = Vector3(0, 0.5, 0)
 rotation_offset = Vector3(0, 90, 90)
 metadata/_custom_type_script = "uid://iyqixpr4un6s"
 
+[node name="Center" type="Node3D" parent="Trunk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
 [node name="Stump" type="StaticBody3D" parent="."]
 
 [node name="StumpMesh" type="MeshInstance3D" parent="Stump"]
@@ -360,5 +402,6 @@ libraries = {
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("11_ytrwe")
 item_instances = Array[ExtResource("12_jeogd")]([SubResource("Resource_jeogd")])
+constant = true
 size = 1
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"

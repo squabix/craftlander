@@ -24,6 +24,7 @@ var _updates_attempted_use := 0
 var _ended_use := true
 
 var update_delta := 0.0
+var root: Node
 
 func update(delta: float) -> void:
 	idle()

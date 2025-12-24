@@ -179,10 +179,11 @@ metadata/_custom_type_script = "uid://bypxgjqugqucx"
 [node name="ArmContainer" type="Node3D" parent="Head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08, -0.3)
 
-[node name="ItemHolder" type="Node3D" parent="Head/Camera3D/ArmContainer" node_paths=PackedStringArray("instance_parent")]
+[node name="ItemHolder" type="Node3D" parent="Head/Camera3D/ArmContainer" node_paths=PackedStringArray("instance_parent", "root")]
 transform = Transform3D(0.9848081, 0.015134426, 0.17298739, 0, 0.9961941, -0.08715573, -0.17364824, 0.08583159, 0.9810602, 0.29, -0.23, 0)
 script = ExtResource("7_kb6p2")
 instance_parent = NodePath("../..")
+root = NodePath("../../../..")
 metadata/_edit_group_ = true
 
 [node name="ItemVisualsContainer3D" type="Node3D" parent="Head/Camera3D/ArmContainer/ItemHolder" node_paths=PackedStringArray("inventory_holder_link")]

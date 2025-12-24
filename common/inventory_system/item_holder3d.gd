@@ -7,6 +7,7 @@ signal consumed_instance(instance: ItemInstance)
 @export var icon_sprite: Sprite3D
 @export var instance_parent: Node3D
 @export var item_override: Item
+@export var root: Node
 @export var item_instance: ItemInstance:
 	set(to):
 		if item_instance == to:
@@ -26,6 +27,7 @@ signal consumed_instance(instance: ItemInstance)
 			return
 		
 		update_icon(item_instance.item.icon)
+		item_instance.item.root = root
 		if item_instance.item.scene != null:
 			item_instance.item.add_scene(instance_parent)
 			#instance_parent.add_child.call_deferred(item_instance.item.instantiate_scene())

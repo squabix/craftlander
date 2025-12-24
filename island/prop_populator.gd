@@ -49,6 +49,8 @@ func populate() -> void:
 			props[spawn_position] = instance
 			
 			prop_count += 1
+	await get_tree().process_frame
+	EventBus.trigger("island_populated")
 
 func get_shortest_prop_distance(to: Vector3) -> float:
 	var shortest_distance := INF
