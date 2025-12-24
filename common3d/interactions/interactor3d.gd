@@ -12,6 +12,8 @@ func interact() -> Interactable3D:
 		printerr("Cannot interact with invalid parent")
 		return null
 	
+	print("Interacting")
+	
 	var interactable: Interactable3D
 	if parent is Area3D:
 		interactable = get_closest_interactable(parent.get_overlapping_areas())

@@ -56,7 +56,8 @@ func set_up_scene() -> void:
 	visuals = scene_instance.get_node(visuals_scene_path)
 	if not is_instance_valid(visuals):
 		printerr(name, " could not find visuals")
-	visuals.hide()
+	if visuals != null:
+		visuals.hide()
 	scene_set_up.emit()
 
 func get_visuals_duplicate() -> Node:

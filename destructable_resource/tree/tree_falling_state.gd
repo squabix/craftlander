@@ -12,7 +12,9 @@ func enter() -> void:
 	fall_direction = root.hurtbox.last_hurt_direction
 
 func physics_update(_delta: float) -> void:
-	if %ContinueFallArea.has_overlapping_bodies():
+	
+	# Greater than 1 to discount colliding with own trunk
+	if %ContinueFallArea.get_overlapping_bodies().size() > 1:
 		transition_to("Chopped")
 	else:
 		fall_speed += FALL_ACCEL

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://c16m48qir7vc7"]
+[gd_scene load_steps=34 format=4 uid="uid://c16m48qir7vc7"]
 
 [ext_resource type="Script" uid="uid://cmlllb7wq80s" path="res://destructable_resource/tree/tree.gd" id="1_27px0"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="1_r4p3j"]
@@ -9,6 +9,11 @@
 [ext_resource type="Script" uid="uid://2c2w68kia23g" path="res://destructable_resource/tree/standing_state.gd" id="7_afesh"]
 [ext_resource type="Script" uid="uid://bwsaqjbx2ith8" path="res://destructable_resource/tree/tree_falling_state.gd" id="7_n32rl"]
 [ext_resource type="Script" uid="uid://ihbhsm4c4qtv" path="res://destructable_resource/tree/chopped_state.gd" id="8_agfax"]
+[ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="10_4ojav"]
+[ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="11_ytrwe"]
+[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="12_jeogd"]
+[ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/wood/wood_item.tres" id="13_mw2c8"]
+[ext_resource type="Script" uid="uid://bcamns7ryy05c" path="res://common/inventory_system/random_item_instance.gd" id="14_18auj"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_r4p3j"]
 height = 10.25
@@ -245,6 +250,13 @@ _data = {
 &"hurt": SubResource("Animation_agfax")
 }
 
+[sub_resource type="Resource" id="Resource_jeogd"]
+script = ExtResource("14_18auj")
+min_quantity = 2
+max_quantity = 5
+item = ExtResource("13_mw2c8")
+metadata/_custom_type_script = "uid://bcamns7ryy05c"
+
 [node name="Tree" type="Node3D"]
 script = ExtResource("1_27px0")
 
@@ -284,6 +296,7 @@ script = ExtResource("8_agfax")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Trunk" type="AnimatableBody3D" parent="."]
+collision_layer = 5
 
 [node name="Hurtbox3D" type="Area3D" parent="Trunk" node_paths=PackedStringArray("health")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
@@ -291,6 +304,8 @@ collision_layer = 8
 monitoring = false
 script = ExtResource("1_r4p3j")
 health = NodePath("../../StandingHealth")
+use_whitelist = true
+type_whitelist = Array[String](["axe"])
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Trunk/Hurtbox3D"]
@@ -319,6 +334,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5473785, 8.896626, -2.4605
 mesh = SubResource("ArrayMesh_r1bcm")
 skeleton = NodePath("")
 
+[node name="Spawner3D" type="Node3D" parent="Trunk" node_paths=PackedStringArray("inventory")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+script = ExtResource("10_4ojav")
+inventory = NodePath("../../Inventory")
+position_offset = Vector3(0, 0.5, 0)
+rotation_offset = Vector3(0, 90, 90)
+metadata/_custom_type_script = "uid://iyqixpr4un6s"
+
 [node name="Stump" type="StaticBody3D" parent="."]
 
 [node name="StumpMesh" type="MeshInstance3D" parent="Stump"]
@@ -332,3 +356,9 @@ shape = SubResource("CylinderShape3D_afesh")
 libraries = {
 &"": SubResource("AnimationLibrary_4ojav")
 }
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("11_ytrwe")
+item_instances = Array[ExtResource("12_jeogd")]([SubResource("Resource_jeogd")])
+size = 1
+metadata/_custom_type_script = "uid://bu0k8q4uctlgf"

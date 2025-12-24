@@ -20,7 +20,7 @@ func _ready() -> void:
 	if damage == null:
 		printerr(name, " has no damage")
 
-func hit(custom_damage_amount: float=0.0) -> bool:
+func hit() -> bool:
 	var area := get_collider() as Area3D
 	
 	# ERROR if area does not exist
@@ -35,10 +35,7 @@ func hit(custom_damage_amount: float=0.0) -> bool:
 	if area in hit_nodes and one_shot:
 		return false
 	
-	var damage_amount := custom_damage_amount
-	if damage_amount == 0.0:
-		damage_amount = damage.sample()
-	area.hurt(damage_amount, Vector3.FORWARD.rotated(Util.VECTOR3Y, global_rotation.y))
+	area.hurt(damage, Vector3.FORWARD.rotated(Util.VECTOR3Y, global_rotation.y))
 	hit_nodes.append(area)
 	hit_node.emit()
 	

@@ -50,4 +50,6 @@ func update_visuals() -> void:
 		GHOSTED_ANIMATION_PROPERTIES,
 		get_tree().process_frame
 	)
+	for mesh_instance in Util.find_children_of_class(contained_visuals, "MeshInstance3D"):
+		mesh_instance.cast_shadow = false
 	contained_visuals.position = Vector3.ZERO

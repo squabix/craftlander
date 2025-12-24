@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bg46c7oyvm5rg"]
+
+[ext_resource type="PackedScene" uid="uid://b5mk2ohahh5e8" path="res://items/wood/wood.blend" id="1_7gmbh"]
+
+[node name="Wood" type="Node3D"]
+
+[node name="Visuals" parent="." instance=ExtResource("1_7gmbh")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+
+[editable path="Visuals"]

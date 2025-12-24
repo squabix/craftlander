@@ -1,11 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://b6d7dfwyfulxo"]
+[gd_scene load_steps=7 format=3 uid="uid://b6d7dfwyfulxo"]
 
 [ext_resource type="Script" uid="uid://csfawk4hjit5w" path="res://main/test.gd" id="1_0pcxm"]
 [ext_resource type="PackedScene" uid="uid://c16m48qir7vc7" path="res://destructable_resource/tree/tree.tscn" id="2_dax2s"]
 [ext_resource type="PackedScene" uid="uid://dmbp0klxo0b0c" path="res://player/player.tscn" id="3_dax2s"]
-[ext_resource type="Script" uid="uid://c00hsywtiwt6w" path="res://common3d/inventory/item_pickup3d.gd" id="4_rarbv"]
-[ext_resource type="Resource" uid="uid://bah3rou15fcfh" path="res://items/tools/shoddy_axe/shoddy_axe_item.tres" id="5_m6xkr"]
-[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="6_1x3tc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gt0vt"]
 albedo_color = Color(0.29520002, 0.72, 0.43680012, 1)
@@ -15,11 +12,6 @@ material = SubResource("StandardMaterial3D_gt0vt")
 size = Vector2(50, 50)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_rarbv"]
-
-[sub_resource type="Resource" id="Resource_khmyp"]
-script = ExtResource("6_1x3tc")
-item = ExtResource("5_m6xkr")
-metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [node name="Test" type="Node3D"]
 script = ExtResource("1_0pcxm")
@@ -37,11 +29,3 @@ collision_layer = 5
 shape = SubResource("WorldBoundaryShape3D_rarbv")
 
 [node name="Player" parent="." instance=ExtResource("3_dax2s")]
-
-[node name="ItemPickup" type="Area3D" parent="."]
-transform = Transform3D(3.821371e-15, 8.742278e-08, 2, 2, -8.742278e-08, 0, 8.742278e-08, 2, -8.742278e-08, 1.499, 4, -1.212)
-collision_layer = 2
-collision_mask = 0
-script = ExtResource("4_rarbv")
-item_instance = SubResource("Resource_khmyp")
-metadata/_custom_type_script = "uid://favgu1tbe1tq"

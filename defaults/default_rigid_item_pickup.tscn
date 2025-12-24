@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfkn44eso73dx"]
+
+[ext_resource type="Script" uid="uid://oexynjvr31bs" path="res://common3d/inventory/rigid_item_pickup3d.gd" id="1_kqrhr"]
+[ext_resource type="Script" uid="uid://c00hsywtiwt6w" path="res://common3d/inventory/item_pickup3d.gd" id="2_d36xw"]
+[ext_resource type="Script" uid="uid://b012crwgfo5u3" path="res://common3d/damage_system/rigid_body_knockback_box3d.gd" id="3_u5gda"]
+[ext_resource type="Script" uid="uid://nqxuax0fbdf8" path="res://common3d/rigid_body_velocity_limiter3d.gd" id="4_1sloe"]
+
+[node name="DefaultRigidItemPickup" type="RigidBody3D" node_paths=PackedStringArray("item_pickup_interactable", "hurtbox")]
+collision_layer = 32
+collision_mask = 36
+linear_velocity = Vector3(0, -2, 0)
+linear_damp = 0.3
+script = ExtResource("1_kqrhr")
+item_pickup_interactable = NodePath("ItemPickup3D")
+hurtbox = NodePath("Hurtbox3D")
+metadata/_custom_type_script = "uid://oexynjvr31bs"
+
+[node name="ItemPickup3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("2_d36xw")
+metadata/_custom_type_script = "uid://c00hsywtiwt6w"
+
+[node name="Hurtbox3D" type="Area3D" parent="." node_paths=PackedStringArray("rigid_body")]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("3_u5gda")
+rigid_body = NodePath("..")
+force = 100.0
+metadata/_custom_type_script = "uid://4dfurtssrp4f"
+
+[node name="RigidBodyVelocityLimiter3D" type="Node" parent="."]
+script = ExtResource("4_1sloe")
+limit = 3.0
+metadata/_custom_type_script = "uid://nqxuax0fbdf8"
