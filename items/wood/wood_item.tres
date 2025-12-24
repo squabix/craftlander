@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("1_01svi")
 scene = ExtResource("2_w64t5")
+name = "Wood"
 max_quantity = 50
 icon = ExtResource("1_8mjoq")
 metadata/_custom_type_script = "uid://bfstlagsbeqe2"

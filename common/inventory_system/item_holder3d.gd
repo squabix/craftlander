@@ -1,6 +1,7 @@
 extends Node3D
 class_name ItemHolder3D
 
+signal updated_instance(new_instance: ItemInstance)
 signal used_item(item: Item)
 signal consumed_instance(instance: ItemInstance)
 
@@ -31,6 +32,8 @@ signal consumed_instance(instance: ItemInstance)
 		if item_instance.item.scene != null:
 			item_instance.item.add_scene(instance_parent)
 			#instance_parent.add_child.call_deferred(item_instance.item.instantiate_scene())
+		
+		updated_instance.emit(item_instance)
 
 var item: Item:
 	get:

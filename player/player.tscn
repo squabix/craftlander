@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dmbp0klxo0b0c"]
+[gd_scene load_steps=41 format=3 uid="uid://dmbp0klxo0b0c"]
 
 [ext_resource type="Script" uid="uid://ucyt6h7yjc6k" path="res://player/player.gd" id="1_g1dw6"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="2_g1dw6"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="11_2ieo8"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="12_ebec5"]
 [ext_resource type="Script" uid="uid://b1eix6p0204fp" path="res://common/inventory_system/displays/item_display.gd" id="16_e7oew"]
+[ext_resource type="Script" uid="uid://ifyn4pfksk07" path="res://player/player_hud.gd" id="17_g4c7l"]
 [ext_resource type="Texture2D" uid="uid://c4jkghkqifcm7" path="res://assets/crosshair.tres" id="17_tqiix"]
 [ext_resource type="Script" uid="uid://b7pvp0pnngnem" path="res://common/ui/fps_label.gd" id="19_bjvpn"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="19_c35mf"]
@@ -57,15 +58,43 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ebec5"]
 size = Vector3(0.42, 1.5, 0.42)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_32hag"]
-bg_color = Color(0.18, 0.18, 0.18, 0.443137)
+[sub_resource type="Animation" id="Animation_g4c7l"]
+resource_name = "show"
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tqiix"]
-bg_color = Color(1, 1, 1, 1)
+[sub_resource type="Animation" id="Animation_knn7v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
-[sub_resource type="Theme" id="Theme_e7oew"]
-ProgressBar/styles/background = SubResource("StyleBoxFlat_32hag")
-ProgressBar/styles/fill = SubResource("StyleBoxFlat_tqiix")
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7pqkx"]
+_data = {
+&"RESET": SubResource("Animation_knn7v"),
+&"show": SubResource("Animation_g4c7l")
+}
 
 [sub_resource type="Gradient" id="Gradient_x7c3f"]
 offsets = PackedFloat32Array(0.480159, 0.585317)
@@ -249,8 +278,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("17_g4c7l")
 
-[node name="TextureRect" type="TextureRect" parent="HUD"]
+[node name="Cursor" type="TextureRect" parent="HUD"]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
@@ -266,23 +296,26 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("17_tqiix")
 
-[node name="BuildBar" type="ProgressBar" parent="HUD"]
-visible = false
+[node name="CurrentItemLabel" type="Label" parent="HUD"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -93.5
-offset_top = 176.0
-offset_right = 93.5
-offset_bottom = 200.0
+offset_left = -200.0
+offset_top = 236.0
+offset_right = 200.0
+offset_bottom = 259.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_e7oew")
-max_value = 1.0
-show_percentage = false
+text = "Axe"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/CurrentItemLabel"]
+libraries = {
+&"": SubResource("AnimationLibrary_7pqkx")
+}
 
 [node name="InventoryDisplay" type="HBoxContainer" parent="HUD"]
 layout_mode = 1
@@ -292,9 +325,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -200.0
-offset_top = 226.0
+offset_top = 266.0
 offset_right = 200.0
-offset_bottom = 266.0
+offset_bottom = 306.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 5
@@ -703,3 +736,5 @@ autoplay = "idle"
 script = ExtResource("19_c35mf")
 item_instances = Array[ExtResource("20_x7c3f")]([SubResource("Resource_s7qer")])
 size = 9
+
+[connection signal="updated_instance" from="Head/Camera3D/ArmContainer/ItemHolder" to="HUD" method="_on_item_holder_updated_instance"]

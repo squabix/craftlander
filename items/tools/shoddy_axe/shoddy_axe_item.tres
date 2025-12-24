@@ -7,6 +7,6 @@
 [resource]
 script = ExtResource("1_udkp1")
 scene = ExtResource("2_gclnw")
-type = "Axe"
+name = "Shoddy Axe"
 icon = ExtResource("1_u75bx")
 metadata/_custom_type_script = "uid://6x786nnhteca"

@@ -34,7 +34,7 @@ func add_item(new_item: Item, quantity: int = 1) -> int:
 		for inst in item_instances:
 			if inst == null:
 				continue
-			if inst.item.type == new_item.type and inst.quantity < new_item.max_quantity:
+			if inst.item.name == new_item.name and inst.quantity < new_item.max_quantity:
 				var space_left: int = new_item.max_quantity - inst.quantity
 				var to_add: int = min(quantity, space_left)
 				inst.quantity += to_add
