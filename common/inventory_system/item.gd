@@ -4,7 +4,11 @@ class_name Item
 signal scene_set_up
 
 @export var scene: PackedScene
-@export var name := "Item"
+@export var type := "":
+	get:
+		if type.is_empty():
+			return resource_name
+		return type
 @export var max_quantity := 1
 @export var icon: Texture2D
 @export var consumable := false
@@ -51,24 +55,24 @@ func get_instance(quantity: int=1) -> ItemInstance:
 
 func set_up_scene() -> void:
 	if not scene_instance:
-		printerr(name, " cannot set up scene without scene instance")
+		printerr(type, " cannot set up scene without scene instance")
 		return
 	visuals = scene_instance.get_node(visuals_scene_path)
 	if not is_instance_valid(visuals):
-		printerr(name, " could not find visuals")
+		printerr(type, " could not find visuals")
 	if visuals != null:
 		visuals.hide()
 	scene_set_up.emit()
 
 func get_visuals_duplicate() -> Node:
 	if scene == null:
-		printerr(name, " cannot get visuals duplicate from null scene")
+		printerr(type, " cannot get visuals duplicate from null scene")
 		return
 	return scene.instantiate().get_node(visuals_scene_path).duplicate()
 
 func add_scene(parent: Node) -> Node:
 	if scene == null:
-		printerr(name, " cannot instantiate null scene")
+		printerr(type, " cannot instantiate null scene")
 		return
 	if is_instance_valid(scene_instance):
 		scene_instance.queue_free()

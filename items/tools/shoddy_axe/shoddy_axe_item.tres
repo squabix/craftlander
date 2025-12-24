@@ -6,8 +6,7 @@
 
 [resource]
 script = ExtResource("1_udkp1")
-harvest_animation = "harvest"
 scene = ExtResource("2_gclnw")
-name = "Shoddy Axe"
+type = "Axe"
 icon = ExtResource("1_u75bx")
 metadata/_custom_type_script = "uid://6x786nnhteca"

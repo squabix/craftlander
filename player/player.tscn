@@ -47,7 +47,7 @@ height = 1.0
 
 [sub_resource type="Gradient" id="Gradient_bjvpn"]
 offsets = PackedFloat32Array(0.5566265, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.078431375)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.15686275)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_s7qer"]
 gradient = SubResource("Gradient_bjvpn")
@@ -116,7 +116,7 @@ _data = {
 &"idle": SubResource("Animation_32hag")
 }
 
-[sub_resource type="Resource" id="Resource_bjvpn"]
+[sub_resource type="Resource" id="Resource_s7qer"]
 script = ExtResource("20_x7c3f")
 item = ExtResource("22_bjvpn")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
@@ -163,12 +163,10 @@ fov = 85.0
 
 [node name="ItemSceneContainer" type="Node3D" parent="Head/Camera3D"]
 
-[node name="BuildRay" type="RayCast3D" parent="Head/Camera3D"]
-collide_with_areas = true
-collide_with_bodies = false
-
 [node name="InteratorRay" type="RayCast3D" parent="Head/Camera3D"]
-target_position = Vector3(0, 0, -2.5)
+target_position = Vector3(0, 0, -1.5)
+collision_mask = 2
+hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
 
@@ -702,5 +700,5 @@ autoplay = "idle"
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("19_c35mf")
-items = Array[ExtResource("20_x7c3f")]([SubResource("Resource_bjvpn")])
+item_instances = Array[ExtResource("20_x7c3f")]([SubResource("Resource_s7qer")])
 size = 9

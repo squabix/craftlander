@@ -16,15 +16,16 @@ func _ready() -> void:
 		if instance.quantity <= 0:
 			item_instances.erase(instance)
 		else:
-			item_instances[item_instances.find(instance)] = instance.duplicate()
+			if instance is RandomItemInstance:
+				item_instances[item_instances.find(instance)] = instance.duplicate()
 
 func add_item(new_item: Item, quantity: int = 1) -> int:
 	if new_item.max_quantity > 1:
 		for inst in item_instances:
 			if inst == null:
 				continue
-			if inst.item == new_item and inst.quantity < new_item.max_stack:
-				var space_left: int = new_item.max_stack - inst.quantity
+			if inst.item.type == new_item.type and inst.quantity < new_item.max_quantity:
+				var space_left: int = new_item.max_quantity - inst.quantity
 				var to_add: int = min(quantity, space_left)
 				inst.quantity += to_add
 				quantity -= to_add
