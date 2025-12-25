@@ -1,17 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://n7e4y3cek3tv"]
+[gd_scene load_steps=4 format=3 uid="uid://n7e4y3cek3tv"]
 
-[ext_resource type="PackedScene" uid="uid://dr1dvrswovt21" path="res://utilities/crafting_bench/crafting_bench.blend" id="1_d6ds3"]
+[ext_resource type="PackedScene" uid="uid://dr1dvrswovt21" path="res://utilities/crafting_bench/crafting_bench.blend" id="1_h3qyj"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_d6ds3"]
-points = PackedVector3Array(-0.8180487, 0.99994135, -1.1956787, -0.95124054, -1, -0.30907452, -1.3899108, 0.99994135, 0.408283, -0.8180487, 1.2, -1.1956787, 0.88432634, 0.99994135, -1.1475444, -2.4318695e-05, -1, -1.0000358, -0.58779395, -1, 0.80888534, -1.3899108, 1.2, 0.408283, -0.041276097, 0.99994135, 1.4480891, 0.88432634, 1.2, -1.1475444, 1.364518, 0.99994135, 0.48643672, 0.95092237, -1, -0.30907452, 0.5877453, -1, 0.80888534, -0.041276097, 1.2, 1.4480891, 1.364518, 1.2, 0.48643672)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_h3qyj"]
+points = PackedVector3Array(-0.654439, 1, -0.9565429, -1.1119287, 1, 0.32662636, -0.654439, 1.2, -0.9565429, 0.7074611, 1, -0.9180354, -1.1119287, 1.2, 0.32662636, -0.033020854, 1, 1.1582642, 0.7074611, 1.2, -0.9180354, 1.0916145, 1, 0.38914937, -0.033020854, 1.2, 1.1582642, 1.0916145, 1.2, 0.38914937)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_t58te"]
+radius = 0.9
 
 [node name="CraftingBench" type="Node3D"]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_d6ds3")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.18699697, 0)
+shape = SubResource("ConvexPolygonShape3D_h3qyj")
 
-[node name="Visuals" parent="." instance=ExtResource("1_d6ds3")]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("CylinderShape3D_t58te")
+
+[node name="Visuals" parent="." instance=ExtResource("1_h3qyj")]
 
 [editable path="Visuals"]
