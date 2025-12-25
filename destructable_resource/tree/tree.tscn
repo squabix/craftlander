@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://c16m48qir7vc7"]
+[gd_scene load_steps=41 format=4 uid="uid://c16m48qir7vc7"]
 
 [ext_resource type="Script" uid="uid://cmlllb7wq80s" path="res://destructable_resource/tree/tree.gd" id="1_27px0"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="1_r4p3j"]
@@ -12,9 +12,11 @@
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="10_4ojav"]
 [ext_resource type="Material" uid="uid://2poe1edl4m8q" path="res://destructable_resource/tree/bark.tres" id="10_mw2c8"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="11_ytrwe"]
+[ext_resource type="Shape3D" uid="uid://1ks4j4c8paiv" path="res://destructable_resource/tree/stump_collision.tres" id="12_18auj"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="12_jeogd"]
 [ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/wood/wood_item.tres" id="13_mw2c8"]
 [ext_resource type="Script" uid="uid://bcamns7ryy05c" path="res://common/inventory_system/random_item_instance.gd" id="14_18auj"]
+[ext_resource type="Script" uid="uid://daj2kv2nxm80i" path="res://destructable_resource/tree/tree_workbench_interactable.gd" id="17_kblrq"]
 
 [sub_resource type="Curve" id="Curve_mw2c8"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.75779045, 0.8774637), -0.5111994, -0.5111994, 0, 0, Vector2(1, 0.2536419), -3.0296543, 0.0, 0, 0]
@@ -239,8 +241,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_sbe46")
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_afesh"]
-
 [sub_resource type="Animation" id="Animation_4ojav"]
 length = 0.001
 tracks/0/type = "value"
@@ -284,6 +284,9 @@ min_quantity = 2
 max_quantity = 5
 item = ExtResource("13_mw2c8")
 metadata/_custom_type_script = "uid://bcamns7ryy05c"
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xgieu"]
+radius = 1.0
 
 [node name="Tree" type="Node3D"]
 script = ExtResource("1_27px0")
@@ -392,7 +395,7 @@ mesh = SubResource("ArrayMesh_nrtbk")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stump"]
-shape = SubResource("CylinderShape3D_afesh")
+shape = ExtResource("12_18auj")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -405,3 +408,15 @@ item_instances = Array[ExtResource("12_jeogd")]([SubResource("Resource_jeogd")])
 constant = true
 size = 1
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
+
+[node name="BenchInteractable" type="Area3D" parent="."]
+unique_name_in_owner = true
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("17_kblrq")
+enabled = false
+metadata/_custom_type_script = "uid://favgu1tbe1tq"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BenchInteractable"]
+shape = SubResource("CylinderShape3D_xgieu")

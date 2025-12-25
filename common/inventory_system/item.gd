@@ -26,6 +26,16 @@ var _ended_use := true
 var update_delta := 0.0
 var root: Node
 
+static func imitate(item_name: String) -> Item:
+	var imitation := Item.new()
+	imitation.name = item_name
+	return imitation
+
+func equals(other_item: Item) -> bool:
+	if other_item == null:
+		return false
+	return name == other_item.name
+
 func update(delta: float) -> void:
 	idle()
 	update_delta = delta

@@ -34,7 +34,7 @@ func add_item(new_item: Item, quantity: int = 1) -> int:
 		for inst in item_instances:
 			if inst == null:
 				continue
-			if inst.item.name == new_item.name and inst.quantity < new_item.max_quantity:
+			if inst.item.equals(new_item) and inst.quantity < new_item.max_quantity:
 				var space_left: int = new_item.max_quantity - inst.quantity
 				var to_add: int = min(quantity, space_left)
 				inst.quantity += to_add
@@ -55,6 +55,20 @@ func add_item(new_item: Item, quantity: int = 1) -> int:
 	
 	return quantity
 
+func get_item_quantity(item: Item) -> int:
+	if item == null:
+		return 0
+	
+	var total := 0
+	for instance in item_instances:
+		if instance == null:
+			continue
+		
+		if instance.item.name == item.name:
+			total += instance.quantity
+	
+	return total
+
 func get_first_empty_index() -> int:
 	for index in size:
 		if item_instances[index] == null:
@@ -70,7 +84,7 @@ func remove_item(item: Item, quantity: int=1) -> int:
 	
 	for i in range(item_instances.size()):
 		var inst := item_instances[i]
-		if inst == null or inst.item != item:
+		if inst == null or not inst.item.equals(item):
 			continue
 		remove_instance(inst, quantity)
 		i -= 1
