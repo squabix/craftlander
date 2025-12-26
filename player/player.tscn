@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dmbp0klxo0b0c"]
+[gd_scene load_steps=45 format=3 uid="uid://dmbp0klxo0b0c"]
 
 [ext_resource type="Script" uid="uid://ucyt6h7yjc6k" path="res://player/player.gd" id="1_g1dw6"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="2_g1dw6"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" uid="uid://7vqcc56mnyjs" path="res://common/ui/tooltip_label.gd" id="19_knn7v"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="20_x7c3f"]
 [ext_resource type="Resource" uid="uid://bah3rou15fcfh" path="res://items/tools/shoddy_axe/shoddy_axe_item.tres" id="22_bjvpn"]
+[ext_resource type="Script" uid="uid://c07qmsd7epd0h" path="res://common/ui/popup_display.gd" id="23_7pqkx"]
 [ext_resource type="Texture2D" uid="uid://dvu8avo8cfq2c" path="res://icon.svg" id="23_g4c7l"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
@@ -106,6 +107,11 @@ gradient = SubResource("Gradient_x7c3f")
 use_hdr = true
 fill = 1
 fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7pqkx"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_uw77l"]
 
 [sub_resource type="Animation" id="Animation_tqiix"]
 length = 0.001
@@ -742,6 +748,77 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 script = ExtResource("19_bjvpn")
+
+[node name="PopupDisplay" type="Control" parent="HUD" node_paths=PackedStringArray("title_label", "body_label")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -72.5
+offset_right = 220.0
+offset_bottom = 72.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("23_7pqkx")
+title_label = NodePath("VBoxContainer/TitleLabel")
+body_label = NodePath("VBoxContainer/BodyLabel")
+
+[node name="ColorRect" type="ColorRect" parent="HUD/PopupDisplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.18, 0.18, 0.18, 0.8627451)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/PopupDisplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="HUD/PopupDisplay/VBoxContainer"]
+layout_mode = 2
+text = "Warning"
+label_settings = SubResource("LabelSettings_7pqkx")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="BodyLabel" type="Label" parent="HUD/PopupDisplay/VBoxContainer"]
+layout_mode = 2
+text = "fsaf"
+label_settings = SubResource("LabelSettings_uw77l")
+
+[node name="CenterContainer" type="CenterContainer" parent="HUD/PopupDisplay"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -35.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/PopupDisplay/CenterContainer"]
+layout_mode = 2
+
+[node name="Button1" type="Button" parent="HUD/PopupDisplay/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+text = "Continue"
+
+[node name="Button2" type="Button" parent="HUD/PopupDisplay/CenterContainer/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+text = "Continue"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

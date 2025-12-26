@@ -199,8 +199,10 @@ static func is_of_class(node: Node, class_type: String) -> bool:
 		return false
 	return node.is_class(class_type)
 
-static func safe_free(node: Node) -> bool:
-	if not is_instance_valid(node):
+static func safe_free(node: Object) -> bool:
+	if node == null:
+		return false
+	if not node.has_method("queue_free"):
 		return false
 	node.queue_free()
 	return true

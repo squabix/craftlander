@@ -8,7 +8,7 @@ func interact(source: Node, _etc: Dictionary={}) -> void:
 	var inventory: Inventory = Util.find_child_of_class(source, "Inventory")
 	var wood_imitation := Item.imitate("Wood")
 	if inventory.get_item_quantity(wood_imitation) < WOOD_COST:
-		print("Not enough!")
+		PopupDisplay.display("You need 10 wood to build a crafting bench.", "Not enough wood!")
 		return
 	inventory.remove_item(wood_imitation, WOOD_COST)
 	Util.safe_free(get_parent())
