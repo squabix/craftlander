@@ -19,11 +19,9 @@ func _ready() -> void:
 	hide()
 	buttons = Util.find_children_of_class(self, "Button")
 	for i in buttons.size():
-		print("Connected ", buttons[i])
 		buttons[i].pressed.connect(
 			func():
 				pressed_button.emit(i)
-				print("Press")
 		)
 
 func _process(_delta: float) -> void:

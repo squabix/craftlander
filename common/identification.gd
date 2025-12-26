@@ -6,7 +6,6 @@ const DEFAULT_ID_PROPERTY: String = "id"
 var _pool: Dictionary
 
 func auto_register(node: Node) -> bool:
-	print("auto registering")
 	if not is_instance_valid(node):
 		printerr("Cannot auto register invalid node ", node)
 		return false
@@ -21,12 +20,11 @@ func auto_register(node: Node) -> bool:
 		return false
 	
 	register(node, id)
-	print("Success, ", _pool)
 	return true
 
 func fetch(id: int) -> Variant:
-	print("Fetching ", id)
 	if not id in _pool:
+		printerr("Could not fetch ", id, " from pool ", _pool)
 		return null
 	return _pool[id]
 
