@@ -7,6 +7,14 @@ signal interacted_with(interactable: Interactable3D)
 @export var id := 0
 
 func interact() -> Interactable3D:
+	var interactable: Interactable3D = get_current_interactable()
+	if interactable == null:
+		return null
+	interactable.interact(root)
+	interacted_with.emit(interactable)
+	return interactable
+
+func get_current_interactable() -> Interactable3D:
 	var parent := get_parent() as Node3D
 	if not is_instance_valid(parent):
 		printerr("Cannot interact with invalid parent")
@@ -21,8 +29,6 @@ func interact() -> Interactable3D:
 	if not is_interactable_valid(interactable):
 		return null
 	
-	interactable.interact(root)
-	interacted_with.emit(interactable)
 	return interactable
 
 func is_interactable_valid(interactable: Interactable3D) -> bool:
