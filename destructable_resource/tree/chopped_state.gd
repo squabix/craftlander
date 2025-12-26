@@ -1,5 +1,7 @@
 extends State
 
+@onready var particles_scene := load("res://particles/puff_particles.tscn")
+
 func enter() -> void:
 	Util.disable_all_colliders(root.trunk)
 	root.trunk.hide()

@@ -1,7 +1,12 @@
 class_name ParticleSpawner3D
-extends PoolSpawner3D
+extends Spawner3D
 
-@export var free_on_finish: bool = true
+@export var particles_scene: PackedScene
+
+@export var free_on_finish := true
+
+func get_scene() -> PackedScene:
+	return particles_scene
 
 func initialize_instance(instance: Node3D) -> void:
 	emit_particles(instance)
@@ -12,6 +17,4 @@ func emit_particles(node: Node) -> void:
 	if node is CPUParticles3D or node is GPUParticles3D:
 		node.emitting = true
 		if free_on_finish:
-			await node.finished
-			if is_instance_valid(node):
-				node.queue_free()
+			node.finished.connect(Util.safe_free.bind(node))

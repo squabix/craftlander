@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://c16m48qir7vc7"]
+[gd_scene load_steps=43 format=4 uid="uid://c16m48qir7vc7"]
 
 [ext_resource type="Script" uid="uid://cmlllb7wq80s" path="res://destructable_resource/tree/tree.gd" id="1_27px0"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="1_r4p3j"]
@@ -156,6 +156,38 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ojyb1")
+
+[sub_resource type="Curve" id="Curve_ndo4n"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.75779045, 0.8774637), -0.5111994, -0.5111994, 0, 0, Vector2(1, 0.2536419), -3.0296543, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_hxqcj"]
+curve = SubResource("Curve_ndo4n")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hah18"]
+emission_shape = 3
+emission_box_extents = Vector3(0, 5, 0)
+direction = Vector3(-1, 0, 0)
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+damping_min = 10.0
+damping_max = 10.0
+scale_min = 0.5
+scale_max = 0.79999995
+scale_curve = SubResource("CurveTexture_hxqcj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_18auj"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.1
+normal_enabled = true
+proximity_fade_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_kblrq"]
+material = SubResource("StandardMaterial3D_18auj")
+radial_segments = 16
+rings = 8
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_sbe46"]
 _surfaces = [{
@@ -348,6 +380,16 @@ metadata/_custom_type_script = "uid://iyqixpr4un6s"
 [node name="Center" type="Node3D" parent="Trunk"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 
+[node name="ChopParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+cast_shadow = 0
+emitting = false
+amount = 32
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_hah18")
+draw_pass_1 = SubResource("SphereMesh_kblrq")
+
 [node name="Stump" type="StaticBody3D" parent="."]
 
 [node name="StumpMesh" type="MeshInstance3D" parent="Stump"]
@@ -382,7 +424,7 @@ metadata/_custom_type_script = "uid://favgu1tbe1tq"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BenchInteractable"]
 shape = SubResource("CylinderShape3D_xgieu")
 
-[node name="ParticleSpawner3D" type="Node3D" parent="."]
+[node name="ParticleSpawner3D" type="Node3D" parent="BenchInteractable"]
 script = ExtResource("18_xgieu")
 particles_scene = ExtResource("2_xgieu")
 metadata/_custom_type_script = "uid://bhjxscxhtg2se"

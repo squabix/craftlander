@@ -65,9 +65,12 @@ func get_spawn_rotation_degrees(parent: Node) -> Vector3:
 func initialize_instance(_instance: Node3D) -> void:
 	pass
 
-func spawn(scene: PackedScene, parent: Node=null, initializer: Callable=Callable()) -> Node3D:
-	if not is_instance_valid(parent):
-		parent = get_tree().root if child_of_root else default_parent
+func get_scene() -> PackedScene:
+	return null
+
+func spawn(custom_scene: PackedScene = null, custom_parent: Node=null) -> Node3D:
+	var parent := custom_parent if custom_parent != null else (get_tree().root if child_of_root else default_parent)
+	var scene := custom_scene if custom_scene != null else get_scene()
 	
 	var spawn_position: Vector3 = get_spawn_position(parent)
 	var spawn_rotation_degrees: Vector3 = get_spawn_rotation_degrees(parent)

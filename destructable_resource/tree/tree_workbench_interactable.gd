@@ -15,3 +15,4 @@ func interact(source: Node, _etc: Dictionary={}) -> void:
 	var bench: Node3D = crafting_bench_scene.instantiate()
 	get_tree().root.add_child(bench)
 	bench.global_transform = get_parent_node_3d().global_transform
+	$ParticleSpawner3D.spawn()

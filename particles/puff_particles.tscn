@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4sqb68mc8p5f"]
+
+[sub_resource type="Curve" id="Curve_w3oie"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.75779045, 0.8774637), -0.5111994, -0.5111994, 0, 0, Vector2(1, 0.2536419), -3.0296543, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_fbxt7"]
+curve = SubResource("Curve_w3oie")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1f2jk"]
+direction = Vector3(-1, 0, 0)
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+damping_min = 10.0
+damping_max = 10.0
+scale_min = 0.5
+scale_max = 0.79999995
+scale_curve = SubResource("CurveTexture_fbxt7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_18auj"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.1
+normal_enabled = true
+proximity_fade_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_kblrq"]
+material = SubResource("StandardMaterial3D_18auj")
+radial_segments = 16
+rings = 8
+
+[node name="PuffParticles" type="GPUParticles3D"]
+cast_shadow = 0
+emitting = false
+amount = 32
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_1f2jk")
+draw_pass_1 = SubResource("SphereMesh_kblrq")
