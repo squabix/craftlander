@@ -57,6 +57,6 @@ func hurt(damage: Damage, direction: Vector3=Vector3.ZERO) -> float:
 	was_dealt_damage.emit(damage)
 	
 	if free_parent_on_hurt:
-		get_parent().queue_free()
+		Util.safe_free(get_parent())
 	
 	return damage_amount

@@ -113,8 +113,8 @@ func should_die() -> bool:
 func die() -> void:
 	died.emit()
 	dead = true
-	if free_parent_on_death and is_instance_valid(get_parent()):
-		get_parent().queue_free()
+	if free_parent_on_death:
+		Util.safe_free(get_parent())
 
 func survive() -> void:
 	survived_hurt.emit()

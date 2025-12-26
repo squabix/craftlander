@@ -16,7 +16,7 @@ func _ready() -> void:
 
 func reset_visuals() -> void:
 	for child in get_children():
-		child.queue_free()
+		Util.safe_free(child)
 
 func update_visuals() -> void:
 	reset_visuals()
@@ -29,8 +29,7 @@ func update_visuals() -> void:
 		return
 	
 	# Free current visuals
-	if is_instance_valid(contained_visuals):
-		contained_visuals.queue_free()
+	Util.safe_free(contained_visuals)
 	
 	# Wait for visuals to be set when item's scene is set up
 	if instance.item.visuals == null:

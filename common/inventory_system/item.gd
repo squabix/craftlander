@@ -85,8 +85,7 @@ func add_scene(parent: Node) -> Node:
 	if scene == null:
 		printerr(name, " cannot instantiate null scene")
 		return
-	if is_instance_valid(scene_instance):
-		scene_instance.queue_free()
+	Util.safe_free(scene_instance)
 		
 	scene_instance = scene.instantiate()
 	parent.add_child(scene_instance)

@@ -13,6 +13,5 @@ func emit_particles(node: Node) -> void:
 		node.emitting = true
 		if free_on_finish:
 			await node.finished
-			if is_instance_valid(node):
-				node.queue_free()
+			Util.safe_free(node)
 	

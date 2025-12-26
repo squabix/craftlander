@@ -14,7 +14,7 @@ static func from_item_instance(item_instance: ItemInstance, scene: PackedScene) 
 func _ready() -> void:
 	freeze = true
 	item_pickup_interactable.auto_generate_collision = false
-	item_pickup_interactable.picked_up.connect(queue_free)
+	item_pickup_interactable.picked_up.connect(Util.safe_free.bind(self))
 	var collision_shapes := item_pickup_interactable.generate_collision()
 	for collision_shape in collision_shapes:
 		var collision_duplicate: CollisionShape3D = collision_shape.duplicate()

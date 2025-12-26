@@ -11,7 +11,7 @@ func interact(source: Node, _etc: Dictionary={}) -> void:
 		print("Not enough!")
 		return
 	inventory.remove_item(wood_imitation, WOOD_COST)
-	get_parent().queue_free()
+	Util.safe_free(get_parent())
 	var bench: Node3D = crafting_bench_scene.instantiate()
 	get_tree().root.add_child(bench)
 	bench.global_transform = get_parent_node_3d().global_transform

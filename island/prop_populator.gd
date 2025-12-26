@@ -15,7 +15,7 @@ var props: Dictionary[Vector3, Node3D] = {}
 
 func reset() -> void:
 	for prop in props.values():
-		prop.queue_free()
+		Util.safe_free(prop)
 	props = {}
 
 func populate() -> void:

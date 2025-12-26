@@ -199,6 +199,12 @@ static func is_of_class(node: Node, class_type: String) -> bool:
 		return false
 	return node.is_class(class_type)
 
+static func safe_free(node: Node) -> bool:
+	if not is_instance_valid(node):
+		return false
+	node.queue_free()
+	return true
+
 # TODO: Make own node
 static func turn_off_all_particles(parent: Node) -> void:
 	if not is_instance_valid(parent):

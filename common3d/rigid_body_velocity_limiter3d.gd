@@ -5,7 +5,7 @@ class_name RigidBodyVelocityLimiter3D
 
 func _process(delta: float) -> void:
 	if not get_parent() is RigidBody3D:
-		queue_free()
+		Util.safe_free(self)
 		return
 	if get_parent().linear_velocity.length() > limit:
 		get_parent().linear_velocity = get_parent().linear_velocity.limit_length(limit)

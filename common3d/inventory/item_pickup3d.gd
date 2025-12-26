@@ -47,5 +47,5 @@ func generate_collision() -> Array[CollisionShape3D]:
 func interact(_source: Node, _etc: Dictionary={}) -> void:
 	var inventory: Inventory = Util.find_child_of_class(_source, "Inventory")
 	inventory.add_item(item, 1)
-	queue_free()
+	Util.safe_free(self)
 	picked_up.emit()
