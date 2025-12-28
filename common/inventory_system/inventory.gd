@@ -78,18 +78,23 @@ func get_first_empty_index() -> int:
 func delete_instance(instance: ItemInstance) -> void:
 	item_instances.erase(instance)
 
-func remove_item(item: Item, quantity: int=1) -> int:
+func remove_item(item: Item, quantity: int = -1, must_reach_quantity: bool = false) -> int:
 	if constant:
+		return quantity
+	
+	if quantity == -1:
+		quantity = get_item_quantity(item)
+	elif must_reach_quantity and quantity > get_item_quantity(item):
 		return quantity
 	
 	for i in range(item_instances.size()):
 		var inst := item_instances[i]
 		if inst == null or not inst.item.equals(item):
 			continue
-		remove_instance(inst, quantity)
-		i -= 1
+		quantity = remove_instance(inst, quantity)
 		if quantity <= 0:
 			return 0
+		i -= 1
 	return quantity
 
 func give_item(item: Item, quantity: int, to: Inventory) -> int:
