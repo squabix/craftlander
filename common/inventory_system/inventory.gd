@@ -126,7 +126,7 @@ func remove_instance(instance: ItemInstance, quantity: int=1) -> int:
 	return quantity
 
 func is_index_valid(index: int) -> bool:
-	return index < size and index >= 0 and item_instances[index] != null
+	return index < size and index >= 0 and item_instances[index] != null and item_instances[index].item != null
 
 func get_instance(index: int) -> ItemInstance:
 	if not is_index_valid(index):

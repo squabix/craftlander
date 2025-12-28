@@ -4,11 +4,13 @@ class_name RigidItemPickup3D
 @export var item_pickup_interactable: ItemPickup3D
 @export var hurtbox: Hurtbox3D
 
-static func from_item_instance(item_instance: ItemInstance, scene: PackedScene) -> RigidItemPickup3D:
+static func from_item(item: Item, scene: PackedScene) -> RigidItemPickup3D:
+	if item == null:
+		return
 	var scene_instance := scene.instantiate() as RigidItemPickup3D
 	if scene_instance == null:
 		return
-	scene_instance.item_pickup_interactable.item_instance = item_instance
+	scene_instance.item_pickup_interactable.item = item
 	return scene_instance
 
 func _ready() -> void:

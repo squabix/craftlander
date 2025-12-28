@@ -12,7 +12,7 @@ var instance: ItemInstance
 var contained_visuals: Node3D
 
 func _ready() -> void:
-	inventory_holder_link.updated_current.connect(update_visuals)
+	inventory_holder_link.changed.connect(update_visuals)
 
 func reset_visuals() -> void:
 	for child in get_children():
