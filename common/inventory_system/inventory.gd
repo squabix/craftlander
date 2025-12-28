@@ -1,6 +1,8 @@
 extends Node
 class_name Inventory
 
+signal changed
+
 @export var item_instances: Array[ItemInstance] = []
 @export var constant := false
 @export var size := 5:
@@ -40,6 +42,7 @@ func add_item(new_item: Item, quantity: int = 1) -> int:
 				inst.quantity += to_add
 				quantity -= to_add
 				if quantity <= 0:
+					changed.emit()
 					return 0
 	# Add new stacks or unstackable items
 	while quantity > 0:
@@ -53,6 +56,7 @@ func add_item(new_item: Item, quantity: int = 1) -> int:
 		item_instances[index] = instance
 		quantity -= to_add
 	
+	changed.emit()
 	return quantity
 
 func get_item_quantity(item: Item) -> int:
@@ -77,6 +81,7 @@ func get_first_empty_index() -> int:
 
 func delete_instance(instance: ItemInstance) -> void:
 	item_instances.erase(instance)
+	changed.emit()
 
 func remove_item(item: Item, quantity: int = -1, must_reach_quantity: bool = false) -> int:
 	if constant:
@@ -93,8 +98,10 @@ func remove_item(item: Item, quantity: int = -1, must_reach_quantity: bool = fal
 			continue
 		quantity = remove_instance(inst, quantity)
 		if quantity <= 0:
+			changed.emit()
 			return 0
 		i -= 1
+	changed.emit()
 	return quantity
 
 func give_item(item: Item, quantity: int, to: Inventory) -> int:
@@ -113,7 +120,9 @@ func remove_instance(instance: ItemInstance, quantity: int=1) -> int:
 		quantity -= instance.quantity
 		item_instances[item_instances.find(instance)] = null
 		if quantity <= 0:
+			changed.emit()
 			return 0
+	changed.emit()
 	return quantity
 
 func is_index_valid(index: int) -> bool:
