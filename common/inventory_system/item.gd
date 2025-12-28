@@ -3,6 +3,8 @@ class_name Item
 
 signal scene_set_up
 
+enum CooldownMode {DISABLED, START_USE, END_USE}
+
 @export var scene: PackedScene
 @export var name := "":
 	get:
@@ -13,12 +15,12 @@ signal scene_set_up
 @export var icon: Texture2D
 @export var consumable := false
 @export var visuals_scene_path := "Visuals"
+@export_group("Cooldown")
+@export var cooldown_mode := CooldownMode.DISABLED
+@export var default_cooldown_length := 0.0
 
 var max_uses := 1
-var scene_instance: Node:
-	set(to):
-		scene_instance = to
-		print("Updated scene instance to ", to)
+var scene_instance: Node
 var visuals: Node
 
 var _attempted_use := false
@@ -28,6 +30,9 @@ var _ended_use := true
 var is_unique := false
 
 var update_delta := 0.0
+var cooldown_start_time := -INF
+var cooldown_length := default_cooldown_length
+
 var root: Node
 
 static func imitate(item_name: String) -> Item:
@@ -40,6 +45,10 @@ func equals(other_item: Item) -> bool:
 		return false
 	return name == other_item.name
 
+func start_cooldown(custom_length: float = 0.0) -> void:
+	cooldown_start_time = Time.get_ticks_msec()
+	cooldown_length = custom_length if custom_length > 0.0 else default_cooldown_length
+
 func update(delta: float) -> void:
 	idle()
 	update_delta = delta
@@ -50,6 +59,8 @@ func update(delta: float) -> void:
 	
 	var reached_max_uses := _updates_attempted_use == max_uses and max_uses > 0
 	if not _ended_use and (reached_max_uses or not _used_this_update):
+		if cooldown_mode == CooldownMode.END_USE:
+			start_cooldown()
 		end_use()
 		_ended_use = true
 		_updates_attempted_use = 0
@@ -94,29 +105,29 @@ func add_scene(parent: Node) -> Node:
 	scene_instance = scene.instantiate()
 	parent.add_child(scene_instance)
 	set_up_scene()
-	print("successfully instantiated scene ", scene_instance, "\n")
 	return scene_instance
 
 func remove_scene() -> void:
-	print("removing scene")
 	if scene_instance == null:
-		print("failed to remove null scene")
 		return
 	Util.safe_free(scene_instance)
 	clear_nodes()
-	print("successfully removed scene")
 
 func clear_nodes() -> void:
-	print("clearing nodes normally not harvest")
 	scene_instance = null
 	visuals = null
+
+func is_on_cooldown() -> bool:
+	return Time.get_ticks_msec() < cooldown_start_time + cooldown_length * 1000.0
 
 func use() -> bool:
 	_attempted_use = true
 	if max_uses > 0 and _updates_attempted_use > max_uses:
 		return false
 	_used_this_update = true
-	if _updates_attempted_use == 0:
+	if _updates_attempted_use == 0 and not is_on_cooldown():
+		if cooldown_mode == CooldownMode.START_USE:
+			start_cooldown()
 		return start_use()
 	return false
 
