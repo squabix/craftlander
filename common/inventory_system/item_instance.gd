@@ -10,8 +10,9 @@ func _init() -> void:
 	make_unique.call_deferred()
 
 func make_unique() -> void:
-	if item != null:
+	if item != null and not item.is_unique:
 		item = item.duplicate_deep()
+		item.is_unique = true
 
 static func do_items_match(items: Array[Item]) -> bool:
 	for a in items:

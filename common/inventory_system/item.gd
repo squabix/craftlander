@@ -22,6 +22,7 @@ var _attempted_use := false
 var _used_this_update := false
 var _updates_attempted_use := 0
 var _ended_use := true
+var is_unique := false
 
 var update_delta := 0.0
 var root: Node
