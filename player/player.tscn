@@ -255,8 +255,9 @@ texture = SubResource("GradientTexture2D_s7qer")
 
 [node name="DropperRayCast" type="RayCast3D" parent="Head/Camera3D"]
 target_position = Vector3(0, 0, -3)
+collision_mask = 37
 script = ExtResource("11_rptt4")
-offset = -0.5
+offset = 0.5
 metadata/_custom_type_script = "uid://pnxdwk3pye0h"
 
 [node name="InventoryDropper3D" type="Node3D" parent="Head/Camera3D/DropperRayCast" node_paths=PackedStringArray("inventory")]

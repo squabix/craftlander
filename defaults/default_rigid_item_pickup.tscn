@@ -1,13 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfkn44eso73dx"]
+[gd_scene load_steps=7 format=3 uid="uid://dfkn44eso73dx"]
 
 [ext_resource type="Script" uid="uid://oexynjvr31bs" path="res://common3d/inventory/rigid_item_pickup3d.gd" id="1_kqrhr"]
 [ext_resource type="Script" uid="uid://c00hsywtiwt6w" path="res://common3d/inventory/item_pickup3d.gd" id="2_d36xw"]
 [ext_resource type="Script" uid="uid://b012crwgfo5u3" path="res://common3d/damage_system/rigid_body_knockback_box3d.gd" id="3_u5gda"]
 [ext_resource type="Script" uid="uid://nqxuax0fbdf8" path="res://common3d/rigid_body_velocity_limiter3d.gd" id="4_1sloe"]
+[ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="5_ncujj"]
+
+[sub_resource type="Resource" id="Resource_nmw4j"]
+script = ExtResource("5_ncujj")
+y = false
+metadata/_custom_type_script = "uid://bh8pcyeueeoey"
 
 [node name="DefaultRigidItemPickup" type="RigidBody3D" node_paths=PackedStringArray("item_pickup_interactable", "hurtbox")]
 collision_layer = 32
-collision_mask = 36
+collision_mask = 37
 gravity_scale = 3.0
 linear_velocity = Vector3(0, -2, 0)
 linear_damp = 0.3
@@ -34,4 +40,5 @@ metadata/_custom_type_script = "uid://4dfurtssrp4f"
 [node name="RigidBodyVelocityLimiter3D" type="Node" parent="."]
 script = ExtResource("4_1sloe")
 limit = 3.0
+axes = SubResource("Resource_nmw4j")
 metadata/_custom_type_script = "uid://nqxuax0fbdf8"

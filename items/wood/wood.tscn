@@ -5,6 +5,6 @@
 [node name="Wood" type="Node3D"]
 
 [node name="Visuals" parent="." instance=ExtResource("1_7gmbh")]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [editable path="Visuals"]
