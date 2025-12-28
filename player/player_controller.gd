@@ -15,6 +15,7 @@ const ACTION_USE_PRIMARY := "use_primary"
 const ACTION_SCROLL_UP := "scroll_up"
 const ACTION_SCROLL_DOWN := "scroll_down"
 
+const ACTION_DROP := "drop"
 
 @export var head: Node3D
 @export var current_collision_shape: CollisionShape3D
@@ -44,6 +45,9 @@ func update(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed(ACTION_JUMP):
 		entity.jump()
+	
+	if Input.is_action_just_pressed(ACTION_DROP):
+		entity.drop_current_item()
 
 func _input(event: InputEvent) -> void:
 	if not is_controlling():

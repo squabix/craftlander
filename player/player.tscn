@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dmbp0klxo0b0c"]
+[gd_scene load_steps=48 format=3 uid="uid://dmbp0klxo0b0c"]
 
 [ext_resource type="Script" uid="uid://ucyt6h7yjc6k" path="res://player/player.gd" id="1_g1dw6"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="2_g1dw6"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://bypxgjqugqucx" path="res://common3d/interactions/interactor3d.gd" id="10_32hag"]
 [ext_resource type="Script" uid="uid://ljihr86cv3xk" path="res://common3d/item_visuals_container_3d.gd" id="10_s7qer"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="11_2ieo8"]
+[ext_resource type="Script" uid="uid://pnxdwk3pye0h" path="res://common3d/pointer_raycast3d.gd" id="11_rptt4"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="12_ebec5"]
 [ext_resource type="Script" uid="uid://b1eix6p0204fp" path="res://common/inventory_system/displays/item_display.gd" id="16_e7oew"]
 [ext_resource type="Script" uid="uid://ifyn4pfksk07" path="res://player/player_hud.gd" id="17_g4c7l"]
@@ -26,6 +27,7 @@
 [ext_resource type="Resource" uid="uid://bah3rou15fcfh" path="res://items/tools/shoddy_axe/shoddy_axe_item.tres" id="22_bjvpn"]
 [ext_resource type="Script" uid="uid://c07qmsd7epd0h" path="res://common/ui/popup_display.gd" id="23_7pqkx"]
 [ext_resource type="Texture2D" uid="uid://dvu8avo8cfq2c" path="res://icon.svg" id="23_g4c7l"]
+[ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="27_uw77l"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -157,6 +159,11 @@ script = ExtResource("20_x7c3f")
 item = ExtResource("22_bjvpn")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
+[sub_resource type="Resource" id="Resource_rptt4"]
+script = ExtResource("20_x7c3f")
+item = ExtResource("22_bjvpn")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("horizontal_rotation_target", "vertical_rotation_target")]
 floor_constant_speed = true
 floor_block_on_wall = false
@@ -246,6 +253,17 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_s7qer")
 
+[node name="DropperRayCast" type="RayCast3D" parent="Head/Camera3D"]
+target_position = Vector3(0, 0, -3)
+script = ExtResource("11_rptt4")
+offset = -0.5
+metadata/_custom_type_script = "uid://pnxdwk3pye0h"
+
+[node name="InventoryDropper3D" type="Node3D" parent="Head/Camera3D/DropperRayCast" node_paths=PackedStringArray("inventory")]
+script = ExtResource("27_uw77l")
+inventory = NodePath("../../../../Inventory")
+metadata/_custom_type_script = "uid://bpmbg0e28ujs7"
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "root")]
 script = ExtResource("7_boad6")
 initial_state = NodePath("Walking")
@@ -269,13 +287,13 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Hurtbox3D" type="Area3D" parent="." node_paths=PackedStringArray("health")]
 script = ExtResource("11_2ieo8")
-health = NodePath("../Node")
+health = NodePath("../Health")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_ebec5")
 
-[node name="Node" type="Node" parent="."]
+[node name="Health" type="Node" parent="."]
 script = ExtResource("12_ebec5")
 
 [node name="HUD" type="Control" parent="."]
@@ -830,7 +848,7 @@ autoplay = "idle"
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("19_c35mf")
-item_instances = Array[ExtResource("20_x7c3f")]([SubResource("Resource_s7qer")])
+item_instances = Array[ExtResource("20_x7c3f")]([SubResource("Resource_s7qer"), SubResource("Resource_rptt4")])
 size = 9
 
 [connection signal="updated_instance" from="Head/Camera3D/ArmContainer/ItemHolder" to="HUD" method="_on_item_holder_updated_instance"]

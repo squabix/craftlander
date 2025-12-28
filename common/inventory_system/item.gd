@@ -7,7 +7,7 @@ signal scene_set_up
 @export var name := "":
 	get:
 		if name.is_empty():
-			return resource_name
+			return resource_path
 		return name
 @export var max_quantity := 1
 @export var icon: Texture2D
@@ -15,7 +15,10 @@ signal scene_set_up
 @export var visuals_scene_path := "Visuals"
 
 var max_uses := 1
-var scene_instance: Node
+var scene_instance: Node:
+	set(to):
+		scene_instance = to
+		print("Updated scene instance to ", to)
 var visuals: Node
 
 var _attempted_use := false
@@ -91,7 +94,22 @@ func add_scene(parent: Node) -> Node:
 	scene_instance = scene.instantiate()
 	parent.add_child(scene_instance)
 	set_up_scene()
+	print("successfully instantiated scene ", scene_instance, "\n")
 	return scene_instance
+
+func remove_scene() -> void:
+	print("removing scene")
+	if scene_instance == null:
+		print("failed to remove null scene")
+		return
+	Util.safe_free(scene_instance)
+	clear_nodes()
+	print("successfully removed scene")
+
+func clear_nodes() -> void:
+	print("clearing nodes normally not harvest")
+	scene_instance = null
+	visuals = null
 
 func use() -> bool:
 	_attempted_use = true
@@ -113,3 +131,6 @@ func end_use() -> bool:
 
 func idle() -> void:
 	pass
+
+func _to_string() -> String:
+	return name + " " + str(scene)

@@ -20,7 +20,7 @@ signal consumed_instance(instance: ItemInstance)
 		# Remove old item
 		if has_item():
 			if item_instance != null:
-				Util.safe_free(item.scene_instance)
+				item_instance.item.remove_scene()
 		item_instance = to
 		
 		if item_instance == null or item_instance.item == null:

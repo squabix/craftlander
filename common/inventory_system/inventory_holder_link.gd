@@ -2,6 +2,7 @@ extends Node
 class_name InventoryHolderLink
 
 signal updated_current
+signal changed
 
 const NUM_KEY_INDEX_MAP: Dictionary[int, int] = {
 	KEY_1: 0,
@@ -19,7 +20,14 @@ const NUM_KEY_INDEX_MAP: Dictionary[int, int] = {
 @export var inventory: Inventory
 @export var item_holder: ItemHolder3D
 @export var root: Node
-@export var current_index := 0
+@export var current_index := 0:
+	set(to):
+		if current_index == to:
+			hold_current()
+			return
+		current_index = wrapi(to, 0, inventory.size)
+		hold_current()
+		updated_current.emit()
 @export var use_num_key_input := true
 
 func _ready() -> void:
@@ -33,6 +41,15 @@ func _ready() -> void:
 	
 	hold_current.call_deferred()
 	updated_current.emit.call_deferred()
+	updated_current.connect(
+		func():
+			changed.emit()
+	)
+	inventory.changed.connect(
+		func():
+			hold_current()
+			changed.emit()
+	)
 	item_holder.consumed_instance.connect(
 		func(instance: ItemInstance):
 			inventory.remove_item(instance.item),
@@ -47,16 +64,14 @@ func scroll(direction: int, skip_null: bool=false) -> void:
 	if skip_null:
 		while get_current_instance() == null and current_index != old_index:
 			scroll(direction, false)
-	updated_current.emit()
 
 func get_current_instance() -> ItemInstance:
-	current_index = clampi(current_index, 0, inventory.size)
+	#current_index = clampi(current_index, 0, inventory.size)
 	if not inventory.is_index_valid(current_index):
 		return null
 	return inventory.get_instance(current_index)
 
 func _process(_delta: float) -> void:
-	hold_current()
 	heed_num_key_input()
 
 func heed_num_key_input() -> void:

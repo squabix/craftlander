@@ -6,6 +6,11 @@ class_name HarvestingTool
 var harvest_ray: HitRay3D
 var animation_player: AnimationPlayer
 
+func clear_nodes() -> void:
+	super()
+	harvest_ray = null
+	animation_player = null
+
 func set_up_scene() -> void:
 	if scene_instance == null:
 		return
