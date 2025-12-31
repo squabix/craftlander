@@ -233,6 +233,7 @@ metadata/_edit_group_ = true
 transform = Transform3D(1.0000001, 4.0978193e-08, 0, -6.519258e-09, 1, -7.450581e-09, -1.4901161e-08, 7.450581e-09, 1, 0.08080295, 0.017175198, 0.014566064)
 script = ExtResource("10_s7qer")
 inventory_holder_link = NodePath("../InventoryHolderLink")
+visuals_scale_ratio = 0.4
 
 [node name="Sprite3D" type="Sprite3D" parent="Head/Camera3D/ArmContainer/ItemHolder"]
 transform = Transform3D(0.050000004, 2.910383e-10, 0, -9.313226e-10, 0.05, 0, 0, 2.3283064e-10, 0.05, 0.08080298, 0.017175198, 0.014566064)

@@ -20,13 +20,13 @@ func _ready() -> void:
 	var collision_shapes := item_pickup_interactable.generate_collision()
 	for collision_shape in collision_shapes:
 		var collision_duplicate: CollisionShape3D = collision_shape.duplicate()
-		collision_duplicate.scale = Vector3.ONE
+		#collision_duplicate.scale = Vector3.ONE
 		collision_duplicate.hide()
 		add_child.call_deferred(collision_duplicate)
 		
 		if hurtbox:
 			var hurtbox_collision_duplicate: CollisionShape3D = collision_shape.duplicate()
-			hurtbox_collision_duplicate.scale = Vector3.ONE
+			#hurtbox_collision_duplicate.scale = Vector3.ONE
 			hurtbox.add_child.call_deferred(hurtbox_collision_duplicate)
 			
 	await get_tree().process_frame

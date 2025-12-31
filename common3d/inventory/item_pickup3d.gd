@@ -18,7 +18,8 @@ func _ready() -> void:
 		return
 	visuals = item.get_visuals_duplicate()
 	add_child(visuals)
-	visuals.global_transform = self.global_transform
+	visuals.global_position = self.global_position
+	visuals.global_rotation = self.global_rotation
 	
 	if generate_floor_raycast:
 		Util.snap_to_floor(self, FLOOR_MARGIN)
@@ -38,7 +39,7 @@ func generate_collision() -> Array[CollisionShape3D]:
 		collision_shape.shape = mesh_instance.mesh.create_convex_shape()
 		add_child.call_deferred(collision_shape)
 		collision_shape.global_transform = mesh_instance.global_transform
-		collision_shape.scale = mesh_instance.scale * collision_scale
+		#collision_shape.scale = mesh_instance.scale * visuals.scale * collision_scale
 		collision_shapes.append(collision_shape)
 		
 	
