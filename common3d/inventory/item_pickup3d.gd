@@ -9,6 +9,8 @@ const FLOOR_MARGIN: float = 0.05
 @export var auto_generate_collision := true
 @export var collision_scale: float = 1.0
 @export var generate_floor_raycast := true
+@export var tooltip_prefix := "Pick up "
+@export var tooltip_suffix := "?"
 
 var visuals: Node3D
 
@@ -20,6 +22,8 @@ func _ready() -> void:
 	add_child(visuals)
 	visuals.global_position = self.global_position
 	visuals.global_rotation = self.global_rotation
+	
+	enabled_tooltip = tooltip_prefix + item.name + tooltip_suffix
 	
 	if generate_floor_raycast:
 		Util.snap_to_floor(self, FLOOR_MARGIN)
