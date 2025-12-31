@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://bh8pcyeueeoey"
 
 [node name="DefaultRigidItemPickup" type="RigidBody3D" node_paths=PackedStringArray("item_pickup_interactable", "hurtbox")]
 collision_layer = 32
-collision_mask = 37
+collision_mask = 36
 gravity_scale = 3.0
 linear_velocity = Vector3(0, -2, 0)
 linear_damp = 0.3
@@ -39,6 +39,7 @@ metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="RigidBodyVelocityLimiter3D" type="Node" parent="."]
 script = ExtResource("4_1sloe")
+enabled = false
 limit = 3.0
 axes = SubResource("Resource_nmw4j")
 metadata/_custom_type_script = "uid://nqxuax0fbdf8"

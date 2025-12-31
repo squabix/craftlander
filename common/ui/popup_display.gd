@@ -51,7 +51,6 @@ static func display(body: String, title: String = "", display_id: int = 0) -> Po
 			popup_display.hide()
 			if popup_display.handle_mouse_mode:
 				Input.mouse_mode = old_mouse_mode
-			print("Pressed")
 	)
 	return popup_display
 
