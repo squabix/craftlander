@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://mwsmthp4sn6c"]
+[gd_scene load_steps=16 format=3 uid="uid://mwsmthp4sn6c"]
 
 [ext_resource type="Script" uid="uid://bki5ij8task16" path="res://common3d/entity/entity3d.gd" id="1_ii4qu"]
 [ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common3d/movement_mode3d.gd" id="2_76rxv"]
@@ -6,6 +6,10 @@
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="3_ihgra"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="4_nauqg"]
 [ext_resource type="Script" uid="uid://v1m6kagbghjv" path="res://common3d/radial_sight_3d.gd" id="5_nauqg"]
+[ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="7_kg2m4"]
+[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="8_8jseq"]
+[ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/wood/wood_item.tres" id="9_4es1i"]
+[ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="10_v4fp6"]
 
 [sub_resource type="Resource" id="Resource_50i80"]
 script = ExtResource("2_76rxv")
@@ -21,6 +25,11 @@ albedo_color = Color(0.47, 0.3149, 0.188, 1)
 material = SubResource("StandardMaterial3D_ii4qu")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ii4qu"]
+
+[sub_resource type="Resource" id="Resource_3emv6"]
+script = ExtResource("8_8jseq")
+item = ExtResource("9_4es1i")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [node name="Rootling" type="CharacterBody3D"]
 collision_mask = 17
@@ -63,3 +72,14 @@ script = ExtResource("2_nauqg")
 sight = NodePath("../Sight3D")
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://ccwod33h53a5s"
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("7_kg2m4")
+item_instances = Array[ExtResource("8_8jseq")]([SubResource("Resource_3emv6")])
+metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
+
+[node name="InventoryDropper3D" type="Node3D" parent="." node_paths=PackedStringArray("inventory", "health")]
+script = ExtResource("10_v4fp6")
+inventory = NodePath("../Inventory")
+health = NodePath("../Health")
+metadata/_custom_type_script = "uid://bpmbg0e28ujs7"

@@ -6,8 +6,13 @@ static var rigid_item_pickup_scene := load("res://defaults/default_rigid_item_pi
 @export var inventory: Inventory
 @export var position_offset: Vector3
 @export var rotation_offset: Vector3
+@export var health: Health
 
 @onready var parent := get_tree().root
+
+func _ready() -> void:
+	if health:
+		health.died.connect(drop_everything)
 
 func drop(index: int) -> Node3D:
 	if not inventory.is_index_valid(index):
