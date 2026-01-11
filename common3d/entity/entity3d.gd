@@ -25,6 +25,8 @@ var frozen: bool
 var gravity: Vector3
 var motion_direction: Vector3
 
+var queued_impulse: Vector3
+
 func get_total_rotation_degrees() -> Vector3:
 	return Vector3(
 		vertical_rotation_target.rotation_degrees.x,
@@ -43,6 +45,9 @@ func rotate_horizontal(deg: float) -> void:
 
 func rotate_vertical(deg: float) -> void:
 	vertical_rotation_target.rotation_degrees.x += deg
+
+func add_impulse(impulse: Vector3) -> void:
+	queued_impulse += impulse
 
 func face_target(target: Variant) -> void:
 	var identified_target := false
@@ -115,7 +120,9 @@ func _accelerate(direction: Vector3) -> void:
 			accelerate_rotation_base.global_rotation.y
 		)
 	
-	velocity = movement_mode.accel(velocity, direction)
+	velocity = movement_mode.accel(velocity, direction) 
+	velocity += queued_impulse
+	queued_impulse = Vector3.ZERO
 
 func reset_gravity() -> void:
 	gravity = Vector3.ZERO

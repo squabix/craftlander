@@ -3,6 +3,7 @@ class_name Damage
 
 @export var base_amount := 1.0
 @export var variation := 0.0
+@export var force := 10.0
 @export var type: String
 
 var source: Node

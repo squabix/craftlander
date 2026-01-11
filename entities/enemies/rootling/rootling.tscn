@@ -10,6 +10,8 @@
 [sub_resource type="Resource" id="Resource_50i80"]
 script = ExtResource("2_76rxv")
 max_speed = Vector2(3, 0)
+acceleration = Vector2(0.1, 1)
+friction = Vector2(0.3, 0)
 metadata/_custom_type_script = "uid://edbvsbdtvgtj"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ii4qu"]
@@ -32,11 +34,12 @@ mesh = SubResource("SphereMesh_sanlc")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_ii4qu")
 
-[node name="Hurtbox3D" type="Area3D" parent="." node_paths=PackedStringArray("health")]
+[node name="Hurtbox3D" type="Area3D" parent="." node_paths=PackedStringArray("health", "knockback_entity")]
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("3_ihgra")
 health = NodePath("../Health")
+knockback_entity = NodePath("..")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D"]
@@ -44,7 +47,7 @@ shape = SubResource("SphereShape3D_ii4qu")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("4_nauqg")
-hp = 3.0
+hp = 10.0
 free_parent_on_death = true
 metadata/_custom_type_script = "uid://cbb5o5ykqwxfp"
 

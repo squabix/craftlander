@@ -11,6 +11,7 @@ signal was_dealt_damage(damage: Damage)
 @export var center := Vector3.ZERO
 @export var use_whitelist := false
 @export var type_whitelist: Array[String] = []
+@export var knockback_entity: Entity3D
 
 @export_group("Auto Hurt")
 @export var bodies_auto_hurt := false
@@ -53,6 +54,9 @@ func hurt(damage: Damage, direction: Vector3=Vector3.ZERO) -> float:
 	
 	if direction != Vector3.ZERO:
 		last_hurt_direction = direction
+		if is_instance_valid(knockback_entity):
+			knockback_entity.add_impulse(direction * damage.force)
+		
 	was_hurt.emit()
 	was_dealt_damage.emit(damage)
 	

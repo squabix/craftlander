@@ -33,3 +33,6 @@ shape = SubResource("WorldBoundaryShape3D_rarbv")
 
 [node name="Rootling" parent="." instance=ExtResource("4_rarbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.638369, 0.5, 11.424053)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)

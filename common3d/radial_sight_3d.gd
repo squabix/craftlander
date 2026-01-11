@@ -16,7 +16,6 @@ var update_timer: Timer
 var target: Node3D
 var target_position: Vector3:
 	get:
-		update_target()
 		if does_see_target():
 			target_position = target.global_position
 		return target_position
@@ -70,4 +69,4 @@ func update_target() -> void:
 			return
 
 func does_see_target() -> bool:
-	return is_instance_valid(target)
+	return is_instance_valid(target) and target != null
