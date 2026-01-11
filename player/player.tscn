@@ -164,7 +164,8 @@ script = ExtResource("20_x7c3f")
 item = ExtResource("22_bjvpn")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("horizontal_rotation_target", "vertical_rotation_target")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
+collision_layer = 17
 floor_constant_speed = true
 floor_block_on_wall = false
 floor_max_angle = 1.0471976

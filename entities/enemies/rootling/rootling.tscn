@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=3 uid="uid://mwsmthp4sn6c"]
+
+[ext_resource type="Script" uid="uid://bki5ij8task16" path="res://common3d/entity/entity3d.gd" id="1_ii4qu"]
+[ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common3d/movement_mode3d.gd" id="2_76rxv"]
+[ext_resource type="Script" uid="uid://crmxhu5iujbq1" path="res://entities/enemies/rootling/rootling_controller.gd" id="2_nauqg"]
+[ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="3_ihgra"]
+[ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="4_nauqg"]
+[ext_resource type="Script" uid="uid://v1m6kagbghjv" path="res://common3d/radial_sight_3d.gd" id="5_nauqg"]
+
+[sub_resource type="Resource" id="Resource_50i80"]
+script = ExtResource("2_76rxv")
+max_speed = Vector2(3, 0)
+metadata/_custom_type_script = "uid://edbvsbdtvgtj"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ii4qu"]
+albedo_color = Color(0.47, 0.3149, 0.188, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_sanlc"]
+material = SubResource("StandardMaterial3D_ii4qu")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ii4qu"]
+
+[node name="Rootling" type="CharacterBody3D"]
+collision_mask = 17
+script = ExtResource("1_ii4qu")
+movement_mode = SubResource("Resource_50i80")
+metadata/_custom_type_script = "uid://bki5ij8task16"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_sanlc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_ii4qu")
+
+[node name="Hurtbox3D" type="Area3D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("3_ihgra")
+health = NodePath("../Health")
+metadata/_custom_type_script = "uid://4dfurtssrp4f"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D"]
+shape = SubResource("SphereShape3D_ii4qu")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("4_nauqg")
+hp = 3.0
+free_parent_on_death = true
+metadata/_custom_type_script = "uid://cbb5o5ykqwxfp"
+
+[node name="Sight3D" type="Node3D" parent="."]
+script = ExtResource("5_nauqg")
+radius = 9.0
+target_collision_mask = 16
+ray_collision_mask = 21
+group_whitelist = Array[String](["player"])
+
+[node name="Controller3D" type="Node" parent="." node_paths=PackedStringArray("sight", "entity")]
+script = ExtResource("2_nauqg")
+sight = NodePath("../Sight3D")
+entity = NodePath("..")
+metadata/_custom_type_script = "uid://ccwod33h53a5s"

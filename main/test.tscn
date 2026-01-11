@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6d7dfwyfulxo"]
+[gd_scene load_steps=8 format=3 uid="uid://b6d7dfwyfulxo"]
 
 [ext_resource type="Script" uid="uid://csfawk4hjit5w" path="res://main/test.gd" id="1_0pcxm"]
 [ext_resource type="PackedScene" uid="uid://c16m48qir7vc7" path="res://destructable_resource/tree/tree.tscn" id="2_dax2s"]
 [ext_resource type="PackedScene" uid="uid://dmbp0klxo0b0c" path="res://player/player.tscn" id="3_dax2s"]
+[ext_resource type="PackedScene" uid="uid://mwsmthp4sn6c" path="res://entities/enemies/rootling/rootling.tscn" id="4_rarbv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gt0vt"]
 albedo_color = Color(0.29520002, 0.72, 0.43680012, 1)
@@ -29,3 +30,6 @@ collision_layer = 5
 shape = SubResource("WorldBoundaryShape3D_rarbv")
 
 [node name="Player" parent="." instance=ExtResource("3_dax2s")]
+
+[node name="Rootling" parent="." instance=ExtResource("4_rarbv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.638369, 0.5, 11.424053)

@@ -41,6 +41,10 @@ folder_colors={
 "res://player/": "blue"
 }
 
+[global_group]
+
+player=""
+
 [input]
 
 move_forward={
@@ -114,6 +118,7 @@ drop={
 3d_physics/layer_2="interactable"
 3d_physics/layer_3="solid"
 3d_physics/layer_4="damage_box"
+3d_physics/layer_5="entity"
 3d_physics/layer_6="item_pickup"
 
 [physics]
