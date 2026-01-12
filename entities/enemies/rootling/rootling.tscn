@@ -76,6 +76,7 @@ metadata/_custom_type_script = "uid://ccwod33h53a5s"
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("7_kg2m4")
 item_instances = Array[ExtResource("8_8jseq")]([SubResource("Resource_3emv6")])
+size = 1
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 
 [node name="InventoryDropper3D" type="Node3D" parent="." node_paths=PackedStringArray("inventory", "health")]

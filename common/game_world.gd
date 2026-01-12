@@ -2,6 +2,7 @@ extends Resource
 class_name GameWorld
 
 const GRAVITY_3D_RATIO: float = 0.01
+const TIME_SCALE := 5.0
 
 static var _current: GameWorld
 

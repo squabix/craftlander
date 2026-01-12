@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://dmbp0klxo0b0c"]
+[gd_scene load_steps=55 format=3 uid="uid://dmbp0klxo0b0c"]
 
 [ext_resource type="Script" uid="uid://ucyt6h7yjc6k" path="res://player/player.gd" id="1_g1dw6"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="2_g1dw6"]
@@ -27,7 +27,10 @@
 [ext_resource type="Resource" uid="uid://bah3rou15fcfh" path="res://items/tools/shoddy_axe/shoddy_axe_item.tres" id="22_bjvpn"]
 [ext_resource type="Script" uid="uid://c07qmsd7epd0h" path="res://common/ui/popup_display.gd" id="23_7pqkx"]
 [ext_resource type="Texture2D" uid="uid://dvu8avo8cfq2c" path="res://icon.svg" id="23_g4c7l"]
+[ext_resource type="Script" uid="uid://q5lh058bmpum" path="res://common/damage_system/health_bar.gd" id="26_r7pn3"]
+[ext_resource type="Script" uid="uid://c3xfbb8ay0ghk" path="res://common/interpolated_bar.gd" id="27_b8hi5"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="27_uw77l"]
+[ext_resource type="Script" uid="uid://bn55l5h1rwjsn" path="res://player/hunger.gd" id="31_2uvqg"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -115,6 +118,12 @@ font_size = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_uw77l"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7pn3"]
+bg_color = Color(0.2812, 0.74, 0.37296006, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8hi5"]
+bg_color = Color(0.79, 0.32548, 0.12640002, 1)
+
 [sub_resource type="Animation" id="Animation_tqiix"]
 length = 0.001
 tracks/0/type = "value"
@@ -163,6 +172,15 @@ metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 script = ExtResource("20_x7c3f")
 item = ExtResource("22_bjvpn")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Curve" id="Curve_2uvqg"]
+_limits = [0.0, 30.0, 0.0, 1.0]
+_data = [Vector2(0, 30), 0.0, 0.0, 0, 0, Vector2(0.25, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_1s1yo"]
+_data = [Vector2(0.892, 0), 0.0, 0.6109068, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
 collision_layer = 17
@@ -298,6 +316,8 @@ shape = SubResource("BoxShape3D_ebec5")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("12_ebec5")
+hp = 100.0
+immortal = true
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
@@ -764,12 +784,6 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="FPSLabel" type="Label" parent="HUD"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-script = ExtResource("19_bjvpn")
-
 [node name="PopupDisplay" type="Control" parent="HUD" node_paths=PackedStringArray("title_label", "body_label")]
 layout_mode = 1
 anchors_preset = 8
@@ -845,6 +859,33 @@ custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 text = "Continue"
 
+[node name="BarContainer" type="VBoxContainer" parent="HUD"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 344.0
+offset_bottom = 128.0
+
+[node name="HealthBar" type="ProgressBar" parent="HUD/BarContainer" node_paths=PackedStringArray("health")]
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_r7pn3")
+value = 4.58
+script = ExtResource("26_r7pn3")
+health = NodePath("../../../Health")
+
+[node name="HungerBar" type="ProgressBar" parent="HUD/BarContainer"]
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_b8hi5")
+max_value = 1.0
+value = 0.41
+script = ExtResource("27_b8hi5")
+metadata/_custom_type_script = "uid://c3xfbb8ay0ghk"
+
+[node name="FPSLabel" type="Label" parent="HUD/BarContainer"]
+layout_mode = 2
+text = "FPS"
+script = ExtResource("19_bjvpn")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_tqiix")
@@ -857,5 +898,13 @@ autoplay = "idle"
 script = ExtResource("19_c35mf")
 item_instances = Array[ExtResource("20_x7c3f")]([SubResource("Resource_s7qer"), SubResource("Resource_rptt4")])
 size = 9
+
+[node name="Hunger" type="Node" parent="." node_paths=PackedStringArray("bar", "health")]
+script = ExtResource("31_2uvqg")
+bar = NodePath("../HUD/BarContainer/HungerBar")
+health = NodePath("../Health")
+hurt_curve = SubResource("Curve_2uvqg")
+regeneration_curve = SubResource("Curve_1s1yo")
+metadata/_custom_type_script = "uid://bn55l5h1rwjsn"
 
 [connection signal="updated_instance" from="Head/Camera3D/ArmContainer/ItemHolder" to="HUD" method="_on_item_holder_updated_instance"]

@@ -1,14 +1,10 @@
 class_name HealthBar
-extends ProgressBar
+extends InterpolatedBar
 
 const CURRENT: String = "CURRENT"
 const MAX: String = "MAX"
 
 @export var health: Health
-
-@export_group("Interpolation")
-@export_range(0.0, 1.0) var lerp_weight: float = 1.0
-@export var jump_distance: float = 0.05
 
 @export_group("Label")
 @export var label: Label
@@ -20,10 +16,9 @@ func _process(_delta: float) -> void:
 		return
 	
 	max_value = health.max_hp
-	value = lerp(value, health.hp, lerp_weight)
-	var distance: float = abs(value - health.hp)
-	if distance <= jump_distance:
-		value = health.hp
+	target_value = health.hp
+	
+	super(_delta)
 	
 	if is_instance_valid(label):
 		label.text = get_label_text()
