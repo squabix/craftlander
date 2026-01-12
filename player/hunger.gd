@@ -6,6 +6,7 @@ class_name Hunger
 	set(to):
 		value = clampf(to, 0.0, 1.0)
 @export var loss_per_minute := 0.2
+@export var loss_multiplier := 1.0
 
 @export_group("Health")
 @export var health: Health
@@ -25,7 +26,7 @@ func _ready() -> void:
 	)
 
 func _process(delta: float) -> void:
-	value -= (loss_per_minute / 60.0) * delta * GameWorld.TIME_SCALE
+	value -= (loss_per_minute * loss_multiplier / 60.0) * delta * GameWorld.TIME_SCALE
 	bar.value = value
 	health.heal(regeneration_curve.sample(value) * delta * GameWorld.TIME_SCALE)
 	if Input.is_action_just_pressed("interact"):

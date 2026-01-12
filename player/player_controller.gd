@@ -21,20 +21,35 @@ const ACTION_DROP := "drop"
 @export var current_collision_shape: CollisionShape3D
 @export var rotation_base: Node3D
 
+var using_sick_controls := false
+
 func _ready() -> void:
 	MouseModeController.capture() # Capture mouse
 
 func turn_head(relative: Vector2) -> void:
+	if using_sick_controls:
+		entity.rotate_vertical(relative.y * MOUSE_SENSITIVITY)
+		entity.rotate_horizontal(relative.x * MOUSE_SENSITIVITY)
+		return
+		
 	entity.rotate_vertical(-relative.y * MOUSE_SENSITIVITY)
 	entity.rotate_horizontal(-relative.x * MOUSE_SENSITIVITY)
 
 func get_motion_vector() -> Vector2:
+	if using_sick_controls:
+		return Input.get_vector(
+			"move_right",
+			"move_left",
+			"move_forward",
+			"move_backward"
+		)
+	
 	return Input.get_vector(
 			"move_left",
 			"move_right",
 			"move_backward",
 			"move_forward"
-		) 
+		)
 
 func update(_delta: float) -> void:
 	

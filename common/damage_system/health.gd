@@ -14,6 +14,7 @@ signal was_dealt_damage(amount)
 signal was_given_hp(amount)
 
 @export var hp := 5.0
+@export var hurt_multiplier := 1.0
 @export var immortal := false
 @export var invulnerable := false
 @export var one_shot := false
@@ -91,6 +92,7 @@ func hurt(amount: float) -> void:
 	if amount <= 0.0 or invulnerable:
 		return
 	
+	amount *= hurt_multiplier
 	was_dealt_damage.emit(amount)
 	
 	if dead:
