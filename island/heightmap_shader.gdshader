@@ -5,6 +5,7 @@ uniform sampler2D gradient;
 uniform sampler2D normal_map;
 uniform float max_height;
 uniform float zero_displacement;
+uniform float roughness = 1.0;
 
 varying float v_height;
 
@@ -21,5 +22,6 @@ void fragment() {
 	vec3 grad_color = texture(gradient, vec2(1.0 - v_height, 0.5)).rgb;
 
 	ALBEDO = grad_color;
+	ROUGHNESS = roughness;
 	//NORMAL_MAP = texture(normal_map, UV).rgb;
 }
