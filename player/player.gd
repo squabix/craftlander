@@ -8,8 +8,21 @@ const CROUCH_CAMERA_SPEED := 0.1
 @onready var head: Node3D = $Head
 @onready var state_machine: StateMachine = $StateMachine
 @onready var inventory: Inventory = $Inventory
+@onready var health: Health = $Health
+@onready var hunger: Hunger = $Hunger
+@onready var sickness_manager: SicknessManager = $SicknessManager
+@onready var item_holder: ItemHolder3D = $Head/Camera3D/ArmContainer/ItemHolder
 @onready var inventory_holder_link: InventoryHolderLink = $Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink
 @onready var dropper: InventoryDropper3D = $Head/Camera3D/DropperRayCast/InventoryDropper3D
+
+func _ready() -> void:
+	item_holder.item_event_triggered.connect(
+		func(event: ItemEvent) -> void:
+			if event is Food.AteFoodEvent:
+				health.hp += event.health_restoration
+				hunger.value += event.hunger_restoration
+				sickness_manager.value += event.sickness
+	)
 
 func adjust_head_to_crouch() -> void:
 	head.position.y = lerp(

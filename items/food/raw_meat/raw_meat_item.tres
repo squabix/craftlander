@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Food" load_steps=4 format=3 uid="uid://r2mg70okysjv"]
+
+[ext_resource type="Script" uid="uid://bcua33xmbibyi" path="res://items/food/food.gd" id="1_enjs7"]
+[ext_resource type="Texture2D" uid="uid://c4jkghkqifcm7" path="res://assets/crosshair.tres" id="1_o47ul"]
+[ext_resource type="PackedScene" uid="uid://chhe4l502hgss" path="res://items/food/raw_meat/raw_meat.tscn" id="2_7ij5n"]
+
+[resource]
+script = ExtResource("1_enjs7")
+sickness_chance = 1.0
+scene = ExtResource("2_7ij5n")
+name = "Raw Meat"
+max_quantity = 99
+icon = ExtResource("1_o47ul")
+consumable = true
+metadata/_custom_type_script = "uid://bcua33xmbibyi"
