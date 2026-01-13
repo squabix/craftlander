@@ -1,0 +1,66 @@
+[gd_scene load_steps=9 format=3 uid="uid://cw2ir860alcgt"]
+
+[ext_resource type="Script" uid="uid://s3ufjlvtqovq" path="res://player/hud/crafting_environment.gd" id="1_mqnoh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mqnoh"]
+size = Vector3(30, 1, 30)
+
+[sub_resource type="Gradient" id="Gradient_wsg1s"]
+colors = PackedColorArray(0.62, 0.51005334, 0.2728, 1, 0.5, 0.40025002, 0.185, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mqnoh"]
+noise_type = 2
+frequency = 0.05
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4aq3d"]
+noise = SubResource("FastNoiseLite_mqnoh")
+color_ramp = SubResource("Gradient_wsg1s")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5krih"]
+albedo_texture = SubResource("NoiseTexture2D_4aq3d")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_snws6"]
+material = SubResource("StandardMaterial3D_5krih")
+size = Vector2(30, 30)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mqnoh"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="CraftingEnvironment" type="SubViewportContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+script = ExtResource("1_mqnoh")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Space" type="Node3D" parent="SubViewport"]
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport/Space"]
+transform = Transform3D(1, 0, 0, 0, 0.25881907, 0.9659258, 0, -0.9659258, 0.25881907, 0, 4, 0)
+current = true
+
+[node name="ItemOrigin" type="Node3D" parent="SubViewport/Space"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Area3D" type="Area3D" parent="SubViewport/Space/ItemOrigin"]
+input_capture_on_drag = true
+
+[node name="Floor" type="StaticBody3D" parent="SubViewport/Space"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_mqnoh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Floor"]
+mesh = SubResource("PlaneMesh_snws6")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space"]
+mesh = SubResource("BoxMesh_mqnoh")

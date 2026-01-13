@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://b6lw3nj0jtipb"]
+
+[node name="CraftingEnvironmentItemPickup" type="Node3D"]

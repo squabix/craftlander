@@ -71,9 +71,8 @@ func _input(event: InputEvent) -> void:
 	# Turn head based on mouse movement
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		turn_head(event.relative * MOUSE_SENSITIVITY)
-	
-	if event.is_action_pressed(ACTION_TOGGLE_MOUSE_CAPTURE):
-		MouseModeController.toggle(Input.MOUSE_MODE_CAPTURED, Input.MOUSE_MODE_VISIBLE)
+	#if event.is_action_pressed(ACTION_TOGGLE_MOUSE_CAPTURE):
+		#MouseModeController.toggle(Input.MOUSE_MODE_CAPTURED, Input.MOUSE_MODE_VISIBLE)
 	
 	if event.is_action_pressed(ACTION_INTERACT):
 		entity.interact()
