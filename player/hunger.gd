@@ -27,5 +27,3 @@ func _process(delta: float) -> void:
 	value -= (loss_per_minute * loss_multiplier / 60.0) * delta * GameWorld.TIME_SCALE
 	bar.value = value
 	health.heal(regeneration_curve.sample(value) * delta * GameWorld.TIME_SCALE)
-	if Input.is_action_just_pressed("interact"):
-		value += 0.1

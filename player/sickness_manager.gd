@@ -27,5 +27,3 @@ func _process(delta: float) -> void:
 		sickness_tint_curve.sample(value),
 		0.1
 	)
-	if Input.is_action_just_pressed("interact"):
-		value += 0.1

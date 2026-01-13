@@ -2,7 +2,7 @@ extends Item
 class_name Food
 
 @export var health_restoration := 0.0
-@export var hunger_restoration := 10.0
+@export_range(0.0, 1.0) var hunger_restoration := 0.1
 @export_range(0.0, 1.0) var sickness_chance := 0.0
 @export_range(0.0, 1.0) var min_sickness := 0.05
 @export_range(0.0, 1.0) var max_sickness := 0.15

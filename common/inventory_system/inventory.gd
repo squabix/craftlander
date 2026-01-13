@@ -117,7 +117,6 @@ func remove_instance(instance: ItemInstance, quantity: int=1) -> int:
 		instance.quantity -= quantity
 		return 0
 	else:
-		print("not greater")
 		quantity -= instance.quantity
 		empty_instance.call_deferred(instance)
 		if quantity <= 0:
