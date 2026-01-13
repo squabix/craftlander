@@ -4,6 +4,7 @@ class_name ItemHolder3D
 signal updated_instance(new_instance: ItemInstance)
 signal used_item(item: Item)
 signal consumed_instance(instance: ItemInstance)
+signal item_event_triggered(event: ItemEvent)
 
 @export var icon_sprite: Sprite3D
 @export var instance_parent: Node3D
@@ -34,6 +35,7 @@ signal consumed_instance(instance: ItemInstance)
 			#instance_parent.add_child.call_deferred(item_instance.item.instantiate_scene())
 		
 		updated_instance.emit(item_instance)
+		item_instance.item.triggered_event.connect(item_event_triggered.emit)
 
 var item: Item:
 	get:

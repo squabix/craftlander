@@ -2,6 +2,7 @@ extends Resource
 class_name Item
 
 signal scene_set_up
+signal triggered_event(event: ItemEvent)
 
 enum CooldownMode {DISABLED, START_USE, END_USE}
 
@@ -48,6 +49,12 @@ func equals(other_item: Item) -> bool:
 func start_cooldown(custom_length: float = 0.0) -> void:
 	cooldown_start_time = Time.get_ticks_msec()
 	cooldown_length = custom_length if custom_length > 0.0 else default_cooldown_length
+
+func trigger_event(event: ItemEvent) -> void:
+	if event == null:
+		return
+	event.item = self
+	triggered_event.emit(event)
 
 func update(delta: float) -> void:
 	idle()
