@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://chhe4l502hgss"]
+
+[ext_resource type="PackedScene" uid="uid://d3nw6sqipfx2f" path="res://items/food/raw_meat/raw_meat.blend" id="1_x8gma"]
+
+[node name="RawMeat" type="Node3D"]
+
+[node name="Visuals" parent="." instance=ExtResource("1_x8gma")]

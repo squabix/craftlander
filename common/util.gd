@@ -309,7 +309,7 @@ static func lerp_look_at_3d(node: Node3D, position: Vector3, weight: float) -> V
 		weight
 	)
 
-static func get_property_names(of: Node) -> PackedStringArray:
+static func get_property_names(of: Object) -> PackedStringArray:
 	var property_names: PackedStringArray = []
 	for property in of.get_property_list():
 		var property_name: String = property["name"]

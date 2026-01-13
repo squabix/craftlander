@@ -54,9 +54,9 @@ func update_icon(to: Texture) -> void:
 func use_item() -> void:
 	if item_instance == null or item_instance.item == null:
 		return
+	used_item.emit(item_instance.item)
 	if item_instance.item.use() and item_instance.item.consumable:
 		consumed_instance.emit(item_instance)
-	used_item.emit(item_instance.item)
 
 func _ready() -> void:
 	if item_override:

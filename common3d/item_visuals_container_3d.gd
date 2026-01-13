@@ -28,6 +28,8 @@ func update_visuals() -> void:
 		return
 	if instance.item == null:
 		return
+	if not instance in inventory_holder_link.inventory.item_instances:
+		return
 	
 	# Free current visuals
 	Util.safe_free(contained_visuals)

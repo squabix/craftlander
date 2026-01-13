@@ -117,13 +117,17 @@ func remove_instance(instance: ItemInstance, quantity: int=1) -> int:
 		instance.quantity -= quantity
 		return 0
 	else:
+		print("not greater")
 		quantity -= instance.quantity
-		item_instances[item_instances.find(instance)] = null
+		empty_instance.call_deferred(instance)
 		if quantity <= 0:
 			changed.emit()
 			return 0
 	changed.emit()
 	return quantity
+
+func empty_instance(instance: ItemInstance) -> void:
+	item_instances[item_instances.find(instance)] = null
 
 func is_index_valid(index: int) -> bool:
 	return index < size and index >= 0 and item_instances[index] != null and item_instances[index].item != null

@@ -52,9 +52,10 @@ func _ready() -> void:
 	)
 	item_holder.consumed_instance.connect(
 		func(instance: ItemInstance):
-			inventory.remove_item(instance.item),
-			1
+			inventory.remove_item(instance.item, 1)
+			changed.emit.call_deferred()
 	)
+	
 
 func scroll(direction: int, skip_null: bool=false) -> void:
 	if inventory == null:
