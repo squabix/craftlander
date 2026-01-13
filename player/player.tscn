@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://dmbp0klxo0b0c"]
+[gd_scene load_steps=62 format=3 uid="uid://dmbp0klxo0b0c"]
 
 [ext_resource type="Script" uid="uid://ucyt6h7yjc6k" path="res://player/player.gd" id="1_g1dw6"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="2_g1dw6"]
@@ -31,6 +31,7 @@
 [ext_resource type="Script" uid="uid://c3xfbb8ay0ghk" path="res://common/interpolated_bar.gd" id="27_b8hi5"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="27_uw77l"]
 [ext_resource type="Script" uid="uid://bn55l5h1rwjsn" path="res://player/hunger.gd" id="31_2uvqg"]
+[ext_resource type="Resource" uid="uid://r2mg70okysjv" path="res://items/food/raw_meat/raw_meat_item.tres" id="31_5ejfk"]
 [ext_resource type="Script" uid="uid://ds4dru7pq3a84" path="res://player/sickness_manager.gd" id="32_1s1yo"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
@@ -126,7 +127,7 @@ fill_from = Vector2(0.5, 0.5)
 bg_color = Color(0.2812, 0.74, 0.37296006, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8hi5"]
-bg_color = Color(0.79, 0.32548, 0.12640002, 1)
+bg_color = Color(0.67, 0.39530003, 0.12060001, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2uvqg"]
 bg_color = Color(0.5798601, 0.12640002, 0.79, 1)
@@ -182,7 +183,8 @@ metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Resource" id="Resource_rptt4"]
 script = ExtResource("20_x7c3f")
-item = ExtResource("22_bjvpn")
+item = ExtResource("31_5ejfk")
+quantity = 5
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Curve" id="Curve_2uvqg"]
@@ -287,6 +289,7 @@ item_holder = NodePath("..")
 metadata/_custom_type_script = "uid://ioo6s3m7wbha"
 
 [node name="VignetteRect" type="TextureRect" parent="Head/Camera3D"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -350,6 +353,7 @@ grow_vertical = 2
 script = ExtResource("17_g4c7l")
 
 [node name="SicknessTint" type="TextureRect" parent="HUD"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -821,6 +825,11 @@ offset_top = 10.0
 offset_right = 344.0
 offset_bottom = 128.0
 
+[node name="FPSLabel" type="Label" parent="HUD/BarContainer"]
+layout_mode = 2
+text = "FPS"
+script = ExtResource("19_bjvpn")
+
 [node name="HealthBar" type="ProgressBar" parent="HUD/BarContainer" node_paths=PackedStringArray("health")]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
@@ -849,11 +858,6 @@ fill_mode = 1
 show_percentage = false
 script = ExtResource("27_b8hi5")
 metadata/_custom_type_script = "uid://c3xfbb8ay0ghk"
-
-[node name="FPSLabel" type="Label" parent="HUD/BarContainer"]
-layout_mode = 2
-text = "FPS"
-script = ExtResource("19_bjvpn")
 
 [node name="PopupDisplay" type="Control" parent="HUD" node_paths=PackedStringArray("title_label", "body_label")]
 layout_mode = 1

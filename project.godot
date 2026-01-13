@@ -37,6 +37,7 @@ folder_colors={
 "res://entities/": "green",
 "res://island/": "yellow",
 "res://items/": "teal",
+"res://items/food/": "orange",
 "res://main/": "gray",
 "res://player/": "blue"
 }

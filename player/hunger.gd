@@ -7,8 +7,6 @@ class_name Hunger
 		value = clampf(to, 0.0, 1.0)
 @export var loss_per_minute := 0.2
 @export var loss_multiplier := 1.0
-
-@export_group("Health")
 @export var health: Health
 @export var hurt_curve: Curve
 @export var regeneration_curve: Curve
