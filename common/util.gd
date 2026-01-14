@@ -288,10 +288,12 @@ static func roll_basis_toward(from: Basis, toward: Vector3, axis: Vector3i, amou
 	
 	return Basis(normalized_cross_product, amount * toward.length()) * from
 
-static func get_ray_query_parameters_3d(from: Vector3, to: Vector3) -> PhysicsRayQueryParameters3D:
+static func get_ray_query_parameters_3d(from: Vector3, to: Vector3, collide_areas := false, collide_bodies := true) -> PhysicsRayQueryParameters3D:
 	var parameters := PhysicsRayQueryParameters3D.new()
 	parameters.from = from
 	parameters.to = to
+	parameters.collide_with_areas = collide_areas
+	parameters.collide_with_bodies = collide_bodies
 	return parameters
 
 static func get_rotation_between_points_3d(a: Vector3, b: Vector3) -> Vector3:
@@ -374,14 +376,20 @@ static func rad_to_deg_vec2(vector: Vector2) -> Vector2:
 		rad_to_deg(vector.y)
 	)
 
-static func get_mouse_position_3d(camera: Camera3D, default_plane: Plane=Plane(Vector3.UP, 0.0), in_space: bool=true, z_depth: float=1000.0, use_front_plane: bool=true) -> Vector3:
-	var mouse_position_2d := camera.get_viewport().get_mouse_position()
+static func get_mouse_position_3d(camera: Camera3D, mouse_position_2d: Vector2 = camera.get_viewport().get_mouse_position(), collide_areas:=false, collide_bodies:=true, in_space: bool=true, default_plane: Plane=Plane(Vector3.UP, 0.0), z_depth: float=1000.0, use_front_plane: bool=true) -> Vector3:
 	var from := camera.project_ray_origin(mouse_position_2d)
 	var to := camera.project_position(mouse_position_2d, z_depth)
 	
 	# Try to intersect ray with an object in 3D space
 	if in_space:
-		var space_intersection := camera.get_world_3d().direct_space_state.intersect_ray(get_ray_query_parameters_3d(from, to))
+		var space_intersection := camera.get_world_3d().direct_space_state.intersect_ray(
+			get_ray_query_parameters_3d(
+				from,
+				to,
+				collide_areas,
+				collide_bodies
+			)
+		)
 		if not space_intersection.is_empty():
 			return space_intersection.position
 	
