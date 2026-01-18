@@ -64,7 +64,7 @@ current = true
 far = 10.0
 
 [node name="ItemOrigin" type="Node3D" parent="SubViewport/Space"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -4.5)
 
 [node name="Floor" type="StaticBody3D" parent="SubViewport/Space"]
 
