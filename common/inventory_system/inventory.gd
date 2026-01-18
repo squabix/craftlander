@@ -11,6 +11,7 @@ signal changed
 		item_instances.resize(size)
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	item_instances.resize(size)
 	await get_tree().process_frame
 	for instance in item_instances:
@@ -79,6 +80,9 @@ func get_first_empty_index() -> int:
 			return index
 	return -1
 
+func get_valid_instances() -> Array[ItemInstance]:
+	return item_instances.filter(func(a): return a != null)
+
 func delete_instance(instance: ItemInstance) -> void:
 	item_instances.erase(instance)
 	changed.emit()
@@ -108,6 +112,13 @@ func give_item(item: Item, quantity: int, to: Inventory) -> int:
 	var available_quantity := quantity - remove_item(item, quantity)
 	var leftover_quantity := to.add_item(item, available_quantity)
 	return leftover_quantity
+
+func give_everything(to: Inventory) -> void:
+	for instance in get_valid_instances():
+		give_item(instance.item, instance.quantity, to)
+
+func is_empty() -> bool:
+	return item_instances.filter(func(a): return a != null).is_empty()
 
 func remove_instance(instance: ItemInstance, quantity: int=1) -> int:
 	if constant:
