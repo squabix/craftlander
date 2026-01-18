@@ -105,7 +105,7 @@ func remove_item(item: Item, quantity: int = -1, must_reach_quantity: bool = fal
 	return quantity
 
 func give_item(item: Item, quantity: int, to: Inventory) -> int:
-	var available_quantity := remove_item(item, quantity)
+	var available_quantity := quantity - remove_item(item, quantity)
 	var leftover_quantity := to.add_item(item, available_quantity)
 	return leftover_quantity
 
