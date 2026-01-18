@@ -7,14 +7,14 @@ func _ready() -> void:
 
 func get_recipe(layout: Dictionary[Vector2i, Item]) -> ItemRecipe:
 	for recipe in recipes:
-		if do_layouts_match(layout, recipe.layout):
+		if verify_layout(layout, recipe.layout):
 			return recipe
 	return null
 
-func do_layouts_match(a: Dictionary[Vector2i, Item], b: Dictionary[Vector2i, Item]) -> bool:
-	for position in a:
-		if not position in b:
+func verify_layout(layout: Dictionary[Vector2i, Item], correct_layout: Dictionary[Vector2i, Item]) -> bool:
+	for position in correct_layout:
+		if not position in layout:
 			return false
-		if not a[position].equals(b[position]):
+		if not correct_layout[position].equals(layout[position]):
 			return false
 	return true
