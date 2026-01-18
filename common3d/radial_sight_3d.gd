@@ -1,7 +1,8 @@
 extends Node3D
 class_name RadialSight3D
 
-@export var radius := 5.0
+@export var radius := 20.0
+@export var lose_distance := 40.0
 @export var target_update_frequency := 0.2
 @export_flags_3d_physics var target_collision_mask := 1
 @export_flags_3d_physics var ray_collision_mask := 1
@@ -49,7 +50,7 @@ func update_target() -> void:
 	nodes_in_area.append_array(area.get_overlapping_areas())
 	nodes_in_area.append_array(area.get_overlapping_bodies())
 	
-	if does_see_target() and target in nodes_in_area:
+	if does_see_target() and global_position.distance_to(target.global_position) < lose_distance:
 		return
 	
 	target = null

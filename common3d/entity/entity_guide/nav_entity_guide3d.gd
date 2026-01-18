@@ -10,7 +10,12 @@ func get_direction(target: Vector3) -> Vector3:
 	nav.target_position = target
 	
 	var next: Vector3 = nav.get_next_path_position()
-	if entity.rotatable_axis != null:
-		entity.look_at(next)
-		entity.global_rotation *= entity.rotatable_axis.as_vector()
+	entity.look_at(next)
 	return entity.global_position.direction_to(next)
+
+func face_target(target: Vector3) -> void:
+	if not is_instance_valid(entity):
+		return
+	nav.target_position = target
+	var next: Vector3 = nav.get_next_path_position()
+	entity.look_at(next)
