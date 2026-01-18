@@ -1,5 +1,7 @@
 extends Control
 
+signal updated_pause
+
 @onready var crafting_environment: CraftingEnvironment = $CraftingMenu/CraftingEnvironment
 
 const ACTION_PAUSE := "ui_cancel"
@@ -18,3 +20,4 @@ func _process(_delta: float) -> void:
 		get_tree().paused = is_paused
 		crafting_environment.is_crafting = is_paused
 		update()
+		updated_pause.emit()

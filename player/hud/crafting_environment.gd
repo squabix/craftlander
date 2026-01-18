@@ -1,22 +1,50 @@
 extends SubViewportContainer
 class_name CraftingEnvironment
 
-const CAMERA_OFFSET := 0.0
+const CAMERA_OFFSET := 1.0
 const MAX_DRAG_DISTANCE := 1.0
-const DRAG_SPEED := 0.1
-const SNAP_SPEED := 1.0
+const MAX_SLOT_DISTANCE := 1.0
+const DRAG_SPEED := 0.2
+const PICKUP_SCALE := 0.5
+const SNAP_SPEED := 0.3
 const SPACE_POSITION := -Vector3.ONE * 1000.0
+
+@export var inventory_holder_link: InventoryHolderLink
+@export var pause_interface: Control
 
 @onready var subviewport: SubViewport = $SubViewport
 @onready var space: Node3D = $SubViewport/Space
 @onready var item_origin: Node3D = $SubViewport/Space/ItemOrigin
 @onready var camera: Camera3D = $SubViewport/Space/Camera3D
+@onready var grid: Node3D = $SubViewport/Space/Grid
+@onready var grid_inventory: Inventory = $SubViewport/Space/Grid/Inventory
 
-var dragged_item: Node3D
+
+var slots_contents: Dictionary[Node3D, ItemPickup3D]
+
 var is_crafting := false
+var held_pickup: ItemPickup3D
 
 func _ready() -> void:
 	space.global_position = SPACE_POSITION
+	
+	for slot in grid.get_children():
+		slots_contents[slot as Node3D] = null
+	
+	inventory_holder_link.updated_current.connect(update_held_pickup)
+	pause_interface.updated_pause.connect(clear)
+	update_held_pickup.call_deferred()
+
+func update_held_pickup() -> void:
+	if is_instance_valid(held_pickup):
+		held_pickup.queue_free()
+		held_pickup = null
+	
+	var new_instance := inventory_holder_link.get_current_instance()
+	if new_instance == null:
+		return
+	
+	held_pickup = spawn_item(new_instance.item)
 
 func get_scaled_mouse_position2d() -> Vector2:
 	var local_mouse := get_local_mouse_position()
@@ -34,33 +62,68 @@ func get_mouse_position3d() -> Vector3:
 		CAMERA_OFFSET
 	)
 
-func spawn_item(item: Item) -> void:
+func spawn_item(item: Item) -> ItemPickup3D:
 	var pickup := ItemPickup3D.new()
 	pickup.item = item
 	item_origin.add_child(pickup)
-	pickup.global_position = get_mouse_position3d()
+	pickup.scale *= PICKUP_SCALE
+	return pickup
+
+func get_closest_slot() -> Node3D:
+	var mouse := get_mouse_position3d()
+	var slot: Node3D = Util.distance_sort_3d(slots_contents.keys(), mouse)[0]
+	if slot.global_position.distance_to(mouse) > MAX_SLOT_DISTANCE:
+		return null
+	return slot
+
+func place_current() -> void:
+	if not is_instance_valid(held_pickup):
+		return
+	
+	var slot: Node3D = get_closest_slot()
+	if slot == null:
+		return
+	
+	empty_slot(slot)
+	
+	slots_contents[slot] = held_pickup
+	inventory_holder_link.inventory.give_item(held_pickup.item, 1, grid_inventory)
+	held_pickup = null
+	update_held_pickup.call_deferred()
+
+func clear() -> void:
+	grid_inventory.give_everything(inventory_holder_link.inventory)
+	for slot in slots_contents:
+		if is_instance_valid(slots_contents[slot]):
+			slots_contents[slot].queue_free()
+		slots_contents[slot] = null
 
 func _process(delta: float) -> void:
 	if not is_crafting:
 		return
 	
-	$SubViewport/Space/MeshInstance3D.global_position = get_mouse_position3d()
-	
-	if Input.is_action_just_pressed("use_secondary"):
-		var mouse := get_mouse_position3d()
-		dragged_item = Util.distance_sort_3d(item_origin.get_children(), mouse)[0]
-		if dragged_item.global_position.distance_to(mouse) > MAX_DRAG_DISTANCE:
-			dragged_item = null
+	for slot in slots_contents:
+		if not is_instance_valid(slots_contents[slot]):
+			continue
+		slots_contents[slot].global_position = slots_contents[slot].global_position.lerp(
+			slot.global_position,
+			SNAP_SPEED
+		)
 		
-	if Input.is_action_just_released("use_secondary") and is_instance_valid(dragged_item):
-		dragged_item.global_position = dragged_item.global_position.lerp(get_mouse_position3d(), SNAP_SPEED)
-		dragged_item = null
+	if Input.is_action_pressed("use_secondary") and not Input.is_action_pressed("use_primary"):
+		empty_slot(get_closest_slot())
 	
-	if is_instance_valid(dragged_item):
-		dragged_item.global_position = dragged_item.global_position.lerp(get_mouse_position3d(), DRAG_SPEED)
+	if is_instance_valid(held_pickup):
+		held_pickup.global_position = held_pickup.global_position.lerp(get_mouse_position3d(), DRAG_SPEED)
+
+func empty_slot(slot: Node3D) -> void:
+	var old_pickup: ItemPickup3D = slots_contents[slot]
+	if old_pickup != null:
+		old_pickup.queue_free()
+		grid_inventory.give_item(old_pickup.item, 1, inventory_holder_link.inventory)
 
 func _input(event: InputEvent) -> void:
 	if not is_crafting:
 		return
 	if event.is_action_pressed("use_primary"):
-		spawn_item(load("res://items/wood/wood_item.tres"))
+		place_current()
