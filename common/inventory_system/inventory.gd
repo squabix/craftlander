@@ -29,9 +29,13 @@ func get_item(index: int) -> Item:
 		return null
 	return instance.item
 
-func add_item(new_item: Item, quantity: int = 1) -> int:
+func add_item(new_item: Item, quantity: int = 1, must_reach_quantity: bool = false) -> int:
 	if constant:
 		return quantity
+	if quantity == 0:
+		return 0
+	
+	var original_quantity := quantity
 	
 	if new_item.max_quantity > 1:
 		for inst in item_instances:
@@ -56,6 +60,10 @@ func add_item(new_item: Item, quantity: int = 1) -> int:
 		instance.emptied.connect(delete_instance.bind(instance))
 		item_instances[index] = instance
 		quantity -= to_add
+	
+	if quantity > 0 and must_reach_quantity:
+		remove_item(new_item, original_quantity - quantity)
+		return original_quantity
 	
 	changed.emit()
 	return quantity
@@ -90,16 +98,22 @@ func delete_instance(instance: ItemInstance) -> void:
 func remove_item(item: Item, quantity: int = -1, must_reach_quantity: bool = false) -> int:
 	if constant:
 		return quantity
+	if quantity == 0:
+		return 0
 	
 	if quantity == -1:
 		quantity = get_item_quantity(item)
 	elif must_reach_quantity and quantity > get_item_quantity(item):
 		return quantity
 	
-	for i in range(item_instances.size()):
+	for i in range(item_instances.size() - 1, -1, -1):
 		var inst := item_instances[i]
-		if inst == null or not inst.item.equals(item):
+		if inst == null:
 			continue
+		
+		if not inst.item.equals(item):
+			continue
+		
 		quantity = remove_instance(inst, quantity)
 		if quantity <= 0:
 			changed.emit()
@@ -150,3 +164,6 @@ func get_instance(index: int) -> ItemInstance:
 	if not is_index_valid(index):
 		return null
 	return item_instances[index]
+
+func _to_string() -> String:
+	return "Inventory of " + str(item_instances)
