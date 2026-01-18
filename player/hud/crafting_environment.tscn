@@ -58,7 +58,7 @@ render_target_update_mode = 4
 [node name="Space" type="Node3D" parent="SubViewport"]
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport/Space"]
-transform = Transform3D(1, 0, 0, 0, 2.9802322e-08, 1, 0, -1, 2.9802322e-08, 0, 5, 0)
+transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, 0, 5, 0)
 cull_mask = 3
 current = true
 far = 10.0
@@ -80,6 +80,11 @@ skeleton = NodePath("../..")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space"]
 layers = 2
 mesh = SubResource("BoxMesh_mqnoh")
+
+[node name="GridInventory" type="Node" parent="SubViewport/Space"]
+script = ExtResource("2_4aq3d")
+size = 25
+metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 
 [node name="Grid" type="Node3D" parent="SubViewport/Space"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -332,11 +337,6 @@ mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot25"]
 shape = SubResource("SphereShape3D_mqnoh")
-
-[node name="Inventory" type="Node" parent="SubViewport/Space/Grid"]
-script = ExtResource("2_4aq3d")
-size = 25
-metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="SubViewport/Space"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
