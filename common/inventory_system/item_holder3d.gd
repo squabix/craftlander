@@ -35,7 +35,8 @@ signal item_event_triggered(event: ItemEvent)
 			#instance_parent.add_child.call_deferred(item_instance.item.instantiate_scene())
 		
 		updated_instance.emit(item_instance)
-		item_instance.item.triggered_event.connect(item_event_triggered.emit)
+		if not item_instance.item.triggered_event.is_connected(item_event_triggered.emit):
+			item_instance.item.triggered_event.connect(item_event_triggered.emit)
 
 var item: Item:
 	get:
