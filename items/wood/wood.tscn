@@ -1,10 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bg46c7oyvm5rg"]
+[gd_scene load_steps=2 format=3 uid="uid://b3r8gm0726pe7"]
 
-[ext_resource type="PackedScene" uid="uid://b5mk2ohahh5e8" path="res://items/wood/wood.blend" id="1_7gmbh"]
+[ext_resource type="PackedScene" uid="uid://b5mk2ohahh5e8" path="res://items/wood/wood.blend" id="1_mxk7r"]
 
 [node name="Wood" type="Node3D"]
 
-[node name="Visuals" parent="." instance=ExtResource("1_7gmbh")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
-
-[editable path="Visuals"]
+[node name="Visuals" parent="." instance=ExtResource("1_mxk7r")]
