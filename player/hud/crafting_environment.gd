@@ -154,7 +154,9 @@ func craft() -> void:
 	var recipe := RecipeBook.get_recipe(get_recipe_layout())
 	if recipe == null:
 		return
-	inventory_holder_link.inventory.add_item(recipe.result.item)
+	var remainder := inventory_holder_link.inventory.add_item(recipe.result.item, recipe.result.quantity, true)
+	if remainder > 0:
+		return # Inventory too full for crafted items
 	grid_inventory.clear()
 	clear()
 
