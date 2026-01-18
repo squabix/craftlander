@@ -44,16 +44,12 @@ static func disable_all_colliders(parent: Node) -> Array[Node]:
 	
 	return disabled_colliders
 
-static func is_node_of_class(node: Node, class_string: String) -> bool:
-	if node.get_script() and node.get_script().get_global_name() == class_string:
-			return true
-	if node.is_class(class_string):
-		return true
-	return false
+static func get_object_class(object: Object) -> String:
+	return object.get_script().get_global_name() if object.get_script() != null else object.get_class()
 
 static func find_child_of_class(parent: Node, class_string: String) -> Node:
 	for child in parent.get_children():
-		if is_node_of_class(child, class_string):
+		if get_object_class(child) == class_string:
 			return child
 		var grandchild := find_child_of_class(child, class_string)
 		if grandchild != null:
@@ -63,7 +59,7 @@ static func find_child_of_class(parent: Node, class_string: String) -> Node:
 static func find_children_of_class(parent: Node, class_string: String) -> Array[Node]:
 	var children: Array[Node] = []
 	for child in parent.get_children():
-		if is_node_of_class(child, class_string):
+		if get_object_class(child) == class_string:
 			children.append(child)
 		else:
 			var grandchildren := find_children_of_class(child, class_string)
@@ -194,10 +190,6 @@ static func search_down_for_node(parent: Node, check: Callable) -> Node:
 			return child_result
 	return null
 
-static func is_of_class(node: Node, class_type: String) -> bool:
-	if not is_instance_valid(node):
-		return false
-	return node.is_class(class_type)
 
 static func safe_free(node: Variant) -> bool:
 	if node == null:
