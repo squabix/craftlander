@@ -54,9 +54,8 @@ func get_recipe_layout() -> Dictionary[Vector2i, Item]:
 	return layout
 
 func update_held_pickup() -> void:
-	if is_instance_valid(held_pickup):
-		held_pickup.queue_free()
-		held_pickup = null
+	Util.safe_free(held_pickup)
+	held_pickup = null
 	
 	var new_instance := inventory_holder_link.get_current_instance() if is_instance_valid(inventory_holder_link) else null
 	if new_instance == null:
@@ -121,8 +120,7 @@ func place_current() -> void:
 func clear() -> void:
 	grid_inventory.give_everything(inventory_holder_link.inventory)
 	for slot in slots_contents:
-		if is_instance_valid(slots_contents[slot]):
-			slots_contents[slot].queue_free()
+		Util.safe_free(slots_contents[slot])
 		slots_contents[slot] = null
 
 func _process(delta: float) -> void:
@@ -148,7 +146,7 @@ func empty_slot(slot: Variant) -> void:
 		return
 	var old_pickup: ItemPickup3D = slots_contents[slot]
 	if old_pickup != null:
-		old_pickup.queue_free()
+		Util.safe_free(old_pickup)
 		grid_inventory.give_item(old_pickup.item, 1, inventory_holder_link.inventory)
 
 func craft() -> void:

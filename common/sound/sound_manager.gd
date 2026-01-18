@@ -31,7 +31,7 @@ func play(sound: Sound) -> void:
 	player.play()
 	
 	await player.finished
-	player.queue_free()
+	Util.safe_free(player)
 
 func play2d(sound: Sound, position: Vector2) -> void:
 	if muted:
@@ -42,7 +42,7 @@ func play2d(sound: Sound, position: Vector2) -> void:
 	player.play()
 	
 	await player.finished
-	player.queue_free()
+	Util.safe_free(player)
 
 func play3d(sound: Sound, position: Vector3) -> void:
 	if muted:
@@ -53,4 +53,4 @@ func play3d(sound: Sound, position: Vector3) -> void:
 	player.play()
 	
 	await player.finished
-	player.queue_free()
+	Util.safe_free(player)
