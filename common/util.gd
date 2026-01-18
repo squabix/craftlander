@@ -190,6 +190,34 @@ static func search_down_for_node(parent: Node, check: Callable) -> Node:
 			return child_result
 	return null
 
+static func find_all_resources(resource_type: String, start_path: String = "res://") -> Array:
+	var results: Array = []
+	
+	var scan_dir: Callable = func(path: String, function: Callable) -> void:
+		var dir := DirAccess.open(path)
+		if dir == null:
+			return
+	
+		dir.list_dir_begin()
+		while true:
+			var dir_name := dir.get_next()
+			if dir_name == "":
+				break
+			if dir_name.begins_with("."):
+				continue
+	
+			var full_path := path.path_join(dir_name)
+			if dir.current_is_dir():
+				function.call(full_path, function)
+			else:
+				var res := ResourceLoader.load(full_path)
+				if res != null and Util.get_object_class(res) == resource_type:
+					results.append(res)
+	
+		dir.list_dir_end()
+	
+	scan_dir.call(start_path, scan_dir)
+	return results
 
 static func safe_free(node: Variant) -> bool:
 	if node == null:
