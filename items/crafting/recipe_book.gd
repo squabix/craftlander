@@ -1,12 +1,16 @@
 extends Node
 
-var recipes: Array
+var all_recipes: Array
 
 func _ready() -> void:
-	recipes = Util.find_all_resources("ItemRecipe", "res://items/")
+	all_recipes = Util.find_all_resources("ItemRecipe", "res://items/")
+	all_recipes.sort_custom(
+		func(a: ItemRecipe, b: ItemRecipe) -> bool:
+			return a.result.item.name < b.result.item.name
+	)
 
 func get_recipe(layout: Dictionary[Vector2i, Item]) -> ItemRecipe:
-	for recipe in recipes:
+	for recipe in all_recipes:
 		if verify_layout(layout, recipe.layout):
 			return recipe
 	return null
