@@ -113,6 +113,10 @@ func give_item(item: Item, quantity: int, to: Inventory) -> int:
 	var leftover_quantity := to.add_item(item, available_quantity)
 	return leftover_quantity
 
+func clear() -> void:
+	for i in len(item_instances):
+		item_instances[i] = null
+
 func give_everything(to: Inventory) -> void:
 	for instance in get_valid_instances():
 		give_item(instance.item, instance.quantity, to)
