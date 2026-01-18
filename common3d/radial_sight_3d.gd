@@ -45,7 +45,10 @@ func _ready() -> void:
 	update_timer.timeout.connect(update_target)
 
 func update_target() -> void:
-	var nodes_in_area: Array = area.get_overlapping_areas() + area.get_overlapping_bodies()
+	var nodes_in_area: Array[Node3D] = []
+	nodes_in_area.append_array(area.get_overlapping_areas())
+	nodes_in_area.append_array(area.get_overlapping_bodies())
+	
 	if does_see_target() and target in nodes_in_area:
 		return
 	
