@@ -35,8 +35,10 @@ func _ready() -> void:
 			continue
 		slots_contents[slot_node.global_position] = null
 	
-	inventory_holder_link.updated_current.connect(update_held_pickup)
-	pause_interface.updated_pause.connect(clear)
+	if is_instance_valid(inventory_holder_link):
+		inventory_holder_link.updated_current.connect(update_held_pickup)
+	if is_instance_valid(pause_interface):
+		pause_interface.updated_pause.connect(clear)
 	update_held_pickup.call_deferred()
 
 func get_recipe_layout() -> Dictionary[Vector2i, Item]:
@@ -56,7 +58,7 @@ func update_held_pickup() -> void:
 		held_pickup.queue_free()
 		held_pickup = null
 	
-	var new_instance := inventory_holder_link.get_current_instance()
+	var new_instance := inventory_holder_link.get_current_instance() if is_instance_valid(inventory_holder_link) else null
 	if new_instance == null:
 		return
 	
@@ -111,7 +113,6 @@ func place_current() -> void:
 		return
 	
 	empty_slot(slot)
-	
 	slots_contents[slot] = held_pickup
 	inventory_holder_link.inventory.give_item(held_pickup.item, 1, grid_inventory)
 	held_pickup = null
