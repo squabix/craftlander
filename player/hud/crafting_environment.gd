@@ -36,7 +36,7 @@ func _ready() -> void:
 		slots_contents[slot_node.global_position] = null
 	
 	if is_instance_valid(inventory_holder_link):
-		inventory_holder_link.updated_current.connect(update_held_pickup)
+		inventory_holder_link.changed.connect(update_held_pickup)
 	if is_instance_valid(pause_interface):
 		pause_interface.updated_pause.connect(clear)
 	update_held_pickup.call_deferred()

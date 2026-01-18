@@ -12,9 +12,6 @@ const ACTION_TOGGLE_MOUSE_CAPTURE := "ui_cancel"
 const ACTION_INTERACT := "interact"
 const ACTION_USE_PRIMARY := "use_primary"
 
-const ACTION_SCROLL_UP := "scroll_up"
-const ACTION_SCROLL_DOWN := "scroll_down"
-
 const ACTION_DROP := "drop"
 
 @export var head: Node3D
@@ -76,12 +73,6 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_pressed(ACTION_INTERACT):
 		entity.interact()
-	
-	if event.is_action_pressed(ACTION_SCROLL_UP):
-		entity.inventory_holder_link.scroll(-1)
-	
-	elif event.is_action_pressed(ACTION_SCROLL_DOWN):
-		entity.inventory_holder_link.scroll(1)
 	
 	if Input.is_action_pressed(ACTION_USE_PRIMARY):
 		entity.use_item()

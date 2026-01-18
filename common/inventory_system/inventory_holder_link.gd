@@ -28,7 +28,11 @@ const NUM_KEY_INDEX_MAP: Dictionary[int, int] = {
 		current_index = wrapi(to, 0, inventory.size)
 		hold_current()
 		updated_current.emit()
+
+@export_group("Input")
 @export var use_num_key_input := true
+@export var scroll_up_input_action := ""
+@export var scroll_down_input_action := ""
 
 func _ready() -> void:
 	if inventory == null:
@@ -43,11 +47,13 @@ func _ready() -> void:
 	updated_current.emit.call_deferred()
 	updated_current.connect(
 		func():
+			await get_tree().process_frame
 			changed.emit()
 	)
 	inventory.changed.connect(
 		func():
 			hold_current()
+			await get_tree().process_frame
 			changed.emit()
 	)
 	item_holder.consumed_instance.connect(
@@ -60,11 +66,16 @@ func _ready() -> void:
 func scroll(direction: int, skip_null: bool=false) -> void:
 	if inventory == null:
 		return
+	
 	var old_index := current_index
 	current_index = wrapi(current_index + direction, 0, inventory.size)
+	
 	if skip_null:
 		while get_current_instance() == null and current_index != old_index:
 			scroll(direction, false)
+	
+	if current_index != old_index:
+		updated_current.emit()
 
 func get_current_instance() -> ItemInstance:
 	#current_index = clampi(current_index, 0, inventory.size)
@@ -74,6 +85,13 @@ func get_current_instance() -> ItemInstance:
 
 func _process(_delta: float) -> void:
 	heed_num_key_input()
+	heed_scroll_input()
+
+func heed_scroll_input() -> void:
+	if Input.is_action_just_pressed(scroll_up_input_action):
+		scroll(-1)
+	if Input.is_action_just_pressed(scroll_down_input_action):
+		scroll(1)
 
 func heed_num_key_input() -> void:
 	for key in NUM_KEY_INDEX_MAP:

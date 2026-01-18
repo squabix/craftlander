@@ -328,6 +328,8 @@ process_mode = 3
 script = ExtResource("9_bjvpn")
 inventory = NodePath("../../../../../Inventory")
 item_holder = NodePath("..")
+scroll_up_input_action = "scroll_up"
+scroll_down_input_action = "scroll_down"
 metadata/_custom_type_script = "uid://ioo6s3m7wbha"
 
 [node name="VignetteRect" type="TextureRect" parent="Head/Camera3D"]
