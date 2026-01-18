@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://dmbp0klxo0b0c"]
+[gd_scene load_steps=71 format=3 uid="uid://dmbp0klxo0b0c"]
 
 [ext_resource type="Script" uid="uid://ucyt6h7yjc6k" path="res://player/player.gd" id="1_g1dw6"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="2_g1dw6"]
@@ -37,6 +37,8 @@
 [ext_resource type="Resource" uid="uid://r2mg70okysjv" path="res://items/food/raw_meat/raw_meat_item.tres" id="31_5ejfk"]
 [ext_resource type="Script" uid="uid://ds4dru7pq3a84" path="res://player/sickness_manager.gd" id="32_1s1yo"]
 [ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/wood/wood_item.tres" id="32_jd2rm"]
+[ext_resource type="Script" uid="uid://crew0n1e8xk4r" path="res://player/hud/recipe_panel.gd" id="38_1so5t"]
+[ext_resource type="Texture2D" uid="uid://p5jyelnqcoqe" path="res://assets/grid.png" id="39_55jnj"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -181,6 +183,9 @@ shader = ExtResource("28_ge24q")
 shader_parameter/blur_amount = 1.0000001424999998
 shader_parameter/mix_amount = 0.30000001425
 shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_55jnj"]
+font_size = 10
 
 [sub_resource type="Animation" id="Animation_tqiix"]
 length = 0.001
@@ -1024,13 +1029,273 @@ mouse_filter = 2
 [node name="CraftingEnvironment" parent="HUD/PauseInterface/CraftingMenu" node_paths=PackedStringArray("inventory_holder_link", "pause_interface") instance=ExtResource("28_q28gw")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.19618055
-anchor_top = 0.061728396
-anchor_right = 0.8038194
-anchor_bottom = 0.8333333
+anchor_left = 0.3263889
+anchor_top = 0.057098765
+anchor_right = 0.9340278
+anchor_bottom = 0.8287037
 inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
 pause_interface = NodePath("../..")
 metadata/_edit_use_anchors_ = true
+
+[node name="RecipePanel" type="Control" parent="HUD/PauseInterface/CraftingMenu"]
+layout_mode = 1
+anchor_left = 0.0069444445
+anchor_top = 0.057098765
+anchor_right = 0.3185764
+anchor_bottom = 0.9722222
+script = ExtResource("38_1so5t")
+metadata/_edit_use_anchors_ = true
+
+[node name="RecipeList" type="ScrollContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 277.0
+grow_horizontal = 2
+
+[node name="RecipeListBox" type="VBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RecipeEntry" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox"]
+visible = false
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Item"
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox/RecipeEntry"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 48.0
+grow_vertical = 2
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="RecipeDisplay" type="Control" parent="HUD/PauseInterface/CraftingMenu/RecipePanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -300.0
+offset_right = 150.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("39_55jnj")
+expand_mode = 1
+
+[node name="GridContainer" type="VBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay"]
+layout_mode = 0
+offset_right = 300.5
+offset_bottom = 300.0
+theme_override_constants/separation = 0
+
+[node name="Row1" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ItemLabel1" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row1"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemLabel2" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row1"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemLabel3" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row1"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemLabel4" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row1"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemLabel5" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row1"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Row2" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ItemLabel1" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row2"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemLabel2" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row2"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemLabel3" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row2"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemLabel4" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row2"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemLabel5" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row2"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Row3" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ItemLabel1" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row3"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemLabel2" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row3"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemLabel3" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row3"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemLabel4" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row3"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemLabel5" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row3"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Row4" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ItemLabel1" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row4"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemLabel2" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row4"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemLabel3" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row4"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemLabel4" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row4"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemLabel5" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row4"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Row5" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ItemLabel1" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row5"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemLabel2" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row5"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemLabel3" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row5"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemLabel4" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row5"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemLabel5" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row5"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+label_settings = SubResource("LabelSettings_55jnj")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
