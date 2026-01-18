@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://mwsmthp4sn6c"]
+[gd_scene load_steps=18 format=3 uid="uid://mwsmthp4sn6c"]
 
 [ext_resource type="Script" uid="uid://bki5ij8task16" path="res://common3d/entity/entity3d.gd" id="1_ii4qu"]
 [ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common3d/movement_mode3d.gd" id="2_76rxv"]
@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/wood/wood_item.tres" id="9_4es1i"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="10_v4fp6"]
 [ext_resource type="Script" uid="uid://c5asagc5dswqt" path="res://common3d/entity/entity_guide/nav_entity_guide3d.gd" id="11_8jseq"]
+[ext_resource type="Script" uid="uid://c6m4guogk1s1y" path="res://common/follow_node3d.gd" id="12_4es1i"]
 
 [sub_resource type="Resource" id="Resource_50i80"]
 script = ExtResource("2_76rxv")
@@ -63,13 +64,15 @@ metadata/_custom_type_script = "uid://cbb5o5ykqwxfp"
 
 [node name="Sight3D" type="Node3D" parent="."]
 script = ExtResource("5_nauqg")
+lose_distance = 30.0
 target_collision_mask = 16
 ray_collision_mask = 21
 group_whitelist = Array[String](["player"])
 
-[node name="Controller3D" type="Node" parent="." node_paths=PackedStringArray("sight", "entity")]
+[node name="Controller3D" type="Node" parent="." node_paths=PackedStringArray("sight", "on_screen_notifier", "entity")]
 script = ExtResource("2_nauqg")
 sight = NodePath("../Sight3D")
+on_screen_notifier = NodePath("../Node/FollowNode3D/VisibleOnScreenNotifier3D")
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://ccwod33h53a5s"
 
@@ -92,3 +95,17 @@ health = NodePath("../Health")
 metadata/_custom_type_script = "uid://bpmbg0e28ujs7"
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Node" type="Node" parent="."]
+
+[node name="FollowNode3D" type="Node3D" parent="Node" node_paths=PackedStringArray("target")]
+script = ExtResource("12_4es1i")
+target = NodePath("../..")
+metadata/_custom_type_script = "uid://c6m4guogk1s1y"
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="Node/FollowNode3D"]
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
+remote_path = NodePath("../Node/FollowNode3D/VisibleOnScreenNotifier3D")
+update_rotation = false
+update_scale = false

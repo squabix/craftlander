@@ -48,6 +48,7 @@ folder_colors={
 [global_group]
 
 player=""
+navigation_mesh_source_group=""
 
 [input]
 
