@@ -210,7 +210,7 @@ static func find_all_resources(resource_type: String, start_path: String = "res:
 			if dir.current_is_dir():
 				function.call(full_path, function)
 			else:
-				var res := ResourceLoader.load(full_path)
+				var res := load(full_path)
 				if res != null and Util.get_object_class(res) == resource_type:
 					results.append(res)
 	
