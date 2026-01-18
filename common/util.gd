@@ -147,7 +147,7 @@ static func reset_local_transform_3d(node: Node3D) -> void:
 	node.rotation = Vector3.ZERO
 	node.scale = Vector3.ONE
 
-static func distance_sort_3d(nodes: Array, position: Vector3) -> Array:
+static func distance_sort_3d(nodes: Array, position: Vector3) -> Array[Node3D]:
 	if nodes.is_empty():
 		return [null]
 	var custom_sort := func(a, b) -> bool:
@@ -161,7 +161,7 @@ static func distance_sort_3d(nodes: Array, position: Vector3) -> Array:
 	
 	var duplicate := nodes.duplicate()
 	duplicate.sort_custom(custom_sort)
-	return duplicate
+	return duplicate as Array[Node3D]
 
 # TODO: Make own node
 static func search_up_for_node(child: Node, check: Callable, ignore_children: bool=false) -> Node:
