@@ -7,14 +7,22 @@ static var rigid_item_pickup_scene := load("res://defaults/default_rigid_item_pi
 @export var position_offset: Vector3
 @export var rotation_offset: Vector3
 @export var health: Health
+@export_group("On Ready")
+@export var drop_on_ready := false
+@export var on_ready_index := -1
 
 @onready var parent := get_tree().root
 
 func _ready() -> void:
 	if health:
 		health.died.connect(drop_everything)
+	if drop_on_ready:
+		drop(on_ready_index)
 
-func drop(index: int) -> Node3D:
+func drop(index: int=-1) -> Node3D:
+	if index == -1:
+		index = inventory.get_random_index_weighted()
+	
 	if not inventory.is_index_valid(index):
 		return
 	var instance := inventory.get_instance(index)
