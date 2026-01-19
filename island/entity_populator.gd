@@ -5,6 +5,7 @@ const MIN_CAMERA_DISTANCE_SQUARED := 100.0
 const MAX_CAMERA_DISTANCE_SQUARED := 10000000.0
 
 @export var entity_quantities: Dictionary[IslandEntityResource, int]
+@export var timer: Timer
 
 var entities: Dictionary[IslandEntityResource, Array]
 
@@ -12,6 +13,7 @@ func _ready() -> void:
 	for i in 3:
 		await get_tree().process_frame
 	populate(true)
+	timer.timeout.connect(populate.bind(false))
 
 func clear_invalid_entities() -> void:
 	for entity_resource in entities:
@@ -38,8 +40,8 @@ func get_spawnpoint(allow_frustom: bool, min_height: float=0.0, max_height: floa
 			continue # Too high
 		if point.y > max_height:
 			continue # Too low
-		#if not allow_frustom and camera.is_position_in_frustum(point):
-			#continue # In frustum
+		if not allow_frustom and camera.is_position_in_frustum(point):
+			continue # In frustum
 		
 		var distance_squared := camera.global_position.distance_squared_to(point)
 		if distance_squared > MAX_CAMERA_DISTANCE_SQUARED:
