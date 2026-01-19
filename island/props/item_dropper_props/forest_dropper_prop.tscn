@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://ckqbqx6uikqth"]
+
+[ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="1_33gt6"]
+[ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="2_6e8sj"]
+[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="3_rmhlk"]
+[ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/wood/wood_item.tres" id="4_k5kd5"]
+[ext_resource type="Resource" uid="uid://r2mg70okysjv" path="res://items/food/raw_meat/raw_meat_item.tres" id="5_hosou"]
+
+[sub_resource type="Resource" id="Resource_q5wva"]
+script = ExtResource("3_rmhlk")
+item = ExtResource("4_k5kd5")
+quantity = 10
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_5hcye"]
+script = ExtResource("3_rmhlk")
+item = ExtResource("5_hosou")
+quantity = 3
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[node name="ItemDropperProp" type="Node3D"]
+
+[node name="InventoryDropper3D" type="Node3D" parent="." node_paths=PackedStringArray("inventory")]
+script = ExtResource("1_33gt6")
+inventory = NodePath("../Inventory")
+position_offset = Vector3(0, 1, 0)
+drop_on_ready = true
+metadata/_custom_type_script = "uid://bpmbg0e28ujs7"
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("2_6e8sj")
+item_instances = Array[ExtResource("3_rmhlk")]([SubResource("Resource_q5wva"), SubResource("Resource_5hcye")])
+constant = true
+size = 2
+metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
