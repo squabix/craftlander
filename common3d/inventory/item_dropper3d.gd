@@ -32,6 +32,8 @@ func drop(index: int) -> Node3D:
 	
 	parent.add_child(pickup)
 	
+	await get_tree().process_frame
+	
 	pickup.global_transform = global_transform
 	pickup.global_position += position_offset
 	pickup.global_rotation_degrees += rotation_offset
