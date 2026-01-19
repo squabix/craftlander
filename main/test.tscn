@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://b6d7dfwyfulxo"]
 
 [ext_resource type="Script" uid="uid://csfawk4hjit5w" path="res://main/test.gd" id="1_0pcxm"]
-[ext_resource type="PackedScene" uid="uid://c16m48qir7vc7" path="res://destructable_resource/tree/tree.tscn" id="2_dax2s"]
+[ext_resource type="PackedScene" uid="uid://c16m48qir7vc7" path="res://island/props/destructable_resource/tree/tree.tscn" id="2_dax2s"]
 [ext_resource type="PackedScene" uid="uid://dmbp0klxo0b0c" path="res://player/player.tscn" id="3_dax2s"]
 [ext_resource type="PackedScene" uid="uid://mwsmthp4sn6c" path="res://entities/enemies/rootling/rootling.tscn" id="4_rarbv"]
 

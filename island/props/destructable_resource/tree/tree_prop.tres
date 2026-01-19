@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="IslandProp" load_steps=3 format=3 uid="uid://dntsc8a8c3qsr"]
 
-[ext_resource type="PackedScene" uid="uid://c16m48qir7vc7" path="res://destructable_resource/tree/tree.tscn" id="1_nawjd"]
+[ext_resource type="PackedScene" uid="uid://c16m48qir7vc7" path="res://island/props/destructable_resource/tree/tree.tscn" id="1_nawjd"]
 [ext_resource type="Script" uid="uid://csprfavexgrle" path="res://island/props/island_prop.gd" id="1_y50tl"]
 
 [resource]

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bo0n5cj4oc8wo"
-path="res://.godot/imported/stone1.blend-ee58c59102c3312c638b4dc66be87139.scn"
+uid="uid://6hxbh5av6fba"
+path="res://.godot/imported/tree1.blend-f72b6bfe6914385a33f6b8964da6c1e9.scn"
 
 [deps]
 
-source_file="res://destructable_resource/stone/stone1.blend"
-dest_files=["res://.godot/imported/stone1.blend-ee58c59102c3312c638b4dc66be87139.scn"]
+source_file="res://island/props/destructable_resource/tree/tree1.blend"
+dest_files=["res://.godot/imported/tree1.blend-f72b6bfe6914385a33f6b8964da6c1e9.scn"]
 
 [params]
 
