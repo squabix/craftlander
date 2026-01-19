@@ -7,6 +7,9 @@ signal updated_mesh
 @export_tool_button("Update Mesh")
 var update_texture_action: Callable = update_mesh
 
+@export_tool_button("Generate Collision Shape")
+var generate_collision_shape_action: Callable = update_collision_shape
+
 @export var map_size := Vector3(1, 1, 1)
 @export var map_resolution := Vector2i(1, 1)
 @export var mesh_instance: MeshInstance3D
@@ -20,6 +23,11 @@ func shader_set(parameter: String, to: Variant) -> void:
 	mesh_instance.material_override.set_shader_parameter(
 		parameter,
 		to
+	)
+
+func shader_get(parameter: String) -> Variant:
+	return mesh_instance.material_override.get_shader_parameter(
+		parameter
 	)
 
 func add_new_mesh() -> void:
@@ -95,7 +103,9 @@ func get_pixel_normal(x: int, y: int, radius: int = 2) -> Vector3:
 	return (global_transform.basis * avg_normal).normalized()
 
 
-func update_collision_shape(image_texture: ImageTexture) -> void:
+func update_collision_shape(image_texture: ImageTexture=null) -> void:
+	if image_texture == null:
+		image_texture = shader_get("heightmap")
 	var image := image_texture.get_image()
 	image.convert(Image.FORMAT_RF)
 	var shape := HeightMapShape3D.new()

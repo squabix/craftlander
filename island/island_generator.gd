@@ -5,11 +5,9 @@ extends HeightmapTerrainGenerator
 @export var taper_gradient_texture: GradientTexture2D
 @export var taper_gradient_strength := 0.9
 @export var absolute_gradient_texture: GradientTexture2D
-@export var heightmap_rect: TextureRect
 
 func _ready() -> void:
 	await super()
-	heightmap_rect.texture = get_mesh_heightmap_texture()
 
 func get_pixel(x: int, y: int, texture_images: Dictionary[Texture2D, Image]) -> Color:
 	var sample := func(texture: Texture2D) -> float: return texture_images[texture].get_pixel(x, y).r
