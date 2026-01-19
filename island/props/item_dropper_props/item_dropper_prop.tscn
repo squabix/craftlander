@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6nhle3n1ts5m"]
+
+[ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="1_slta6"]
+[ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="2_a3h4v"]
+
+[node name="ItemDropperProp" type="Node3D"]
+
+[node name="InventoryDropper3D" type="Node3D" parent="." node_paths=PackedStringArray("inventory")]
+script = ExtResource("1_slta6")
+inventory = NodePath("../Inventory")
+position_offset = Vector3(0, 1, 0)
+drop_on_ready = true
+metadata/_custom_type_script = "uid://bpmbg0e28ujs7"
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("2_a3h4v")
+constant = true
+metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
