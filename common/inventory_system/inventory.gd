@@ -164,7 +164,7 @@ func is_empty() -> bool:
 
 func remove_instance(instance: ItemInstance, quantity: int=1) -> int:
 	if constant:
-		return quantity
+		return 0
 	
 	if instance.quantity > quantity:
 		instance.quantity -= quantity
