@@ -68,19 +68,22 @@ func add_item(new_item: Item, quantity: int = 1, must_reach_quantity: bool = fal
 	changed.emit()
 	return quantity
 
-func get_item_quantity(item: Item) -> int:
-	if item == null:
-		return 0
-	
-	var total := 0
+func get_item_quantities() -> Dictionary[Item, int]:
+	var quantities: Dictionary[Item, int] = {}
 	for instance in item_instances:
 		if instance == null:
 			continue
 		
-		if instance.item.name == item.name:
-			total += instance.quantity
+		for item in quantities:
+			if item.equals(instance.item):
+				quantities[item] += instance.quantity
+				continue
+		
+		quantities[instance.item] = instance.quantity
 	
-	return total
+	return quantities
+
+
 
 func get_first_empty_index() -> int:
 	for index in size:
@@ -101,9 +104,10 @@ func remove_item(item: Item, quantity: int = -1, must_reach_quantity: bool = fal
 	if quantity == 0:
 		return 0
 	
+	var item_quantity := get_item_quantities()[item]
 	if quantity == -1:
-		quantity = get_item_quantity(item)
-	elif must_reach_quantity and quantity > get_item_quantity(item):
+		quantity = item_quantity
+	elif must_reach_quantity and quantity > item_quantity:
 		return quantity
 	
 	for i in range(item_instances.size() - 1, -1, -1):
