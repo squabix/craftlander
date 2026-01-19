@@ -17,9 +17,14 @@ const SICK_CONTROLS_VALUE := 0.85
 
 var hurt_timer: Timer
 
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
 func _process(delta: float) -> void:
 	entity_controller.using_sick_controls = value > SICK_CONTROLS_VALUE
 	bar.value = value
+	if get_tree().paused:
+		return
 	hunger.loss_multiplier = hunger_multiplier_curve.sample(value)
 	health.hurt_multiplier = hurt_multiplier_curve.sample(value)
 	sickness_tint.modulate.a = lerp(

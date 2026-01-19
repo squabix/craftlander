@@ -15,6 +15,7 @@ class_name Hunger
 var hurt_timer: Timer
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	hurt_timer = Timer.new()
 	add_child(hurt_timer)
 	hurt_timer.start()
@@ -24,6 +25,8 @@ func _ready() -> void:
 	)
 
 func _process(delta: float) -> void:
-	value -= (loss_per_minute * loss_multiplier / 60.0) * delta * GameWorld.TIME_SCALE
 	bar.value = value
+	if get_tree().paused:
+		return
+	value -= (loss_per_minute * loss_multiplier / 60.0) * delta * GameWorld.TIME_SCALE
 	health.heal(regeneration_curve.sample(value) * delta * GameWorld.TIME_SCALE)
