@@ -98,6 +98,26 @@ func delete_instance(instance: ItemInstance) -> void:
 	item_instances.erase(instance)
 	changed.emit()
 
+func get_random_index_weighted() -> int:
+	var quantities := get_item_quantities()
+	var total_weight := 0
+	for weight in quantities.values():
+		total_weight += weight
+	
+	if total_weight <= 0:
+		return -1
+	
+	var r := randi() % total_weight
+	var cumulative := 0
+	
+	var keys := quantities.keys()
+	for i in len(keys):
+		cumulative += quantities[keys[i]]
+		if r < cumulative:
+			return i
+	
+	return -1
+
 func remove_item(item: Item, quantity: int = -1, must_reach_quantity: bool = false) -> int:
 	if constant:
 		return quantity
