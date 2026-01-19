@@ -1,9 +1,8 @@
-[gd_scene load_steps=42 format=4 uid="uid://c16m48qir7vc7"]
+[gd_scene load_steps=38 format=4 uid="uid://c16m48qir7vc7"]
 
 [ext_resource type="Script" uid="uid://cmlllb7wq80s" path="res://island/props/destructable_resource/tree/tree.gd" id="1_27px0"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="1_r4p3j"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="2_27px0"]
-[ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="2_xgieu"]
 [ext_resource type="Script" uid="uid://dapeyi3eetek1" path="res://common/signal_triggrs/signal_animation_trigger.gd" id="4_agfax"]
 [ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/signal_triggrs/signal_state_trigger.gd" id="5_afesh"]
 [ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="5_s0q6f"]
@@ -16,8 +15,6 @@
 [ext_resource type="Shape3D" uid="uid://1ks4j4c8paiv" path="res://island/props/destructable_resource/tree/stump_collision.tres" id="12_18auj"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="12_jeogd"]
 [ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/wood/wood_item.tres" id="13_mw2c8"]
-[ext_resource type="Script" uid="uid://daj2kv2nxm80i" path="res://island/props/destructable_resource/tree/tree_workbench_interactable.gd" id="17_kblrq"]
-[ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="18_xgieu"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_r4p3j"]
 height = 10.25
@@ -284,9 +281,6 @@ script = ExtResource("12_jeogd")
 item = ExtResource("13_mw2c8")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_xgieu"]
-radius = 1.0
-
 [node name="Tree" type="Node3D"]
 script = ExtResource("1_27px0")
 
@@ -408,21 +402,3 @@ item_instances = Array[ExtResource("12_jeogd")]([SubResource("Resource_xgieu")])
 constant = true
 size = 1
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
-
-[node name="BenchInteractable" type="Area3D" parent="."]
-unique_name_in_owner = true
-collision_layer = 2
-collision_mask = 0
-monitoring = false
-script = ExtResource("17_kblrq")
-enabled = false
-enabled_tooltip = "Build crafting bench?"
-metadata/_custom_type_script = "uid://favgu1tbe1tq"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BenchInteractable"]
-shape = SubResource("CylinderShape3D_xgieu")
-
-[node name="ParticleSpawner3D" type="Node3D" parent="BenchInteractable"]
-script = ExtResource("18_xgieu")
-particles_scene = ExtResource("2_xgieu")
-metadata/_custom_type_script = "uid://bhjxscxhtg2se"
