@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://cwrsffh7lrj5"]
+
+[ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="1_8ubk6"]
+[ext_resource type="PackedScene" uid="uid://4lmb1r25uhnr" path="res://items/materials/stick/stick.tscn" id="1_f62wd"]
+[ext_resource type="Texture2D" uid="uid://dvu8avo8cfq2c" path="res://icon.svg" id="1_h40hw"]
+
+[resource]
+script = ExtResource("1_8ubk6")
+scene = ExtResource("1_f62wd")
+name = "Stick"
+max_quantity = 99
+icon = ExtResource("1_h40hw")
+metadata/_custom_type_script = "uid://bfstlagsbeqe2"
