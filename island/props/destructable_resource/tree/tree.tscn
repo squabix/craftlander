@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="11_ytrwe"]
 [ext_resource type="Shape3D" uid="uid://1ks4j4c8paiv" path="res://island/props/destructable_resource/tree/stump_collision.tres" id="12_18auj"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="12_jeogd"]
-[ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/wood/wood_item.tres" id="13_mw2c8"]
+[ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="13_mw2c8"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_r4p3j"]
 height = 10.25
