@@ -48,7 +48,7 @@ func get_recipe_layout() -> Dictionary[Vector2i, Item]:
 			continue
 		var layout_position := Vector2i(
 			int((slot.x - SPACE_POSITION.x) / RECIPE_LAYOUT_SCALE),
-			int((slot.z - SPACE_POSITION.z) / RECIPE_LAYOUT_SCALE)
+			-int((slot.z - SPACE_POSITION.z) / RECIPE_LAYOUT_SCALE)
 		)
 		layout[layout_position] = slots_contents[slot].item
 	return layout
