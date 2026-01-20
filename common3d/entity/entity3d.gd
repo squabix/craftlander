@@ -18,6 +18,7 @@ signal left_ground
 @export var horizontal_rotation_target: Node3D
 @export var vertical_rotation_target: Node3D
 @export var rotation_range: RangeVector3
+@export var default_rotation_targets_to_entity := true
 
 var was_on_floor: bool
 var frozen: bool
@@ -137,10 +138,18 @@ func rotate_targets() -> void:
 		vertical_rotation_target.rotation_degrees.x = rotation_range.clampx(
 			vertical_rotation_target.rotation_degrees.x
 		)
+	elif default_rotation_targets_to_entity:
+		vertical_rotation_target = self
+	
 	if is_instance_valid(horizontal_rotation_target):
 		horizontal_rotation_target.rotation_degrees.y = rotation_range.clampy(
 			horizontal_rotation_target.rotation_degrees.y
 		)
+		horizontal_rotation_target.rotation_degrees.z = rotation_range.clampz(
+			horizontal_rotation_target.rotation_degrees.z
+		)
+	elif default_rotation_targets_to_entity:
+		horizontal_rotation_target = self
 
 func _physics_process(delta: float) -> void:
 	
