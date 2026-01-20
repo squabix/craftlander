@@ -12,7 +12,7 @@ data = PackedVector3Array(1.4600999, 1.0784, -0.8253, 1.0259, 0.5688, -1.3563, 1
 script = ExtResource("1_a54gr")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39999998, 0)
 collision_layer = 5
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D"]
@@ -20,7 +20,7 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_a54gr")
 
 [node name="Hurtbox3D" type="Area3D" parent="." node_paths=PackedStringArray("health")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39999998, 0)
 script = ExtResource("2_sq77v")
 health = NodePath("../Health")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
@@ -33,6 +33,6 @@ shape = SubResource("ConcavePolygonShape3D_a54gr")
 script = ExtResource("3_qeat1")
 
 [node name="stone1" parent="." instance=ExtResource("4_a54gr")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.4, 0)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.39999998, 0)
 
 [editable path="stone1"]
