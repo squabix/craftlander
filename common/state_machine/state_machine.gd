@@ -52,6 +52,9 @@ func exit_current() -> void:
 	current.is_active = false
 	current = null
 
+func get_state(state_name: String) -> State:
+	return states[state_name]
+
 func enter_state(state_name: String) -> bool:
 	var state := states[state_name]
 	if not is_instance_valid(state):
