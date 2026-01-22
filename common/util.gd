@@ -324,8 +324,8 @@ static func get_spherical_velocity_rotation(velocity: Vector3, radius: float, de
 		return 0.0
 	return velocity.length() / radius * delta
 
-static func lerp_look_at_3d(node: Node3D, position: Vector3, weight: float) -> Vector3:
-	return lerp_angle_3d(
+static func lerp_look_at_3d(node: Node3D, position: Vector3, weight: float) -> void:
+	node.global_rotation = lerp_angle_3d(
 		node.global_rotation,
 		get_rotation_between_points_3d(node.global_position, position),
 		weight
