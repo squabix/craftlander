@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://mwsmthp4sn6c"]
+[gd_scene load_steps=30 format=3 uid="uid://mwsmthp4sn6c"]
 
 [ext_resource type="Script" uid="uid://doai6uyyht5am" path="res://entities/enemies/rootling/rootling.gd" id="1_wtogd"]
 [ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common3d/movement_mode3d.gd" id="2_76rxv"]
@@ -9,14 +9,15 @@
 [ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_w8hfy"]
 [ext_resource type="Script" uid="uid://v1m6kagbghjv" path="res://common3d/radial_sight_3d.gd" id="5_nauqg"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="7_kg2m4"]
+[ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/signal_triggrs/signal_state_trigger.gd" id="8_7mn0t"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="8_8jseq"]
 [ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="9_4es1i"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="10_v4fp6"]
 [ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="10_v53xr"]
-[ext_resource type="Script" uid="uid://dmd1q78n1xm4s" path="res://common/state_machine/state.gd" id="11_0dji4"]
 [ext_resource type="Script" uid="uid://cf04j3voj4xyc" path="res://entities/enemies/enemy_states/wandering_state.gd" id="11_7mn0t"]
 [ext_resource type="Script" uid="uid://c5asagc5dswqt" path="res://common3d/entity/entity_guide/nav_entity_guide3d.gd" id="11_8jseq"]
 [ext_resource type="Script" uid="uid://c6m4guogk1s1y" path="res://common/follow_node3d.gd" id="12_4es1i"]
+[ext_resource type="Script" uid="uid://pdvlr6l3n04n" path="res://entities/enemies/enemy_states/chasing_state.gd" id="13_7mn0t"]
 [ext_resource type="PackedScene" uid="uid://bl745esge18tq" path="res://entities/enemies/rootling/rootling.blend" id="13_v4fp6"]
 
 [sub_resource type="Resource" id="Resource_50i80"]
@@ -451,6 +452,14 @@ target_collision_mask = 16
 ray_collision_mask = 21
 group_whitelist = Array[String](["player"])
 
+[node name="StartChaseTrigger" type="Node" parent="Sight3D" node_paths=PackedStringArray("state_machine")]
+script = ExtResource("8_7mn0t")
+state_machine = NodePath("../../Controller3D/StateMachine")
+state_name = "Chasing"
+from_state_whitelist = Array[String](["Wandering"])
+signal_name = &"found_target"
+metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
+
 [node name="Controller3D" type="Node" parent="." node_paths=PackedStringArray("sight", "on_screen_notifier", "entity")]
 script = ExtResource("2_nauqg")
 sight = NodePath("../Sight3D")
@@ -482,8 +491,10 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Timer" type="Timer" parent="Controller3D/StateMachine/Wandering"]
 
-[node name="Chasing" type="Node" parent="Controller3D/StateMachine" node_paths=PackedStringArray("root")]
-script = ExtResource("11_0dji4")
+[node name="Chasing" type="Node" parent="Controller3D/StateMachine" node_paths=PackedStringArray("nav_guide", "sight", "root")]
+script = ExtResource("13_7mn0t")
+nav_guide = NodePath("../../NavEntityGuide3D")
+sight = NodePath("../../../Sight3D")
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
