@@ -21,5 +21,10 @@ func _process(_delta: float) -> void:
 	guide.set_target(sight.target_position)
 	
 	guide.face_target()
-	if entity.global_position.distance_to(sight.target.global_position) > MIN_TARGET_DISTANCE:
+	if is_target_far():
 		entity.move_forward()
+
+func is_target_far() -> bool:
+	var v1 := Util.vec3to2(entity.global_position, Util.VECTOR3Y)
+	var v2 := Util.vec3to2(sight.target.global_position, Util.VECTOR3Y)
+	return v1.distance_to(v2) > MIN_TARGET_DISTANCE
