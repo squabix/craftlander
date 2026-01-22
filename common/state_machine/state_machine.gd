@@ -49,6 +49,7 @@ func exit_current() -> void:
 	current.exit()
 	current.exited.emit()
 	exited_state.emit(current)
+	current.is_active = false
 	current = null
 
 func enter_state(state_name: String) -> bool:
@@ -66,6 +67,7 @@ func enter_state(state_name: String) -> bool:
 	
 	current = state
 	
+	current.is_active = true
 	current.enter()
 	current.entered.emit()
 	entered_state.emit(current)

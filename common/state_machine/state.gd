@@ -23,7 +23,7 @@ signal exited
 
 var transition_checks: Dictionary = {} # {check: state}
 var enter_callable: Callable
-
+var is_active := false
 
 func enter() -> void:
 	pass
