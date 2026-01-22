@@ -91,6 +91,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="GridSlot" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot"]
 layers = 2
@@ -101,6 +103,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot2" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot2"]
 layers = 2
@@ -111,6 +115,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot3" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot3"]
 layers = 2
@@ -121,6 +127,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot4" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot4"]
 layers = 2
@@ -131,6 +139,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot5" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot5"]
 layers = 2
@@ -141,6 +151,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot6" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot6"]
 layers = 2
@@ -151,6 +163,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot7" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot7"]
 layers = 2
@@ -161,6 +175,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot8" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot8"]
 layers = 2
@@ -171,6 +187,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot9" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot9"]
 layers = 2
@@ -181,6 +199,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot10" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot10"]
 layers = 2
@@ -191,6 +211,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot11" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot11"]
 layers = 2
@@ -201,6 +223,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot12" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot12"]
 layers = 2
@@ -210,6 +234,8 @@ mesh = SubResource("SphereMesh_4aq3d")
 shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot13" type="Area3D" parent="SubViewport/Space/Grid"]
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot13"]
 layers = 2
@@ -220,6 +246,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot14" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot14"]
 layers = 2
@@ -230,6 +258,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot15" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot15"]
 layers = 2
@@ -240,6 +270,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot16" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot16"]
 layers = 2
@@ -250,6 +282,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot17" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot17"]
 layers = 2
@@ -260,6 +294,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot18" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot18"]
 layers = 2
@@ -270,6 +306,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot19" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot19"]
 layers = 2
@@ -280,6 +318,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot20" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot20"]
 layers = 2
@@ -290,6 +330,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot21" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot21"]
 layers = 2
@@ -300,6 +342,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot22" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot22"]
 layers = 2
@@ -310,6 +354,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot23" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot23"]
 layers = 2
@@ -320,6 +366,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot24" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot24"]
 layers = 2
@@ -330,6 +378,8 @@ shape = SubResource("SphereShape3D_mqnoh")
 
 [node name="GridSlot25" type="Area3D" parent="SubViewport/Space/Grid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+monitoring = false
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot25"]
 layers = 2
