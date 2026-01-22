@@ -1,6 +1,9 @@
 extends Node3D
 class_name RadialSight3D
 
+signal found_target(new_target: Node3D)
+signal lost_target
+
 @export var radius := 20.0
 @export var lose_distance := 40.0
 @export var target_update_frequency := 0.2
@@ -53,6 +56,9 @@ func update_target() -> void:
 	if does_see_target() and global_position.distance_to(target.global_position) < lose_distance:
 		return
 	
+	if target != null:
+		lost_target.emit()
+	
 	target = null
 	nodes_in_area = nodes_in_area.filter(
 		func(node: Node3D) -> bool:
@@ -70,6 +76,7 @@ func update_target() -> void:
 		ray.look_at(node.global_position)
 		if ray.get_collider() == node:
 			target = node
+			found_target.emit(target)
 			return
 
 func does_see_target() -> bool:
