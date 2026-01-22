@@ -29,14 +29,13 @@ func update(_delta: float) -> void:
 		if root.global_position.distance_to(nav_guide.target_position) <= idle_distance:
 			start_idle_timer()
 		nav_guide.face_target()
-		root.move_forward()
+		nav_guide.entity.move_forward()
 
 func start_moving() -> void:
 	if not is_active:
 		return
 	nav_guide.set_target(
 		nav_guide.get_nearby_navigable_position(
-			root.global_position,
 			inner_wander_radius,
 			outter_wander_radius
 		)
