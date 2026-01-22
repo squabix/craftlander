@@ -14,15 +14,14 @@ func _process(_delta: float) -> void:
 		entity.hide()
 		if not sight.does_see_target():
 			return
-		
-	if not sight.does_see_target():
-		return
 	
-	guide.set_target(sight.target_position)
 	
-	guide.face_target()
-	if is_target_far():
-		entity.move_forward()
+	#if sight.does_see_target():
+		#guide.set_target(sight.target_position)
+		#
+	#else:
+		#pass
+	
 
 func is_target_far() -> bool:
 	var v1 := Util.vec3to2(entity.global_position, Util.VECTOR3Y)
