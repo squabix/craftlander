@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="HarvestingTool" load_steps=4 format=3 uid="uid://bah3rou15fcfh"]
+[gd_resource type="Resource" script_class="HarvestingTool" format=3 uid="uid://bah3rou15fcfh"]
 
 [ext_resource type="Texture2D" uid="uid://dmocxrp70ktf2" path="res://items/tools/shoddy_axe/shoddy_axe_placeholder.png" id="1_u75bx"]
 [ext_resource type="Script" uid="uid://6x786nnhteca" path="res://items/tools/harvesting_tool.gd" id="1_udkp1"]

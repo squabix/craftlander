@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://n7e4y3cek3tv"]
+[gd_scene format=3 uid="uid://n7e4y3cek3tv"]
 
 [ext_resource type="PackedScene" uid="uid://dr1dvrswovt21" path="res://utilities/crafting_bench/crafting_bench.blend" id="1_h3qyj"]
 

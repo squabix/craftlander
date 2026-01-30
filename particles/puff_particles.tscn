@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4sqb68mc8p5f"]
+[gd_scene format=3 uid="uid://b4sqb68mc8p5f"]
 
 [sub_resource type="Curve" id="Curve_w3oie"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.75779045, 0.8774637), -0.5111994, -0.5111994, 0, 0, Vector2(1, 0.2536419), -3.0296543, 0.0, 0, 0]

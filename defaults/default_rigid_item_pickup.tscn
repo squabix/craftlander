@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dfkn44eso73dx"]
+[gd_scene format=3 uid="uid://dfkn44eso73dx"]
 
 [ext_resource type="Script" uid="uid://oexynjvr31bs" path="res://common3d/inventory/rigid_item_pickup3d.gd" id="1_kqrhr"]
 [ext_resource type="Script" uid="uid://c00hsywtiwt6w" path="res://common3d/inventory/item_pickup3d.gd" id="2_d36xw"]

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://d1ripkpgxv11u"]
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://d1ripkpgxv11u"]
 
 [ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="1_01svi"]
 [ext_resource type="Texture2D" uid="uid://divjmhiylget6" path="res://items/materials/wood/wood_placeholder.png" id="1_8mjoq"]

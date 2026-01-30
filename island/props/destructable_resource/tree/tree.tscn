@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://c16m48qir7vc7"]
+[gd_scene format=4 uid="uid://c16m48qir7vc7"]
 
 [ext_resource type="Script" uid="uid://cmlllb7wq80s" path="res://island/props/destructable_resource/tree/tree.gd" id="1_27px0"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="1_r4p3j"]

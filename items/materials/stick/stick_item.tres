@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Item" load_steps=4 format=3 uid="uid://cwrsffh7lrj5"]
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://cwrsffh7lrj5"]
 
 [ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="1_8ubk6"]
 [ext_resource type="PackedScene" uid="uid://4lmb1r25uhnr" path="res://items/materials/stick/stick.tscn" id="1_f62wd"]

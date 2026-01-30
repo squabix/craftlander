@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cw2ir860alcgt"]
+[gd_scene format=3 uid="uid://cw2ir860alcgt"]
 
 [ext_resource type="Script" uid="uid://s3ufjlvtqovq" path="res://player/hud/crafting_environment.gd" id="1_mqnoh"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="2_4aq3d"]

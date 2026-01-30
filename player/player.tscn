@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://dmbp0klxo0b0c"]
+[gd_scene format=3 uid="uid://dmbp0klxo0b0c"]
 
 [ext_resource type="Script" uid="uid://ucyt6h7yjc6k" path="res://player/player.gd" id="1_g1dw6"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="2_g1dw6"]
@@ -212,7 +212,7 @@ _data = {
 &"idle": SubResource("Animation_32hag")
 }
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
+[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
 collision_layer = 17
 floor_constant_speed = true
 floor_block_on_wall = false
@@ -226,12 +226,12 @@ vertical_rotation_target = NodePath("Head/Camera3D")
 rotation_range = SubResource("Resource_g6k8r")
 metadata/_custom_type_script = "uid://bki5ij8task16"
 
-[node name="Inventory" type="Node" parent="."]
+[node name="Inventory" type="Node" parent="." unique_id=710458340]
 script = ExtResource("19_c35mf")
 item_instances = Array[ExtResource("20_x7c3f")]([SubResource("Resource_s7qer")])
 size = 9
 
-[node name="Hunger" type="Node" parent="." node_paths=PackedStringArray("bar", "health")]
+[node name="Hunger" type="Node" parent="." unique_id=1790864786 node_paths=PackedStringArray("bar", "health")]
 script = ExtResource("31_2uvqg")
 bar = NodePath("../HUD/BarContainer/HungerBar")
 health = NodePath("../Health")
@@ -239,7 +239,7 @@ hurt_curve = SubResource("Curve_2uvqg")
 regeneration_curve = SubResource("Curve_1s1yo")
 metadata/_custom_type_script = "uid://bn55l5h1rwjsn"
 
-[node name="SicknessManager" type="Node" parent="." node_paths=PackedStringArray("bar", "entity_controller", "health", "hunger", "sickness_tint")]
+[node name="SicknessManager" type="Node" parent="." unique_id=629645805 node_paths=PackedStringArray("bar", "entity_controller", "health", "hunger", "sickness_tint")]
 script = ExtResource("32_1s1yo")
 bar = NodePath("../HUD/BarContainer/SicknessBar")
 entity_controller = NodePath("../Controller3D")
@@ -250,71 +250,71 @@ hunger_multiplier_curve = SubResource("Curve_jd2rm")
 sickness_tint = NodePath("../HUD/SicknessTint")
 sickness_tint_curve = SubResource("Curve_5ejfk")
 
-[node name="StandingCollisionShape" type="CollisionShape3D" parent="."]
+[node name="StandingCollisionShape" type="CollisionShape3D" parent="." unique_id=1369713611]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 shape = SubResource("CapsuleShape3D_r1lm2")
 
-[node name="CrouchedCollisionShape" type="CollisionShape3D" parent="."]
+[node name="CrouchedCollisionShape" type="CollisionShape3D" parent="." unique_id=61496094]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_yw30f")
 
-[node name="Controller3D" type="Node" parent="." node_paths=PackedStringArray("head", "current_collision_shape", "rotation_base", "entity")]
+[node name="Controller3D" type="Node" parent="." unique_id=632344104 node_paths=PackedStringArray("head", "current_collision_shape", "rotation_base", "entity")]
 script = ExtResource("4_qjkh3")
 head = NodePath("../Head")
 current_collision_shape = NodePath("../StandingCollisionShape")
 rotation_base = NodePath("../Head")
 entity = NodePath("..")
 
-[node name="MouseController" type="Node" parent="."]
+[node name="MouseController" type="Node" parent="." unique_id=766266427]
 script = ExtResource("5_g6k8r")
 metadata/_custom_type_script = "uid://cb1suk3avv5yq"
 
-[node name="Head" type="Node3D" parent="."]
+[node name="Head" type="Node3D" parent="." unique_id=1861980767]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Head"]
+[node name="Camera3D" type="Camera3D" parent="Head" unique_id=757383881]
 cull_mask = 1048573
 fov = 85.0
 
-[node name="ItemSceneContainer" type="Node3D" parent="Head/Camera3D"]
+[node name="ItemSceneContainer" type="Node3D" parent="Head/Camera3D" unique_id=1891665532]
 
-[node name="InteratorRay" type="RayCast3D" parent="Head/Camera3D"]
+[node name="InteratorRay" type="RayCast3D" parent="Head/Camera3D" unique_id=1551921047]
 target_position = Vector3(0, 0, -2)
 collision_mask = 2
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
 
-[node name="Interactor" type="Node" parent="Head/Camera3D/InteratorRay" node_paths=PackedStringArray("root")]
+[node name="Interactor" type="Node" parent="Head/Camera3D/InteratorRay" unique_id=1272942006 node_paths=PackedStringArray("root")]
 unique_name_in_owner = true
 script = ExtResource("10_32hag")
 root = NodePath("../../../..")
 metadata/_custom_type_script = "uid://bypxgjqugqucx"
 
-[node name="ArmContainer" type="Node3D" parent="Head/Camera3D"]
+[node name="ArmContainer" type="Node3D" parent="Head/Camera3D" unique_id=207489004]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08, -0.3)
 
-[node name="ItemHolder" type="Node3D" parent="Head/Camera3D/ArmContainer" node_paths=PackedStringArray("instance_parent", "root")]
+[node name="ItemHolder" type="Node3D" parent="Head/Camera3D/ArmContainer" unique_id=1642409333 node_paths=PackedStringArray("instance_parent", "root")]
 transform = Transform3D(0.9848081, 0.015134426, 0.17298739, 0, 0.9961941, -0.08715573, -0.17364824, 0.08583159, 0.9810602, 0.29, -0.23, 0)
 script = ExtResource("7_kb6p2")
 instance_parent = NodePath("../..")
 root = NodePath("../../../..")
 metadata/_edit_group_ = true
 
-[node name="ItemVisualsContainer3D" type="Node3D" parent="Head/Camera3D/ArmContainer/ItemHolder" node_paths=PackedStringArray("inventory_holder_link")]
+[node name="ItemVisualsContainer3D" type="Node3D" parent="Head/Camera3D/ArmContainer/ItemHolder" unique_id=482834376 node_paths=PackedStringArray("inventory_holder_link")]
 transform = Transform3D(1.0000001, 4.0978193e-08, 0, -6.519258e-09, 1, -7.450581e-09, -1.4901161e-08, 7.450581e-09, 1, 0.08080295, 0.017175198, 0.014566064)
 script = ExtResource("10_s7qer")
 inventory_holder_link = NodePath("../InventoryHolderLink")
 visuals_scale_ratio = 0.4
 
-[node name="Sprite3D" type="Sprite3D" parent="Head/Camera3D/ArmContainer/ItemHolder"]
+[node name="Sprite3D" type="Sprite3D" parent="Head/Camera3D/ArmContainer/ItemHolder" unique_id=1502779023]
 transform = Transform3D(0.050000004, 2.910383e-10, 0, -9.313226e-10, 0.05, 0, 0, 2.3283064e-10, 0.05, 0.08080298, 0.017175198, 0.014566064)
 no_depth_test = true
 texture_filter = 0
 
-[node name="InventoryHolderLink" type="Node" parent="Head/Camera3D/ArmContainer/ItemHolder" node_paths=PackedStringArray("inventory", "item_holder")]
+[node name="InventoryHolderLink" type="Node" parent="Head/Camera3D/ArmContainer/ItemHolder" unique_id=500529388 node_paths=PackedStringArray("inventory", "item_holder")]
 process_mode = 3
 script = ExtResource("9_bjvpn")
 inventory = NodePath("../../../../../Inventory")
@@ -323,7 +323,7 @@ scroll_up_input_action = "scroll_up"
 scroll_down_input_action = "scroll_down"
 metadata/_custom_type_script = "uid://ioo6s3m7wbha"
 
-[node name="VignetteRect" type="TextureRect" parent="Head/Camera3D"]
+[node name="VignetteRect" type="TextureRect" parent="Head/Camera3D" unique_id=1442022538]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -332,53 +332,53 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_s7qer")
 
-[node name="DropperRayCast" type="RayCast3D" parent="Head/Camera3D"]
+[node name="DropperRayCast" type="RayCast3D" parent="Head/Camera3D" unique_id=690174372]
 target_position = Vector3(0, 0, -3)
 collision_mask = 37
 script = ExtResource("11_rptt4")
 offset = 0.5
 metadata/_custom_type_script = "uid://pnxdwk3pye0h"
 
-[node name="InventoryDropper3D" type="Node3D" parent="Head/Camera3D/DropperRayCast" node_paths=PackedStringArray("inventory")]
+[node name="InventoryDropper3D" type="Node3D" parent="Head/Camera3D/DropperRayCast" unique_id=138206234 node_paths=PackedStringArray("inventory")]
 script = ExtResource("27_uw77l")
 inventory = NodePath("../../../../Inventory")
 metadata/_custom_type_script = "uid://bpmbg0e28ujs7"
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "root")]
+[node name="StateMachine" type="Node" parent="." unique_id=430840899 node_paths=PackedStringArray("initial_state", "root")]
 script = ExtResource("7_boad6")
 initial_state = NodePath("Walking")
 root = NodePath("..")
 metadata/_custom_type_script = "uid://bqonxtntgndfr"
 
-[node name="Walking" type="Node" parent="StateMachine" node_paths=PackedStringArray("root")]
+[node name="Walking" type="Node" parent="StateMachine" unique_id=732487638 node_paths=PackedStringArray("root")]
 script = ExtResource("8_hg6s5")
 root = NodePath("../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Crouching" type="Node" parent="StateMachine" node_paths=PackedStringArray("root")]
+[node name="Crouching" type="Node" parent="StateMachine" unique_id=761766902 node_paths=PackedStringArray("root")]
 script = ExtResource("9_hg6s5")
 root = NodePath("../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Sprinting" type="Node" parent="StateMachine" node_paths=PackedStringArray("root")]
+[node name="Sprinting" type="Node" parent="StateMachine" unique_id=900263776 node_paths=PackedStringArray("root")]
 script = ExtResource("10_8t03j")
 root = NodePath("../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Hurtbox3D" type="Area3D" parent="." node_paths=PackedStringArray("health")]
+[node name="Hurtbox3D" type="Area3D" parent="." unique_id=2128029413 node_paths=PackedStringArray("health")]
 script = ExtResource("11_2ieo8")
 health = NodePath("../Health")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1563961394]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_ebec5")
 
-[node name="Health" type="Node" parent="."]
+[node name="Health" type="Node" parent="." unique_id=1348652794]
 script = ExtResource("12_ebec5")
 hp = 100.0
 immortal = true
 
-[node name="HUD" type="Control" parent="."]
+[node name="HUD" type="Control" parent="." unique_id=1406402649]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -389,7 +389,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("17_g4c7l")
 
-[node name="SicknessTint" type="TextureRect" parent="HUD"]
+[node name="SicknessTint" type="TextureRect" parent="HUD" unique_id=1082167472]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -399,7 +399,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_5ejfk")
 
-[node name="Cursor" type="TextureRect" parent="HUD"]
+[node name="Cursor" type="TextureRect" parent="HUD" unique_id=92395798]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
@@ -416,7 +416,7 @@ grow_vertical = 2
 texture = ExtResource("17_tqiix")
 expand_mode = 1
 
-[node name="InventoryInterface" type="Control" parent="HUD"]
+[node name="InventoryInterface" type="Control" parent="HUD" unique_id=858532635]
 z_index = 1
 layout_mode = 1
 anchors_preset = 15
@@ -425,7 +425,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CurrentItemLabel" type="Label" parent="HUD/InventoryInterface"]
+[node name="CurrentItemLabel" type="Label" parent="HUD/InventoryInterface" unique_id=272445762]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -441,12 +441,10 @@ grow_vertical = 2
 text = "Axe"
 horizontal_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/InventoryInterface/CurrentItemLabel"]
-libraries = {
-&"": SubResource("AnimationLibrary_7pqkx")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/InventoryInterface/CurrentItemLabel" unique_id=1735479515]
+libraries/ = SubResource("AnimationLibrary_7pqkx")
 
-[node name="InventoryDisplay" type="HBoxContainer" parent="HUD/InventoryInterface"]
+[node name="InventoryDisplay" type="HBoxContainer" parent="HUD/InventoryInterface" unique_id=1354943621]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -461,7 +459,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 5
 
-[node name="ItemDisplay1" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
+[node name="ItemDisplay1" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=468719072 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -471,7 +469,7 @@ inventory = NodePath("../../../../Inventory")
 inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
 selected_modulate = Color(0.345098, 1, 1, 1)
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay1"]
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay1" unique_id=1569262230]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -481,14 +479,14 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay1"]
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay1" unique_id=1846995695]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay1"]
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay1" unique_id=1640920594]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -503,7 +501,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="ItemDisplay2" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
+[node name="ItemDisplay2" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1566893430 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -514,7 +512,7 @@ index = 1
 inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
 selected_modulate = Color(0.345098, 1, 1, 1)
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2"]
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2" unique_id=1638759378]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -524,14 +522,14 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2"]
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2" unique_id=1308629600]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2"]
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2" unique_id=1227409477]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -546,7 +544,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="ItemDisplay3" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
+[node name="ItemDisplay3" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=346234876 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -557,7 +555,7 @@ index = 2
 inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
 selected_modulate = Color(0.345098, 1, 1, 1)
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3"]
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3" unique_id=1982610863]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -567,14 +565,14 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3"]
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3" unique_id=1574897447]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3"]
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3" unique_id=1667207652]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -589,7 +587,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="ItemDisplay4" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
+[node name="ItemDisplay4" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1368455562 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -600,7 +598,7 @@ index = 3
 inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
 selected_modulate = Color(0.345098, 1, 1, 1)
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4"]
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4" unique_id=727156131]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -610,14 +608,14 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4"]
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4" unique_id=142109256]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4"]
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4" unique_id=132940345]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -632,7 +630,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="ItemDisplay5" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
+[node name="ItemDisplay5" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=558654689 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -643,7 +641,7 @@ index = 4
 inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
 selected_modulate = Color(0.345098, 1, 1, 1)
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5"]
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5" unique_id=940714038]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -653,14 +651,14 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5"]
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5" unique_id=24253356]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5"]
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5" unique_id=4543047]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -675,7 +673,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="ItemDisplay6" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
+[node name="ItemDisplay6" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=356410584 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -686,7 +684,7 @@ index = 5
 inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
 selected_modulate = Color(0.345098, 1, 1, 1)
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6"]
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6" unique_id=411628049]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -696,14 +694,14 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6"]
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6" unique_id=1736496631]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6"]
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6" unique_id=1648222158]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -718,7 +716,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="ItemDisplay7" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
+[node name="ItemDisplay7" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1797142558 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -729,7 +727,7 @@ index = 6
 inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
 selected_modulate = Color(0.345098, 1, 1, 1)
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7"]
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7" unique_id=1921957488]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -739,14 +737,14 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7"]
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7" unique_id=1805097140]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7"]
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7" unique_id=247556463]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -761,7 +759,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="ItemDisplay8" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
+[node name="ItemDisplay8" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1424194935 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -772,7 +770,7 @@ index = 7
 inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
 selected_modulate = Color(0.345098, 1, 1, 1)
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8"]
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8" unique_id=1245140687]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -782,14 +780,14 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8"]
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8" unique_id=340953188]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8"]
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8" unique_id=1539599903]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -804,7 +802,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="ItemDisplay9" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
+[node name="ItemDisplay9" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=577589432 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -815,7 +813,7 @@ index = 8
 inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
 selected_modulate = Color(0.345098, 1, 1, 1)
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9"]
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9" unique_id=1395515331]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -825,14 +823,14 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9"]
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9" unique_id=855804498]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9"]
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9" unique_id=1260966804]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -847,7 +845,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="TooltipLabel" type="Label" parent="HUD" node_paths=PackedStringArray("interactor")]
+[node name="TooltipLabel" type="Label" parent="HUD" unique_id=189793984 node_paths=PackedStringArray("interactor")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -864,19 +862,19 @@ autowrap_mode = 3
 script = ExtResource("19_knn7v")
 interactor = NodePath("../../Head/Camera3D/InteratorRay/Interactor")
 
-[node name="BarContainer" type="VBoxContainer" parent="HUD"]
+[node name="BarContainer" type="VBoxContainer" parent="HUD" unique_id=1488788714]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 344.0
 offset_bottom = 128.0
 
-[node name="FPSLabel" type="Label" parent="HUD/BarContainer"]
+[node name="FPSLabel" type="Label" parent="HUD/BarContainer" unique_id=1610708313]
 layout_mode = 2
 text = "FPS"
 script = ExtResource("19_bjvpn")
 
-[node name="HealthBar" type="ProgressBar" parent="HUD/BarContainer" node_paths=PackedStringArray("health")]
+[node name="HealthBar" type="ProgressBar" parent="HUD/BarContainer" unique_id=231774684 node_paths=PackedStringArray("health")]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_r7pn3")
@@ -886,7 +884,7 @@ script = ExtResource("26_r7pn3")
 health = NodePath("../../../Health")
 lerp_weight = 0.1
 
-[node name="HungerBar" type="ProgressBar" parent="HUD/BarContainer"]
+[node name="HungerBar" type="ProgressBar" parent="HUD/BarContainer" unique_id=446841129]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_b8hi5")
@@ -897,7 +895,7 @@ script = ExtResource("27_b8hi5")
 lerp_weight = 0.1
 metadata/_custom_type_script = "uid://c3xfbb8ay0ghk"
 
-[node name="SicknessBar" type="ProgressBar" parent="HUD/BarContainer"]
+[node name="SicknessBar" type="ProgressBar" parent="HUD/BarContainer" unique_id=807616943]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_2uvqg")
@@ -908,7 +906,7 @@ script = ExtResource("27_b8hi5")
 lerp_weight = 0.1
 metadata/_custom_type_script = "uid://c3xfbb8ay0ghk"
 
-[node name="PopupDisplay" type="Control" parent="HUD" node_paths=PackedStringArray("title_label", "body_label")]
+[node name="PopupDisplay" type="Control" parent="HUD" unique_id=2003166414 node_paths=PackedStringArray("title_label", "body_label")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -926,7 +924,7 @@ script = ExtResource("23_7pqkx")
 title_label = NodePath("VBoxContainer/TitleLabel")
 body_label = NodePath("VBoxContainer/BodyLabel")
 
-[node name="ColorRect" type="ColorRect" parent="HUD/PopupDisplay"]
+[node name="ColorRect" type="ColorRect" parent="HUD/PopupDisplay" unique_id=875381987]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -939,7 +937,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.110822044, 0.18975028, 0.25127524, 0.8627451)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/PopupDisplay"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/PopupDisplay" unique_id=568522180]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -947,19 +945,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TitleLabel" type="Label" parent="HUD/PopupDisplay/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="HUD/PopupDisplay/VBoxContainer" unique_id=1035971810]
 layout_mode = 2
 text = "Warning"
 label_settings = SubResource("LabelSettings_7pqkx")
 horizontal_alignment = 1
 uppercase = true
 
-[node name="BodyLabel" type="Label" parent="HUD/PopupDisplay/VBoxContainer"]
+[node name="BodyLabel" type="Label" parent="HUD/PopupDisplay/VBoxContainer" unique_id=734178331]
 layout_mode = 2
 text = "fsaf"
 label_settings = SubResource("LabelSettings_uw77l")
 
-[node name="CenterContainer" type="CenterContainer" parent="HUD/PopupDisplay"]
+[node name="CenterContainer" type="CenterContainer" parent="HUD/PopupDisplay" unique_id=87607025]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -970,21 +968,21 @@ offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/PopupDisplay/CenterContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/PopupDisplay/CenterContainer" unique_id=1064867228]
 layout_mode = 2
 
-[node name="Button1" type="Button" parent="HUD/PopupDisplay/CenterContainer/HBoxContainer"]
+[node name="Button1" type="Button" parent="HUD/PopupDisplay/CenterContainer/HBoxContainer" unique_id=1065288209]
 custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 text = "Continue"
 
-[node name="Button2" type="Button" parent="HUD/PopupDisplay/CenterContainer/HBoxContainer"]
+[node name="Button2" type="Button" parent="HUD/PopupDisplay/CenterContainer/HBoxContainer" unique_id=1345165497]
 visible = false
 custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 text = "Continue"
 
-[node name="PauseInterface" type="Control" parent="HUD"]
+[node name="PauseInterface" type="Control" parent="HUD" unique_id=1163003515]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 15
@@ -994,7 +992,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("28_pnw6m")
 
-[node name="BlurRect" type="ColorRect" parent="HUD/PauseInterface"]
+[node name="BlurRect" type="ColorRect" parent="HUD/PauseInterface" unique_id=1141508559]
 material = SubResource("ShaderMaterial_pnw6m")
 layout_mode = 1
 anchors_preset = 15
@@ -1003,7 +1001,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CraftingMenu" type="Control" parent="HUD/PauseInterface"]
+[node name="CraftingMenu" type="Control" parent="HUD/PauseInterface" unique_id=874561833]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1012,7 +1010,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CraftingEnvironment" parent="HUD/PauseInterface/CraftingMenu" node_paths=PackedStringArray("inventory_holder_link", "pause_interface") instance=ExtResource("28_q28gw")]
+[node name="CraftingEnvironment" parent="HUD/PauseInterface/CraftingMenu" unique_id=651686952 node_paths=PackedStringArray("inventory_holder_link", "pause_interface") instance=ExtResource("28_q28gw")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.3263889
@@ -1023,7 +1021,7 @@ inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHol
 pause_interface = NodePath("../..")
 metadata/_edit_use_anchors_ = true
 
-[node name="RecipePanel" type="Control" parent="HUD/PauseInterface/CraftingMenu"]
+[node name="RecipePanel" type="Control" parent="HUD/PauseInterface/CraftingMenu" unique_id=1393690572]
 layout_mode = 1
 anchor_left = 0.0069444445
 anchor_top = 0.057098765
@@ -1032,25 +1030,25 @@ anchor_bottom = 0.9722222
 script = ExtResource("38_1so5t")
 metadata/_edit_use_anchors_ = true
 
-[node name="RecipeList" type="ScrollContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel"]
+[node name="RecipeList" type="ScrollContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel" unique_id=1782315597]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 277.0
 grow_horizontal = 2
 
-[node name="RecipeListBox" type="VBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList"]
+[node name="RecipeListBox" type="VBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList" unique_id=1086293113]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="RecipeEntry" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox"]
+[node name="RecipeEntry" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox" unique_id=2103479977]
 visible = false
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 text = "Item"
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox/RecipeEntry"]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox/RecipeEntry" unique_id=370566999]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -1059,7 +1057,7 @@ grow_vertical = 2
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="RecipeDisplay" type="Control" parent="HUD/PauseInterface/CraftingMenu/RecipePanel"]
+[node name="RecipeDisplay" type="Control" parent="HUD/PauseInterface/CraftingMenu/RecipePanel" unique_id=1671577749]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1072,7 +1070,7 @@ offset_right = 150.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay"]
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay" unique_id=569302728]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1082,213 +1080,211 @@ grow_vertical = 2
 texture = ExtResource("39_55jnj")
 expand_mode = 1
 
-[node name="GridContainer" type="VBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay"]
+[node name="GridContainer" type="VBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay" unique_id=914428979]
 layout_mode = 0
 offset_right = 300.5
 offset_bottom = 300.0
 theme_override_constants/separation = 0
 
-[node name="Row1" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer"]
+[node name="Row1" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer" unique_id=2057981750]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="ItemLabel1" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row1"]
+[node name="ItemLabel1" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row1" unique_id=728872443]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemLabel2" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row1"]
+[node name="ItemLabel2" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row1" unique_id=31171211]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemLabel3" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row1"]
+[node name="ItemLabel3" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row1" unique_id=1811189382]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemLabel4" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row1"]
+[node name="ItemLabel4" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row1" unique_id=1620272882]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemLabel5" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row1"]
+[node name="ItemLabel5" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row1" unique_id=1555620948]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Row2" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer"]
+[node name="Row2" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer" unique_id=1621277022]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="ItemLabel1" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row2"]
+[node name="ItemLabel1" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row2" unique_id=672876357]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemLabel2" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row2"]
+[node name="ItemLabel2" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row2" unique_id=33562155]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemLabel3" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row2"]
+[node name="ItemLabel3" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row2" unique_id=1633492114]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemLabel4" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row2"]
+[node name="ItemLabel4" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row2" unique_id=1929928273]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemLabel5" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row2"]
+[node name="ItemLabel5" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row2" unique_id=1965088786]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Row3" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer"]
+[node name="Row3" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer" unique_id=2112732742]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="ItemLabel1" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row3"]
+[node name="ItemLabel1" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row3" unique_id=1643272288]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemLabel2" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row3"]
+[node name="ItemLabel2" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row3" unique_id=440202729]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemLabel3" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row3"]
+[node name="ItemLabel3" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row3" unique_id=1424487467]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemLabel4" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row3"]
+[node name="ItemLabel4" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row3" unique_id=125662215]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemLabel5" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row3"]
+[node name="ItemLabel5" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row3" unique_id=2046967061]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Row4" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer"]
+[node name="Row4" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer" unique_id=1501319191]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="ItemLabel1" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row4"]
+[node name="ItemLabel1" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row4" unique_id=1123539027]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemLabel2" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row4"]
+[node name="ItemLabel2" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row4" unique_id=2031538334]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemLabel3" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row4"]
+[node name="ItemLabel3" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row4" unique_id=1684520500]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemLabel4" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row4"]
+[node name="ItemLabel4" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row4" unique_id=1951069497]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemLabel5" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row4"]
+[node name="ItemLabel5" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row4" unique_id=1175780897]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Row5" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer"]
+[node name="Row5" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer" unique_id=205283659]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="ItemLabel1" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row5"]
+[node name="ItemLabel1" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row5" unique_id=1877339435]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemLabel2" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row5"]
+[node name="ItemLabel2" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row5" unique_id=1776895495]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemLabel3" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row5"]
+[node name="ItemLabel3" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row5" unique_id=1985169616]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemLabel4" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row5"]
+[node name="ItemLabel4" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row5" unique_id=98761385]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemLabel5" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row5"]
+[node name="ItemLabel5" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeDisplay/GridContainer/Row5" unique_id=297592564]
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_tqiix")
-}
-autoplay = "idle"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1780880928]
+libraries/ = SubResource("AnimationLibrary_tqiix")
+autoplay = &"idle"
 
-[node name="BuildTimer" type="Timer" parent="."]
+[node name="BuildTimer" type="Timer" parent="." unique_id=1941720648]
 
 [connection signal="updated_instance" from="Head/Camera3D/ArmContainer/ItemHolder" to="HUD" method="_on_item_holder_updated_instance"]
