@@ -428,7 +428,7 @@ nodes/RunBlendSpace/node = SubResource("AnimationNodeBlendSpace1D_7mn0t")
 nodes/RunBlendSpace/position = Vector2(32, 128)
 node_connections = [&"output", 0, &"RunBlendSpace"]
 
-[node name="Rootling" type="CharacterBody3D" node_paths=PackedStringArray("anim_player", "anim_tree", "horizontal_rotation_target", "vertical_rotation_target")]
+[node name="Rootling" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_player", "anim_tree", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
 script = ExtResource("1_wtogd")
 anim_player = NodePath("AnimationPlayer")
@@ -439,12 +439,12 @@ vertical_rotation_target = NodePath(".")
 rotation_range = SubResource("Resource_0dji4")
 metadata/_custom_type_script = "uid://bki5ij8task16"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2121250733]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 visible = false
 shape = SubResource("CapsuleShape3D_3emv6")
 
-[node name="Hurtbox3D" type="Area3D" parent="." node_paths=PackedStringArray("health", "knockback_entity")]
+[node name="Hurtbox3D" type="Area3D" parent="." unique_id=884870034 node_paths=PackedStringArray("health", "knockback_entity")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 visible = false
 collision_layer = 8
@@ -454,16 +454,23 @@ health = NodePath("../Health")
 knockback_entity = NodePath("..")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1941702815]
 shape = SubResource("CapsuleShape3D_3emv6")
 
-[node name="Health" type="Node" parent="."]
+[node name="StartChaseTrigger" type="Node" parent="Hurtbox3D" unique_id=1954498291 node_paths=PackedStringArray("state_machine")]
+script = ExtResource("8_7mn0t")
+state_machine = NodePath("../../Controller3D/StateMachine")
+state_name = "Chasing"
+from_state_whitelist = Array[String](["Wandering"])
+signal_name = &"was_hurt"
+metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
+
+[node name="Health" type="Node" parent="." unique_id=780116179]
 script = ExtResource("4_nauqg")
-hp = 10.0
 free_parent_on_death = true
 metadata/_custom_type_script = "uid://cbb5o5ykqwxfp"
 
-[node name="Sight3D" type="Node3D" parent="."]
+[node name="Sight3D" type="Node3D" parent="." unique_id=713539717]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("5_nauqg")
 radius = 15.0
@@ -472,7 +479,7 @@ target_collision_mask = 16
 ray_collision_mask = 21
 group_whitelist = Array[String](["player"])
 
-[node name="StartChaseTrigger" type="Node" parent="Sight3D" node_paths=PackedStringArray("state_machine")]
+[node name="StartChaseTrigger" type="Node" parent="Sight3D" unique_id=1196415362 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("8_7mn0t")
 state_machine = NodePath("../../Controller3D/StateMachine")
 state_name = "Chasing"
@@ -480,21 +487,21 @@ from_state_whitelist = Array[String](["Wandering"])
 signal_name = &"found_target"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 
-[node name="Controller3D" type="Node" parent="." node_paths=PackedStringArray("sight", "on_screen_notifier", "entity")]
+[node name="Controller3D" type="Node" parent="." unique_id=1315753818 node_paths=PackedStringArray("sight", "on_screen_notifier", "entity")]
 script = ExtResource("2_nauqg")
 sight = NodePath("../Sight3D")
 on_screen_notifier = NodePath("../Node/FollowNode3D/VisibleOnScreenNotifier3D")
 entity = NodePath("..")
 metadata/_custom_type_script = "uid://ccwod33h53a5s"
 
-[node name="NavEntityGuide3D" type="Node" parent="Controller3D" node_paths=PackedStringArray("nav", "entity")]
+[node name="NavEntityGuide3D" type="Node" parent="Controller3D" unique_id=377578045 node_paths=PackedStringArray("nav", "entity")]
 script = ExtResource("11_8jseq")
 nav = NodePath("../../NavigationAgent3D")
 entity = NodePath("../..")
 face_interpolation = 0.1
 metadata/_custom_type_script = "uid://c5asagc5dswqt"
 
-[node name="StateMachine" type="Node" parent="Controller3D" node_paths=PackedStringArray("initial_state", "root")]
+[node name="StateMachine" type="Node" parent="Controller3D" unique_id=1574117420 node_paths=PackedStringArray("initial_state", "root")]
 script = ExtResource("10_v53xr")
 initial_state = NodePath("Wandering")
 root = NodePath("../..")
@@ -502,55 +509,55 @@ process_update = true
 physics_process_update = true
 metadata/_custom_type_script = "uid://bqonxtntgndfr"
 
-[node name="Wandering" type="Node" parent="Controller3D/StateMachine" node_paths=PackedStringArray("nav_guide", "idle_timer", "root")]
+[node name="Wandering" type="Node" parent="Controller3D/StateMachine" unique_id=1882444428 node_paths=PackedStringArray("nav_guide", "idle_timer", "root")]
 script = ExtResource("11_7mn0t")
 nav_guide = NodePath("../../NavEntityGuide3D")
 idle_timer = NodePath("Timer")
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Timer" type="Timer" parent="Controller3D/StateMachine/Wandering"]
+[node name="Timer" type="Timer" parent="Controller3D/StateMachine/Wandering" unique_id=1600727395]
 
-[node name="Chasing" type="Node" parent="Controller3D/StateMachine" node_paths=PackedStringArray("nav_guide", "sight", "root")]
+[node name="Chasing" type="Node" parent="Controller3D/StateMachine" unique_id=1883496829 node_paths=PackedStringArray("nav_guide", "sight", "root")]
 script = ExtResource("13_7mn0t")
 nav_guide = NodePath("../../NavEntityGuide3D")
 sight = NodePath("../../../Sight3D")
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Inventory" type="Node" parent="."]
+[node name="Inventory" type="Node" parent="." unique_id=2020826484]
 script = ExtResource("7_kg2m4")
 item_instances = Array[ExtResource("8_8jseq")]([SubResource("Resource_3emv6")])
 size = 1
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 
-[node name="InventoryDropper3D" type="Node3D" parent="." node_paths=PackedStringArray("inventory", "health")]
+[node name="InventoryDropper3D" type="Node3D" parent="." unique_id=709626360 node_paths=PackedStringArray("inventory", "health")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("10_v4fp6")
 inventory = NodePath("../Inventory")
 health = NodePath("../Health")
 metadata/_custom_type_script = "uid://bpmbg0e28ujs7"
 
-[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1081978445]
 
-[node name="Node" type="Node" parent="."]
+[node name="Node" type="Node" parent="." unique_id=1936843058]
 
-[node name="FollowNode3D" type="Node3D" parent="Node" node_paths=PackedStringArray("target")]
+[node name="FollowNode3D" type="Node3D" parent="Node" unique_id=1527888734 node_paths=PackedStringArray("target")]
 script = ExtResource("12_4es1i")
 target = NodePath("../..")
 metadata/_custom_type_script = "uid://c6m4guogk1s1y"
 
-[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="Node/FollowNode3D"]
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="Node/FollowNode3D" unique_id=2055379880]
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="." unique_id=1901715806]
 remote_path = NodePath("../Node/FollowNode3D/VisibleOnScreenNotifier3D")
 update_rotation = false
 update_scale = false
 
-[node name="Visuals" parent="." instance=ExtResource("13_v4fp6")]
+[node name="Visuals" parent="." unique_id=1055487819 instance=ExtResource("13_v4fp6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
-[node name="Skeleton3D" parent="Visuals/Armature" index="0"]
+[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1055487819, 406792161) index="0" unique_id=1791091783]
 bones/0/scale = Vector3(0.9999997, 0.9999997, 1)
 bones/3/position = Vector3(2.0001467e-10, 0.30181545, 2.2215756e-15)
 bones/3/scale = Vector3(1, 0.99999994, 1)
@@ -562,13 +569,11 @@ bones/10/rotation = Quaternion(-0.35355338, -0.14644662, 0.35355335, 0.8535534)
 bones/10/scale = Vector3(0.9999998, 1, 0.99999964)
 bones/11/scale = Vector3(1, 0.9999999, 0.99999994)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_wtogd")
-}
-autoplay = "walk"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1635551601]
+libraries/ = SubResource("AnimationLibrary_wtogd")
+autoplay = &"walk"
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=944648514]
 tree_root = SubResource("AnimationNodeBlendTree_p5gg5")
 anim_player = NodePath("../AnimationPlayer")
 parameters/RunBlendSpace/blend_position = -0.14243498
