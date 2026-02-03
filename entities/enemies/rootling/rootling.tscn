@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://c6m4guogk1s1y" path="res://common/follow_node3d.gd" id="12_4es1i"]
 [ext_resource type="Script" uid="uid://pdvlr6l3n04n" path="res://entities/enemies/enemy_states/chasing_state.gd" id="13_7mn0t"]
 [ext_resource type="PackedScene" uid="uid://bl745esge18tq" path="res://entities/enemies/rootling/rootling.blend" id="13_v4fp6"]
+[ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="17_p5gg5"]
 
 [sub_resource type="Resource" id="Resource_50i80"]
 script = ExtResource("2_76rxv")
@@ -43,6 +44,12 @@ radius = 0.65
 [sub_resource type="Resource" id="Resource_3emv6"]
 script = ExtResource("8_8jseq")
 item = ExtResource("9_4es1i")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_aoox1"]
+script = ExtResource("8_8jseq")
+item = ExtResource("17_p5gg5")
+quantity = 2
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Animation" id="Animation_3emv6"]
@@ -527,8 +534,9 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Inventory" type="Node" parent="." unique_id=2020826484]
 script = ExtResource("7_kg2m4")
-item_instances = Array[ExtResource("8_8jseq")]([SubResource("Resource_3emv6")])
-size = 1
+item_instances = Array[ExtResource("8_8jseq")]([SubResource("Resource_3emv6"), SubResource("Resource_aoox1")])
+constant = true
+size = 2
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 
 [node name="InventoryDropper3D" type="Node3D" parent="." unique_id=709626360 node_paths=PackedStringArray("inventory", "health")]
@@ -536,6 +544,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("10_v4fp6")
 inventory = NodePath("../Inventory")
 health = NodePath("../Health")
+death_drop_mode = 1
 metadata/_custom_type_script = "uid://bpmbg0e28ujs7"
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1081978445]
@@ -557,7 +566,7 @@ update_scale = false
 [node name="Visuals" parent="." unique_id=1055487819 instance=ExtResource("13_v4fp6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
-[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1055487819, 406792161) index="0" unique_id=1791091783]
+[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1055487819, 1177331135) index="0" unique_id=657049233]
 bones/0/scale = Vector3(0.9999997, 0.9999997, 1)
 bones/3/position = Vector3(2.0001467e-10, 0.30181545, 2.2215756e-15)
 bones/3/scale = Vector3(1, 0.99999994, 1)

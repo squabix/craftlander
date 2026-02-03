@@ -83,8 +83,6 @@ func get_item_quantities() -> Dictionary[Item, int]:
 	
 	return quantities
 
-
-
 func get_first_empty_index() -> int:
 	for index in size:
 		if item_instances[index] == null:
