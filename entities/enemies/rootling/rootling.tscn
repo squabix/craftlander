@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="7_kg2m4"]
 [ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/signal_triggrs/signal_state_trigger.gd" id="8_7mn0t"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="8_8jseq"]
-[ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="9_4es1i"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="10_v4fp6"]
 [ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="10_v53xr"]
 [ext_resource type="Script" uid="uid://cf04j3voj4xyc" path="res://entities/enemies/enemy_states/wandering_state.gd" id="11_7mn0t"]
@@ -19,7 +18,10 @@
 [ext_resource type="Script" uid="uid://c6m4guogk1s1y" path="res://common/follow_node3d.gd" id="12_4es1i"]
 [ext_resource type="Script" uid="uid://pdvlr6l3n04n" path="res://entities/enemies/enemy_states/chasing_state.gd" id="13_7mn0t"]
 [ext_resource type="PackedScene" uid="uid://bl745esge18tq" path="res://entities/enemies/rootling/rootling.blend" id="13_v4fp6"]
-[ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="17_p5gg5"]
+[ext_resource type="Resource" uid="uid://bah3rou15fcfh" path="res://items/tools/shoddy_axe/shoddy_axe_item.tres" id="16_p5gg5"]
+[ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="21_40hqq"]
+[ext_resource type="Script" uid="uid://u05gsl6vruc1" path="res://common/inventory_system/animation/item_animation_player.gd" id="21_aoox1"]
+[ext_resource type="Script" uid="uid://c622jer80j3sk" path="res://common/inventory_system/animation/item_animation.gd" id="22_sqkxx"]
 
 [sub_resource type="Resource" id="Resource_50i80"]
 script = ExtResource("2_76rxv")
@@ -41,15 +43,9 @@ metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3emv6"]
 radius = 0.65
 
-[sub_resource type="Resource" id="Resource_3emv6"]
-script = ExtResource("8_8jseq")
-item = ExtResource("9_4es1i")
-metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
-
 [sub_resource type="Resource" id="Resource_aoox1"]
 script = ExtResource("8_8jseq")
-item = ExtResource("17_p5gg5")
-quantity = 2
+item = ExtResource("16_p5gg5")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Animation" id="Animation_3emv6"]
@@ -131,6 +127,95 @@ tracks/10/path = NodePath("Visuals/Armature/Skeleton3D:Bone.011")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = PackedFloat32Array(0, 1, -0.35355338, -0.1464466, 0.35355335, 0.8535534)
+tracks/11/type = "rotation_3d"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Visuals/Armature/Skeleton3D:Bone.012")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = PackedFloat32Array(0, 1, 0, 0, -0.07041718, 0.99751765)
+
+[sub_resource type="Animation" id="Animation_aoox1"]
+resource_name = "attack"
+length = 0.4
+step = 0.1
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Armature/Skeleton3D:Bone")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 1.1920929e-07, 0, 1)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Armature/Skeleton3D:Bone.001")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 1, 0, 0, 0)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/Armature/Skeleton3D:Bone.002")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 4.2381817e-08, -4.261895e-08, 0.6204223, 0.7842679)
+tracks/3/type = "rotation_3d"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/Armature/Skeleton3D:Bone.003")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, -1.3102503e-07, 1.9494044e-08, -0.52479047, 0.85123146)
+tracks/4/type = "rotation_3d"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals/Armature/Skeleton3D:Bone.013")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array(0, 1, -3.3848327e-08, -5.3742593e-08, -0.6204223, 0.7842679)
+tracks/5/type = "rotation_3d"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Visuals/Armature/Skeleton3D:Bone.014")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = PackedFloat32Array(0, 1, 5.8298586e-08, -1.174062e-07, 0.52479047, 0.85123146)
+tracks/6/type = "rotation_3d"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Visuals/Armature/Skeleton3D:Bone.007")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = PackedFloat32Array(0, 1, 0.5, -0.5, -0.5, -0.5)
+tracks/7/type = "rotation_3d"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Visuals/Armature/Skeleton3D:Bone.008")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = PackedFloat32Array(0, 1, -0.35355338, 0.14644662, -0.35355335, 0.8535534)
+tracks/8/type = "rotation_3d"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Visuals/Armature/Skeleton3D:Bone.009")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = PackedFloat32Array(0, 1, 0, 0, 0.06378673, 0.99796355)
+tracks/9/type = "rotation_3d"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Visuals/Armature/Skeleton3D:Bone.010")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = PackedFloat32Array(0, 1, 0.5, 0.5, 0.5, -0.5)
+tracks/10/type = "rotation_3d"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Visuals/Armature/Skeleton3D:Bone.011")
+tracks/10/interp = 2
+tracks/10/loop_wrap = true
+tracks/10/keys = PackedFloat32Array(0, 1, -0.35355338, -0.14644662, 0.35355335, 0.8535534, 0.1, 1, -0.3369063, 0.16102871, 0.5750201, 0.7279532, 0.4, 1, -0.35355338, -0.14644662, 0.35355335, 0.8535534)
 tracks/11/type = "rotation_3d"
 tracks/11/imported = false
 tracks/11/enabled = true
@@ -412,10 +497,16 @@ tracks/11/keys = PackedFloat32Array(0, 1, 0, 0, -0.07041718, 0.99751765)
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wtogd"]
 _data = {
 &"RESET": SubResource("Animation_3emv6"),
+&"attack": SubResource("Animation_aoox1"),
 &"idle": SubResource("Animation_v4fp6"),
 &"run": SubResource("Animation_w8hfy"),
 &"walk": SubResource("Animation_wtogd")
 }
+
+[sub_resource type="Resource" id="Resource_qk6mp"]
+script = ExtResource("22_sqkxx")
+start_anim = "attack"
+metadata/_custom_type_script = "uid://c622jer80j3sk"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7mn0t"]
 animation = &"idle"
@@ -533,8 +624,9 @@ root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Inventory" type="Node" parent="." unique_id=2020826484]
+unique_name_in_owner = true
 script = ExtResource("7_kg2m4")
-item_instances = Array[ExtResource("8_8jseq")]([SubResource("Resource_3emv6"), SubResource("Resource_aoox1")])
+item_instances = Array[ExtResource("8_8jseq")]([SubResource("Resource_aoox1")])
 constant = true
 size = 2
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
@@ -575,12 +667,18 @@ bones/7/rotation = Quaternion(-0.35355338, 0.14644662, -0.35355335, 0.8535534)
 bones/7/scale = Vector3(0.9999999, 0.99999994, 0.9999998)
 bones/8/scale = Vector3(1, 1, 1.0000001)
 bones/10/rotation = Quaternion(-0.35355338, -0.14644662, 0.35355335, 0.8535534)
-bones/10/scale = Vector3(0.9999998, 1, 0.99999964)
+bones/10/scale = Vector3(1.0000001, 1.0000002, 0.99999976)
 bones/11/scale = Vector3(1, 0.9999999, 0.99999994)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1635551601]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1635551601 node_paths=PackedStringArray("anim_tree")]
+unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_wtogd")
 autoplay = &"walk"
+script = ExtResource("21_aoox1")
+item_animations = Dictionary[ExtResource("21_40hqq"), ExtResource("22_sqkxx")]({
+ExtResource("16_p5gg5"): SubResource("Resource_qk6mp")
+})
+anim_tree = NodePath("../AnimationTree")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=944648514]
 tree_root = SubResource("AnimationNodeBlendTree_p5gg5")
