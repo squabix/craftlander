@@ -1,15 +1,22 @@
 extends Node3D
 class_name InventoryDropper3D
 
+enum DeathDropMode {EVERYTHING, RANDOM, NEXT, NONE}
+
 static var rigid_item_pickup_scene := load("res://defaults/default_rigid_item_pickup.tscn")
 
 @export var inventory: Inventory
 @export var position_offset: Vector3
 @export var rotation_offset: Vector3
-@export var health: Health
+
 @export_group("On Ready")
 @export var drop_on_ready := false
 @export var on_ready_index := -1
+
+@export_group("On Death")
+@export var health: Health
+@export var death_drop_mode: DeathDropMode
+@export var death_drop_quantity := 1
 
 @onready var parent := get_tree().root
 
@@ -25,8 +32,11 @@ static func _transform_pickup(pickup: RigidItemPickup3D, dropper: InventoryDropp
 	pickup.global_rotation_degrees += pickup_rotation_offset
 
 func _ready() -> void:
-	if health:
-		health.died.connect(drop_everything)
+	
+	# Drop items on death
+	if is_instance_valid(health):
+		health.died.connect(die)
+	
 	if drop_on_ready:
 		drop(on_ready_index)
 
@@ -63,3 +73,24 @@ func drop_everything() -> void:
 	
 	for i in inventory.size:
 		drop(i)
+
+func die() -> void:
+	match death_drop_mode:
+			
+			# Drop nothing
+			DeathDropMode.NONE:
+				pass
+			
+			# Drop random item(s)
+			DeathDropMode.RANDOM:
+				for i in death_drop_quantity:
+					drop()
+			
+			# Drop next available item(s)
+			DeathDropMode.NEXT:
+				for i in death_drop_quantity:
+					drop(inventory.get_first_empty_index())
+			
+			# Drop everything
+			DeathDropMode.EVERYTHING:
+				drop_everything()
