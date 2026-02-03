@@ -50,6 +50,12 @@ func equals(other_item: Item) -> bool:
 		return false
 	return name == other_item.name
 
+func find_in_array(array: Array) -> Item:
+	for a in array:
+		if a is Item and equals(a):
+			return a
+	return null
+
 func start_cooldown(custom_length: float = 0.0) -> void:
 	cooldown_start_time = Time.get_ticks_msec()
 	cooldown_length = custom_length if custom_length > 0.0 else default_cooldown_length
