@@ -13,6 +13,17 @@ static var rigid_item_pickup_scene := load("res://defaults/default_rigid_item_pi
 
 @onready var parent := get_tree().root
 
+static func _transform_pickup(pickup: RigidItemPickup3D, dropper: InventoryDropper3D) -> void:
+	var pickup_base_transform := dropper.global_transform
+	var pickup_position_offset := dropper.position_offset
+	var pickup_rotation_offset := dropper.rotation_offset
+	
+	await dropper.get_tree().process_frame
+	
+	pickup.global_transform = pickup_base_transform
+	pickup.global_position += pickup_position_offset
+	pickup.global_rotation_degrees += pickup_rotation_offset
+
 func _ready() -> void:
 	if health:
 		health.died.connect(drop_everything)
@@ -40,11 +51,7 @@ func drop(index: int=-1) -> Node3D:
 	
 	parent.add_child(pickup)
 	
-	await get_tree().process_frame
-	
-	pickup.global_transform = global_transform
-	pickup.global_position += position_offset
-	pickup.global_rotation_degrees += rotation_offset
+	InventoryDropper3D._transform_pickup(pickup, self)
 	
 	return pickup
 
