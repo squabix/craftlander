@@ -35,13 +35,15 @@ func drop(index: int=-1) -> Node3D:
 		index = inventory.get_random_index_weighted()
 	
 	if not inventory.is_index_valid(index):
+		printerr(self, " cannot drop invalid index ", index, " from ", inventory)
 		return
+	
 	var instance := inventory.get_instance(index)
 	var item := inventory.get_instance(index).item
 	
 	# Failed to remove item (doesn't exist)
 	if inventory.remove_instance(instance, 1) > 0:
-		printerr(self, " cannot remove nonexistant item ", item, " from ", inventory.item_instances)
+		printerr(self, " cannot remove nonexistant item ", item, " from ", inventory)
 		return null
 	
 	var pickup := RigidItemPickup3D.from_item(item, rigid_item_pickup_scene)
