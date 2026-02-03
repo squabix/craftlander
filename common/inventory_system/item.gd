@@ -4,6 +4,10 @@ class_name Item
 signal scene_set_up
 signal triggered_event(event: ItemEvent)
 
+signal started_use
+signal continued_use
+signal ended_use
+
 enum CooldownMode {DISABLED, START_USE, END_USE}
 
 @export var scene: PackedScene
@@ -63,6 +67,7 @@ func update(delta: float) -> void:
 		_ended_use = false
 		if _updates_attempted_use != 0:
 			continue_use()
+			continued_use.emit()
 	
 	var reached_max_uses := _updates_attempted_use == max_uses and max_uses > 0
 	if not _ended_use and (reached_max_uses or not _used_this_update):
@@ -71,6 +76,7 @@ func update(delta: float) -> void:
 		end_use()
 		_ended_use = true
 		_updates_attempted_use = 0
+		ended_use.emit()
 	
 	if not _attempted_use:
 		_updates_attempted_use = 0
@@ -135,7 +141,9 @@ func use() -> bool:
 	if _updates_attempted_use == 0 and not is_on_cooldown():
 		if cooldown_mode == CooldownMode.START_USE:
 			start_cooldown()
-		return start_use()
+		var result := start_use()
+		started_use.emit()
+		return result
 	return false
 
 func start_use() -> bool:
