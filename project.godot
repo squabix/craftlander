@@ -17,8 +17,8 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="Island Survival Game"
 run/main_scene="uid://xw1mkjxlbnke"
 config/features=PackedStringArray("4.6", "Mobile")
-boot_splash/bg_color=Color(0, 0, 0, 1)
-boot_splash/image="uid://dt4rw3hb46tr3"
+boot_splash/bg_color=Color(0.0406, 0.0406, 0.07, 1)
+boot_splash/image="uid://6rsobsln1x1t"
 config/icon="res://icon.svg"
 
 [autoload]
