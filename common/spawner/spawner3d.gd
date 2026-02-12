@@ -9,7 +9,6 @@ enum TransformMode {SELF, PARENT, DEFAULT}
 @export var child_of_root: bool = true
 
 @export var default_parent: Node
-@export var spawn_on_parent_queue_free: bool
 
 @export_group("Transform")
 @export var position_mode: TransformMode = TransformMode.PARENT
