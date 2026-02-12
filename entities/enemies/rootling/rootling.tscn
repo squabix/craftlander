@@ -22,6 +22,9 @@
 [ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="21_40hqq"]
 [ext_resource type="Script" uid="uid://u05gsl6vruc1" path="res://common/inventory_system/animation/item_animation_player.gd" id="21_aoox1"]
 [ext_resource type="Script" uid="uid://c622jer80j3sk" path="res://common/inventory_system/animation/item_animation.gd" id="22_sqkxx"]
+[ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="23_qk6mp"]
+[ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="24_vy7b5"]
+[ext_resource type="Script" uid="uid://cmmmo3xnygmau" path="res://common/deletion_alarm.gd" id="25_vy7b5"]
 
 [sub_resource type="Resource" id="Resource_50i80"]
 script = ExtResource("2_76rxv")
@@ -684,5 +687,17 @@ anim_tree = NodePath("../AnimationTree")
 tree_root = SubResource("AnimationNodeBlendTree_p5gg5")
 anim_player = NodePath("../AnimationPlayer")
 parameters/RunBlendSpace/blend_position = -0.14243498
+
+[node name="ParticleSpawner3D" type="Node3D" parent="." unique_id=1876124391]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("23_qk6mp")
+particles_scene = ExtResource("24_vy7b5")
+metadata/_custom_type_script = "uid://bhjxscxhtg2se"
+
+[node name="DeletionAlarm" type="Node" parent="." unique_id=1721040567]
+script = ExtResource("25_vy7b5")
+metadata/_custom_type_script = "uid://cmmmo3xnygmau"
+
+[connection signal="deleted" from="DeletionAlarm" to="ParticleSpawner3D" method="spawn"]
 
 [editable path="Visuals"]
