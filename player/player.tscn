@@ -303,9 +303,10 @@ instance_parent = NodePath("../..")
 root = NodePath("../../../..")
 metadata/_edit_group_ = true
 
-[node name="ItemVisualsContainer3D" type="Node3D" parent="Head/Camera3D/ArmContainer/ItemHolder" unique_id=482834376 node_paths=PackedStringArray("inventory_holder_link")]
+[node name="ItemVisualsContainer3D" type="Node3D" parent="Head/Camera3D/ArmContainer/ItemHolder" unique_id=482834376 node_paths=PackedStringArray("item_holder", "inventory_holder_link")]
 transform = Transform3D(1.0000001, 4.0978193e-08, 0, -6.519258e-09, 1, -7.450581e-09, -1.4901161e-08, 7.450581e-09, 1, 0.08080295, 0.017175198, 0.014566064)
 script = ExtResource("10_s7qer")
+item_holder = NodePath("..")
 inventory_holder_link = NodePath("../InventoryHolderLink")
 visuals_scale_ratio = 0.4
 
