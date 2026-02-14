@@ -34,6 +34,8 @@ var _updates_attempted_use := 0
 var _ended_use := true
 var is_unique := false
 
+var is_scene_set_up := false
+
 var update_delta := 0.0
 var cooldown_start_time := -INF
 var cooldown_length := default_cooldown_length
@@ -107,6 +109,7 @@ func set_up_scene() -> void:
 		printerr(name, " could not find visuals")
 	if visuals != null:
 		visuals.hide()
+	is_scene_set_up = true
 	scene_set_up.emit()
 
 func get_visuals_duplicate() -> Node:
