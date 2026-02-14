@@ -8,7 +8,6 @@ signal item_event_triggered(event: ItemEvent)
 
 @export var icon_sprite: Sprite3D
 @export var instance_parent: Node3D
-@export var item_override: Item
 @export var root: Node
 @export var item_instance: ItemInstance:
 	set(to):
@@ -40,8 +39,6 @@ signal item_event_triggered(event: ItemEvent)
 
 var item: Item:
 	get:
-		if item_override != null:
-			return item_override
 		if item_instance == null:
 			return null
 		return item_instance.item
@@ -62,10 +59,7 @@ func use_item() -> void:
 		consumed_instance.emit(item_instance)
 
 func _ready() -> void:
-	if item_override:
-		item_instance = item_override.get_instance()
-	else:
-		item_instance = item_instance
+	item_instance = item_instance # Trigger setter to set up visuals if instance was set in editor
 
 func _process(delta: float) -> void:
 	if not has_item():
