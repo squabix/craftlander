@@ -6,6 +6,7 @@ const GHOSTED_ANIMATION_PROPERTIES: PackedStringArray = [
 	"rotation"
 ]
 
+@export var item_holder: ItemHolder3D
 @export var inventory_holder_link: InventoryHolderLink
 @export var visuals_scale_ratio := 1.0
 
@@ -13,7 +14,13 @@ var instance: ItemInstance
 var contained_visuals: Node3D
 
 func _ready() -> void:
-	inventory_holder_link.changed.connect(update_visuals)
+	if is_instance_valid(inventory_holder_link):
+		inventory_holder_link.changed.connect(update_visuals)
+		if item_holder == null:
+			item_holder = inventory_holder_link.item_holder
+	
+	await get_tree().process_frame
+	update_visuals()
 
 func reset_visuals() -> void:
 	for child in get_children():
@@ -21,21 +28,20 @@ func reset_visuals() -> void:
 
 func update_visuals() -> void:
 	reset_visuals()
-	instance = inventory_holder_link.get_current_instance()
+	instance = item_holder.item_instance
 	
 	# Cannot update visuals if no instance/item
 	if instance == null:
 		return
 	if instance.item == null:
 		return
-	if not instance in inventory_holder_link.inventory.item_instances:
-		return
-	
+	# if not instance in inventory_holder_link.inventory.item_instances:
+	# 	return
 	# Free current visuals
 	Util.safe_free(contained_visuals)
 	
 	# Wait for visuals to be set when item's scene is set up
-	if instance.item.visuals == null:
+	if not instance.item.is_scene_set_up:
 		await instance.item.scene_set_up
 		
 		# Return if visuals are still not set
