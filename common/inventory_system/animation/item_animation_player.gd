@@ -1,7 +1,7 @@
 extends AnimationPlayer
 class_name ItemAnimationPlayer
 
-@export var item_animations: Dictionary[Item, ItemAnimations] = {}
+@export var item_animations: Array[ItemAnimations] = []
 
 @export_group("Defaults")
 @export var default_start_anim := ""
@@ -50,15 +50,21 @@ func update_item(new_item: Item) -> void:
 		item = null
 	
 	# Find new item animations or default if cannot
-	var key := new_item.find_in_array(item_animations.keys())
-	if key == null or item_animations[key] == null:
+	var key: Item = null
+	var anims: ItemAnimations = null
+	for item_anims in item_animations:
+		key = new_item.find_in_array(item_anims.items)
+		if key != null:
+			anims = item_anims
+			break
+
+	if key == null:
 		default()
 		return
 	
 	item = new_item
 	
 	# Set animation names
-	var anims: ItemAnimations = item_animations[key]
 	start_anim = anims.start_anim if has_animation(anims.start_anim) else ""
 	continue_anim = anims.continue_anim if has_animation(anims.continue_anim) else ""
 	end_anim = anims.end_anim if has_animation(anims.end_anim) else ""
