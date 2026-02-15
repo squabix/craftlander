@@ -2,6 +2,7 @@ extends Resource
 class_name Item
 
 signal scene_set_up
+signal made_unique
 signal triggered_event(event: ItemEvent)
 
 signal started_use
@@ -32,7 +33,11 @@ var _attempted_use := false
 var _used_this_update := false
 var _updates_attempted_use := 0
 var _ended_use := true
-var is_unique := false
+var is_unique := false:
+	set(to):
+		is_unique = to
+		if to == true:
+			made_unique.emit()
 
 var is_scene_set_up := false
 
