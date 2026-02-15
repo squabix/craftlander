@@ -7,35 +7,36 @@ signal consumed_instance(instance: ItemInstance)
 signal item_event_triggered(event: ItemEvent)
 
 @export var icon_sprite: Sprite3D
-@export var instance_parent: Node3D
+@export var initial_item_instance: ItemInstance
 @export var root: Node
-@export var item_instance: ItemInstance:
-	set(to):
-		if item_instance == to:
-			return
-		
-		if instance_parent == null:
-			instance_parent = self
-		
-		# Remove old item
-		if has_item():
-			if item_instance != null:
-				item_instance.item.remove_scene()
-		item_instance = to
-		
-		if item_instance == null or item_instance.item == null:
-			update_icon(null)
-			return
-		
-		update_icon(item_instance.item.icon)
-		item_instance.item.root = root
-		if item_instance.item.scene != null:
-			item_instance.item.add_scene(instance_parent)
-			#instance_parent.add_child.call_deferred(item_instance.item.instantiate_scene())
-		
-		updated_instance.emit(item_instance)
-		if not item_instance.item.triggered_event.is_connected(item_event_triggered.emit):
-			item_instance.item.triggered_event.connect(item_event_triggered.emit)
+@export_group("Misc")
+@export var instance_parent: Node3D
+
+var item_instance: ItemInstance
+
+func update_item_instance(to: ItemInstance):
+	if item_instance == to:
+		return
+	
+	if instance_parent == null:
+		instance_parent = self
+	
+	# Remove old item
+	if has_item():
+		if item_instance != null:
+			item_instance.item.remove_scene()
+	item_instance = to
+	
+	if not item_instance.item.is_unique:
+		await item_instance.item.made_unique
+	
+	item_instance.item.root = root
+	if item_instance.item.scene != null:
+		item_instance.item.add_scene(instance_parent)
+	
+	updated_instance.emit(item_instance)
+	if not item_instance.item.triggered_event.is_connected(item_event_triggered.emit):
+		item_instance.item.triggered_event.connect(item_event_triggered.emit)
 
 var item: Item:
 	get:
@@ -59,7 +60,7 @@ func use_item() -> void:
 		consumed_instance.emit(item_instance)
 
 func _ready() -> void:
-	item_instance = item_instance # Trigger setter to set up visuals if instance was set in editor
+	update_item_instance(initial_item_instance)
 
 func _process(delta: float) -> void:
 	if not has_item():

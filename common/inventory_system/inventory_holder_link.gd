@@ -107,4 +107,4 @@ func heed_num_key_input() -> void:
 		return
 
 func hold_current() -> void:
-	item_holder.item_instance = get_current_instance()
+	item_holder.update_item_instance(get_current_instance())
