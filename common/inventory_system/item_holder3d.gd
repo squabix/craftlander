@@ -6,7 +6,6 @@ signal used_item(item: Item)
 signal consumed_instance(instance: ItemInstance)
 signal item_event_triggered(event: ItemEvent)
 
-@export var icon_sprite: Sprite3D
 @export var initial_item_instance: ItemInstance
 @export var root: Node
 @export_group("Misc")
@@ -47,10 +46,6 @@ var item: Item:
 func has_item() -> bool:
 	return item_instance != null and item_instance.item != null
 
-func update_icon(to: Texture) -> void:
-	if not is_instance_valid(icon_sprite):
-		return
-	icon_sprite.texture = to
 
 func use_item() -> void:
 	if item_instance == null or item_instance.item == null:
