@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://mhk4odp75uiy"]
+
+[ext_resource type="Script" uid="uid://dd8qskwv1nlqx" path="res://common3d/damage_system/hit_ray3d.gd" id="1_gbrfq"]
+[ext_resource type="Script" uid="uid://bl5x717nsijmk" path="res://common/damage_system/damage.gd" id="2_ek3ir"]
+[ext_resource type="PackedScene" uid="uid://d4e4niggplert" path="res://items/tools/shoddy_spear/shoddy_spear.blend" id="3_7cxoo"]
+
+[sub_resource type="Resource" id="Resource_7cxoo"]
+script = ExtResource("2_ek3ir")
+type = "weapon"
+metadata/_custom_type_script = "uid://bl5x717nsijmk"
+
+[sub_resource type="Animation" id="Animation_vh8m0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ew34c"]
+resource_name = "harvest"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.2617994, 0, 0), Vector3(-0.7752328, 1.1604856, -0.21674187), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vh8m0"]
+_data = {
+&"RESET": SubResource("Animation_vh8m0"),
+&"harvest": SubResource("Animation_ew34c")
+}
+
+[node name="ShoddySpear" type="Node3D" unique_id=1538443592]
+
+[node name="HarvestRay" type="RayCast3D" parent="." unique_id=1061948039]
+target_position = Vector3(0, 0, -2)
+collision_mask = 8
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("1_gbrfq")
+damage = SubResource("Resource_7cxoo")
+metadata/_custom_type_script = "uid://dd8qskwv1nlqx"
+
+[node name="Visuals" type="Node3D" parent="." unique_id=253996080]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals" unique_id=1230038836]
+libraries/ = SubResource("AnimationLibrary_vh8m0")
+
+[node name="BlenderMeshes" parent="Visuals" unique_id=1873865866 instance=ExtResource("3_7cxoo")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
