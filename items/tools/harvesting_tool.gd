@@ -20,7 +20,7 @@ func set_up_scene() -> void:
 	harvest_ray.damage.source = root
 
 func start_use() -> bool:
-	if is_instance_valid(anim_player):
+	if is_instance_valid(anim_player) and anim_player.has_animation(harvest_animation):
 		anim_player.stop()
 		anim_player.play(harvest_animation)
 	if harvest_ray != null and harvest_ray.hit():
