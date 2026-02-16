@@ -508,8 +508,9 @@ _data = {
 &"walk": SubResource("Animation_wtogd")
 }
 
-[sub_resource type="Resource" id="Resource_qk6mp"]
+[sub_resource type="Resource" id="Resource_0uawy"]
 script = ExtResource("22_sqkxx")
+items = Array[ExtResource("21_40hqq")]([ExtResource("16_p5gg5")])
 start_anim = "attack"
 metadata/_custom_type_script = "uid://c622jer80j3sk"
 
@@ -696,9 +697,7 @@ unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_wtogd")
 autoplay = &"walk"
 script = ExtResource("21_aoox1")
-item_animations = Dictionary[ExtResource("21_40hqq"), ExtResource("22_sqkxx")]({
-ExtResource("16_p5gg5"): SubResource("Resource_qk6mp")
-})
+item_animations = Array[ExtResource("22_sqkxx")]([SubResource("Resource_0uawy")])
 anim_tree = NodePath("../AnimationTree")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=944648514]
@@ -716,11 +715,13 @@ metadata/_custom_type_script = "uid://bhjxscxhtg2se"
 script = ExtResource("25_vy7b5")
 metadata/_custom_type_script = "uid://cmmmo3xnygmau"
 
-[node name="ItemHolder3D" type="Node3D" parent="." unique_id=936376664 node_paths=PackedStringArray("root")]
+[node name="ItemHolder3D" type="Node3D" parent="." unique_id=936376664 node_paths=PackedStringArray("root", "anim_player")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.5)
 script = ExtResource("27_7307j")
+initial_item_instance = SubResource("Resource_7307j")
 root = NodePath("..")
-item_instance = SubResource("Resource_7307j")
+anim_player = NodePath("../AnimationPlayer")
 metadata/_custom_type_script = "uid://bwd4jx8u5uct2"
 
 [connection signal="deleted" from="DeletionAlarm" to="ParticleSpawner3D" method="spawn"]
