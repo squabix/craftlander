@@ -36,7 +36,10 @@
 [ext_resource type="Script" uid="uid://bn55l5h1rwjsn" path="res://player/hunger.gd" id="31_2uvqg"]
 [ext_resource type="Script" uid="uid://ds4dru7pq3a84" path="res://player/sickness_manager.gd" id="32_1s1yo"]
 [ext_resource type="Script" uid="uid://crew0n1e8xk4r" path="res://player/hud/recipe_panel.gd" id="38_1so5t"]
+[ext_resource type="Script" uid="uid://u05gsl6vruc1" path="res://common/inventory_system/animation/item_animation_player.gd" id="38_55jnj"]
 [ext_resource type="Texture2D" uid="uid://p5jyelnqcoqe" path="res://assets/grid.png" id="39_55jnj"]
+[ext_resource type="Script" uid="uid://c622jer80j3sk" path="res://common/inventory_system/animation/item_animation.gd" id="39_dx5ib"]
+[ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="40_a2xo5"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -187,6 +190,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, -0.08, -0.3)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Camera3D/ArmContainer/ItemHolder/ItemVisualsContainer3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(7.4505815e-09, 1.4901159e-08, -6.519257e-09)]
+}
 
 [sub_resource type="Animation" id="Animation_32hag"]
 resource_name = "idle"
@@ -205,12 +220,57 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, -0.08, -0.3), Vector3(0, -0.07, -0.3), Vector3(0, -0.08, -0.3)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Camera3D/ArmContainer/ItemHolder/ItemVisualsContainer3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(7.4505815e-09, 1.4901159e-08, -6.519257e-09)]
+}
+
+[sub_resource type="Animation" id="Animation_1so5t"]
+resource_name = "swing_tool"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D/ArmContainer/ItemHolder/ItemVisualsContainer3D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.2617994, 0, 0), Vector3(-0.7749262, 1.1606439, -0.21642083), Vector3(0, 0, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tqiix"]
 _data = {
 &"RESET": SubResource("Animation_tqiix"),
-&"idle": SubResource("Animation_32hag")
+&"idle": SubResource("Animation_32hag"),
+&"swing_tool": SubResource("Animation_1so5t")
 }
+
+[sub_resource type="Resource" id="Resource_art4l"]
+script = ExtResource("39_dx5ib")
+items = Array[ExtResource("40_a2xo5")]([ExtResource("22_bjvpn")])
+start_anim = "swing_tool"
+metadata/_custom_type_script = "uid://c622jer80j3sk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pnw6m"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_1so5t"]
+graph_offset = Vector2(-278.4, 84)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_pnw6m")
+nodes/Animation/position = Vector2(-48, 128)
+node_connections = [&"output", 0, &"Animation"]
 
 [node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
 collision_layer = 17
@@ -296,15 +356,16 @@ metadata/_custom_type_script = "uid://bypxgjqugqucx"
 [node name="ArmContainer" type="Node3D" parent="Head/Camera3D" unique_id=207489004]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08, -0.3)
 
-[node name="ItemHolder" type="Node3D" parent="Head/Camera3D/ArmContainer" unique_id=1642409333 node_paths=PackedStringArray("instance_parent", "root")]
+[node name="ItemHolder" type="Node3D" parent="Head/Camera3D/ArmContainer" unique_id=1642409333 node_paths=PackedStringArray("root", "anim_player", "instance_parent")]
 transform = Transform3D(0.9848081, 0.015134426, 0.17298739, 0, 0.9961941, -0.08715573, -0.17364824, 0.08583159, 0.9810602, 0.29, -0.23, 0)
 script = ExtResource("7_kb6p2")
-instance_parent = NodePath("../..")
 root = NodePath("../../../..")
+anim_player = NodePath("../../../../AnimationPlayer")
+instance_parent = NodePath("../..")
 metadata/_edit_group_ = true
 
 [node name="ItemVisualsContainer3D" type="Node3D" parent="Head/Camera3D/ArmContainer/ItemHolder" unique_id=482834376 node_paths=PackedStringArray("item_holder", "inventory_holder_link")]
-transform = Transform3D(1.0000001, 4.0978193e-08, 0, -6.519258e-09, 1, -7.450581e-09, -1.4901161e-08, 7.450581e-09, 1, 0.08080295, 0.017175198, 0.014566064)
+transform = Transform3D(1.0000001, 6.519257e-09, 1.4901159e-08, -6.519258e-09, 1, -7.4505815e-09, -1.4901161e-08, 7.4505815e-09, 1, 0.08080295, 0.017175198, 0.014566064)
 script = ExtResource("10_s7qer")
 item_holder = NodePath("..")
 inventory_holder_link = NodePath("../InventoryHolderLink")
@@ -1282,9 +1343,17 @@ label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1780880928]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1780880928 node_paths=PackedStringArray("anim_tree")]
 libraries/ = SubResource("AnimationLibrary_tqiix")
 autoplay = &"idle"
+script = ExtResource("38_55jnj")
+item_animations = Array[ExtResource("39_dx5ib")]([SubResource("Resource_art4l")])
+anim_tree = NodePath("../AnimationTree")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1076057530]
+active = false
+tree_root = SubResource("AnimationNodeBlendTree_1so5t")
+anim_player = NodePath("../AnimationPlayer")
 
 [node name="BuildTimer" type="Timer" parent="." unique_id=1941720648]
 
