@@ -2,6 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://b5mk2ohahh5e8" path="res://items/materials/wood/wood.blend" id="1_mxk7r"]
 
-[node name="Wood" type="Node3D"]
+[node name="Wood" type="Node3D" unique_id=1422949405]
 
-[node name="Visuals" parent="." instance=ExtResource("1_mxk7r")]
+[node name="Visuals" parent="." unique_id=1919549888 instance=ExtResource("1_mxk7r")]

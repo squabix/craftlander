@@ -30,7 +30,7 @@ material = SubResource("StandardMaterial3D_18auj")
 radial_segments = 16
 rings = 8
 
-[node name="PuffParticles" type="GPUParticles3D"]
+[node name="PuffParticles" type="GPUParticles3D" unique_id=456102786]
 cast_shadow = 0
 emitting = false
 amount = 32

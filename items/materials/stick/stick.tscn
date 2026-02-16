@@ -1,7 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://4lmb1r25uhnr"]
+[gd_scene format=3 uid="uid://4lmb1r25uhnr"]
 
 [ext_resource type="PackedScene" uid="uid://cnh37b6uro8e4" path="res://items/materials/stick/stick.blend" id="1_dto60"]
 
-[node name="Stick" type="Node3D"]
+[node name="Stick" type="Node3D" unique_id=156442345]
 
-[node name="Visuals" parent="." instance=ExtResource("1_dto60")]
+[node name="Visuals" parent="." unique_id=531292594 instance=ExtResource("1_dto60")]

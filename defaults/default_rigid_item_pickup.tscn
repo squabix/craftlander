@@ -11,7 +11,7 @@ script = ExtResource("5_ncujj")
 y = false
 metadata/_custom_type_script = "uid://bh8pcyeueeoey"
 
-[node name="DefaultRigidItemPickup" type="RigidBody3D" node_paths=PackedStringArray("item_pickup_interactable", "hurtbox")]
+[node name="DefaultRigidItemPickup" type="RigidBody3D" unique_id=1935409248 node_paths=PackedStringArray("item_pickup_interactable", "hurtbox")]
 collision_layer = 32
 collision_mask = 36
 gravity_scale = 3.0
@@ -22,13 +22,13 @@ item_pickup_interactable = NodePath("ItemPickup3D")
 hurtbox = NodePath("Hurtbox3D")
 metadata/_custom_type_script = "uid://oexynjvr31bs"
 
-[node name="ItemPickup3D" type="Area3D" parent="."]
+[node name="ItemPickup3D" type="Area3D" parent="." unique_id=1836251032]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("2_d36xw")
 metadata/_custom_type_script = "uid://c00hsywtiwt6w"
 
-[node name="Hurtbox3D" type="Area3D" parent="." node_paths=PackedStringArray("rigid_body")]
+[node name="Hurtbox3D" type="Area3D" parent="." unique_id=953956432 node_paths=PackedStringArray("rigid_body")]
 collision_layer = 8
 collision_mask = 0
 monitoring = false
@@ -36,7 +36,7 @@ script = ExtResource("3_u5gda")
 rigid_body = NodePath("..")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
-[node name="RigidBodyVelocityLimiter3D" type="Node" parent="."]
+[node name="RigidBodyVelocityLimiter3D" type="Node" parent="." unique_id=1702087799]
 script = ExtResource("4_1sloe")
 enabled = false
 limit = 3.0

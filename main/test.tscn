@@ -14,26 +14,26 @@ size = Vector2(50, 50)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_rarbv"]
 
-[node name="Test" type="Node3D"]
+[node name="Test" type="Node3D" unique_id=71390746]
 script = ExtResource("1_0pcxm")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1991878510]
 mesh = SubResource("PlaneMesh_8nrhl")
 
-[node name="Tree" parent="." instance=ExtResource("2_dax2s")]
+[node name="Tree" parent="." unique_id=182452863 instance=ExtResource("2_dax2s")]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -6.115755, 0, -6.115755)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=588090918]
 collision_layer = 5
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1557807534]
 shape = SubResource("WorldBoundaryShape3D_rarbv")
 
-[node name="Player" parent="." instance=ExtResource("3_dax2s")]
+[node name="Player" parent="." unique_id=840439423 instance=ExtResource("3_dax2s")]
 
-[node name="Rootling" parent="." instance=ExtResource("4_rarbv")]
+[node name="Rootling" parent="." unique_id=1926843073 instance=ExtResource("4_rarbv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.638369, 0.5, 11.424053)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=883971372]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 shadow_enabled = true

@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="24_vy7b5"]
 [ext_resource type="Script" uid="uid://cmmmo3xnygmau" path="res://common/deletion_alarm.gd" id="25_vy7b5"]
 [ext_resource type="Script" uid="uid://bwd4jx8u5uct2" path="res://common/inventory_system/item_holder3d.gd" id="27_7307j"]
+[ext_resource type="Resource" uid="uid://cou0hpul4vf1y" path="res://items/tools/shoddy_spear/shoddy_spear_item.tres" id="28_0uawy"]
 
 [sub_resource type="Resource" id="Resource_50i80"]
 script = ExtResource("2_76rxv")
@@ -534,7 +535,7 @@ node_connections = [&"output", 0, &"RunBlendSpace"]
 
 [sub_resource type="Resource" id="Resource_7307j"]
 script = ExtResource("8_8jseq")
-item = ExtResource("16_p5gg5")
+item = ExtResource("28_0uawy")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [node name="Rootling" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_player", "anim_tree", "horizontal_rotation_target", "vertical_rotation_target")]
@@ -669,7 +670,7 @@ update_scale = false
 [node name="Visuals" parent="." unique_id=1055487819 instance=ExtResource("13_v4fp6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
-[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1055487819, 1177331135) index="0" unique_id=657049233]
+[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1055487819, 955464245) index="0" unique_id=840631278]
 bones/0/scale = Vector3(0.9999997, 0.9999997, 1)
 bones/3/position = Vector3(2.0001467e-10, 0.30181545, 2.2215756e-15)
 bones/3/scale = Vector3(1, 0.99999994, 1)

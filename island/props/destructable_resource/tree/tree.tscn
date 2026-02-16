@@ -349,7 +349,6 @@ shape = SubResource("SphereShape3D_8mlu7")
 
 [node name="TrunkMesh" type="MeshInstance3D" parent="Trunk" unique_id=364536463]
 mesh = SubResource("ArrayMesh_6wxbm")
-skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Trunk" unique_id=372898001]
 shape = SubResource("ConcavePolygonShape3D_afesh")
@@ -357,7 +356,6 @@ shape = SubResource("ConcavePolygonShape3D_afesh")
 [node name="LeavesMesh" type="MeshInstance3D" parent="Trunk" unique_id=157717306]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5473785, 8.896626, -2.4605901)
 mesh = SubResource("ArrayMesh_r1bcm")
-skeleton = NodePath("")
 
 [node name="Spawner3D" type="Node3D" parent="Trunk" unique_id=737068488 node_paths=PackedStringArray("inventory")]
 unique_name_in_owner = true
@@ -386,7 +384,6 @@ draw_pass_1 = SubResource("SphereMesh_kblrq")
 
 [node name="StumpMesh" type="MeshInstance3D" parent="Stump" unique_id=1272186461]
 mesh = SubResource("ArrayMesh_nrtbk")
-skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stump" unique_id=1879403206]
 shape = ExtResource("12_18auj")

@@ -2,6 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://d3nw6sqipfx2f" path="res://items/food/raw_meat/raw_meat.blend" id="1_x8gma"]
 
-[node name="RawMeat" type="Node3D"]
+[node name="RawMeat" type="Node3D" unique_id=282752753]
 
-[node name="Visuals" parent="." instance=ExtResource("1_x8gma")]
+[node name="Visuals" parent="." unique_id=573375162 instance=ExtResource("1_x8gma")]
