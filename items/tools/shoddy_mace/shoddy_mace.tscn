@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://1b3xwsw4p1gp"]
+
+[ext_resource type="Script" uid="uid://dd8qskwv1nlqx" path="res://common3d/damage_system/hit_ray3d.gd" id="1_550cs"]
+[ext_resource type="Script" uid="uid://bl5x717nsijmk" path="res://common/damage_system/damage.gd" id="2_5pc8o"]
+[ext_resource type="PackedScene" uid="uid://7qerylnupfr3" path="res://items/tools/shoddy_mace/shoddy_mace.blend" id="3_550cs"]
+
+[sub_resource type="Resource" id="Resource_7cxoo"]
+script = ExtResource("2_5pc8o")
+base_amount = 4.0
+force = 15.0
+type = "weapon"
+metadata/_custom_type_script = "uid://bl5x717nsijmk"
+
+[node name="ShoddyMace" type="Node3D" unique_id=1538443592]
+
+[node name="HarvestRay" type="RayCast3D" parent="." unique_id=1061948039]
+target_position = Vector3(0, 0, -2)
+collision_mask = 8
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("1_550cs")
+damage = SubResource("Resource_7cxoo")
+metadata/_custom_type_script = "uid://dd8qskwv1nlqx"
+
+[node name="Visuals" type="Node3D" parent="." unique_id=253996080]
+
+[node name="BlenderMeshes" parent="Visuals" unique_id=742673609 instance=ExtResource("3_550cs")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)

@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ItemRecipe" format=3 uid="uid://6a5notvdv1ei"]
+
+[ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="1_66pyb"]
+[ext_resource type="Script" uid="uid://c5ntwgpouf24m" path="res://items/crafting/item_recipe.gd" id="2_sb42a"]
+[ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="2_xu5xl"]
+[ext_resource type="Resource" uid="uid://b37h3pr83pcu4" path="res://items/materials/rock/rock_item.tres" id="3_s5hfs"]
+[ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/tools/shoddy_mace/shoddy_mace_item.tres" id="4_eo3xd"]
+[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="5_6a1qf"]
+
+[sub_resource type="Resource" id="Resource_5bulu"]
+script = ExtResource("5_6a1qf")
+item = ExtResource("4_eo3xd")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[resource]
+script = ExtResource("2_sb42a")
+result = SubResource("Resource_5bulu")
+layout = Dictionary[Vector2i, ExtResource("1_66pyb")]({
+Vector2i(-1, 1): ExtResource("3_s5hfs"),
+Vector2i(-1, 2): ExtResource("3_s5hfs"),
+Vector2i(0, -2): ExtResource("2_xu5xl"),
+Vector2i(0, -1): ExtResource("2_xu5xl"),
+Vector2i(0, 0): ExtResource("2_xu5xl"),
+Vector2i(0, 1): ExtResource("3_s5hfs"),
+Vector2i(0, 2): ExtResource("3_s5hfs"),
+Vector2i(1, 1): ExtResource("3_s5hfs"),
+Vector2i(1, 2): ExtResource("3_s5hfs")
+})
+metadata/_custom_type_script = "uid://c5ntwgpouf24m"
