@@ -40,6 +40,7 @@
 [ext_resource type="Texture2D" uid="uid://p5jyelnqcoqe" path="res://assets/grid.png" id="39_55jnj"]
 [ext_resource type="Script" uid="uid://c622jer80j3sk" path="res://common/inventory_system/animation/item_animation.gd" id="39_dx5ib"]
 [ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="40_a2xo5"]
+[ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/tools/shoddy_mace/shoddy_mace_item.tres" id="41_a2xo5"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -259,7 +260,7 @@ _data = {
 
 [sub_resource type="Resource" id="Resource_art4l"]
 script = ExtResource("39_dx5ib")
-items = Array[ExtResource("40_a2xo5")]([ExtResource("22_bjvpn")])
+items = Array[ExtResource("40_a2xo5")]([ExtResource("22_bjvpn"), ExtResource("41_a2xo5")])
 start_anim = "swing_tool"
 metadata/_custom_type_script = "uid://c622jer80j3sk"
 
