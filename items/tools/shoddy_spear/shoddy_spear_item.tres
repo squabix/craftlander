@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="HarvestingTool" format=3 uid="uid://cou0hpul4vf1y"]
+
+[ext_resource type="Script" uid="uid://6x786nnhteca" path="res://items/tools/harvesting_tool.gd" id="1_6sfkv"]
+[ext_resource type="PackedScene" uid="uid://mhk4odp75uiy" path="res://items/tools/shoddy_spear/shoddy_spear.tscn" id="1_o8drn"]
+[ext_resource type="Texture2D" uid="uid://ctyb4g15jbje6" path="res://items/tools/shoddy_spear/shoddy_spear_placeholder.png" id="1_yupxs"]
+
+[resource]
+script = ExtResource("1_6sfkv")
+harvest_animation = "jab"
+scene = ExtResource("1_o8drn")
+name = "Shoddy Spear"
+icon = ExtResource("1_yupxs")
+cooldown_mode = 1
+default_cooldown_length = 0.4
+metadata/_custom_type_script = "uid://6x786nnhteca"
