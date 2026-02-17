@@ -14,3 +14,6 @@ func _init() -> void:
 			ingredients[item] += 1
 		else:
 			ingredients[item] = 1
+
+func _to_string() -> String:
+	return str(result) + " Recipe"
