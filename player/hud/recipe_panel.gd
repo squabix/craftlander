@@ -25,6 +25,9 @@ func clear_recipe_display() -> void:
 func display_recipe(recipe: ItemRecipe) -> void:
 	clear_recipe_display()
 	for item_position in recipe.layout:
+		if recipe.layout[item_position] == null:
+			printerr(self, " cannot display ingredient in ", recipe, " with null at ", item_position)
+			continue
 		get_grid_item_label(item_position).text = recipe.layout[item_position].name
 
 func get_grid_item_label(label_position: Vector2i) -> Label:
