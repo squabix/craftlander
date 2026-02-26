@@ -27,6 +27,9 @@ func update_item_instance(to: ItemInstance):
 			item_instance.item.remove_scene()
 	item_instance = to
 	
+	if item_instance == null:
+		return
+	
 	# Wait for item to become unique
 	if not item_instance.item.is_unique:
 		await item_instance.item.made_unique
