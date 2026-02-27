@@ -1,3 +1,5 @@
+assets/placeholder_assets
+
 # Godot 4+ specific ignores
 .godot/
 .nomedia
