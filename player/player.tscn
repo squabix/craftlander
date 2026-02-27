@@ -106,6 +106,29 @@ gradient = SubResource("Gradient_1s1yo")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7pn3"]
+bg_color = Color(0.2812, 0.74, 0.37296006, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8hi5"]
+bg_color = Color(0.67, 0.39530003, 0.12060001, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2uvqg"]
+bg_color = Color(0.5798601, 0.12640002, 0.79, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7pqkx"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_uw77l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pnw6m"]
+shader = ExtResource("28_ge24q")
+shader_parameter/blur_amount = 1.0000001424999998
+shader_parameter/mix_amount = 0.30000001425
+shader_parameter/color_over = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_55jnj"]
+font_size = 10
+
 [sub_resource type="Animation" id="Animation_knn7v"]
 length = 0.001
 tracks/0/type = "value"
@@ -153,29 +176,6 @@ gradient = SubResource("Gradient_x7c3f")
 use_hdr = true
 fill = 1
 fill_from = Vector2(0.5, 0.5)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7pn3"]
-bg_color = Color(0.2812, 0.74, 0.37296006, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8hi5"]
-bg_color = Color(0.67, 0.39530003, 0.12060001, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2uvqg"]
-bg_color = Color(0.5798601, 0.12640002, 0.79, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_7pqkx"]
-font_size = 20
-
-[sub_resource type="LabelSettings" id="LabelSettings_uw77l"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pnw6m"]
-shader = ExtResource("28_ge24q")
-shader_parameter/blur_amount = 1.0000001424999998
-shader_parameter/mix_amount = 0.30000001425
-shader_parameter/color_over = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_55jnj"]
-font_size = 10
 
 [sub_resource type="Animation" id="Animation_tqiix"]
 length = 0.001
@@ -371,6 +371,7 @@ script = ExtResource("10_s7qer")
 item_holder = NodePath("..")
 inventory_holder_link = NodePath("../InventoryHolderLink")
 visuals_scale_ratio = 0.4
+disable_shadows = true
 
 [node name="Sprite3D" type="Sprite3D" parent="Head/Camera3D/ArmContainer/ItemHolder" unique_id=1502779023]
 transform = Transform3D(0.050000004, 2.910383e-10, 0, -9.313226e-10, 0.05, 0, 0, 2.3283064e-10, 0.05, 0.08080298, 0.017175198, 0.014566064)
@@ -387,7 +388,6 @@ scroll_down_input_action = "scroll_down"
 metadata/_custom_type_script = "uid://ioo6s3m7wbha"
 
 [node name="VignetteRect" type="TextureRect" parent="Head/Camera3D" unique_id=1442022538]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -449,7 +449,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+mouse_filter = 1
 script = ExtResource("17_g4c7l")
 
 [node name="SicknessTint" type="TextureRect" parent="HUD" unique_id=1082167472]
@@ -478,435 +478,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("17_tqiix")
 expand_mode = 1
-
-[node name="InventoryInterface" type="Control" parent="HUD" unique_id=858532635]
-z_index = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CurrentItemLabel" type="Label" parent="HUD/InventoryInterface" unique_id=272445762]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = 236.0
-offset_right = 200.0
-offset_bottom = 259.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Axe"
-horizontal_alignment = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/InventoryInterface/CurrentItemLabel" unique_id=1735479515]
-libraries/ = SubResource("AnimationLibrary_7pqkx")
-
-[node name="InventoryDisplay" type="HBoxContainer" parent="HUD/InventoryInterface" unique_id=1354943621]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = 266.0
-offset_right = 200.0
-offset_bottom = 306.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 5
-
-[node name="ItemDisplay1" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=468719072 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-script = ExtResource("16_e7oew")
-icon_rect = NodePath("IconRect")
-quantity_label = NodePath("QuantityLabel")
-inventory = NodePath("../../../../Inventory")
-inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
-selected_modulate = Color(0.345098, 1, 1, 1)
-
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay1" unique_id=1569262230]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_bjvpn")
-expand_mode = 1
-
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay1" unique_id=1846995695]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("23_g4c7l")
-expand_mode = 1
-
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay1" unique_id=1640920594]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -23.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "#"
-text_overrun_behavior = 1
-
-[node name="ItemDisplay2" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1566893430 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-script = ExtResource("16_e7oew")
-icon_rect = NodePath("IconRect")
-quantity_label = NodePath("QuantityLabel")
-inventory = NodePath("../../../../Inventory")
-index = 1
-inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
-selected_modulate = Color(0.345098, 1, 1, 1)
-
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2" unique_id=1638759378]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_bjvpn")
-expand_mode = 1
-
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2" unique_id=1308629600]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("23_g4c7l")
-expand_mode = 1
-
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2" unique_id=1227409477]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -23.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "#"
-text_overrun_behavior = 1
-
-[node name="ItemDisplay3" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=346234876 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-script = ExtResource("16_e7oew")
-icon_rect = NodePath("IconRect")
-quantity_label = NodePath("QuantityLabel")
-inventory = NodePath("../../../../Inventory")
-index = 2
-inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
-selected_modulate = Color(0.345098, 1, 1, 1)
-
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3" unique_id=1982610863]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_bjvpn")
-expand_mode = 1
-
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3" unique_id=1574897447]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("23_g4c7l")
-expand_mode = 1
-
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3" unique_id=1667207652]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -23.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "#"
-text_overrun_behavior = 1
-
-[node name="ItemDisplay4" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1368455562 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-script = ExtResource("16_e7oew")
-icon_rect = NodePath("IconRect")
-quantity_label = NodePath("QuantityLabel")
-inventory = NodePath("../../../../Inventory")
-index = 3
-inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
-selected_modulate = Color(0.345098, 1, 1, 1)
-
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4" unique_id=727156131]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_bjvpn")
-expand_mode = 1
-
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4" unique_id=142109256]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("23_g4c7l")
-expand_mode = 1
-
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4" unique_id=132940345]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -23.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "#"
-text_overrun_behavior = 1
-
-[node name="ItemDisplay5" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=558654689 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-script = ExtResource("16_e7oew")
-icon_rect = NodePath("IconRect")
-quantity_label = NodePath("QuantityLabel")
-inventory = NodePath("../../../../Inventory")
-index = 4
-inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
-selected_modulate = Color(0.345098, 1, 1, 1)
-
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5" unique_id=940714038]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_bjvpn")
-expand_mode = 1
-
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5" unique_id=24253356]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("23_g4c7l")
-expand_mode = 1
-
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5" unique_id=4543047]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -23.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "#"
-text_overrun_behavior = 1
-
-[node name="ItemDisplay6" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=356410584 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-script = ExtResource("16_e7oew")
-icon_rect = NodePath("IconRect")
-quantity_label = NodePath("QuantityLabel")
-inventory = NodePath("../../../../Inventory")
-index = 5
-inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
-selected_modulate = Color(0.345098, 1, 1, 1)
-
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6" unique_id=411628049]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_bjvpn")
-expand_mode = 1
-
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6" unique_id=1736496631]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("23_g4c7l")
-expand_mode = 1
-
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6" unique_id=1648222158]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -23.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "#"
-text_overrun_behavior = 1
-
-[node name="ItemDisplay7" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1797142558 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-script = ExtResource("16_e7oew")
-icon_rect = NodePath("IconRect")
-quantity_label = NodePath("QuantityLabel")
-inventory = NodePath("../../../../Inventory")
-index = 6
-inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
-selected_modulate = Color(0.345098, 1, 1, 1)
-
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7" unique_id=1921957488]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_bjvpn")
-expand_mode = 1
-
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7" unique_id=1805097140]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("23_g4c7l")
-expand_mode = 1
-
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7" unique_id=247556463]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -23.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "#"
-text_overrun_behavior = 1
-
-[node name="ItemDisplay8" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1424194935 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-script = ExtResource("16_e7oew")
-icon_rect = NodePath("IconRect")
-quantity_label = NodePath("QuantityLabel")
-inventory = NodePath("../../../../Inventory")
-index = 7
-inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
-selected_modulate = Color(0.345098, 1, 1, 1)
-
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8" unique_id=1245140687]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_bjvpn")
-expand_mode = 1
-
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8" unique_id=340953188]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("23_g4c7l")
-expand_mode = 1
-
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8" unique_id=1539599903]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -23.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "#"
-text_overrun_behavior = 1
-
-[node name="ItemDisplay9" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=577589432 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link")]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-script = ExtResource("16_e7oew")
-icon_rect = NodePath("IconRect")
-quantity_label = NodePath("QuantityLabel")
-inventory = NodePath("../../../../Inventory")
-index = 8
-inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
-selected_modulate = Color(0.345098, 1, 1, 1)
-
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9" unique_id=1395515331]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_bjvpn")
-expand_mode = 1
-
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9" unique_id=855804498]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("23_g4c7l")
-expand_mode = 1
-
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9" unique_id=1260966804]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -23.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "#"
-text_overrun_behavior = 1
 
 [node name="TooltipLabel" type="Label" parent="HUD" unique_id=189793984 node_paths=PackedStringArray("interactor")]
 layout_mode = 1
@@ -1343,6 +914,580 @@ layout_mode = 2
 label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="InventoryInterface" type="Control" parent="HUD" unique_id=858532635]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="CurrentItemLabel" type="Label" parent="HUD/InventoryInterface" unique_id=272445762]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 236.0
+offset_right = 200.0
+offset_bottom = 259.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Axe"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/InventoryInterface/CurrentItemLabel" unique_id=1735479515]
+libraries/ = SubResource("AnimationLibrary_7pqkx")
+
+[node name="InventoryDisplay" type="HBoxContainer" parent="HUD/InventoryInterface" unique_id=1354943621]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 266.0
+offset_right = 200.0
+offset_bottom = 306.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+theme_override_constants/separation = 5
+
+[node name="ItemDisplay1" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=468719072 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+inventory = NodePath("../../../../Inventory")
+inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
+select_button = NodePath("Button")
+selected_modulate = Color(0.345098, 1, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay1" unique_id=1569262230]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay1" unique_id=1846995695]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay1" unique_id=1640920594]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay1" unique_id=787085304]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="ItemDisplay2" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=565086459 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+inventory = NodePath("../../../../Inventory")
+index = 1
+inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
+select_button = NodePath("Button")
+selected_modulate = Color(0.345098, 1, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2" unique_id=1619170252]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2" unique_id=753609349]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2" unique_id=129411955]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2" unique_id=742415257]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="ItemDisplay3" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1912724409 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+inventory = NodePath("../../../../Inventory")
+index = 2
+inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
+select_button = NodePath("Button")
+selected_modulate = Color(0.345098, 1, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3" unique_id=1811648726]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3" unique_id=1158039226]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3" unique_id=602525612]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3" unique_id=439677409]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="ItemDisplay4" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1964717903 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+inventory = NodePath("../../../../Inventory")
+index = 3
+inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
+select_button = NodePath("Button")
+selected_modulate = Color(0.345098, 1, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4" unique_id=426563937]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4" unique_id=493789448]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4" unique_id=1236421659]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4" unique_id=1694660412]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="ItemDisplay5" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=351473629 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+inventory = NodePath("../../../../Inventory")
+index = 4
+inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
+select_button = NodePath("Button")
+selected_modulate = Color(0.345098, 1, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5" unique_id=1563477326]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5" unique_id=1152911382]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5" unique_id=304825081]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5" unique_id=1986254317]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="ItemDisplay6" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=2093114136 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+inventory = NodePath("../../../../Inventory")
+index = 5
+inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
+select_button = NodePath("Button")
+selected_modulate = Color(0.345098, 1, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6" unique_id=480602057]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6" unique_id=479300021]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6" unique_id=2032687980]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6" unique_id=1342096179]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="ItemDisplay7" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=270341977 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+inventory = NodePath("../../../../Inventory")
+index = 6
+inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
+select_button = NodePath("Button")
+selected_modulate = Color(0.345098, 1, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7" unique_id=1691641236]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7" unique_id=162548575]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7" unique_id=600567779]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7" unique_id=678091576]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="ItemDisplay8" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1265445971 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+inventory = NodePath("../../../../Inventory")
+index = 7
+inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
+select_button = NodePath("Button")
+selected_modulate = Color(0.345098, 1, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8" unique_id=729010364]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8" unique_id=159934111]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8" unique_id=748199376]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8" unique_id=76328627]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="ItemDisplay9" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=751152059 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+inventory = NodePath("../../../../Inventory")
+index = 8
+inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
+select_button = NodePath("Button")
+selected_modulate = Color(0.345098, 1, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9" unique_id=328276105]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9" unique_id=1989049812]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9" unique_id=555245987]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9" unique_id=235572382]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="ItemDisplay10" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=521288441 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+inventory = NodePath("../../../../Inventory")
+index = 9
+inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
+select_button = NodePath("Button")
+selected_modulate = Color(0.345098, 1, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay10" unique_id=1779436927]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay10" unique_id=1491249226]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay10" unique_id=458647099]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay10" unique_id=2143432368]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1780880928 node_paths=PackedStringArray("anim_tree")]
 libraries/ = SubResource("AnimationLibrary_tqiix")
