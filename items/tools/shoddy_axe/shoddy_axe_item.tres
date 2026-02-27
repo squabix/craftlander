@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="HarvestingTool" format=3 uid="uid://bah3rou15fcfh"]
 
-[ext_resource type="Texture2D" uid="uid://dmocxrp70ktf2" path="res://assets/placeholder_assets/shoddy_axe_placeholder.png" id="1_u75bx"]
+[ext_resource type="Texture2D" uid="uid://djncico7ttqhm" path="res://items/tools/shoddy_axe/shoddy_axe.png" id="1_gclnw"]
 [ext_resource type="Script" uid="uid://6x786nnhteca" path="res://items/tools/harvesting_tool.gd" id="1_udkp1"]
 [ext_resource type="PackedScene" uid="uid://jlwffnpxmq3x" path="res://items/tools/shoddy_axe/shoddy_axe.tscn" id="2_gclnw"]
 
@@ -8,7 +8,7 @@
 script = ExtResource("1_udkp1")
 scene = ExtResource("2_gclnw")
 name = "Shoddy Axe"
-icon = ExtResource("1_u75bx")
+icon = ExtResource("1_gclnw")
 cooldown_mode = 1
 default_cooldown_length = 0.25
 metadata/_custom_type_script = "uid://6x786nnhteca"
