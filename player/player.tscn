@@ -290,7 +290,7 @@ metadata/_custom_type_script = "uid://bki5ij8task16"
 [node name="Inventory" type="Node" parent="." unique_id=710458340]
 script = ExtResource("19_c35mf")
 item_instances = Array[ExtResource("20_x7c3f")]([SubResource("Resource_s7qer")])
-size = 9
+size = 10
 
 [node name="Hunger" type="Node" parent="." unique_id=1790864786 node_paths=PackedStringArray("bar", "health")]
 script = ExtResource("31_2uvqg")
