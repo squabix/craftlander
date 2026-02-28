@@ -1,16 +1,13 @@
-extends AnimationPlayer
-class_name ItemAnimationPlayer
+extends AnimationTree
+class_name ItemAnimationTree
 
 @export var item_animations: Array[ItemAnimations] = []
+@export var do_interupt := true
 
 @export_group("Defaults")
 @export var default_start_anim := ""
 @export var default_continue_anim := ""
 @export var default_end_anim := ""
-
-@export_group("Tree")
-@export var anim_tree: AnimationTree
-@export var do_interupt_tree := true
 
 var item: Item
 var start_anim := ""
@@ -19,21 +16,21 @@ var end_anim := ""
 
 func _ready() -> void:
 	default()
-	animation_finished.connect(update_tree)
+	get_player().animation_finished.connect(update)
 
-func update_tree(finished_anim: String) -> void:
-	if not (do_interupt_tree and is_instance_valid(anim_tree)):
+func update(finished_anim: String) -> void:
+	if not do_interupt:
 		return
 	
 	match finished_anim:
 		start_anim:
 			if continue_anim.is_empty():
-				anim_tree.active = true
+				active = true
 		continue_anim:
 			if end_anim.is_empty():
-				anim_tree.active = true
+				active = true
 		end_anim:
-			anim_tree.active = true
+			active = true
 
 func default() -> void:
 	start_anim = default_start_anim
@@ -74,21 +71,24 @@ func update_item(new_item: Item) -> void:
 	item.continued_use.connect(play_continue)
 	item.ended_use.connect(play_end)
 
+func get_player() -> AnimationPlayer:
+	return get_node(anim_player)
+
 func play_start() -> void:
-	deactivate_tree()
-	play(start_anim)
+	deactivate()
+	get_player().play(start_anim)
 
 func play_continue() -> void:
-	if current_animation == start_anim:
+	if get_player().current_animation == start_anim:
 		return
 	
-	deactivate_tree()
-	play(continue_anim)
+	deactivate()
+	get_player().play(continue_anim)
 
-func deactivate_tree() -> void:
-	if do_interupt_tree and is_instance_valid(anim_tree):
-		anim_tree.active = false
+func deactivate() -> void:
+	if do_interupt:
+		active = false
 
 func play_end() -> void:
-	deactivate_tree()
-	play(end_anim)
+	deactivate()
+	get_player().play(end_anim)

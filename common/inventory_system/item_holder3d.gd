@@ -9,7 +9,7 @@ signal item_event_triggered(event: ItemEvent)
 @export var initial_item_instance: ItemInstance
 @export var root: Node
 @export_group("Misc")
-@export var anim_player: ItemAnimationPlayer
+@export var anim_tree: ItemAnimationTree
 @export var instance_parent: Node3D
 
 var item_instance: ItemInstance
@@ -35,8 +35,8 @@ func update_item_instance(to: ItemInstance):
 		await item_instance.item.made_unique
 	
 	# Update anim player
-	if anim_player:
-		anim_player.update_item(item_instance.item)
+	if anim_tree:
+		anim_tree.update_item(item_instance.item)
 	
 	item_instance.item.root = root
 	
