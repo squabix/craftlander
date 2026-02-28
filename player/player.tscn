@@ -34,7 +34,6 @@
 [ext_resource type="Script" uid="uid://7qluctwrt8qk" path="res://player/hud/full_screen_interface.gd" id="28_pnw6m"]
 [ext_resource type="PackedScene" uid="uid://cw2ir860alcgt" path="res://player/hud/crafting_environment.tscn" id="28_q28gw"]
 [ext_resource type="Script" uid="uid://bn55l5h1rwjsn" path="res://player/hunger.gd" id="31_2uvqg"]
-[ext_resource type="Script" uid="uid://ds4dru7pq3a84" path="res://player/sickness_manager.gd" id="32_1s1yo"]
 [ext_resource type="Script" uid="uid://crew0n1e8xk4r" path="res://player/hud/recipe_panel.gd" id="38_1so5t"]
 [ext_resource type="Script" uid="uid://bi8ev1kcq2ayf" path="res://common/inventory_system/animation/item_animation_tree.gd" id="38_a2xo5"]
 [ext_resource type="Texture2D" uid="uid://p5jyelnqcoqe" path="res://assets/grid.png" id="39_55jnj"]
@@ -69,15 +68,6 @@ point_count = 2
 _data = [Vector2(0.892, 0), 0.0, 0.6109068, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Curve" id="Curve_5ejfk"]
-_data = [Vector2(0.25, 0), 0.0, 2.729937, 0, 0, Vector2(1, 1), 3.221552, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_jd2rm"]
-_limits = [1.0, 5.0, 0.0, 1.0]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.75, 2), 0.0, 0.0, 0, 0, Vector2(1, 5), 15.916982, 0.0, 0, 0]
-point_count = 3
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r1lm2"]
 radius = 0.3
 height = 1.6
@@ -98,22 +88,11 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_ebec5"]
 size = Vector3(0.42, 1.5, 0.42)
 
-[sub_resource type="Gradient" id="Gradient_1s1yo"]
-colors = PackedColorArray(0.592, 0.27999997, 1, 0.5882353, 0.42297676, 0.008599992, 0.43, 0.9019608)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_5ejfk"]
-gradient = SubResource("Gradient_1s1yo")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7pn3"]
 bg_color = Color(0.2812, 0.74, 0.37296006, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8hi5"]
 bg_color = Color(0.67, 0.39530003, 0.12060001, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2uvqg"]
-bg_color = Color(0.5798601, 0.12640002, 0.79, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_7pqkx"]
 font_size = 20
@@ -302,17 +281,6 @@ hurt_curve = SubResource("Curve_2uvqg")
 regeneration_curve = SubResource("Curve_1s1yo")
 metadata/_custom_type_script = "uid://bn55l5h1rwjsn"
 
-[node name="SicknessManager" type="Node" parent="." unique_id=629645805 node_paths=PackedStringArray("bar", "entity_controller", "health", "hunger", "sickness_tint")]
-script = ExtResource("32_1s1yo")
-bar = NodePath("../HUD/BarContainer/SicknessBar")
-entity_controller = NodePath("../Controller3D")
-health = NodePath("../Health")
-hunger = NodePath("../Hunger")
-hurt_multiplier_curve = SubResource("Curve_5ejfk")
-hunger_multiplier_curve = SubResource("Curve_jd2rm")
-sickness_tint = NodePath("../HUD/SicknessTint")
-sickness_tint_curve = SubResource("Curve_5ejfk")
-
 [node name="StandingCollisionShape" type="CollisionShape3D" parent="." unique_id=1369713611]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
@@ -454,16 +422,6 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("17_g4c7l")
 
-[node name="SicknessTint" type="TextureRect" parent="HUD" unique_id=1082167472]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_5ejfk")
-
 [node name="Cursor" type="TextureRect" parent="HUD" unique_id=92395798]
 texture_filter = 1
 layout_mode = 1
@@ -526,17 +484,6 @@ layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_b8hi5")
 max_value = 1.0
 value = 0.41
-show_percentage = false
-script = ExtResource("27_b8hi5")
-lerp_weight = 0.1
-metadata/_custom_type_script = "uid://c3xfbb8ay0ghk"
-
-[node name="SicknessBar" type="ProgressBar" parent="HUD/BarContainer" unique_id=807616943]
-custom_minimum_size = Vector2(0, 15)
-layout_mode = 2
-theme_override_styles/fill = SubResource("StyleBoxFlat_2uvqg")
-max_value = 1.0
-fill_mode = 1
 show_percentage = false
 script = ExtResource("27_b8hi5")
 lerp_weight = 0.1
