@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://6x786nnhteca" path="res://items/tools/harvesting_tool.gd" id="1_6sfkv"]
 [ext_resource type="PackedScene" uid="uid://mhk4odp75uiy" path="res://items/tools/shoddy_spear/shoddy_spear.tscn" id="1_o8drn"]
-[ext_resource type="Texture2D" uid="uid://ctyb4g15jbje6" path="res://items/tools/shoddy_spear/shoddy_spear_placeholder.png" id="1_yupxs"]
+[ext_resource type="Texture2D" uid="uid://b2my7s87xk85k" path="res://items/tools/shoddy_spear/shoddy_spear.png" id="1_yupxs"]
 
 [resource]
 script = ExtResource("1_6sfkv")

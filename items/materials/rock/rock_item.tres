@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Item" format=3 uid="uid://b37h3pr83pcu4"]
 
-[ext_resource type="Texture2D" uid="uid://cy7t71mibkd8k" path="res://island/island_taper_texture.tres" id="1_3vdst"]
+[ext_resource type="Texture2D" uid="uid://dst7iet4aksej" path="res://items/materials/rock/rock.png" id="1_3vdst"]
 [ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="1_p5fvs"]
 [ext_resource type="PackedScene" uid="uid://ewpur2xt3lj3" path="res://items/materials/rock/rock.tscn" id="2_one12"]
 

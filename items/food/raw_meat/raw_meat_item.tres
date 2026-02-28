@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Food" format=3 uid="uid://r2mg70okysjv"]
 
 [ext_resource type="Script" uid="uid://bcua33xmbibyi" path="res://items/food/food.gd" id="1_enjs7"]
-[ext_resource type="Texture2D" uid="uid://c4jkghkqifcm7" path="res://assets/crosshair.tres" id="1_o47ul"]
+[ext_resource type="Texture2D" uid="uid://b02s8vle3kjwk" path="res://items/food/raw_meat/raw_meat.png" id="1_o47ul"]
 [ext_resource type="PackedScene" uid="uid://chhe4l502hgss" path="res://items/food/raw_meat/raw_meat.tscn" id="2_7ij5n"]
 
 [resource]

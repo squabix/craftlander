@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctyb4g15jbje6"
-path="res://.godot/imported/shoddy_spear_placeholder.png-43cb5aab5d9df9b6741b756c2dc3ae22.ctex"
+uid="uid://b2my7s87xk85k"
+path="res://.godot/imported/shoddy_spear.png-39c5d4b497fca0572c92fc04533943f4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://items/tools/shoddy_spear/shoddy_spear_placeholder.png"
-dest_files=["res://.godot/imported/shoddy_spear_placeholder.png-43cb5aab5d9df9b6741b756c2dc3ae22.ctex"]
+source_file="res://items/tools/shoddy_spear/shoddy_spear.png"
+dest_files=["res://.godot/imported/shoddy_spear.png-39c5d4b497fca0572c92fc04533943f4.ctex"]
 
 [params]
 

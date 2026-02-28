@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Item" format=3 uid="uid://d1ripkpgxv11u"]
 
 [ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="1_01svi"]
-[ext_resource type="Texture2D" uid="uid://divjmhiylget6" path="res://items/materials/wood/wood_placeholder.png" id="1_8mjoq"]
+[ext_resource type="Texture2D" uid="uid://chh6o0ggvj8jo" path="res://items/materials/wood/wood.png" id="1_dl8ob"]
 [ext_resource type="PackedScene" uid="uid://b3r8gm0726pe7" path="res://items/materials/wood/wood.tscn" id="2_w64t5"]
 
 [resource]
@@ -9,5 +9,5 @@ script = ExtResource("1_01svi")
 scene = ExtResource("2_w64t5")
 name = "Wood"
 max_quantity = 50
-icon = ExtResource("1_8mjoq")
+icon = ExtResource("1_dl8ob")
 metadata/_custom_type_script = "uid://bfstlagsbeqe2"
