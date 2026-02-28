@@ -168,11 +168,13 @@ _data = {
 }
 
 [sub_resource type="Gradient" id="Gradient_x7c3f"]
-offsets = PackedFloat32Array(0.480159, 0.585317)
+offsets = PackedFloat32Array(0.5619159, 0.5961838)
 colors = PackedColorArray(0.36, 0.36, 0.36, 0.560784, 0.28, 0.28, 0.28, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_bjvpn"]
 gradient = SubResource("Gradient_x7c3f")
+width = 128
+height = 128
 use_hdr = true
 fill = 1
 fill_from = Vector2(0.5, 0.5)
@@ -960,31 +962,40 @@ grow_vertical = 2
 mouse_filter = 0
 theme_override_constants/separation = 5
 
-[node name="ItemDisplay1" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=468719072 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button")]
+[node name="ItemDisplay1" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=468719072 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 inventory = NodePath("../../../../Inventory")
+auto_set_index = true
 inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
 select_button = NodePath("Button")
-selected_modulate = Color(0.345098, 1, 1, 1)
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay1" unique_id=1569262230]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay1" unique_id=1569262230]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
 [node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay1" unique_id=1846995695]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
@@ -1012,36 +1023,44 @@ grow_horizontal = 2
 grow_vertical = 2
 flat = true
 
-[node name="ItemDisplay2" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=565086459 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button")]
+[node name="ItemDisplay2" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1254984961 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 inventory = NodePath("../../../../Inventory")
-index = 1
+auto_set_index = true
 inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
 select_button = NodePath("Button")
-selected_modulate = Color(0.345098, 1, 1, 1)
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2" unique_id=1619170252]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2" unique_id=51958537]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2" unique_id=753609349]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2" unique_id=919095829]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2" unique_id=129411955]
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2" unique_id=1689291696]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1056,7 +1075,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2" unique_id=742415257]
+[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2" unique_id=1780644706]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1065,36 +1084,44 @@ grow_horizontal = 2
 grow_vertical = 2
 flat = true
 
-[node name="ItemDisplay3" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1912724409 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button")]
+[node name="ItemDisplay3" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1060589485 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 inventory = NodePath("../../../../Inventory")
-index = 2
+auto_set_index = true
 inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
 select_button = NodePath("Button")
-selected_modulate = Color(0.345098, 1, 1, 1)
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3" unique_id=1811648726]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3" unique_id=864364424]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3" unique_id=1158039226]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3" unique_id=70948820]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3" unique_id=602525612]
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3" unique_id=2143471399]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1109,7 +1136,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3" unique_id=439677409]
+[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3" unique_id=746829255]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1118,36 +1145,44 @@ grow_horizontal = 2
 grow_vertical = 2
 flat = true
 
-[node name="ItemDisplay4" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1964717903 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button")]
+[node name="ItemDisplay4" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=927929334 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 inventory = NodePath("../../../../Inventory")
-index = 3
+auto_set_index = true
 inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
 select_button = NodePath("Button")
-selected_modulate = Color(0.345098, 1, 1, 1)
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4" unique_id=426563937]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4" unique_id=219899475]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4" unique_id=493789448]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4" unique_id=42587934]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4" unique_id=1236421659]
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4" unique_id=144049556]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1162,7 +1197,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4" unique_id=1694660412]
+[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4" unique_id=897510517]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1171,36 +1206,44 @@ grow_horizontal = 2
 grow_vertical = 2
 flat = true
 
-[node name="ItemDisplay5" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=351473629 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button")]
+[node name="ItemDisplay5" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=72169265 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 inventory = NodePath("../../../../Inventory")
-index = 4
+auto_set_index = true
 inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
 select_button = NodePath("Button")
-selected_modulate = Color(0.345098, 1, 1, 1)
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5" unique_id=1563477326]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5" unique_id=1636606821]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5" unique_id=1152911382]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5" unique_id=1983570132]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5" unique_id=304825081]
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5" unique_id=1617319046]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1215,7 +1258,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5" unique_id=1986254317]
+[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5" unique_id=1994844553]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1224,36 +1267,44 @@ grow_horizontal = 2
 grow_vertical = 2
 flat = true
 
-[node name="ItemDisplay6" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=2093114136 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button")]
+[node name="ItemDisplay6" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1071741433 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 inventory = NodePath("../../../../Inventory")
-index = 5
+auto_set_index = true
 inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
 select_button = NodePath("Button")
-selected_modulate = Color(0.345098, 1, 1, 1)
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6" unique_id=480602057]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6" unique_id=1118306256]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6" unique_id=479300021]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6" unique_id=1932801645]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6" unique_id=2032687980]
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6" unique_id=851589338]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1268,7 +1319,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6" unique_id=1342096179]
+[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6" unique_id=419507078]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1277,36 +1328,44 @@ grow_horizontal = 2
 grow_vertical = 2
 flat = true
 
-[node name="ItemDisplay7" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=270341977 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button")]
+[node name="ItemDisplay7" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1337058418 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 inventory = NodePath("../../../../Inventory")
-index = 6
+auto_set_index = true
 inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
 select_button = NodePath("Button")
-selected_modulate = Color(0.345098, 1, 1, 1)
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7" unique_id=1691641236]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7" unique_id=528911688]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7" unique_id=162548575]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7" unique_id=1259561192]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7" unique_id=600567779]
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7" unique_id=1018266148]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1321,7 +1380,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7" unique_id=678091576]
+[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7" unique_id=972553802]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1330,36 +1389,44 @@ grow_horizontal = 2
 grow_vertical = 2
 flat = true
 
-[node name="ItemDisplay8" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1265445971 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button")]
+[node name="ItemDisplay8" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=2053131231 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 inventory = NodePath("../../../../Inventory")
-index = 7
+auto_set_index = true
 inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
 select_button = NodePath("Button")
-selected_modulate = Color(0.345098, 1, 1, 1)
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8" unique_id=729010364]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8" unique_id=86937184]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8" unique_id=159934111]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8" unique_id=1742151620]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8" unique_id=748199376]
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8" unique_id=459044544]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1374,7 +1441,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8" unique_id=76328627]
+[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8" unique_id=74183042]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1383,36 +1450,44 @@ grow_horizontal = 2
 grow_vertical = 2
 flat = true
 
-[node name="ItemDisplay9" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=751152059 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button")]
+[node name="ItemDisplay9" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1009426977 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 inventory = NodePath("../../../../Inventory")
-index = 8
+auto_set_index = true
 inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
 select_button = NodePath("Button")
-selected_modulate = Color(0.345098, 1, 1, 1)
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9" unique_id=328276105]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9" unique_id=22248205]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9" unique_id=1989049812]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9" unique_id=1843502004]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9" unique_id=555245987]
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9" unique_id=975251917]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1427,7 +1502,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9" unique_id=235572382]
+[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9" unique_id=1151456464]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1436,36 +1511,44 @@ grow_horizontal = 2
 grow_vertical = 2
 flat = true
 
-[node name="ItemDisplay10" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=521288441 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button")]
+[node name="ItemDisplay10" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=28854432 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 inventory = NodePath("../../../../Inventory")
-index = 9
+auto_set_index = true
 inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
 select_button = NodePath("Button")
-selected_modulate = Color(0.345098, 1, 1, 1)
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="TextureRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay10" unique_id=1779436927]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay10" unique_id=2043926117]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay10" unique_id=1491249226]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay10" unique_id=134112140]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay10" unique_id=458647099]
+[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay10" unique_id=91883696]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1480,7 +1563,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay10" unique_id=2143432368]
+[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay10" unique_id=982282449]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
