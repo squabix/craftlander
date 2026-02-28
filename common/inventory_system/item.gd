@@ -156,8 +156,8 @@ func use() -> bool:
 	_attempted_use = true
 	if max_uses > 0 and _updates_attempted_use > max_uses:
 		return false
-	_used_this_update = true
 	if _updates_attempted_use == 0 and not is_on_cooldown():
+		_used_this_update = true
 		if cooldown_mode == CooldownMode.START_USE:
 			start_cooldown()
 		var result := start_use()
