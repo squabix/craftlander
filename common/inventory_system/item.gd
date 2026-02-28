@@ -10,6 +10,7 @@ signal continued_use
 signal ended_use
 
 enum CooldownMode {DISABLED, START_USE, END_USE}
+enum UseState {START_USE, CONTINUE_USE, END_USE}
 
 @export var scene: PackedScene
 @export var name := "":
@@ -28,6 +29,8 @@ enum CooldownMode {DISABLED, START_USE, END_USE}
 var max_uses := 1
 var scene_instance: Node
 var visuals: Node
+
+var current_use_state: UseState
 
 var _attempted_use := false
 var _used_this_update := false
@@ -80,6 +83,7 @@ func update(delta: float) -> void:
 		_ended_use = false
 		if _updates_attempted_use != 0:
 			continue_use()
+			current_use_state = UseState.CONTINUE_USE
 			continued_use.emit()
 	
 	var reached_max_uses := _updates_attempted_use == max_uses and max_uses > 0
@@ -90,6 +94,7 @@ func update(delta: float) -> void:
 		_ended_use = true
 		_updates_attempted_use = 0
 		ended_use.emit()
+		current_use_state = UseState.END_USE
 	
 	if not _attempted_use:
 		_updates_attempted_use = 0
@@ -157,6 +162,7 @@ func use() -> bool:
 			start_cooldown()
 		var result := start_use()
 		started_use.emit()
+		current_use_state = UseState.START_USE
 		return result
 	return false
 
