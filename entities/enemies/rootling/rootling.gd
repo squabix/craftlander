@@ -8,7 +8,6 @@ const ANIM_ATTACK := "attack"
 const RUN_THRESHOLD := 0.5
 const WALK_THESHOLD := 0.3
 
-@export var anim_player: AnimationPlayer
 @export var anim_tree: AnimationTree
 
 func _process(_delta: float) -> void:
