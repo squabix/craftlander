@@ -13,6 +13,9 @@ class_name ItemDisplay
 @export var select_button: Button
 @export var unselected_modulate := Color.WHITE
 @export var selected_modulate := Color.WHITE
+@export var selected_scale_amount := 1.0
+@export_range(0.0, 1.0) var selected_scale_speed := 1.0
+@export var selected_scale_targets: Array[Control] = []
 
 func _ready() -> void:
 	if auto_set_index:
@@ -39,6 +42,11 @@ func is_selected() -> bool:
 
 func _process(_delta: float) -> void:
 	modulate = selected_modulate if is_selected() else unselected_modulate
+	for target in selected_scale_targets:
+		target.scale = target.scale.lerp(
+			Vector2.ONE * (selected_scale_amount if is_selected() else 1.0),
+			selected_scale_speed
+		)
 	
 	var instance := get_instance()
 	if instance == null:
