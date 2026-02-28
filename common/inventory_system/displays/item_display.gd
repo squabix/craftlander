@@ -5,6 +5,7 @@ class_name ItemDisplay
 @export var quantity_label: Label
 @export var inventory: Inventory
 @export var index := 0
+@export var auto_set_index := false
 @export var instance_override: ItemInstance
 
 @export_group("Selection")
@@ -14,6 +15,8 @@ class_name ItemDisplay
 @export var selected_modulate := Color.WHITE
 
 func _ready() -> void:
+	if auto_set_index:
+		index = get_index()
 	if is_instance_valid(select_button):
 		select_button.pressed.connect(select_self)
 
