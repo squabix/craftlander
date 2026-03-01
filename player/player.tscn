@@ -13,10 +13,10 @@
 [ext_resource type="Script" uid="uid://ccbg8iw3gs48v" path="res://player/states/player_crouched_state.gd" id="9_hg6s5"]
 [ext_resource type="Script" uid="uid://cody42elqcrek" path="res://player/states/player_sprinting_state.gd" id="10_8t03j"]
 [ext_resource type="Script" uid="uid://bypxgjqugqucx" path="res://common3d/interactions/interactor3d.gd" id="10_32hag"]
-[ext_resource type="Script" uid="uid://ljihr86cv3xk" path="res://common3d/item_visuals_container_3d.gd" id="10_s7qer"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="11_2ieo8"]
 [ext_resource type="Script" uid="uid://pnxdwk3pye0h" path="res://common3d/pointer_raycast3d.gd" id="11_rptt4"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="12_ebec5"]
+[ext_resource type="Script" uid="uid://yalk48uhpbto" path="res://player/player_item_visuals_container.gd" id="14_a2xo5"]
 [ext_resource type="Script" uid="uid://b1eix6p0204fp" path="res://common/inventory_system/displays/item_display.gd" id="16_e7oew"]
 [ext_resource type="Script" uid="uid://ifyn4pfksk07" path="res://player/player_hud.gd" id="17_g4c7l"]
 [ext_resource type="Texture2D" uid="uid://c4jkghkqifcm7" path="res://assets/crosshair.tres" id="17_tqiix"]
@@ -336,6 +336,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_yw30f")
 
 [node name="Controller3D" type="Node" parent="." unique_id=632344104 node_paths=PackedStringArray("head", "current_collision_shape", "rotation_base", "entity")]
+unique_name_in_owner = true
 script = ExtResource("4_qjkh3")
 head = NodePath("../Head")
 current_collision_shape = NodePath("../StandingCollisionShape")
@@ -381,7 +382,7 @@ metadata/_edit_group_ = true
 
 [node name="ItemVisualsContainer3D" type="Node3D" parent="Head/Camera3D/ArmContainer/ItemHolder" unique_id=482834376 node_paths=PackedStringArray("item_holder", "inventory_holder_link")]
 transform = Transform3D(1.0000001, 6.519257e-09, 1.4901159e-08, -6.519258e-09, 1, -7.4505815e-09, -1.4901161e-08, 7.4505815e-09, 1, 0.08080295, 0.017175198, 0.014566064)
-script = ExtResource("10_s7qer")
+script = ExtResource("14_a2xo5")
 item_holder = NodePath("..")
 inventory_holder_link = NodePath("../InventoryHolderLink")
 visuals_scale_ratio = 0.4
@@ -613,6 +614,7 @@ text = "Continue"
 
 [node name="PauseInterface" type="Control" parent="HUD" unique_id=1163003515]
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1578,4 +1580,6 @@ item_animations = Array[ExtResource("39_dx5ib")]([SubResource("Resource_art4l")]
 
 [node name="BuildTimer" type="Timer" parent="." unique_id=1941720648]
 
+[connection signal="updated_entity" from="Controller3D" to="Head/Camera3D/ArmContainer/ItemHolder/ItemVisualsContainer3D" method="_on_controller_3d_updated_entity"]
+[connection signal="updated_entity" from="Controller3D" to="HUD" method="_on_controller_3d_updated_entity"]
 [connection signal="updated_instance" from="Head/Camera3D/ArmContainer/ItemHolder" to="HUD" method="_on_item_holder_updated_instance"]
