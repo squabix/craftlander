@@ -25,12 +25,12 @@ func _ready() -> void:
 
 func turn_head(relative: Vector2) -> void:
 	if using_sick_controls:
-		entity.rotate_vertical(relative.y * MOUSE_SENSITIVITY)
-		entity.rotate_horizontal(relative.x * MOUSE_SENSITIVITY)
+		original_entity.rotate_vertical(relative.y * MOUSE_SENSITIVITY)
+		original_entity.rotate_horizontal(relative.x * MOUSE_SENSITIVITY)
 		return
 		
-	entity.rotate_vertical(-relative.y * MOUSE_SENSITIVITY)
-	entity.rotate_horizontal(-relative.x * MOUSE_SENSITIVITY)
+	original_entity.rotate_vertical(-relative.y * MOUSE_SENSITIVITY)
+	original_entity.rotate_horizontal(-relative.x * MOUSE_SENSITIVITY)
 
 func get_motion_vector() -> Vector2:
 	if using_sick_controls:
@@ -70,6 +70,9 @@ func _input(event: InputEvent) -> void:
 		turn_head(event.relative * MOUSE_SENSITIVITY)
 	#if event.is_action_pressed(ACTION_TOGGLE_MOUSE_CAPTURE):
 		#MouseModeController.toggle(Input.MOUSE_MODE_CAPTURED, Input.MOUSE_MODE_VISIBLE)
+	
+	if not entity.type == "player":
+		return
 	
 	if event.is_action_pressed(ACTION_INTERACT):
 		entity.interact()
