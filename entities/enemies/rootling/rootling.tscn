@@ -542,9 +542,9 @@ animation = &"run"
 
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_7mn0t"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_7mn0t")
-blend_point_0/pos = 0.1
+blend_point_0/pos = 0.3
 blend_point_1/node = SubResource("AnimationNodeAnimation_p5gg5")
-blend_point_1/pos = 0.90000004
+blend_point_1/pos = 0.8
 min_space = 0.0
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_p5gg5"]
@@ -734,7 +734,7 @@ autoplay = &"walk"
 tree_root = SubResource("AnimationNodeBlendTree_p5gg5")
 anim_player = NodePath("../AnimationPlayer")
 parameters/RunBlendSpace/blend_position = 1.0
-parameters/ItemBlend/blend_amount = 1.0
+parameters/ItemBlend/blend_amount = 0.6
 script = ExtResource("26_f0qrw")
 item_animations = Array[ExtResource("22_sqkxx")]([SubResource("Resource_0uawy")])
 
