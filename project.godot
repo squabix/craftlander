@@ -34,6 +34,7 @@ enabled=PackedStringArray("res://addons/IgnoreFolders/plugin.cfg")
 
 folder_colors={
 "res://assets/": "orange",
+"res://boat/": "blue",
 "res://common/": "yellow",
 "res://common3d/": "red",
 "res://defaults/": "blue",

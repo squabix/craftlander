@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://c2ss32j8grhn8"]
+
+[ext_resource type="Script" uid="uid://bj8pokcrjdf2c" path="res://boat/boat.gd" id="1_1ek77"]
+[ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common3d/movement_mode3d.gd" id="2_0q3wp"]
+[ext_resource type="PackedScene" uid="uid://j53nm0t5m7rf" path="res://boat/boat1.blend" id="2_6h0kv"]
+[ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="2_fs7t1"]
+[ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="3_0q3wp"]
+[ext_resource type="Script" uid="uid://dukhrkatonywt" path="res://common3d/entity/vehicle/entity_vehicle_seat3d.gd" id="3_qqn3m"]
+[ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="4_qqn3m"]
+[ext_resource type="Script" uid="uid://dacuhxdpe6083" path="res://boat/boat_docking_state.gd" id="5_c4lax"]
+[ext_resource type="Script" uid="uid://dmd1q78n1xm4s" path="res://common/state_machine/state.gd" id="5_q2vwj"]
+[ext_resource type="Script" uid="uid://8bgokntpuh33" path="res://boat/boat_docked_state.gd" id="6_c4lax"]
+
+[sub_resource type="Resource" id="Resource_e44pp"]
+script = ExtResource("2_0q3wp")
+max_speed = Vector2(8, 0)
+friction = Vector2(0.1, 0)
+metadata/_custom_type_script = "uid://edbvsbdtvgtj"
+
+[sub_resource type="Resource" id="Resource_1blct"]
+script = ExtResource("2_fs7t1")
+metadata/_custom_type_script = "uid://bh8pcyeueeoey"
+
+[sub_resource type="Resource" id="Resource_wbjwq"]
+script = ExtResource("3_0q3wp")
+bool_vector = SubResource("Resource_1blct")
+metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_enlnh"]
+size = Vector3(4.5, 0.5, 5.5)
+
+[sub_resource type="Animation" id="Animation_0q3wp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlenderMeshes1:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.017453292, 0, 0.017453292)]
+}
+
+[sub_resource type="Animation" id="Animation_1blct"]
+resource_name = "rock"
+length = 4.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlenderMeshes1:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.017453292, 0, 0.017453292), Vector3(-0.017453292, 0, -0.017453292), Vector3(0.017453292, 0, 0.017453292)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wbjwq"]
+_data = {
+&"RESET": SubResource("Animation_0q3wp"),
+&"rock": SubResource("Animation_1blct")
+}
+
+[node name="Boat" type="CharacterBody3D" unique_id=782602740 node_paths=PackedStringArray("driver_seat", "seats")]
+collision_layer = 5
+axis_lock_linear_y = true
+motion_mode = 1
+script = ExtResource("1_1ek77")
+driver_seat = NodePath("DriverSeat")
+seats = [NodePath("DriverSeat")]
+type = "boat"
+movement_mode = SubResource("Resource_e44pp")
+gravity_multiplier = 0.0
+move_up_as_jump = false
+rotation_range = SubResource("Resource_wbjwq")
+metadata/_custom_type_script = "uid://sw1ikf32qnw0"
+
+[node name="BlenderMeshes1" parent="." unique_id=562094623 instance=ExtResource("2_6h0kv")]
+transform = Transform3D(0.9998477, -0.017452406, 0, 0.017449748, 0.9996954, -0.017452406, 0.00030458646, 0.017449748, 0.9998477, 0, 0.2, 2.78762)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=653007229]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 2.78762)
+shape = SubResource("BoxShape3D_enlnh")
+
+[node name="DriverSeat" type="Node3D" parent="." unique_id=238917161 node_paths=PackedStringArray("vehicle")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 2.788)
+script = ExtResource("3_qqn3m")
+vehicle = NodePath("..")
+metadata/_custom_type_script = "uid://dukhrkatonywt"
+
+[node name="StateMachine" type="Node" parent="." unique_id=266798118 node_paths=PackedStringArray("initial_state", "root")]
+script = ExtResource("4_qqn3m")
+initial_state = NodePath("Docking")
+root = NodePath("..")
+process_update = true
+physics_process_update = true
+metadata/_custom_type_script = "uid://bqonxtntgndfr"
+
+[node name="Docking" type="Node" parent="StateMachine" unique_id=1793866003]
+script = ExtResource("5_c4lax")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="Docked" type="Node" parent="StateMachine" unique_id=1637149440]
+script = ExtResource("6_c4lax")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="Piloting" type="Node" parent="StateMachine" unique_id=1893954928]
+script = ExtResource("5_q2vwj")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1985380001]
+libraries/ = SubResource("AnimationLibrary_wbjwq")
+autoplay = &"rock"

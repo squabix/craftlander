@@ -6,10 +6,12 @@ const DOCK_EXPOSED_LENGTH := 6.0
 
 @onready var dock_place_ray_container: Node3D = $DockPlaceRayContainer
 @onready var dock: Node3D = $Dock
+@onready var boat: Boat = $Boat
 
 func _ready() -> void:
 	await get_tree().process_frame
 	place_dock()
+	boat.dock_position = $Dock/BoatDockPoint.global_position
 
 func place_dock() -> void:
 	var found_placement := false

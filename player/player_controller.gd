@@ -49,6 +49,9 @@ func get_motion_vector() -> Vector2:
 		)
 
 func update(_delta: float) -> void:
+	if entity.type == "boat":
+		boat_update()
+		return
 	
 	# Move
 	entity.move_planar(
@@ -60,6 +63,9 @@ func update(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed(ACTION_DROP):
 		entity.drop_current_item()
+
+func boat_update() -> void:
+	pass
 
 func _input(event: InputEvent) -> void:
 	if not is_controlling():
