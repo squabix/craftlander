@@ -5,6 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://dmbp0klxo0b0c" path="res://player/player.tscn" id="3_dax2s"]
 [ext_resource type="PackedScene" uid="uid://mwsmthp4sn6c" path="res://entities/enemies/rootling/rootling.tscn" id="4_rarbv"]
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_rarbv"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_rarbv"]
+vertices = PackedVector3Array(-24.5, 0.5, -24.5, -24.5, 0.5, 24.5, 24.5, 0.5, 24.5, 24.5, 0.5, -24.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gt0vt"]
 albedo_color = Color(0.29520002, 0.72, 0.43680012, 1)
 
@@ -12,13 +18,8 @@ albedo_color = Color(0.29520002, 0.72, 0.43680012, 1)
 material = SubResource("StandardMaterial3D_gt0vt")
 size = Vector2(50, 50)
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_rarbv"]
-
 [node name="Test" type="Node3D" unique_id=71390746]
 script = ExtResource("1_0pcxm")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1991878510]
-mesh = SubResource("PlaneMesh_8nrhl")
 
 [node name="Tree" parent="." unique_id=182452863 instance=ExtResource("2_dax2s")]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, -6.115755, 0, -6.115755)
@@ -31,9 +32,15 @@ shape = SubResource("WorldBoundaryShape3D_rarbv")
 
 [node name="Player" parent="." unique_id=840439423 instance=ExtResource("3_dax2s")]
 
-[node name="Rootling" parent="." unique_id=1926843073 instance=ExtResource("4_rarbv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.638369, 0.5, 11.424053)
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=883971372]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 shadow_enabled = true
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=280556898]
+navigation_mesh = SubResource("NavigationMesh_rarbv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=1991878510]
+mesh = SubResource("PlaneMesh_8nrhl")
+
+[node name="Rootling" parent="." unique_id=764734795 instance=ExtResource("4_rarbv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2169075, 1, 10.464537)
