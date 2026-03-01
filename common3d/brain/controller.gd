@@ -1,7 +1,12 @@
 extends Node
 class_name Controller3D
 
-@export var entity: Entity3D
+signal updated_entity(to: Entity3D)
+
+@export var entity: Entity3D:
+	set(to):
+		entity = to
+		updated_entity.emit(to)
 
 static var _entity_controller_map: Dictionary
 
