@@ -1,4 +1,4 @@
-extends Controller3D
+extends EntityController3D
 
 const MOUSE_SENSITIVITY := 0.35
 

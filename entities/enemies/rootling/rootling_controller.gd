@@ -1,4 +1,4 @@
-extends Controller3D
+extends EntityController3D
 
 const MIN_TARGET_DISTANCE := 2.0
 

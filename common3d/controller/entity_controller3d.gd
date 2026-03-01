@@ -1,5 +1,5 @@
 extends Node
-class_name Controller3D
+class_name EntityController3D
 
 signal updated_entity(to: Entity3D)
 
@@ -8,11 +8,11 @@ signal updated_entity(to: Entity3D)
 		entity = to
 		updated_entity.emit(to)
 
-static var _entity_controller_map: Dictionary
+static var _entity_controller_map: Dictionary[Entity3D, EntityController3D]
 
 @onready var original_entity: Entity3D = entity
 
-static func get_controller(of: Entity3D) -> Controller3D:
+static func get_controller(of: Entity3D) -> EntityController3D:
 	if of in _entity_controller_map:
 		return _entity_controller_map[of]
 	return null

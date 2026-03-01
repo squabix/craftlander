@@ -7,7 +7,7 @@ const SICK_CONTROLS_VALUE := 0.85
 @export_range(0.0, 1.0) var value := 0.0:
 	set(to):
 		value = clampf(to, 0.0, 1.0)
-@export var entity_controller: Controller3D
+@export var entity_controller: EntityController3D
 @export var health: Health
 @export var hunger: Hunger
 @export var hurt_multiplier_curve: Curve

@@ -6,7 +6,7 @@ class_name Seat3D
 @export var initial_entity: Entity3D
 
 var mounted_entity: Entity3D
-var mounted_controller: Controller3D
+var mounted_controller: EntityController3D
 
 func _ready() -> void:
 	if initial_entity != null:
@@ -23,7 +23,7 @@ func mount(entity: Entity3D) -> bool:
 		return false
 	
 	mounted_entity = entity
-	mounted_controller = Controller3D.get_controller(mounted_entity)
+	mounted_controller = EntityController3D.get_controller(mounted_entity)
 	if mounted_controller:
 		mounted_controller.entity = vehicle
 	
