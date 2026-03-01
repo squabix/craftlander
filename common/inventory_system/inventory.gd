@@ -166,6 +166,7 @@ func remove_instance(instance: ItemInstance, quantity: int=1) -> int:
 	
 	if instance.quantity > quantity:
 		instance.quantity -= quantity
+		changed.emit()
 		return 0
 	else:
 		quantity -= instance.quantity
