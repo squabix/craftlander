@@ -10,5 +10,5 @@ scene = ExtResource("2_gclnw")
 name = "Shoddy Axe"
 icon = ExtResource("1_gclnw")
 cooldown_mode = 1
-default_cooldown_length = 0.3
+default_cooldown_length = 0.25
 metadata/_custom_type_script = "uid://6x786nnhteca"
