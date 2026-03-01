@@ -17,6 +17,7 @@ height = 8.800171
 radius = 0.6
 
 [node name="Dock" type="StaticBody3D" unique_id=1417096960]
+collision_layer = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1785478165]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
