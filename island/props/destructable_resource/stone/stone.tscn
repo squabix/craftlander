@@ -59,7 +59,7 @@ _data = {
 
 [node name="Stone" type="Node3D" unique_id=51772479 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
 script = ExtResource("1_a54gr")
-min_hp = 5
+min_hp = 6
 max_hp = 10
 hurtbox = NodePath("Hurtbox3D")
 inventory = NodePath("Inventory")

@@ -290,6 +290,8 @@ metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [node name="Tree" type="Node3D" unique_id=1544571203 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
 script = ExtResource("1_27px0")
+min_hp = 6
+max_hp = 10
 hurtbox = NodePath("Trunk/Hurtbox3D")
 inventory = NodePath("Inventory")
 health = NodePath("Health")
@@ -339,7 +341,6 @@ collision_layer = 8
 monitoring = false
 script = ExtResource("1_r4p3j")
 health = NodePath("../../Health")
-use_whitelist = true
 type_whitelist = Array[String](["axe"])
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
