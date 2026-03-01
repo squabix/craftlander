@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://bl745esge18tq" path="res://entities/enemies/rootling/rootling.blend" id="13_v4fp6"]
 [ext_resource type="Resource" uid="uid://bah3rou15fcfh" path="res://items/tools/shoddy_axe/shoddy_axe_item.tres" id="16_p5gg5"]
 [ext_resource type="Script" uid="uid://ljihr86cv3xk" path="res://common3d/item_visuals_container_3d.gd" id="20_geuk7"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://clw23t4rpt3rl" path="res://common/inventory_system/animation/item_anim_tree_state_machine.tres" id="21_5b15m"]
 [ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="21_40hqq"]
 [ext_resource type="Script" uid="uid://c622jer80j3sk" path="res://common/inventory_system/animation/item_animation.gd" id="22_sqkxx"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="23_qk6mp"]
@@ -529,40 +530,9 @@ _data = {
 &"walk": SubResource("Animation_wtogd")
 }
 
-[sub_resource type="AnimationNodeAdd2" id="AnimationNodeAdd2_5b15m"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f0qrw"]
-animation = &"RESET"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rvntx"]
-animation = &"RESET"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uefcv"]
-animation = &"RESET"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c3uxn"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hswny"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j7us1"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c4qwy"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_u2ks8"]
-"states/Continue Use/node" = SubResource("AnimationNodeAnimation_f0qrw")
-"states/Continue Use/position" = Vector2(569.1, 120.7)
-states/End/position = Vector2(900, 117.033585)
-"states/End Use/node" = SubResource("AnimationNodeAnimation_rvntx")
-"states/End Use/position" = Vector2(719.5, 115.74)
-states/Start/position = Vector2(200, 115.15199)
-"states/Start Use/node" = SubResource("AnimationNodeAnimation_uefcv")
-"states/Start Use/position" = Vector2(353.9, 115.9)
-transitions = ["Start", "Start Use", SubResource("AnimationNodeStateMachineTransition_c3uxn"), "Start Use", "Continue Use", SubResource("AnimationNodeStateMachineTransition_hswny"), "Continue Use", "End Use", SubResource("AnimationNodeStateMachineTransition_j7us1"), "End Use", "End", SubResource("AnimationNodeStateMachineTransition_c4qwy")]
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_0uawy"]
+filter_enabled = true
+filters = ["Visuals/Armature/Skeleton3D:Bone.011", "Visuals/Armature/Skeleton3D:Bone.012"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7mn0t"]
 animation = &"idle"
@@ -578,15 +548,15 @@ blend_point_1/pos = 0.90000004
 min_space = 0.0
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_p5gg5"]
-graph_offset = Vector2(-624, -228)
-nodes/output/position = Vector2(256, 128)
+graph_offset = Vector2(-1130.5316, -137.93541)
+nodes/output/position = Vector2(160, 26.666666)
 nodes/RunBlendSpace/node = SubResource("AnimationNodeBlendSpace1D_7mn0t")
-nodes/RunBlendSpace/position = Vector2(-160, 176)
-nodes/ItemMachine/node = SubResource("AnimationNodeStateMachine_u2ks8")
-nodes/ItemMachine/position = Vector2(-394.6951, -140.36578)
-nodes/Add2/node = SubResource("AnimationNodeAdd2_5b15m")
-nodes/Add2/position = Vector2(36.794975, 20.342258)
-node_connections = [&"output", 0, &"Add2", &"Add2", 0, &"ItemMachine", &"Add2", 1, &"RunBlendSpace"]
+nodes/RunBlendSpace/position = Vector2(-306.66666, -66.666664)
+nodes/ItemBlend/node = SubResource("AnimationNodeBlend2_0uawy")
+nodes/ItemBlend/position = Vector2(-66.666664, 40)
+nodes/ItemStateMachine/node = ExtResource("21_5b15m")
+nodes/ItemStateMachine/position = Vector2(-600, 173.33333)
+node_connections = [&"output", 0, &"ItemBlend", &"ItemBlend", 0, &"RunBlendSpace", &"ItemBlend", 1, &"ItemStateMachine"]
 
 [sub_resource type="Resource" id="Resource_0uawy"]
 script = ExtResource("22_sqkxx")
@@ -763,8 +733,8 @@ autoplay = &"walk"
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=944648514]
 tree_root = SubResource("AnimationNodeBlendTree_p5gg5")
 anim_player = NodePath("../AnimationPlayer")
-parameters/RunBlendSpace/blend_position = -0.14243498
-parameters/Add2/add_amount = 1.0
+parameters/RunBlendSpace/blend_position = 1.0
+parameters/ItemBlend/blend_amount = 1.0
 script = ExtResource("26_f0qrw")
 item_animations = Array[ExtResource("22_sqkxx")]([SubResource("Resource_0uawy")])
 
