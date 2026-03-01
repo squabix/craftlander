@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Damage" format=3 uid="uid://bgyj7jyanhg22"]
+
+[ext_resource type="Script" uid="uid://bl5x717nsijmk" path="res://common/damage_system/damage.gd" id="1_nghgf"]
+
+[resource]
+script = ExtResource("1_nghgf")
+base_amount = 4.0
+force = 5.0
+type = "weapon"
+metadata/_custom_type_script = "uid://bl5x717nsijmk"

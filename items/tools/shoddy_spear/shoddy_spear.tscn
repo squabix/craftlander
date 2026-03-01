@@ -1,15 +1,8 @@
 [gd_scene format=3 uid="uid://mhk4odp75uiy"]
 
 [ext_resource type="Script" uid="uid://dd8qskwv1nlqx" path="res://common3d/damage_system/hit_ray3d.gd" id="1_gbrfq"]
-[ext_resource type="Script" uid="uid://bl5x717nsijmk" path="res://common/damage_system/damage.gd" id="2_ek3ir"]
+[ext_resource type="Resource" uid="uid://bgyj7jyanhg22" path="res://items/tools/shoddy_spear/shoddy_spear_damage.tres" id="2_7cxoo"]
 [ext_resource type="PackedScene" uid="uid://d4e4niggplert" path="res://items/tools/shoddy_spear/shoddy_spear.blend" id="3_7cxoo"]
-
-[sub_resource type="Resource" id="Resource_7cxoo"]
-script = ExtResource("2_ek3ir")
-base_amount = 3.0
-force = 5.0
-type = "weapon"
-metadata/_custom_type_script = "uid://bl5x717nsijmk"
 
 [node name="ShoddySpear" type="Node3D" unique_id=1538443592]
 
@@ -19,7 +12,7 @@ collision_mask = 8
 collide_with_areas = true
 collide_with_bodies = false
 script = ExtResource("1_gbrfq")
-damage = SubResource("Resource_7cxoo")
+damage = ExtResource("2_7cxoo")
 metadata/_custom_type_script = "uid://dd8qskwv1nlqx"
 
 [node name="Visuals" type="Node3D" parent="." unique_id=253996080]
