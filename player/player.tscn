@@ -437,6 +437,9 @@ root = NodePath("../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Hurtbox3D" type="Area3D" parent="." unique_id=2128029413 node_paths=PackedStringArray("health")]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
 script = ExtResource("11_2ieo8")
 health = NodePath("../Health")
 
@@ -447,7 +450,6 @@ shape = SubResource("BoxShape3D_ebec5")
 [node name="Health" type="Node" parent="." unique_id=1348652794]
 script = ExtResource("12_ebec5")
 hp = 100.0
-immortal = true
 
 [node name="HUD" type="Control" parent="." unique_id=1406402649]
 process_mode = 3
