@@ -697,26 +697,15 @@ remote_path = NodePath("../Node/FollowNode3D/VisibleOnScreenNotifier3D")
 update_rotation = false
 update_scale = false
 
-[node name="Visuals" parent="." unique_id=873518079 instance=ExtResource("13_v4fp6")]
+[node name="Visuals" parent="." unique_id=1269952913 instance=ExtResource("13_v4fp6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
-[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(873518079, 1076918728) index="0" unique_id=904241351]
-bones/0/scale = Vector3(0.9999997, 0.9999997, 1)
-bones/1/position = Vector3(0.00036418438, 0.35384908, 0)
-bones/3/position = Vector3(2.0001467e-10, 0.30181545, 2.2215756e-15)
-bones/3/scale = Vector3(1, 0.99999994, 1)
-bones/5/scale = Vector3(0.9999998, 0.9999999, 1.0000002)
+[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1269952913, 1317121624) index="0" unique_id=1593283826]
 bones/7/rotation = Quaternion(-0.35355338, 0.14644662, -0.35355335, 0.8535534)
-bones/7/scale = Vector3(0.9999999, 1.0000001, 0.9999998)
-bones/8/scale = Vector3(1, 1, 1.0000001)
-bones/9/scale = Vector3(0.9999997, 0.9999997, 1)
 bones/10/rotation = Quaternion(-0.35355338, -0.14644662, 0.35355335, 0.8535534)
-bones/10/scale = Vector3(0.9999999, 1.0000004, 0.99999946)
-bones/11/position = Vector3(-1.8663544e-08, 0.28284276, -1.9935428e-08)
-bones/11/scale = Vector3(1.0000004, 1.0000001, 1)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Visuals/Armature/Skeleton3D" index="1" unique_id=319653899]
-transform = Transform3D(0.6298518, 0.59437925, 0.49999958, 0.09933786, -0.7000947, 0.7071065, 0.7703367, -0.39570376, -0.49999958, 0.54142123, 0.32332408, -0.14142136)
+transform = Transform3D(0.6298519, 0.59437907, 0.5, 0.09933779, -0.7000942, 0.7071068, 0.7703367, -0.39570355, -0.5, 0.54142135, 0.32332414, -0.14142136)
 bone_name = "Bone.012"
 bone_idx = 11
 
