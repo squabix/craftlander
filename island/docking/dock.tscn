@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://dxwqj0o18t8o2"]
+
+[ext_resource type="PackedScene" uid="uid://ni2bhtdnrjaj" path="res://island/docking/dock.blend" id="1_r7o7e"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wrd2w"]
+size = Vector3(4.5, 0.9, 16)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_og45p"]
+albedo_color = Color(0.6, 0.42890003, 0.24600002, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yfe8t"]
+material = SubResource("StandardMaterial3D_og45p")
+size = Vector3(3, 0.5, 20)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_r7o7e"]
+height = 8.800171
+radius = 0.6
+
+[node name="Dock" type="StaticBody3D" unique_id=1417096960]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1785478165]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+shape = SubResource("BoxShape3D_wrd2w")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=378573676]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+visible = false
+mesh = SubResource("BoxMesh_yfe8t")
+
+[node name="BlenderMeshes" parent="." unique_id=1351219446 instance=ExtResource("1_r7o7e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.40487766)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=154433877]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9681377, -3.515, -0.0024997592)
+shape = SubResource("CylinderShape3D_r7o7e")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=1443007915]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.968, -3.515, -0.0028776526)
+shape = SubResource("CylinderShape3D_r7o7e")
