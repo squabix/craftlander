@@ -31,10 +31,12 @@ func _ready() -> void:
 	if playback != null:
 		
 		# Disable item blend when item state machine finishes
-		playback.state_started.connect(
+		playback.state_finished.connect(
 			func(state_name: String) -> void:
-				if state_name == "End":
+				if state_name == end_use_state:
 					disable_item_blend()
+				elif item.current_use_state == Item.UseState.END_USE:
+					play_end()
 		)
 	disable_item_blend()
 	active = true 
@@ -54,7 +56,6 @@ func update_item(new_item: Item) -> void:
 	# Disconnect old item's signals
 	if item != null:
 		item.started_use.disconnect(play_start)
-		item.ended_use.disconnect(play_end)
 		item = null
 	
 	var anims: ItemAnimations = null
@@ -84,7 +85,6 @@ func update_item(new_item: Item) -> void:
 	# Connect new item's signals
 	if item != null:
 		item.started_use.connect(play_start)
-		item.ended_use.connect(play_end)
 
 func get_player() -> AnimationPlayer:
 	return get_node(anim_player)
@@ -111,12 +111,9 @@ func get_current_item_anim() -> String:
 	return get(item_state_path)
 
 func play_end() -> void:
-	
-	# Return if no end animation
-	# Playback will still travel to end_use after current animation finishes
-	if end_anim.is_empty():
-		return
 	play_state(end_use_state)
+	if end_anim.is_empty():
+		disable_item_blend()
 
 func _assign_nodes_to_tree() -> void:
 	var state_anim_map: Dictionary[String, String] = {
