@@ -697,10 +697,10 @@ remote_path = NodePath("../Node/FollowNode3D/VisibleOnScreenNotifier3D")
 update_rotation = false
 update_scale = false
 
-[node name="Visuals" parent="." unique_id=1055487819 instance=ExtResource("13_v4fp6")]
+[node name="Visuals" parent="." unique_id=873518079 instance=ExtResource("13_v4fp6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
-[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1055487819, 955464245) index="0" unique_id=840631278]
+[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(873518079, 1076918728) index="0" unique_id=904241351]
 bones/0/scale = Vector3(0.9999997, 0.9999997, 1)
 bones/1/position = Vector3(0.00036418438, 0.35384908, 0)
 bones/3/position = Vector3(2.0001467e-10, 0.30181545, 2.2215756e-15)
@@ -733,8 +733,8 @@ autoplay = &"walk"
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=944648514]
 tree_root = SubResource("AnimationNodeBlendTree_p5gg5")
 anim_player = NodePath("../AnimationPlayer")
-parameters/RunBlendSpace/blend_position = 1.0
-parameters/ItemBlend/blend_amount = 0.6
+parameters/RunBlendSpace/blend_position = 0.0
+parameters/ItemBlend/blend_amount = 0.0
 script = ExtResource("26_f0qrw")
 item_animations = Array[ExtResource("22_sqkxx")]([SubResource("Resource_0uawy")])
 
