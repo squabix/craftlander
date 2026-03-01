@@ -2,7 +2,6 @@ extends Entity3D
 class_name EntityVehicle3D
 
 @export var seats: Array[Seat3D]
-@export var dismount_areas: Array[Area3D]
 
 func get_open_seats() -> Array[Seat3D]:
 	var open_seats: Array[Seat3D]
