@@ -30,12 +30,11 @@ var max_uses := 1
 var scene_instance: Node
 var visuals: Node
 
-var current_use_state: UseState
+var current_use_state: UseState = UseState.END_USE
 
 var _attempted_use := false
 var _used_this_update := false
 var _updates_attempted_use := 0
-var _ended_use := true
 var is_unique := false:
 	set(to):
 		is_unique = to
@@ -79,30 +78,65 @@ func trigger_event(event: ItemEvent) -> void:
 func update(delta: float) -> void:
 	idle()
 	update_delta = delta
-	if _used_this_update:
-		_ended_use = false
-		if _updates_attempted_use != 0:
-			continue_use()
-			current_use_state = UseState.CONTINUE_USE
-			continued_use.emit()
 	
-	var reached_max_uses := _updates_attempted_use == max_uses and max_uses > 0
-	if not _ended_use and (reached_max_uses or not _used_this_update):
-		if cooldown_mode == CooldownMode.END_USE:
-			start_cooldown()
-		end_use()
-		_ended_use = true
-		_updates_attempted_use = 0
-		ended_use.emit()
-		current_use_state = UseState.END_USE
-	
-	if not _attempted_use:
-		_updates_attempted_use = 0
-	else:
+	# 1. Start Logic (First frame of use)
+	if _used_this_update and current_use_state == UseState.END_USE:
+		current_use_state = UseState.START_USE
+		started_use.emit()
+
+	# 2. Continue Logic (Multiple frames of use)
+	elif _used_this_update and _updates_attempted_use > 0:
+		current_use_state = UseState.CONTINUE_USE
+		continued_use.emit()
+		continue_use()
+
+	# 3. Termination Logic (First frame not using)
+	if current_use_state != UseState.END_USE:
+		if reached_use_limit() or not _used_this_update:
+			if cooldown_mode == CooldownMode.END_USE:
+				start_cooldown()
+			
+			end_use()
+			
+			current_use_state = UseState.END_USE
+			ended_use.emit()
+			
+			# Reset counter
+			_updates_attempted_use = 0
+			_attempted_use = false 
+
+	# Increment counter if actively holding button and haven't just ended
+	if _attempted_use and current_use_state != UseState.END_USE:
 		_updates_attempted_use += 1
+	else:
+		_updates_attempted_use = 0
 	
 	_used_this_update = false
 	_attempted_use = false
+
+func reached_use_limit() -> bool:
+	return max_uses > 0 and _updates_attempted_use >= max_uses
+
+func use() -> bool:
+	_attempted_use = true
+	
+	# Fail if on cooldown
+	if _updates_attempted_use == 0 and is_on_cooldown():
+		return false
+	
+	# Fail if reached limit
+	if reached_use_limit():
+		return false
+	
+	# Use is successful
+	_used_this_update = true
+	
+	if _updates_attempted_use == 0:
+		if cooldown_mode == CooldownMode.START_USE:
+			start_cooldown()
+		start_use()
+		
+	return true
 
 func get_instance(quantity: int=1) -> ItemInstance:
 	var instance := ItemInstance.new()
@@ -151,20 +185,6 @@ func clear_nodes() -> void:
 
 func is_on_cooldown() -> bool:
 	return Time.get_ticks_msec() < cooldown_start_time + cooldown_length * 1000.0
-
-func use() -> bool:
-	_attempted_use = true
-	if max_uses > 0 and _updates_attempted_use > max_uses:
-		return false
-	if _updates_attempted_use == 0 and not is_on_cooldown():
-		_used_this_update = true
-		if cooldown_mode == CooldownMode.START_USE:
-			start_cooldown()
-		var result := start_use()
-		started_use.emit()
-		current_use_state = UseState.START_USE
-		return result
-	return false
 
 func start_use() -> bool:
 	return false
