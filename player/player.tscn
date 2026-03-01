@@ -60,6 +60,11 @@ script = ExtResource("20_x7c3f")
 item = ExtResource("22_bjvpn")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
+[sub_resource type="Resource" id="Resource_a2xo5"]
+script = ExtResource("20_x7c3f")
+item = ExtResource("41_art4l")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
 [sub_resource type="Curve" id="Curve_2uvqg"]
 _limits = [0.0, 30.0, 0.0, 1.0]
 _data = [Vector2(0, 20), 0.0, 0.0, 0, 0, Vector2(0.03, 0), 0.0, 0.0, 0, 0]
@@ -309,7 +314,7 @@ metadata/_custom_type_script = "uid://bki5ij8task16"
 
 [node name="Inventory" type="Node" parent="." unique_id=710458340]
 script = ExtResource("19_c35mf")
-item_instances = Array[ExtResource("20_x7c3f")]([SubResource("Resource_s7qer")])
+item_instances = Array[ExtResource("20_x7c3f")]([SubResource("Resource_s7qer"), SubResource("Resource_a2xo5")])
 size = 10
 
 [node name="Hunger" type="Node" parent="." unique_id=1790864786 node_paths=PackedStringArray("bar", "health")]
