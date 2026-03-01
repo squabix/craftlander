@@ -242,11 +242,49 @@ _data = {
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pnw6m"]
 animation = &"idle"
 
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_art4l"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a2xo5"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_art4l"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fjxoa"]
+animation = &"swing_tool"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gswnw"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xcnuv"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j55il"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hjies"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_mmwog"]
+states/continue_use/node = SubResource("AnimationNodeAnimation_a2xo5")
+states/continue_use/position = Vector2(529.5, 104.166664)
+states/end_use/node = SubResource("AnimationNodeAnimation_art4l")
+states/end_use/position = Vector2(698.8333, 96.833336)
+states/start_use/node = SubResource("AnimationNodeAnimation_fjxoa")
+states/start_use/position = Vector2(373.49997, 100.31482)
+transitions = ["Start", "start_use", SubResource("AnimationNodeStateMachineTransition_gswnw"), "start_use", "continue_use", SubResource("AnimationNodeStateMachineTransition_xcnuv"), "continue_use", "end_use", SubResource("AnimationNodeStateMachineTransition_j55il"), "end_use", "End", SubResource("AnimationNodeStateMachineTransition_hjies")]
+
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_1so5t"]
-graph_offset = Vector2(-297.49048, -254.65987)
-nodes/Animation/node = SubResource("AnimationNodeAnimation_pnw6m")
-nodes/Animation/position = Vector2(-32, 256)
-node_connections = [&"output", 0, &"Animation"]
+graph_offset = Vector2(-809.991, 181.29036)
+nodes/output/position = Vector2(146.66667, 226.66667)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_pnw6m")
+nodes/Idle/position = Vector2(-320, 253.33333)
+nodes/ItemBlend/node = SubResource("AnimationNodeBlend2_art4l")
+nodes/ItemBlend/position = Vector2(-40, 226.66667)
+nodes/ItemStateMachine/node = SubResource("AnimationNodeStateMachine_mmwog")
+nodes/ItemStateMachine/position = Vector2(-320, 466.66666)
+node_connections = [&"output", 0, &"ItemBlend", &"ItemBlend", 0, &"Idle", &"ItemBlend", 1, &"ItemStateMachine"]
 
 [sub_resource type="Resource" id="Resource_art4l"]
 script = ExtResource("39_dx5ib")
@@ -1526,6 +1564,7 @@ autoplay = &"idle"
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1076057530]
 tree_root = SubResource("AnimationNodeBlendTree_1so5t")
 anim_player = NodePath("../AnimationPlayer")
+parameters/ItemBlend/blend_amount = 1.0
 script = ExtResource("38_a2xo5")
 item_animations = Array[ExtResource("39_dx5ib")]([SubResource("Resource_art4l")])
 
