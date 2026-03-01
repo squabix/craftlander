@@ -23,8 +23,6 @@ func mount(entity: Entity3D) -> bool:
 		return false
 	
 	mounted_entity = entity
-	for child in mounted_entity.get_children():
-		print(Util.get_object_class(child))
 	mounted_controller = Controller3D.get_controller(mounted_entity)
 	if mounted_controller:
 		mounted_controller.entity = vehicle
