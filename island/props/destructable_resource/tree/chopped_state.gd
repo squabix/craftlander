@@ -3,9 +3,8 @@ extends State
 @onready var particles_scene := load("res://particles/puff_particles.tscn")
 
 func enter() -> void:
-	Util.disable_all_colliders(root.trunk)
-	root.trunk.hide()
-	root.chop_particles.show()
-	root.chop_particles.global_transform = root.hurtbox.get_child(0).global_transform # Transform particles to center of tree
-	root.chop_particles.emitting = true
-	#%Spawner3D.drop()
+	Util.disable_all_colliders(%Trunk)
+	%Trunk.hide()
+	%ChopParticles.show()
+	%ChopParticles.global_transform = root.hurtbox.get_child(0).global_transform # Transform particles to center of tree
+	%ChopParticles.emitting = true

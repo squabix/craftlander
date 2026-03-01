@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://c16m48qir7vc7"]
 
-[ext_resource type="Script" uid="uid://cmlllb7wq80s" path="res://island/props/destructable_resource/tree/tree.gd" id="1_27px0"]
+[ext_resource type="Script" uid="uid://cmlllb7wq80s" path="res://island/props/destructable_resource/destructable_resource.gd" id="1_27px0"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="1_r4p3j"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="2_27px0"]
 [ext_resource type="Script" uid="uid://dapeyi3eetek1" path="res://common/signal_triggrs/signal_animation_trigger.gd" id="4_agfax"]
@@ -15,6 +15,7 @@
 [ext_resource type="Shape3D" uid="uid://1ks4j4c8paiv" path="res://island/props/destructable_resource/tree/stump_collision.tres" id="12_18auj"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="12_jeogd"]
 [ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="13_mw2c8"]
+[ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="16_cs0vr"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_r4p3j"]
 height = 10.25
@@ -279,10 +280,19 @@ _data = {
 [sub_resource type="Resource" id="Resource_xgieu"]
 script = ExtResource("12_jeogd")
 item = ExtResource("13_mw2c8")
+quantity = 3
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
-[node name="Tree" type="Node3D" unique_id=1544571203]
+[sub_resource type="Resource" id="Resource_rngja"]
+script = ExtResource("12_jeogd")
+item = ExtResource("16_cs0vr")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[node name="Tree" type="Node3D" unique_id=1544571203 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
 script = ExtResource("1_27px0")
+hurtbox = NodePath("Trunk/Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
 
 [node name="Health" type="Node" parent="." unique_id=95922495]
 script = ExtResource("2_27px0")
@@ -320,6 +330,7 @@ script = ExtResource("8_agfax")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Trunk" type="AnimatableBody3D" parent="." unique_id=202807730]
+unique_name_in_owner = true
 collision_layer = 5
 
 [node name="Hurtbox3D" type="Area3D" parent="Trunk" unique_id=1330554951 node_paths=PackedStringArray("health")]
@@ -370,6 +381,7 @@ metadata/_custom_type_script = "uid://iyqixpr4un6s"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 
 [node name="ChopParticles" type="GPUParticles3D" parent="." unique_id=931223418]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 visible = false
 cast_shadow = 0
@@ -393,7 +405,7 @@ libraries/ = SubResource("AnimationLibrary_4ojav")
 
 [node name="Inventory" type="Node" parent="." unique_id=997929093]
 script = ExtResource("11_ytrwe")
-item_instances = Array[ExtResource("12_jeogd")]([SubResource("Resource_xgieu")])
+item_instances = Array[ExtResource("12_jeogd")]([SubResource("Resource_xgieu"), SubResource("Resource_rngja")])
 constant = true
-size = 1
+size = 2
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
