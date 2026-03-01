@@ -67,6 +67,9 @@ func use_item() -> void:
 		consumed_instance.emit(item_instance)
 
 func _ready() -> void:
+	if initial_item_instance != null:
+		initial_item_instance = initial_item_instance.duplicate_deep()
+		initial_item_instance.make_unique()
 	update_item_instance(initial_item_instance)
 
 func _process(delta: float) -> void:
