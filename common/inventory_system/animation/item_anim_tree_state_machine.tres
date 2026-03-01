@@ -13,7 +13,6 @@ animation = &"attack"
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f0qrw"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rvntx"]
 advance_mode = 2
@@ -26,9 +25,9 @@ advance_mode = 2
 states/End/position = Vector2(911.3333, 99.79012)
 states/Start/position = Vector2(200, 99.740746)
 states/continue_use/node = SubResource("AnimationNodeAnimation_0uawy")
-states/continue_use/position = Vector2(586.1667, 99.611115)
+states/continue_use/position = Vector2(586.8334, 99.81687)
 states/end_use/node = SubResource("AnimationNodeAnimation_5b15m")
 states/end_use/position = Vector2(762.8333, 100.94444)
 states/start_use/node = SubResource("AnimationNodeAnimation_f0qrw")
-states/start_use/position = Vector2(365.5, 102.030876)
+states/start_use/position = Vector2(365.5, 100.03497)
 transitions = ["Start", "start_use", SubResource("AnimationNodeStateMachineTransition_0uawy"), "continue_use", "end_use", SubResource("AnimationNodeStateMachineTransition_f0qrw"), "end_use", "End", SubResource("AnimationNodeStateMachineTransition_rvntx"), "start_use", "continue_use", SubResource("AnimationNodeStateMachineTransition_5b15m")]
