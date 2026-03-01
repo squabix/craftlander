@@ -47,14 +47,12 @@ func _ready() -> void:
 	updated_current.emit.call_deferred()
 	updated_current.connect(
 		func():
-			await get_tree().process_frame
-			changed.emit()
+			changed.emit.call_deferred()
 	)
 	inventory.changed.connect(
 		func():
 			hold_current()
-			await get_tree().process_frame
-			changed.emit()
+			changed.emit.call_deferred()
 	)
 	item_holder.consumed_instance.connect(
 		func(instance: ItemInstance):
