@@ -99,7 +99,13 @@ func play_start() -> void:
 	enable_item_blend()
 	if start_anim.is_empty():
 		return
-	playback.travel("start_use")
+	playback_travel(start_use_state)
+
+func playback_travel(state: String) -> void:
+	if playback == null:
+		printerr("Null playback cannot travel to state ", state)
+		return
+	playback.travel(state)
 
 func get_current_item_anim() -> String:
 	return get(item_state_path)
@@ -110,7 +116,7 @@ func play_end() -> void:
 	# Playback will still travel to end_use after current animation finishes
 	if end_anim.is_empty():
 		return
-	playback.travel("end_use")
+	playback_travel(end_use_state)
 
 func _assign_nodes_to_tree() -> void:
 	var state_anim_map: Dictionary[String, String] = {
