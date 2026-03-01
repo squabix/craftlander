@@ -243,9 +243,9 @@ _data = {
 animation = &"idle"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_1so5t"]
-graph_offset = Vector2(-294.04654, 144.8444)
+graph_offset = Vector2(-297.49048, -254.65987)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_pnw6m")
-nodes/Animation/position = Vector2(-48, 128)
+nodes/Animation/position = Vector2(-32, 256)
 node_connections = [&"output", 0, &"Animation"]
 
 [sub_resource type="Resource" id="Resource_art4l"]
@@ -1524,7 +1524,6 @@ libraries/ = SubResource("AnimationLibrary_tqiix")
 autoplay = &"idle"
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1076057530]
-active = false
 tree_root = SubResource("AnimationNodeBlendTree_1so5t")
 anim_player = NodePath("../AnimationPlayer")
 script = ExtResource("38_a2xo5")

@@ -4,7 +4,6 @@ extends State
 @export var sight: RadialSight3D
 @export var min_approach_distance := 1.5
 
-@onready var anim_player: ItemAnimationPlayer = %AnimationPlayer
 @onready var inventory: Inventory = %Inventory
 @onready var item_holder: ItemHolder3D = %ItemHolder3D
 
