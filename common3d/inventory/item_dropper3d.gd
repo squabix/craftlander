@@ -45,7 +45,6 @@ func drop(index: int=-1) -> Node3D:
 		index = inventory.get_random_index_weighted()
 	
 	if not inventory.is_index_valid(index):
-		printerr(self, " cannot drop invalid index ", index, " from ", inventory)
 		return
 	
 	var instance := inventory.get_instance(index)
