@@ -14,6 +14,12 @@ signal item_event_triggered(event: ItemEvent)
 
 var item_instance: ItemInstance
 
+var item: Item:
+	get:
+		if item_instance == null:
+			return null
+		return item_instance.item
+
 func update_item_instance(to: ItemInstance):
 	if item_instance == to:
 		return
@@ -48,15 +54,9 @@ func update_item_instance(to: ItemInstance):
 	if not item_instance.item.triggered_event.is_connected(item_event_triggered.emit):
 		item_instance.item.triggered_event.connect(item_event_triggered.emit)
 
-var item: Item:
-	get:
-		if item_instance == null:
-			return null
-		return item_instance.item
 
 func has_item() -> bool:
 	return item_instance != null and item_instance.item != null
-
 
 func use_item() -> void:
 	if item_instance == null or item_instance.item == null:
