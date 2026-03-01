@@ -40,6 +40,7 @@
 [ext_resource type="Script" uid="uid://c622jer80j3sk" path="res://common/inventory_system/animation/item_animation.gd" id="39_dx5ib"]
 [ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="40_a2xo5"]
 [ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/tools/shoddy_mace/shoddy_mace_item.tres" id="41_a2xo5"]
+[ext_resource type="Resource" uid="uid://w52cknmpa167" path="res://items/tools/shoddy_pickaxe/shoddy_pickaxe_item.tres" id="41_art4l"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -276,7 +277,7 @@ states/start_use/position = Vector2(373.49997, 100.31482)
 transitions = ["Start", "start_use", SubResource("AnimationNodeStateMachineTransition_gswnw"), "start_use", "continue_use", SubResource("AnimationNodeStateMachineTransition_xcnuv"), "continue_use", "end_use", SubResource("AnimationNodeStateMachineTransition_j55il"), "end_use", "End", SubResource("AnimationNodeStateMachineTransition_hjies")]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_1so5t"]
-graph_offset = Vector2(-809.991, 181.29036)
+graph_offset = Vector2(-809.991, 156.15398)
 nodes/output/position = Vector2(146.66667, 226.66667)
 nodes/Idle/node = SubResource("AnimationNodeAnimation_pnw6m")
 nodes/Idle/position = Vector2(-320, 253.33333)
@@ -288,7 +289,7 @@ node_connections = [&"output", 0, &"ItemBlend", &"ItemBlend", 0, &"Idle", &"Item
 
 [sub_resource type="Resource" id="Resource_art4l"]
 script = ExtResource("39_dx5ib")
-items = Array[ExtResource("40_a2xo5")]([ExtResource("41_a2xo5"), ExtResource("22_bjvpn")])
+items = Array[ExtResource("40_a2xo5")]([ExtResource("41_a2xo5"), ExtResource("22_bjvpn"), ExtResource("41_art4l")])
 start_anim = "swing_tool"
 metadata/_custom_type_script = "uid://c622jer80j3sk"
 
