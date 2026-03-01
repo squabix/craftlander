@@ -6,7 +6,7 @@ const CROUCHED_HEAD_HEIGHT := 0.7
 const CROUCH_CAMERA_SPEED := 0.1
 
 @onready var head: Node3D = $Head
-@onready var state_machine: StateMachine = $StateMachine
+@onready var movement_state_machine: StateMachine = $MovementStateMachine
 @onready var inventory: Inventory = $Inventory
 @onready var health: Health = $Health
 @onready var hunger: Hunger = $Hunger
@@ -27,7 +27,7 @@ func _ready() -> void:
 func adjust_head_to_crouch() -> void:
 	head.position.y = lerp(
 		head.position.y,
-		CROUCHED_HEAD_HEIGHT if state_machine.is_currently("Crouching") else STANDING_HEAD_HEIGHT,
+		CROUCHED_HEAD_HEIGHT if movement_state_machine.is_currently("Crouching") else STANDING_HEAD_HEIGHT,
 		CROUCH_CAMERA_SPEED
 	)
 

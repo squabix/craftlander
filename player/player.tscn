@@ -422,23 +422,23 @@ script = ExtResource("27_uw77l")
 inventory = NodePath("../../../../Inventory")
 metadata/_custom_type_script = "uid://bpmbg0e28ujs7"
 
-[node name="StateMachine" type="Node" parent="." unique_id=430840899 node_paths=PackedStringArray("initial_state", "root")]
+[node name="MovementStateMachine" type="Node" parent="." unique_id=430840899 node_paths=PackedStringArray("initial_state", "root")]
 script = ExtResource("7_boad6")
 initial_state = NodePath("Walking")
 root = NodePath("..")
 metadata/_custom_type_script = "uid://bqonxtntgndfr"
 
-[node name="Walking" type="Node" parent="StateMachine" unique_id=732487638 node_paths=PackedStringArray("root")]
+[node name="Walking" type="Node" parent="MovementStateMachine" unique_id=732487638 node_paths=PackedStringArray("root")]
 script = ExtResource("8_hg6s5")
 root = NodePath("../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Crouching" type="Node" parent="StateMachine" unique_id=761766902 node_paths=PackedStringArray("root")]
+[node name="Crouching" type="Node" parent="MovementStateMachine" unique_id=761766902 node_paths=PackedStringArray("root")]
 script = ExtResource("9_hg6s5")
 root = NodePath("../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Sprinting" type="Node" parent="StateMachine" unique_id=900263776 node_paths=PackedStringArray("root")]
+[node name="Sprinting" type="Node" parent="MovementStateMachine" unique_id=900263776 node_paths=PackedStringArray("root")]
 script = ExtResource("10_8t03j")
 root = NodePath("../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
