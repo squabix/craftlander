@@ -82,8 +82,9 @@ func update_item(new_item: Item) -> void:
 		default()
 	
 	# Connect new item's signals
-	item.started_use.connect(play_start)
-	item.ended_use.connect(play_end)
+	if item != null:
+		item.started_use.connect(play_start)
+		item.ended_use.connect(play_end)
 
 func get_player() -> AnimationPlayer:
 	return get_node(anim_player)
