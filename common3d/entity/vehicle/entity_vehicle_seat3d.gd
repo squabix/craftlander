@@ -11,7 +11,7 @@ func _ready() -> void:
 	if initial_entity != null:
 		mount(initial_entity)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if is_instance_valid(mounted_entity):
 		mounted_entity.global_position = global_position
 
