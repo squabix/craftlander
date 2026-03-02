@@ -23,6 +23,7 @@ func _ready() -> void:
 	if not get_parent() is StateMachine:
 		process_update = true
 		physics_process_update = true
+		do_handle_input = true
 	
 	for child in get_children():
 		if child is State:
@@ -49,6 +50,10 @@ func update(delta: float) -> void:
 func physics_update(delta: float) -> void:
 	if is_valid():
 		current.physics_update(delta)
+
+func handle_input(event: InputEvent) -> void:
+	if is_valid():
+		current.handle_input(event)
 
 func exit_current() -> void:
 	current.exit()
