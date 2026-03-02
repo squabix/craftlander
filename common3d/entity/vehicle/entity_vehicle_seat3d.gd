@@ -6,7 +6,6 @@ class_name Seat3D
 @export var initial_entity: Entity3D
 
 var mounted_entity: Entity3D
-var mounted_controller: EntityController3D
 
 func _ready() -> void:
 	if initial_entity != null:
@@ -16,6 +15,9 @@ func _process(delta: float) -> void:
 	if is_instance_valid(mounted_entity):
 		mounted_entity.global_position = global_position
 
+func get_controller() -> EntityController3D:
+	return EntityController3D.get_controller(mounted_entity)
+
 func mount(entity: Entity3D) -> bool:
 	
 	# Cannot mount new entity when already mounted
@@ -23,14 +25,15 @@ func mount(entity: Entity3D) -> bool:
 		return false
 	
 	mounted_entity = entity
-	mounted_controller = EntityController3D.get_controller(mounted_entity)
-	if mounted_controller:
-		mounted_controller.entity = vehicle
+	var mounted_controller := get_controller()
+	if mounted_controller != null:
+		mounted_controller.update_entity(vehicle)
 	
 	return true
 
 func dismount() -> void:
-	if is_instance_valid(mounted_entity):
-		mounted_controller.entity = mounted_entity
+	var mounted_controller := get_controller()
+	if mounted_controller != null:
+		mounted_controller.update_entity(mounted_entity)
 	mounted_entity = null
 	mounted_controller = null
