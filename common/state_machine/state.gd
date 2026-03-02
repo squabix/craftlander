@@ -62,10 +62,3 @@ func physics_update(_delta: float) -> void:
 
 func handle_input(_event: InputEvent) -> void:
 	pass
-
-func check_transitions() -> void:
-	pass
-	#for check in transition_checks:
-		#if check.call() == true:
-			#transition_to(transition_checks[check])
-			#return

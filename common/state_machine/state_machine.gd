@@ -39,7 +39,6 @@ func is_currently(state_name: String) -> bool:
 func update(delta: float) -> void:
 	if is_valid():
 		current.update(delta)
-		current.check_transitions()
 
 func physics_update(delta: float) -> void:
 	if is_valid():
