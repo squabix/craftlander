@@ -83,5 +83,5 @@ func enter_state(state_name: String) -> bool:
 	return true
 
 func _to_string() -> String:
-	var string: String = "State Machine ({0})".format([get_children()])
+	var string: String = "State Machine ({0})".format([states])
 	return string
