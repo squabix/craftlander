@@ -14,8 +14,10 @@
 [ext_resource type="Script" uid="uid://cody42elqcrek" path="res://player/states/player_sprinting_state.gd" id="10_8t03j"]
 [ext_resource type="Script" uid="uid://bypxgjqugqucx" path="res://common3d/interactions/interactor3d.gd" id="10_32hag"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="11_2ieo8"]
+[ext_resource type="Script" uid="uid://0ys7hbc4clgc" path="res://player/player_free_state.gd" id="11_art4l"]
 [ext_resource type="Script" uid="uid://pnxdwk3pye0h" path="res://common3d/pointer_raycast3d.gd" id="11_rptt4"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="12_ebec5"]
+[ext_resource type="Script" uid="uid://idhcfku7c3tn" path="res://player/player_docking_boat_state.gd" id="12_fjxoa"]
 [ext_resource type="Script" uid="uid://yalk48uhpbto" path="res://player/player_item_visuals_container.gd" id="14_a2xo5"]
 [ext_resource type="Script" uid="uid://b1eix6p0204fp" path="res://common/inventory_system/displays/item_display.gd" id="16_e7oew"]
 [ext_resource type="Script" uid="uid://ifyn4pfksk07" path="res://player/player_hud.gd" id="17_g4c7l"]
@@ -335,13 +337,27 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_yw30f")
 
-[node name="Controller3D" type="Node" parent="." unique_id=632344104 node_paths=PackedStringArray("head", "current_collision_shape", "rotation_base", "entity")]
+[node name="Controller3D" type="Node" parent="." unique_id=632344104 node_paths=PackedStringArray("initial_entity", "initial_state", "root")]
 unique_name_in_owner = true
 script = ExtResource("4_qjkh3")
-head = NodePath("../Head")
-current_collision_shape = NodePath("../StandingCollisionShape")
-rotation_base = NodePath("../Head")
-entity = NodePath("..")
+entity_type_state_map = Dictionary[String, String]({
+"boat": "DockingBoat",
+"player": "Free"
+})
+initial_entity = NodePath("..")
+initial_state = NodePath("Free")
+root = NodePath("..")
+process_update = true
+physics_process_update = true
+do_handle_input = true
+
+[node name="DockingBoat" type="Node" parent="Controller3D" unique_id=1555341780]
+script = ExtResource("12_fjxoa")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="Free" type="Node" parent="Controller3D" unique_id=1922812879]
+script = ExtResource("11_art4l")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="MouseController" type="Node" parent="." unique_id=766266427]
 script = ExtResource("5_g6k8r")
@@ -470,6 +486,7 @@ mouse_filter = 1
 script = ExtResource("17_g4c7l")
 
 [node name="Cursor" type="TextureRect" parent="HUD" unique_id=92395798]
+unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
@@ -504,6 +521,7 @@ script = ExtResource("19_knn7v")
 interactor = NodePath("../../Head/Camera3D/InteratorRay/Interactor")
 
 [node name="BarContainer" type="VBoxContainer" parent="HUD" unique_id=1488788714]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
@@ -537,6 +555,7 @@ lerp_weight = 0.1
 metadata/_custom_type_script = "uid://c3xfbb8ay0ghk"
 
 [node name="PopupDisplay" type="Control" parent="HUD" unique_id=2003166414 node_paths=PackedStringArray("title_label", "body_label")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -613,6 +632,7 @@ layout_mode = 2
 text = "Continue"
 
 [node name="PauseInterface" type="Control" parent="HUD" unique_id=1163003515]
+unique_name_in_owner = true
 process_mode = 3
 visible = false
 layout_mode = 1
@@ -913,6 +933,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="InventoryInterface" type="Control" parent="HUD" unique_id=858532635]
+unique_name_in_owner = true
 z_index = 1
 layout_mode = 1
 anchors_preset = 15
