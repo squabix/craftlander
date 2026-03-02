@@ -10,9 +10,15 @@ var current: State
 
 var states: Dictionary[String, State]
 
+func default_initial_state() -> void:
+	for child in get_children():
+		if child is State:
+			initial_state = child
+			return
+
 func _ready() -> void:
 	if initial_state == null:
-		initial_state = get_child(0)
+		default_initial_state()
 		
 	if not get_parent() is StateMachine:
 		process_update = true
