@@ -606,7 +606,7 @@ shape = SubResource("CapsuleShape3D_3emv6")
 
 [node name="StartChaseTrigger" type="Node" parent="Hurtbox3D" unique_id=1954498291 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("8_7mn0t")
-state_machine = NodePath("../../Controller3D/StateMachine")
+state_machine = NodePath("../../Controller3D/Default")
 state_name = "Chasing"
 from_state_whitelist = Array[String](["Wandering"])
 signal_name = &"was_hurt"
@@ -629,7 +629,7 @@ group_whitelist = Array[String](["player"])
 
 [node name="StartChaseTrigger" type="Node" parent="Sight3D" unique_id=1196415362 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("8_7mn0t")
-state_machine = NodePath("../../Controller3D/StateMachine")
+state_machine = NodePath("../../Controller3D/Default")
 state_name = "Chasing"
 from_state_whitelist = Array[String](["Wandering"])
 signal_name = &"found_target"
@@ -642,14 +642,7 @@ on_screen_notifier = NodePath("../Node/FollowNode3D/VisibleOnScreenNotifier3D")
 initial_entity = NodePath("..")
 metadata/_custom_type_script = "uid://ccwod33h53a5s"
 
-[node name="NavEntityGuide3D" type="Node" parent="Controller3D" unique_id=377578045 node_paths=PackedStringArray("nav", "entity")]
-script = ExtResource("11_8jseq")
-nav = NodePath("../../NavigationAgent3D")
-entity = NodePath("../..")
-face_interpolation = 0.1
-metadata/_custom_type_script = "uid://c5asagc5dswqt"
-
-[node name="StateMachine" type="Node" parent="Controller3D" unique_id=1574117420 node_paths=PackedStringArray("initial_state", "root")]
+[node name="Default" type="Node" parent="Controller3D" unique_id=1574117420 node_paths=PackedStringArray("initial_state", "root")]
 script = ExtResource("10_v53xr")
 initial_state = NodePath("Wandering")
 root = NodePath("../..")
@@ -657,21 +650,28 @@ process_update = true
 physics_process_update = true
 metadata/_custom_type_script = "uid://bqonxtntgndfr"
 
-[node name="Wandering" type="Node" parent="Controller3D/StateMachine" unique_id=1882444428 node_paths=PackedStringArray("nav_guide", "idle_timer", "root")]
+[node name="Wandering" type="Node" parent="Controller3D/Default" unique_id=1882444428 node_paths=PackedStringArray("nav_guide", "idle_timer", "root")]
 script = ExtResource("11_7mn0t")
 nav_guide = NodePath("../../NavEntityGuide3D")
 idle_timer = NodePath("Timer")
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Timer" type="Timer" parent="Controller3D/StateMachine/Wandering" unique_id=1600727395]
+[node name="Timer" type="Timer" parent="Controller3D/Default/Wandering" unique_id=1600727395]
 
-[node name="Chasing" type="Node" parent="Controller3D/StateMachine" unique_id=1883496829 node_paths=PackedStringArray("nav_guide", "sight", "root")]
+[node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=1883496829 node_paths=PackedStringArray("nav_guide", "sight", "root")]
 script = ExtResource("13_7mn0t")
 nav_guide = NodePath("../../NavEntityGuide3D")
 sight = NodePath("../../../Sight3D")
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="NavEntityGuide3D" type="Node" parent="Controller3D" unique_id=377578045 node_paths=PackedStringArray("nav", "entity")]
+script = ExtResource("11_8jseq")
+nav = NodePath("../../NavigationAgent3D")
+entity = NodePath("../..")
+face_interpolation = 0.1
+metadata/_custom_type_script = "uid://c5asagc5dswqt"
 
 [node name="Inventory" type="Node" parent="." unique_id=2020826484]
 unique_name_in_owner = true

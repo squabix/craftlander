@@ -347,38 +347,38 @@ unique_name_in_owner = true
 script = ExtResource("4_qjkh3")
 entity_type_state_map = Dictionary[String, String]({
 "boat": "DockingBoat",
-"player": "Free"
+"player": "Default"
 })
 initial_entity = NodePath("..")
-initial_state = NodePath("Free")
+initial_state = NodePath("Default")
 root = NodePath("..")
 process_update = true
 physics_process_update = true
 do_handle_input = true
 
-[node name="DockingBoat" type="Node" parent="Controller3D" unique_id=1555341780]
-script = ExtResource("12_fjxoa")
-metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
-
-[node name="Free" type="Node" parent="Controller3D" unique_id=1922812879 node_paths=PackedStringArray("initial_state", "root")]
+[node name="Default" type="Node" parent="Controller3D" unique_id=1922812879 node_paths=PackedStringArray("initial_state", "root")]
 script = ExtResource("11_art4l")
 initial_state = NodePath("Walking")
 root = NodePath("../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Walking" type="Node" parent="Controller3D/Free" unique_id=732487638 node_paths=PackedStringArray("root")]
+[node name="Walking" type="Node" parent="Controller3D/Default" unique_id=732487638 node_paths=PackedStringArray("root")]
 script = ExtResource("8_hg6s5")
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Crouching" type="Node" parent="Controller3D/Free" unique_id=761766902 node_paths=PackedStringArray("root")]
+[node name="Crouching" type="Node" parent="Controller3D/Default" unique_id=761766902 node_paths=PackedStringArray("root")]
 script = ExtResource("9_hg6s5")
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Sprinting" type="Node" parent="Controller3D/Free" unique_id=900263776 node_paths=PackedStringArray("root")]
+[node name="Sprinting" type="Node" parent="Controller3D/Default" unique_id=900263776 node_paths=PackedStringArray("root")]
 script = ExtResource("10_8t03j")
 root = NodePath("../../..")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="DockingBoat" type="Node" parent="Controller3D" unique_id=1555341780]
+script = ExtResource("12_fjxoa")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="MouseController" type="Node" parent="." unique_id=766266427]
