@@ -11,6 +11,7 @@ const ACTION_USE_PRIMARY := "use_primary"
 const ACTION_DROP := "drop"
 
 func enter() -> void:
+	%ItemVisualsContainer3D.show()
 	for control in get_parent().docking_hidden_interface:
 		control.show()
 
