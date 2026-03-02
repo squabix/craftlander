@@ -20,6 +20,7 @@ signal exited
 			was_unlocked.emit()
 @export var process_update: bool
 @export var physics_process_update: bool
+@export var do_handle_input: bool
 
 var transition_checks: Dictionary = {} # {check: state}
 var enter_callable: Callable
@@ -49,10 +50,17 @@ func _physics_process(delta: float) -> void:
 	if physics_process_update:
 		physics_update(delta)
 
+func _input(event: InputEvent) -> void:
+	if do_handle_input:
+		handle_input(event)
+
 func update(_delta: float) -> void:
 	pass
 
 func physics_update(_delta: float) -> void:
+	pass
+
+func handle_input(_event: InputEvent) -> void:
 	pass
 
 func check_transitions() -> void:
