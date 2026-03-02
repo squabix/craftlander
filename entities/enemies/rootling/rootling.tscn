@@ -635,11 +635,11 @@ from_state_whitelist = Array[String](["Wandering"])
 signal_name = &"found_target"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 
-[node name="Controller3D" type="Node" parent="." unique_id=1315753818 node_paths=PackedStringArray("sight", "on_screen_notifier", "entity")]
+[node name="Controller3D" type="Node" parent="." unique_id=1315753818 node_paths=PackedStringArray("sight", "on_screen_notifier", "initial_entity")]
 script = ExtResource("2_nauqg")
 sight = NodePath("../Sight3D")
 on_screen_notifier = NodePath("../Node/FollowNode3D/VisibleOnScreenNotifier3D")
-entity = NodePath("..")
+initial_entity = NodePath("..")
 metadata/_custom_type_script = "uid://ccwod33h53a5s"
 
 [node name="NavEntityGuide3D" type="Node" parent="Controller3D" unique_id=377578045 node_paths=PackedStringArray("nav", "entity")]
