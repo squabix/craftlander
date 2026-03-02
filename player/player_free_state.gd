@@ -1,4 +1,4 @@
-extends State
+extends StateMachine
 
 const ACTION_MOVE_LEFT := "move_left"
 const ACTION_MOVE_RIGHT := "move_right"
@@ -11,11 +11,13 @@ const ACTION_USE_PRIMARY := "use_primary"
 const ACTION_DROP := "drop"
 
 func enter() -> void:
+	super()
 	%ItemVisualsContainer3D.show()
 	for control in get_parent().docking_hidden_interface:
 		control.show()
 
 func handle_input(event: InputEvent) -> void:
+	super(event)
 	if event.is_action_pressed(ACTION_INTERACT):
 		root.interact()
 	if Input.is_action_pressed(ACTION_USE_PRIMARY):
@@ -30,6 +32,7 @@ static func get_motion_vector() -> Vector2:
 		)
 
 func update(_delta: float) -> void:
+	super(_delta)
 	root.move_planar(
 		get_motion_vector().normalized()
 	)

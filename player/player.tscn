@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_g6k8r"]
 [ext_resource type="Script" uid="uid://chlki14yu5ulm" path="res://player/player_controller.gd" id="4_qjkh3"]
 [ext_resource type="Script" uid="uid://cb1suk3avv5yq" path="res://common/mouse_mode_controller.gd" id="5_g6k8r"]
-[ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="7_boad6"]
 [ext_resource type="Script" uid="uid://bwd4jx8u5uct2" path="res://common/inventory_system/item_holder3d.gd" id="7_kb6p2"]
 [ext_resource type="Script" uid="uid://bx3dqx6ebaugu" path="res://player/states/player_walking_state.gd" id="8_hg6s5"]
 [ext_resource type="Script" uid="uid://ioo6s3m7wbha" path="res://common/inventory_system/inventory_holder_link.gd" id="9_bjvpn"]
@@ -361,8 +360,25 @@ do_handle_input = true
 script = ExtResource("12_fjxoa")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Free" type="Node" parent="Controller3D" unique_id=1922812879]
+[node name="Free" type="Node" parent="Controller3D" unique_id=1922812879 node_paths=PackedStringArray("initial_state", "root")]
 script = ExtResource("11_art4l")
+initial_state = NodePath("Walking")
+root = NodePath("../..")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="Walking" type="Node" parent="Controller3D/Free" unique_id=732487638 node_paths=PackedStringArray("root")]
+script = ExtResource("8_hg6s5")
+root = NodePath("../../..")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="Crouching" type="Node" parent="Controller3D/Free" unique_id=761766902 node_paths=PackedStringArray("root")]
+script = ExtResource("9_hg6s5")
+root = NodePath("../../..")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="Sprinting" type="Node" parent="Controller3D/Free" unique_id=900263776 node_paths=PackedStringArray("root")]
+script = ExtResource("10_8t03j")
+root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="MouseController" type="Node" parent="." unique_id=766266427]
@@ -444,27 +460,6 @@ metadata/_custom_type_script = "uid://pnxdwk3pye0h"
 script = ExtResource("27_uw77l")
 inventory = NodePath("../../../../Inventory")
 metadata/_custom_type_script = "uid://bpmbg0e28ujs7"
-
-[node name="MovementStateMachine" type="Node" parent="." unique_id=430840899 node_paths=PackedStringArray("initial_state", "root")]
-script = ExtResource("7_boad6")
-initial_state = NodePath("Walking")
-root = NodePath("..")
-metadata/_custom_type_script = "uid://bqonxtntgndfr"
-
-[node name="Walking" type="Node" parent="MovementStateMachine" unique_id=732487638 node_paths=PackedStringArray("root")]
-script = ExtResource("8_hg6s5")
-root = NodePath("../..")
-metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
-
-[node name="Crouching" type="Node" parent="MovementStateMachine" unique_id=761766902 node_paths=PackedStringArray("root")]
-script = ExtResource("9_hg6s5")
-root = NodePath("../..")
-metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
-
-[node name="Sprinting" type="Node" parent="MovementStateMachine" unique_id=900263776 node_paths=PackedStringArray("root")]
-script = ExtResource("10_8t03j")
-root = NodePath("../..")
-metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Hurtbox3D" type="Area3D" parent="." unique_id=2128029413 node_paths=PackedStringArray("health")]
 collision_layer = 8
