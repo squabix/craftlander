@@ -38,7 +38,7 @@ func _process(_delta: float) -> void:
 	adjust_head_to_crouch()
 
 func use_item() -> void:
-	$Head/Camera3D/ArmContainer/ItemHolder.use_item()
+	item_holder.use_item()
 
 func interact() -> void:
 	%Interactor.interact()

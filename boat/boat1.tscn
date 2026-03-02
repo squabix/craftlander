@@ -13,7 +13,7 @@
 
 [sub_resource type="Resource" id="Resource_e44pp"]
 script = ExtResource("2_0q3wp")
-max_speed = Vector2(8, 0)
+max_speed = Vector2(40, 0)
 friction = Vector2(0.1, 0)
 metadata/_custom_type_script = "uid://edbvsbdtvgtj"
 

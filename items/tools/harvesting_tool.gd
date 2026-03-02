@@ -16,7 +16,6 @@ func set_up_scene() -> void:
 		return
 	super()
 	harvest_ray = scene_instance.get_node("HarvestRay")
-	anim_player = visuals.get_node("AnimationPlayer")
 	harvest_ray.damage.source = root
 
 func start_use() -> bool:

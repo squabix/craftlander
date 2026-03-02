@@ -33,7 +33,6 @@ func update(_delta: float) -> void:
 	root.move_planar(
 		get_motion_vector().normalized()
 	)
-	print("Updated, moved")
 	
 	if Input.is_action_just_pressed(ACTION_JUMP):
 		root.jump()
