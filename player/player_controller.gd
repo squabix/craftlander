@@ -21,6 +21,7 @@ func turn_head(relative: Vector2) -> void:
 func handle_input(event: InputEvent) -> void:
 	if not is_controlling():
 		return
+	super(event)
 	
 	# Turn head based on mouse movement
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
