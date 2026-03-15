@@ -16,6 +16,10 @@ signal recovered_from_depletion
 @export var fill_multiplier := 1.0
 @export var recovery_threshold := 1.0
 
+@export_group("Hunger")
+@export var hunger: Hunger
+@export var hunger_fill_curve: Curve
+
 var value := 1.0:
 	set(to):
 		value = clampf(to, 0.0, 1.0)
@@ -55,6 +59,11 @@ func spend(amount_per_second: float) -> void:
 func is_usable() -> bool:
 	return value > 0.0 and not is_depleted
 
+func get_hunger_multiplier() -> float:
+	if hunger == null or hunger_fill_curve == null:
+		return 1.0
+	return hunger_fill_curve.sample(hunger.value)
+
 func _process(delta: float) -> void:
 	bar.target_value = value
 	
@@ -67,8 +76,8 @@ func _process(delta: float) -> void:
 		if is_filling:
 			_current_fill_time += delta * GameWorld.TIME_SCALE
 			
-			# Current rate: (Base + Accel * Time) * Multiplier
-			value += (fill_base_rate + fill_acceleration * _current_fill_time) * fill_multiplier * delta * GameWorld.TIME_SCALE
+			# Current rate: (Base + Accel * Time) * Multipliers
+			value += (fill_base_rate + fill_acceleration * _current_fill_time) * fill_multiplier * get_hunger_multiplier() * delta * GameWorld.TIME_SCALE
 			
 			# Stop filling if hit max
 			if value >= 1.0:

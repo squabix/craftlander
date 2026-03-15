@@ -76,6 +76,10 @@ point_count = 2
 _data = [Vector2(0.892, 0), 0.0, 0.6109068, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="Curve" id="Curve_fjxoa"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.8228518, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r1lm2"]
 radius = 0.3
 height = 1.6
@@ -332,17 +336,21 @@ size = 10
 [node name="Hunger" type="Node" parent="." unique_id=1790864786 node_paths=PackedStringArray("bar", "health", "stamina")]
 script = ExtResource("31_2uvqg")
 bar = NodePath("../HUD/BarContainer/HungerBar")
+loss_per_minute = 0.15
 health = NodePath("../Health")
 hurt_curve = SubResource("Curve_2uvqg")
 regeneration_curve = SubResource("Curve_1s1yo")
 stamina = NodePath("../Stamina")
+stamina_hunger_loss = 0.05
 metadata/_custom_type_script = "uid://bn55l5h1rwjsn"
 
-[node name="Stamina" type="Node" parent="." unique_id=260796409 node_paths=PackedStringArray("bar", "idle_timer")]
+[node name="Stamina" type="Node" parent="." unique_id=260796409 node_paths=PackedStringArray("bar", "idle_timer", "hunger")]
 unique_name_in_owner = true
 script = ExtResource("10_fjxoa")
 bar = NodePath("../HUD/BarContainer/StaminaBar")
 idle_timer = NodePath("IdleTimer")
+hunger = NodePath("../Hunger")
+hunger_fill_curve = SubResource("Curve_fjxoa")
 metadata/_custom_type_script = "uid://b5danpxdbcbqx"
 
 [node name="IdleTimer" type="Timer" parent="Stamina" unique_id=1788991875]
