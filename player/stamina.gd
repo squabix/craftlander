@@ -1,6 +1,8 @@
 extends Node
 class_name Stamina
 
+signal spent(amount: float)
+
 signal started_fill
 signal became_depleted
 signal recovered_from_depletion
@@ -85,5 +87,6 @@ func _process(delta: float) -> void:
 			idle_timer.stop()
 			
 		value -= queued_spend * delta * GameWorld.TIME_SCALE
+		spent.emit(queued_spend)
 	
 	queued_spend = 0.0
