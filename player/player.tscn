@@ -103,10 +103,10 @@ fill_from = Vector2(0.5, 0.5)
 size = Vector3(0.42, 1.5, 0.42)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7pn3"]
-bg_color = Color(0.2812, 0.74, 0.37296006, 1)
+bg_color = Color(1, 0.28235295, 0.3764706, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8hi5"]
-bg_color = Color(0.67, 0.39530003, 0.12060001, 1)
+bg_color = Color(0.89, 0.62299997, 0.35599998, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_7pqkx"]
 font_size = 20
