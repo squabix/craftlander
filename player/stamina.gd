@@ -11,6 +11,7 @@ signal recovered_from_depletion
 @export_group("Rates")
 @export var fill_base_rate := 0.05
 @export var fill_acceleration := 0.03
+@export var fill_multiplier := 1.0
 @export var recovery_threshold := 1.0
 
 var value := 1.0:
@@ -64,8 +65,8 @@ func _process(delta: float) -> void:
 		if is_filling:
 			_current_fill_time += delta * GameWorld.TIME_SCALE
 			
-			# Current rate: Base + (Accel * Time)
-			value += (fill_base_rate + fill_acceleration * _current_fill_time) * delta * GameWorld.TIME_SCALE
+			# Current rate: (Base + Accel * Time) * Multiplier
+			value += (fill_base_rate + fill_acceleration * _current_fill_time) * fill_multiplier * delta * GameWorld.TIME_SCALE
 			
 			# Stop filling if hit max
 			if value >= 1.0:
