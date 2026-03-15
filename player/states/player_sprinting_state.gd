@@ -5,7 +5,7 @@ const MIN_FORWARD_MOTION: float = 0.7
 @onready var movement_mode: MovementMode3D = preload("res://player/states/player_sprinting_movement_mode.tres")
 
 func is_walking_forward() -> bool:
-	return root.motion_direction.z <= -MIN_FORWARD_MOTION
+	return root.last_motion_direction.z <= -MIN_FORWARD_MOTION
 
 func enter() -> void:
 	root.movement_mode = movement_mode

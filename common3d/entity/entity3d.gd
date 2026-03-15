@@ -25,6 +25,7 @@ var frozen: bool
 
 var gravity: Vector3
 var motion_direction: Vector3
+var last_motion_direction: Vector3
 
 var queued_impulse: Vector3
 
@@ -164,6 +165,7 @@ func _physics_process(delta: float) -> void:
 		velocity += gravity
 	
 	_accelerate(motion_direction)
+	last_motion_direction = motion_direction
 	motion_direction = Vector3.ZERO
 	move_and_slide()
 	
