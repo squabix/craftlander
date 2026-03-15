@@ -5,6 +5,8 @@ const STANDING_HEAD_HEIGHT := 1.4
 const CROUCHED_HEAD_HEIGHT := 0.7
 const CROUCH_CAMERA_SPEED := 0.1
 
+const WATER_LEVEL := 0.1
+
 @onready var head: Node3D = $Head
 @onready var movement_state_machine: StateMachine = $Controller3D/Default
 @onready var inventory: Inventory = $Inventory
@@ -25,6 +27,9 @@ func _ready() -> void:
 	)
 
 func adjust_head_to_crouch() -> void:
+func is_in_water() -> bool:
+	return global_position.y <= WATER_LEVEL
+
 	head.position.y = lerp(
 		head.position.y,
 		CROUCHED_HEAD_HEIGHT if movement_state_machine.is_currently("Crouching") else STANDING_HEAD_HEIGHT,

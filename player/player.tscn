@@ -382,6 +382,10 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 script = ExtResource("12_fjxoa")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
+[node name="Swimming" type="Node" parent="Controller3D" unique_id=708197157]
+script = ExtResource("16_art4l")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
 [node name="MouseController" type="Node" parent="." unique_id=766266427]
 script = ExtResource("5_g6k8r")
 metadata/_custom_type_script = "uid://cb1suk3avv5yq"

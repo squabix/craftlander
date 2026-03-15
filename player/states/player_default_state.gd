@@ -22,6 +22,9 @@ func update(_delta: float) -> void:
 	super(_delta)
 	root.move_planar(PlayerController.get_input_motion_vector().normalized())
 	
+	if root.is_in_water():
+		transition_to("Swimming")
+	
 	if Input.is_action_just_pressed(ACTION_JUMP):
 		root.jump()
 	
