@@ -13,6 +13,7 @@ class_name Hunger
 @export var hurt_frequency := 1.0
 
 var hurt_timer: Timer
+var queued_loss := 0.0
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -28,5 +29,12 @@ func _process(delta: float) -> void:
 	bar.target_value = value
 	if get_tree().paused:
 		return
-	value -= (loss_per_minute * loss_multiplier / 60.0) * delta * GameWorld.TIME_SCALE
+	
+	lose(loss_per_minute * loss_multiplier / 60.0)
+	value -= queued_loss * delta * GameWorld.TIME_SCALE
+	queued_loss = 0.0
+	
 	health.heal(regeneration_curve.sample(value) * delta * GameWorld.TIME_SCALE)
+
+func lose(amount: float) -> void:
+	queued_loss += amount
