@@ -35,6 +35,9 @@ func _ready() -> void:
 func enter() -> void:
 	enter_state(initial_state.name)
 
+func exit() -> void:
+	exit_current()
+
 func is_valid() -> bool:
 	return is_instance_valid(current)
 
