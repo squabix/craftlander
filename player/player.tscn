@@ -329,12 +329,13 @@ script = ExtResource("19_c35mf")
 item_instances = Array[ExtResource("20_x7c3f")]([SubResource("Resource_s7qer"), SubResource("Resource_a2xo5")])
 size = 10
 
-[node name="Hunger" type="Node" parent="." unique_id=1790864786 node_paths=PackedStringArray("bar", "health")]
+[node name="Hunger" type="Node" parent="." unique_id=1790864786 node_paths=PackedStringArray("bar", "health", "stamina")]
 script = ExtResource("31_2uvqg")
 bar = NodePath("../HUD/BarContainer/HungerBar")
 health = NodePath("../Health")
 hurt_curve = SubResource("Curve_2uvqg")
 regeneration_curve = SubResource("Curve_1s1yo")
+stamina = NodePath("../Stamina")
 metadata/_custom_type_script = "uid://bn55l5h1rwjsn"
 
 [node name="Stamina" type="Node" parent="." unique_id=260796409 node_paths=PackedStringArray("bar", "idle_timer")]

@@ -7,10 +7,16 @@ class_name Hunger
 		value = clampf(to, 0.0, 1.0)
 @export var loss_per_minute := 0.2
 @export var loss_multiplier := 1.0
+
+@export_group("Health")
 @export var health: Health
 @export var hurt_curve: Curve
 @export var regeneration_curve: Curve
 @export var hurt_frequency := 1.0
+
+@export_group("Stamina")
+@export var stamina: Stamina
+@export var stamina_hunger_loss := 0.1
 
 var hurt_timer: Timer
 var queued_loss := 0.0
@@ -24,6 +30,11 @@ func _ready() -> void:
 		func() -> void:
 			health.hurt(hurt_curve.sample(value))
 	)
+	if stamina:
+		stamina.spent.connect(
+			func(amount: float) -> void:
+				lose(amount * stamina_hunger_loss)
+		)
 
 func _process(delta: float) -> void:
 	bar.target_value = value
