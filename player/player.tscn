@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://ccbg8iw3gs48v" path="res://player/states/player_crouched_state.gd" id="9_hg6s5"]
 [ext_resource type="Script" uid="uid://cody42elqcrek" path="res://player/states/player_sprinting_state.gd" id="10_8t03j"]
 [ext_resource type="Script" uid="uid://bypxgjqugqucx" path="res://common3d/interactions/interactor3d.gd" id="10_32hag"]
+[ext_resource type="Script" uid="uid://b5danpxdbcbqx" path="res://player/stamina.gd" id="10_fjxoa"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="11_2ieo8"]
 [ext_resource type="Script" uid="uid://0ys7hbc4clgc" path="res://player/states/player_default_state.gd" id="11_art4l"]
 [ext_resource type="Script" uid="uid://pnxdwk3pye0h" path="res://common3d/pointer_raycast3d.gd" id="11_rptt4"]
@@ -107,6 +108,9 @@ bg_color = Color(1, 0.28235295, 0.3764706, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8hi5"]
 bg_color = Color(0.89, 0.62299997, 0.35599998, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fjxoa"]
+bg_color = Color(0.538974, 0.8672089, 0.34119555, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_7pqkx"]
 font_size = 20
@@ -333,6 +337,17 @@ hurt_curve = SubResource("Curve_2uvqg")
 regeneration_curve = SubResource("Curve_1s1yo")
 metadata/_custom_type_script = "uid://bn55l5h1rwjsn"
 
+[node name="Stamina" type="Node" parent="." unique_id=260796409 node_paths=PackedStringArray("bar", "idle_timer")]
+unique_name_in_owner = true
+script = ExtResource("10_fjxoa")
+bar = NodePath("../HUD/BarContainer/StaminaBar")
+idle_timer = NodePath("IdleTimer")
+metadata/_custom_type_script = "uid://b5danpxdbcbqx"
+
+[node name="IdleTimer" type="Timer" parent="Stamina" unique_id=1788991875]
+wait_time = 2.0
+one_shot = true
+
 [node name="StandingCollisionShape" type="CollisionShape3D" parent="." unique_id=1369713611]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
@@ -548,7 +563,7 @@ value = 4.58
 show_percentage = false
 script = ExtResource("26_r7pn3")
 health = NodePath("../../../Health")
-lerp_weight = 0.1
+lerp_weight = 0.3
 
 [node name="HungerBar" type="ProgressBar" parent="HUD/BarContainer" unique_id=446841129]
 custom_minimum_size = Vector2(0, 15)
@@ -558,7 +573,18 @@ max_value = 1.0
 value = 0.41
 show_percentage = false
 script = ExtResource("27_b8hi5")
-lerp_weight = 0.1
+lerp_weight = 0.3
+metadata/_custom_type_script = "uid://c3xfbb8ay0ghk"
+
+[node name="StaminaBar" type="ProgressBar" parent="HUD/BarContainer" unique_id=609152098]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_fjxoa")
+max_value = 1.0
+value = 0.41
+show_percentage = false
+script = ExtResource("27_b8hi5")
+lerp_weight = 0.3
 metadata/_custom_type_script = "uid://c3xfbb8ay0ghk"
 
 [node name="PopupDisplay" type="Control" parent="HUD" unique_id=2003166414 node_paths=PackedStringArray("title_label", "body_label")]

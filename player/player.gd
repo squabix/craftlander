@@ -48,6 +48,8 @@ func drop_current_item() -> void:
 
 func _process(_delta: float) -> void:
 	adjust_head()
+	if is_in_water() and not %Stamina.is_usable():
+		health.hurt(INF)
 
 func use_item() -> void:
 	item_holder.use_item()

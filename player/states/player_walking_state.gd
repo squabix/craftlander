@@ -8,5 +8,5 @@ func enter() -> void:
 func update(_delta: float) -> void:
 	if Input.is_action_just_pressed("crouch") and root.is_on_floor():
 		transition_to("Crouching")
-	elif Input.is_action_just_pressed("sprint"):
+	elif Input.is_action_just_pressed("sprint") and %Stamina.is_usable():
 		transition_to("Sprinting")

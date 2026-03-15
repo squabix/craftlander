@@ -17,5 +17,5 @@ func exit() -> void:
 func update(_delta: float) -> void:
 	if Input.is_action_just_pressed("crouch") or Input.is_action_just_pressed("jump"):
 		transition_to("Walking")
-	elif Input.is_action_just_pressed("sprint"):
+	elif Input.is_action_just_pressed("sprint") and %Stamina.is_usable():
 		transition_to("Sprinting")
