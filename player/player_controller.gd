@@ -1,6 +1,11 @@
 extends EntityController3D
 class_name PlayerController
 
+const ACTION_MOVE_LEFT := "move_left"
+const ACTION_MOVE_RIGHT := "move_right"
+const ACTION_MOVE_FORWARD := "move_forward"
+const ACTION_MOVE_BACKWARD := "move_backward"
+
 const MOUSE_SENSITIVITY := 0.35
 
 @onready var docking_hidden_interface: Array[Control] = [
@@ -17,6 +22,14 @@ func _ready() -> void:
 func turn_head(relative: Vector2) -> void:
 	root.rotate_vertical(-relative.y * MOUSE_SENSITIVITY)
 	root.rotate_horizontal(-relative.x * MOUSE_SENSITIVITY)
+
+static func get_input_motion_vector() -> Vector2:
+	return Input.get_vector(
+			ACTION_MOVE_LEFT,
+			ACTION_MOVE_RIGHT,
+			ACTION_MOVE_BACKWARD,
+			ACTION_MOVE_FORWARD
+		)
 
 func handle_input(event: InputEvent) -> void:
 	if not is_controlling():
