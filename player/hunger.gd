@@ -25,7 +25,7 @@ func _ready() -> void:
 	)
 
 func _process(delta: float) -> void:
-	bar.value = value
+	bar.target_value = value
 	if get_tree().paused:
 		return
 	value -= (loss_per_minute * loss_multiplier / 60.0) * delta * GameWorld.TIME_SCALE
