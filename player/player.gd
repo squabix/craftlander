@@ -1,8 +1,9 @@
 extends Entity3D
 class_name Player
 
-const STANDING_HEAD_HEIGHT := 1.4
+const DEFAULT_HEAD_HEIGHT := 1.4
 const CROUCHED_HEAD_HEIGHT := 0.7
+const SWIMMING_HEAD_HEIGHT := 1.1
 const CROUCH_CAMERA_SPEED := 0.1
 
 const WATER_LEVEL := 0.1
@@ -26,13 +27,19 @@ func _ready() -> void:
 				sickness_manager.value += event.sickness
 	)
 
-func adjust_head_to_crouch() -> void:
 func is_in_water() -> bool:
 	return global_position.y <= WATER_LEVEL
 
+func adjust_head() -> void:
+	var height: float = DEFAULT_HEAD_HEIGHT
+	if movement_state_machine.is_currently("Crouching"):
+		height = CROUCHED_HEAD_HEIGHT
+	elif is_in_water():
+		height = SWIMMING_HEAD_HEIGHT
+	
 	head.position.y = lerp(
 		head.position.y,
-		CROUCHED_HEAD_HEIGHT if movement_state_machine.is_currently("Crouching") else STANDING_HEAD_HEIGHT,
+		height,
 		CROUCH_CAMERA_SPEED
 	)
 
@@ -40,7 +47,7 @@ func drop_current_item() -> void:
 	dropper.drop(inventory_holder_link.current_index)
 
 func _process(_delta: float) -> void:
-	adjust_head_to_crouch()
+	adjust_head()
 
 func use_item() -> void:
 	item_holder.use_item()
