@@ -16,6 +16,9 @@ func get_direction() -> Vector3:
 func face_target() -> void:
 	if not is_instance_valid(entity):
 		return
+	if not nav.is_target_reachable():
+		Util.lerp_look_at_3d(entity, target_position, face_interpolation)
+		return
 	var next: Vector3 = nav.get_next_path_position()
 	Util.lerp_look_at_3d(entity, next, face_interpolation)
 
