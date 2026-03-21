@@ -556,7 +556,7 @@ unique_name_in_owner = true
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
-offset_right = 344.0
+offset_right = 218.0
 offset_bottom = 128.0
 
 [node name="FPSLabel" type="Label" parent="HUD/BarContainer" unique_id=1610708313]
@@ -565,7 +565,7 @@ text = "FPS"
 script = ExtResource("19_bjvpn")
 
 [node name="HealthBar" type="ProgressBar" parent="HUD/BarContainer" unique_id=231774684 node_paths=PackedStringArray("health")]
-custom_minimum_size = Vector2(0, 15)
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_r7pn3")
 value = 4.58
@@ -575,7 +575,7 @@ health = NodePath("../../../Health")
 lerp_weight = 0.3
 
 [node name="HungerBar" type="ProgressBar" parent="HUD/BarContainer" unique_id=446841129]
-custom_minimum_size = Vector2(0, 15)
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_b8hi5")
 max_value = 1.0
@@ -586,7 +586,7 @@ lerp_weight = 0.3
 metadata/_custom_type_script = "uid://c3xfbb8ay0ghk"
 
 [node name="StaminaBar" type="ProgressBar" parent="HUD/BarContainer" unique_id=609152098]
-custom_minimum_size = Vector2(0, 15)
+custom_minimum_size = Vector2(0, 4)
 layout_mode = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_fjxoa")
 max_value = 1.0
