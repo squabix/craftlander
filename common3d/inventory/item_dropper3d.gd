@@ -27,6 +27,9 @@ static func _transform_pickup(pickup: RigidItemPickup3D, dropper: InventoryDropp
 	
 	await dropper.get_tree().process_frame
 	
+	if not is_instance_valid(pickup):
+		return
+	
 	pickup.global_transform = pickup_base_transform
 	pickup.global_position += pickup_position_offset
 	pickup.global_rotation_degrees += pickup_rotation_offset
