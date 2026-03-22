@@ -18,6 +18,8 @@ const WATER_LEVEL := 0.1
 @onready var inventory_holder_link: InventoryHolderLink = $Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink
 @onready var dropper: InventoryDropper3D = $Head/Camera3D/DropperRayCast/InventoryDropper3D
 
+var is_in_water := false
+
 func _ready() -> void:
 	item_holder.item_event_triggered.connect(
 		func(event: ItemEvent) -> void:
@@ -27,14 +29,11 @@ func _ready() -> void:
 				sickness_manager.value += event.sickness
 	)
 
-func is_in_water() -> bool:
-	return global_position.y <= WATER_LEVEL
-
 func adjust_head() -> void:
 	var height: float = DEFAULT_HEAD_HEIGHT
 	if movement_state_machine.is_currently("Crouching"):
 		height = CROUCHED_HEAD_HEIGHT
-	elif is_in_water():
+	elif is_in_water:
 		height = SWIMMING_HEAD_HEIGHT
 	
 	head.position.y = lerp(
@@ -48,7 +47,7 @@ func drop_current_item() -> void:
 
 func _process(_delta: float) -> void:
 	adjust_head()
-	if is_in_water() and not %Stamina.is_usable():
+	if is_in_water and not %Stamina.is_usable():
 		health.hurt(INF)
 
 func use_item() -> void:

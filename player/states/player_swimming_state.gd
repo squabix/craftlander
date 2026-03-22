@@ -1,6 +1,7 @@
 extends State
 
 const STAMINA_COST := 0.12
+
 @onready var movement_mode: MovementMode3D = preload("res://player/states/player_swmming_movement_mode.tres")
 
 func enter() -> void:
@@ -9,7 +10,7 @@ func enter() -> void:
 func update(_delta: float) -> void:
 	%Stamina.spend(STAMINA_COST)
 	
-	if not root.is_in_water():
+	if not root.is_in_water:
 		transition_to("Default")
 		return
 	
