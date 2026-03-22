@@ -62,7 +62,7 @@ func heal(amount: float, can_revive: bool=false) -> void:
 	was_healed.emit()
 	was_given_hp.emit(amount)
 
-func revive(revived_hp: float) -> void:
+func revive(revived_hp: float=max_hp) -> void:
 	if revived_hp < 0.0:
 		return
 	if not dead:
