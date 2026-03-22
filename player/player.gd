@@ -6,8 +6,6 @@ const CROUCHED_HEAD_HEIGHT := 0.7
 const SWIMMING_HEAD_HEIGHT := 1.1
 const CROUCH_CAMERA_SPEED := 0.1
 
-const WATER_LEVEL := 0.1
-
 @onready var head: Node3D = $Head
 @onready var movement_state_machine: StateMachine = $Controller3D/Default
 @onready var inventory: Inventory = $Inventory
