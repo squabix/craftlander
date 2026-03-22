@@ -15,7 +15,9 @@ const CROUCH_CAMERA_SPEED := 0.1
 @onready var item_holder: ItemHolder3D = $Head/Camera3D/ArmContainer/ItemHolder
 @onready var inventory_holder_link: InventoryHolderLink = $Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink
 @onready var dropper: InventoryDropper3D = $Head/Camera3D/DropperRayCast/InventoryDropper3D
+@onready var respawn_button: Button = $HUD/DeathScreen/OptionsContainer/RespawnButton
 
+var respawn_point_node: Node3D
 var is_in_water := false
 
 func _ready() -> void:
@@ -26,6 +28,8 @@ func _ready() -> void:
 				hunger.value += event.hunger_restoration
 				sickness_manager.value += event.sickness
 	)
+	respawn_button.pressed.connect(respawn)
+	health.died.connect(die)
 
 func adjust_head() -> void:
 	var height: float = DEFAULT_HEAD_HEIGHT
@@ -53,3 +57,21 @@ func use_item() -> void:
 
 func interact() -> void:
 	%Interactor.interact()
+
+func die() -> void:
+	get_tree().paused = true
+	MouseModeController.show()
+
+func respawn() -> void:
+	
+	# Transform to respawn point
+	global_position = respawn_point_node.global_position
+	global_rotation = respawn_point_node.global_rotation
+	
+	# Replenish stats
+	$Health.revive()
+	hunger.value = hunger.initial_value
+	%Stamina.value = 1.0
+	
+	MouseModeController.capture()
+	get_tree().paused = false

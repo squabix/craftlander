@@ -1,4 +1,6 @@
 extends State
 
 func enter() -> void:
-	%DriverSeat.dismount()
+	var dismounted_player: Player = %DriverSeat.dismount()
+	if dismounted_player != null:
+		dismounted_player.respawn_point_node = %DriverSeat

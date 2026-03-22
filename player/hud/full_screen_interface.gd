@@ -9,6 +9,8 @@ var is_paused := false
 
 func _ready() -> void:
 	update()
+	%Health.died.connect(set_process.bind(false))
+	%Health.revived.connect(set_process.bind(true))
 
 func update() -> void:
 	visible = is_paused

@@ -16,8 +16,8 @@ const MOUSE_SENSITIVITY := 0.35
 
 func _ready() -> void:
 	super()
-	
 	MouseModeController.capture() # Capture mouse
+	%Health.revived.connect(enter) # Default to initial state after revival
 
 func turn_head(relative: Vector2) -> void:
 	root.rotate_vertical(-relative.y * MOUSE_SENSITIVITY)

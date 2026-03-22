@@ -41,6 +41,7 @@
 [ext_resource type="Texture2D" uid="uid://p5jyelnqcoqe" path="res://assets/grid.png" id="39_55jnj"]
 [ext_resource type="Script" uid="uid://c622jer80j3sk" path="res://common/inventory_system/animation/item_animation.gd" id="39_dx5ib"]
 [ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="40_a2xo5"]
+[ext_resource type="Script" uid="uid://dfo0te3udism4" path="res://player/hud/player_death_screen.gd" id="40_gswnw"]
 [ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/tools/shoddy_mace/shoddy_mace_item.tres" id="41_a2xo5"]
 [ext_resource type="Resource" uid="uid://w52cknmpa167" path="res://items/tools/shoddy_pickaxe/shoddy_pickaxe_item.tres" id="41_art4l"]
 
@@ -179,6 +180,20 @@ height = 128
 use_hdr = true
 fill = 1
 fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_fjxoa"]
+colors = PackedColorArray(0.09627376, 0.108222656, 0.12931883, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gswnw"]
+gradient = SubResource("Gradient_fjxoa")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xcnuv"]
+font_size = 100
+font_color = Color(0.73, 0.1825, 0.1825, 1)
 
 [sub_resource type="Animation" id="Animation_tqiix"]
 length = 0.001
@@ -502,6 +517,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_ebec5")
 
 [node name="Health" type="Node" parent="." unique_id=1348652794]
+unique_name_in_owner = true
 script = ExtResource("12_ebec5")
 hp = 100.0
 
@@ -1628,6 +1644,62 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+flat = true
+
+[node name="DeathScreen" type="Control" parent="HUD" unique_id=1492309495]
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("40_gswnw")
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/DeathScreen" unique_id=690622334]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_gswnw")
+
+[node name="TitleLabel" type="Label" parent="HUD/DeathScreen" unique_id=288706922]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 368.0
+grow_horizontal = 2
+text = "YOU DIED"
+label_settings = SubResource("LabelSettings_xcnuv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OptionsContainer" type="VBoxContainer" parent="HUD/DeathScreen" unique_id=336769755]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -139.5
+offset_top = -355.0
+offset_right = 139.5
+offset_bottom = -95.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="RespawnButton" type="Button" parent="HUD/DeathScreen/OptionsContainer" unique_id=361444523]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.65697014, 0.65697014, 0.65697014, 1)
+text = "Respawn"
+flat = true
+
+[node name="QuitButton" type="Button" parent="HUD/DeathScreen/OptionsContainer" unique_id=394106598]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.65697014, 0.65697014, 0.65697014, 1)
+text = "Quit to Title Screen"
 flat = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1780880928]
