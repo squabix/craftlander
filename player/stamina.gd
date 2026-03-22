@@ -52,8 +52,6 @@ func start_fill() -> void:
 	started_fill.emit()
 
 func spend(amount_per_second: float) -> void:
-	if is_depleted:
-		return
 	queued_spend += amount_per_second
 
 func is_usable() -> bool:
@@ -86,15 +84,15 @@ func _process(delta: float) -> void:
 				
 		elif idle_timer.is_stopped() and value < 1.0:
 			idle_timer.start()
-		
-	else:
+	
+	if queued_spend != 0.0:
 		# If spending, reset filling state and acceleration
 		is_filling = false
 		_current_fill_time = 0.0
 		
 		if not idle_timer.is_stopped():
 			idle_timer.stop()
-			
+		
 		value -= queued_spend * delta * GameWorld.TIME_SCALE
 		spent.emit(queued_spend)
 	
