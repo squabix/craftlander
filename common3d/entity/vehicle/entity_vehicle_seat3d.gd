@@ -31,9 +31,12 @@ func mount(entity: Entity3D) -> bool:
 	
 	return true
 
-func dismount() -> void:
+func dismount() -> Entity3D:
+	var entity := mounted_entity
 	var mounted_controller := get_controller()
 	if mounted_controller != null:
 		mounted_controller.update_entity(mounted_entity)
+	
 	mounted_entity = null
 	mounted_controller = null
+	return entity
