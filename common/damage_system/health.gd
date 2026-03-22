@@ -54,9 +54,7 @@ func is_full() -> bool:
 func heal(amount: float, can_revive: bool=false) -> void:
 	if amount <= 0.0:
 		return
-	if hp <= 0.0:
-		if can_revive:
-			revive(amount)
+	if hp <= 0.0 and not can_revive:
 		return
 	hp = min(max_hp, hp + abs(amount))
 	was_healed.emit()
@@ -68,7 +66,7 @@ func revive(revived_hp: float=max_hp) -> void:
 	if not dead:
 		return
 	dead = false
-	heal(revived_hp)
+	heal(revived_hp, true)
 	revived.emit()
 
 func set_hp(to: float, can_hurt: bool=true, can_heal: bool=true) -> void:
