@@ -2,9 +2,7 @@ extends Node
 class_name Hunger
 
 @export var bar: InterpolatedBar
-@export_range(0.0, 1.0) var value := 0.75:
-	set(to):
-		value = clampf(to, 0.0, 1.0)
+@export_range(0.0, 1.0) var initial_value := 0.75
 @export var loss_per_minute := 0.2
 @export var loss_multiplier := 1.0
 
@@ -21,7 +19,12 @@ class_name Hunger
 var hurt_timer: Timer
 var queued_loss := 0.0
 
+var value := 1.0:
+	set(to):
+		value = clampf(to, 0.0, 1.0)
+
 func _ready() -> void:
+	value = initial_value
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	hurt_timer = Timer.new()
 	add_child(hurt_timer)
