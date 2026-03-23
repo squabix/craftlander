@@ -14,12 +14,12 @@ func _ready() -> void:
 	EventBus.subscribe("quit_to_title", quit_to_title)
 
 func start_new_game(save: int) -> void:
-	title_screen.queue_free()
+	clear()
 	level = island_scenes[save].instantiate()
 	add_child(level)
 
 func quit_level() -> void:
-	level.queue_free()
+	clear()
 	level = null
 
 func quit_to_title() -> void:
@@ -30,3 +30,13 @@ func load_title() -> void:
 	title_screen = title_screen_scene.instantiate()
 	add_child(title_screen)
 	title_screen.started_new_game.connect(start_new_game)
+
+func clear() -> void:
+	InventoryDropper3D.clear_dropped_pickups()
+	for child in get_children():
+		child.queue_free()
+	
+	title_screen = null
+	level = null
+	
+	get_tree().paused = false
