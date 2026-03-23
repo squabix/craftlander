@@ -4,6 +4,7 @@ class_name InventoryDropper3D
 enum DeathDropMode {EVERYTHING, RANDOM, NEXT, NONE}
 
 static var rigid_item_pickup_scene := load("res://defaults/default_rigid_item_pickup.tscn")
+static var all_dropped_pickups: Array[Node]
 
 @export var inventory: Inventory
 @export var position_offset: Vector3
@@ -33,6 +34,12 @@ static func _transform_pickup(pickup: RigidItemPickup3D, dropper: InventoryDropp
 	pickup.global_transform = pickup_base_transform
 	pickup.global_position += pickup_position_offset
 	pickup.global_rotation_degrees += pickup_rotation_offset
+
+static func clear_dropped_pickups() -> void:
+	for pickup in all_dropped_pickups:
+		if is_instance_valid(pickup):
+			pickup.queue_free()
+	all_dropped_pickups = []
 
 func _ready() -> void:
 	
@@ -64,7 +71,7 @@ func drop(index: int=-1) -> Node3D:
 		return
 	
 	parent.add_child(pickup)
-	
+	InventoryDropper3D.all_dropped_pickups.append(pickup)
 	InventoryDropper3D._transform_pickup(pickup, self)
 	
 	return pickup
