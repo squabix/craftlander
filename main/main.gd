@@ -25,6 +25,7 @@ func quit_level() -> void:
 func quit_to_title() -> void:
 	quit_level()
 	load_title()
+	MouseModeController.show()
 
 func load_title() -> void:
 	title_screen = title_screen_scene.instantiate()
