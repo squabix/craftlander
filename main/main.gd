@@ -1,12 +1,13 @@
 extends Node
+class_name Main
 
 @onready var title_screen_scene: PackedScene = load("res://menus/title_screen.tscn")
 @onready var island_scenes: Array[PackedScene] = [
 	load("res://levels/island0.tscn")
 ]
 
-var title_screen: TitleScreen
-var level: Node3D
+static var title_screen: TitleScreen
+static var level: Node3D
 
 func _ready() -> void:
 	load_title()
