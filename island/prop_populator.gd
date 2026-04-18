@@ -6,6 +6,7 @@ class_name PropPopulator
 @export var prop_quantities: Dictionary[IslandProp, int]
 @export var rng_seed := 0
 @export var prop_spread := 0.0
+@export var populate_on_ready := true
 @export_tool_button("Populate")
 var populate_tool_button := populate
 @export_tool_button("Reset")
@@ -61,5 +62,7 @@ func get_shortest_prop_distance(to: Vector3) -> float:
 	return shortest_distance
 
 func _ready() -> void:
+	if not populate_on_ready:
+		return
 	await get_tree().process_frame
 	populate()
