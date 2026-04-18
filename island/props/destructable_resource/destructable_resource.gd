@@ -24,5 +24,6 @@ func _ready() -> void:
 							1,
 							Util.find_child_of_class(damage.source, "Inventory")
 						)
-				)
+				),
+			tree_exiting
 		)
