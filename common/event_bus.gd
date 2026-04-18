@@ -13,8 +13,8 @@ static func subscribe(to: String, subscriber: Callable, unsubscribe_signal: Sign
 		# Unsubscribe when received signal
 		unsubscribe_signal.connect(EventBus.unsubscribe.bind(to, subscriber))
 		return true
-	else:
-		printerr("Invalid Callable cannot subscribe to EventBus")
+	
+	printerr("Invalid Callable cannot subscribe to EventBus")
 	return false
 
 static func trigger(event: String, etc: Variant = null) -> bool:
