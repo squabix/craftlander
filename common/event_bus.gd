@@ -3,12 +3,15 @@ extends Object
 
 static var subscribed_events: Dictionary = {}
 
-static func subscribe(to: String, subscriber: Callable) -> bool:
+static func subscribe(to: String, subscriber: Callable, unsubscribe_signal: Signal = Signal()) -> bool:
 	if subscriber.is_valid():
 		if to in subscribed_events and subscribed_events[to] is Array:
 			subscribed_events[to].append(subscriber)
 		else:
 			subscribed_events[to] = [subscriber]
+		
+		# Unsubscribe when received signal
+		unsubscribe_signal.connect(EventBus.unsubscribe.bind(to, subscriber))
 		return true
 	else:
 		printerr("Invalid Callable cannot subscribe to EventBus")
