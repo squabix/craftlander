@@ -104,6 +104,8 @@ func get_pixel_normal(x: int, y: int, radius: int = 2) -> Vector3:
 
 
 func update_collision_shape(image_texture: ImageTexture=null) -> void:
+	if not is_instance_valid(collision_shape):
+		return
 	if image_texture == null:
 		image_texture = shader_get("heightmap")
 	var image := image_texture.get_image()
