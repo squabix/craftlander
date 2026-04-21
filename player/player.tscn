@@ -40,6 +40,7 @@
 [ext_resource type="Script" uid="uid://bi8ev1kcq2ayf" path="res://common/inventory_system/animation/item_animation_tree.gd" id="38_a2xo5"]
 [ext_resource type="Texture2D" uid="uid://p5jyelnqcoqe" path="res://assets/grid.png" id="39_55jnj"]
 [ext_resource type="Script" uid="uid://c622jer80j3sk" path="res://common/inventory_system/animation/item_animation.gd" id="39_dx5ib"]
+[ext_resource type="PackedScene" uid="uid://byosfqwobl3sl" path="res://menus/settings_menu.tscn" id="39_xcnuv"]
 [ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="40_a2xo5"]
 [ext_resource type="Script" uid="uid://dfo0te3udism4" path="res://player/hud/player_death_screen.gd" id="40_gswnw"]
 [ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/tools/shoddy_mace/shoddy_mace_item.tres" id="41_a2xo5"]
@@ -529,7 +530,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
 script = ExtResource("17_g4c7l")
 
 [node name="Cursor" type="TextureRect" parent="HUD" unique_id=92395798]
@@ -692,7 +692,6 @@ text = "Continue"
 [node name="PauseInterface" type="Control" parent="HUD" unique_id=1163003515]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -702,6 +701,7 @@ grow_vertical = 2
 script = ExtResource("28_pnw6m")
 
 [node name="BlurRect" type="ColorRect" parent="HUD/PauseInterface" unique_id=1141508559]
+visible = false
 material = SubResource("ShaderMaterial_pnw6m")
 layout_mode = 1
 anchors_preset = 15
@@ -709,6 +709,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="CraftingMenu" type="Control" parent="HUD/PauseInterface" unique_id=874561833]
 layout_mode = 1
@@ -990,6 +991,18 @@ label_settings = SubResource("LabelSettings_55jnj")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SettingsButton" type="Button" parent="HUD/PauseInterface/CraftingMenu" unique_id=1494540130]
+layout_mode = 0
+offset_left = 996.0
+offset_top = 553.0
+offset_right = 1066.0
+offset_bottom = 623.0
+text = "Settings"
+
+[node name="SettingsMenu" parent="HUD/PauseInterface" unique_id=788547277 instance=ExtResource("39_xcnuv")]
+visible = false
+layout_mode = 1
+
 [node name="InventoryInterface" type="Control" parent="HUD" unique_id=858532635]
 unique_name_in_owner = true
 z_index = 1
@@ -999,7 +1012,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
+mouse_filter = 2
 
 [node name="CurrentItemLabel" type="Label" parent="HUD/InventoryInterface" unique_id=272445762]
 layout_mode = 1
@@ -1647,6 +1660,7 @@ grow_vertical = 2
 flat = true
 
 [node name="DeathScreen" type="Control" parent="HUD" unique_id=1492309495]
+visible = false
 z_index = 2
 layout_mode = 1
 anchors_preset = 15

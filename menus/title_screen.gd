@@ -12,17 +12,20 @@ signal back_button_pressed
 
 var current_save_select_mode: SaveSelectMode
 
-# Button containers
-@onready var main_button_container: Container = $MainButtonContainer
-@onready var save_button_container: Container = $SaveButtonContainer
-@onready var all_button_containers: Array[Container] = [
-	main_button_container,
-	save_button_container
+# Submenus
+@onready var main_submenu: Container = $MainButtonContainer
+@onready var save_submenu: Container = $SaveButtonContainer
+@onready var settings_submenu: Menu = $SettingsMenu
+@onready var all_submenus: Array[Control] = [
+	main_submenu,
+	save_submenu,
+	settings_submenu
 ]
 
 # Main buttons
 @onready var new_game_button: Button = $MainButtonContainer/NewGameButton
 @onready var quit_game_button: Button = $MainButtonContainer/QuitButton
+@onready var settings_button: Button = $MainButtonContainer/SettingsButton
 
 # Save buttons
 @onready var save_buttons: Array[Button]
@@ -30,7 +33,7 @@ var current_save_select_mode: SaveSelectMode
 func _ready() -> void:
 	
 	# Load save buttons
-	for child in save_button_container.get_children():
+	for child in save_submenu.get_children():
 		if child is Button:
 			if child.name == BACK_BUTTON_NAME:
 				child.pressed.connect(reset_to_main)
@@ -41,13 +44,20 @@ func _ready() -> void:
 	reset_to_main()
 	
 	new_game_button.pressed.connect(start_save_selection.bind(SaveSelectMode.NEW))
+	settings_button.pressed.connect(open_settings_menu)
 	quit_game_button.pressed.connect(get_tree().quit)
+	
 
 func reset_to_main() -> void:
-	for container in all_button_containers:
+	for container in all_submenus:
 		container.hide()
-	main_button_container.show()
-	
+	main_submenu.show()
+
+func open_settings_menu() -> void:
+	main_submenu.hide()
+	settings_submenu.show()
+	await settings_submenu.backed_out
+	reset_to_main()
 
 func select_save(save: int) -> void:
 	match current_save_select_mode:
@@ -58,5 +68,5 @@ func select_save(save: int) -> void:
 
 func start_save_selection(mode: SaveSelectMode):
 	current_save_select_mode = mode
-	main_button_container.hide()
-	save_button_container.show()
+	main_submenu.hide()
+	save_submenu.show()

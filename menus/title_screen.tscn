@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://h257chlnqrha" path="res://menus/title_screen.gd" id="1_m4alt"]
 [ext_resource type="Script" uid="uid://wcijrouade5d" path="res://island/island_generator.gd" id="2_ctf6r"]
+[ext_resource type="PackedScene" uid="uid://byosfqwobl3sl" path="res://menus/settings_menu.tscn" id="2_dbvjn"]
 [ext_resource type="Texture2D" uid="uid://cy7t71mibkd8k" path="res://island/island_taper_texture.tres" id="3_dbvjn"]
 [ext_resource type="Texture2D" uid="uid://c4gehucq85wxc" path="res://island/island_absolute_texture.tres" id="4_eujrm"]
 [ext_resource type="Material" uid="uid://drm8bdv4es6et" path="res://island/mat1.tres" id="5_cqggn"]
@@ -106,7 +107,7 @@ frequency = 0.002
 noise = SubResource("FastNoiseLite_legw5")
 color_ramp = SubResource("Gradient_vons5")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_nfrpb"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_dbvjn"]
 size = Vector2(600, 600)
 subdivide_width = 1000
 subdivide_depth = 1000
@@ -178,6 +179,10 @@ text = "CRAFTLANDER"
 label_settings = SubResource("LabelSettings_kb6lx")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SettingsMenu" parent="." unique_id=1608320205 instance=ExtResource("2_dbvjn")]
+visible = false
+layout_mode = 1
 
 [node name="MainButtonContainer" type="VBoxContainer" parent="." unique_id=1534027746]
 layout_mode = 1
@@ -255,7 +260,7 @@ metadata/_edit_group_ = true
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PreviewIsland/IslandGenerator" unique_id=1883831798]
 material_override = ExtResource("5_cqggn")
 cast_shadow = 2
-mesh = SubResource("PlaneMesh_nfrpb")
+mesh = SubResource("PlaneMesh_dbvjn")
 
 [node name="WaterMesh" type="MeshInstance3D" parent="PreviewIsland/IslandGenerator" unique_id=264507659]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5375899, 0)

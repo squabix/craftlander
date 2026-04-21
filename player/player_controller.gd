@@ -20,6 +20,11 @@ func _ready() -> void:
 	%Health.revived.connect(enter) # Default to initial state after revival
 
 func turn_head(relative: Vector2) -> void:
+	
+	# Invert y
+	if GameSettings.config.get_value("gameplay", "invert_y", false) == true:
+		relative.y *= -1.0
+	
 	root.rotate_vertical(-relative.y * MOUSE_SENSITIVITY)
 	root.rotate_horizontal(-relative.x * MOUSE_SENSITIVITY)
 

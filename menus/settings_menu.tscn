@@ -1,0 +1,188 @@
+[gd_scene format=3 uid="uid://byosfqwobl3sl"]
+
+[ext_resource type="Script" uid="uid://c54p7ksaku8o0" path="res://menus/settings_menu.gd" id="1_83qjl"]
+
+[sub_resource type="Gradient" id="Gradient_83qjl"]
+offsets = PackedFloat32Array(0.9412202, 1)
+colors = PackedColorArray(0, 0, 0, 0.41960785, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_v0bl3"]
+gradient = SubResource("Gradient_83qjl")
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+
+[node name="SettingsMenu" type="Control" unique_id=788547277]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_83qjl")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1518470332]
+custom_minimum_size = Vector2(380, 370)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -185.0
+offset_right = 190.0
+offset_bottom = 185.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_v0bl3")
+
+[node name="SettingsContainer" type="VBoxContainer" parent="." unique_id=1534027746]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -155.0
+offset_right = 160.0
+offset_bottom = 155.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="FullScreen" type="HBoxContainer" parent="SettingsContainer" unique_id=780028123]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="SettingsContainer/FullScreen" unique_id=2115819152]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Full Screen"
+
+[node name="FullScreenToggle" type="CheckBox" parent="SettingsContainer/FullScreen" unique_id=2049426436]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VSync" type="HBoxContainer" parent="SettingsContainer" unique_id=1355440551]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="SettingsContainer/VSync" unique_id=382500737]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "VSync"
+
+[node name="VSyncToggle" type="CheckBox" parent="SettingsContainer/VSync" unique_id=1518537055]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+button_pressed = true
+
+[node name="InvertY" type="HBoxContainer" parent="SettingsContainer" unique_id=573359744]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="SettingsContainer/InvertY" unique_id=927416758]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Invert Y"
+
+[node name="InvertYToggle" type="CheckBox" parent="SettingsContainer/InvertY" unique_id=1517878780]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+button_pressed = true
+
+[node name="AntiAliasing" type="HBoxContainer" parent="SettingsContainer" unique_id=289704489]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="SettingsContainer/AntiAliasing" unique_id=1825894110]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Anti Aliasing"
+
+[node name="AAOption" type="OptionButton" parent="SettingsContainer/AntiAliasing" unique_id=630181348]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 1
+item_count = 4
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "2x"
+popup/item_1/id = 1
+popup/item_2/text = "4x"
+popup/item_2/id = 2
+popup/item_3/text = "8x"
+popup/item_3/id = 3
+
+[node name="ShadowQuality" type="HBoxContainer" parent="SettingsContainer" unique_id=1126559339]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="SettingsContainer/ShadowQuality" unique_id=1032371091]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Shadow Quality"
+
+[node name="ShadowOption" type="OptionButton" parent="SettingsContainer/ShadowQuality" unique_id=1710798274]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 1
+item_count = 4
+popup/item_0/text = "Low"
+popup/item_0/id = 0
+popup/item_1/text = "Medium"
+popup/item_1/id = 1
+popup/item_2/text = "High"
+popup/item_2/id = 2
+popup/item_3/text = "Ultra"
+popup/item_3/id = 3
+
+[node name="MusicVolume" type="HBoxContainer" parent="SettingsContainer" unique_id=1049655463]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="SettingsContainer/MusicVolume" unique_id=1880123562]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicSlider" type="HSlider" parent="SettingsContainer/MusicVolume" unique_id=1082336741]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+value = 1.0
+tick_count = 10
+ticks_on_borders = true
+
+[node name="SFXVolume" type="HBoxContainer" parent="SettingsContainer" unique_id=1097559491]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="SettingsContainer/SFXVolume" unique_id=556711064]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "SFX Volume"
+
+[node name="SFXSlider" type="HSlider" parent="SettingsContainer/SFXVolume" unique_id=699787212]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+value = 1.0
+tick_count = 10
+ticks_on_borders = true
+
+[node name="BackButton" type="Button" parent="SettingsContainer" unique_id=1546788436]
+layout_mode = 2
+text = "BACK"
+
+[connection signal="toggled" from="SettingsContainer/FullScreen/FullScreenToggle" to="." method="_on_full_screen_toggled"]
+[connection signal="toggled" from="SettingsContainer/VSync/VSyncToggle" to="." method="_on_vsync_toggled"]
+[connection signal="toggled" from="SettingsContainer/InvertY/InvertYToggle" to="." method="_on_invert_y_toggled"]
+[connection signal="item_selected" from="SettingsContainer/AntiAliasing/AAOption" to="." method="_on_anti_aliasing_selected"]
+[connection signal="item_selected" from="SettingsContainer/ShadowQuality/ShadowOption" to="." method="_on_shadow_quality_selected"]
+[connection signal="value_changed" from="SettingsContainer/MusicVolume/MusicSlider" to="." method="_on_music_volume_changed"]
+[connection signal="value_changed" from="SettingsContainer/SFXVolume/SFXSlider" to="." method="_on_sfx_volume_changed"]
+[connection signal="pressed" from="SettingsContainer/BackButton" to="." method="_on_back_button_pressed"]
