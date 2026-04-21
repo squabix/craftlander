@@ -21,6 +21,7 @@ config/icon="res://icon.svg"
 
 SoundManager="*res://common/sound/sound_manager.gd"
 RecipeBook="*res://items/crafting/recipe_book.gd"
+GameSettings="*uid://dybhrs6lws1mr"
 
 [display]
 
