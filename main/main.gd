@@ -3,7 +3,7 @@ class_name Main
 
 @onready var title_screen_scene: PackedScene = load("res://menus/title_screen.tscn")
 @onready var island_scenes: Array[PackedScene] = [
-	load("res://levels/island0.tscn")
+	load("res://levels/island_0.scn")
 ]
 
 static var title_screen: TitleScreen
