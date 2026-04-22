@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://wcijrouade5d" path="res://island/island_generator.gd" id="2_ctf6r"]
 [ext_resource type="PackedScene" uid="uid://byosfqwobl3sl" path="res://menus/settings_menu.tscn" id="2_dbvjn"]
 [ext_resource type="Texture2D" uid="uid://cy7t71mibkd8k" path="res://island/island_taper_texture.tres" id="3_dbvjn"]
+[ext_resource type="Script" uid="uid://dlutjgdrcstqh" path="res://menus/save_menu.gd" id="3_eujrm"]
 [ext_resource type="Texture2D" uid="uid://c4gehucq85wxc" path="res://island/island_absolute_texture.tres" id="4_eujrm"]
 [ext_resource type="Material" uid="uid://drm8bdv4es6et" path="res://island/mat1.tres" id="5_cqggn"]
 [ext_resource type="Shader" uid="uid://bjt5jcslbt2k1" path="res://water.gdshader" id="6_fuwux"]
@@ -149,7 +150,7 @@ size = Vector2(2000, 2000)
 subdivide_width = 300
 subdivide_depth = 300
 
-[node name="TitleScreen" type="Control" unique_id=788547277]
+[node name="TitleScreen" type="Control" unique_id=788547277 node_paths=PackedStringArray("visibility_proxy")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -157,6 +158,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_m4alt")
+visibility_proxy = NodePath("MainButtonContainer")
 
 [node name="PreviewCameraPivot" type="Node3D" parent="." unique_id=924350797]
 
@@ -213,8 +215,20 @@ text = "SETTINGS"
 layout_mode = 2
 text = "QUIT"
 
-[node name="SaveButtonContainer" type="VBoxContainer" parent="." unique_id=2089379936]
+[node name="SaveMenu" type="Control" parent="." unique_id=148699048 node_paths=PackedStringArray("save_buttons", "back_button")]
 visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_eujrm")
+save_buttons = [NodePath("SaveButtonContainer/Save1Button")]
+back_button = NodePath("SaveButtonContainer/BackButton")
+metadata/_custom_type_script = "uid://b6yko3fl1r3fe"
+
+[node name="SaveButtonContainer" type="VBoxContainer" parent="SaveMenu" unique_id=2089379936]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -227,11 +241,11 @@ offset_right = 160.5
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Save1Button" type="Button" parent="SaveButtonContainer" unique_id=1088268271]
+[node name="Save1Button" type="Button" parent="SaveMenu/SaveButtonContainer" unique_id=1088268271]
 layout_mode = 2
 text = "SAVE 1"
 
-[node name="BackButton" type="Button" parent="SaveButtonContainer" unique_id=1162609949]
+[node name="BackButton" type="Button" parent="SaveMenu/SaveButtonContainer" unique_id=1162609949]
 layout_mode = 2
 text = "BACK"
 

@@ -30,7 +30,7 @@ func quit_to_title() -> void:
 func load_title() -> void:
 	title_screen = title_screen_scene.instantiate()
 	add_child(title_screen)
-	title_screen.started_new_game.connect(start_new_game)
+	title_screen.save_submenu.started_new_game.connect(start_new_game)
 
 func clear() -> void:
 	InventoryDropper3D.clear_dropped_pickups()
