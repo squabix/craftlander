@@ -55,6 +55,10 @@ _data = {
 
 [sub_resource type="LabelSettings" id="LabelSettings_kb6lx"]
 font_size = 100
+font_color = Color(1, 0.964353, 0.56398994, 1)
+shadow_size = 6
+shadow_color = Color(0, 0, 0, 0.4509804)
+shadow_offset = Vector2(2.875, 3.025)
 
 [sub_resource type="Gradient" id="Gradient_tsgde"]
 
@@ -141,8 +145,8 @@ visibility_proxy = NodePath("MainButtonContainer")
 [node name="PreviewCameraPivot" type="Node3D" parent="." unique_id=924350797]
 
 [node name="Camera3D" type="Camera3D" parent="PreviewCameraPivot" unique_id=1271233095]
-transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 60, 235)
-fov = 110.0
+transform = Transform3D(1, 0, 0, 0, 0.96532696, 0.26104364, 0, -0.26104364, 0.96532696, 0, 96.78769, 322.05264)
+fov = 70.0
 far = 704.59
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PreviewCameraPivot" unique_id=1690099708]
