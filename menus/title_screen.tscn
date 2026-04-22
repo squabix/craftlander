@@ -55,10 +55,12 @@ _data = {
 
 [sub_resource type="LabelSettings" id="LabelSettings_kb6lx"]
 font_size = 100
-font_color = Color(1, 0.964353, 0.56398994, 1)
-shadow_size = 6
+font_color = Color(0.33384326, 0.9495346, 0.603484, 1)
+outline_size = 8
+outline_color = Color(0.19299632, 0.564977, 0.78293514, 1)
+shadow_size = 8
 shadow_color = Color(0, 0, 0, 0.4509804)
-shadow_offset = Vector2(2.875, 3.025)
+shadow_offset = Vector2(0, 5)
 
 [sub_resource type="Gradient" id="Gradient_tsgde"]
 
@@ -90,7 +92,7 @@ frequency = 0.002
 noise = SubResource("FastNoiseLite_legw5")
 color_ramp = SubResource("Gradient_vons5")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_fuwux"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_cqggn"]
 size = Vector2(600, 600)
 subdivide_width = 1000
 subdivide_depth = 1000
@@ -256,7 +258,7 @@ metadata/_edit_group_ = true
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PreviewIsland/IslandGenerator" unique_id=1883831798]
 material_override = ExtResource("5_cqggn")
 cast_shadow = 2
-mesh = SubResource("PlaneMesh_fuwux")
+mesh = SubResource("PlaneMesh_cqggn")
 
 [node name="WaterMesh" type="MeshInstance3D" parent="PreviewIsland/IslandGenerator" unique_id=264507659]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5375899, 0)
