@@ -701,7 +701,6 @@ grow_vertical = 2
 script = ExtResource("28_pnw6m")
 
 [node name="BlurRect" type="ColorRect" parent="HUD/PauseInterface" unique_id=1141508559]
-visible = false
 material = SubResource("ShaderMaterial_pnw6m")
 layout_mode = 1
 anchors_preset = 15
