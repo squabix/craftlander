@@ -720,21 +720,25 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="CraftingEnvironment" parent="HUD/PauseInterface/CraftingMenu" unique_id=651686952 node_paths=PackedStringArray("inventory_holder_link", "pause_interface") instance=ExtResource("28_q28gw")]
+custom_minimum_size = Vector2(500, 500)
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.3263889
-anchor_top = 0.057098765
-anchor_right = 0.9340278
-anchor_bottom = 0.8287037
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -294.0
+offset_right = 250.0
+offset_bottom = 206.00037
 inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
 pause_interface = NodePath("../..")
-metadata/_edit_use_anchors_ = true
 
 [node name="RecipePanel" type="Control" parent="HUD/PauseInterface/CraftingMenu" unique_id=1393690572]
 layout_mode = 1
 anchor_left = 0.0069444445
 anchor_top = 0.057098765
-anchor_right = 0.3185764
+anchor_right = 0.2734375
 anchor_bottom = 0.9722222
 script = ExtResource("38_1so5t")
 metadata/_edit_use_anchors_ = true
