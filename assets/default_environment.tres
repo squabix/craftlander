@@ -1,0 +1,81 @@
+[gd_resource type="Environment" format=3 uid="uid://cibxuhtgknost"]
+
+[ext_resource type="Shader" uid="uid://bkbty48k6awb1" path="res://assets/shaders/sky_shader1.gdshader" id="1_0e4fy"]
+
+[sub_resource type="Gradient" id="Gradient_fh26t"]
+offsets = PackedFloat32Array(0.055841923, 0.124570444, 0.14862543, 0.28608248)
+colors = PackedColorArray(1, 1, 1, 1, 0.9600888, 0.8626332, 0.4831741, 1, 1, 1, 1, 0.2901961, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_q07lh"]
+gradient = SubResource("Gradient_fh26t")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_rskvw"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7t3mh"]
+gradient = SubResource("Gradient_rskvw")
+fill_to = Vector2(0.730057, 0)
+
+[sub_resource type="Gradient" id="Gradient_7qw7f"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wyq6a"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ikxt8"]
+noise = SubResource("FastNoiseLite_wyq6a")
+color_ramp = SubResource("Gradient_7qw7f")
+seamless = true
+
+[sub_resource type="Gradient" id="Gradient_q07lh"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fh26t"]
+noise_type = 5
+frequency = 0.025
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_epvbt"]
+noise = SubResource("FastNoiseLite_fh26t")
+color_ramp = SubResource("Gradient_q07lh")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fh26t"]
+shader = ExtResource("1_0e4fy")
+shader_parameter/cloud_shape_sampler = SubResource("NoiseTexture2D_epvbt")
+shader_parameter/cloud_noise_sampler = SubResource("NoiseTexture2D_ikxt8")
+shader_parameter/cloud_curves = SubResource("GradientTexture2D_7t3mh")
+shader_parameter/clouds_samples = 16
+shader_parameter/shadow_sample = 4
+shader_parameter/clouds_density = 0.40000000596048
+shader_parameter/clouds_scale = 0.5
+shader_parameter/clouds_smoothness = 0.0999999977648
+shader_parameter/clouds_light_color = Color(1, 1, 1, 1)
+shader_parameter/clouds_shadow_intensity = 1.0
+shader_parameter/high_clouds_density = 0.0
+shader_parameter/top_color = Color(0.66710144, 0.8157107, 0.95419544, 1)
+shader_parameter/bottom_color = Color(0, 0.19316678, 0.61, 1)
+shader_parameter/sun_scatter = Color(0.5245193, 0.8061467, 0.9174949, 1)
+shader_parameter/astro_tint = Color(1, 1, 1, 1)
+shader_parameter/astro_sampler = SubResource("GradientTexture2D_q07lh")
+shader_parameter/astro_scale = 1.0
+shader_parameter/astro_intensity = 1.0
+shader_parameter/stars_intensity = 0.0
+shader_parameter/shooting_stars_intensity = 0.0
+shader_parameter/shooting_star_tint = Color(0, 0, 0, 1)
+
+[sub_resource type="Sky" id="Sky_tsgde"]
+sky_material = SubResource("ShaderMaterial_fh26t")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_tsgde")
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.3
+ambient_light_energy = 0.5
+reflected_light_source = 2
+ssao_enabled = true
+ssao_intensity = 4.0
+adjustment_enabled = true
+adjustment_brightness = 0.95
+adjustment_saturation = 1.5

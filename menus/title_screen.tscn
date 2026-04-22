@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://byosfqwobl3sl" path="res://menus/settings_menu.tscn" id="2_dbvjn"]
 [ext_resource type="Texture2D" uid="uid://cy7t71mibkd8k" path="res://island/island_taper_texture.tres" id="3_dbvjn"]
 [ext_resource type="Script" uid="uid://dlutjgdrcstqh" path="res://menus/save_menu.gd" id="3_eujrm"]
+[ext_resource type="Environment" uid="uid://cibxuhtgknost" path="res://assets/default_environment.tres" id="4_cqggn"]
 [ext_resource type="Texture2D" uid="uid://c4gehucq85wxc" path="res://island/island_absolute_texture.tres" id="4_eujrm"]
 [ext_resource type="Material" uid="uid://drm8bdv4es6et" path="res://island/mat1.tres" id="5_cqggn"]
 [ext_resource type="Shader" uid="uid://bjt5jcslbt2k1" path="res://water.gdshader" id="6_fuwux"]
@@ -55,29 +56,6 @@ _data = {
 [sub_resource type="LabelSettings" id="LabelSettings_kb6lx"]
 font_size = 100
 
-[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_lmpr0"]
-rayleigh_coefficient = 4.33
-rayleigh_color = Color(0.078, 0.26069996, 0.6, 1)
-mie_color = Color(1, 0.73731935, 0.6181913, 1)
-ground_color = Color(0.029999971, 0.8706668, 1, 1)
-energy_multiplier = 3.9
-
-[sub_resource type="Sky" id="Sky_tsgde"]
-sky_material = SubResource("PhysicalSkyMaterial_lmpr0")
-
-[sub_resource type="Environment" id="Environment_pmfem"]
-background_mode = 2
-sky = SubResource("Sky_tsgde")
-ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_sky_contribution = 0.3
-ambient_light_energy = 0.5
-reflected_light_source = 2
-ssao_enabled = true
-ssao_intensity = 4.0
-adjustment_enabled = true
-adjustment_brightness = 0.95
-adjustment_saturation = 1.5
-
 [sub_resource type="Gradient" id="Gradient_tsgde"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_pmfem"]
@@ -108,7 +86,7 @@ frequency = 0.002
 noise = SubResource("FastNoiseLite_legw5")
 color_ramp = SubResource("Gradient_vons5")
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_dbvjn"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_fuwux"]
 size = Vector2(600, 600)
 subdivide_width = 1000
 subdivide_depth = 1000
@@ -252,10 +230,10 @@ text = "BACK"
 [node name="PreviewIsland" type="Node3D" parent="." unique_id=125848165]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="PreviewIsland" unique_id=2120940629]
-environment = SubResource("Environment_pmfem")
+environment = ExtResource("4_cqggn")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="PreviewIsland" unique_id=1902175977]
-transform = Transform3D(0.6819984, 0.73135376, 0, -0.13704203, 0.12779379, 0.9822872, 0.7183994, -0.66991836, 0.18738134, 0, 0, 0)
+transform = Transform3D(0.4134141, 0.19452626, -0.8895215, 0.55945605, 0.71649784, 0.41670117, 0.7183994, -0.66991836, 0.18738134, 0, 0, 0)
 shadow_enabled = true
 shadow_blur = 2.0
 
@@ -274,7 +252,7 @@ metadata/_edit_group_ = true
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PreviewIsland/IslandGenerator" unique_id=1883831798]
 material_override = ExtResource("5_cqggn")
 cast_shadow = 2
-mesh = SubResource("PlaneMesh_dbvjn")
+mesh = SubResource("PlaneMesh_fuwux")
 
 [node name="WaterMesh" type="MeshInstance3D" parent="PreviewIsland/IslandGenerator" unique_id=264507659]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5375899, 0)
