@@ -17,7 +17,7 @@ const CROUCH_CAMERA_SPEED := 0.1
 @onready var dropper: InventoryDropper3D = $Head/Camera3D/DropperRayCast/InventoryDropper3D
 @onready var respawn_button: Button = $HUD/DeathScreen/OptionsContainer/RespawnButton
 
-var respawn_point_node: Node3D
+@export var respawn_point_node: Node3D
 var is_in_water := false
 
 func _ready() -> void:
