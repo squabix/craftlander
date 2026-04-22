@@ -7,15 +7,19 @@
 size = Vector3(30, 1, 30)
 
 [sub_resource type="Gradient" id="Gradient_wsg1s"]
-colors = PackedColorArray(0.62, 0.53165, 0.34100002, 1, 0.5, 0.42875, 0.275, 1)
+offsets = PackedFloat32Array(0, 0.567757, 0.6020249, 1)
+colors = PackedColorArray(0.73, 0.6604067, 0.5402, 1, 0.62, 0.5571734, 0.4216, 1, 0.5690345, 0.5145218, 0.3970211, 1, 0.65, 0.54589164, 0.44849998, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mqnoh"]
 noise_type = 2
 frequency = 0.05
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4aq3d"]
+width = 885
+height = 930
 noise = SubResource("FastNoiseLite_mqnoh")
 color_ramp = SubResource("Gradient_wsg1s")
+seamless = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5krih"]
 albedo_texture = SubResource("NoiseTexture2D_4aq3d")
@@ -35,8 +39,8 @@ albedo_color = Color(1, 1, 1, 0.69803923)
 
 [sub_resource type="SphereMesh" id="SphereMesh_4aq3d"]
 material = SubResource("StandardMaterial3D_mqnoh")
-radius = 0.05
-height = 0.1
+radius = 0.07
+height = 0.14
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_mqnoh"]
 
