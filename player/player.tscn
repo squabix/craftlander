@@ -126,7 +126,7 @@ font_size = 20
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pnw6m"]
 shader = ExtResource("28_ge24q")
 shader_parameter/blur_amount = 1.0000001424999998
-shader_parameter/mix_amount = 0.30000001425
+shader_parameter/mix_amount = 0.50000002375
 shader_parameter/color_over = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_55jnj"]
@@ -720,19 +720,16 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="CraftingEnvironment" parent="HUD/PauseInterface/CraftingMenu" unique_id=651686952 node_paths=PackedStringArray("inventory_holder_link", "pause_interface") instance=ExtResource("28_q28gw")]
-custom_minimum_size = Vector2(500, 500)
+custom_minimum_size = Vector2(1000, 1000)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -294.0
-offset_right = 250.0
-offset_bottom = 206.00037
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 1
+grow_vertical = 1
+scale = Vector2(0.5, 0.5)
 inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
 pause_interface = NodePath("../..")
+metadata/_edit_use_anchors_ = true
 
 [node name="RecipePanel" type="Control" parent="HUD/PauseInterface/CraftingMenu" unique_id=1393690572]
 layout_mode = 1

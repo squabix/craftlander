@@ -32,17 +32,20 @@ size = Vector2(30, 30)
 size = Vector3(0.1, 0.1, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mqnoh"]
-transparency = 1
 no_depth_test = true
 shading_mode = 0
 albedo_color = Color(1, 1, 1, 0.69803923)
+grow_amount = -0.9
 
 [sub_resource type="SphereMesh" id="SphereMesh_4aq3d"]
 material = SubResource("StandardMaterial3D_mqnoh")
-radius = 0.07
-height = 0.14
+radius = 0.04
+height = 0.08
+radial_segments = 12
+rings = 6
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_mqnoh"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4aq3d"]
+height = 0.01
 
 [node name="CraftingEnvironment" type="SubViewportContainer" unique_id=2022052365]
 anchors_preset = 15
@@ -54,18 +57,19 @@ stretch = true
 script = ExtResource("1_mqnoh")
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=635865808]
+transparent_bg = true
 handle_input_locally = false
-screen_space_aa = 1
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
 [node name="Space" type="Node3D" parent="SubViewport" unique_id=440212288]
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport/Space" unique_id=283800474]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, 0)
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.7071068, 0, -0.7071068, 0.70710677, 0, 16.56235, 17.479282)
 cull_mask = 3
 current = true
-far = 10.0
+fov = 20.0
+far = 1000.0
 
 [node name="ItemOrigin" type="Node3D" parent="SubViewport/Space" unique_id=211703202]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4.5)
@@ -77,11 +81,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_mqnoh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Floor" unique_id=283773765]
+visible = false
 layers = 2
 mesh = SubResource("PlaneMesh_snws6")
 skeleton = NodePath("../..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space" unique_id=1195585660]
+visible = false
 layers = 2
 mesh = SubResource("BoxMesh_mqnoh")
 
@@ -103,7 +109,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot" unique_id=1253136491]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot2" type="Area3D" parent="SubViewport/Space/Grid" unique_id=1980975369]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
@@ -115,7 +121,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot2" unique_id=9266367]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot3" type="Area3D" parent="SubViewport/Space/Grid" unique_id=495388472]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
@@ -127,7 +133,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot3" unique_id=1353539486]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot4" type="Area3D" parent="SubViewport/Space/Grid" unique_id=1890698495]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
@@ -139,7 +145,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot4" unique_id=668942751]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot5" type="Area3D" parent="SubViewport/Space/Grid" unique_id=863910021]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
@@ -151,7 +157,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot5" unique_id=1902956483]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot6" type="Area3D" parent="SubViewport/Space/Grid" unique_id=400376717]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1)
@@ -163,7 +169,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot6" unique_id=1279561792]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot7" type="Area3D" parent="SubViewport/Space/Grid" unique_id=1071664926]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
@@ -175,7 +181,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot7" unique_id=391921949]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot8" type="Area3D" parent="SubViewport/Space/Grid" unique_id=1122395661]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
@@ -187,7 +193,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot8" unique_id=1325562068]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot9" type="Area3D" parent="SubViewport/Space/Grid" unique_id=126493086]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
@@ -199,7 +205,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot9" unique_id=171415397]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot10" type="Area3D" parent="SubViewport/Space/Grid" unique_id=2048845758]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
@@ -211,7 +217,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot10" unique_id=2018421768]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot11" type="Area3D" parent="SubViewport/Space/Grid" unique_id=1107902454]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
@@ -223,7 +229,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot11" unique_id=666669238]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot12" type="Area3D" parent="SubViewport/Space/Grid" unique_id=654239107]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
@@ -235,7 +241,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot12" unique_id=142471283]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot13" type="Area3D" parent="SubViewport/Space/Grid" unique_id=1280065690]
 monitoring = false
@@ -246,7 +252,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot13" unique_id=329353594]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot14" type="Area3D" parent="SubViewport/Space/Grid" unique_id=1193888925]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
@@ -258,7 +264,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot14" unique_id=1452896078]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot15" type="Area3D" parent="SubViewport/Space/Grid" unique_id=887982556]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
@@ -270,7 +276,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot15" unique_id=982259582]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot16" type="Area3D" parent="SubViewport/Space/Grid" unique_id=289552929]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
@@ -282,7 +288,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot16" unique_id=1400283364]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot17" type="Area3D" parent="SubViewport/Space/Grid" unique_id=1564463312]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
@@ -294,7 +300,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot17" unique_id=346499187]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot18" type="Area3D" parent="SubViewport/Space/Grid" unique_id=802013499]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
@@ -306,7 +312,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot18" unique_id=1061160662]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot19" type="Area3D" parent="SubViewport/Space/Grid" unique_id=673875595]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
@@ -318,7 +324,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot19" unique_id=836244126]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot20" type="Area3D" parent="SubViewport/Space/Grid" unique_id=447272461]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
@@ -330,7 +336,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot20" unique_id=1553976376]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot21" type="Area3D" parent="SubViewport/Space/Grid" unique_id=352686830]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
@@ -342,7 +348,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot21" unique_id=89184286]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot22" type="Area3D" parent="SubViewport/Space/Grid" unique_id=1636648680]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
@@ -354,7 +360,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot22" unique_id=1610996779]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot23" type="Area3D" parent="SubViewport/Space/Grid" unique_id=387467214]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
@@ -366,7 +372,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot23" unique_id=1309796908]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot24" type="Area3D" parent="SubViewport/Space/Grid" unique_id=1452801876]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
@@ -378,7 +384,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot24" unique_id=648670568]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot25" type="Area3D" parent="SubViewport/Space/Grid" unique_id=44246964]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
@@ -390,7 +396,7 @@ layers = 2
 mesh = SubResource("SphereMesh_4aq3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot25" unique_id=762334412]
-shape = SubResource("SphereShape3D_mqnoh")
+shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="SubViewport/Space" unique_id=1511305085]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
