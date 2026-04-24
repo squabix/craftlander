@@ -7,6 +7,7 @@ const DRAG_SPEED := 0.2
 const PICKUP_SCALE := 0.5
 const SNAP_SPEED := 0.3
 const SPACE_POSITION := -Vector3.ONE * 1000.0
+const PICKUP_TILT := Vector3(0.0, -45.0, 0.0)
 
 const RECIPE_LAYOUT_SCALE := 1.0
 
@@ -80,6 +81,7 @@ func spawn_item(item: Item) -> ItemPickup3D:
 	pickup.item = item
 	item_origin.add_child(pickup)
 	pickup.scale *= PICKUP_SCALE
+	pickup.rotation_degrees = PICKUP_TILT
 	return pickup
 
 func get_current_slot() -> Variant:
