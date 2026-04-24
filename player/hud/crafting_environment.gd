@@ -1,7 +1,6 @@
 extends SubViewportContainer
 class_name CraftingEnvironment
 
-const CAMERA_OFFSET := 1.0
 const MAX_DRAG_DISTANCE := 1.0
 const MAX_SLOT_DISTANCE := 1.0
 const DRAG_SPEED := 0.2
@@ -20,7 +19,7 @@ const RECIPE_LAYOUT_SCALE := 1.0
 @onready var camera: Camera3D = $SubViewport/Space/Camera3D
 @onready var grid: Node3D = $SubViewport/Space/Grid
 @onready var grid_inventory: Inventory = $SubViewport/Space/GridInventory
-
+@onready var cursor3d: RayCast3D = $SubViewport/Space/Cursor3D
 
 var slots_contents: Dictionary[Vector3, ItemPickup3D]
 
@@ -74,9 +73,6 @@ func get_mouse_position3d() -> Vector3:
 	return Util.get_mouse_position_3d(
 		camera,
 		get_scaled_mouse_position2d()
-	).move_toward(
-		camera.global_position,
-		CAMERA_OFFSET
 	)
 
 func spawn_item(item: Item) -> ItemPickup3D:
@@ -86,28 +82,17 @@ func spawn_item(item: Item) -> ItemPickup3D:
 	pickup.scale *= PICKUP_SCALE
 	return pickup
 
-func get_closest_slot() -> Variant:
-	var mouse := get_mouse_position3d()
-	
-	var closest_distance := INF
-	var slot: Vector3
-	
-	for child in grid.get_children():
-		var distance: float = (child as Node3D).global_position.distance_squared_to(mouse)
-		if distance < closest_distance:
-			closest_distance = distance
-			slot = child.global_position
-	
-	#var slot: Vector3 = Util.distance_sort_3d(slots_contents.keys(), mouse)[0].global_position
-	if slot.distance_to(mouse) > MAX_SLOT_DISTANCE:
+func get_current_slot() -> Variant:
+	if not cursor3d.is_colliding():
 		return null
-	return slot
+	var overlap: Area3D = cursor3d.get_collider()
+	return overlap.global_position
 
 func place_current() -> void:
 	if not is_instance_valid(held_pickup):
 		return
 	
-	var slot: Variant = get_closest_slot()
+	var slot: Variant = get_current_slot()
 	if slot == null:
 		return
 	
@@ -123,7 +108,7 @@ func clear() -> void:
 		Util.safe_free(slots_contents[slot])
 		slots_contents[slot] = null
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not is_crafting:
 		return
 	
@@ -136,16 +121,19 @@ func _process(delta: float) -> void:
 		)
 		
 	if Input.is_action_pressed("use_secondary") and not Input.is_action_pressed("use_primary"):
-		empty_slot(get_closest_slot())
+		empty_slot(get_current_slot())
 	
+	var mouse := get_mouse_position3d()
+	cursor3d.global_position = mouse
 	if is_instance_valid(held_pickup):
-		held_pickup.global_position = held_pickup.global_position.lerp(get_mouse_position3d(), DRAG_SPEED)
+		held_pickup.global_position = held_pickup.global_position.lerp(mouse, DRAG_SPEED)
 
 func empty_slot(slot: Variant) -> void:
 	if slot == null:
 		return
 	var old_pickup: ItemPickup3D = slots_contents[slot]
 	if old_pickup != null:
+		print("Emptied slot ", old_pickup)
 		Util.safe_free(old_pickup)
 		grid_inventory.give_item(old_pickup.item, 1, inventory_holder_link.inventory)
 

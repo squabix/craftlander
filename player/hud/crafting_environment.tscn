@@ -65,7 +65,7 @@ render_target_update_mode = 4
 [node name="Space" type="Node3D" parent="SubViewport" unique_id=440212288]
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport/Space" unique_id=283800474]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.7071068, 0, -0.7071068, 0.70710677, 0, 16.56235, 17.479282)
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.7071068, 0, -0.7071068, 0.70710677, 0, 15.562349, 17.479282)
 cull_mask = 3
 current = true
 fov = 20.0
@@ -97,12 +97,11 @@ size = 25
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 
 [node name="Grid" type="Node3D" parent="SubViewport/Space" unique_id=2043751157]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0)
 
 [node name="GridSlot" type="Area3D" parent="SubViewport/Space/Grid" unique_id=795584208]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot" unique_id=783665336]
 layers = 2
@@ -114,7 +113,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot2" type="Area3D" parent="SubViewport/Space/Grid" unique_id=1980975369]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot2" unique_id=1558813328]
 layers = 2
@@ -126,7 +124,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot3" type="Area3D" parent="SubViewport/Space/Grid" unique_id=495388472]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot3" unique_id=842164329]
 layers = 2
@@ -138,7 +135,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot4" type="Area3D" parent="SubViewport/Space/Grid" unique_id=1890698495]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot4" unique_id=990432721]
 layers = 2
@@ -150,7 +146,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot5" type="Area3D" parent="SubViewport/Space/Grid" unique_id=863910021]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot5" unique_id=1468149959]
 layers = 2
@@ -162,7 +157,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot6" type="Area3D" parent="SubViewport/Space/Grid" unique_id=400376717]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot6" unique_id=157019494]
 layers = 2
@@ -174,7 +168,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot7" type="Area3D" parent="SubViewport/Space/Grid" unique_id=1071664926]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot7" unique_id=137760569]
 layers = 2
@@ -186,7 +179,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot8" type="Area3D" parent="SubViewport/Space/Grid" unique_id=1122395661]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot8" unique_id=940339753]
 layers = 2
@@ -198,7 +190,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot9" type="Area3D" parent="SubViewport/Space/Grid" unique_id=126493086]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot9" unique_id=1611856095]
 layers = 2
@@ -210,7 +201,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot10" type="Area3D" parent="SubViewport/Space/Grid" unique_id=2048845758]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot10" unique_id=1803732792]
 layers = 2
@@ -222,7 +212,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot11" type="Area3D" parent="SubViewport/Space/Grid" unique_id=1107902454]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot11" unique_id=1698610541]
 layers = 2
@@ -234,7 +223,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot12" type="Area3D" parent="SubViewport/Space/Grid" unique_id=654239107]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot12" unique_id=396292243]
 layers = 2
@@ -245,7 +233,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 
 [node name="GridSlot13" type="Area3D" parent="SubViewport/Space/Grid" unique_id=1280065690]
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot13" unique_id=1891494300]
 layers = 2
@@ -257,7 +244,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot14" type="Area3D" parent="SubViewport/Space/Grid" unique_id=1193888925]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot14" unique_id=1228979838]
 layers = 2
@@ -269,7 +255,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot15" type="Area3D" parent="SubViewport/Space/Grid" unique_id=887982556]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot15" unique_id=273591792]
 layers = 2
@@ -281,7 +266,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot16" type="Area3D" parent="SubViewport/Space/Grid" unique_id=289552929]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 1)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot16" unique_id=2118585506]
 layers = 2
@@ -293,7 +277,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot17" type="Area3D" parent="SubViewport/Space/Grid" unique_id=1564463312]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot17" unique_id=1606107404]
 layers = 2
@@ -305,7 +288,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot18" type="Area3D" parent="SubViewport/Space/Grid" unique_id=802013499]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot18" unique_id=1384456904]
 layers = 2
@@ -317,7 +299,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot19" type="Area3D" parent="SubViewport/Space/Grid" unique_id=673875595]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot19" unique_id=186000930]
 layers = 2
@@ -329,7 +310,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot20" type="Area3D" parent="SubViewport/Space/Grid" unique_id=447272461]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot20" unique_id=1802780812]
 layers = 2
@@ -341,7 +321,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot21" type="Area3D" parent="SubViewport/Space/Grid" unique_id=352686830]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot21" unique_id=1426796624]
 layers = 2
@@ -353,7 +332,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot22" type="Area3D" parent="SubViewport/Space/Grid" unique_id=1636648680]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot22" unique_id=894343557]
 layers = 2
@@ -365,7 +343,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot23" type="Area3D" parent="SubViewport/Space/Grid" unique_id=387467214]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot23" unique_id=1802886272]
 layers = 2
@@ -377,7 +354,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot24" type="Area3D" parent="SubViewport/Space/Grid" unique_id=1452801876]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot24" unique_id=511776035]
 layers = 2
@@ -389,7 +365,6 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="GridSlot25" type="Area3D" parent="SubViewport/Space/Grid" unique_id=44246964]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
 monitoring = false
-monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/Space/Grid/GridSlot25" unique_id=1787404704]
 layers = 2
@@ -405,3 +380,9 @@ light_energy = 2.0
 shadow_enabled = true
 shadow_caster_mask = 4293918722
 omni_range = 10.0
+
+[node name="Cursor3D" type="RayCast3D" parent="SubViewport/Space" unique_id=101020664]
+target_position = Vector3(0, 0.1, 0)
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
