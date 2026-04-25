@@ -25,7 +25,6 @@
 [ext_resource type="Script" uid="uid://b7pvp0pnngnem" path="res://common/ui/fps_label.gd" id="19_bjvpn"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="19_c35mf"]
 [ext_resource type="Script" uid="uid://7vqcc56mnyjs" path="res://common/ui/tooltip_label.gd" id="19_knn7v"]
-[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="20_x7c3f"]
 [ext_resource type="Resource" uid="uid://bah3rou15fcfh" path="res://items/tools/shoddy_axe/shoddy_axe_item.tres" id="22_bjvpn"]
 [ext_resource type="Script" uid="uid://c07qmsd7epd0h" path="res://common/ui/popup_display.gd" id="23_7pqkx"]
 [ext_resource type="Texture2D" uid="uid://dvu8avo8cfq2c" path="res://icon.svg" id="23_g4c7l"]
@@ -58,16 +57,6 @@ bool_vector = SubResource("Resource_qjkh3")
 x_min = -90.0
 x_max = 90.0
 metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
-
-[sub_resource type="Resource" id="Resource_s7qer"]
-script = ExtResource("20_x7c3f")
-item = ExtResource("22_bjvpn")
-metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
-
-[sub_resource type="Resource" id="Resource_a2xo5"]
-script = ExtResource("20_x7c3f")
-item = ExtResource("41_art4l")
-metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Curve" id="Curve_2uvqg"]
 _limits = [0.0, 30.0, 0.0, 1.0]
@@ -346,7 +335,6 @@ metadata/_custom_type_script = "uid://bki5ij8task16"
 
 [node name="Inventory" type="Node" parent="." unique_id=710458340]
 script = ExtResource("19_c35mf")
-item_instances = Array[ExtResource("20_x7c3f")]([SubResource("Resource_s7qer"), SubResource("Resource_a2xo5")])
 size = 10
 
 [node name="Hunger" type="Node" parent="." unique_id=1790864786 node_paths=PackedStringArray("bar", "health", "stamina")]
