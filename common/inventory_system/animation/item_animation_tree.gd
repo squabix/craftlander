@@ -35,7 +35,7 @@ func _ready() -> void:
 			func(state_name: String) -> void:
 				if state_name == end_use_state:
 					disable_item_blend()
-				elif item.current_use_state == Item.UseState.END_USE:
+				elif item != null and item.current_use_state == Item.UseState.END_USE:
 					play_end()
 		)
 	disable_item_blend()
