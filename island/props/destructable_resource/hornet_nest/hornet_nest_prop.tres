@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="IslandProp" format=3 uid="uid://d0yrx3k8tg6kv"]
+
+[ext_resource type="PackedScene" uid="uid://b1en432erfol4" path="res://island/props/destructable_resource/hornet_nest/hornet_nest.tscn" id="1_qbphk"]
+[ext_resource type="Script" uid="uid://csprfavexgrle" path="res://island/props/island_prop.gd" id="2_3murq"]
+
+[resource]
+script = ExtResource("2_3murq")
+scene = ExtResource("1_qbphk")
+min_height = 8.4
+normal_conformity = 0.7
+metadata/_custom_type_script = "uid://csprfavexgrle"
