@@ -121,31 +121,31 @@ metadata/_custom_type_script = "uid://bhjxscxhtg2se"
 [node name="BlenderMeshes" parent="." unique_id=340605420 instance=ExtResource("11_b76o0")]
 
 [node name="BeeSpawner1" type="Node3D" parent="." unique_id=694305899]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34595376, 0, 0.24480975)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34595376, 1, 0.24480975)
 script = ExtResource("12_8mibs")
 default_scene = ExtResource("13_ioeyq")
 metadata/_custom_type_script = "uid://iyqixpr4un6s"
 
 [node name="BeeSpawner2" type="Node3D" parent="." unique_id=1959693925]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18280369, 0, 0.31336135)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18280369, 1, 0.31336135)
 script = ExtResource("12_8mibs")
 default_scene = ExtResource("13_ioeyq")
 metadata/_custom_type_script = "uid://iyqixpr4un6s"
 
 [node name="BeeSpawner3" type="Node3D" parent="." unique_id=1845188797]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2745326, 0, -0.36986166)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2745326, 1, -0.36986166)
 script = ExtResource("12_8mibs")
 default_scene = ExtResource("13_ioeyq")
 metadata/_custom_type_script = "uid://iyqixpr4un6s"
 
 [node name="BeeSpawner4" type="Node3D" parent="." unique_id=1551754788]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27488637, 0, -0.42348504)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27488637, 1, -0.42348504)
 script = ExtResource("12_8mibs")
 default_scene = ExtResource("13_ioeyq")
 metadata/_custom_type_script = "uid://iyqixpr4un6s"
 
 [node name="BeeSpawner5" type="Node3D" parent="." unique_id=1085354651]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02033177, 0, -0.07410443)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02033177, 1, -0.07410443)
 script = ExtResource("12_8mibs")
 default_scene = ExtResource("13_ioeyq")
 metadata/_custom_type_script = "uid://iyqixpr4un6s"
