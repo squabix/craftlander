@@ -1,6 +1,7 @@
 extends State
 
 @export var nav_guide: NavEntityGuide3D
+@export var default_target: Node3D
 @export var sight: RadialSight3D
 @export var min_approach_distance := 1.5
 
@@ -15,7 +16,7 @@ func update(_delta: float) -> void:
 		transition_to(lose_target_state)
 		return
 	
-	nav_guide.set_target(sight.target_position)
+	nav_guide.set_target(get_target_position())
 	nav_guide.face_target()
 	
 	if nav_guide.nav.distance_to_target() > min_approach_distance:
@@ -23,3 +24,12 @@ func update(_delta: float) -> void:
 			nav_guide.entity.move_forward()
 	else:
 		item_holder.use_item()
+
+func get_target_position() -> Vector3:
+	if sight != null:
+		return sight.target_position
+	if is_instance_valid(default_target):
+		return default_target.global_position
+	if is_instance_valid(root):
+		return root.global_position
+	return Vector3.ZERO
