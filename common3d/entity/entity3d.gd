@@ -6,8 +6,11 @@ signal left_ground
 
 @export var type := "default_entity"
 @export var movement_mode: MovementMode3D
-@export var gravity_multiplier := 1.0
 @export var move_up_as_jump := true
+
+@export_group("Gravity")
+@export var does_obey_gravity := true
+@export var gravity_multiplier := 1.0
 
 @export_group("Rigid Bodies")
 @export var do_push_rigid_bodies := false
@@ -163,7 +166,7 @@ func _physics_process(delta: float) -> void:
 		reset_gravity()
 	
 	# Add forces to velocity
-	if not is_on_floor():
+	if not is_on_floor() and does_obey_gravity:
 		velocity += gravity
 	
 	_accelerate(motion_direction)
