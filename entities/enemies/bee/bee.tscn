@@ -10,8 +10,6 @@
 [ext_resource type="Script" uid="uid://pdvlr6l3n04n" path="res://entities/enemies/enemy_states/chasing_state.gd" id="7_bfxyu"]
 [ext_resource type="Script" uid="uid://c5asagc5dswqt" path="res://common3d/entity/entity_guide/nav_entity_guide3d.gd" id="8_elujw"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="9_xkejc"]
-[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="10_c6nxc"]
-[ext_resource type="Resource" uid="uid://j8xwx023phbg" path="res://items/food/honeycomb/honeycomb_item.tres" id="11_cri7m"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="12_0rn6u"]
 [ext_resource type="Script" uid="uid://c6m4guogk1s1y" path="res://common/follow_node3d.gd" id="13_121pw"]
 [ext_resource type="PackedScene" uid="uid://btvdb6drbsbg6" path="res://entities/enemies/bee/bee.blend" id="14_0lxgi"]
@@ -24,11 +22,6 @@ max_speed = Vector2(2.5, 0)
 acceleration = Vector2(0.1, 1)
 friction = Vector2(0.23, 0)
 metadata/_custom_type_script = "uid://edbvsbdtvgtj"
-
-[sub_resource type="Resource" id="Resource_ceedn"]
-script = ExtResource("10_c6nxc")
-item = ExtResource("11_cri7m")
-metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qkhbg"]
 size = Vector3(0.2, 0.2, 0.4)
@@ -200,7 +193,7 @@ _data = {
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_muv15"]
 radius = 0.1
-height = 1.1379395
+height = 1.4
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nw5ty"]
 radius = 0.15
@@ -277,7 +270,6 @@ metadata/_custom_type_script = "uid://c5asagc5dswqt"
 [node name="Inventory" type="Node" parent="." unique_id=2020826484]
 unique_name_in_owner = true
 script = ExtResource("9_xkejc")
-item_instances = Array[ExtResource("10_c6nxc")]([SubResource("Resource_ceedn")])
 constant = true
 size = 1
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
@@ -308,9 +300,10 @@ update_scale = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1283622617]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.048)
 shape = SubResource("BoxShape3D_qkhbg")
+disabled = true
 
 [node name="BlenderVisuals" type="Node3D" parent="." unique_id=71307781]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 
 [node name="Visuals" parent="BlenderVisuals" unique_id=2002060618 instance=ExtResource("14_0lxgi")]
 transform = Transform3D(0.2, 0, 0, 0, 0.19696155, -0.034729637, 0, 0.034729637, 0.19696155, 0, 0.05, 0)
@@ -326,11 +319,6 @@ mesh = SubResource("ArrayMesh_44jin")
 libraries/ = SubResource("AnimationLibrary_x7bfg")
 autoplay = &"fly"
 
-[node name="GroundRayCast" type="RayCast3D" parent="." unique_id=95167471]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-target_position = Vector3(0, -10, 0)
-collision_mask = 4
-
 [node name="Health" type="Node" parent="." unique_id=780116179]
 script = ExtResource("15_7niy0")
 one_shot = true
@@ -342,11 +330,11 @@ libraries/ = SubResource("AnimationLibrary_6g1qb")
 autoplay = &"fly"
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1316642755]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5753174, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 shape = SubResource("CapsuleShape3D_muv15")
 
 [node name="Hurtbox3D" type="Area3D" parent="." unique_id=966906013 node_paths=PackedStringArray("health", "knockback_entity")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("16_0hiqi")
