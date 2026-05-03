@@ -57,7 +57,7 @@ _data = {
 &"hurt": SubResource("Animation_ir3ee")
 }
 
-[node name="HornetNest" type="Node3D" unique_id=51772479 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
+[node name="BeeNest" type="Node3D" unique_id=51772479 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
 script = ExtResource("1_f6sd6")
 min_hp = 20
 max_hp = 20
@@ -80,7 +80,6 @@ collision_mask = 0
 monitoring = false
 script = ExtResource("2_rb30n")
 health = NodePath("../Health")
-type_whitelist = Array[String](["pickaxe"])
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1070889462]
