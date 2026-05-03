@@ -1,6 +1,6 @@
 extends State
 
-@export var nav_guide: NavEntityGuide3D
+@export var guide: EntityGuide3D
 @export var default_target: Node3D
 @export var sight: RadialSight3D
 @export var min_approach_distance := 1.5
@@ -8,7 +8,6 @@ extends State
 @export var can_lose_target := true
 @export var lose_target_state := ""
 
-@onready var inventory: Inventory = %Inventory
 @onready var item_holder: ItemHolder3D = %ItemHolder3D
 
 func update(_delta: float) -> void:
@@ -16,14 +15,18 @@ func update(_delta: float) -> void:
 		transition_to(lose_target_state)
 		return
 	
-	nav_guide.set_target(get_target_position())
-	nav_guide.face_target()
+	if not is_instance_valid(guide):
+		printerr("Chasing state of ", root, " has no guide")
+		return
 	
-	if nav_guide.nav.distance_to_target() > min_approach_distance:
-		if nav_guide.nav.is_target_reachable():
-			nav_guide.entity.move_forward()
+	guide.set_target(get_target_position())
+	guide.face_target()
+	
+	if guide.get_distance_to_target() > min_approach_distance:
+		guide.move_forward()
 	else:
-		item_holder.use_item()
+		if item_holder:
+			item_holder.use_item()
 
 func get_target_position() -> Vector3:
 	if sight != null:
