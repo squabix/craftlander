@@ -7,8 +7,7 @@
 [resource]
 script = ExtResource("3_w883n")
 health_restoration = 1.0
-min_sickness = 0.0
-max_sickness = 0.0
+hunger_restoration = 0.2
 scene = ExtResource("2_bccu5")
 name = "HoneyComb"
 max_quantity = 99
