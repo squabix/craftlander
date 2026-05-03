@@ -52,6 +52,10 @@ func _ready() -> void:
 func target_is_lost() -> bool:
 	return can_lose_target and global_position.distance_to(target.global_position) >= lose_distance
 
+func set_target(to: Node3D) -> void:
+	target = to
+	found_target.emit(target)
+
 func update_target() -> void:
 	if does_see_target() and not target_is_lost():
 		return
@@ -79,8 +83,7 @@ func update_target() -> void:
 			continue
 		ray.look_at(node.global_position)
 		if ray.get_collider() == node:
-			target = node
-			found_target.emit(target)
+			set_target(node)
 			return
 
 func does_see_target() -> bool:
