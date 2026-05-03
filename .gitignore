@@ -18,3 +18,5 @@ mono_crash.*.json
 TODO.txt
 BUGS.txt
 .vscode/settings.json
+/testing
+testing/test_scene1.tscn
