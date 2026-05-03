@@ -1015,7 +1015,6 @@ offset_right = 200.0
 offset_bottom = 259.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Axe"
 horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/InventoryInterface/CurrentItemLabel" unique_id=1735479515]
