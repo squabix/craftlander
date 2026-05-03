@@ -614,7 +614,7 @@ metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 
 [node name="Health" type="Node" parent="." unique_id=780116179]
 script = ExtResource("4_nauqg")
-hp = 30.0
+hp = 12.0
 free_parent_on_death = true
 metadata/_custom_type_script = "uid://cbb5o5ykqwxfp"
 
