@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="7_yyl5a"]
 [ext_resource type="Script" uid="uid://cmmmo3xnygmau" path="res://common/deletion_alarm.gd" id="9_t1ty2"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="10_085ko"]
-[ext_resource type="PackedScene" uid="uid://bkber348p7jtw" path="res://island/props/destructable_resource/hornet_nest/hornet_nest.blend" id="11_b76o0"]
+[ext_resource type="PackedScene" uid="uid://bkber348p7jtw" path="res://island/props/destructable_resource/bee_nest/bee_nest.blend" id="11_b76o0"]
 [ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="11_stmp3"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_b76o0"]
@@ -117,7 +117,7 @@ script = ExtResource("10_085ko")
 particles_scene = ExtResource("11_stmp3")
 metadata/_custom_type_script = "uid://bhjxscxhtg2se"
 
-[node name="BlenderMeshes" parent="." unique_id=312604315 instance=ExtResource("11_b76o0")]
+[node name="BlenderMeshes" parent="." unique_id=340605420 instance=ExtResource("11_b76o0")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [connection signal="deleted" from="DeletionAlarm" to="ParticleSpawner3D" method="spawn"]

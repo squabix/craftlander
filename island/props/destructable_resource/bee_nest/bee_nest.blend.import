@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bkber348p7jtw"
-path="res://.godot/imported/hornet_nest.blend-b3f06a993c4529b32a1904a3100b0ec3.scn"
+path="res://.godot/imported/bee_nest.blend-d36882c14ba2ee2462c1bf3f68833786.scn"
 
 [deps]
 
-source_file="res://island/props/destructable_resource/hornet_nest/hornet_nest.blend"
-dest_files=["res://.godot/imported/hornet_nest.blend-b3f06a993c4529b32a1904a3100b0ec3.scn"]
+source_file="res://island/props/destructable_resource/bee_nest/bee_nest.blend"
+dest_files=["res://.godot/imported/bee_nest.blend-d36882c14ba2ee2462c1bf3f68833786.scn"]
 
 [params]
 
