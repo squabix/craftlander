@@ -20,6 +20,7 @@ func face_target() -> void:
 		Util.lerp_look_at_3d(entity, target_position, face_interpolation)
 		return
 	var next: Vector3 = nav.get_next_path_position()
+	next.y = entity.global_position.y
 	Util.lerp_look_at_3d(entity, next, face_interpolation)
 
 func get_distance_to_target() -> float:
