@@ -51,6 +51,7 @@ func _ready() -> void:
 	)
 	inventory.changed.connect(
 		func():
+			await get_tree().process_frame
 			hold_current()
 			changed.emit.call_deferred()
 	)
