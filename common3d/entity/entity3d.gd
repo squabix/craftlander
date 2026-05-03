@@ -135,6 +135,8 @@ func jump() -> void:
 	move_up()
 
 func rotate_targets() -> void:
+	if rotation_range == null:
+		return
 	if is_instance_valid(vertical_rotation_target):
 		vertical_rotation_target.rotation_degrees.x = rotation_range.clampx(
 			vertical_rotation_target.rotation_degrees.x
