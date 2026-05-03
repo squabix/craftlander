@@ -61,8 +61,8 @@ _data = {
 
 [node name="BeeNest" type="Node3D" unique_id=51772479 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
 script = ExtResource("1_8mibs")
-min_hp = 40
-max_hp = 40
+min_hp = 12
+max_hp = 30
 hurtbox = NodePath("Hurtbox3D")
 inventory = NodePath("Inventory")
 health = NodePath("Health")

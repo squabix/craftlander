@@ -9,6 +9,7 @@ extends DestructableResource
 ]
 
 func _ready() -> void:
+	super()
 	$Health.died.connect(
 		func() -> void:
 			for spawner in bee_spawners:
