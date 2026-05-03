@@ -14,7 +14,8 @@ func _process(_delta: float) -> void:
 	
 	# Interpolate between animations by velocity
 	var velocity_length := Util.vec3to2(velocity, Util.VECTOR3Y).length()
-	anim_tree.set(
-		"parameters/RunBlendSpace/blend_position",
-		velocity_length / movement_mode.max_speed.x
-	)
+	if anim_tree:
+		anim_tree.set(
+			"parameters/RunBlendSpace/blend_position",
+			velocity_length / movement_mode.max_speed.x
+		)

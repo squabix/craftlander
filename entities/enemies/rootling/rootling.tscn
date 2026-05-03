@@ -588,12 +588,10 @@ metadata/_custom_type_script = "uid://bki5ij8task16"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2121250733]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-visible = false
 shape = SubResource("CapsuleShape3D_3emv6")
 
 [node name="Hurtbox3D" type="Area3D" parent="." unique_id=884870034 node_paths=PackedStringArray("health", "knockback_entity")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-visible = false
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("3_ihgra")
@@ -659,9 +657,9 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Timer" type="Timer" parent="Controller3D/Default/Wandering" unique_id=1600727395]
 
-[node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=1883496829 node_paths=PackedStringArray("nav_guide", "sight", "root")]
+[node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=1883496829 node_paths=PackedStringArray("guide", "sight", "root")]
 script = ExtResource("13_7mn0t")
-nav_guide = NodePath("../../NavEntityGuide3D")
+guide = NodePath("../../NavEntityGuide3D")
 sight = NodePath("../../../Sight3D")
 lose_target_state = "Wandering"
 root = NodePath("../../..")
