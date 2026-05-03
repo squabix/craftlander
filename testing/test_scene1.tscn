@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b6d7dfwyfulxo"]
 
-[ext_resource type="Script" uid="uid://csfawk4hjit5w" path="res://main/test.gd" id="1_0pcxm"]
+[ext_resource type="Script" uid="uid://csfawk4hjit5w" path="res://testing/test_scene1.gd" id="1_0pcxm"]
 [ext_resource type="PackedScene" uid="uid://c16m48qir7vc7" path="res://island/props/destructable_resource/tree/tree.tscn" id="2_dax2s"]
 [ext_resource type="PackedScene" uid="uid://dmbp0klxo0b0c" path="res://player/player.tscn" id="3_dax2s"]
 [ext_resource type="PackedScene" uid="uid://mwsmthp4sn6c" path="res://entities/enemies/rootling/rootling.tscn" id="4_rarbv"]
@@ -43,4 +43,4 @@ navigation_mesh = SubResource("NavigationMesh_rarbv")
 mesh = SubResource("PlaneMesh_8nrhl")
 
 [node name="Rootling" parent="." unique_id=764734795 instance=ExtResource("4_rarbv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2169075, 1, 10.464537)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2169075, 1, 15.32445)
