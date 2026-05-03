@@ -1,0 +1,367 @@
+[gd_scene format=4 uid="uid://d0a4ydiqu4jj6"]
+
+[ext_resource type="Script" uid="uid://bt06wqhladgjr" path="res://entities/enemies/bee/bee.gd" id="1_4hd4j"]
+[ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common3d/movement_mode3d.gd" id="2_rq2ym"]
+[ext_resource type="Script" uid="uid://v1m6kagbghjv" path="res://common3d/radial_sight_3d.gd" id="2_wnfpe"]
+[ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/signal_triggrs/signal_state_trigger.gd" id="3_rq2ym"]
+[ext_resource type="Script" uid="uid://crmxhu5iujbq1" path="res://entities/enemies/rootling/rootling_controller.gd" id="4_qp58c"]
+[ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="5_4vry0"]
+[ext_resource type="Script" uid="uid://cf04j3voj4xyc" path="res://entities/enemies/enemy_states/wandering_state.gd" id="6_wpegq"]
+[ext_resource type="Script" uid="uid://pdvlr6l3n04n" path="res://entities/enemies/enemy_states/chasing_state.gd" id="7_bfxyu"]
+[ext_resource type="Script" uid="uid://c5asagc5dswqt" path="res://common3d/entity/entity_guide/nav_entity_guide3d.gd" id="8_elujw"]
+[ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="9_xkejc"]
+[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="10_c6nxc"]
+[ext_resource type="Resource" uid="uid://j8xwx023phbg" path="res://items/food/honeycomb/honeycomb_item.tres" id="11_cri7m"]
+[ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="12_0rn6u"]
+[ext_resource type="Script" uid="uid://c6m4guogk1s1y" path="res://common/follow_node3d.gd" id="13_121pw"]
+[ext_resource type="PackedScene" uid="uid://btvdb6drbsbg6" path="res://entities/enemies/bee/bee.blend" id="14_0lxgi"]
+[ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="15_7niy0"]
+[ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="16_0hiqi"]
+
+[sub_resource type="Resource" id="Resource_qp58c"]
+script = ExtResource("2_rq2ym")
+max_speed = Vector2(2.5, 0)
+acceleration = Vector2(0.1, 1)
+friction = Vector2(0.23, 0)
+metadata/_custom_type_script = "uid://edbvsbdtvgtj"
+
+[sub_resource type="Resource" id="Resource_ceedn"]
+script = ExtResource("10_c6nxc")
+item = ExtResource("11_cri7m")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qkhbg"]
+size = Vector3(0.2, 0.2, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ff1s"]
+resource_name = "Material.002"
+transparency = 4
+cull_mode = 2
+albedo_color = Color(0.55871755, 0.55871755, 0.55871755, 0.57142854)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3yo3w"]
+_surfaces = [{
+"aabb": AABB(-0.8389459, -0.00027403812, -0.74463487, 1.6512907, 0.00022401221, 0.50224495),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAAAAIABAACAAUABgAHAAgABgAJAAcACgAGAAgACgAIAAsA"),
+"name": "Material.002",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("///2/4BtAAByuf//7SkAAPGo9/8QewAAPeT6/wAAAABN2vb///8AALGrAAA08AAAAAD2/4BtAACMRv//7SkAAA1X9/8QewAAwRv6/wAAAACxJfb///8AAE1UAAA08AAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_44jin"]
+resource_name = "bee_Plane_001"
+_surfaces = [{
+"aabb": AABB(-0.8389459, -0.00027403812, -0.74463487, 1.6512907, 0.00022401221, 0.50224495),
+"attribute_data": PackedByteArray("AAD/f///AAD///9/AAAAAAAA//////9//////wAA/38AAP9///8AAP///38AAAAAAAD//////3//////AAD/fw=="),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0A"),
+"material": SubResource("StandardMaterial3D_2ff1s"),
+"name": "Material.002",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("///2/4Btov5yuf//7Smq9/Go9/8Qe4L7PeT6/wAAq/1N2vb////M//Go9/8QexX/sasAADTwB/3///b/gG2k/gAA9v+AbQXAjEb//+0p2MANV/f/EHs+wMEb+v8AABDAsSX2/////L8NV/f/EHv+v01UAAA08BfAAAD2/4BtAsBAP3/+pjtM95g9L/u7Pnb94T/C/wN/fUDMfJFBPj99/jb644IY43KOte6kiG/2x4QX/26ACP4cfAP6EHQ2+t+C")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_3yo3w")
+
+[sub_resource type="Animation" id="Animation_1rsga"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlenderVisuals/Visuals/Wings:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5707964, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlenderVisuals/Visuals/Wings2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5707964, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qkhbg"]
+resource_name = "fly"
+length = 0.2
+loop_mode = 1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlenderVisuals/Visuals/Wings:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector3(1.5707964, 0, 0), Vector3(1.0471976, 0, 0), Vector3(1.5707964, 0, 0), Vector3(2.0943952, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlenderVisuals/Visuals/Wings2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector3(1.8325958, 0, 0), Vector3(1.5707964, 0, 0), Vector3(2.0943952, 0, 0), Vector3(1.3962635, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x7bfg"]
+_data = {
+&"RESET": SubResource("Animation_1rsga"),
+&"fly": SubResource("Animation_qkhbg")
+}
+
+[sub_resource type="Animation" id="Animation_lfdyi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlenderVisuals/Visuals:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.17453292, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlenderVisuals/Visuals:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.05, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_yoaiu"]
+resource_name = "fly"
+length = 2.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlenderVisuals/Visuals:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.17453292, 0, 0), Vector3(-0.17453292, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlenderVisuals/Visuals:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.05, 0), Vector3(0, -0.05, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6g1qb"]
+_data = {
+&"RESET": SubResource("Animation_lfdyi"),
+&"fly": SubResource("Animation_yoaiu")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_muv15"]
+radius = 0.1
+height = 1.1379395
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nw5ty"]
+radius = 0.15
+
+[node name="Bee" type="CharacterBody3D" unique_id=764734795]
+collision_mask = 17
+script = ExtResource("1_4hd4j")
+type = "enemy"
+movement_mode = SubResource("Resource_qp58c")
+move_up_as_jump = false
+metadata/_custom_type_script = "uid://bki5ij8task16"
+
+[node name="HitTimer" type="Timer" parent="." unique_id=1781383609]
+wait_time = 0.1
+one_shot = true
+
+[node name="Sight3D" type="Node3D" parent="." unique_id=713539717]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("2_wnfpe")
+radius = 15.0
+lose_distance = 23.0
+target_collision_mask = 16
+ray_collision_mask = 21
+group_whitelist = Array[String](["player"])
+
+[node name="StartChaseTrigger" type="Node" parent="Sight3D" unique_id=1196415362 node_paths=PackedStringArray("state_machine")]
+script = ExtResource("3_rq2ym")
+state_machine = NodePath("../../Controller3D/Default")
+state_name = "Chasing"
+from_state_whitelist = Array[String](["Wandering"])
+signal_name = &"found_target"
+metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
+
+[node name="Controller3D" type="Node" parent="." unique_id=1315753818 node_paths=PackedStringArray("sight", "on_screen_notifier", "initial_entity")]
+script = ExtResource("4_qp58c")
+sight = NodePath("../Sight3D")
+on_screen_notifier = NodePath("../Node/FollowNode3D/VisibleOnScreenNotifier3D")
+initial_entity = NodePath("..")
+metadata/_custom_type_script = "uid://ccwod33h53a5s"
+
+[node name="Default" type="Node" parent="Controller3D" unique_id=1574117420 node_paths=PackedStringArray("initial_state", "root")]
+script = ExtResource("5_4vry0")
+initial_state = NodePath("Wandering")
+root = NodePath("../..")
+process_update = true
+physics_process_update = true
+metadata/_custom_type_script = "uid://bqonxtntgndfr"
+
+[node name="Wandering" type="Node" parent="Controller3D/Default" unique_id=1882444428 node_paths=PackedStringArray("nav_guide", "idle_timer", "root")]
+script = ExtResource("6_wpegq")
+nav_guide = NodePath("../../NavEntityGuide3D")
+idle_timer = NodePath("Timer")
+root = NodePath("../../..")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="Timer" type="Timer" parent="Controller3D/Default/Wandering" unique_id=1600727395]
+
+[node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=1883496829 node_paths=PackedStringArray("guide", "sight", "root")]
+script = ExtResource("7_bfxyu")
+guide = NodePath("../../NavEntityGuide3D")
+sight = NodePath("../../../Sight3D")
+min_approach_distance = 0.7
+lose_target_state = "Wandering"
+root = NodePath("../../..")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="NavEntityGuide3D" type="Node" parent="Controller3D" unique_id=377578045 node_paths=PackedStringArray("nav", "entity")]
+script = ExtResource("8_elujw")
+nav = NodePath("../../NavigationAgent3D")
+entity = NodePath("../..")
+face_interpolation = 0.1
+metadata/_custom_type_script = "uid://c5asagc5dswqt"
+
+[node name="Inventory" type="Node" parent="." unique_id=2020826484]
+unique_name_in_owner = true
+script = ExtResource("9_xkejc")
+item_instances = Array[ExtResource("10_c6nxc")]([SubResource("Resource_ceedn")])
+constant = true
+size = 1
+metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
+
+[node name="InventoryDropper3D" type="Node3D" parent="." unique_id=709626360 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("12_0rn6u")
+inventory = NodePath("../Inventory")
+death_drop_mode = 1
+metadata/_custom_type_script = "uid://bpmbg0e28ujs7"
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1081978445]
+
+[node name="Node" type="Node" parent="." unique_id=1936843058]
+
+[node name="FollowNode3D" type="Node3D" parent="Node" unique_id=1527888734 node_paths=PackedStringArray("target")]
+script = ExtResource("13_121pw")
+target = NodePath("../..")
+metadata/_custom_type_script = "uid://c6m4guogk1s1y"
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="Node/FollowNode3D" unique_id=2055379880]
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="." unique_id=1901715806]
+remote_path = NodePath("../Node/FollowNode3D/VisibleOnScreenNotifier3D")
+update_rotation = false
+update_scale = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1283622617]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.048)
+shape = SubResource("BoxShape3D_qkhbg")
+
+[node name="BlenderVisuals" type="Node3D" parent="." unique_id=71307781]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Visuals" parent="BlenderVisuals" unique_id=2002060618 instance=ExtResource("14_0lxgi")]
+transform = Transform3D(0.2, 0, 0, 0, 0.19696155, -0.034729637, 0, 0.034729637, 0.19696155, 0, 0.05, 0)
+
+[node name="Wings" parent="BlenderVisuals/Visuals" index="1" unique_id=1580978913]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0)
+
+[node name="Wings2" type="MeshInstance3D" parent="BlenderVisuals/Visuals" unique_id=1431738844]
+transform = Transform3D(1, 0, 0, 0, -4.371138e-08, -0.9999998, 0, 0.9999998, -4.371138e-08, 0, 0, 0)
+mesh = SubResource("ArrayMesh_44jin")
+
+[node name="WingAnimationPlayer" type="AnimationPlayer" parent="." unique_id=365137237]
+libraries/ = SubResource("AnimationLibrary_x7bfg")
+autoplay = &"fly"
+
+[node name="GroundRayCast" type="RayCast3D" parent="." unique_id=95167471]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, -10, 0)
+collision_mask = 4
+
+[node name="Health" type="Node" parent="." unique_id=780116179]
+script = ExtResource("15_7niy0")
+one_shot = true
+free_parent_on_death = true
+metadata/_custom_type_script = "uid://cbb5o5ykqwxfp"
+
+[node name="FlightAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1652503716]
+libraries/ = SubResource("AnimationLibrary_6g1qb")
+autoplay = &"fly"
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1316642755]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5753174, 0)
+shape = SubResource("CapsuleShape3D_muv15")
+
+[node name="Hurtbox3D" type="Area3D" parent="." unique_id=966906013 node_paths=PackedStringArray("health", "knockback_entity")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("16_0hiqi")
+health = NodePath("../Health")
+knockback_entity = NodePath("..")
+metadata/_custom_type_script = "uid://4dfurtssrp4f"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1632674445]
+shape = SubResource("SphereShape3D_nw5ty")
+
+[node name="InventoryDropper3D2" type="Node3D" parent="." unique_id=46336329 node_paths=PackedStringArray("inventory", "health")]
+script = ExtResource("12_0rn6u")
+inventory = NodePath("../Inventory")
+health = NodePath("../Health")
+death_drop_mode = 1
+metadata/_custom_type_script = "uid://bpmbg0e28ujs7"
+
+[editable path="BlenderVisuals/Visuals"]
