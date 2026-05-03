@@ -10,6 +10,8 @@ signal recovered_from_depletion
 @export var bar: InterpolatedBar
 @export var idle_timer: Timer
 
+@export var depletable := false 
+
 @export_group("Rates")
 @export var fill_base_rate := 0.05
 @export var fill_acceleration := 0.03
@@ -23,6 +25,13 @@ signal recovered_from_depletion
 var value := 1.0:
 	set(to):
 		value = clampf(to, 0.0, 1.0)
+		
+		# Never deplete
+		if not depletable:
+			is_depleted = false
+			return
+		
+		# Depletion logic
 		if value <= 0.0 and not is_depleted:
 			is_depleted = true
 		elif value >= recovery_threshold and is_depleted:
@@ -55,7 +64,9 @@ func spend(amount_per_second: float) -> void:
 	queued_spend += amount_per_second
 
 func is_usable() -> bool:
-	return value > 0.0 and not is_depleted
+	if depletable:
+		return value > 0.0 and not is_depleted
+	return value > 0.0
 
 func get_hunger_multiplier() -> float:
 	if hunger == null or hunger_fill_curve == null:
@@ -70,7 +81,8 @@ func _process(delta: float) -> void:
 	
 	last_value = value
 	
-	if queued_spend == 0.0 or is_depleted:
+	# Refill if not spending or are locked in depletion
+	if queued_spend == 0.0 or (depletable and is_depleted):
 		if is_filling:
 			_current_fill_time += delta * GameWorld.TIME_SCALE
 			
@@ -85,8 +97,14 @@ func _process(delta: float) -> void:
 		elif idle_timer.is_stopped() and value < 1.0:
 			idle_timer.start()
 	
+	# Spend logic
 	if queued_spend != 0.0:
-		# If spending, reset filling state and acceleration
+		
+		# If depletable and depleted, block spending
+		if depletable and is_depleted:
+			queued_spend = 0.0
+			return
+
 		is_filling = false
 		_current_fill_time = 0.0
 		
