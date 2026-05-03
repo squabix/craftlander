@@ -63,7 +63,7 @@ func hit(area: Area3D) -> bool:
 	if not (area is Hurtbox3D):
 		return false
 	
-	area.hurt(damage.sample())
+	area.hurt(damage, Vector3.FORWARD.rotated(Util.VECTOR3Y, global_rotation.y))
 	hit_nodes.append(area)
 	hit_node.emit()
 	
