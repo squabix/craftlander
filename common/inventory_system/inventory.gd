@@ -83,6 +83,12 @@ func get_item_quantities() -> Dictionary[Item, int]:
 	
 	return quantities
 
+func get_item_quantity(item: Item) -> int:
+	var all_quantities := get_item_quantities()
+	if item in all_quantities:
+		return all_quantities[item]
+	return 0
+
 func get_first_empty_index() -> int:
 	for index in size:
 		if item_instances[index] == null:
@@ -122,7 +128,7 @@ func remove_item(item: Item, quantity: int = -1, must_reach_quantity: bool = fal
 	if quantity == 0:
 		return 0
 	
-	var item_quantity := get_item_quantities()[item]
+	var item_quantity := get_item_quantity(item)
 	if quantity == -1:
 		quantity = item_quantity
 	elif must_reach_quantity and quantity > item_quantity:
