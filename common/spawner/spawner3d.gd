@@ -9,6 +9,7 @@ enum TransformMode {SELF, PARENT, DEFAULT}
 @export var child_of_root: bool = true
 
 @export var default_parent: Node
+@export var default_scene: PackedScene
 
 @export_group("Transform")
 @export var position_mode: TransformMode = TransformMode.PARENT
@@ -65,7 +66,7 @@ func initialize_instance(_instance: Node3D) -> void:
 	pass
 
 func get_scene() -> PackedScene:
-	return null
+	return default_scene
 
 func spawn(custom_scene: PackedScene = null, custom_parent: Node=null) -> Node3D:
 	var parent := custom_parent if custom_parent != null else (get_tree().root if child_of_root else default_parent)
