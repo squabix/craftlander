@@ -663,6 +663,7 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 script = ExtResource("13_7mn0t")
 nav_guide = NodePath("../../NavEntityGuide3D")
 sight = NodePath("../../../Sight3D")
+lose_target_state = "Wandering"
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
