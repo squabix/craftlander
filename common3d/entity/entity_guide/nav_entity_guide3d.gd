@@ -22,6 +22,14 @@ func face_target() -> void:
 	var next: Vector3 = nav.get_next_path_position()
 	Util.lerp_look_at_3d(entity, next, face_interpolation)
 
+func get_distance_to_target() -> float:
+	return nav.distance_to_target()
+
+func move_forward() -> void:
+	if not nav.is_target_reachable():
+		return
+	entity.move_forward()
+
 func get_nearby_navigable_position(
 	inner_radius: float,
 	outer_radius: float,
