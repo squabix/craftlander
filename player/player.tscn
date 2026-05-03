@@ -29,6 +29,7 @@
 [ext_resource type="Resource" uid="uid://bah3rou15fcfh" path="res://items/tools/shoddy_axe/shoddy_axe_item.tres" id="22_bjvpn"]
 [ext_resource type="Script" uid="uid://c07qmsd7epd0h" path="res://common/ui/popup_display.gd" id="23_7pqkx"]
 [ext_resource type="Texture2D" uid="uid://dvu8avo8cfq2c" path="res://icon.svg" id="23_g4c7l"]
+[ext_resource type="Script" uid="uid://dapeyi3eetek1" path="res://common/signal_triggrs/signal_animation_trigger.gd" id="25_j55il"]
 [ext_resource type="Script" uid="uid://q5lh058bmpum" path="res://common/damage_system/health_bar.gd" id="26_r7pn3"]
 [ext_resource type="Script" uid="uid://c3xfbb8ay0ghk" path="res://common/interpolated_bar.gd" id="27_b8hi5"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="27_uw77l"]
@@ -103,6 +104,53 @@ fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ebec5"]
 size = Vector3(0.42, 1.5, 0.42)
+
+[sub_resource type="Gradient" id="Gradient_xcnuv"]
+offsets = PackedFloat32Array(0, 0.35643822, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.06666667, 1, 1, 1, 0.14901961)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j55il"]
+gradient = SubResource("Gradient_xcnuv")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_xcnuv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_j55il"]
+resource_name = "hurt"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0), Color(1, 0, 0, 1), Color(1, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hjies"]
+_data = {
+&"RESET": SubResource("Animation_xcnuv"),
+&"hurt": SubResource("Animation_j55il")
+}
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7pn3"]
 bg_color = Color(1, 0.28235295, 0.3764706, 1)
@@ -517,6 +565,14 @@ unique_name_in_owner = true
 script = ExtResource("12_ebec5")
 hp = 100.0
 
+[node name="SignalAnimationTrigger" type="Node" parent="Health" unique_id=1074142864 node_paths=PackedStringArray("anim_player")]
+script = ExtResource("25_j55il")
+anim_player = NodePath("../../HUD/HurtScreenEffect/AnimationPlayer")
+anim_name = "hurt"
+force_from_start = false
+signal_name = &"was_hurt"
+metadata/_custom_type_script = "uid://dapeyi3eetek1"
+
 [node name="HUD" type="Control" parent="." unique_id=1406402649]
 process_mode = 3
 layout_mode = 3
@@ -544,6 +600,19 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("17_tqiix")
 expand_mode = 1
+
+[node name="HurtScreenEffect" type="TextureRect" parent="HUD" unique_id=2101455403]
+modulate = Color(1, 0, 0, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_j55il")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/HurtScreenEffect" unique_id=1282475695]
+libraries/ = SubResource("AnimationLibrary_hjies")
 
 [node name="TooltipLabel" type="Label" parent="HUD" unique_id=189793984 node_paths=PackedStringArray("interactor")]
 layout_mode = 1
@@ -687,6 +756,7 @@ text = "Continue"
 [node name="PauseInterface" type="Control" parent="HUD" unique_id=1163003515]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
