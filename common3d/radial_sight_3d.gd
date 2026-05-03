@@ -6,6 +6,7 @@ signal lost_target
 
 @export var radius := 20.0
 @export var lose_distance := 40.0
+@export var can_lose_target := true
 @export var target_update_frequency := 0.2
 @export_flags_3d_physics var target_collision_mask := 1
 @export_flags_3d_physics var ray_collision_mask := 1
@@ -48,13 +49,16 @@ func _ready() -> void:
 	update_timer.start()
 	update_timer.timeout.connect(update_target)
 
+func target_is_lost() -> bool:
+	return can_lose_target and global_position.distance_to(target.global_position) >= lose_distance
+
 func update_target() -> void:
+	if does_see_target() and not target_is_lost():
+		return
+	
 	var nodes_in_area: Array[Node3D] = []
 	nodes_in_area.append_array(area.get_overlapping_areas())
 	nodes_in_area.append_array(area.get_overlapping_bodies())
-	
-	if does_see_target() and global_position.distance_to(target.global_position) < lose_distance:
-		return
 	
 	if target != null:
 		lost_target.emit()
