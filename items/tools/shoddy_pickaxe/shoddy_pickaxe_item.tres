@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="HarvestingTool" format=3 uid="uid://w52cknmpa167"]
 
-[ext_resource type="Texture2D" uid="uid://dt4rw3hb46tr3" path="res://main/white_logo.png" id="1_4lcjq"]
+[ext_resource type="Texture2D" uid="uid://c3o13o5vrivr" path="res://items/tools/shoddy_pickaxe/shoddy_pickaxe.png" id="1_4lcjq"]
 [ext_resource type="PackedScene" uid="uid://dbj2o38nc5idd" path="res://items/tools/shoddy_pickaxe/shoddy_pickaxe.tscn" id="2_4lcjq"]
 [ext_resource type="Script" uid="uid://6x786nnhteca" path="res://items/tools/harvesting_tool.gd" id="3_aaxip"]
 
