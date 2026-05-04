@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Food" format=3 uid="uid://j8xwx023phbg"]
 
-[ext_resource type="Texture2D" uid="uid://c4gehucq85wxc" path="res://island/island_absolute_texture.tres" id="1_5ikg0"]
+[ext_resource type="Texture2D" uid="uid://cjt81ehcvp1ub" path="res://items/food/honeycomb/honeycomb.png" id="1_5ikg0"]
 [ext_resource type="PackedScene" uid="uid://dhy8e5mh2ovvm" path="res://items/food/honeycomb/honeycomb.tscn" id="2_bccu5"]
 [ext_resource type="Script" uid="uid://bcua33xmbibyi" path="res://items/food/food.gd" id="3_w883n"]
 
