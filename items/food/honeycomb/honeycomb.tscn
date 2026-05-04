@@ -5,6 +5,7 @@
 [node name="Honeycomb" type="Node3D" unique_id=282752753]
 
 [node name="Visuals" parent="." unique_id=1564862642 instance=ExtResource("1_2uevs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.27)
 
 [node name="Circle1" parent="Visuals" index="0" unique_id=707338699]
 visible = false
