@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ni2bhtdnrjaj" path="res://island/docking/dock.blend" id="1_r7o7e"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wrd2w"]
-size = Vector3(4.5, 0.9, 16)
+size = Vector3(4.5, 0.9, 17)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_og45p"]
 albedo_color = Color(0.6, 0.42890003, 0.24600002, 1)
