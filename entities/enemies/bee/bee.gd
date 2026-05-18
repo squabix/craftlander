@@ -8,6 +8,10 @@ const WALK_THESHOLD := 0.3
 const MIN_ATTACK_TIME := 0.3
 const MAX_ATTACK_TIME := 0.6
 
+const ATTACK_RANGE := 1.0
+
+var target_healths: Dictionary[Node3D, Health] = {}
+
 @onready var sight: RadialSight3D = $Sight3D
 @onready var hit_timer: Timer = $HitTimer
 
@@ -19,10 +23,18 @@ func _start_random_timer() -> void:
 	hit_timer.wait_time = randf_range(MIN_ATTACK_TIME, MAX_ATTACK_TIME)
 	hit_timer.start()
 
+func get_target_health() -> Health:
+	if not sight.target in target_healths:
+		target_healths[sight.target] = Util.find_child_of_class(sight.target, "Health")
+	return target_healths[sight.target]
+
 func attack() -> void:
-	if global_position.distance_to(sight.target_position) <= 1.0:
-		var attacked_health: Health = Util.find_child_of_class(sight.target, "Health")
-		attacked_health.hurt(1.0)
+	
+	# Target is out of range
+	if global_position.distance_to(sight.target_position) > ATTACK_RANGE:
+		return
+	
+	get_target_health().hurt(1.0)
 
 func _on_hit_timer_timeout() -> void:
 	attack()
