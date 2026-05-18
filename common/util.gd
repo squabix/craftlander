@@ -45,7 +45,8 @@ static func disable_all_colliders(parent: Node) -> Array[Node]:
 	return disabled_colliders
 
 static func get_object_class(object: Object) -> String:
-	return object.get_script().get_global_name() if object.get_script() != null else object.get_class()
+	var script: Script = object.get_script()
+	return script.get_global_name() if script != null else object.get_class()
 
 static func find_child_of_class(parent: Node, class_string: String) -> Node:
 	for child in parent.get_children():
