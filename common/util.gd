@@ -114,6 +114,12 @@ static func enable_collider(collider: Node) -> void:
 		return
 	collider.set_deferred("disabled", false)
 
+static func are_instances_valid(instances: Array) -> bool:
+	for instance in instances:
+		if not is_instance_valid(instance):
+			return false
+	return true
+
 static func distance_sort_2d(nodes: Array, position: Vector2) -> Array:
 	if nodes.is_empty():
 		return [null]
