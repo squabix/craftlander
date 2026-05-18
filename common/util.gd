@@ -48,7 +48,7 @@ static func get_object_class(object: Object) -> String:
 	var script: Script = object.get_script()
 	return script.get_global_name() if script != null else object.get_class()
 
-static func classify_dict_key(dictionary: Dictionary) -> String:
+static func classify_dict_key(dictionary: Dictionary, default_to_builtin := true) -> String:
 	if not dictionary.is_typed_key():
 		return ""
 	var typed_script: Script = dictionary.get_typed_key_script()
@@ -57,9 +57,11 @@ static func classify_dict_key(dictionary: Dictionary) -> String:
 	var typed_class := dictionary.get_typed_key_class_name()
 	if not typed_class.is_empty():
 		return typed_class
+	if not default_to_builtin:
+		return ""
 	return type_string(dictionary.get_typed_key_builtin())
 
-static func classify_dict_value(dictionary: Dictionary) -> String:
+static func classify_dict_value(dictionary: Dictionary, default_to_builtin := true) -> String:
 	if not dictionary.is_typed_value():
 		return ""
 	var typed_script: Script = dictionary.get_typed_value_script()
@@ -68,6 +70,8 @@ static func classify_dict_value(dictionary: Dictionary) -> String:
 	var typed_class := dictionary.get_typed_key_class_name()
 	if not typed_class.is_empty():
 		return typed_class
+	if not default_to_builtin:
+		return ""
 	return type_string(dictionary.get_typed_value_builtin())
 
 static func find_child_of_class(parent: Node, class_string: String) -> Node:
