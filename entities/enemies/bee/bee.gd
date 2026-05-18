@@ -24,9 +24,7 @@ func _start_random_timer() -> void:
 	hit_timer.start()
 
 func get_target_health() -> Health:
-	if not sight.target in target_healths:
-		target_healths[sight.target] = Util.find_child_of_class(sight.target, "Health")
-	return target_healths[sight.target]
+	return Util.find_stored_child_of_class(target_healths, sight.target)
 
 func attack() -> void:
 	
