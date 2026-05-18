@@ -48,6 +48,28 @@ static func get_object_class(object: Object) -> String:
 	var script: Script = object.get_script()
 	return script.get_global_name() if script != null else object.get_class()
 
+static func classify_dict_key(dictionary: Dictionary) -> String:
+	if not dictionary.is_typed_key():
+		return ""
+	var typed_script: Script = dictionary.get_typed_key_script()
+	if typed_script != null:
+		return typed_script.get_global_name()
+	var typed_class := dictionary.get_typed_key_class_name()
+	if not typed_class.is_empty():
+		return typed_class
+	return type_string(dictionary.get_typed_key_builtin())
+
+static func classify_dict_value(dictionary: Dictionary) -> String:
+	if not dictionary.is_typed_value():
+		return ""
+	var typed_script: Script = dictionary.get_typed_value_script()
+	if typed_script != null:
+		return typed_script.get_global_name()
+	var typed_class := dictionary.get_typed_key_class_name()
+	if not typed_class.is_empty():
+		return typed_class
+	return type_string(dictionary.get_typed_value_builtin())
+
 static func find_child_of_class(parent: Node, class_string: String) -> Node:
 	for child in parent.get_children():
 		if get_object_class(child) == class_string:
