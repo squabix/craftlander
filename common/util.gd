@@ -83,7 +83,8 @@ static func find_child_of_class(parent: Node, class_string: String) -> Node:
 			return grandchild
 	return null
 
-static func find_stored_child_of_class(dictionary: Dictionary, parent: Node, class_string: String) -> Node:
+static func find_stored_child_of_class(dictionary: Dictionary, parent: Node) -> Node:
+	var class_string := classify_dict_value(dictionary, false)
 	if not parent in dictionary:
 		dictionary[parent] = find_child_of_class(parent, class_string)
 	return dictionary[parent]

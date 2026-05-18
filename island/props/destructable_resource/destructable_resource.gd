@@ -21,7 +21,7 @@ func connect_hurtbox_damage() -> void:
 	hurtbox.was_dealt_damage.connect(give_to_source)
 
 func get_damage_source_inventory(source: Node) -> Inventory:
-	return Util.find_stored_child_of_class(damage_source_inventories, source, "Inventory")
+	return Util.find_stored_child_of_class(damage_source_inventories, source)
 
 func give_random_item(to: Inventory) -> void:
 	var item := inventory.get_item(inventory.get_random_index_weighted())
