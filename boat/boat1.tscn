@@ -77,8 +77,8 @@ driver_seat = NodePath("DriverSeat")
 seats = [NodePath("DriverSeat")]
 type = "boat"
 movement_mode = SubResource("Resource_e44pp")
-gravity_multiplier = 0.0
 move_up_as_jump = false
+gravity_multiplier = 0.0
 rotation_range = SubResource("Resource_wbjwq")
 metadata/_custom_type_script = "uid://sw1ikf32qnw0"
 
@@ -108,8 +108,9 @@ metadata/_custom_type_script = "uid://bqonxtntgndfr"
 script = ExtResource("5_c4lax")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Docked" type="Node" parent="StateMachine" unique_id=1637149440]
+[node name="Docked" type="Node" parent="StateMachine" unique_id=1637149440 node_paths=PackedStringArray("driver_seat")]
 script = ExtResource("6_c4lax")
+driver_seat = NodePath("../../DriverSeat")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Piloting" type="Node" parent="StateMachine" unique_id=1893954928]
