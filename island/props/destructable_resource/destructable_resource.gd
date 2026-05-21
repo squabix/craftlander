@@ -7,6 +7,7 @@ class_name DestructableResource
 @export var hurtbox: Hurtbox3D
 @export var inventory: Inventory
 @export var health: Health
+@export var wait_for_island_population := true
 
 var damage_source_inventories: Dictionary[Node, Inventory] = {}
 
@@ -33,9 +34,11 @@ func _ready() -> void:
 	if not Util.are_instances_valid([inventory, hurtbox]):
 		return
 	
-	# Once island is populated, connect hurtbox damage signal to give first inventory item to damager
-	EventBus.subscribe(
-		"island_populated",
-		connect_hurtbox_damage,
-		tree_exiting
-	)
+	if wait_for_island_population:
+		EventBus.subscribe(
+			"island_populated",
+			connect_hurtbox_damage,
+			tree_exiting
+		)
+	else:
+		connect_hurtbox_damage()
