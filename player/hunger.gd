@@ -26,13 +26,7 @@ var value := 1.0:
 func _ready() -> void:
 	value = initial_value
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	hurt_timer = Timer.new()
-	add_child(hurt_timer)
-	hurt_timer.start()
-	hurt_timer.timeout.connect(
-		func() -> void:
-			health.hurt(hurt_curve.sample(value))
-	)
+	add_hurt_timer()
 	if stamina:
 		stamina.spent.connect(
 			func(amount: float) -> void:
@@ -49,6 +43,15 @@ func _process(delta: float) -> void:
 	queued_loss = 0.0
 	
 	health.heal(regeneration_curve.sample(value) * delta * GameWorld.TIME_SCALE)
+
+func add_hurt_timer() -> void:
+	hurt_timer = Timer.new()
+	add_child(hurt_timer)
+	hurt_timer.start()
+	hurt_timer.timeout.connect(
+		func() -> void:
+			health.hurt(hurt_curve.sample(value))
+	)
 
 func lose(amount: float) -> void:
 	queued_loss += amount
