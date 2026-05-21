@@ -26,26 +26,30 @@ func get_distance() -> float:
 		return global_position.distance_to(target.global_position)
 	return INF
 
+func retreat() -> void:
+	direction = direction.lerp(-global_position.direction_to(target.global_position), lerp_weight)
+
+func idle() -> void:
+	direction = direction.lerp(Vector3.ZERO, lerp_weight)
+
+func approach() -> void:
+	direction = direction.lerp(global_position.direction_to(target.global_position), lerp_weight)
+
+func has_min_approach_distance() -> bool: return min_approach_distance > 0.0
+func has_max_approach_distance() -> bool: return max_approach_distance > 0.0
+
 func update_direction() -> void:
 	if target == null:
-		direction = direction.lerp(Vector3.ZERO, lerp_weight)
+		idle()
 		return
 	
 	var distance: float = get_distance()
-	var raw_direction: Vector3
 	
-	if min_approach_distance > 0.0 and distance < min_approach_distance:
-		
-		# Idle
+	if has_min_approach_distance() and distance < min_approach_distance:
 		if distance < min_retreat_distance:
-			raw_direction = -global_position.direction_to(target.global_position)
-		
-		# Retreat
+			retreat()
 		else:
-			raw_direction = Vector3.ZERO
+			idle()
+	elif not has_max_approach_distance() or distance < max_approach_distance:
+		approach()
 	
-	# Approach
-	elif (max_approach_distance > 0.0 and distance < max_approach_distance) or max_approach_distance == 0.0:
-			raw_direction = global_position.direction_to(target.global_position)
-	
-	direction = direction.lerp(raw_direction, lerp_weight)
