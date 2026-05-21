@@ -14,6 +14,11 @@ const FLOOR_MARGIN: float = 0.05
 
 var visuals: Node3D
 
+static func from_item(_item: Item) -> ItemPickup3D:
+	var pickup := ItemPickup3D.new()
+	pickup.item = _item
+	return pickup
+
 func _ready() -> void:
 	if item == null:
 		printerr(self, " has no item instance")
