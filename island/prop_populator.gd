@@ -43,8 +43,7 @@ func populate() -> void:
 			
 			var instance: Node3D = prop.scene.instantiate()
 			add_child.call_deferred(instance)
-			island_generator.place_node(instance, px, py)
-			instance.rotation_degrees = instance.rotation_degrees.lerp(Vector3.ZERO, 1.0 - prop.normal_conformity)
+			island_generator.place_node(instance, px, py, prop.normal_conformity)
 			instance.rotation_degrees.y = rng.randf_range(0.0, 360.0)
 			instance.scale = Vector3.ONE * rng.randf_range(prop.min_scale, prop.max_scale)
 			props[spawn_position] = instance
