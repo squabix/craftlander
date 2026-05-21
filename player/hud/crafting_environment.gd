@@ -69,8 +69,11 @@ func update_held_pickup() -> void:
 	if not is_instance_valid(inventory_holder_link):
 		return
 	
-	# Set held pickup to current held item
 	var new_instance := inventory_holder_link.get_current_instance()
+	if not is_instance_valid(new_instance):
+		return
+	
+	# Set held pickup to current held item
 	held_pickup = spawn_item(new_instance.item)
 
 func get_scaled_mouse_position2d() -> Vector2:
