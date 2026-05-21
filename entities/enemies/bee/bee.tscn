@@ -6,8 +6,8 @@
 [ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/signal_triggrs/signal_state_trigger.gd" id="3_rq2ym"]
 [ext_resource type="Script" uid="uid://crmxhu5iujbq1" path="res://entities/enemies/rootling/rootling_controller.gd" id="4_qp58c"]
 [ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="5_4vry0"]
-[ext_resource type="Script" uid="uid://cf04j3voj4xyc" path="res://entities/enemies/enemy_states/wandering_state.gd" id="6_wpegq"]
-[ext_resource type="Script" uid="uid://pdvlr6l3n04n" path="res://entities/enemies/enemy_states/chasing_state.gd" id="7_bfxyu"]
+[ext_resource type="Script" uid="uid://cf04j3voj4xyc" path="res://entities/npc_states/wandering_state.gd" id="6_wpegq"]
+[ext_resource type="Script" uid="uid://pdvlr6l3n04n" path="res://entities/npc_states/chasing_state.gd" id="7_bfxyu"]
 [ext_resource type="Script" uid="uid://c5asagc5dswqt" path="res://common3d/entity/entity_guide/nav_entity_guide3d.gd" id="8_elujw"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="9_xkejc"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="12_0rn6u"]
@@ -255,7 +255,6 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 script = ExtResource("7_bfxyu")
 guide = NodePath("../../NavEntityGuide3D")
 sight = NodePath("../../../Sight3D")
-min_approach_distance = 0.7
 lose_target_state = "Wandering"
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
