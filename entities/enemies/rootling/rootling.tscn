@@ -657,8 +657,9 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Timer" type="Timer" parent="Controller3D/Default/Wandering" unique_id=1600727395]
 
-[node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=1883496829 node_paths=PackedStringArray("guide", "sight", "root")]
+[node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=1883496829 node_paths=PackedStringArray("item_holder", "guide", "sight", "root")]
 script = ExtResource("13_7mn0t")
+item_holder = NodePath("../../../ItemHolder3D")
 guide = NodePath("../../NavEntityGuide3D")
 sight = NodePath("../../../Sight3D")
 lose_target_state = "Wandering"
