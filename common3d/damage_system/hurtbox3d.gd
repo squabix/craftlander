@@ -38,27 +38,32 @@ func _set_up_auto_hurt() -> void:
 func get_hurt_direction_from(from_position: Vector3) -> Vector3:
 	return from_position.direction_to(global_position + center)
 
-func hurt(damage: Damage, direction: Vector3=Vector3.ZERO) -> float:
-	if damage == null:
-		return 0.0
-	
-	if not type_whitelist.is_empty() and not damage.type in type_whitelist:
-		return 0.0
-	
-	if inactive:
-		return 0.0
-	
-	var damage_amount := damage.sample() * damage_multiplier
+func is_type_whitelisted(type: String) -> bool:
+	return type_whitelist.is_empty() or type in type_whitelist
+
+func apply_damage_amount(base_amount: float) -> float:
+	var damage_amount := base_amount * damage_multiplier
 	total_damage_taken += damage_amount
 	
 	if is_instance_valid(health):
 		health.hurt(damage_amount)
 	
-	if direction != Vector3.ZERO:
-		last_hurt_direction = direction
-		if is_instance_valid(knockback_entity):
-			knockback_entity.add_impulse(direction * damage.force * knockback_multiplier)
-		
+	return damage_amount
+
+func hurt(damage: Damage, direction: Vector3=Vector3.ZERO) -> float:
+	if damage == null:
+		return 0.0
+	
+	if not is_type_whitelisted(damage.type):
+		return 0.0
+	
+	if inactive:
+		return 0.0
+	
+	var damage_amount := apply_damage_amount(damage.sample())
+	
+	knock(direction, damage.force)
+	
 	was_hurt.emit()
 	was_dealt_damage.emit(damage)
 	
@@ -66,3 +71,10 @@ func hurt(damage: Damage, direction: Vector3=Vector3.ZERO) -> float:
 		Util.safe_free(get_parent())
 	
 	return damage_amount
+
+func knock(direction: Vector3, base_force: float) -> void:
+	if direction == Vector3.ZERO:
+		return
+	last_hurt_direction = direction
+	if is_instance_valid(knockback_entity):
+		knockback_entity.add_impulse(direction * base_force * knockback_multiplier)
