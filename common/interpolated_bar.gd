@@ -6,11 +6,8 @@ class_name InterpolatedBar
 
 var target_value := value
 
-
 func _process(_delta: float) -> void:
 	value = lerp(value, target_value, lerp_weight)
 	var distance: float = abs(value - target_value)
 	if distance <= jump_distance:
 		value = target_value
-	
-	
