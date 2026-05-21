@@ -253,6 +253,7 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=1883496829 node_paths=PackedStringArray("guide", "sight", "root")]
 script = ExtResource("7_bfxyu")
+max_item_use_distance = 1.0
 guide = NodePath("../../NavEntityGuide3D")
 sight = NodePath("../../../Sight3D")
 lose_target_state = "Wandering"

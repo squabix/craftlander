@@ -42,6 +42,7 @@ folder_colors={
 "res://entities/": "green",
 "res://island/": "yellow",
 "res://island/props/destructable_resource/": "pink",
+"res://island/props/item_dropper_props/": "orange",
 "res://items/": "teal",
 "res://items/crafting/": "gray",
 "res://items/food/": "orange",
