@@ -10,8 +10,7 @@ const MAX_CAMERA_DISTANCE_SQUARED := 10000000.0
 var entities: Dictionary[IslandEntityResource, Array]
 
 func _ready() -> void:
-	for i in 3:
-		await get_tree().process_frame
+	for i in 3: await get_tree().process_frame # Wait 3 frames before population
 	populate(true)
 	timer.timeout.connect(populate.bind(false))
 
@@ -25,16 +24,22 @@ func clear_invalid_entities() -> void:
 func get_missing_quantity(entity_resource: IslandEntityResource) -> int:
 	clear_invalid_entities()
 	var intended_quantity := entity_quantities[entity_resource]
-	if entity_resource in entities:
-		return max(0, intended_quantity - entities[entity_resource].size())
-	return intended_quantity
+	return max(0, intended_quantity - get_current_quantity(entity_resource))
+
+func get_current_quantity(entity_resource: IslandEntityResource):
+	if not entity_resource in entities:
+		return 0
+	return entities[entity_resource].size()
+
+func get_random_point(rid: RID) -> Vector3:
+	return NavigationServer3D.region_get_random_point(rid, 1, false)
 
 func get_spawnpoint(allow_frustom: bool, min_height: float=0.0, max_height: float=1000.0) -> Vector3:
-	var region := IslandNavRegion.current
+	var rid := IslandNavRegion.current.get_rid()
 	var point: Vector3
 	var camera: Camera3D = get_viewport().get_camera_3d()
 	while true:
-		point = NavigationServer3D.region_get_random_point(region.get_region_rid(), 1, false)
+		point = get_random_point(rid)
 		
 		if point.y < min_height:
 			continue # Too high
@@ -51,21 +56,23 @@ func get_spawnpoint(allow_frustom: bool, min_height: float=0.0, max_height: floa
 		break
 	return point
 
+func add_entity(entity_resource: IslandEntityResource, spawnpoint: Vector3) -> Entity3D:
+	var entity: Entity3D = entity_resource.scene.instantiate()
+	add_child(entity)
+	entity.global_position = spawnpoint
+	if entity_resource in entities:
+		entities[entity_resource].append(entity)
+	else:
+		entities[entity_resource] = [entity]
+	return entity
+
 func populate(allow_frustom := false) -> void:
 	for entity_resource in entity_quantities:
 		var quantity_to_spawn := get_missing_quantity(entity_resource)
-		if quantity_to_spawn == 0:
-			continue
 		for i in quantity_to_spawn:
 			var spawnpoint := get_spawnpoint(
 				allow_frustom,
 				entity_resource.min_height,
 				entity_resource.max_height
 			)
-			var entity: Entity3D = entity_resource.scene.instantiate()
-			add_child(entity)
-			entity.global_position = spawnpoint
-			if entity_resource in entities:
-				entities[entity_resource].append(entity)
-			else:
-				entities[entity_resource] = [entity]
+			add_entity(entity_resource, spawnpoint)
