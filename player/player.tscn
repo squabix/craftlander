@@ -34,7 +34,7 @@
 [ext_resource type="Script" uid="uid://c3xfbb8ay0ghk" path="res://common/interpolated_bar.gd" id="27_b8hi5"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="27_uw77l"]
 [ext_resource type="Shader" uid="uid://of3kag0xs7lt" path="res://player/blur_shader.gdshader" id="28_ge24q"]
-[ext_resource type="Script" uid="uid://7qluctwrt8qk" path="res://player/hud/full_screen_interface.gd" id="28_pnw6m"]
+[ext_resource type="Script" uid="uid://7qluctwrt8qk" path="res://player/hud/pause_interface.gd" id="28_pnw6m"]
 [ext_resource type="PackedScene" uid="uid://cw2ir860alcgt" path="res://player/hud/crafting_environment.tscn" id="28_q28gw"]
 [ext_resource type="Script" uid="uid://bn55l5h1rwjsn" path="res://player/hunger.gd" id="31_2uvqg"]
 [ext_resource type="Script" uid="uid://crew0n1e8xk4r" path="res://player/hud/recipe_panel.gd" id="38_1so5t"]
@@ -753,7 +753,7 @@ custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 text = "Continue"
 
-[node name="PauseInterface" type="Control" parent="HUD" unique_id=1163003515]
+[node name="PauseInterface" type="Control" parent="HUD" unique_id=1163003515 node_paths=PackedStringArray("crafting_menu", "crafting_environment", "settings_menu", "settings_button", "health")]
 unique_name_in_owner = true
 process_mode = 3
 visible = false
@@ -764,6 +764,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("28_pnw6m")
+crafting_menu = NodePath("CraftingMenu")
+crafting_environment = NodePath("CraftingMenu/CraftingEnvironment")
+settings_menu = NodePath("SettingsMenu")
+settings_button = NodePath("CraftingMenu/SettingsButton")
+health = NodePath("../../Health")
 
 [node name="BlurRect" type="ColorRect" parent="HUD/PauseInterface" unique_id=1141508559]
 material = SubResource("ShaderMaterial_pnw6m")
