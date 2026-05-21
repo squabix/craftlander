@@ -32,8 +32,8 @@ static func get_input_motion_vector() -> Vector2:
 	return Input.get_vector(
 			ACTION_MOVE_LEFT,
 			ACTION_MOVE_RIGHT,
-			ACTION_MOVE_BACKWARD,
-			ACTION_MOVE_FORWARD
+			ACTION_MOVE_FORWARD,
+			ACTION_MOVE_BACKWARD
 		)
 
 func handle_input(event: InputEvent) -> void:
