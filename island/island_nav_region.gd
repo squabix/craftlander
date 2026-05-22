@@ -8,11 +8,9 @@ static var current: IslandNavRegion
 
 func _ready() -> void:
 	current = self
-	await get_tree().process_frame
-	await get_tree().process_frame
 	if bake_on_ready:
+		for i in 2: await get_tree().process_frame
 		bake()
-	
 
 func bake() -> void:
 	get_tree().paused = true
