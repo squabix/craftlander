@@ -45,22 +45,14 @@ func _ready() -> void:
 	
 	hold_current.call_deferred()
 	updated_current.emit.call_deferred()
-	updated_current.connect(
-		func():
-			changed.emit.call_deferred()
-	)
-	inventory.changed.connect(
-		func():
-			await get_tree().process_frame
-			hold_current()
-			changed.emit.call_deferred()
-	)
-	item_holder.consumed_instance.connect(
-		func(instance: ItemInstance):
-			inventory.remove_item(instance.item, 1)
-			changed.emit.call_deferred()
-	)
 	
+	updated_current.connect(changed.emit.call_deferred)
+	inventory.changed.connect(hold_current)
+	item_holder.consumed_instance.connect(consume_instance)
+
+func consume_instance(instance: ItemInstance) -> void:
+	inventory.remove_item(instance.item, 1)
+	changed.emit.call_deferred()
 
 func scroll(direction: int, skip_null: bool=false) -> void:
 	if inventory == null:
@@ -70,6 +62,11 @@ func scroll(direction: int, skip_null: bool=false) -> void:
 	current_index = wrapi(current_index + direction, 0, inventory.size)
 	
 	if skip_null:
+		
+		# Every slot is null
+		if inventory.is_empty():
+			return
+		
 		while get_current_instance() == null and current_index != old_index:
 			scroll(direction, false)
 	
@@ -106,4 +103,6 @@ func heed_num_key_input() -> void:
 		return
 
 func hold_current() -> void:
+	await get_tree().process_frame
 	item_holder.update_item_instance(get_current_instance())
+	changed.emit.call_deferred()
