@@ -29,10 +29,8 @@ func select_self() -> void:
 func get_instance() -> ItemInstance:
 	if instance_override:
 		return instance_override
-	
 	if inventory == null:
 		return null
-	
 	return inventory.get_instance(index)
 
 func is_selected() -> bool:
@@ -41,23 +39,30 @@ func is_selected() -> bool:
 	return inventory_holder_link.current_index == index
 
 func _process(_delta: float) -> void:
-	modulate = selected_modulate if is_selected() else unselected_modulate
-	for target in selected_scale_targets:
-		target.scale = target.scale.lerp(
-			Vector2.ONE * (selected_scale_amount if is_selected() else 1.0),
-			selected_scale_speed
-		)
+	var selected := is_selected()
+	selection_modulate(selected)
+	selection_scale(selected)
 	
 	var instance := get_instance()
-	if instance == null:
-		icon_rect.texture = null
-		quantity_label.text = ""
+	update_icon_texture(instance)
+	update_quantity_label(instance)
+
+func selection_modulate(selected: bool) -> void:
+	modulate = selected_modulate if selected else unselected_modulate
+
+func selection_scale(selected: bool) -> void:
+	for target in selected_scale_targets:
+		target.scale = target.scale.lerp(
+			Vector2.ONE * (selected_scale_amount if selected else 1.0),
+			selected_scale_speed
+		)
+
+func update_icon_texture(instance: ItemInstance) -> void:
+	if icon_rect == null:
 		return
-	
-	if instance.item != null:
-		icon_rect.texture = instance.item.icon
-	
-	if instance.quantity > 1:
-		quantity_label.text = str(instance.quantity)
-	else:
-		quantity_label.text = ""
+	icon_rect.texture = null if instance == null or instance.item == null else instance.item.icon
+
+func update_quantity_label(instance: ItemInstance) -> void:
+	if quantity_label == null:
+		return
+	quantity_label.text = "" if instance == null or instance.quantity <= 1 else str(instance.quantity)
