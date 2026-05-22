@@ -42,30 +42,18 @@ static func clear_dropped_pickups() -> void:
 	all_dropped_pickups = []
 
 func _ready() -> void:
-	
-	# Drop items on death
-	if is_instance_valid(health):
-		health.died.connect(die)
-	
-	if drop_on_ready:
-		drop(on_ready_index)
+	if is_instance_valid(health): health.died.connect(die) # Drop items on death
+	if drop_on_ready: drop(on_ready_index)
 
 func drop(index: int=-1) -> Node3D:
-	if index == -1:
-		index = inventory.get_random_index_weighted()
-	
-	if not inventory.is_index_valid(index):
-		return
-	
-	var instance := inventory.get_instance(index)
-	var item := inventory.get_instance(index).item
+	var instance := get_instance(index)
 	
 	# Failed to remove item (doesn't exist)
 	if inventory.remove_instance(instance, 1) > 0:
-		printerr(self, " cannot remove nonexistant item ", item, " from ", inventory)
+		printerr(self, " cannot remove nonexistant item ", instance.item, " from ", inventory)
 		return null
 	
-	var pickup := RigidItemPickup3D.from_item(item, rigid_item_pickup_scene)
+	var pickup := RigidItemPickup3D.from_item(instance.item, rigid_item_pickup_scene)
 	if pickup == null:
 		printerr(self, " cannot drop null pickup")
 		return
@@ -75,6 +63,9 @@ func drop(index: int=-1) -> Node3D:
 	InventoryDropper3D._transform_pickup(pickup, self)
 	
 	return pickup
+
+func get_instance(index) -> ItemInstance:
+	return inventory.get_instance(inventory.get_random_index_weighted() if index == -1 else index)
 
 func drop_everything() -> void:
 	if inventory == null or inventory.item_instances.is_empty():
