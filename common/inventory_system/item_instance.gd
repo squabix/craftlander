@@ -14,15 +14,6 @@ func make_unique() -> void:
 		item = item.duplicate_deep()
 		item.is_unique = true
 
-static func do_items_match(items: Array[Item]) -> bool:
-	for a in items:
-		for b in items:
-			if a == b:
-				continue
-			if not (a.matches(b) and b.matches(a)):
-				return false
-	return true
-
 func add(amount: int) -> int:
 	if amount < 0:
 		printerr("Cannot add negative amount to item - use subtract instead")
@@ -48,14 +39,7 @@ func subtract(amount: int) -> int:
 	quantity = max(raw_quantity, 0)
 	if quantity == 0:
 		emptied.emit()
-	print("New amount: " + str(quantity))
 	return remainder
 
 func _to_string() -> String:
 	return item.name + " * " + str(quantity)
-
-func matches(item: Item) -> bool:
-	return do_attributes_match(item)
-
-func do_attributes_match(item: Item) -> bool:
-	return self.attributes == item.attributes
