@@ -50,8 +50,8 @@ func default_animations() -> void:
 func update_item(new_item: Item) -> void:
 	
 	# Wait until item is unique
-	if new_item != null and not new_item.is_unique:
-		await new_item.made_unique
+	if new_item != null:
+		await new_item.ensure_unique()
 	
 	# Disconnect old item's signals
 	if current_item != null:

@@ -54,6 +54,11 @@ static func imitate(item_name: String) -> Item:
 	imitation.name = item_name
 	return imitation
 
+func ensure_unique() -> void:
+	if is_unique:
+		return
+	await made_unique
+
 func equals(other_item: Item) -> bool:
 	if other_item == null:
 		return false
