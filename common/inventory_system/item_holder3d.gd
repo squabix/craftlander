@@ -14,36 +14,19 @@ signal item_event_triggered(event: ItemEvent)
 
 var item_instance: ItemInstance
 
-var item: Item:
-	get:
-		if item_instance == null:
-			return null
-		return item_instance.item
-
 func update_item_instance(to: ItemInstance):
-	if item_instance == to:
-		return
+	if item_instance == to: return # Already holding this instance
 	
 	if instance_parent == null:
 		instance_parent = self
+	reset_item_instance()
 	
-	# Remove old item
-	if has_item():
-		if item_instance != null:
-			item_instance.item.remove_scene()
 	item_instance = to
+	if item_instance == null: return
 	
-	if item_instance == null:
-		return
-	
-	# Wait for item to become unique
-	if not item_instance.item.is_unique:
-		await item_instance.item.made_unique
-	
-	# Update anim player
+	await item_instance.item.ensure_unique()
 	if anim_tree:
 		anim_tree.update_item(item_instance.item)
-	
 	item_instance.item.root = root
 	
 	# Add item scene
@@ -51,9 +34,23 @@ func update_item_instance(to: ItemInstance):
 		item_instance.item.add_scene(instance_parent)
 	
 	updated_instance.emit(item_instance)
-	if not item_instance.item.triggered_event.is_connected(item_event_triggered.emit):
-		item_instance.item.triggered_event.connect(item_event_triggered.emit)
+	
+	connect_triggered_event(item_instance)
 
+func connect_triggered_event(instance: ItemInstance) -> void:
+	if instance == null or instance.item == null:
+		return
+	var triggered_event := instance.item.triggered_event
+	var emit := item_event_triggered.emit
+	if triggered_event.is_connected(emit):
+		return
+	triggered_event.connect(emit)
+
+func reset_item_instance() -> void:
+	if not has_item():
+		return
+	item_instance.item.remove_scene()
+	item_instance = null
 
 func has_item() -> bool:
 	return item_instance != null and item_instance.item != null
@@ -75,4 +72,4 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not has_item():
 		return
-	item.update(delta)
+	item_instance.item.update(delta)
