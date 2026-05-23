@@ -45,8 +45,14 @@ static func disable_all_colliders(parent: Node) -> Array[Node]:
 	return disabled_colliders
 
 static func get_object_class(object: Object) -> String:
+	if object == null:
+		return ""
 	var script: Script = object.get_script()
-	return script.get_global_name() if script != null else object.get_class()
+	if script != null:
+		var global_name := script.get_global_name()
+		if not global_name.is_empty():
+			return global_name
+	return object.get_class()
 
 static func classify_dict_key(dictionary: Dictionary, default_to_builtin := true) -> String:
 	if not dictionary.is_typed_key():
@@ -67,7 +73,7 @@ static func classify_dict_value(dictionary: Dictionary, default_to_builtin := tr
 	var typed_script: Script = dictionary.get_typed_value_script()
 	if typed_script != null:
 		return typed_script.get_global_name()
-	var typed_class := dictionary.get_typed_key_class_name()
+	var typed_class := dictionary.get_typed_value_class_name()
 	if not typed_class.is_empty():
 		return typed_class
 	if not default_to_builtin:
@@ -126,26 +132,26 @@ static func snap_to_floor(
 	
 	return true
 
+static func is_collider(node: Node) -> bool:
+	return (
+		node is CollisionShape2D
+		or node is CollisionShape3D
+		or node is CollisionPolygon2D
+		or node is CollisionPolygon3D
+	)
+
+
 static func disable_collider(collider: Node) -> bool:
-	var polygon2d := collider is CollisionPolygon2D
-	var polygon3d := collider is CollisionPolygon3D
-	var shape2d := collider is CollisionShape2D
-	var shape3d := collider is CollisionShape3D
-	
-	if not (polygon2d or polygon3d or shape2d or shape3d):
+	if not is_collider(collider):
 		return false
 	collider.set_deferred("disabled", true)
 	return true
 
-static func enable_collider(collider: Node) -> void:
-	var polygon2d := collider is CollisionPolygon2D
-	var polygon3d := collider is CollisionPolygon3D
-	var shape2d := collider is CollisionShape2D
-	var shape3d := collider is CollisionShape3D
-	
-	if not (polygon2d or polygon3d or shape2d or shape3d):
-		return
+static func enable_collider(collider: Node) -> bool:
+	if not is_collider(collider):
+		return false
 	collider.set_deferred("disabled", false)
+	return true
 
 static func are_instances_valid(instances: Array) -> bool:
 	for instance in instances:
@@ -153,20 +159,21 @@ static func are_instances_valid(instances: Array) -> bool:
 			return false
 	return true
 
-static func distance_sort_2d(nodes: Array, position: Vector2) -> Array:
+static func distance_sort_2d(nodes: Array, position: Vector2) -> Array[Node2D]:
 	if nodes.is_empty():
 		return [null]
-	var custom_sort := func(a, b) -> bool:
-		if not (is_instance_valid(b) or b is Node2D):
-			return true
-		if not (is_instance_valid(a) or a is Node2D):
-			return false
-		var dist_a := (a as Node2D).global_position.distance_squared_to(position)
-		var dist_b := (b as Node2D).global_position.distance_squared_to(position)
+	
+	var is_valid := func(a) -> bool:
+		return is_instance_valid(a) and a is Node2D
+	
+	var sort := func(a, b) -> bool:
+		var dist_a: float = a.global_position.distance_squared_to(position)
+		var dist_b: float = b.global_position.distance_squared_to(position)
 		return dist_a < dist_b
 	
-	var duplicate := nodes.duplicate()
-	duplicate.sort_custom(custom_sort)
+	var duplicate: Array[Node2D]
+	duplicate.assign(nodes.duplicate().filter(is_valid))
+	duplicate.sort_custom(sort)
 	return duplicate
 
 static func get_position3d(of: Variant) -> Vector3:
@@ -193,43 +200,39 @@ static func distance_sort_3d(nodes: Array, position: Vector3) -> Array[Node3D]:
 	var is_valid := func(a) -> bool:
 		return is_instance_valid(a) and a is Node3D
 	
-	var custom_sort := func(a, b) -> bool:
-		if not (is_instance_valid(b) or b is Node3D):
-			return true
-		elif not (is_instance_valid(a) or a is Node3D):
-			return false
-		var dist_a: float = a.global_position.distance_squared_to(position)
-		var dist_b: float = b.global_position.distance_squared_to(position)
-		return dist_a < dist_b
+	var sort := func(a, b) -> bool:
+		return (
+			a.global_position.distance_squared_to(position) # Distance a
+			<
+			b.global_position.distance_squared_to(position) # Distance b
+		)
 	
 	var duplicate: Array[Node3D]
-	duplicate.assign(nodes.duplicate())
-	duplicate.filter(is_valid).sort_custom(custom_sort)
-	return (duplicate.filter(func(n): return n != null)) as Array[Node3D]
+	duplicate.assign(nodes.duplicate().filter(is_valid))
+	duplicate.sort_custom(sort)
+	return duplicate
 
 # TODO: Make own node
-static func search_up_for_node(child: Node, check: Callable, ignore_children: bool=false) -> Node:
+static func search_up_tree(child: Node, check: Callable, ignore_children: bool=false) -> Node:
 	if not is_instance_valid(child):
 		return null
-	print_debug(child.name)
 	if check.call(child) == true:
 		return child
 	var parent := child.get_parent()
 	if is_instance_valid(parent) and not ignore_children:
-		var parent_result := search_down_for_node(parent, check)
+		var parent_result := search_down_tree(parent, check)
 		if parent_result != null:
 			return parent_result
-	return search_up_for_node(parent, check, ignore_children)
+	return search_up_tree(parent, check, ignore_children)
 
 # TODO: Make own node
-static func search_down_for_node(parent: Node, check: Callable) -> Node:
+static func search_down_tree(parent: Node, check: Callable) -> Node:
 	if not is_instance_valid(parent):
 		return null
-	print_debug("        " + parent.name)
 	if check.call(parent) == true:
 		return parent
 	for child in parent.get_children():
-		var child_result := search_down_for_node(child, check)
+		var child_result := search_down_tree(child, check)
 		if child_result != null:
 			return child_result
 	return null
@@ -302,7 +305,8 @@ static func unfreeze(node: Node) -> void:
 	node.set_physics_process(true)
 
 static func round_places(x: float, places: int=1) -> float:
-	return float(round(x * pow(10, places))) / pow(10, places)
+	var factor := pow(10.0, places)
+	return round(x * factor) / factor
 
 static func round_vec3(v: Vector3, places: int=1) -> Vector3:
 	var r := func(x): return round_places(x, places)
@@ -376,9 +380,9 @@ static func lerp_look_at_3d(node: Node3D, position: Vector3, weight: float) -> v
 	)
 
 static func get_property_names(of: Object) -> PackedStringArray:
-	var property_names: PackedStringArray = []
+	var property_names := PackedStringArray()
 	for property in of.get_property_list():
-		var property_name: String = property["name"]
+		var property_name: String = property.name
 		if property_name.is_empty():
 			continue
 		var first_char := property_name[0]
@@ -411,19 +415,19 @@ static func debug_node(node: Node) -> void:
 	if not is_instance_valid(node):
 		return
 	
-	var debug_strings: PackedStringArray = [node, "named " + node.name]
+	var debug_strings: PackedStringArray = [str(node), "named " + node.name]
 	var append: Callable = func(...strings: Array) -> void:
 		debug_strings.append_array(strings)
 	if node is Node3D:
 		node = node as Node3D
 		append.call(
-			"at " + str(node.global_position),
-			"rotated " + str(node.global_rotation_degrees),
-			"scaled " + str(node.global_scale)
+			"at", str(node.global_position),
+			"rotated", str(node.global_rotation_degrees),
+			"scaled", str(node.global_scale)
 		)
 		if node is CharacterBody3D:
 			append.call(
-				"moving " + node.velocity
+				"moving", node.velocity
 			)
 	print(" ".join(debug_strings))
 
@@ -440,7 +444,7 @@ static func rad_to_deg_vec2(vector: Vector2) -> Vector2:
 		rad_to_deg(vector.y)
 	)
 
-static func get_mouse_position_3d(camera: Camera3D, mouse_position_2d: Vector2 = camera.get_viewport().get_mouse_position(), collide_areas:=false, collide_bodies:=true, in_space: bool=true, default_plane: Plane=Plane(Vector3.UP, 0.0), z_depth: float=1000.0, use_front_plane: bool=true) -> Vector3:
+static func get_mouse_position_3d(camera: Camera3D, mouse_position_2d: Vector2 = camera.get_viewport().get_mouse_position(), collide_areas:=false, collide_bodies:=true, in_space: bool=true, default_plane: Plane=Plane(Vector3.UP, 0.0), z_depth: float=1000.0, use_camera_plane: bool=true) -> Vector3:
 	var from := camera.project_ray_origin(mouse_position_2d)
 	var to := camera.project_position(mouse_position_2d, z_depth)
 	
@@ -458,19 +462,18 @@ static func get_mouse_position_3d(camera: Camera3D, mouse_position_2d: Vector2 =
 			return space_intersection.position
 	
 	# Try to intersect ray with the default plane
-	if default_plane != null:
-		var default_plane_intersection: Variant = default_plane.intersects_ray(from, to)
-		if default_plane_intersection != null:
-			return default_plane_intersection 
+	var default_plane_intersection: Variant = default_plane.intersects_segment(from, to)
+	if default_plane_intersection != null:
+		return default_plane_intersection 
 	
 	# Try to intersect ray with a plane in front of the camera
-	if use_front_plane:
+	if use_camera_plane:
 		var camera_forward := -camera.global_transform.basis.z.normalized()
 		var front_plane := Plane(
 			camera_forward,
 			(camera.global_transform.origin + camera_forward * z_depth).dot(camera_forward)
 		)
-		var front_plane_intersection: Variant = front_plane.intersects_ray(from, to)
+		var front_plane_intersection: Variant = front_plane.intersects_segment(from, to)
 		if front_plane_intersection != null:
 			return front_plane_intersection 
 	
@@ -478,6 +481,5 @@ static func get_mouse_position_3d(camera: Camera3D, mouse_position_2d: Vector2 =
 	return Vector3.ZERO
 
 static func get_camera_rect(camera: Camera2D) -> Rect2:
-	var pos := camera.position # Camera's center
-	var half_size := camera.get_viewport_rect().size * 0.5
-	return Rect2(pos - half_size, pos + half_size)
+	var size := camera.get_viewport_rect().size
+	return Rect2(camera.position - size * 0.5, size)
