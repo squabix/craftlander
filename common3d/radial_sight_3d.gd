@@ -73,7 +73,7 @@ func is_targetable(node: Node3D) -> bool:
 	return false
 
 func get_targetable_nodes() -> Array[Node3D]:
-	var nodes_in_area: Array[Node3D] = area.get_overlapping_areas() + area.get_overlapping_bodies()
+	var nodes_in_area := area.get_overlapping_areas() + area.get_overlapping_bodies()
 	return Util.distance_sort_3d(nodes_in_area.filter(is_targetable), global_position)
 
 func is_ray_reachable(node: Node3D) -> bool:
