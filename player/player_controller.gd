@@ -8,16 +8,13 @@ const ACTION_MOVE_BACKWARD := "move_backward"
 
 const MOUSE_SENSITIVITY := 0.35
 
-@onready var docking_hidden_interface: Array[Control] = [
-	%BarContainer,
-	%InventoryInterface,
-	%Cursor
-]
+@export var health: Health
+@export var docking_hidden_interfaces: Array[Control] = []
 
 func _ready() -> void:
 	super()
 	MouseModeController.capture() # Capture mouse
-	%Health.revived.connect(enter) # Default to initial state after revival
+	health.revived.connect(enter) # Default to initial state after revival
 
 func turn_head(relative: Vector2) -> void:
 	

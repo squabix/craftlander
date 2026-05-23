@@ -373,13 +373,24 @@ items = Array[ExtResource("40_a2xo5")]([ExtResource("41_a2xo5"), ExtResource("22
 start_anim = "swing_tool"
 metadata/_custom_type_script = "uid://c622jer80j3sk"
 
-[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
+[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("head", "movement_state_machine", "interactor", "respawn_button", "inventory", "item_holder", "inventory_holder_link", "dropper", "health", "hunger", "stamina", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
 collision_layer = 17
 floor_constant_speed = true
 floor_block_on_wall = false
 floor_max_angle = 1.0471976
 floor_snap_length = 0.5
 script = ExtResource("1_g1dw6")
+head = NodePath("Head")
+movement_state_machine = NodePath("Controller3D/Default")
+interactor = NodePath("Head/Camera3D/InteratorRay/Interactor")
+respawn_button = NodePath("HUD/DeathScreen/OptionsContainer/RespawnButton")
+inventory = NodePath("Inventory")
+item_holder = NodePath("Head/Camera3D/ArmContainer/ItemHolder")
+inventory_holder_link = NodePath("Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink")
+dropper = NodePath("Head/Camera3D/DropperRayCast/InventoryDropper3D")
+health = NodePath("Health")
+hunger = NodePath("Hunger")
+stamina = NodePath("Stamina")
 type = "player"
 movement_mode = ExtResource("2_g6k8r")
 horizontal_rotation_target = NodePath(".")
@@ -426,9 +437,11 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_yw30f")
 
-[node name="Controller3D" type="Node" parent="." unique_id=632344104 node_paths=PackedStringArray("initial_entity", "initial_state", "root")]
+[node name="Controller3D" type="Node" parent="." unique_id=632344104 node_paths=PackedStringArray("health", "docking_hidden_interfaces", "initial_entity", "initial_state", "root")]
 unique_name_in_owner = true
 script = ExtResource("4_qjkh3")
+health = NodePath("../Health")
+docking_hidden_interfaces = [NodePath("../HUD/BarContainer"), NodePath("../HUD/InventoryInterface"), NodePath("../HUD/Cursor")]
 entity_type_state_map = Dictionary[String, String]({
 "boat": "DockingBoat",
 "player": "Default"
@@ -446,18 +459,23 @@ initial_state = NodePath("Walking")
 root = NodePath("../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Walking" type="Node" parent="Controller3D/Default" unique_id=732487638 node_paths=PackedStringArray("root")]
+[node name="Walking" type="Node" parent="Controller3D/Default" unique_id=732487638 node_paths=PackedStringArray("stamina", "root")]
 script = ExtResource("8_hg6s5")
+stamina = NodePath("../../../Stamina")
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Crouching" type="Node" parent="Controller3D/Default" unique_id=761766902 node_paths=PackedStringArray("root")]
+[node name="Crouching" type="Node" parent="Controller3D/Default" unique_id=761766902 node_paths=PackedStringArray("stamina", "standing_collision", "crouched_collision", "root")]
 script = ExtResource("9_hg6s5")
+stamina = NodePath("../../../Stamina")
+standing_collision = NodePath("../../../StandingCollisionShape")
+crouched_collision = NodePath("../../../CrouchedCollisionShape")
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Sprinting" type="Node" parent="Controller3D/Default" unique_id=900263776 node_paths=PackedStringArray("root")]
+[node name="Sprinting" type="Node" parent="Controller3D/Default" unique_id=900263776 node_paths=PackedStringArray("stamina", "root")]
 script = ExtResource("10_8t03j")
+stamina = NodePath("../../../Stamina")
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
@@ -465,8 +483,9 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 script = ExtResource("12_fjxoa")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Swimming" type="Node" parent="Controller3D" unique_id=708197157]
+[node name="Swimming" type="Node" parent="Controller3D" unique_id=708197157 node_paths=PackedStringArray("stamina")]
 script = ExtResource("16_art4l")
+stamina = NodePath("../../Stamina")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="MouseController" type="Node" parent="." unique_id=766266427]
@@ -513,7 +532,6 @@ script = SubResource("GDScript_art4l")
 item_holder = NodePath("..")
 inventory_holder_link = NodePath("../InventoryHolderLink")
 visuals_scale_ratio = 0.4
-disable_shadows = true
 
 [node name="Sprite3D" type="Sprite3D" parent="Head/Camera3D/ArmContainer/ItemHolder" unique_id=1502779023]
 transform = Transform3D(0.050000004, 2.910383e-10, 0, -9.313226e-10, 0.05, 0, 0, 2.3283064e-10, 0.05, 0.08080298, 0.017175198, 0.014566064)

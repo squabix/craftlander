@@ -4,19 +4,27 @@ class_name Player
 const DEFAULT_HEAD_HEIGHT := 1.4
 const CROUCHED_HEAD_HEIGHT := 0.7
 const SWIMMING_HEAD_HEIGHT := 1.1
-const CROUCH_CAMERA_SPEED := 0.1
+const HEAD_SPEED := 0.1
 
-@onready var head: Node3D = $Head
-@onready var movement_state_machine: StateMachine = $Controller3D/Default
-@onready var inventory: Inventory = $Inventory
-@onready var health: Health = $Health
-@onready var hunger: Hunger = $Hunger
-@onready var item_holder: ItemHolder3D = $Head/Camera3D/ArmContainer/ItemHolder
-@onready var inventory_holder_link: InventoryHolderLink = $Head/Camera3D/ArmContainer/ItemHolder/InventoryHolderLink
-@onready var dropper: InventoryDropper3D = $Head/Camera3D/DropperRayCast/InventoryDropper3D
-@onready var respawn_button: Button = $HUD/DeathScreen/OptionsContainer/RespawnButton
+@export var head: Node3D
+@export var movement_state_machine: StateMachine
+@export var interactor: Interactor3D
+@export var respawn_button: Button
 
+@export_group("Inventory")
+@export var inventory: Inventory
+@export var item_holder: ItemHolder3D
+@export var inventory_holder_link: InventoryHolderLink
+@export var dropper: InventoryDropper3D
+
+@export_group("Stats")
+@export var health: Health
+@export var hunger: Hunger
+@export var stamina: Stamina
+
+@export_group("External Dependencies")
 @export var respawn_point_node: Node3D
+
 var is_in_water := false
 
 func _ready() -> void:
@@ -29,17 +37,18 @@ func _ready() -> void:
 	respawn_button.pressed.connect(respawn)
 	health.died.connect(die)
 
-func adjust_head() -> void:
-	var height: float = DEFAULT_HEAD_HEIGHT
+func get_target_head_height() -> float:
 	if movement_state_machine.is_currently("Crouching"):
-		height = CROUCHED_HEAD_HEIGHT
-	elif is_in_water:
-		height = SWIMMING_HEAD_HEIGHT
-	
+		return CROUCHED_HEAD_HEIGHT
+	if is_in_water:
+		return SWIMMING_HEAD_HEIGHT
+	return DEFAULT_HEAD_HEIGHT
+
+func adjust_head() -> void:
 	head.position.y = lerp(
 		head.position.y,
-		height,
-		CROUCH_CAMERA_SPEED
+		get_target_head_height(),
+		HEAD_SPEED
 	)
 
 func drop_current_item() -> void:
@@ -47,14 +56,16 @@ func drop_current_item() -> void:
 
 func _process(_delta: float) -> void:
 	adjust_head()
-	if is_in_water and not %Stamina.is_usable():
+	
+	# Drown if swimming when out of stamina
+	if is_in_water and not stamina.is_usable():
 		health.hurt(INF)
 
 func use_item() -> void:
 	item_holder.use_item()
 
 func interact() -> void:
-	%Interactor.interact()
+	interactor.interact()
 
 func die() -> void:
 	get_tree().paused = true
@@ -67,9 +78,9 @@ func respawn() -> void:
 	global_rotation = respawn_point_node.global_rotation
 	
 	# Replenish stats
-	$Health.revive()
+	health.revive()
 	hunger.value = hunger.initial_value
-	%Stamina.value = 1.0
+	stamina.value = 1.0
 	
 	MouseModeController.capture()
 	get_tree().paused = false
