@@ -189,6 +189,10 @@ static func reset_local_transform_3d(node: Node3D) -> void:
 static func distance_sort_3d(nodes: Array, position: Vector3) -> Array[Node3D]:
 	if nodes.is_empty():
 		return [null]
+	
+	var is_valid := func(a) -> bool:
+		return is_instance_valid(a) and a is Node3D
+	
 	var custom_sort := func(a, b) -> bool:
 		if not (is_instance_valid(b) or b is Node3D):
 			return true
@@ -198,9 +202,10 @@ static func distance_sort_3d(nodes: Array, position: Vector3) -> Array[Node3D]:
 		var dist_b: float = b.global_position.distance_squared_to(position)
 		return dist_a < dist_b
 	
-	var duplicate := nodes.duplicate().filter(func(n): return n != null)
-	duplicate.sort_custom(custom_sort)
-	return duplicate as Array[Node3D]
+	var duplicate: Array[Node3D]
+	duplicate.assign(nodes.duplicate())
+	duplicate.filter(is_valid).sort_custom(custom_sort)
+	return (duplicate.filter(func(n): return n != null)) as Array[Node3D]
 
 # TODO: Make own node
 static func search_up_for_node(child: Node, check: Callable, ignore_children: bool=false) -> Node:
