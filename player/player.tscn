@@ -530,6 +530,7 @@ script = SubResource("GDScript_art4l")
 item_holder = NodePath("..")
 inventory_holder_link = NodePath("../InventoryHolderLink")
 visuals_scale_ratio = 0.4
+do_disable_shadows = true
 
 [node name="Sprite3D" type="Sprite3D" parent="Head/Camera3D/ArmContainer/ItemHolder" unique_id=1502779023]
 transform = Transform3D(0.050000004, 2.910383e-10, 0, -9.313226e-10, 0.05, 0, 0, 2.3283064e-10, 0.05, 0.08080298, 0.017175198, 0.014566064)
