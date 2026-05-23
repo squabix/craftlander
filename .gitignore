@@ -20,3 +20,4 @@ BUGS.txt
 .vscode/settings.json
 /testing
 testing/test_scene1.tscn
+/assets/outsourced_assets
