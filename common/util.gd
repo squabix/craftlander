@@ -198,7 +198,7 @@ static func distance_sort_3d(nodes: Array, position: Vector3) -> Array[Node3D]:
 		var dist_b: float = b.global_position.distance_squared_to(position)
 		return dist_a < dist_b
 	
-	var duplicate := nodes.duplicate()
+	var duplicate := nodes.duplicate().filter(func(n): return n != null)
 	duplicate.sort_custom(custom_sort)
 	return duplicate as Array[Node3D]
 
