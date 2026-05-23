@@ -437,11 +437,9 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_yw30f")
 
-[node name="Controller3D" type="Node" parent="." unique_id=632344104 node_paths=PackedStringArray("health", "docking_hidden_interfaces", "initial_entity", "initial_state", "root")]
+[node name="Controller3D" type="Node" parent="." unique_id=632344104 node_paths=PackedStringArray("initial_entity", "initial_state", "root")]
 unique_name_in_owner = true
 script = ExtResource("4_qjkh3")
-health = NodePath("../Health")
-docking_hidden_interfaces = [NodePath("../HUD/BarContainer"), NodePath("../HUD/InventoryInterface"), NodePath("../HUD/Cursor")]
 entity_type_state_map = Dictionary[String, String]({
 "boat": "DockingBoat",
 "player": "Default"

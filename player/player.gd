@@ -10,6 +10,7 @@ const HEAD_SPEED := 0.1
 @export var movement_state_machine: StateMachine
 @export var interactor: Interactor3D
 @export var respawn_button: Button
+@export var docking_hidden_interfaces: Array[Control] = []
 
 @export_group("Inventory")
 @export var inventory: Inventory

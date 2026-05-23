@@ -8,7 +8,7 @@ const ACTION_DROP := "drop"
 func enter() -> void:
 	super()
 	%ItemVisualsContainer3D.show()
-	for control in get_parent().docking_hidden_interface:
+	for control in root.docking_hidden_interfaces:
 		control.show()
 
 func handle_input(event: InputEvent) -> void:
