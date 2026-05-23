@@ -17,7 +17,7 @@ func _ready() -> void:
 	freeze = true
 	item_pickup_interactable.auto_generate_collision = false
 	item_pickup_interactable.picked_up.connect(Util.safe_free.bind(self))
-	var collision_shapes := item_pickup_interactable.generate_collision()
+	var collision_shapes := item_pickup_interactable.generate_all_collision()
 	for collision_shape in collision_shapes:
 		var collision_duplicate: CollisionShape3D = collision_shape.duplicate()
 		#collision_duplicate.scale = Vector3.ONE
