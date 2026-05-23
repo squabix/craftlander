@@ -2,20 +2,24 @@ extends Control
 
 const LAYOUT_OFFSET := Vector2i(2, -3)
 
-@onready var recipe_list_box: VBoxContainer = $RecipeList/RecipeListBox
-@onready var recipe_entry_template: Button = $RecipeList/RecipeListBox/RecipeEntry
-
-@onready var grid_container: VBoxContainer = $RecipeDisplay/GridContainer
+@export var recipe_list_box: VBoxContainer
+@export var recipe_entry_template: Button
+@export var grid_container: VBoxContainer
+@export var icon_rect_path := "IconRect"
 
 func _ready() -> void:
 	recipe_entry_template.hide()
 	for recipe in RecipeBook.all_recipes:
-		var new_entry: Button = recipe_entry_template.duplicate()
-		recipe_list_box.add_child(new_entry)
-		new_entry.show()
-		new_entry.text = recipe.result.item.name
-		new_entry.get_node("IconRect").texture = recipe.result.item.icon
-		new_entry.pressed.connect(display_recipe.bind(recipe))
+		add_entry(recipe)
+
+func add_entry(recipe: ItemRecipe) -> Button:
+	var entry: Button = recipe_entry_template.duplicate()
+	recipe_list_box.add_child(entry)
+	entry.show()
+	entry.text = recipe.result.item.name
+	entry.get_node(icon_rect_path).texture = recipe.result.item.icon
+	entry.pressed.connect(display_recipe.bind(recipe))
+	return entry
 
 func clear_recipe_display() -> void:
 	for row in grid_container.get_children():

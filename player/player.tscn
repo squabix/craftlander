@@ -819,13 +819,16 @@ inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHol
 pause_interface = NodePath("../..")
 metadata/_edit_use_anchors_ = true
 
-[node name="RecipePanel" type="Control" parent="HUD/PauseInterface/CraftingMenu" unique_id=1393690572]
+[node name="RecipePanel" type="Control" parent="HUD/PauseInterface/CraftingMenu" unique_id=1393690572 node_paths=PackedStringArray("recipe_list_box", "recipe_entry_template", "grid_container")]
 layout_mode = 1
 anchor_left = 0.0069444445
 anchor_top = 0.057098765
 anchor_right = 0.2734375
 anchor_bottom = 0.9722222
 script = ExtResource("38_1so5t")
+recipe_list_box = NodePath("RecipeList/RecipeListBox")
+recipe_entry_template = NodePath("RecipeList/RecipeListBox/RecipeEntry")
+grid_container = NodePath("RecipeDisplay/GridContainer")
 metadata/_edit_use_anchors_ = true
 
 [node name="RecipeList" type="ScrollContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel" unique_id=1782315597]
