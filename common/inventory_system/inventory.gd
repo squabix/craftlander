@@ -127,8 +127,9 @@ func remove_item(item: Item, quantity: int = -1, must_reach_quantity: bool = fal
 		changed.emit()
 	return quantity
 
-func remove_instance(instance: ItemInstance, quantity: int = 1) -> int:
+func remove_instance(instance: ItemInstance, quantity := 1) -> int:
 	if constant: return 0
+	if instance == null: return quantity
 	
 	if instance.quantity > quantity:
 		instance.quantity -= quantity
