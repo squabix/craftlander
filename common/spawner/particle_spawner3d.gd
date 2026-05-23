@@ -14,7 +14,10 @@ func initialize_instance(instance: Node3D) -> void:
 func emit_particles(node: Node) -> void:
 	for child in node.get_children():
 		emit_particles(child)
-	if node is CPUParticles3D or node is GPUParticles3D:
-		node.emitting = true
-		if free_on_finish:
-			node.finished.connect(Util.safe_free.bind(node))
+	
+	if not (node is CPUParticles3D or node is GPUParticles3D):
+		return
+	
+	node.emitting = true
+	if free_on_finish:
+		node.finished.connect(Util.safe_free.bind(node))
