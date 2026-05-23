@@ -1,21 +1,30 @@
 extends Menu
 class_name SettingsMenu
 
+@export var music_slider: Slider
+@export var sfx_slider: Slider
+
+@export var vsync_toggle: Button
+@export var full_screen_toggle: Button
+@export var aa_option: OptionButton
+
+@export var invert_y_toggle: Button
+
 func _ready() -> void:
 	sync_ui_with_settings()
 
 func sync_ui_with_settings() -> void:
 	# Audio
-	%MusicSlider.value = GameSettings.config.get_value("audio", "Music", 0.8)
-	%SFXSlider.value = GameSettings.config.get_value("audio", "SFX", 0.8)
+	music_slider.value = GameSettings.config.get_value("audio", "Music", 0.8)
+	sfx_slider.value = GameSettings.config.get_value("audio", "SFX", 0.8)
 	
 	# Video
-	%VSyncToggle.button_pressed = GameSettings.config.get_value("video", "vsync", true)
-	%FullScreenToggle.button_pressed = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
-	%AAOption.selected = GameSettings.config.get_value("video", "msaa", 1)
+	vsync_toggle.button_pressed = GameSettings.config.get_value("video", "vsync", true)
+	full_screen_toggle.button_pressed = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
+	aa_option.selected = GameSettings.config.get_value("video", "msaa", 1)
 	
 	# Gameplay
-	%InvertYToggle.button_pressed = GameSettings.config.get_value("gameplay", "invert_y", false)
+	invert_y_toggle.button_pressed = GameSettings.config.get_value("gameplay", "invert_y", false)
 
 func _on_full_screen_toggled(toggled_on: bool) -> void:
 	var mode = DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN if toggled_on else DisplayServer.WINDOW_MODE_WINDOWED

@@ -11,7 +11,7 @@ gradient = SubResource("Gradient_83qjl")
 fill = 2
 fill_from = Vector2(0.5, 0.5)
 
-[node name="SettingsMenu" type="Control" unique_id=788547277]
+[node name="SettingsMenu" type="Control" unique_id=788547277 node_paths=PackedStringArray("music_slider", "sfx_slider", "vsync_toggle", "full_screen_toggle", "aa_option", "invert_y_toggle")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,6 +19,12 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_83qjl")
+music_slider = NodePath("SettingsContainer/MusicVolume/MusicSlider")
+sfx_slider = NodePath("SettingsContainer/SFXVolume/SFXSlider")
+vsync_toggle = NodePath("SettingsContainer/VSync/VSyncToggle")
+full_screen_toggle = NodePath("SettingsContainer/FullScreen/FullScreenToggle")
+aa_option = NodePath("SettingsContainer/AntiAliasing/AAOption")
+invert_y_toggle = NodePath("SettingsContainer/InvertY/InvertYToggle")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1518470332]
 custom_minimum_size = Vector2(380, 370)
