@@ -94,8 +94,4 @@ func enter_state(state_name: String, force_ancestors := false) -> bool:
 	return true
 
 func _to_string() -> String:
-	var string: String = name + " Machine ("
-	for state_name in states:
-		string += "  " + str(states[state_name])
-	string += "  )"
-	return string
+	return name
