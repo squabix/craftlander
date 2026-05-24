@@ -2,6 +2,10 @@ extends Entity3D
 class_name EntityVehicle3D
 
 @export var seats: Array[Seat3D]
+@export var initial_fill: Array[Entity3D]
+
+func _ready() -> void:
+	fill_seats(initial_fill)
 
 func get_open_seats() -> Array[Seat3D]:
 	var open_seats: Array[Seat3D]
