@@ -1,0 +1,31 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://d06u1efqiqr8e"]
+
+[ext_resource type="Shader" uid="uid://bjt5jcslbt2k1" path="res://assets/shaders/water.gdshader" id="1_f81ln"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fh26t"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_q07lh"]
+noise = SubResource("FastNoiseLite_fh26t")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_epvbt"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wyq6a"]
+noise = SubResource("FastNoiseLite_epvbt")
+seamless = true
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_f81ln")
+shader_parameter/noise_tex_1 = SubResource("NoiseTexture2D_q07lh")
+shader_parameter/noise_tex_2 = SubResource("NoiseTexture2D_wyq6a")
+shader_parameter/deep_color = Color(0.042399988, 0.2780732, 0.53, 1)
+shader_parameter/shallow_color = Color(0.2508, 0.4485799, 0.66, 1)
+shader_parameter/wave_speed = 0.01
+shader_parameter/wave_scale = 6.895
+shader_parameter/normal_strength = 0.5
+shader_parameter/wave_height = 0.75
+shader_parameter/roughness = 0.05
+shader_parameter/metallic = 0.1
