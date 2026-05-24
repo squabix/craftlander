@@ -8,7 +8,7 @@
 [ext_resource type="Environment" uid="uid://cibxuhtgknost" path="res://assets/default_environment.tres" id="4_cqggn"]
 [ext_resource type="Texture2D" uid="uid://c4gehucq85wxc" path="res://island/island_absolute_texture.tres" id="4_eujrm"]
 [ext_resource type="Material" uid="uid://drm8bdv4es6et" path="res://island/mat1.tres" id="5_cqggn"]
-[ext_resource type="Shader" uid="uid://bjt5jcslbt2k1" path="res://water.gdshader" id="6_fuwux"]
+[ext_resource type="Shader" uid="uid://bjt5jcslbt2k1" path="res://assets/shaders/water.gdshader" id="6_fuwux"]
 [ext_resource type="Script" uid="uid://bg82eansdlgrc" path="res://island/prop_populator.gd" id="7_h3epy"]
 [ext_resource type="Script" uid="uid://csprfavexgrle" path="res://island/props/island_prop.gd" id="8_o4wu6"]
 [ext_resource type="Resource" uid="uid://dntsc8a8c3qsr" path="res://island/props/destructable_resource/tree/tree_prop.tres" id="9_dwwsf"]
