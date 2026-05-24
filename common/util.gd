@@ -44,15 +44,22 @@ static func disable_all_colliders(parent: Node) -> Array[Node]:
 	
 	return disabled_colliders
 
-static func get_object_class(object: Object) -> String:
-	if object == null:
-		return ""
-	var script: Script = object.get_script()
-	if script != null:
-		var global_name := script.get_global_name()
-		if not global_name.is_empty():
-			return global_name
-	return object.get_class()
+static func is_object_class(object: Object, class_string: String) -> bool:
+	if not object:
+		return false
+		
+	# Check for built-in classes
+	if object.is_class(class_string):
+		return true
+		
+	# Check for custom classes
+	var current_script: Script = object.get_script()
+	while current_script != null:
+		if current_script.get_global_name() == class_string:
+			return true
+		current_script = current_script.get_base_script()
+	
+	return false
 
 static func classify_dict_key(dictionary: Dictionary, default_to_builtin := true) -> String:
 	if not dictionary.is_typed_key():
@@ -82,7 +89,7 @@ static func classify_dict_value(dictionary: Dictionary, default_to_builtin := tr
 
 static func find_child_of_class(parent: Node, class_string: String) -> Node:
 	for child in parent.get_children():
-		if get_object_class(child) == class_string:
+		if is_object_class(child, class_string):
 			return child
 		var grandchild := find_child_of_class(child, class_string)
 		if grandchild != null:
@@ -98,7 +105,7 @@ static func find_stored_child_of_class(dictionary: Dictionary, parent: Node) -> 
 static func find_children_of_class(parent: Node, class_string: String) -> Array[Node]:
 	var children: Array[Node] = []
 	for child in parent.get_children():
-		if get_object_class(child) == class_string:
+		if is_object_class(child, class_string):
 			children.append(child)
 		else:
 			var grandchildren := find_children_of_class(child, class_string)
@@ -258,7 +265,7 @@ static func find_all_resources(resource_type: String, start_path: String = "res:
 				function.call(full_path, function)
 			else:
 				var res := load(full_path)
-				if res != null and Util.get_object_class(res) == resource_type:
+				if res != null and Util.is_object_class(res, resource_type):
 					results.append(res)
 	
 		dir.list_dir_end()
