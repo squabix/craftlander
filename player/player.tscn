@@ -21,7 +21,9 @@
 [ext_resource type="Script" uid="uid://idhcfku7c3tn" path="res://player/states/player_docking_boat_state.gd" id="12_fjxoa"]
 [ext_resource type="Script" uid="uid://b6gq5g1xvdnsu" path="res://player/states/player_swimming_state.gd" id="16_art4l"]
 [ext_resource type="Script" uid="uid://b1eix6p0204fp" path="res://common/inventory_system/displays/item_display.gd" id="16_e7oew"]
+[ext_resource type="Script" uid="uid://c3r6ofqamuc13" path="res://common/state_machine/mirror_state_machine.gd" id="16_mmwog"]
 [ext_resource type="Script" uid="uid://ifyn4pfksk07" path="res://player/player_hud.gd" id="17_g4c7l"]
+[ext_resource type="Script" uid="uid://bn1bpe1hvtv7u" path="res://player/player_piloting_boat_state.gd" id="17_hjies"]
 [ext_resource type="Texture2D" uid="uid://c4jkghkqifcm7" path="res://assets/crosshair.tres" id="17_tqiix"]
 [ext_resource type="Script" uid="uid://b7pvp0pnngnem" path="res://common/ui/fps_label.gd" id="19_bjvpn"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="19_c35mf"]
@@ -441,7 +443,7 @@ shape = SubResource("CapsuleShape3D_yw30f")
 unique_name_in_owner = true
 script = ExtResource("4_qjkh3")
 entity_type_state_map = Dictionary[String, String]({
-"boat": "DockingBoat",
+"boat": "Boat",
 "player": "Default"
 })
 initial_entity = NodePath("..")
@@ -477,14 +479,20 @@ stamina = NodePath("../../../Stamina")
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="DockingBoat" type="Node" parent="Controller3D" unique_id=1555341780]
-script = ExtResource("12_fjxoa")
-metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
-
 [node name="Swimming" type="Node" parent="Controller3D" unique_id=708197157 node_paths=PackedStringArray("stamina")]
 script = ExtResource("16_art4l")
 stamina = NodePath("../../Stamina")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="Boat" type="Node" parent="Controller3D" unique_id=1028222102]
+script = ExtResource("16_mmwog")
+
+[node name="Docking" type="Node" parent="Controller3D/Boat" unique_id=1555341780]
+script = ExtResource("12_fjxoa")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="Piloting" type="Node" parent="Controller3D/Boat" unique_id=1749152635]
+script = ExtResource("17_hjies")
 
 [node name="MouseController" type="Node" parent="." unique_id=766266427]
 script = ExtResource("5_g6k8r")
@@ -773,7 +781,6 @@ text = "Continue"
 [node name="PauseInterface" type="Control" parent="HUD" unique_id=1163003515 node_paths=PackedStringArray("crafting_menu", "crafting_environment", "settings_menu", "settings_button", "health")]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

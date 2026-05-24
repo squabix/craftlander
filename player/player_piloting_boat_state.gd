@@ -7,7 +7,6 @@ func enter() -> void:
 
 func update(delta: float) -> void:
 	if root == null:
-		print("Null root")
 		return
 	var input_motion_vector := PlayerController.get_input_motion_vector()
 	
