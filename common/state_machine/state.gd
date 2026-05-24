@@ -64,4 +64,4 @@ func handle_input(_event: InputEvent) -> void:
 	pass
 
 func _to_string() -> String:
-	return name + " State"
+	return name

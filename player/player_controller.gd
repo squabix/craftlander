@@ -11,7 +11,7 @@ const MOUSE_SENSITIVITY := 0.35
 func _ready() -> void:
 	super()
 	MouseModeController.capture() # Capture mouse
-	root.health.revived.connect(enter) # Default to initial state after revival
+	initial_entity.health.revived.connect(enter) # Default to initial state after revival
 
 func turn_head(relative: Vector2) -> void:
 	
@@ -19,8 +19,8 @@ func turn_head(relative: Vector2) -> void:
 	if GameSettings.config.get_value("gameplay", "invert_y", false) == true:
 		relative.y *= -1.0
 	
-	root.rotate_vertical(-relative.y * MOUSE_SENSITIVITY)
-	root.rotate_horizontal(-relative.x * MOUSE_SENSITIVITY)
+	initial_entity.rotate_vertical(-relative.y * MOUSE_SENSITIVITY)
+	initial_entity.rotate_horizontal(-relative.x * MOUSE_SENSITIVITY)
 
 static func get_input_motion_vector() -> Vector2:
 	return Input.get_vector(
