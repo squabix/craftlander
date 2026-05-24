@@ -76,20 +76,23 @@ func get_state(state_name: String) -> State:
 	return states[state_name]
 
 func enter_state(state_name: String, force_ancestors := false) -> bool:
-	if force_ancestors and get_parent() is StateMachine:
-		get_parent().enter_state(name, true)
+	if not state_name in states:
+		return false
 	
 	var state := states[state_name]
 	if not is_instance_valid(state):
 		printerr("Cannot enter invalid state: " + str(state))
 		return false
 	if state == current:
-		return false
+		return true
 	
 	if is_valid():
 		if current.priority > state.priority:
 			return false
 		exit_current()
+	
+	if force_ancestors and get_parent() is StateMachine:
+		get_parent().enter_state(name, true)
 	
 	current = state
 	
