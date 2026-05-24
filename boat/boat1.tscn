@@ -74,6 +74,7 @@ collision_layer = 5
 axis_lock_linear_y = true
 motion_mode = 1
 script = ExtResource("1_1ek77")
+max_turn_speed = 1650.0
 driver_seat = NodePath("DriverSeat")
 seats = [NodePath("DriverSeat")]
 type = "boat"

@@ -26,6 +26,6 @@ shader_parameter/shallow_color = Color(0.2508, 0.4485799, 0.66, 1)
 shader_parameter/wave_speed = 0.01
 shader_parameter/wave_scale = 6.895
 shader_parameter/normal_strength = 0.5
-shader_parameter/wave_height = 0.75
+shader_parameter/wave_height = 0.5
 shader_parameter/roughness = 0.05
 shader_parameter/metallic = 0.1
