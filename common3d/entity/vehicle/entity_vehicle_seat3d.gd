@@ -18,6 +18,9 @@ func _process(_delta: float) -> void:
 func get_controller() -> EntityController3D:
 	return EntityController3D.get_controller(mounted_entity)
 
+func is_open() -> bool:
+	return not is_instance_valid(mounted_entity)
+
 func mount(entity: Entity3D) -> bool:
 	
 	# Cannot mount new entity when already mounted
