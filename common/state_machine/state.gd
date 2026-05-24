@@ -32,6 +32,9 @@ func enter() -> void:
 func exit() -> void:
 	pass
 
+func update_root(to: Node) -> void:
+	root = to
+
 func add_check(target: State, callable: Callable) -> void:
 	transition_checks[callable] = target
 

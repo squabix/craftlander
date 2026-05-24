@@ -10,9 +10,7 @@ var entity: Entity3D
 
 func update_entity(to: Entity3D) -> void:
 	entity = to
-	for child in get_children():
-		if child is State:
-			child.root = entity
+	update_root(to)
 	
 	if is_instance_valid(entity) and entity.type in entity_type_state_map:
 		enter_state(entity_type_state_map[entity.type])

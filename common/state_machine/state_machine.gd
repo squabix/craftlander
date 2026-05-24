@@ -32,6 +32,13 @@ func _ready() -> void:
 			states[child.name] = child
 	enter_state(initial_state.name)
 
+func update_root(to: Node) -> void:
+	if root == to:
+		return
+	root = to
+	for state_name in states:
+		states[state_name].update_root(to)
+
 func enter() -> void:
 	enter_state(initial_state.name)
 
