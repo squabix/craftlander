@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_omnkm")
 max_speed = Vector2(2.5, 8)
-acceleration = Vector2(0.2, 1)
-friction = Vector2(0.7, 0)
+acceleration = Vector2(20, 1)
+friction = Vector2(25, 0)
 metadata/_custom_type_script = "uid://edbvsbdtvgtj"

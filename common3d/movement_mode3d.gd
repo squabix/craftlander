@@ -5,11 +5,11 @@ class_name MovementMode3D
 @export var acceleration: Vector2 = Vector2(1, 1)
 @export var friction: Vector2 = Vector2(1, 0)
 
-func accel(velocity: Vector3, direction: Vector3) -> Vector3:
+func accel(velocity: Vector3, direction: Vector3, delta: float) -> Vector3:
 	return Vector3(
-		accel_axis(velocity.x, direction.x, max_speed.x, acceleration.x, friction.x),
-		accel_axis(velocity.y, direction.y, max_speed.y, acceleration.y, friction.y),
-		accel_axis(velocity.z, direction.z, max_speed.x, acceleration.x, friction.x)
+		accel_axis(velocity.x, direction.x, max_speed.x, acceleration.x, friction.x, delta),
+		accel_axis(velocity.y, direction.y, max_speed.y, acceleration.y, friction.y, delta),
+		accel_axis(velocity.z, direction.z, max_speed.x, acceleration.x, friction.x, delta)
 	)
 
 func _to_string() -> String:

@@ -92,7 +92,7 @@ func move_right(amount: float = 1.0) -> void: motion_direction.x = amount
 func move_up(amount: float = 1.0) -> void: motion_direction.y = amount
 func move_down(amount: float = 1.0) -> void: motion_direction.y = -amount
 
-func _accelerate(direction: Vector3) -> void:
+func _accelerate(direction: Vector3, delta: float) -> void:
 	if movement_mode == null:
 		return
 	
@@ -101,7 +101,7 @@ func _accelerate(direction: Vector3) -> void:
 	elif accelerate_rotation_base != null:
 		direction = direction.rotated(Vector3.UP, accelerate_rotation_base.global_rotation.y)
 	
-	velocity = movement_mode.accel(velocity, direction) 
+	velocity = movement_mode.accel(velocity, direction, delta)
 	if not queued_impulse.is_zero_approx():
 		velocity += queued_impulse
 		queued_impulse = Vector3.ZERO
@@ -123,9 +123,9 @@ func rotate_targets() -> void:
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor() and does_obey_gravity:
-		velocity += GameWorld.get_current().get_gravity3d(gravity_multiplier)
+		velocity += GameWorld.get_current().get_gravity3d(gravity_multiplier) * delta
 	
-	_accelerate(motion_direction)
+	_accelerate(motion_direction, delta)
 	
 	last_motion_direction = motion_direction
 	motion_direction = Vector3.ZERO

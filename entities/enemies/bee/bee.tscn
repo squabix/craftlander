@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://d0a4ydiqu4jj6"]
 
 [ext_resource type="Script" uid="uid://bt06wqhladgjr" path="res://entities/enemies/bee/bee.gd" id="1_4hd4j"]
-[ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common3d/movement_mode3d.gd" id="2_rq2ym"]
+[ext_resource type="Resource" uid="uid://dgd8cmju8w3ba" path="res://entities/enemies/bee/bee_movement_mode.tres" id="2_vtgqy"]
 [ext_resource type="Script" uid="uid://v1m6kagbghjv" path="res://common3d/radial_sight_3d.gd" id="2_wnfpe"]
 [ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/signal_triggrs/signal_state_trigger.gd" id="3_rq2ym"]
 [ext_resource type="Script" uid="uid://crmxhu5iujbq1" path="res://entities/enemies/rootling/rootling_controller.gd" id="4_qp58c"]
@@ -15,13 +15,6 @@
 [ext_resource type="PackedScene" uid="uid://btvdb6drbsbg6" path="res://entities/enemies/bee/bee.blend" id="14_0lxgi"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="15_7niy0"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="16_0hiqi"]
-
-[sub_resource type="Resource" id="Resource_qp58c"]
-script = ExtResource("2_rq2ym")
-max_speed = Vector2(2.5, 0)
-acceleration = Vector2(0.1, 1)
-friction = Vector2(0.23, 0)
-metadata/_custom_type_script = "uid://edbvsbdtvgtj"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qkhbg"]
 size = Vector3(0.2, 0.2, 0.4)
@@ -202,7 +195,7 @@ radius = 0.15
 collision_mask = 17
 script = ExtResource("1_4hd4j")
 type = "enemy"
-movement_mode = SubResource("Resource_qp58c")
+movement_mode = ExtResource("2_vtgqy")
 move_up_as_jump = false
 metadata/_custom_type_script = "uid://bki5ij8task16"
 

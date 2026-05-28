@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://mwsmthp4sn6c"]
 
 [ext_resource type="Script" uid="uid://doai6uyyht5am" path="res://entities/enemies/rootling/rootling.gd" id="1_wtogd"]
-[ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common3d/movement_mode3d.gd" id="2_76rxv"]
+[ext_resource type="Resource" uid="uid://o4s4d0gqgsng" path="res://entities/enemies/rootling/rootling_movement_mode.tres" id="2_f0qrw"]
 [ext_resource type="Script" uid="uid://crmxhu5iujbq1" path="res://entities/enemies/rootling/rootling_controller.gd" id="2_nauqg"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="3_ihgra"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="3_wtogd"]
@@ -30,13 +30,6 @@
 [ext_resource type="Script" uid="uid://bi8ev1kcq2ayf" path="res://common/inventory_system/animation/item_animation_tree.gd" id="26_f0qrw"]
 [ext_resource type="Script" uid="uid://bwd4jx8u5uct2" path="res://common/inventory_system/item_holder3d.gd" id="27_7307j"]
 [ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/tools/shoddy_mace/shoddy_mace_item.tres" id="29_5b15m"]
-
-[sub_resource type="Resource" id="Resource_50i80"]
-script = ExtResource("2_76rxv")
-max_speed = Vector2(3, 0)
-acceleration = Vector2(0.1, 1)
-friction = Vector2(0.3, 0)
-metadata/_custom_type_script = "uid://edbvsbdtvgtj"
 
 [sub_resource type="Resource" id="Resource_v53xr"]
 script = ExtResource("3_wtogd")
@@ -580,7 +573,7 @@ metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 collision_mask = 17
 script = ExtResource("1_wtogd")
 anim_tree = NodePath("AnimationTree")
-movement_mode = SubResource("Resource_50i80")
+movement_mode = ExtResource("2_f0qrw")
 horizontal_rotation_target = NodePath(".")
 vertical_rotation_target = NodePath(".")
 rotation_range = SubResource("Resource_0dji4")

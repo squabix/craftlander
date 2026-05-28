@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="MovementMode3D" format=3 uid="uid://dgd8cmju8w3ba"]
+
+[ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common3d/movement_mode3d.gd" id="1_laqmf"]
+
+[resource]
+script = ExtResource("1_laqmf")
+max_speed = Vector2(2.5, 0)
+acceleration = Vector2(5, 1)
+friction = Vector2(5, 0)
+metadata/_custom_type_script = "uid://edbvsbdtvgtj"
