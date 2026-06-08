@@ -9,7 +9,6 @@ uniform vec3 shallow_color : source_color = vec3(0.05, 0.35, 0.45);
 
 uniform float wave_speed = 0.05;
 uniform float wave_scale = 4.0;
-uniform float normal_strength = 1.2;
 uniform float wave_height = 0.3;
 
 uniform float roughness = 0.15;
@@ -43,28 +42,19 @@ void fragment() {
 	float n1 = texture(noise_tex_1, scroll_1).r;
 	float n2 = texture(noise_tex_2, scroll_2).r;
 
-	// Combined wave noise
 	float wave = (n1 + n2) * 0.5;
 
-	// Fake vertical wave movement (visual illusion)
-	float height_mask = smoothstep(0.2, 0.8, wave);
+	float height_mask = smoothstep(0.2, 0.8, wave_height_mask); 
+
 	vec3 water_color = mix(deep_color, shallow_color, height_mask);
-
-	// Normal reconstruction from noise
-	vec2 normal_uv_offset = vec2(
-		texture(noise_tex_1, scroll_1 + vec2(0.01, 0.0)).r - n1,
-		texture(noise_tex_2, scroll_2 + vec2(0.0, 0.01)).r - n2
-	);
-
-	vec3 normal = normalize(vec3(
-		normal_uv_offset.x * normal_strength,
-		1.0,
-		normal_uv_offset.y * normal_strength
-	));
-
-	NORMAL = normal;
 
 	ALBEDO = water_color;
 	ROUGHNESS = roughness;
 	METALLIC = metallic;
+
+	vec3 x_deriv = dFdx(VERTEX);
+	vec3 y_deriv = dFdy(VERTEX);
+	vec3 flat_normal = normalize(cross(y_deriv, x_deriv));
+	
+	NORMAL = flat_normal;
 }
