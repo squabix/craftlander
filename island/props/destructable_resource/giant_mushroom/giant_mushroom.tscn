@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://bwsaqjbx2ith8" path="res://island/props/destructable_resource/tree/tree_falling_state.gd" id="7_gswg4"]
 [ext_resource type="Script" uid="uid://ihbhsm4c4qtv" path="res://island/props/destructable_resource/tree/chopped_state.gd" id="8_e6e5w"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="9_0sf1c"]
+[ext_resource type="Material" uid="uid://drfxxufa84pj2" path="res://assets/materials/white_mushroom.tres" id="10_jcypt"]
 [ext_resource type="ArrayMesh" uid="uid://cxtofsxxgyuua" path="res://island/props/destructable_resource/giant_mushroom/giant_mushroom_top.tres" id="11_thgfp"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="12_e47mg"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="14_hjpsa"]
@@ -256,6 +257,7 @@ monitorable = false
 shape = SubResource("SphereShape3D_8mlu7")
 
 [node name="TrunkMesh" type="MeshInstance3D" parent="Trunk" unique_id=600598852]
+material_override = ExtResource("10_jcypt")
 mesh = SubResource("ArrayMesh_hbewo")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Trunk" unique_id=226286952]
@@ -298,6 +300,7 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.24145353, 0)
 
 [node name="StumpMesh" type="MeshInstance3D" parent="Stump" unique_id=1593970293]
 mesh = SubResource("ArrayMesh_rh3ft")
+surface_material_override/0 = ExtResource("10_jcypt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stump" unique_id=894602809]
 shape = SubResource("ConvexPolygonShape3D_jcypt")
