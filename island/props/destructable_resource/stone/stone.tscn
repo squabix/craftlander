@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bo0n5cj4oc8wo" path="res://island/props/destructable_resource/stone/stone1.blend" id="4_a54gr"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="5_isl6o"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="6_5v37a"]
+[ext_resource type="Material" uid="uid://bh8sv2icydggs" path="res://assets/materials/stone.tres" id="6_pwnbr"]
 [ext_resource type="Resource" uid="uid://b37h3pr83pcu4" path="res://items/materials/rock/rock_item.tres" id="7_ir3ee"]
 [ext_resource type="Script" uid="uid://cmmmo3xnygmau" path="res://common/deletion_alarm.gd" id="9_toofl"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="10_pwnbr"]
@@ -100,6 +101,9 @@ metadata/_custom_type_script = "uid://dapeyi3eetek1"
 
 [node name="BlenderMeshes" parent="." unique_id=1560999619 instance=ExtResource("4_a54gr")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.39999998, 0)
+
+[node name="Cube" parent="BlenderMeshes" index="0" unique_id=53737742]
+surface_material_override/0 = ExtResource("6_pwnbr")
 
 [node name="Inventory" type="Node" parent="." unique_id=836906820]
 script = ExtResource("5_isl6o")

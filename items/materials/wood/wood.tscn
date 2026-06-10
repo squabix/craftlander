@@ -1,7 +1,15 @@
 [gd_scene format=3 uid="uid://b3r8gm0726pe7"]
 
 [ext_resource type="PackedScene" uid="uid://b5mk2ohahh5e8" path="res://items/materials/wood/wood.blend" id="1_mxk7r"]
+[ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="2_3oktv"]
+[ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="3_vo0lx"]
 
 [node name="Wood" type="Node3D" unique_id=1422949405]
 
 [node name="Visuals" parent="." unique_id=1919549888 instance=ExtResource("1_mxk7r")]
+
+[node name="Stump" parent="Visuals" index="0" unique_id=29378343]
+surface_material_override/0 = ExtResource("2_3oktv")
+surface_material_override/1 = ExtResource("3_vo0lx")
+
+[editable path="Visuals"]

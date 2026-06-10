@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dhy8e5mh2ovvm"]
 
 [ext_resource type="PackedScene" uid="uid://cxyo02n5xogja" path="res://items/food/honeycomb/honeycomb.blend" id="1_2uevs"]
+[ext_resource type="Material" uid="uid://dxf25ivnceuua" path="res://assets/materials/honey.tres" id="2_uif06"]
 
 [node name="Honeycomb" type="Node3D" unique_id=282752753]
 
@@ -15,5 +16,6 @@ visible = false
 
 [node name="Honeycomb" parent="Visuals" index="2" unique_id=1342536534]
 transform = Transform3D(0.099999994, 0, 0.17320509, 0, 0.2, 0, -0.17320509, 0, 0.099999994, 0, 0, 0.89256847)
+surface_material_override/0 = ExtResource("2_uif06")
 
 [editable path="Visuals"]

@@ -1,7 +1,13 @@
 [gd_scene format=3 uid="uid://ewpur2xt3lj3"]
 
 [ext_resource type="PackedScene" uid="uid://0omxrkxu1djy" path="res://items/materials/rock/rock.blend" id="1_w1jhf"]
+[ext_resource type="Material" uid="uid://bh8sv2icydggs" path="res://assets/materials/stone.tres" id="2_5el7v"]
 
 [node name="Rock" type="Node3D" unique_id=249716213]
 
 [node name="Visuals" parent="." unique_id=541475137 instance=ExtResource("1_w1jhf")]
+
+[node name="Cube" parent="Visuals" index="0" unique_id=531735036]
+surface_material_override/0 = ExtResource("2_5el7v")
+
+[editable path="Visuals"]
