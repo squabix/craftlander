@@ -10,8 +10,8 @@
 [ext_resource type="Script" uid="uid://bwsaqjbx2ith8" path="res://island/props/destructable_resource/tree/tree_falling_state.gd" id="7_n32rl"]
 [ext_resource type="Script" uid="uid://ihbhsm4c4qtv" path="res://island/props/destructable_resource/tree/chopped_state.gd" id="8_agfax"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="10_4ojav"]
-[ext_resource type="Material" path="res://assets/materials/bark.tres" id="10_rngja"]
-[ext_resource type="Material" path="res://assets/materials/soft_wood.tres" id="11_55jnn"]
+[ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="10_rngja"]
+[ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="11_55jnn"]
 [ext_resource type="Shader" uid="uid://d0g1tx71qh1wb" path="res://assets/shaders/tree_wind_shader.gdshader" id="11_rngja"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="11_ytrwe"]
 [ext_resource type="Shape3D" uid="uid://1ks4j4c8paiv" path="res://island/props/destructable_resource/tree/stump_collision.tres" id="12_18auj"]
@@ -100,7 +100,7 @@ data = PackedVector3Array(-0.0196, 1, 0.6896, 0.19909999, 4.0982, 0.27879998, 0.
 
 [sub_resource type="Gradient" id="Gradient_rngja"]
 interpolation_mode = 1
-colors = PackedColorArray(0.33916375, 0.82947147, 0.44099665, 1, 1, 1, 1, 1)
+colors = PackedColorArray(0.247, 0.65, 0.40148327, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_55jnn"]
 gradient = SubResource("Gradient_rngja")
