@@ -1,7 +1,16 @@
 [gd_resource type="ArrayMesh" format=4 uid="uid://cxtofsxxgyuua"]
 
-[ext_resource type="Material" uid="uid://bntpptj6c08nu" path="res://assets/materials/red_mushroom.tres" id="1_wyxoa"]
-[ext_resource type="Material" uid="uid://fs0rcuantoc5" path="res://assets/materials/mushroom_spot.tres" id="2_kt6iu"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tfv7u"]
+resource_name = "Material.001"
+cull_mode = 2
+albedo_color = Color(0.9064302, 0.23409474, 0.21253078, 1)
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wyxoa"]
+resource_name = "Material.002"
+cull_mode = 2
+albedo_color = Color(0.9063318, 0.9063318, 0.9063318, 1)
+roughness = 0.5
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_kt6iu"]
 _surfaces = [{
@@ -36,7 +45,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 279,
 "index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsADAANAA4ADwAQABEAEgATABQAFQAWABcAGAAZABoAGwAcAB0AHgAfACAAIQAiACMAJAAlACYAJwAoACkAKgArACwALQAuAC8AMAAxADIAMwA0ADUANgA3ADgAOQA6ADsAPAA9AD4APwBAAEEAQgBDAEQARQBGAEcASABJAEoASwBMAE0ATgBPAFAAUQBSAFMAVABVAFYAVwBYAFkAWgBbAFwAXQBeAF8AYABhAGIAYwBkAGUAZgBnAGgAaQBqAGsAbABtAG4AbwBwAHEAcgBzAHQAdQB2AHcAeAB5AHoAewB8AH0AfgB/AIAAgQCCAIMAhACFAIYAhwCIAIkAigCLAIwAjQCOAI8AkACRAJIAkwCUAJUAlgCXAJgAmQCaAJsAnACdAJ4AnwCgAKEAogCjAKQApQCmAKcAqACpAKoAqwCsAK0ArgCvALAAsQCyALMAtAC1ALYAtwC4ALkAugC7ALwAvQC+AL8AwADBAMIAwwDEAMUAxgDHAMgAyQDKAMsAzADNAM4AzwDQANEAzwDSANAA0wDUANUA0wDWANQA1wDYANkA1wDaANgA2wDcAN0A3QDcAN4A3wDgAOEA3wDiAOAA4wDkAOUA4wDmAOQA5wDoAOkA5wDqAOgA6wDsAO0A6wDuAOwA7wDwAPEA7wDyAPAA8wD0APUA8wD2APQA9wD4APkA9wD6APgA+wD8AP0A+wD+APwA"),
-"material": ExtResource("1_wyxoa"),
+"material": SubResource("StandardMaterial3D_tfv7u"),
 "name": "Material.001",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -49,7 +58,7 @@ _surfaces = [{
 "index_count": 33,
 "index_data": PackedByteArray("AAABAAIADQAOAA8AEAARABIAEwAUABUAFgAXABgAAwAEAAUABwAIAAkAGQAaABsAHAAdAB4AHwAGACAACgALAAwA"),
 "lods": [1.7154572, PackedByteArray("AAABAAIAAwAEAAUAAwAGAAQABwAIAAkACgALAAwA")],
-"material": ExtResource("2_kt6iu"),
+"material": SubResource("StandardMaterial3D_wyxoa"),
 "name": "Material.002",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
