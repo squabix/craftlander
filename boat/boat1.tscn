@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="4_qqn3m"]
 [ext_resource type="Script" uid="uid://dacuhxdpe6083" path="res://boat/boat_docking_state.gd" id="5_c4lax"]
 [ext_resource type="Script" uid="uid://8bgokntpuh33" path="res://boat/boat_docked_state.gd" id="6_c4lax"]
+[ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="6_wbjwq"]
+[ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="7_e44pp"]
 [ext_resource type="Script" uid="uid://bcwgfvcnnjoac" path="res://boat/boat_piloting_state.gd" id="10_0q3wp"]
 
 [sub_resource type="Resource" id="Resource_e44pp"]
@@ -87,6 +89,10 @@ metadata/_custom_type_script = "uid://sw1ikf32qnw0"
 [node name="BlenderMeshes1" parent="." unique_id=562094623 instance=ExtResource("2_6h0kv")]
 transform = Transform3D(0.9998477, -0.017452406, 0, 0.017449748, 0.9996954, -0.017452406, 0.00030458646, 0.017449748, 0.9998477, 0, 0.2, 2.78762)
 
+[node name="Walkway" parent="BlenderMeshes1" index="0" unique_id=593954362]
+surface_material_override/0 = ExtResource("6_wbjwq")
+surface_material_override/1 = ExtResource("7_e44pp")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=653007229]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 2.78762)
 shape = SubResource("BoxShape3D_enlnh")
@@ -122,3 +128,5 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1985380001]
 libraries/ = SubResource("AnimationLibrary_wbjwq")
 autoplay = &"rock"
+
+[editable path="BlenderMeshes1"]

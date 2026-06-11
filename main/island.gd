@@ -13,4 +13,5 @@ func _ready() -> void:
 		PlayerSpawnMode.BOAT:
 			boat_driver_seat.initial_entity = player
 		PlayerSpawnMode.ISLAND_CENTER:
+			boat_driver_seat.initial_entity = null
 			player.global_position = Vector3(0.0, ISLAND_CENTER_SPAWN_HEIGHT, 0.0)
