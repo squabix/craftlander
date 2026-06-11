@@ -97,7 +97,7 @@ script/source = "extends ItemVisualsContainer3D
 
 [sub_resource type="Gradient" id="Gradient_bjvpn"]
 offsets = PackedFloat32Array(0.5566265, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.15686275)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.3137255)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_s7qer"]
 gradient = SubResource("Gradient_bjvpn")
