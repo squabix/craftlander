@@ -10,7 +10,7 @@ extends State
 @export var lose_target_state := ""
 
 
-func update(_delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	if can_lose_target and not can_see_target():
 		transition_to(lose_target_state)
 		return

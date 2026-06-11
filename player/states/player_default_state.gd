@@ -19,9 +19,6 @@ func handle_input(event: InputEvent) -> void:
 		root.use_item()
 
 func update(_delta: float) -> void:
-	super(_delta)
-	root.move_planar(PlayerController.get_input_motion_vector().normalized())
-	
 	if root.is_in_water:
 		transition_to("Swimming")
 	
@@ -30,3 +27,7 @@ func update(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed(ACTION_DROP):
 		root.drop_current_item()
+
+func physics_update(delta: float) -> void:
+	super(delta)
+	root.move_planar(PlayerController.get_input_motion_vector().normalized())

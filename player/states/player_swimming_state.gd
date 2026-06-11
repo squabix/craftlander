@@ -9,7 +9,7 @@ const STAMINA_COST := 0.12
 func enter() -> void:
 	root.movement_mode = movement_mode
 
-func update(_delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	stamina.spend(STAMINA_COST)
 	
 	if not root.is_in_water:
