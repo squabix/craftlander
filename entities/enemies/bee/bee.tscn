@@ -16,9 +16,6 @@
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="15_7niy0"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="16_0hiqi"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_qkhbg"]
-size = Vector3(0.2, 0.2, 0.4)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ff1s"]
 resource_name = "Material.002"
 transparency = 4
@@ -185,11 +182,11 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_muv15"]
-radius = 0.1
-height = 1.4
+radius = 0.22
+height = 1.44
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_nw5ty"]
-radius = 0.15
+radius = 0.23
 
 [node name="Bee" type="CharacterBody3D" unique_id=764734795]
 collision_mask = 17
@@ -290,16 +287,11 @@ remote_path = NodePath("../Node/FollowNode3D/VisibleOnScreenNotifier3D")
 update_rotation = false
 update_scale = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1283622617]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.048)
-shape = SubResource("BoxShape3D_qkhbg")
-disabled = true
-
 [node name="BlenderVisuals" type="Node3D" parent="." unique_id=71307781]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 
 [node name="Visuals" parent="BlenderVisuals" unique_id=2002060618 instance=ExtResource("14_0lxgi")]
-transform = Transform3D(0.2, 0, 0, 0, 0.19696155, -0.034729637, 0, 0.034729637, 0.19696155, 0, 0.05, 0)
+transform = Transform3D(0.4, 0, 0, 0, 0.3939231, -0.069459274, 0, 0.069459274, 0.3939231, 0, 0.05, 0)
 
 [node name="Wings" parent="BlenderVisuals/Visuals" index="1" unique_id=1580978913]
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0)
@@ -322,8 +314,8 @@ metadata/_custom_type_script = "uid://cbb5o5ykqwxfp"
 libraries/ = SubResource("AnimationLibrary_6g1qb")
 autoplay = &"fly"
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1316642755]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1316642755]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72, 0)
 shape = SubResource("CapsuleShape3D_muv15")
 
 [node name="Hurtbox3D" type="Area3D" parent="." unique_id=966906013 node_paths=PackedStringArray("health", "knockback_entity")]
@@ -336,6 +328,7 @@ knockback_entity = NodePath("..")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1632674445]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 shape = SubResource("SphereShape3D_nw5ty")
 
 [node name="InventoryDropper3D2" type="Node3D" parent="." unique_id=46336329 node_paths=PackedStringArray("inventory", "health")]
