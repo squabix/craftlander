@@ -1,13 +1,13 @@
 extends Resource
 class_name GameWorld
 
-const GRAVITY_3D_RATIO: float = 1.0
+const GRAVITY_3D_RATIO := 1.0
 const TIME_SCALE := 1.0
 
 static var _current: GameWorld
 
-@export var gravity_strength: float = 9.8
-@export var gravity_direction: Vector3 = Vector3.DOWN
+@export var gravity_strength := 17.0
+@export var gravity_direction := Vector3.DOWN
 
 var tree: SceneTree
 var default_parent_3d: Node
