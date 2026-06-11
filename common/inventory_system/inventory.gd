@@ -98,7 +98,7 @@ func create_new_stacks(new_item: Item, quantity: int) -> int:
 		
 		var to_add: int = min(quantity, new_item.max_quantity)
 		var instance := new_item.get_instance(to_add)
-		instance.emptied.connect(delete_instance.bind(instance))
+		instance.emptied.connect(empty_instance.bind(instance))
 		
 		item_instances[empty_idx] = instance
 		quantity -= to_add
@@ -133,6 +133,7 @@ func remove_instance(instance: ItemInstance, quantity := 1) -> int:
 	
 	if instance.quantity > quantity:
 		instance.quantity -= quantity
+		changed.emit()
 		return 0
 	else:
 		quantity -= instance.quantity
@@ -141,11 +142,9 @@ func remove_instance(instance: ItemInstance, quantity := 1) -> int:
 
 func empty_instance(instance: ItemInstance) -> void:
 	var idx := item_instances.find(instance)
-	if idx != -1:
-		item_instances[idx] = null
-
-func delete_instance(instance: ItemInstance) -> void:
-	empty_instance(instance)
+	if idx == -1:
+		return
+	item_instances[idx] = null
 	changed.emit()
 
 func give_item(item: Item, quantity: int, to: Inventory) -> int:

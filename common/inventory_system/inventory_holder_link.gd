@@ -43,11 +43,12 @@ func _ready() -> void:
 		printerr(name, " has an invalid ItemHolder and will not function")
 		return
 	
+	# Immediately hold current item, then emit that current has been updated
 	hold_current.call_deferred()
 	updated_current.emit.call_deferred()
 	
-	updated_current.connect(changed.emit.call_deferred)
-	inventory.changed.connect(hold_current)
+	updated_current.connect(changed.emit.call_deferred) # Emit changed after emitting updated current
+	inventory.changed.connect(hold_current) # Hold current whenever inventory is changed
 	item_holder.consumed_instance.connect(consume_instance)
 
 func consume_instance(instance: ItemInstance) -> void:
