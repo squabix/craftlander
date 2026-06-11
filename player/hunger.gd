@@ -33,11 +33,12 @@ func _ready() -> void:
 				lose(amount * stamina_hunger_loss)
 		)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	bar.target_value = value
 	if get_tree().paused:
 		return
-	
+
+func _physics_process(delta: float) -> void:
 	lose(loss_per_minute * loss_multiplier / 60.0)
 	value -= queued_loss * delta * GameWorld.TIME_SCALE
 	queued_loss = 0.0

@@ -13,8 +13,10 @@ func is_walking_forward() -> bool:
 func enter() -> void:
 	root.movement_mode = movement_mode
 
-func update(_delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	stamina.spend(STAMINA_COST)
+
+func update(_delta: float) -> void:
 	
 	# Crouching is currently disabled
 	#if Input.is_action_just_pressed("crouch") and root.is_on_floor():
