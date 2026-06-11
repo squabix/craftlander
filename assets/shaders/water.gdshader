@@ -14,7 +14,8 @@ uniform float wave_height = 0.3;
 uniform float roughness = 0.15;
 uniform float metallic = 0.0;
 
-varying float wave_height_mask;
+varying flat float v_flat_wave_height;
+varying flat vec3 v_flat_world_pos;
 
 void vertex() {
 	vec2 world_uv = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xz * wave_scale;
@@ -28,33 +29,21 @@ void vertex() {
 	float wave = (n1 + n2) * 0.5;
 
 	VERTEX.y += wave * wave_height;
-	wave_height_mask = wave;
+	
+	v_flat_wave_height = wave;
+	v_flat_world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 }
 
 void fragment() {
-	// Base UVs
-	vec2 uv = UV * wave_scale;
-
-	// Scrolling noise
-	vec2 scroll_1 = uv + vec2(TIME * wave_speed, TIME * wave_speed * 0.7);
-	vec2 scroll_2 = uv - vec2(TIME * wave_speed * 0.6, TIME * wave_speed);
-
-	float n1 = texture(noise_tex_1, scroll_1).r;
-	float n2 = texture(noise_tex_2, scroll_2).r;
-
-	float wave = (n1 + n2) * 0.5;
-
-	float height_mask = smoothstep(0.2, 0.8, wave_height_mask); 
-
+	float height_mask = smoothstep(0.2, 0.8, v_flat_wave_height); 
 	vec3 water_color = mix(deep_color, shallow_color, height_mask);
-
-	ALBEDO = water_color;
-	ROUGHNESS = roughness;
-	METALLIC = metallic;
 
 	vec3 x_deriv = dFdx(VERTEX);
 	vec3 y_deriv = dFdy(VERTEX);
 	vec3 flat_normal = normalize(cross(y_deriv, x_deriv));
-	
 	NORMAL = flat_normal;
+
+	ALBEDO = water_color;
+	ROUGHNESS = roughness;
+	METALLIC = metallic;
 }

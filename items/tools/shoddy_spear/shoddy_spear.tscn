@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://dd8qskwv1nlqx" path="res://common3d/damage_system/hit_ray3d.gd" id="1_gbrfq"]
 [ext_resource type="Resource" uid="uid://bgyj7jyanhg22" path="res://items/tools/shoddy_spear/shoddy_spear_damage.tres" id="2_7cxoo"]
 [ext_resource type="PackedScene" uid="uid://d4e4niggplert" path="res://items/tools/shoddy_spear/shoddy_spear.blend" id="3_7cxoo"]
+[ext_resource type="Material" path="res://assets/materials/stone.tres" id="4_pi6by"]
+[ext_resource type="Material" path="res://assets/materials/bark.tres" id="5_aaiew"]
 
 [node name="ShoddySpear" type="Node3D" unique_id=1538443592]
 
@@ -19,3 +21,12 @@ metadata/_custom_type_script = "uid://dd8qskwv1nlqx"
 
 [node name="BlenderMeshes" parent="Visuals" unique_id=1873865866 instance=ExtResource("3_7cxoo")]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="Tip" parent="Visuals/BlenderMeshes" index="0" unique_id=990874036]
+transform = Transform3D(1, 0, 0, 0, 0.9707029, -0.24028307, 0, 0.24028307, 0.9707029, 0, 4.1100097, -0.0687084)
+surface_material_override/0 = ExtResource("4_pi6by")
+
+[node name="Handle" parent="Visuals/BlenderMeshes" index="1" unique_id=1401374642]
+surface_material_override/0 = ExtResource("5_aaiew")
+
+[editable path="Visuals/BlenderMeshes"]

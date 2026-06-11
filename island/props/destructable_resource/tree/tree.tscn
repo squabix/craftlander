@@ -10,7 +10,8 @@
 [ext_resource type="Script" uid="uid://bwsaqjbx2ith8" path="res://island/props/destructable_resource/tree/tree_falling_state.gd" id="7_n32rl"]
 [ext_resource type="Script" uid="uid://ihbhsm4c4qtv" path="res://island/props/destructable_resource/tree/chopped_state.gd" id="8_agfax"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="10_4ojav"]
-[ext_resource type="Material" uid="uid://2poe1edl4m8q" path="res://island/props/destructable_resource/tree/bark.tres" id="10_mw2c8"]
+[ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="10_rngja"]
+[ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="11_55jnn"]
 [ext_resource type="Shader" uid="uid://d0g1tx71qh1wb" path="res://assets/shaders/tree_wind_shader.gdshader" id="11_rngja"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="11_ytrwe"]
 [ext_resource type="Shape3D" uid="uid://1ks4j4c8paiv" path="res://island/props/destructable_resource/tree/stump_collision.tres" id="12_18auj"]
@@ -23,11 +24,6 @@ height = 10.25
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8mlu7"]
 radius = 1.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_isvi4"]
-resource_name = "Material.003"
-cull_mode = 2
-albedo_color = Color(0.9063355, 0.6912122, 0.48511449, 1)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_isvi4"]
 _surfaces = [{
@@ -77,7 +73,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 261,
 "index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0AMAAxADIAMAAzADEANAA1ADYANwA4ADkANwA6ADgAOwA8AD0AOwA+ADwAPwBAAEEAQgBDAEQAQgBFAEMARgBHAEgARgBJAEcASgBLAEwASgBNAEsATgBPAFAAUQBSAFMAVABVAFYAVwBYAFkAWgBbAFwAWgBdAFsAXgBfAGAAXgBhAF8AYgBjAGQAYgBlAGMAZgBnAGgAaQBqAGsAbABtAG4AbwBwAHEAcgBzAHQAcgB1AHMAdgB3AHgAdgB5AHcAegB7AHwAegB9AHsAfgB/AIAAgQCCAIMAhACFAIYAhwCIAIkAigCLAIwAjQCOAI8AkACRAJIAkwCUAJUAkwCWAJQAlwCYAJkAlwCaAJgAmwCcAJ0AmwCeAJwAnwCgAKEAogCjAKQApQCmAKcAqACpAKoAqwCsAK0AqwCuAKwArwCwALEArwCyALAAswC0ALUAswC2ALQAtwC4ALkAtwC6ALgAuwC8AL0AvgC/AMAAwQDCAMMAxADFAMYA"),
-"material": ExtResource("10_mw2c8"),
+"material": ExtResource("10_rngja"),
 "name": "Material.002",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -89,7 +85,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 9,
 "index_data": PackedByteArray("AAABAAIAAQAAAAMAAQADAAQA"),
-"material": SubResource("StandardMaterial3D_isvi4"),
+"material": ExtResource("11_55jnn"),
 "name": "Material.003",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -104,7 +100,7 @@ data = PackedVector3Array(-0.0196, 1, 0.6896, 0.19909999, 4.0982, 0.27879998, 0.
 
 [sub_resource type="Gradient" id="Gradient_rngja"]
 interpolation_mode = 1
-colors = PackedColorArray(0.33916375, 0.82947147, 0.44099665, 1, 1, 1, 1, 1)
+colors = PackedColorArray(0.247, 0.65, 0.40148327, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_55jnn"]
 gradient = SubResource("Gradient_rngja")
@@ -237,7 +233,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 39,
 "index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFQAUABcAFQAXABgA"),
-"material": ExtResource("10_mw2c8"),
+"material": ExtResource("10_rngja"),
 "name": "Material.002",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -249,7 +245,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 9,
 "index_data": PackedByteArray("AAABAAIAAQAAAAMAAQADAAQA"),
-"material": SubResource("StandardMaterial3D_isvi4"),
+"material": ExtResource("11_55jnn"),
 "name": "Material.003",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
