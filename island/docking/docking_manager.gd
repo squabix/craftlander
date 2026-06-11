@@ -5,13 +5,15 @@ const DEFAULT_DOCK_PLACE_RAY_LENGTH := 400.0
 const DOCK_EXPOSED_LENGTH := 6.0
 
 @export var dock_place_ray_container: Node3D
+@export var boat_dock_point: Node3D
 @export var dock: Node3D
 @export var boat: Boat
 
 func _ready() -> void:
 	await get_tree().process_frame
 	place_dock()
-	boat.dock_position = $Dock/BoatDockPoint.global_position
+	boat.dock_position = boat_dock_point.global_position
+	boat.look_at(boat.dock_position)
 
 func extend_dock_place_rays() -> void:
 	for ray in dock_place_ray_container.get_children():
