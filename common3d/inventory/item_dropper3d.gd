@@ -73,11 +73,7 @@ func get_instance(index) -> ItemInstance:
 	return inventory.get_instance(inventory.get_random_index_weighted() if index == -1 else index)
 
 func drop_everything() -> void:
-	if inventory == null or inventory.item_instances.is_empty():
-		return
-	
-	for i in inventory.size:
-		drop(i)
+	printerr("Drop everything is not currently implemented")
 
 func die() -> void:
 	match death_drop_mode:
