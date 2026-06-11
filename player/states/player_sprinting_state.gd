@@ -15,7 +15,11 @@ func enter() -> void:
 
 func update(_delta: float) -> void:
 	stamina.spend(STAMINA_COST)
-	if Input.is_action_just_pressed("crouch") and root.is_on_floor():
-		transition_to("Crouching")
-	elif not (stamina.is_usable() and is_walking_forward()):
+	
+	# Crouching is currently disabled
+	#if Input.is_action_just_pressed("crouch") and root.is_on_floor():
+		#transition_to("Crouching")
+	
+	# 'elif' when crouching enabled
+	if not (stamina.is_usable() and is_walking_forward()):
 		transition_to("Walking")
