@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_1lmkm")
-max_speed = Vector2(5, 250)
+max_speed = Vector2(5, 280)
 acceleration = Vector2(15, 1)
 friction = Vector2(30, 0)
 metadata/_custom_type_script = "uid://edbvsbdtvgtj"
