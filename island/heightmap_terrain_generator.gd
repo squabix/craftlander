@@ -136,22 +136,29 @@ func generate_image_texture() -> ImageTexture:
 	)
 
 func align_node_to_normal(node: Node3D, px: int, py: int, conformity := 1.0) -> void:
-	var normal := get_pixel_normal(px, py).normalized()
-	var forward := node.global_transform.basis.z.normalized()
+	var target_normal := get_pixel_normal(px, py).normalized()
+	var current_basis := node.global_transform.basis
 	
-	# Align node exactly to normal
-	if abs(forward.dot(normal)) > 0.99:
-		forward = Vector3.FORWARD
-	node.look_at(node.global_position + forward, normal)
+	# Calculate a new right (X) and forward (Z) vector based on the new normal (Y)
+	var current_forward := -current_basis.z.normalized()
 	
-	# Straighten node based on conformity while preserving y rotation
-	var y := node.rotation_degrees.y
-	node.rotation_degrees = node.rotation_degrees.lerp(Vector3.ZERO, 1.0 - conformity)
-	node.rotation_degrees.y = y
+	var target_right := current_forward.cross(target_normal).normalized()
+	var target_forward := target_normal.cross(target_right).normalized()
+	
+	# Create the fully aligned target basis
+	var target_basis := Basis(target_right, target_normal, -target_forward)
+	
+	# Smoothly blend between the completely upright orientation and aligned orientation
+	if conformity < 1.0:
+		var upright_basis := Basis.from_euler(Vector3(0, current_basis.get_euler().y, 0))
+		target_basis = upright_basis.slerp(target_basis, conformity) # Slerp between upright and fully aligned
+	
+	# Apply the new basis back to the node, preserving its scale
+	node.global_transform.basis = target_basis.orthonormalized().scaled(current_basis.get_scale())
 
 func place_node(node: Node3D, px: int, py: int, normal_conformity := 1.0) -> void:
 	node.global_position = get_pixel_position(px, py)
-	align_node_to_normal(node, px, py, normal_conformity)
+	align_node_to_normal.call_deferred(node, px, py, normal_conformity)
 
 func get_pixel_position(x: int, y: int) -> Vector3:
 	return global_transform * Vector3(
