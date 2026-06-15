@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="IslandProp" format=3 uid="uid://csb30iff5ceag"]
+
+[ext_resource type="Script" uid="uid://csprfavexgrle" path="res://island/props/island_prop.gd" id="1_3htax"]
+[ext_resource type="PackedScene" uid="uid://biex0hrp2cqrg" path="res://island/props/destructable_resource/giant_mushroom/giant_mushroom.tscn" id="1_qauxh"]
+
+[resource]
+script = ExtResource("1_3htax")
+scene = ExtResource("1_qauxh")
+radius = 5.0
+min_height = 4.0
+metadata/_custom_type_script = "uid://csprfavexgrle"
