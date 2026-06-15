@@ -37,6 +37,7 @@ func get_pixel(x: int, y: int, texture_images: Dictionary[Texture2D, Image]) -> 
 	
 	var value := 0.0
 	
+	# Combine noise textures
 	for texture in noise_textures:
 		value += sample.call(texture)
 	value /= float(len(noise_textures))
