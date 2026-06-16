@@ -505,21 +505,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 cull_mask = 1048573
 fov = 85.0
 
-[node name="ItemSceneContainer" type="Node3D" parent="Head/Camera3D" unique_id=1891665532]
-
-[node name="InteratorRay" type="RayCast3D" parent="Head/Camera3D" unique_id=1551921047]
-target_position = Vector3(0, 0, -2)
-collision_mask = 2
-hit_from_inside = true
-collide_with_areas = true
-collide_with_bodies = false
-
-[node name="Interactor" type="Node" parent="Head/Camera3D/InteratorRay" unique_id=1272942006 node_paths=PackedStringArray("root")]
-unique_name_in_owner = true
-script = ExtResource("10_32hag")
-root = NodePath("../../../..")
-metadata/_custom_type_script = "uid://bypxgjqugqucx"
-
 [node name="ArmContainer" type="Node3D" parent="Head/Camera3D" unique_id=207489004]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08, -0.3)
 
@@ -539,6 +524,7 @@ item_holder = NodePath("..")
 inventory_holder_link = NodePath("../InventoryHolderLink")
 visuals_scale_ratio = 0.4
 do_disable_shadows = true
+layers = 2
 
 [node name="Sprite3D" type="Sprite3D" parent="Head/Camera3D/ArmContainer/ItemHolder" unique_id=1502779023]
 transform = Transform3D(0.050000004, 2.910383e-10, 0, -9.313226e-10, 0.05, 0, 0, 2.3283064e-10, 0.05, 0.08080298, 0.017175198, 0.014566064)
@@ -553,6 +539,21 @@ item_holder = NodePath("..")
 scroll_up_input_action = "scroll_up"
 scroll_down_input_action = "scroll_down"
 metadata/_custom_type_script = "uid://ioo6s3m7wbha"
+
+[node name="ItemSceneContainer" type="Node3D" parent="Head/Camera3D" unique_id=1891665532]
+
+[node name="InteratorRay" type="RayCast3D" parent="Head/Camera3D" unique_id=1551921047]
+target_position = Vector3(0, 0, -2)
+collision_mask = 2
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Interactor" type="Node" parent="Head/Camera3D/InteratorRay" unique_id=1272942006 node_paths=PackedStringArray("root")]
+unique_name_in_owner = true
+script = ExtResource("10_32hag")
+root = NodePath("../../../..")
+metadata/_custom_type_script = "uid://bypxgjqugqucx"
 
 [node name="VignetteRect" type="TextureRect" parent="Head/Camera3D" unique_id=1442022538]
 anchors_preset = 15
@@ -573,6 +574,28 @@ metadata/_custom_type_script = "uid://pnxdwk3pye0h"
 script = ExtResource("27_uw77l")
 inventory = NodePath("../../../../Inventory")
 metadata/_custom_type_script = "uid://bpmbg0e28ujs7"
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Head/Camera3D" unique_id=212379624]
+remote_path = NodePath("../../SubViewportContainer/SubViewport/Camera3D")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Head" unique_id=702739673]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Head/SubViewportContainer" unique_id=1289466890]
+transparent_bg = true
+handle_input_locally = false
+msaa_3d = 2
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Head/SubViewportContainer/SubViewport" unique_id=849292685]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+cull_mask = 2
 
 [node name="Hurtbox3D" type="Area3D" parent="." unique_id=2128029413 node_paths=PackedStringArray("health")]
 collision_layer = 8

@@ -10,6 +10,7 @@ const GHOSTED_ANIMATION_PROPERTIES: PackedStringArray = [
 @export var inventory_holder_link: InventoryHolderLink
 @export var visuals_scale_ratio := 1.0
 @export var do_disable_shadows := false
+@export_flags_3d_render var layers := 1
 
 var instance: ItemInstance
 var contained_visuals: Node3D
@@ -64,6 +65,11 @@ func update_visuals() -> void:
 	# Transform contained visuals
 	contained_visuals.position = Vector3.ZERO
 	contained_visuals.scale *= visuals_scale_ratio
+	
+	# Set visual instances' layers
+	var visual_instances := Util.find_children_of_class(contained_visuals, "VisualInstance3D")
+	for visual_instance in visual_instances:
+		visual_instance.layers = layers
 
 func disable_shadows() -> void:
 	for mesh_instance in Util.find_children_of_class(contained_visuals, "MeshInstance3D"):
