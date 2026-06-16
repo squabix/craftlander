@@ -11,7 +11,6 @@ enum PlayerSpawnMode {BOAT, ISLAND_CENTER}
 func _ready() -> void:
 	match current_player_spawn_mode:
 		PlayerSpawnMode.BOAT:
-			boat_driver_seat.initial_entity = player
+			boat_driver_seat.mount(player)
 		PlayerSpawnMode.ISLAND_CENTER:
-			boat_driver_seat.initial_entity = null
 			player.global_position = Vector3(0.0, ISLAND_CENTER_SPAWN_HEIGHT, 0.0)
