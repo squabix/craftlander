@@ -295,7 +295,7 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_hah18")
 draw_pass_1 = SubResource("SphereMesh_kblrq")
 
-[node name="Stump" type="StaticBody3D" parent="." unique_id=871808702]
+[node name="Stump" type="AnimatableBody3D" parent="." unique_id=235156396]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.24145353, 0)
 
 [node name="StumpMesh" type="MeshInstance3D" parent="Stump" unique_id=1593970293]
