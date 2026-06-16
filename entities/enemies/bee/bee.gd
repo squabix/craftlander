@@ -2,11 +2,11 @@ extends Entity3D
 
 const DAMAGE_AMOUNT := 1.0
 
-const RUN_THRESHOLD := 0.5
-const WALK_THESHOLD := 0.3
-
 const MIN_ATTACK_TIME := 0.3
 const MAX_ATTACK_TIME := 0.6
+
+const BASE_HEIGHT := 1.3
+const HEIGHT_RANDOM_OFFSET := 0.3
 
 const ATTACK_RANGE := 1.0
 
@@ -14,10 +14,23 @@ var target_healths: Dictionary[Node3D, Health] = {}
 
 @onready var sight: RadialSight3D = $Sight3D
 @onready var hit_timer: Timer = $HitTimer
+@onready var form_nodes: Array[Node3D] = [
+	$BlenderVisuals,
+	sight,
+	$InventoryDropper3D,
+	$RemoteTransform3D,
+	$Hurtbox3D
+]
 
 func _ready() -> void:
 	hit_timer.timeout.connect(_on_hit_timer_timeout)
 	_start_random_timer()
+	randomize_height()
+
+func randomize_height() -> void:
+	var height := BASE_HEIGHT + randf_range(-HEIGHT_RANDOM_OFFSET, HEIGHT_RANDOM_OFFSET)
+	for node in form_nodes:
+		node.position.y = height
 
 func _start_random_timer() -> void:
 	hit_timer.wait_time = randf_range(MIN_ATTACK_TIME, MAX_ATTACK_TIME)

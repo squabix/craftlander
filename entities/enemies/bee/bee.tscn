@@ -331,11 +331,4 @@ metadata/_custom_type_script = "uid://4dfurtssrp4f"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 shape = SubResource("SphereShape3D_nw5ty")
 
-[node name="InventoryDropper3D2" type="Node3D" parent="." unique_id=46336329 node_paths=PackedStringArray("inventory", "health")]
-script = ExtResource("12_0rn6u")
-inventory = NodePath("../Inventory")
-health = NodePath("../Health")
-death_drop_mode = 1
-metadata/_custom_type_script = "uid://bpmbg0e28ujs7"
-
 [editable path="BlenderVisuals/Visuals"]
