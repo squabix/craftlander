@@ -9,7 +9,7 @@ class_name ItemDisplay
 @export var instance_override: ItemInstance
 
 @export_group("Selection")
-@export var inventory_holder_link: InventoryHolderLink
+@export var inventory_holder: InventoryHolder
 @export var select_button: Button
 @export var unselected_modulate := Color.WHITE
 @export var selected_modulate := Color.WHITE
@@ -24,7 +24,7 @@ func _ready() -> void:
 		select_button.pressed.connect(select_self)
 
 func select_self() -> void:
-	inventory_holder_link.current_index = index
+	inventory_holder.current_index = index
 
 func get_instance() -> ItemInstance:
 	if instance_override:
@@ -34,9 +34,9 @@ func get_instance() -> ItemInstance:
 	return inventory.get_instance(index)
 
 func is_selected() -> bool:
-	if inventory_holder_link == null:
+	if inventory_holder == null:
 		return false
-	return inventory_holder_link.current_index == index
+	return inventory_holder.current_index == index
 
 func _process(_delta: float) -> void:
 	var selected := is_selected()
