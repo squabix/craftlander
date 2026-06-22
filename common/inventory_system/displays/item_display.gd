@@ -6,6 +6,7 @@ class_name ItemDisplay
 @export var inventory: Inventory
 @export var index := 0
 @export var auto_set_index := false
+@export var auto_set_index_offset := 0
 @export var instance_override: ItemInstance
 
 @export_group("Selection")
@@ -19,7 +20,7 @@ class_name ItemDisplay
 
 func _ready() -> void:
 	if auto_set_index:
-		index = get_index()
+		index = get_index() + auto_set_index_offset
 	if is_instance_valid(select_button):
 		select_button.pressed.connect(select_self)
 
