@@ -26,6 +26,23 @@ const BUILT_IN_INPUT_ACTIONS: Array[String] = [
 	"ui_filedialog_refresh", "ui_filedialog_show_hidden", "ui_swap_input_direction"
 ]
 
+static func interval_print(interval_seconds: float, ...args: Array) -> void:
+	if interval_seconds <= 0.0:
+		return
+
+	# Convert to milliseconds
+	var current_time_msec := Time.get_ticks_msec()
+	var interval_msec := int(interval_seconds * 1000.0)
+	
+	# Get the main loop's last frame time in milliseconds
+	var delta_msec := int(Engine.get_main_loop().root.get_process_delta_time() * 1000.0)
+	
+	var current_window := current_time_msec / interval_msec
+	var previous_window := (current_time_msec - delta_msec) / interval_msec
+	
+	if current_window > previous_window:
+		print.callv(args)
+
 # TODO: Make own node
 static func disable_all_colliders(parent: Node) -> Array[Node]:
 	if not is_instance_valid(parent):
