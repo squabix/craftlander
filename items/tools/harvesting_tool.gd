@@ -22,6 +22,9 @@ func start_use() -> bool:
 	if is_instance_valid(anim_player) and anim_player.has_animation(harvest_animation):
 		anim_player.stop()
 		anim_player.play(harvest_animation)
-	if harvest_ray != null and harvest_ray.hit():
-		pass # Hit successful
+	
+	if harvest_ray != null:
+		var result := harvest_ray.hit()
+		if result != null:
+			pass # Successful hit
 	return true

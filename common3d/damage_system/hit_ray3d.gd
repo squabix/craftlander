@@ -20,23 +20,23 @@ func _ready() -> void:
 	if damage == null:
 		printerr(name, " has no damage")
 
-func hit() -> bool:
+func hit() -> Area3D:
 	var area := get_collider() as Area3D
 	
 	# ERROR if area does not exist
 	if not is_instance_valid(area):
-		return false
+		return null
 	
 	# BAIL if area is not a hurtbox
 	if not (area is Hurtbox3D):
-		return false
+		return null
 	
 	# BAIL if area has already been hit & can only be hit once
 	if area in hit_nodes and one_shot:
-		return false
+		return null
 	
 	area.hurt(damage, Vector3.FORWARD.rotated(Util.VECTOR3Y, global_rotation.y))
 	hit_nodes.append(area)
 	hit_node.emit()
 	
-	return true
+	return area
