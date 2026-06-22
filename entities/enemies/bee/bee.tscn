@@ -188,9 +188,12 @@ height = 1.44
 [sub_resource type="SphereShape3D" id="SphereShape3D_nw5ty"]
 radius = 0.15
 
-[node name="Bee" type="CharacterBody3D" unique_id=764734795]
+[node name="Bee" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("sight", "hit_timer", "form_nodes")]
 collision_mask = 17
 script = ExtResource("1_4hd4j")
+sight = NodePath("Sight3D")
+hit_timer = NodePath("HitTimer")
+form_nodes = [NodePath("BlenderVisuals"), NodePath("Sight3D"), NodePath("InventoryDropper3D"), NodePath("RemoteTransform3D"), NodePath("Hurtbox3D")]
 type = "enemy"
 movement_mode = ExtResource("2_vtgqy")
 move_up_as_jump = false
@@ -291,7 +294,7 @@ update_scale = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 
 [node name="Visuals" parent="BlenderVisuals" unique_id=2002060618 instance=ExtResource("14_0lxgi")]
-transform = Transform3D(0.225, 0, 0, 0, 0.22158173, -0.03907084, 0, 0.03907084, 0.22158173, 0, 0.05, 0)
+transform = Transform3D(0.225, 0, 0, 0, 0.22158171, -0.039070837, 0, 0.039070837, 0.22158171, 0, 0.05, 0)
 
 [node name="Wings" parent="BlenderVisuals/Visuals" index="1" unique_id=1580978913]
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0)
@@ -318,7 +321,7 @@ autoplay = &"fly"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72, 0)
 shape = SubResource("CapsuleShape3D_muv15")
 
-[node name="Hurtbox3D" type="Area3D" parent="." unique_id=966906013 node_paths=PackedStringArray("health", "knockback_entity")]
+[node name="Hurtbox3D" type="Area3D" parent="." unique_id=945988311 node_paths=PackedStringArray("health", "knockback_entity")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 collision_layer = 8
 collision_mask = 0
@@ -327,8 +330,7 @@ health = NodePath("../Health")
 knockback_entity = NodePath("..")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1632674445]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1632674445]
 shape = SubResource("SphereShape3D_nw5ty")
 
 [editable path="BlenderVisuals/Visuals"]

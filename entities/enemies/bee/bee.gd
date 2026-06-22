@@ -12,15 +12,9 @@ const ATTACK_RANGE := 1.0
 
 var target_healths: Dictionary[Node3D, Health] = {}
 
-@onready var sight: RadialSight3D = $Sight3D
-@onready var hit_timer: Timer = $HitTimer
-@onready var form_nodes: Array[Node3D] = [
-	$BlenderVisuals,
-	sight,
-	$InventoryDropper3D,
-	$RemoteTransform3D,
-	$Hurtbox3D
-]
+@export var sight: RadialSight3D
+@export var hit_timer: Timer
+@export var form_nodes: Array[Node3D]
 
 func _ready() -> void:
 	hit_timer.timeout.connect(_on_hit_timer_timeout)
