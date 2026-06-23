@@ -13,13 +13,13 @@ signal changed
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	item_instances.resize(size)
-	await get_tree().process_frame
 	for i in item_instances.size():
 		_initialize_slot(i)
 
 func _initialize_slot(index: int) -> void:
 	var instance = item_instances[index]
-	if instance == null: return
+	if instance == null:
+		return
 	
 	if instance.quantity <= 0:
 		item_instances[index] = null
@@ -38,11 +38,9 @@ func is_index_valid(index: int) -> bool:
 func get_first_empty_index() -> int:
 	return item_instances.find(null)
 
-func is_empty() -> bool:
-	return item_instances.all(func(slot): return slot == null)
+func is_empty() -> bool: return item_instances.all(func(slot): return slot == null)
 
-func get_valid_instances() -> Array[ItemInstance]:
-	return item_instances.filter(func(slot): return slot != null)
+func get_valid_instances() -> Array[ItemInstance]: return item_instances.filter(func(slot): return slot != null)
 
 func get_item_quantities() -> Dictionary:
 	var quantities: Dictionary = {}
@@ -61,8 +59,10 @@ func get_item_quantity(item: Item) -> int:
 	return quantities.get(item, 0)
 
 func add_item(new_item: Item, quantity: int = 1, must_reach_quantity: bool = false) -> int:
-	if constant: return quantity
-	if quantity <= 0: return 0
+	if constant:
+		return quantity
+	if quantity <= 0:
+		return 0
 	
 	var original_quantity := quantity
 	
@@ -107,13 +107,14 @@ func create_new_stacks(new_item: Item, quantity: int) -> int:
 func _is_stackable_with(instance: ItemInstance, item: Item) -> bool:
 	return instance != null and item != null and instance.item.equals(item) and instance.quantity < item.max_quantity
 
-func remove_item(item: Item, quantity: int = -1, must_reach_quantity: bool = false) -> int:
-	if constant: return quantity
-	if quantity == 0: return 0
+func remove_item(item: Item, quantity: int, must_reach_quantity: bool = false) -> int:
+	if constant:
+		return quantity
+	if quantity == 0:
+		return 0
 	
 	var total_available := get_item_quantity(item)
-	if quantity == -1: quantity = total_available
-	elif must_reach_quantity and quantity > total_available: return quantity
+	if must_reach_quantity and quantity > total_available: return quantity
 	
 	var start_quantity := quantity
 	for i in range(item_instances.size() - 1, -1, -1):
@@ -127,7 +128,7 @@ func remove_item(item: Item, quantity: int = -1, must_reach_quantity: bool = fal
 		changed.emit()
 	return quantity
 
-func remove_instance(instance: ItemInstance, quantity := 1) -> int:
+func remove_instance(instance: ItemInstance, quantity: int) -> int:
 	if constant: return 0
 	if instance == null: return quantity
 	
