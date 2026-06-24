@@ -47,7 +47,7 @@ func _ready() -> void:
 	
 	# Connect signals
 	if is_instance_valid(inventory_selector):
-		inventory_selector.updated.connect(update_selection_visuals)
+		inventory_selector.selected_new_item_instance.connect(update_selection_visuals.unbind(1))
 	if is_instance_valid(pause_interface):
 		pause_interface.updated_pause.connect(func(_paused: bool): clear())
 	

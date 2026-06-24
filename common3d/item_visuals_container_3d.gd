@@ -25,7 +25,7 @@ func _ready() -> void:
 	
 	# Update visuals when inventory selector changes if using inventory holder
 	if item_holder is InventoryHolder3D:
-		item_holder.selector.updated.connect(update_visuals.call_deferred)
+		item_holder.selector.selected_new_item_instance.connect(update_visuals.call_deferred.unbind(1))
 	
 	update_visuals()
 

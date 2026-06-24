@@ -1,9 +1,9 @@
 extends Node
 class_name InventorySelector
 
-signal changed_selection
-signal updated
-
+signal selected_new_index(index: int)
+signal selected_new_item(item: Item)
+signal selected_new_item_instance(instance: ItemInstance)
 
 @export var enabled := true:
 	set(to):
@@ -19,25 +19,41 @@ signal updated
 			return
 		
 		if selected_index == to:
-			updated.emit()
 			return
 		
 		selected_index = wrapi(to, 0, inventory.size)
 		
-		updated.emit()
-		changed_selection.emit()
+		selected_new_index.emit(selected_index)
+		selected_new_item_instance.emit(get_current_instance())
+
+var _last_instance: ItemInstance
 
 func _ready() -> void:
 	if inventory == null:
 		printerr(self, " has no inventory and will not work")
 		return
 	
-	updated.emit.call_deferred()
-	changed_selection.emit.call_deferred()
+	selected_new_index.emit.call_deferred(selected_index)
+	selected_new_item_instance.emit.call_deferred(get_current_instance())
 	
-	inventory.changed.connect(updated.emit.call_deferred) # Hold current whenever inventory is changed
+	# Emit selected new item whenever selected new instance
+	selected_new_item_instance.connect(
+		func(instance: ItemInstance) -> void:
+			if instance == null:
+				selected_new_item.emit(null)
+				return
+			selected_new_item.emit(instance.item)
+	)
+	
+	inventory.changed.connect(check_instance_update) # Hold current whenever inventory is changed
 
 func is_index_valid(index: int) -> bool: return enabled and inventory.is_index_valid(index)
+
+func check_instance_update() -> void:
+	var current := get_current_instance()
+	if _last_instance != current:
+		_last_instance = current
+		selected_new_item_instance.emit(current)
 
 func get_current_instance() -> ItemInstance:
 	if not is_index_valid(selected_index):

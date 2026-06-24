@@ -4,10 +4,7 @@ class_name InventoryHolder3D
 @export var selector: InventorySelector
 
 func _ready() -> void:
-	selector.updated.connect(hold_selected_instance)
-
-func hold_selected_instance() -> void:
-	hold_instance(selector.get_current_instance())
+	selector.selected_new_item_instance.connect(hold_instance) # Hold current instance
 
 func consume_item() -> void:
 	selector.inventory.remove_instance(item_instance, 1)

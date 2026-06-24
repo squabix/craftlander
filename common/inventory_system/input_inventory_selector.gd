@@ -42,8 +42,6 @@ func scroll(direction: int, skip_null: bool=false) -> void:
 		# Scroll until reached non-null slot or wrapped back to initial slot
 		while get_current_instance() == null and selected_index != old_index:
 			scroll(direction, false)
-	
-		updated.emit()
 
 func scroll_wrap(index: int) -> int: return wrapi(index, scroll_min_index, scroll_max_index + 1 if scroll_max_index != -1 else inventory.size)
 

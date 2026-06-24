@@ -30,8 +30,9 @@ func _ready() -> void:
 	initialize_playback()
 	disable_item_blend()
 	
+	# Update when inventory selector selects new instance
 	if is_instance_valid(inventory_selector):
-		inventory_selector.updated.connect(update_to_selection)
+		inventory_selector.selected_new_item.connect(update_item)
 	
 	active = true
 
@@ -49,9 +50,6 @@ func _on_state_finished(state_name: String) -> void:
 	# Play end use
 	elif current_item != null and current_item.current_use_state == Item.UseState.END_USE:
 		play_end()
-
-func update_to_selection() -> void:
-	update_item(inventory_selector.get_current_item())
 
 func default_animations() -> void:
 	start_anim = default_start_anim
