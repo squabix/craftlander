@@ -46,8 +46,9 @@ func update_visuals() -> void:
 	Util.safe_free(contained_visuals)
 	
 	# Wait for visuals to be set when item's scene is set up
-	if not await ensure_item_visuals():
-		return
+	item.set_up_scene()
+	
+	contained_visuals = item.duplicate_visuals()
 	
 	# Ghost a duplicate of visuals to copy animation
 	contained_visuals = instance.item.visuals.duplicate()

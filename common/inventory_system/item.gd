@@ -5,6 +5,7 @@ signal scene_set_up
 signal made_unique
 signal triggered_event(event: ItemEvent)
 
+# Item state signals
 signal started_use
 signal continued_use
 signal ended_use
@@ -12,35 +13,45 @@ signal ended_use
 enum CooldownMode {DISABLED, START_USE, END_USE}
 enum UseState {START_USE, CONTINUE_USE, END_USE}
 
-@export var scene: PackedScene
 @export var name := "":
 	get:
+		# Fallback to resource path if no name is set
 		if name.is_empty():
 			return resource_path
 		return name
 @export var max_quantity := 1
 @export var icon: Texture2D
 @export var consumable := false
-@export var visuals_scene_path := "Visuals"
+
+@export_group("Scene")
+@export var scene: PackedScene
+@export var visuals_scene_path := "Visuals" # Node path inside the scene containing visual meshes, particles, animations, etc.
+
 @export_group("Cooldown")
 @export var cooldown_mode := CooldownMode.DISABLED
 @export var default_cooldown_length := 0.0
 
-var max_uses := 1
+var max_uses := 1 # Maximum consecutive uses (frames)
 var scene_instance: Node
-var visuals: Node
+var visuals: Node:
+	get:
+		if not is_instance_valid(visuals) and not is_scene_set_up:
+			printerr(self, " has no visuals without setting up scene")
+			return null
+		return visuals
 
 var current_use_state: UseState = UseState.END_USE
 
+# Trackers for the frame update loop
 var _attempted_use := false
 var _used_this_update := false
 var _updates_attempted_use := 0
+
 var is_unique := false:
 	set(to):
 		is_unique = to
 		if to == true:
 			made_unique.emit()
-
 var is_scene_set_up := false
 
 var update_delta := 0.0
@@ -49,11 +60,7 @@ var cooldown_length := default_cooldown_length
 
 var root: Node
 
-static func imitate(item_name: String) -> Item:
-	var imitation := Item.new()
-	imitation.name = item_name
-	return imitation
-
+## Halts execution using await until this resource has been made unique
 func ensure_unique() -> void:
 	if is_unique:
 		return
@@ -84,33 +91,34 @@ func update(delta: float) -> void:
 	idle()
 	update_delta = delta
 	
-	# 1. Start Logic (First frame of use)
+	# Start Logic (first frame of use)
 	if _used_this_update and current_use_state == UseState.END_USE:
 		current_use_state = UseState.START_USE
 		started_use.emit()
 
-	# 2. Continue Logic (Multiple frames of use)
+	# Continue Logic (multiple frames of use)
 	elif _used_this_update and _updates_attempted_use > 0:
 		current_use_state = UseState.CONTINUE_USE
 		continued_use.emit()
 		continue_use()
 
-	# 3. Termination Logic (First frame not using)
-	if current_use_state != UseState.END_USE:
-		if reached_use_limit() or not _used_this_update:
-			if cooldown_mode == CooldownMode.END_USE:
-				start_cooldown()
-			
-			end_use()
-			
-			current_use_state = UseState.END_USE
-			ended_use.emit()
-			
-			# Reset counter
-			_updates_attempted_use = 0
-			_attempted_use = false 
+	# Termination Logic (first frame of no use)
+	if current_use_state != UseState.END_USE and (reached_use_limit() or not _used_this_update):
+		
+		# Try starting cooldown
+		if cooldown_mode == CooldownMode.END_USE:
+			start_cooldown()
+		
+		end_use()
+		
+		current_use_state = UseState.END_USE
+		ended_use.emit()
+		
+		# Reset counter
+		_updates_attempted_use = 0
+		_attempted_use = false 
 
-	# Increment counter if actively holding button and haven't just ended
+	# Increment counter if actively attempting use and haven't just ended
 	if _attempted_use and current_use_state != UseState.END_USE:
 		_updates_attempted_use += 1
 	else:
@@ -119,8 +127,7 @@ func update(delta: float) -> void:
 	_used_this_update = false
 	_attempted_use = false
 
-func reached_use_limit() -> bool:
-	return max_uses > 0 and _updates_attempted_use >= max_uses
+func reached_use_limit() -> bool: return max_uses > 0 and _updates_attempted_use >= max_uses
 
 func use() -> bool:
 	_attempted_use = true
@@ -135,7 +142,6 @@ func use() -> bool:
 	
 	# Use is successful
 	_used_this_update = true
-	
 	if _updates_attempted_use == 0:
 		if cooldown_mode == CooldownMode.START_USE:
 			start_cooldown()
@@ -150,39 +156,59 @@ func get_instance(quantity: int=1) -> ItemInstance:
 	return instance
 
 func set_up_scene() -> void:
-	if not scene_instance:
-		printerr(name, " cannot set up scene without scene instance")
+	if is_scene_set_up:
 		return
-	visuals = scene_instance.get_node(visuals_scene_path)
-	if not is_instance_valid(visuals):
-		printerr(name, " could not find visuals")
-	if visuals != null:
+	
+	if not scene_instance:
+		scene_instance = scene.instantiate()
+	
+	# Find visuals
+	visuals = scene_instance.get_node_or_null(visuals_scene_path)
+	if is_instance_valid(visuals):
 		visuals.hide()
+	
 	is_scene_set_up = true
 	scene_set_up.emit()
 
-func get_visuals_duplicate() -> Node:
+func duplicate_visuals() -> Node:
 	if scene == null:
-		printerr(name, " cannot get visuals duplicate from null scene")
-		return
-	return scene.instantiate().get_node(visuals_scene_path).duplicate()
+		printerr(self, " cannot get visuals duplicate from null scene")
+		return null
+	
+	var temp_instance := scene.instantiate()
+	var target_node := temp_instance.get_node_or_null(visuals_scene_path)
+	var duplicate_node: Node = null
+	
+	if is_instance_valid(target_node):
+		duplicate_node = target_node.duplicate()
+	else:
+		printerr(self, " failed to find visuals path for duplication: ", visuals_scene_path)
+		
+	temp_instance.queue_free() 
+	return duplicate_node
 
 func add_scene(parent: Node) -> Node:
 	if scene == null:
 		printerr(name, " cannot instantiate null scene")
 		return
-	Util.safe_free(scene_instance)
-		
-	scene_instance = scene.instantiate()
-	parent.add_child(scene_instance)
-	set_up_scene()
+	
+	if not is_scene_set_up or scene_instance == null:
+		is_scene_set_up = false
+		Util.safe_free(scene_instance)
+		scene_instance = scene.instantiate()
+		parent.add_child(scene_instance)
+		set_up_scene()
+	else:
+		parent.add_child(scene_instance)
+	
 	return scene_instance
 
 func remove_scene() -> void:
-	if scene_instance == null:
+	if not is_instance_valid(scene_instance):
 		return
 	Util.safe_free(scene_instance)
 	clear_nodes()
+	is_scene_set_up = false
 
 func clear_nodes() -> void:
 	scene_instance = null
@@ -204,4 +230,4 @@ func idle() -> void:
 	pass
 
 func _to_string() -> String:
-	return name + " " + str(scene)
+	return name + " Item"

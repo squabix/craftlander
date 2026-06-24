@@ -20,7 +20,7 @@ static func from_item(_item: Item) -> ItemPickup3D:
 	return pickup
 
 func update_visuals() -> void:
-	visuals = item.get_visuals_duplicate()
+	visuals = item.duplicate_visuals()
 	add_child(visuals)
 	visuals.global_position = self.global_position
 	visuals.global_rotation = self.global_rotation
