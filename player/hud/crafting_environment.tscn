@@ -47,7 +47,7 @@ rings = 6
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4aq3d"]
 height = 0.01
 
-[node name="CraftingEnvironment" type="SubViewportContainer" unique_id=2022052365 node_paths=PackedStringArray("subviewport", "space", "item_origin", "camera", "grid", "grid_inventory", "cursor3d")]
+[node name="CraftingEnvironment" type="SubViewportContainer" unique_id=2022052365 node_paths=PackedStringArray("sub_viewport", "space", "item_origin", "camera", "grid", "grid_inventory", "cursor3d")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -55,7 +55,7 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 script = ExtResource("1_mqnoh")
-subviewport = NodePath("SubViewport")
+sub_viewport = NodePath("SubViewport")
 space = NodePath("SubViewport/Space")
 item_origin = NodePath("SubViewport/Space/ItemOrigin")
 camera = NodePath("SubViewport/Space/Camera3D")

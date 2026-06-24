@@ -15,7 +15,7 @@ const HEAD_SPEED := 0.1
 @export_group("Inventory")
 @export var inventory: Inventory
 @export var item_holder: ItemHolder3D
-@export var inventory_holder_link: InventoryHolderLink
+@export var inventory_selector: InventorySelector
 @export var dropper: InventoryDropper3D
 
 @export_group("Stats")
@@ -53,7 +53,7 @@ func adjust_head() -> void:
 	)
 
 func drop_current_item() -> void:
-	dropper.drop(inventory_holder_link.current_index)
+	dropper.drop(inventory_selector.current_index)
 
 func _process(_delta: float) -> void:
 	adjust_head()

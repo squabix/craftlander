@@ -3,41 +3,53 @@ class_name ItemDisplay
 
 @export var icon_rect: TextureRect
 @export var quantity_label: Label
-@export var inventory: Inventory
 @export var index := 0
-@export var auto_set_index := false
-@export var auto_set_index_offset := 0
 @export var instance_override: ItemInstance
 
+@export_group("Auto Set Index")
+@export var do_auto_set_index := false
+@export var auto_set_index_offset := 0
+
 @export_group("Selection")
-@export var inventory_holder: InventoryHolder
+@export var inventory_selector: InventorySelector
 @export var select_button: Button
+
 @export var unselected_modulate := Color.WHITE
 @export var selected_modulate := Color.WHITE
+
 @export var selected_scale_amount := 1.0
 @export_range(0.0, 1.0) var selected_scale_speed := 1.0
+
 @export var selected_scale_targets: Array[Control] = []
 
 func _ready() -> void:
-	if auto_set_index:
+	
+	# Auto set index
+	if do_auto_set_index:
 		index = get_index() + auto_set_index_offset
+	
+	# Connect selection signal
 	if is_instance_valid(select_button):
 		select_button.pressed.connect(select_self)
 
 func select_self() -> void:
-	inventory_holder.current_index = index
+	inventory_selector.selected_index = index
 
 func get_instance() -> ItemInstance:
 	if instance_override:
 		return instance_override
-	if inventory == null:
+	if inventory_selector == null:
 		return null
-	return inventory.get_instance(index)
+	if inventory_selector.inventory == null:
+		return null
+	return inventory_selector.inventory.get_instance(index)
 
 func is_selected() -> bool:
-	if inventory_holder == null:
+	if inventory_selector == null:
 		return false
-	return inventory_holder.current_index == index
+	if not inventory_selector.enabled:
+		return false
+	return inventory_selector.selected_index == index
 
 func _process(_delta: float) -> void:
 	var selected := is_selected()

@@ -7,39 +7,48 @@ const GHOSTED_ANIMATION_PROPERTIES: PackedStringArray = [
 ]
 
 @export var item_holder: ItemHolder3D
-@export var inventory_holder_link: InventoryHolderLink
+@export var item_override: Item
+@export var do_ghost_animations := true
 @export var visuals_scale_ratio := 1.0
 @export var do_disable_shadows := false
 @export_flags_3d_render var layers := 1
 
-var instance: ItemInstance
 var contained_visuals: Node3D
 
+static func from_item(item: Item) -> ItemVisualsContainer3D:
+	item.set_up_scene()
+	var visuals_container := ItemVisualsContainer3D.new()
+	visuals_container.item_override = item
+	return visuals_container
+
 func _ready() -> void:
-	if is_instance_valid(inventory_holder_link):
-		inventory_holder_link.changed.connect(update_visuals)
-		if item_holder == null:
-			item_holder = inventory_holder_link.item_holder
 	
-	await get_tree().process_frame
+	# Update visuals when inventory selector changes if using inventory holder
+	if item_holder is InventoryHolder3D:
+		item_holder.selector.updated.connect(update_visuals.call_deferred)
+	
 	update_visuals()
 
 func reset_visuals() -> void:
 	for child in get_children():
 		Util.safe_free(child)
 
-func ensure_item_visuals() -> bool:
-	if instance.item.is_scene_set_up:
-		return true
-	await instance.item.scene_set_up
-	return instance.item.visuals != null
+func get_item() -> Item:
+	if item_override != null:
+		return item_override
+	if item_holder == null:
+		return null
+	if item_holder.item_instance == null:
+		return null
+	return item_holder.item_instance.item
 
 func update_visuals() -> void:
 	reset_visuals()
-	instance = item_holder.item_instance
 	
-	# Cannot update visuals if no instance/item
-	if instance == null or instance.item == null:
+	var item := get_item()
+	
+	# Cannot update visuals if no item
+	if item == null:
 		return
 	
 	# Free current visuals
@@ -50,15 +59,15 @@ func update_visuals() -> void:
 	
 	contained_visuals = item.duplicate_visuals()
 	
-	# Ghost a duplicate of visuals to copy animation
-	contained_visuals = instance.item.visuals.duplicate()
 	add_child(contained_visuals)
-	Util.ghost(
-		instance.item.visuals,
-		contained_visuals,
-		GHOSTED_ANIMATION_PROPERTIES,
-		get_tree().process_frame
-	)
+	if item_override == null and do_ghost_animations:
+		# Ghost a duplicate of visuals to copy animation
+		Util.ghost(
+			item.visuals,
+			contained_visuals,
+			GHOSTED_ANIMATION_PROPERTIES,
+			get_tree().process_frame
+		)
 	
 	contained_visuals.show()
 	if do_disable_shadows: disable_shadows()

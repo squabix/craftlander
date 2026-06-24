@@ -4,14 +4,14 @@ class_name CraftingEnvironment
 const MAX_DRAG_DISTANCE := 1.0
 const MAX_SLOT_DISTANCE := 1.0
 const DRAG_SPEED := 0.2
-const PICKUP_SCALE := 0.5
+const VISUALS_SCALE := 0.5
 const SNAP_SPEED := 0.3
 const SPACE_POSITION := -Vector3.ONE * 1000.0
-const PICKUP_TILT := Vector3(0.0, -45.0, 0.0)
+const VISUALS_TILT := Vector3(0.0, -45.0, 0.0)
 
 const RECIPE_LAYOUT_SCALE := 1.0
 
-@export var subviewport: SubViewport
+@export var sub_viewport: SubViewport
 @export var space: Node3D
 @export var item_origin: Node3D
 @export var camera: Camera3D
@@ -20,13 +20,19 @@ const RECIPE_LAYOUT_SCALE := 1.0
 @export var cursor3d: RayCast3D
 
 @export_group("External Dependencies")
-@export var inventory_holder_link: InventoryHolderLink
+@export var inventory_selector: InventorySelector
 @export var pause_interface: Control
 
-var slots_contents: Dictionary[Vector3, ItemPickup3D]
+@export var is_crafting := false:
+	set(value):
+		is_crafting = value
+		if is_crafting:
+			update_selection_visuals()
+		else:
+			reset_selection_visuals()
 
-var is_crafting := false
-var held_pickup: ItemPickup3D
+var slots_contents: Dictionary[Vector3, ItemVisualsContainer3D]
+var selection_visuals: ItemVisualsContainer3D
 
 func reset_slots() -> void:
 	for slot_node in grid.get_children():
@@ -40,12 +46,12 @@ func _ready() -> void:
 	reset_slots()
 	
 	# Connect signals
-	if is_instance_valid(inventory_holder_link):
-		inventory_holder_link.changed.connect(update_held_pickup)
+	if is_instance_valid(inventory_selector):
+		inventory_selector.updated.connect(update_selection_visuals)
 	if is_instance_valid(pause_interface):
-		pause_interface.updated_pause.connect(clear)
+		pause_interface.updated_pause.connect(func(_paused: bool): clear())
 	
-	update_held_pickup.call_deferred()
+	update_selection_visuals.call_deferred()
 
 func get_recipe_layout() -> Dictionary[Vector2i, Item]:
 	var layout: Dictionary[Vector2i, Item]
@@ -59,28 +65,35 @@ func get_recipe_layout() -> Dictionary[Vector2i, Item]:
 		layout[layout_position] = slots_contents[slot].item
 	return layout
 
-func reset_held_pickup() -> void:
-	Util.safe_free(held_pickup)
-	held_pickup = null
+func reset_selection_visuals() -> void:
+	Util.safe_free(selection_visuals)
+	selection_visuals = null
 
-func update_held_pickup() -> void:
-	reset_held_pickup()
-	
-	if not is_instance_valid(inventory_holder_link):
+func update_selection_visuals() -> void:
+	if not is_crafting or not is_instance_valid(inventory_selector):
+		reset_selection_visuals()
 		return
 	
-	var new_instance := inventory_holder_link.get_current_instance()
-	if not is_instance_valid(new_instance):
+	var new_instance := inventory_selector.get_current_instance()
+	if not is_instance_valid(new_instance) or new_instance.item == null:
+		reset_selection_visuals()
 		return
 	
-	# Set held pickup to current held item
-	held_pickup = spawn_item(new_instance.item)
+	if is_instance_valid(selection_visuals) and selection_visuals.get_item() == new_instance.item:
+		return
+		
+	reset_selection_visuals()
+	
+	# Set held visuals to current held item
+	new_instance.item.set_up_scene()
+	selection_visuals = spawn_item(new_instance.item)
+	
 
 func get_scaled_mouse_position2d() -> Vector2:
 	var local_mouse := get_local_mouse_position()
 	return Vector2(
-		local_mouse.x / size.x * subviewport.size.x,
-		local_mouse.y / size.y * subviewport.size.y
+		local_mouse.x / size.x * sub_viewport.size.x,
+		local_mouse.y / size.y * sub_viewport.size.y
 	)
 
 func get_mouse_position3d() -> Vector3:
@@ -89,12 +102,12 @@ func get_mouse_position3d() -> Vector3:
 		get_scaled_mouse_position2d()
 	)
 
-func spawn_item(item: Item) -> ItemPickup3D:
-	var pickup := ItemPickup3D.from_item(item)
-	item_origin.add_child(pickup)
-	pickup.scale *= PICKUP_SCALE
-	pickup.rotation_degrees = PICKUP_TILT
-	return pickup
+func spawn_item(item: Item) -> ItemVisualsContainer3D:
+	var visuals := ItemVisualsContainer3D.from_item(item)
+	item_origin.add_child(visuals)
+	visuals.scale *= VISUALS_SCALE
+	visuals.rotation_degrees = VISUALS_TILT
+	return visuals
 
 func get_current_slot() -> Variant:
 	if not cursor3d.is_colliding():
@@ -103,40 +116,40 @@ func get_current_slot() -> Variant:
 	return overlap.global_position
 
 func move_item_to_grid_inventory(item: Item) -> void:
-	inventory_holder_link.inventory.give_item(item, 1, grid_inventory)
+	inventory_selector.inventory.give_item(item, 1, grid_inventory)
 
 func remove_item_from_grid_inventory(item: Item) -> void:
-	grid_inventory.give_item(item, 1, inventory_holder_link.inventory)
+	grid_inventory.give_item(item, 1, inventory_selector.inventory)
 
 func place_current() -> void:
-	
-	# Has no current to place
-	if not is_instance_valid(held_pickup):
+	if not is_instance_valid(selection_visuals):
 		return
 	
-	# Not hovering over any slot
 	var slot: Variant = get_current_slot()
 	if slot == null:
 		return
 	
 	empty_slot(slot)
-	slots_contents[slot] = held_pickup
-	move_item_to_grid_inventory(held_pickup.item)
-	held_pickup = null
-	update_held_pickup.call_deferred()
+	
+	var visuals_to_place := selection_visuals
+	selection_visuals = null
+	
+	slots_contents[slot] = visuals_to_place
+	move_item_to_grid_inventory(visuals_to_place.get_item())
+	update_selection_visuals.call_deferred()
 
 func clear() -> void:
-	grid_inventory.give_everything(inventory_holder_link.inventory)
+	grid_inventory.give_everything(inventory_selector.inventory)
 	for slot in slots_contents:
 		Util.safe_free(slots_contents[slot])
 		slots_contents[slot] = null
 
 func interpolate_slots_contents() -> void:
 	for slot in slots_contents:
-		var slot_pickup := slots_contents[slot]
-		if not is_instance_valid(slot_pickup):
+		var slot_visuals := slots_contents[slot]
+		if not is_instance_valid(slot_visuals):
 			continue
-		slot_pickup.global_position = slot_pickup.global_position.lerp(
+		slot_visuals.global_position = slot_visuals.global_position.lerp(
 			slot,
 			SNAP_SPEED
 		)
@@ -147,39 +160,38 @@ func _process(_delta: float) -> void:
 	
 	interpolate_slots_contents()
 	
-	# Empty current slot
 	if Input.is_action_pressed("use_secondary") and not Input.is_action_pressed("use_primary"):
 		empty_slot(get_current_slot())
 	
-	# Reposition cursor 3d and held pickup to mouse
 	var mouse := get_mouse_position3d()
 	cursor3d.global_position = mouse
-	if is_instance_valid(held_pickup):
-		held_pickup.global_position = held_pickup.global_position.lerp(mouse, DRAG_SPEED)
+	if is_instance_valid(selection_visuals):
+		selection_visuals.global_position = selection_visuals.global_position.lerp(mouse, DRAG_SPEED)
 
 func empty_slot(slot: Variant) -> void:
 	if slot == null:
 		return
-	
-	var old_pickup: ItemPickup3D = slots_contents[slot]
-	if old_pickup == null:
+	var old_visuals: ItemVisualsContainer3D = slots_contents[slot]
+	if old_visuals == null:
 		return
 	
-	Util.safe_free(old_pickup)
-	remove_item_from_grid_inventory(old_pickup.item)
+	var item_to_remove = old_visuals.get_item()
+	Util.safe_free(old_visuals)
+	slots_contents[slot] = null 
+	remove_item_from_grid_inventory(item_to_remove)
 
 func craft() -> void:
 	var recipe := RecipeBook.get_recipe(get_recipe_layout())
 	if recipe == null:
 		return
 	
-	var remainder := inventory_holder_link.inventory.add_item(
+	var remainder := inventory_selector.inventory.add_item(
 		recipe.result.item,
 		recipe.result.quantity,
 		true
 	)
 	if remainder > 0:
-		return # Inventory too full for crafted items
+		return 
 	
 	grid_inventory.clear()
 	clear()

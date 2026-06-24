@@ -1,6 +1,6 @@
 extends Control
 
-signal updated_pause
+signal updated_pause(to: bool)
 
 const ACTION_PAUSE := "ui_cancel"
 
@@ -41,7 +41,7 @@ func toggle_pause() -> void:
 	get_tree().paused = is_paused
 	crafting_environment.is_crafting = is_paused
 	update()
-	updated_pause.emit()
+	updated_pause.emit(is_paused)
 
 func _process(_delta: float) -> void:
 	if can_update_pause and pressed_pause():

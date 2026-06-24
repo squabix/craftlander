@@ -8,21 +8,24 @@ signal item_event_triggered(event: ItemEvent)
 
 @export var initial_item_instance: ItemInstance
 @export var root: Node
+
 @export_group("Misc")
 @export var anim_tree: ItemAnimationTree
 @export var instance_parent: Node3D
 
 var item_instance: ItemInstance
 
-func update_item_instance(to: ItemInstance):
-	if item_instance == to: return # Already holding this instance
+func hold_instance(new_instance: ItemInstance):
+	if item_instance == new_instance:
+		return # Already holding this instance
 	
 	if instance_parent == null:
 		instance_parent = self
-	reset_item_instance()
+	reset_instance()
 	
-	item_instance = to
-	if item_instance == null: return
+	item_instance = new_instance
+	if item_instance == null:
+		return
 	
 	await item_instance.item.ensure_unique()
 	if anim_tree:
@@ -46,7 +49,7 @@ func connect_triggered_event(instance: ItemInstance) -> void:
 		return
 	triggered_event.connect(emit)
 
-func reset_item_instance() -> void:
+func reset_instance() -> void:
 	if not has_item():
 		return
 	item_instance.item.remove_scene()
@@ -61,13 +64,16 @@ func use_item() -> void:
 	used_item.emit(item_instance.item)
 	var consumed := item_instance.item.use()
 	if consumed and item_instance.item.consumable:
-		consumed_instance.emit(item_instance)
+		consume_item()
+
+func consume_item() -> void:
+	consumed_instance.emit(item_instance)
 
 func _ready() -> void:
 	if initial_item_instance != null:
 		initial_item_instance = initial_item_instance.duplicate_deep()
 		initial_item_instance.make_unique()
-	update_item_instance(initial_item_instance)
+	hold_instance(initial_item_instance)
 
 func _process(delta: float) -> void:
 	if not has_item():

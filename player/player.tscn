@@ -7,9 +7,9 @@
 [ext_resource type="Script" uid="uid://chlki14yu5ulm" path="res://player/player_controller.gd" id="4_qjkh3"]
 [ext_resource type="Script" uid="uid://cb1suk3avv5yq" path="res://common/mouse_mode_controller.gd" id="5_g6k8r"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="6_j55il"]
-[ext_resource type="Script" uid="uid://bwd4jx8u5uct2" path="res://common/inventory_system/item_holder3d.gd" id="7_kb6p2"]
 [ext_resource type="Script" uid="uid://bx3dqx6ebaugu" path="res://player/states/player_walking_state.gd" id="8_hg6s5"]
-[ext_resource type="Script" uid="uid://ioo6s3m7wbha" path="res://common/inventory_system/inventory_holder.gd" id="9_bjvpn"]
+[ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="8_w7j2h"]
+[ext_resource type="Script" uid="uid://ioo6s3m7wbha" path="res://common/inventory_system/inventory_selector.gd" id="9_bjvpn"]
 [ext_resource type="Script" uid="uid://ccbg8iw3gs48v" path="res://player/states/player_crouched_state.gd" id="9_hg6s5"]
 [ext_resource type="Script" uid="uid://cody42elqcrek" path="res://player/states/player_sprinting_state.gd" id="10_8t03j"]
 [ext_resource type="Script" uid="uid://bypxgjqugqucx" path="res://common3d/interactions/interactor3d.gd" id="10_32hag"]
@@ -22,12 +22,14 @@
 [ext_resource type="Script" uid="uid://b6gq5g1xvdnsu" path="res://player/states/player_swimming_state.gd" id="16_art4l"]
 [ext_resource type="Script" uid="uid://b1eix6p0204fp" path="res://common/inventory_system/displays/item_display.gd" id="16_e7oew"]
 [ext_resource type="Script" uid="uid://c3r6ofqamuc13" path="res://common/state_machine/mirror_state_machine.gd" id="16_mmwog"]
-[ext_resource type="Script" uid="uid://ifyn4pfksk07" path="res://player/player_hud.gd" id="17_g4c7l"]
+[ext_resource type="Script" uid="uid://ifyn4pfksk07" path="res://player/hud/player_hud.gd" id="17_g4c7l"]
 [ext_resource type="Script" uid="uid://bn1bpe1hvtv7u" path="res://player/player_piloting_boat_state.gd" id="17_hjies"]
 [ext_resource type="Texture2D" uid="uid://c4jkghkqifcm7" path="res://assets/crosshair.tres" id="17_tqiix"]
 [ext_resource type="Script" uid="uid://b7pvp0pnngnem" path="res://common/ui/fps_label.gd" id="19_bjvpn"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="19_c35mf"]
 [ext_resource type="Script" uid="uid://7vqcc56mnyjs" path="res://common/ui/tooltip_label.gd" id="19_knn7v"]
+[ext_resource type="Script" uid="uid://dk37mcui4c45e" path="res://common/inventory_system/inventory_holder3d.gd" id="20_mmwog"]
+[ext_resource type="Script" uid="uid://bghx5ubltmjf7" path="res://common/inventory_system/input_inventory_selector.gd" id="21_fmu53"]
 [ext_resource type="Resource" uid="uid://bah3rou15fcfh" path="res://items/tools/shoddy_axe/shoddy_axe_item.tres" id="22_bjvpn"]
 [ext_resource type="Script" uid="uid://c07qmsd7epd0h" path="res://common/ui/popup_display.gd" id="23_7pqkx"]
 [ext_resource type="Texture2D" uid="uid://dvu8avo8cfq2c" path="res://icon.svg" id="23_g4c7l"]
@@ -48,6 +50,7 @@
 [ext_resource type="Script" uid="uid://dfo0te3udism4" path="res://player/hud/player_death_screen.gd" id="40_gswnw"]
 [ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/tools/shoddy_mace/shoddy_mace_item.tres" id="41_a2xo5"]
 [ext_resource type="Resource" uid="uid://w52cknmpa167" path="res://items/tools/shoddy_pickaxe/shoddy_pickaxe_item.tres" id="41_art4l"]
+[ext_resource type="Script" uid="uid://s6yjbusuc0uo" path="res://player/hud/current_item_label.gd" id="43_8pxes"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -65,6 +68,12 @@ metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
 [sub_resource type="Resource" id="Resource_mmwog"]
 script = ExtResource("6_j55il")
 item = ExtResource("22_bjvpn")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_n0b8q"]
+script = ExtResource("6_j55il")
+item = ExtResource("8_w7j2h")
+quantity = 5
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Curve" id="Curve_2uvqg"]
@@ -177,6 +186,18 @@ shader_parameter/color_over = Color(0, 0, 0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_55jnj"]
 font_size = 10
 
+[sub_resource type="Gradient" id="Gradient_x7c3f"]
+offsets = PackedFloat32Array(0.5619159, 0.5961838)
+colors = PackedColorArray(0.36, 0.36, 0.36, 0.560784, 0.28, 0.28, 0.28, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bjvpn"]
+gradient = SubResource("Gradient_x7c3f")
+width = 128
+height = 128
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [sub_resource type="Animation" id="Animation_knn7v"]
 length = 0.001
 tracks/0/type = "value"
@@ -215,18 +236,6 @@ _data = {
 &"show": SubResource("Animation_g4c7l")
 }
 
-[sub_resource type="Gradient" id="Gradient_x7c3f"]
-offsets = PackedFloat32Array(0.5619159, 0.5961838)
-colors = PackedColorArray(0.36, 0.36, 0.36, 0.560784, 0.28, 0.28, 0.28, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_bjvpn"]
-gradient = SubResource("Gradient_x7c3f")
-width = 128
-height = 128
-use_hdr = true
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-
 [sub_resource type="Gradient" id="Gradient_fjxoa"]
 colors = PackedColorArray(0.09627376, 0.108222656, 0.12931883, 1, 0, 0, 0, 1)
 
@@ -246,22 +255,10 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Head/Camera3D/ArmContainer:position")
+tracks/0/path = NodePath("Head/Camera3D/ItemHolder/ItemVisualsContainer3D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, -0.08, -0.3)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Head/Camera3D/ArmContainer/ItemHolder/ItemVisualsContainer3D:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -276,22 +273,10 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Head/Camera3D/ArmContainer:position")
-tracks/0/interp = 2
+tracks/0/path = NodePath("Head/Camera3D/ItemHolder/ItemVisualsContainer3D:rotation")
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.8, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector3(0, -0.08, -0.3), Vector3(0, -0.07, -0.3), Vector3(0, -0.08, -0.3)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Head/Camera3D/ArmContainer/ItemHolder/ItemVisualsContainer3D:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -305,7 +290,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Head/Camera3D/ArmContainer/ItemHolder/ItemVisualsContainer3D:rotation")
+tracks/0/path = NodePath("Head/Camera3D/ItemHolder/ItemVisualsContainer3D:rotation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -359,7 +344,6 @@ states/start_use/position = Vector2(373.49997, 100.31482)
 transitions = ["Start", "start_use", SubResource("AnimationNodeStateMachineTransition_gswnw"), "start_use", "continue_use", SubResource("AnimationNodeStateMachineTransition_xcnuv"), "continue_use", "end_use", SubResource("AnimationNodeStateMachineTransition_j55il"), "end_use", "End", SubResource("AnimationNodeStateMachineTransition_hjies")]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_1so5t"]
-graph_offset = Vector2(-809.991, 156.15398)
 nodes/output/position = Vector2(146.66667, 226.66667)
 nodes/Idle/node = SubResource("AnimationNodeAnimation_pnw6m")
 nodes/Idle/position = Vector2(-320, 253.33333)
@@ -375,7 +359,7 @@ items = Array[ExtResource("40_a2xo5")]([ExtResource("41_a2xo5"), ExtResource("22
 start_anim = "swing_tool"
 metadata/_custom_type_script = "uid://c622jer80j3sk"
 
-[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("head", "movement_state_machine", "interactor", "respawn_button", "inventory", "item_holder", "inventory_holder_link", "dropper", "health", "hunger", "stamina", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
+[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("head", "movement_state_machine", "interactor", "respawn_button", "inventory", "item_holder", "inventory_selector", "dropper", "health", "hunger", "stamina", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
 collision_layer = 17
 floor_constant_speed = true
 floor_block_on_wall = false
@@ -387,8 +371,8 @@ movement_state_machine = NodePath("Controller3D/Default")
 interactor = NodePath("Head/Camera3D/InteratorRay/Interactor")
 respawn_button = NodePath("HUD/DeathScreen/OptionsContainer/RespawnButton")
 inventory = NodePath("Inventory")
-item_holder = NodePath("Head/Camera3D/ArmContainer/ItemHolder")
-inventory_holder_link = NodePath("Head/Camera3D/ArmContainer/ItemHolder/InventoryHolder")
+item_holder = NodePath("Head/Camera3D/ItemHolder")
+inventory_selector = NodePath("Head/Camera3D/ItemHolder/HoldSelector")
 dropper = NodePath("Head/Camera3D/DropperRayCast/InventoryDropper3D")
 health = NodePath("Health")
 hunger = NodePath("Hunger")
@@ -402,8 +386,8 @@ metadata/_custom_type_script = "uid://bki5ij8task16"
 
 [node name="Inventory" type="Node" parent="." unique_id=710458340]
 script = ExtResource("19_c35mf")
-item_instances = Array[ExtResource("6_j55il")]([SubResource("Resource_mmwog")])
-size = 10
+item_instances = Array[ExtResource("6_j55il")]([SubResource("Resource_mmwog"), SubResource("Resource_n0b8q")])
+size = 50
 
 [node name="Hunger" type="Node" parent="." unique_id=1790864786 node_paths=PackedStringArray("bar", "health", "stamina")]
 script = ExtResource("31_2uvqg")
@@ -505,45 +489,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 cull_mask = 1048573
 fov = 85.0
 
-[node name="ArmContainer" type="Node3D" parent="Head/Camera3D" unique_id=207489004]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.08, -0.3)
-
-[node name="ItemHolder" type="Node3D" parent="Head/Camera3D/ArmContainer" unique_id=1642409333 node_paths=PackedStringArray("root", "anim_tree", "instance_parent")]
-transform = Transform3D(0.9848081, 0.015134426, 0.17298739, 0, 0.9961941, -0.08715573, -0.17364824, 0.08583159, 0.9810602, 0.29, -0.23, 0)
-script = ExtResource("7_kb6p2")
-root = NodePath("../../../..")
-anim_tree = NodePath("../../../../AnimationTree")
-instance_parent = NodePath("../..")
+[node name="ItemHolder" type="Node3D" parent="Head/Camera3D" unique_id=1816609521 node_paths=PackedStringArray("selector", "root")]
+transform = Transform3D(1.0000004, 0, 0, 0, 0.9999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+script = ExtResource("20_mmwog")
+selector = NodePath("HoldSelector")
+root = NodePath("../../..")
+metadata/_custom_type_script = "uid://dk37mcui4c45e"
 metadata/_edit_group_ = true
 
-[node name="ItemVisualsContainer3D" type="Node3D" parent="Head/Camera3D/ArmContainer/ItemHolder" unique_id=482834376 node_paths=PackedStringArray("item_holder", "inventory_holder_link")]
+[node name="ItemVisualsContainer3D" type="Node3D" parent="Head/Camera3D/ItemHolder" unique_id=482834376 node_paths=PackedStringArray("item_holder")]
 unique_name_in_owner = true
-transform = Transform3D(1.0000001, 6.519257e-09, 1.4901159e-08, -6.519258e-09, 1, -7.4505815e-09, -1.4901161e-08, 7.4505815e-09, 1, 0.08080295, 0.017175198, 0.014566064)
+transform = Transform3D(1.0000001, 6.5192567e-09, 1.4901159e-08, -6.519258e-09, 0.99999994, -7.4505815e-09, -1.4901161e-08, 7.450581e-09, 1, 0.37235495, -0.2941599, -0.29826698)
 script = SubResource("GDScript_art4l")
 item_holder = NodePath("..")
-inventory_holder_link = NodePath("../InventoryHolder")
 visuals_scale_ratio = 0.4
 do_disable_shadows = true
 layers = 2
 
-[node name="Sprite3D" type="Sprite3D" parent="Head/Camera3D/ArmContainer/ItemHolder" unique_id=1502779023]
-transform = Transform3D(0.050000004, 2.910383e-10, 0, -9.313226e-10, 0.05, 0, 0, 2.3283064e-10, 0.05, 0.08080298, 0.017175198, 0.014566064)
-no_depth_test = true
-texture_filter = 0
-
-[node name="InventoryHolder" type="Node" parent="Head/Camera3D/ArmContainer/ItemHolder" unique_id=500529388 node_paths=PackedStringArray("inventory", "item_holder")]
+[node name="HoldSelector" type="Node" parent="Head/Camera3D/ItemHolder" unique_id=2089262331 node_paths=PackedStringArray("inventory")]
 process_mode = 3
-script = ExtResource("9_bjvpn")
-inventory = NodePath("../../../../../Inventory")
-item_holder = NodePath("..")
-use_num_key_input = true
+script = ExtResource("21_fmu53")
 scroll_up_input_action = "scroll_up"
 scroll_down_input_action = "scroll_down"
-metadata/_custom_type_script = "uid://ioo6s3m7wbha"
-
-[node name="ItemSceneContainer" type="Node3D" parent="Head/Camera3D" unique_id=1891665532]
+scroll_max_index = 9
+inventory = NodePath("../../../../Inventory")
+metadata/_custom_type_script = "uid://bghx5ubltmjf7"
 
 [node name="InteratorRay" type="RayCast3D" parent="Head/Camera3D" unique_id=1551921047]
+visible = false
 target_position = Vector3(0, 0, -2)
 collision_mask = 2
 hit_from_inside = true
@@ -565,6 +538,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_s7qer")
 
 [node name="DropperRayCast" type="RayCast3D" parent="Head/Camera3D" unique_id=690174372]
+visible = false
 target_position = Vector3(0, 0, -3)
 collision_mask = 37
 script = ExtResource("11_rptt4")
@@ -622,7 +596,7 @@ force_from_start = false
 signal_name = &"was_hurt"
 metadata/_custom_type_script = "uid://dapeyi3eetek1"
 
-[node name="HUD" type="Control" parent="." unique_id=1406402649]
+[node name="HUD" type="Control" parent="." unique_id=1406402649 node_paths=PackedStringArray("inventory_display_rows", "primary_inventory_selector", "hold_inventory_selector", "pause_interface")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -631,6 +605,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("17_g4c7l")
+inventory_display_rows = [NodePath("HotbarInterface/HotbarDisplay"), NodePath("PauseInterface/BackpackDisplay/RowDisplay1"), NodePath("PauseInterface/BackpackDisplay/RowDisplay2"), NodePath("PauseInterface/BackpackDisplay/RowDisplay3"), NodePath("PauseInterface/BackpackDisplay/RowDisplay4")]
+primary_inventory_selector = NodePath("PrimaryInventorySelector")
+hold_inventory_selector = NodePath("../Head/Camera3D/ItemHolder/HoldSelector")
+pause_interface = NodePath("PauseInterface")
+
+[node name="PrimaryInventorySelector" type="Node" parent="HUD" unique_id=573150197 node_paths=PackedStringArray("inventory")]
+script = ExtResource("9_bjvpn")
+enabled = false
+reset_selection_on_disable = true
+inventory = NodePath("../../Inventory")
+metadata/_custom_type_script = "uid://ioo6s3m7wbha"
 
 [node name="Cursor" type="TextureRect" parent="HUD" unique_id=92395798]
 unique_name_in_owner = true
@@ -837,7 +822,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CraftingEnvironment" parent="HUD/PauseInterface/CraftingMenu" unique_id=651686952 node_paths=PackedStringArray("inventory_holder_link", "pause_interface") instance=ExtResource("28_q28gw")]
+[node name="CraftingEnvironment" parent="HUD/PauseInterface/CraftingMenu" unique_id=651686952 node_paths=PackedStringArray("inventory_selector", "pause_interface") instance=ExtResource("28_q28gw")]
 custom_minimum_size = Vector2(1000, 1000)
 layout_mode = 1
 offset_right = 1152.0
@@ -845,7 +830,7 @@ offset_bottom = 648.0
 grow_horizontal = 1
 grow_vertical = 1
 scale = Vector2(0.5, 0.5)
-inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolder")
+inventory_selector = NodePath("../../../PrimaryInventorySelector")
 pause_interface = NodePath("../..")
 metadata/_edit_use_anchors_ = true
 
@@ -1124,36 +1109,2489 @@ text = "Settings"
 visible = false
 layout_mode = 1
 
-[node name="InventoryInterface" type="Control" parent="HUD" unique_id=858532635]
-unique_name_in_owner = true
-z_index = 1
+[node name="BackpackDisplay" type="VBoxContainer" parent="HUD/PauseInterface" unique_id=346564196]
+layout_mode = 0
+anchor_left = 0.30729166
+anchor_top = 0.6018519
+anchor_right = 0.6935764
+anchor_bottom = 0.8827159
+offset_top = -3.0517578e-05
+metadata/_edit_use_anchors_ = true
+
+[node name="RowDisplay1" type="HBoxContainer" parent="HUD/PauseInterface/BackpackDisplay" unique_id=1854711009]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/separation = 5
+
+[node name="ItemDisplay1" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1733163599 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 10
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay1" unique_id=231042655]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
 
-[node name="CurrentItemLabel" type="Label" parent="HUD/InventoryInterface" unique_id=272445762]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay1" unique_id=1642755907]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = 236.0
-offset_right = 200.0
-offset_bottom = 259.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-horizontal_alignment = 1
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/InventoryInterface/CurrentItemLabel" unique_id=1735479515]
-libraries/ = SubResource("AnimationLibrary_7pqkx")
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay1" unique_id=466764263]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
 
-[node name="InventoryDisplay" type="HBoxContainer" parent="HUD/InventoryInterface" unique_id=1354943621]
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay1" unique_id=1642140600]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay2" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1560585739 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 10
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay2" unique_id=421201971]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay2" unique_id=736044015]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay2" unique_id=1184746645]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay2" unique_id=208140048]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay3" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1406269891 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 10
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay3" unique_id=1377561658]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay3" unique_id=87529847]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay3" unique_id=30271494]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay3" unique_id=2142815124]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay4" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=36782617 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 10
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay4" unique_id=209322114]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay4" unique_id=1367607949]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay4" unique_id=399583750]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay4" unique_id=1990551245]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay5" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=611962087 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 10
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay5" unique_id=1812355872]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay5" unique_id=2014847364]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay5" unique_id=156295181]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay5" unique_id=1160813121]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay6" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=167817826 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 10
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay6" unique_id=186335977]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay6" unique_id=1007049460]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay6" unique_id=2035193575]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay6" unique_id=1726468004]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay7" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=154602108 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 10
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay7" unique_id=42507078]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay7" unique_id=185567434]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay7" unique_id=1774113156]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay7" unique_id=863960569]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay8" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1058436826 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 10
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay8" unique_id=1515621425]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay8" unique_id=1807487400]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay8" unique_id=507430137]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay8" unique_id=2137955992]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay9" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1307079016 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 10
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay9" unique_id=1561593606]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay9" unique_id=1897636335]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay9" unique_id=2019509936]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay9" unique_id=331079273]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay10" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1750960175 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 10
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay10" unique_id=351435304]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay10" unique_id=1308632292]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay10" unique_id=1593516922]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay10" unique_id=1153596618]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="RowDisplay2" type="HBoxContainer" parent="HUD/PauseInterface/BackpackDisplay" unique_id=1750740063]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/separation = 5
+
+[node name="ItemDisplay1" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=2103486419 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 20
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay1" unique_id=62946278]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay1" unique_id=1018490670]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay1" unique_id=923287785]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay1" unique_id=1462766675]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay2" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=313686191 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 20
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay2" unique_id=1008178590]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay2" unique_id=1140587736]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay2" unique_id=950489683]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay2" unique_id=1785874927]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay3" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=2119846412 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 20
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay3" unique_id=620150183]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay3" unique_id=1484343707]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay3" unique_id=989455100]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay3" unique_id=1805549961]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay4" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=1162672368 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 20
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay4" unique_id=1740021588]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay4" unique_id=2012064969]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay4" unique_id=980349780]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay4" unique_id=661962118]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay5" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=1881498847 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 20
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay5" unique_id=1493517088]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay5" unique_id=1119655795]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay5" unique_id=591750575]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay5" unique_id=1163458934]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay6" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=745454295 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 20
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay6" unique_id=934232251]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay6" unique_id=1777863876]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay6" unique_id=1300064421]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay6" unique_id=340876626]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay7" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=1102511587 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 20
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay7" unique_id=958677755]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay7" unique_id=532739544]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay7" unique_id=2009078399]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay7" unique_id=2137942653]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay8" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=1292109159 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 20
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay8" unique_id=849310178]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay8" unique_id=180459415]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay8" unique_id=629146463]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay8" unique_id=1984636010]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay9" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=754304230 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 20
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay9" unique_id=1847743672]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay9" unique_id=397428198]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay9" unique_id=1209866210]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay9" unique_id=318327459]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay10" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=270353714 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 20
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay10" unique_id=2022956936]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay10" unique_id=238392649]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay10" unique_id=549315886]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay10" unique_id=1877397095]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="RowDisplay3" type="HBoxContainer" parent="HUD/PauseInterface/BackpackDisplay" unique_id=1016003750]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/separation = 5
+
+[node name="ItemDisplay1" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=1046851539 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 30
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay1" unique_id=1289321144]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay1" unique_id=472393109]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay1" unique_id=1593512777]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay1" unique_id=1849884858]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay2" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=1066216402 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 30
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay2" unique_id=495510910]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay2" unique_id=1587950713]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay2" unique_id=2065310911]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay2" unique_id=1926479233]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay3" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=634972052 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 30
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay3" unique_id=1112819178]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay3" unique_id=809646042]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay3" unique_id=995172447]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay3" unique_id=1226303034]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay4" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=862879204 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 30
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay4" unique_id=1075890853]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay4" unique_id=1458429715]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay4" unique_id=1209908994]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay4" unique_id=1314213379]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay5" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=1495625235 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 30
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay5" unique_id=2078156821]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay5" unique_id=804173848]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay5" unique_id=15395791]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay5" unique_id=117753686]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay6" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=1984033998 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 30
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay6" unique_id=166074707]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay6" unique_id=1406459557]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay6" unique_id=188333035]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay6" unique_id=597229023]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay7" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=776807590 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 30
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay7" unique_id=834965665]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay7" unique_id=1625218089]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay7" unique_id=1539298492]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay7" unique_id=313028797]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay8" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=909090026 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 30
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay8" unique_id=680286921]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay8" unique_id=1038971940]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay8" unique_id=1332050987]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay8" unique_id=923795300]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay9" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=609790293 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 30
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay9" unique_id=1010763375]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay9" unique_id=510607250]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay9" unique_id=13554877]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay9" unique_id=1868446751]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay10" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=434601853 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 30
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay10" unique_id=1352230625]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay10" unique_id=1203329349]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay10" unique_id=1364942104]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay10" unique_id=1698270789]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="RowDisplay4" type="HBoxContainer" parent="HUD/PauseInterface/BackpackDisplay" unique_id=172463121]
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/separation = 5
+
+[node name="ItemDisplay1" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=1521061378 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 40
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay1" unique_id=1428855644]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay1" unique_id=541348381]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay1" unique_id=1159711817]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay1" unique_id=1779357197]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay2" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=829021038 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 40
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay2" unique_id=2078502433]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay2" unique_id=121118303]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay2" unique_id=154151452]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay2" unique_id=1115298695]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay3" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=736826601 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 40
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay3" unique_id=397269297]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay3" unique_id=1420778922]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay3" unique_id=137222995]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay3" unique_id=512126672]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay4" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=1421898138 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 40
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay4" unique_id=490257187]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay4" unique_id=1583922405]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay4" unique_id=1438570898]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay4" unique_id=1871572143]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay5" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=1095176777 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 40
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay5" unique_id=1321299132]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay5" unique_id=397670845]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay5" unique_id=1721503809]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay5" unique_id=1553295244]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay6" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=95388718 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 40
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay6" unique_id=1524790019]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay6" unique_id=37354974]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay6" unique_id=62187038]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay6" unique_id=1378553983]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay7" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=2069564156 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 40
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay7" unique_id=964365725]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay7" unique_id=1448397992]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay7" unique_id=102978035]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay7" unique_id=1108615602]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay8" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=812668640 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 40
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay8" unique_id=260207866]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay8" unique_id=429606426]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay8" unique_id=978687752]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay8" unique_id=1791177972]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay9" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=404388599 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 40
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay9" unique_id=1068253649]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay9" unique_id=328285488]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay9" unique_id=971903089]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay9" unique_id=516031512]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay10" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=667606792 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("16_e7oew")
+icon_rect = NodePath("IconRect")
+quantity_label = NodePath("QuantityLabel")
+do_auto_set_index = true
+auto_set_index_offset = 40
+select_button = NodePath("Button")
+selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.4
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay10" unique_id=2052594533]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_bjvpn")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay10" unique_id=475638073]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("23_g4c7l")
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay10" unique_id=1874795911]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay10" unique_id=1047062796]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+action_mode = 0
+flat = true
+
+[node name="HotbarInterface" type="Control" parent="HUD" unique_id=858532635]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 1
+anchor_left = 0.3090278
+anchor_top = 0.86728394
+anchor_right = 0.6909722
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CurrentItemLabel" type="Label" parent="HUD/HotbarInterface" unique_id=272445762 node_paths=PackedStringArray("anim_player", "item_holder")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1161,30 +3599,50 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -200.0
-offset_top = 266.0
+offset_top = -39.0
 offset_right = 200.0
-offset_bottom = 306.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "t"
+horizontal_alignment = 1
+script = ExtResource("43_8pxes")
+anim_player = NodePath("AnimationPlayer")
+item_holder = NodePath("../../../Head/Camera3D/ItemHolder")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/HotbarInterface/CurrentItemLabel" unique_id=1735479515]
+libraries/ = SubResource("AnimationLibrary_7pqkx")
+
+[node name="HotbarDisplay" type="HBoxContainer" parent="HUD/HotbarInterface" unique_id=1354943621]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -222.5
+offset_top = -15.0
+offset_right = 222.5
+offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 0
 theme_override_constants/separation = 5
 
-[node name="ItemDisplay1" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=468719072 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay1" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=468719072 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
-inventory = NodePath("../../../../Inventory")
-auto_set_index = true
-inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolder")
+do_auto_set_index = true
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay1" unique_id=1569262230]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay1" unique_id=1569262230]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1195,7 +3653,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay1" unique_id=1846995695]
+[node name="IconRect" type="TextureRect" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay1" unique_id=1846995695]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1206,7 +3664,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay1" unique_id=1640920594]
+[node name="QuantityLabel" type="Label" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay1" unique_id=1640920594]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1221,31 +3679,30 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay1" unique_id=787085304]
+[node name="Button" type="Button" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay1" unique_id=787085304]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+action_mode = 0
 flat = true
 
-[node name="ItemDisplay2" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1254984961 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay2" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=1254984961 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
-inventory = NodePath("../../../../Inventory")
-auto_set_index = true
-inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolder")
+do_auto_set_index = true
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2" unique_id=51958537]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay2" unique_id=51958537]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1256,7 +3713,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2" unique_id=919095829]
+[node name="IconRect" type="TextureRect" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay2" unique_id=919095829]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1267,7 +3724,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2" unique_id=1689291696]
+[node name="QuantityLabel" type="Label" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay2" unique_id=1689291696]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1282,31 +3739,30 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay2" unique_id=1780644706]
+[node name="Button" type="Button" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay2" unique_id=1780644706]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+action_mode = 0
 flat = true
 
-[node name="ItemDisplay3" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1060589485 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay3" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=1060589485 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
-inventory = NodePath("../../../../Inventory")
-auto_set_index = true
-inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolder")
+do_auto_set_index = true
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3" unique_id=864364424]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay3" unique_id=864364424]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1317,7 +3773,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3" unique_id=70948820]
+[node name="IconRect" type="TextureRect" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay3" unique_id=70948820]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1328,7 +3784,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3" unique_id=2143471399]
+[node name="QuantityLabel" type="Label" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay3" unique_id=2143471399]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1343,31 +3799,30 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay3" unique_id=746829255]
+[node name="Button" type="Button" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay3" unique_id=746829255]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+action_mode = 0
 flat = true
 
-[node name="ItemDisplay4" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=927929334 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay4" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=927929334 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
-inventory = NodePath("../../../../Inventory")
-auto_set_index = true
-inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolder")
+do_auto_set_index = true
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4" unique_id=219899475]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay4" unique_id=219899475]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1378,7 +3833,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4" unique_id=42587934]
+[node name="IconRect" type="TextureRect" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay4" unique_id=42587934]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1389,7 +3844,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4" unique_id=144049556]
+[node name="QuantityLabel" type="Label" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay4" unique_id=144049556]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1404,31 +3859,30 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay4" unique_id=897510517]
+[node name="Button" type="Button" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay4" unique_id=897510517]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+action_mode = 0
 flat = true
 
-[node name="ItemDisplay5" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=72169265 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay5" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=72169265 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
-inventory = NodePath("../../../../Inventory")
-auto_set_index = true
-inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolder")
+do_auto_set_index = true
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5" unique_id=1636606821]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay5" unique_id=1636606821]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1439,7 +3893,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5" unique_id=1983570132]
+[node name="IconRect" type="TextureRect" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay5" unique_id=1983570132]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1450,7 +3904,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5" unique_id=1617319046]
+[node name="QuantityLabel" type="Label" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay5" unique_id=1617319046]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1465,31 +3919,30 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay5" unique_id=1994844553]
+[node name="Button" type="Button" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay5" unique_id=1994844553]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+action_mode = 0
 flat = true
 
-[node name="ItemDisplay6" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1071741433 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay6" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=1071741433 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
-inventory = NodePath("../../../../Inventory")
-auto_set_index = true
-inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolder")
+do_auto_set_index = true
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6" unique_id=1118306256]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay6" unique_id=1118306256]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1500,7 +3953,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6" unique_id=1932801645]
+[node name="IconRect" type="TextureRect" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay6" unique_id=1932801645]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1511,7 +3964,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6" unique_id=851589338]
+[node name="QuantityLabel" type="Label" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay6" unique_id=851589338]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1526,31 +3979,30 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay6" unique_id=419507078]
+[node name="Button" type="Button" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay6" unique_id=419507078]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+action_mode = 0
 flat = true
 
-[node name="ItemDisplay7" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1337058418 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay7" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=1337058418 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
-inventory = NodePath("../../../../Inventory")
-auto_set_index = true
-inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolder")
+do_auto_set_index = true
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7" unique_id=528911688]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay7" unique_id=528911688]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1561,7 +4013,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7" unique_id=1259561192]
+[node name="IconRect" type="TextureRect" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay7" unique_id=1259561192]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1572,7 +4024,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7" unique_id=1018266148]
+[node name="QuantityLabel" type="Label" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay7" unique_id=1018266148]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1587,31 +4039,30 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay7" unique_id=972553802]
+[node name="Button" type="Button" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay7" unique_id=972553802]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+action_mode = 0
 flat = true
 
-[node name="ItemDisplay8" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=2053131231 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay8" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=2053131231 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
-inventory = NodePath("../../../../Inventory")
-auto_set_index = true
-inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolder")
+do_auto_set_index = true
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8" unique_id=86937184]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay8" unique_id=86937184]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1622,7 +4073,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8" unique_id=1742151620]
+[node name="IconRect" type="TextureRect" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay8" unique_id=1742151620]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1633,7 +4084,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8" unique_id=459044544]
+[node name="QuantityLabel" type="Label" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay8" unique_id=459044544]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1648,31 +4099,30 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay8" unique_id=74183042]
+[node name="Button" type="Button" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay8" unique_id=74183042]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+action_mode = 0
 flat = true
 
-[node name="ItemDisplay9" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=1009426977 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay9" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=1009426977 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
-inventory = NodePath("../../../../Inventory")
-auto_set_index = true
-inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolder")
+do_auto_set_index = true
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9" unique_id=22248205]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay9" unique_id=22248205]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1683,7 +4133,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9" unique_id=1843502004]
+[node name="IconRect" type="TextureRect" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay9" unique_id=1843502004]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1694,7 +4144,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9" unique_id=975251917]
+[node name="QuantityLabel" type="Label" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay9" unique_id=975251917]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1709,31 +4159,30 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay9" unique_id=1151456464]
+[node name="Button" type="Button" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay9" unique_id=1151456464]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+action_mode = 0
 flat = true
 
-[node name="ItemDisplay10" type="Control" parent="HUD/InventoryInterface/InventoryDisplay" unique_id=28854432 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory", "inventory_holder_link", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay10" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=28854432 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
-inventory = NodePath("../../../../Inventory")
-auto_set_index = true
-inventory_holder_link = NodePath("../../../../Head/Camera3D/ArmContainer/ItemHolder/InventoryHolder")
+do_auto_set_index = true
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay10" unique_id=2043926117]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay10" unique_id=2043926117]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1744,7 +4193,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay10" unique_id=134112140]
+[node name="IconRect" type="TextureRect" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay10" unique_id=134112140]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1755,7 +4204,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay10" unique_id=91883696]
+[node name="QuantityLabel" type="Label" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay10" unique_id=91883696]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1770,13 +4219,14 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/InventoryInterface/InventoryDisplay/ItemDisplay10" unique_id=982282449]
+[node name="Button" type="Button" parent="HUD/HotbarInterface/HotbarDisplay/ItemDisplay10" unique_id=982282449]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+action_mode = 0
 flat = true
 
 [node name="DeathScreen" type="Control" parent="HUD" unique_id=1492309495]
@@ -1840,13 +4290,14 @@ flat = true
 libraries/ = SubResource("AnimationLibrary_tqiix")
 autoplay = &"idle"
 
-[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1076057530]
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1076057530 node_paths=PackedStringArray("inventory_selector")]
 tree_root = SubResource("AnimationNodeBlendTree_1so5t")
 anim_player = NodePath("../AnimationPlayer")
 parameters/ItemBlend/blend_amount = 1.0
 script = ExtResource("38_a2xo5")
 item_animations = Array[ExtResource("39_dx5ib")]([SubResource("Resource_art4l")])
+inventory_selector = NodePath("../Head/Camera3D/ItemHolder/HoldSelector")
 
 [node name="BuildTimer" type="Timer" parent="." unique_id=1941720648]
 
-[connection signal="updated_instance" from="Head/Camera3D/ArmContainer/ItemHolder" to="HUD" method="_on_item_holder_updated_instance"]
+[connection signal="updated_instance" from="Head/Camera3D/ItemHolder" to="HUD" method="_on_item_holder_updated_instance"]

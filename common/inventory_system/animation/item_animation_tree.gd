@@ -2,6 +2,7 @@ extends AnimationTree
 class_name ItemAnimationTree
 
 @export var item_animations: Array[ItemAnimations] = []
+@export var inventory_selector: InventorySelector
 
 @export_group("Defaults")
 @export var default_start_anim := ""
@@ -26,21 +27,31 @@ var playback: AnimationNodeStateMachinePlayback
 
 func _ready() -> void:
 	default_animations()
-	
-	playback = get(state_machine_path + "/playback")
-	if playback != null:
-		
-		# Disable current item blend when item state machine finishes
-		playback.state_finished.connect(
-			func(state_name: String) -> void:
-				if state_name == end_use_state:
-					disable_item_blend()
-				elif current_item != null and current_item.current_use_state == Item.UseState.END_USE:
-					play_end()
-		)
+	initialize_playback()
 	disable_item_blend()
 	
+	if is_instance_valid(inventory_selector):
+		inventory_selector.updated.connect(update_to_selection)
+	
 	active = true
+
+func initialize_playback() -> void:
+	playback = get(state_machine_path + "/playback")
+	if playback != null:
+		playback.state_finished.connect(_on_state_finished)
+
+func _on_state_finished(state_name: String) -> void:
+	
+	# Disable current item blend when item state machine finishes
+	if state_name == end_use_state:
+		disable_item_blend()
+	
+	# Play end use
+	elif current_item != null and current_item.current_use_state == Item.UseState.END_USE:
+		play_end()
+
+func update_to_selection() -> void:
+	update_item(inventory_selector.get_current_item())
 
 func default_animations() -> void:
 	start_anim = default_start_anim
@@ -48,31 +59,24 @@ func default_animations() -> void:
 	end_anim = default_end_anim
 
 func update_item(new_item: Item) -> void:
+	reset_current_item()
 	
-	# Wait until item is unique
+	if new_item == null:
+		return
 	if new_item != null:
 		await new_item.ensure_unique()
 	
-	# Disconnect old item's signals
-	if current_item != null:
-		current_item.started_use.disconnect(play_start)
-		current_item = null
-	
-	if new_item == null:
-		reset_current_item()
-		return
-	
-	var anims: ItemAnimations = get_animations(new_item)
-	
-	load_animations(anims)
+	load_animations(get_animations(new_item))
 	update_tree_animations()
 	
-	# Connect new item's signals
+	# Connect new item's signals (only start signal)
 	new_item.started_use.connect(play_start)
 	
 	current_item = new_item
 
 func reset_current_item() -> void:
+	if current_item == null:
+		return
 	current_item.started_use.disconnect(play_start)
 	current_item = null
 
@@ -82,6 +86,7 @@ func get_animations(item: Item) -> ItemAnimations:
 		if key != null:
 			return item_anims
 	return null
+
 
 func load_animations(anims: ItemAnimations) -> void:
 	if anims == null:

@@ -176,4 +176,4 @@ func get_random_index_weighted() -> int:
 	return -1
 
 func _to_string() -> String:
-	return "Inventory of " + str(item_instances)
+	return "Inventory of %s" % str(get_valid_instances())
