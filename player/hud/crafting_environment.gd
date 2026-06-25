@@ -33,14 +33,12 @@ const RECIPE_LAYOUT_SCALE := 1.0
 		else:
 			reset_selection_visuals()
 
-var slots_contents: Dictionary[Vector3, ItemVisualsContainer3D]
+var slots_contents: Array[ItemVisualsContainer3D]
 var selection_visuals: ItemVisualsContainer3D
 
 func reset_slots() -> void:
-	for slot_node in grid.get_children():
-		if not slot_node is Node3D:
-			continue
-		slots_contents[slot_node.global_position] = null
+	slots_contents.clear()
+	slots_contents.resize(grid.get_child_count())
 
 func _ready() -> void:
 	space.global_position = SPACE_POSITION
@@ -56,15 +54,22 @@ func _ready() -> void:
 	update_selection_visuals.call_deferred()
 
 func get_recipe_layout() -> Dictionary[Vector2i, Item]:
-	var layout: Dictionary[Vector2i, Item]
-	for slot in slots_contents:
-		if not is_instance_valid(slots_contents[slot]):
+	var layout: Dictionary[Vector2i, Item] = {}
+	var slots := grid.get_children()
+	
+	for i in range(slots_contents.size()):
+		if not is_instance_valid(slots_contents[i]):
 			continue
+			
+		var slot_node = slots[i] as Node3D
+		if not slot_node:
+			continue
+			
 		var layout_position := Vector2i(
-			int((slot.x - SPACE_POSITION.x) / RECIPE_LAYOUT_SCALE),
-			-int((slot.z - SPACE_POSITION.z) / RECIPE_LAYOUT_SCALE)
+			int((slot_node.global_position.x - SPACE_POSITION.x) / RECIPE_LAYOUT_SCALE),
+			-int((slot_node.global_position.z - SPACE_POSITION.z) / RECIPE_LAYOUT_SCALE)
 		)
-		layout[layout_position] = slots_contents[slot].get_item()
+		layout[layout_position] = slots_contents[i].get_item()
 	return layout
 
 func reset_selection_visuals() -> void:
@@ -89,7 +94,6 @@ func update_selection_visuals() -> void:
 	# Set held visuals to current held item
 	new_instance.item.set_up_scene()
 	selection_visuals = spawn_item(new_instance.item)
-	
 
 func get_scaled_mouse_position2d() -> Vector2:
 	var local_mouse := get_local_mouse_position()
@@ -109,13 +113,20 @@ func spawn_item(item: Item) -> ItemVisualsContainer3D:
 	item_origin.add_child(visuals)
 	visuals.scale *= VISUALS_SCALE
 	visuals.rotation_degrees = VISUALS_TILT
+	visuals.global_position = get_mouse_position3d()
 	return visuals
 
-func get_current_slot() -> Variant:
+func get_current_slot() -> int:
 	if not cursor3d.is_colliding():
-		return null
+		return -1
 	var overlap: Area3D = cursor3d.get_collider()
-	return overlap.global_position
+	
+	var slots := grid.get_children()
+	for i in range(slots.size()):
+		if slots[i] == overlap or slots[i].global_position.is_equal_approx(overlap.global_position):
+			return i
+			
+	return -1
 
 func move_item_to_grid_inventory(item: Item) -> void:
 	inventory_selector.inventory.give_item(item, 1, grid_inventory)
@@ -127,37 +138,41 @@ func remove_item_from_grid_inventory(item: Item) -> void:
 	update_selection_visuals()
 	grid_changed.emit()
 
-func place_current() -> void:
+func place(slot_index: int) -> void:
 	if not is_instance_valid(selection_visuals):
 		return
 	
-	var slot: Variant = get_current_slot()
-	if slot == null:
+	if slot_index == -1:
 		return
 	
-	empty_slot(slot)
+	if slots_contents[slot_index] != null and slots_contents[slot_index].get_item() == selection_visuals.get_item():
+		return
+	
+	empty(slot_index)
 	
 	var visuals_to_place := selection_visuals
 	selection_visuals = null
 	
-	slots_contents[slot] = visuals_to_place
+	slots_contents[slot_index] = visuals_to_place
 	move_item_to_grid_inventory(visuals_to_place.get_item())
 	update_selection_visuals.call_deferred()
 
 func clear() -> void:
 	grid_inventory.give_everything(inventory_selector.inventory)
-	for slot in slots_contents:
-		Util.safe_free(slots_contents[slot])
-		slots_contents[slot] = null
+	for i in range(slots_contents.size()):
+		Util.safe_free(slots_contents[i])
+		slots_contents[i] = null
 	grid_changed.emit()
 
 func interpolate_slots_contents() -> void:
-	for slot in slots_contents:
-		var slot_visuals := slots_contents[slot]
+	var slots := grid.get_children()
+	for i in range(slots_contents.size()):
+		var slot_visuals := slots_contents[i]
 		if not is_instance_valid(slot_visuals):
 			continue
+		
 		slot_visuals.global_position = slot_visuals.global_position.lerp(
-			slot,
+			slots[i].global_position,
 			SNAP_SPEED
 		)
 
@@ -167,24 +182,27 @@ func _process(_delta: float) -> void:
 	
 	interpolate_slots_contents()
 	
-	if Input.is_action_pressed("use_secondary") and not Input.is_action_pressed("use_primary"):
-		empty_slot(get_current_slot())
+	var current_slot_index := get_current_slot()
+	if Input.is_action_pressed("grid_place"):
+		place(current_slot_index)
+	elif Input.is_action_pressed("grid_remove"):
+		empty(current_slot_index)
 	
 	var mouse := get_mouse_position3d()
 	cursor3d.global_position = mouse
 	if is_instance_valid(selection_visuals):
 		selection_visuals.global_position = selection_visuals.global_position.lerp(mouse, DRAG_SPEED)
 
-func empty_slot(slot: Variant) -> void:
-	if slot == null:
+func empty(slot_index: int) -> void:
+	if slot_index == -1:
 		return
-	var old_visuals: ItemVisualsContainer3D = slots_contents[slot]
+	var old_visuals: ItemVisualsContainer3D = slots_contents[slot_index]
 	if old_visuals == null:
 		return
 	
 	var item_to_remove = old_visuals.get_item()
 	Util.safe_free(old_visuals)
-	slots_contents[slot] = null 
+	slots_contents[slot_index] = null 
 	remove_item_from_grid_inventory(item_to_remove)
 
 func craft() -> void:
@@ -206,5 +224,5 @@ func craft() -> void:
 func _input(event: InputEvent) -> void:
 	if not is_crafting:
 		return
-	if event.is_action_pressed("use_primary"): place_current()
-	elif event.is_action_pressed("craft"): craft()
+	if event.is_action_pressed("craft"): 
+		craft()
