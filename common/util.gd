@@ -455,6 +455,16 @@ static func debug_node(node: Node) -> void:
 			)
 	print(" ".join(debug_strings))
 
+static func match_connect(signal_to_watch: Signal, target_callable: Callable, ...expected_args: Array) -> void:
+	var interceptor: Callable = func(received_args: Array):
+		if len(received_args) < len(expected_args):
+			return
+		for i in len(expected_args):
+			if expected_args[i] != received_args[i]:
+				return
+		target_callable.callv(received_args)
+	signal_to_watch.connect(interceptor.bindv(expected_args))
+
 static func lerp_angle_3d(from: Vector3, to: Vector3, weight: float) -> Vector3:
 	return Vector3(
 		lerp_angle(from.x, to.x, weight),
