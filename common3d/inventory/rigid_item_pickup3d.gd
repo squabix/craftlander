@@ -17,17 +17,16 @@ func _ready() -> void:
 	freeze = true
 	item_pickup_interactable.auto_generate_collision = false
 	item_pickup_interactable.picked_up.connect(Util.safe_free.bind(self))
-	var collision_shapes := item_pickup_interactable.generate_all_collision()
-	for collision_shape in collision_shapes:
-		var collision_duplicate: CollisionShape3D = collision_shape.duplicate()
-		#collision_duplicate.scale = Vector3.ONE
-		collision_duplicate.hide()
-		add_child.call_deferred(collision_duplicate)
-		
-		if hurtbox:
+	
+	# Generate the collision shapes directly onto this RigidBody3D 
+	var collision_shapes := item_pickup_interactable.generate_all_collision(self)
+	
+	# Duplicate collision shapes to hurtbox
+	if hurtbox:
+		for collision_shape in collision_shapes:
 			var hurtbox_collision_duplicate: CollisionShape3D = collision_shape.duplicate()
-			#hurtbox_collision_duplicate.scale = Vector3.ONE
-			hurtbox.add_child.call_deferred(hurtbox_collision_duplicate)
+			hurtbox.add_child(hurtbox_collision_duplicate)
+			hurtbox_collision_duplicate.global_transform = collision_shape.global_transform
 			
 	await get_tree().process_frame
 	freeze = false

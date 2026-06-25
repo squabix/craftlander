@@ -37,25 +37,30 @@ func _ready() -> void:
 		Util.snap_to_floor(self, FLOOR_MARGIN)
 	
 	if auto_generate_collision:
-		generate_all_collision()
+		generate_all_collision(self)
 
-func generate_all_collision() -> Array[CollisionShape3D]:
+func generate_all_collision(target_parent: Node3D = self) -> Array[CollisionShape3D]:
 	var collision_shapes: Array[CollisionShape3D] = []
 	var mesh_instances := Util.find_children_of_class(visuals, "MeshInstance3D")
 	
 	for mesh_instance: MeshInstance3D in mesh_instances:
-		if mesh_instance.mesh == null:
-			continue
-		collision_shapes.append(add_collision_shape(mesh_instance))
+		collision_shapes.append(add_collision_shape(mesh_instance, target_parent))
 	
 	return collision_shapes
 
-func add_collision_shape(mesh_instance: MeshInstance3D) -> CollisionShape3D:
+func add_collision_shape(mesh_instance: MeshInstance3D, parent: Node) -> CollisionShape3D:
+	if mesh_instance == null:
+		return null
+	if parent == null:
+		return null
+	if mesh_instance.mesh == null:
+		return null
+		
 	var collision_shape := CollisionShape3D.new()
 	collision_shape.shape = mesh_instance.mesh.create_convex_shape()
-	add_child.call_deferred(collision_shape)
+	
+	parent.add_child(collision_shape)
 	collision_shape.global_transform = mesh_instance.global_transform
-	#collision_shape.scale = mesh_instance.scale * visuals.scale * collision_scale
 	return collision_shape
 
 func interact(_source: Node, _etc: Dictionary={}) -> void:
