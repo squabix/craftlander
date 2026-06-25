@@ -603,7 +603,7 @@ force_from_start = false
 signal_name = &"was_hurt"
 metadata/_custom_type_script = "uid://dapeyi3eetek1"
 
-[node name="HUD" type="Control" parent="." unique_id=1406402649 node_paths=PackedStringArray("inventory_display_rows", "primary_inventory_selector", "hold_inventory_selector", "pause_interface")]
+[node name="HUD" type="Control" parent="." unique_id=1406402649 node_paths=PackedStringArray("inventory_display_rows", "primary_inventory_selector", "secondary_inventory_selector", "inventory", "hold_inventory_selector", "pause_interface")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -614,10 +614,19 @@ grow_vertical = 2
 script = ExtResource("17_g4c7l")
 inventory_display_rows = [NodePath("HotbarInterface/HotbarDisplay"), NodePath("PauseInterface/BackpackDisplay/RowDisplay1"), NodePath("PauseInterface/BackpackDisplay/RowDisplay2"), NodePath("PauseInterface/BackpackDisplay/RowDisplay3"), NodePath("PauseInterface/BackpackDisplay/RowDisplay4")]
 primary_inventory_selector = NodePath("PrimaryInventorySelector")
+secondary_inventory_selector = NodePath("SecondaryInventorySelector")
+inventory = NodePath("../Inventory")
 hold_inventory_selector = NodePath("../Head/Camera3D/ItemHolder/HoldSelector")
 pause_interface = NodePath("PauseInterface")
 
 [node name="PrimaryInventorySelector" type="Node" parent="HUD" unique_id=573150197 node_paths=PackedStringArray("inventory")]
+script = ExtResource("9_bjvpn")
+enabled = false
+reset_selection_on_disable = true
+inventory = NodePath("../../Inventory")
+metadata/_custom_type_script = "uid://ioo6s3m7wbha"
+
+[node name="SecondaryInventorySelector" type="Node" parent="HUD" unique_id=486779293 node_paths=PackedStringArray("inventory")]
 script = ExtResource("9_bjvpn")
 enabled = false
 reset_selection_on_disable = true
@@ -1184,7 +1193,7 @@ layout_mode = 2
 mouse_filter = 0
 theme_override_constants/separation = 5
 
-[node name="ItemDisplay1" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1733163599 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay1" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1733163599 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1192,6 +1201,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 10
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -1245,7 +1259,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay2" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1560585739 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay2" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1560585739 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1253,6 +1267,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 10
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -1306,7 +1325,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay3" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1406269891 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay3" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1406269891 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1314,6 +1333,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 10
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -1367,7 +1391,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay4" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=36782617 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay4" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=36782617 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1375,6 +1399,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 10
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -1428,7 +1457,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay5" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=611962087 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay5" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=611962087 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1436,6 +1465,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 10
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -1489,7 +1523,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay6" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=167817826 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay6" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=167817826 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1497,6 +1531,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 10
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -1550,7 +1589,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay7" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=154602108 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay7" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=154602108 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1558,6 +1597,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 10
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -1611,7 +1655,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay8" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1058436826 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay8" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1058436826 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1619,6 +1663,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 10
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -1672,7 +1721,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay9" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1307079016 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay9" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1307079016 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1680,6 +1729,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 10
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -1733,7 +1787,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay10" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1750960175 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay10" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1750960175 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1741,6 +1795,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 10
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -1799,7 +1858,7 @@ layout_mode = 2
 mouse_filter = 0
 theme_override_constants/separation = 5
 
-[node name="ItemDisplay1" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=2103486419 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay1" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=2103486419 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1807,6 +1866,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 20
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -1860,7 +1924,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay2" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=313686191 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay2" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=313686191 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1868,6 +1932,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 20
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -1921,7 +1990,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay3" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=2119846412 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay3" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=2119846412 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1929,6 +1998,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 20
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -1982,7 +2056,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay4" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=1162672368 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay4" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=1162672368 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1990,6 +2064,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 20
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -2043,7 +2122,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay5" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=1881498847 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay5" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=1881498847 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2051,6 +2130,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 20
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -2104,7 +2188,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay6" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=745454295 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay6" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=745454295 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2112,6 +2196,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 20
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -2165,7 +2254,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay7" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=1102511587 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay7" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=1102511587 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2173,6 +2262,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 20
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -2226,7 +2320,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay8" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=1292109159 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay8" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=1292109159 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2234,6 +2328,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 20
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -2287,7 +2386,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay9" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=754304230 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay9" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=754304230 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2295,6 +2394,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 20
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -2348,7 +2452,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay10" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=270353714 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay10" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=270353714 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2356,6 +2460,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 20
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -2414,7 +2523,7 @@ layout_mode = 2
 mouse_filter = 0
 theme_override_constants/separation = 5
 
-[node name="ItemDisplay1" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=1046851539 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay1" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=1046851539 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2422,6 +2531,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 30
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -2475,7 +2589,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay2" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=1066216402 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay2" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=1066216402 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2483,6 +2597,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 30
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -2536,7 +2655,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay3" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=634972052 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay3" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=634972052 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2544,6 +2663,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 30
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -2597,7 +2721,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay4" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=862879204 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay4" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=862879204 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2605,6 +2729,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 30
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -2658,7 +2787,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay5" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=1495625235 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay5" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=1495625235 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2666,6 +2795,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 30
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -2719,7 +2853,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay6" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=1984033998 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay6" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=1984033998 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2727,6 +2861,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 30
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -2780,7 +2919,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay7" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=776807590 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay7" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=776807590 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2788,6 +2927,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 30
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -2841,7 +2985,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay8" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=909090026 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay8" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=909090026 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2849,6 +2993,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 30
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -2902,7 +3051,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay9" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=609790293 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay9" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=609790293 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2910,6 +3059,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 30
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -2963,7 +3117,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay10" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=434601853 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay10" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=434601853 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2971,6 +3125,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 30
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -3029,7 +3188,7 @@ layout_mode = 2
 mouse_filter = 0
 theme_override_constants/separation = 5
 
-[node name="ItemDisplay1" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=1521061378 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay1" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=1521061378 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -3037,6 +3196,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 40
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -3090,7 +3254,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay2" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=829021038 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay2" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=829021038 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -3098,6 +3262,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 40
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -3151,7 +3320,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay3" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=736826601 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay3" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=736826601 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -3159,6 +3328,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 40
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -3212,7 +3386,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay4" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=1421898138 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay4" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=1421898138 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -3220,6 +3394,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 40
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -3273,7 +3452,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay5" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=1095176777 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay5" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=1095176777 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -3281,6 +3460,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 40
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -3334,7 +3518,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay6" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=95388718 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay6" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=95388718 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -3342,6 +3526,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 40
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -3395,7 +3584,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay7" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=2069564156 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay7" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=2069564156 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -3403,6 +3592,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 40
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -3456,7 +3650,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay8" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=812668640 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay8" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=812668640 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -3464,6 +3658,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 40
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -3517,7 +3716,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay9" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=404388599 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay9" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=404388599 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -3525,6 +3724,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 40
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -3578,7 +3782,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay10" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=667606792 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay10" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=667606792 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -3586,6 +3790,11 @@ icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 40
+inventory_selectors = {
+NodePath("../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../SecondaryInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -3690,13 +3899,19 @@ grow_vertical = 2
 mouse_filter = 0
 theme_override_constants/separation = 5
 
-[node name="ItemDisplay1" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=468719072 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay1" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=468719072 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
+inventory_selectors = {
+NodePath("../../../PrimaryInventorySelector"): 0,
+NodePath("../../../SecondaryInventorySelector"): 1,
+NodePath("../../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+inventory = NodePath("../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -3750,13 +3965,19 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay2" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=1254984961 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay2" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=1254984961 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
+inventory_selectors = {
+NodePath("../../../PrimaryInventorySelector"): 0,
+NodePath("../../../SecondaryInventorySelector"): 1,
+NodePath("../../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+inventory = NodePath("../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -3810,13 +4031,19 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay3" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=1060589485 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay3" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=1060589485 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
+inventory_selectors = {
+NodePath("../../../PrimaryInventorySelector"): 0,
+NodePath("../../../SecondaryInventorySelector"): 1,
+NodePath("../../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+inventory = NodePath("../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -3870,13 +4097,19 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay4" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=927929334 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay4" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=927929334 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
+inventory_selectors = {
+NodePath("../../../PrimaryInventorySelector"): 0,
+NodePath("../../../SecondaryInventorySelector"): 1,
+NodePath("../../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+inventory = NodePath("../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -3930,13 +4163,19 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay5" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=72169265 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay5" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=72169265 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
+inventory_selectors = {
+NodePath("../../../PrimaryInventorySelector"): 0,
+NodePath("../../../SecondaryInventorySelector"): 1,
+NodePath("../../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+inventory = NodePath("../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -3990,13 +4229,19 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay6" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=1071741433 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay6" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=1071741433 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
+inventory_selectors = {
+NodePath("../../../PrimaryInventorySelector"): 0,
+NodePath("../../../SecondaryInventorySelector"): 1,
+NodePath("../../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+inventory = NodePath("../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -4050,13 +4295,19 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay7" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=1337058418 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay7" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=1337058418 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
+inventory_selectors = {
+NodePath("../../../PrimaryInventorySelector"): 0,
+NodePath("../../../SecondaryInventorySelector"): 1,
+NodePath("../../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+inventory = NodePath("../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -4110,13 +4361,19 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay8" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=2053131231 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay8" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=2053131231 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
+inventory_selectors = {
+NodePath("../../../PrimaryInventorySelector"): 0,
+NodePath("../../../SecondaryInventorySelector"): 1,
+NodePath("../../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+inventory = NodePath("../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -4170,13 +4427,19 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay9" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=1009426977 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay9" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=1009426977 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
+inventory_selectors = {
+NodePath("../../../PrimaryInventorySelector"): 0,
+NodePath("../../../SecondaryInventorySelector"): 1,
+NodePath("../../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+inventory = NodePath("../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
@@ -4230,13 +4493,19 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay10" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=28854432 node_paths=PackedStringArray("icon_rect", "quantity_label", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay10" type="Control" parent="HUD/HotbarInterface/HotbarDisplay" unique_id=28854432 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 icon_rect = NodePath("IconRect")
 quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
+inventory_selectors = {
+NodePath("../../../PrimaryInventorySelector"): 0,
+NodePath("../../../SecondaryInventorySelector"): 1,
+NodePath("../../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+inventory = NodePath("../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4

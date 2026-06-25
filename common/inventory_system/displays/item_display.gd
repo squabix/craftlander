@@ -1,6 +1,8 @@
 extends Control
 class_name ItemDisplay
 
+enum SelectMode {PRESS, HOVER, MANUAL}
+
 @export var icon_rect: TextureRect
 @export var quantity_label: Label
 @export var index := 0
@@ -11,7 +13,8 @@ class_name ItemDisplay
 @export var auto_set_index_offset := 0
 
 @export_group("Selection")
-@export var inventory_selector: InventorySelector
+@export var inventory_selectors: Dictionary[InventorySelector, SelectMode]
+@export var inventory: Inventory
 @export var select_button: Button
 
 @export var unselected_modulate := Color.WHITE
@@ -30,26 +33,57 @@ func _ready() -> void:
 	
 	# Connect selection signal
 	if is_instance_valid(select_button):
-		select_button.pressed.connect(select_self)
+		select_button.pressed.connect(press)
+		select_button.mouse_entered.connect(hover)
+		select_button.mouse_exited.connect(unhover)
+		
 
-func select_self() -> void:
+func select_self(inventory_selector: InventorySelector) -> bool:
+	if inventory_selector == null:
+		return false
+	if inventory_selector.enabled == false:
+		return false
 	inventory_selector.selected_index = index
+	return true
+
+func deselect_self(inventory_selector: InventorySelector) -> bool:
+	if inventory_selector == null:
+		return false
+	if inventory_selector.enabled == false:
+		return false
+	if inventory_selector.selected_index != index:
+		return false
+	inventory_selector.selected_index = -1
+	return true
+
+func press() -> void:
+	for selector in inventory_selectors:
+		if inventory_selectors[selector] == SelectMode.PRESS:
+			select_self(selector)
+
+func hover() -> void:
+	for selector in inventory_selectors:
+		if inventory_selectors[selector] == SelectMode.HOVER:
+			select_self(selector)
+
+func unhover() -> void:
+	for selector in inventory_selectors:
+		if inventory_selectors[selector] == SelectMode.HOVER:
+			deselect_self(selector)
+	
 
 func get_instance() -> ItemInstance:
 	if instance_override:
 		return instance_override
-	if inventory_selector == null:
+	if inventory == null:
 		return null
-	if inventory_selector.inventory == null:
-		return null
-	return inventory_selector.inventory.get_instance(index)
+	return inventory.get_instance(index)
 
 func is_selected() -> bool:
-	if inventory_selector == null:
-		return false
-	if not inventory_selector.enabled:
-		return false
-	return inventory_selector.selected_index == index
+	for selector in inventory_selectors:
+		if selector.enabled and selector.selected_index == index:
+			return true
+	return false
 
 func _process(_delta: float) -> void:
 	var selected := is_selected()

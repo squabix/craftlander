@@ -217,6 +217,24 @@ func clear() -> void:
 	for i in size:
 		item_changed.emit(i)
 
+func swap(index1: int, index2: int) -> bool:
+	if index1 < 0 or index1 >= size or index2 < 0 or index2 >= size:
+		return false
+	
+	if index1 == index2:
+		return false
+
+	var temp := item_instances[index1]
+	item_instances[index1] = item_instances[index2]
+	item_instances[index2] = temp
+	
+	item_changed.emit(index1)
+	item_changed.emit(index2)
+	return true
+	
+	#instance_changed.emit(index1)
+	#instance_changed.emit(index2)
+
 func give_everything(to: Inventory) -> void:
 	for index in get_occupied_indexes():
 		var instance := get_instance(index)
