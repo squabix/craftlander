@@ -32,7 +32,10 @@ func _ready() -> void:
 	
 	# Update when inventory selector selects new instance
 	if is_instance_valid(inventory_selector):
-		inventory_selector.selected_new_item.connect(update_item)
+		inventory_selector.selected_new_index.connect(
+			func(_index: int) -> void:
+				update_item(inventory_selector.get_current_item())
+		)
 	
 	active = true
 

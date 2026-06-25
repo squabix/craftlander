@@ -25,9 +25,9 @@ func _ready() -> void:
 	
 	# Update visuals when inventory selector changes if using inventory holder
 	if item_holder is InventoryHolder3D:
-		item_holder.selector.selected_new_item_instance.connect(update_visuals.call_deferred.unbind(1))
+		item_holder.selector.selected_new_index.connect(update_visuals.call_deferred.unbind(1))
 	
-	update_visuals()
+	update_visuals.call_deferred()
 
 func reset_visuals() -> void:
 	for child in get_children():
@@ -38,9 +38,9 @@ func get_item() -> Item:
 		return item_override
 	if item_holder == null:
 		return null
-	if item_holder.item_instance == null:
+	if item_holder.held_item_instance == null:
 		return null
-	return item_holder.item_instance.item
+	return item_holder.held_item_instance.item
 
 func update_visuals() -> void:
 	reset_visuals()

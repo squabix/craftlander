@@ -47,7 +47,7 @@ func _ready() -> void:
 	
 	# Connect signals
 	if is_instance_valid(inventory_selector):
-		inventory_selector.selected_new_item_instance.connect(update_selection_visuals.unbind(1))
+		inventory_selector.selected_new_index.connect(update_selection_visuals.unbind(1))
 	if is_instance_valid(pause_interface):
 		pause_interface.updated_pause.connect(func(_paused: bool): clear())
 	
@@ -62,7 +62,7 @@ func get_recipe_layout() -> Dictionary[Vector2i, Item]:
 			int((slot.x - SPACE_POSITION.x) / RECIPE_LAYOUT_SCALE),
 			-int((slot.z - SPACE_POSITION.z) / RECIPE_LAYOUT_SCALE)
 		)
-		layout[layout_position] = slots_contents[slot].item
+		layout[layout_position] = slots_contents[slot].get_item()
 	return layout
 
 func reset_selection_visuals() -> void:

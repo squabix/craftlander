@@ -63,7 +63,7 @@ func drop(index: int=-1) -> Node3D:
 		return
 	
 	# Failed to remove item (doesn't exist)
-	if inventory.remove_instance(instance, 1) > 0:
+	if inventory.remove_instance(index, 1) > 0:
 		printerr(self, " cannot remove nonexistant item ", instance.item, " from ", inventory)
 		return null
 	

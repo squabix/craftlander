@@ -53,7 +53,7 @@ func adjust_head() -> void:
 	)
 
 func drop_current_item() -> void:
-	dropper.drop(inventory_selector.current_index)
+	dropper.drop(inventory_selector.selected_index)
 
 func _process(_delta: float) -> void:
 	adjust_head()

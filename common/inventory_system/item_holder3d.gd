@@ -13,32 +13,33 @@ signal item_event_triggered(event: ItemEvent)
 @export var anim_tree: ItemAnimationTree
 @export var instance_parent: Node3D
 
-var item_instance: ItemInstance
+var held_item_instance: ItemInstance
 
-func hold_instance(new_instance: ItemInstance):
-	if item_instance == new_instance:
+func hold_instance(new_instance: ItemInstance) -> void:
+	if held_item_instance == new_instance:
 		return # Already holding this instance
 	
 	if instance_parent == null:
 		instance_parent = self
 	reset_instance()
 	
-	item_instance = new_instance
-	if item_instance == null:
+	held_item_instance = new_instance
+	if held_item_instance == null:
 		return
 	
-	await item_instance.item.ensure_unique()
+	await held_item_instance.item.ensure_unique()
 	if anim_tree:
-		anim_tree.update_item(item_instance.item)
-	item_instance.item.root = root
+		anim_tree.update_item(held_item_instance.item)
+	held_item_instance.item.root = root
 	
 	# Add item scene
-	if item_instance.item.scene != null:
-		item_instance.item.add_scene(instance_parent)
+	if held_item_instance.item.scene != null:
+		held_item_instance.item.add_scene(instance_parent)
 	
-	updated_instance.emit(item_instance)
+	updated_instance.emit(held_item_instance)
 	
-	connect_triggered_event(item_instance)
+	connect_triggered_event(held_item_instance)
+	print("Success")
 
 func connect_triggered_event(instance: ItemInstance) -> void:
 	if instance == null or instance.item == null:
@@ -52,22 +53,22 @@ func connect_triggered_event(instance: ItemInstance) -> void:
 func reset_instance() -> void:
 	if not has_item():
 		return
-	item_instance.item.remove_scene()
-	item_instance = null
+	held_item_instance.item.remove_scene()
+	held_item_instance = null
 
 func has_item() -> bool:
-	return item_instance != null and item_instance.item != null
+	return held_item_instance != null and held_item_instance.item != null
 
 func use_item() -> void:
-	if item_instance == null or item_instance.item == null:
+	if held_item_instance == null or held_item_instance.item == null:
 		return
-	used_item.emit(item_instance.item)
-	var consumed := item_instance.item.use()
-	if consumed and item_instance.item.consumable:
+	used_item.emit(held_item_instance.item)
+	var consumed := held_item_instance.item.use()
+	if consumed and held_item_instance.item.consumable:
 		consume_item()
 
 func consume_item() -> void:
-	consumed_instance.emit(item_instance)
+	consumed_instance.emit(held_item_instance)
 
 func _ready() -> void:
 	if initial_item_instance != null:
@@ -78,4 +79,4 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not has_item():
 		return
-	item_instance.item.update(delta)
+	held_item_instance.item.update(delta)

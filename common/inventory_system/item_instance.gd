@@ -14,6 +14,8 @@ func make_unique() -> void:
 		item = item.duplicate_deep()
 		item.is_unique = true
 
+func is_stackable_with(other_item: Item) -> bool: return item.equals(other_item) and quantity < item.max_quantity
+
 func add(amount: int) -> int:
 	if amount < 0:
 		printerr("Cannot add negative amount to item - use subtract instead")

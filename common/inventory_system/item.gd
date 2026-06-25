@@ -149,7 +149,7 @@ func use() -> bool:
 		
 	return true
 
-func get_instance(quantity: int=1) -> ItemInstance:
+func instantiate(quantity: int=1) -> ItemInstance:
 	var instance := ItemInstance.new()
 	instance.item = self
 	instance.quantity = quantity

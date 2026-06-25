@@ -1,7 +1,8 @@
 extends Node
 class_name Inventory
 
-signal changed
+signal instance_changed(index: int)
+signal item_changed(index: int)
 
 @export var item_instances: Array[ItemInstance] = []
 @export var constant := false
@@ -15,6 +16,7 @@ func _ready() -> void:
 	item_instances.resize(size)
 	for i in item_instances.size():
 		_initialize_slot(i)
+	item_changed.connect(instance_changed.emit)
 
 func _initialize_slot(index: int) -> void:
 	var instance = item_instances[index]
@@ -26,33 +28,51 @@ func _initialize_slot(index: int) -> void:
 	elif instance is RandomItemInstance:
 		item_instances[index] = instance.duplicate()
 
-func get_item(index: int) -> Item:
-	return item_instances[index].item if is_index_valid(index) else null
+func get_item(index: int) -> Item: return item_instances[index].item if is_occupied(index) else null
 
-func get_instance(index: int) -> ItemInstance:
-	return item_instances[index] if is_index_valid(index) else null
+func get_instance(index: int) -> ItemInstance: return item_instances[index] if is_occupied(index) else null
 
-func is_index_valid(index: int) -> bool:
+func has_index(index: int) -> bool: return index >= 0 and index < size
+
+func is_occupied(index: int) -> bool:
 	return index >= 0 and index < size and item_instances[index] != null and item_instances[index].item != null
 
-func get_first_empty_index() -> int:
-	return item_instances.find(null)
+func get_first_empty_index() -> int: return item_instances.find(null)
 
-func is_empty() -> bool: return item_instances.all(func(slot): return slot == null)
+func get_instance_index(item_instance: ItemInstance) -> int: return item_instances.find(item_instance)
 
-func get_valid_instances() -> Array[ItemInstance]: return item_instances.filter(func(slot): return slot != null)
+func get_item_index(item: Item) -> int:
+	for index in len(item_instances):
+		if not is_occupied(index):
+			continue
+		var instance := item_instances[index]
+		if not instance.item.equals(item):
+			continue
+		return index
+	return -1
 
-func get_item_quantities() -> Dictionary:
-	var quantities: Dictionary = {}
-	for inst in get_valid_instances():
-		if quantities.has(inst.item):
-			quantities[inst.item] += inst.quantity
+func is_empty() -> bool: return item_instances.all(func(instance: ItemInstance) -> bool: return instance == null)
+
+func get_occupied_indexes() -> Array:
+	return get_all_indexes().filter(
+		func(index: int) -> bool:
+			return is_occupied(index)
+	)
+
+func get_all_indexes() -> Array: return range(len(item_instances))
+
+func get_item_quantities() -> Dictionary[Item, int]:
+	var quantities: Dictionary[Item, int] = {}
+	for index in get_occupied_indexes():
+		var instance := get_instance(index)
+		if quantities.has(instance.item):
+			quantities[instance.item] += instance.quantity
 		else:
-			quantities[inst.item] = inst.quantity
+			quantities[instance.item] = instance.quantity
 	return quantities
 
 func get_item_quantity(item: Item) -> int:
-	if item == null: 
+	if item == null:
 		return 0
 	
 	var quantities := get_item_quantities()
@@ -61,7 +81,12 @@ func get_item_quantity(item: Item) -> int:
 func add_item(new_item: Item, quantity: int = 1, must_reach_quantity: bool = false) -> int:
 	if constant:
 		return quantity
+	
+	if new_item == null:
+		return quantity
+	
 	if quantity <= 0:
+		printerr("%s cannot add %s with quantity of %s" % [self, new_item, quantity])
 		return 0
 	
 	var original_quantity := quantity
@@ -72,40 +97,67 @@ func add_item(new_item: Item, quantity: int = 1, must_reach_quantity: bool = fal
 	if quantity > 0:
 		quantity = create_new_stacks(new_item, quantity)
 	
+	# If didn't reach goal quantity, reverse all the work done
 	if quantity > 0 and must_reach_quantity:
 		remove_item(new_item, original_quantity - quantity)
 		return original_quantity
-		
-	if quantity != original_quantity:
-		changed.emit()
+	
 	return quantity
 
 func fill_existing_stacks(new_item: Item, quantity: int) -> int:
-	for inst in get_valid_instances():
-		if not _is_stackable_with(inst, new_item): continue
+	if quantity <= 0:
+		printerr("%s cannot fill existing stacks of %s with quantity of %s" % [self, new_item, quantity])
+		return 0
+	
+	if new_item == null:
+		return quantity
+	
+	var indexes := get_occupied_indexes()
+	for index in indexes:
+		var instance := get_instance(index)
 		
-		var space_left := new_item.max_quantity - inst.quantity
+		if not instance.is_stackable_with(new_item):
+			continue
+		
+		var space_left := new_item.max_quantity - instance.quantity
 		var to_add: int = min(quantity, space_left)
-		inst.quantity += to_add
+		
+		instance.quantity += to_add
 		quantity -= to_add
-		if quantity <= 0: break
+		instance_changed.emit(index)
+		if quantity <= 0:
+			break
+	
 	return quantity
+
+func create_instance(index: int, item: Item, quantity: int, overwrite_occupied := true) -> ItemInstance:
+	if item == null:
+		printerr("%s cannot create instance at %s with null item" % [self, index])
+		return null
+	if quantity == 0:
+		printerr("%s cannot create instance at %s with quantity of zero" % [self, index])
+		return null
+	
+	if index == -1:
+		return null
+	if not overwrite_occupied and is_occupied(index):
+		return null
+	
+	var instance := item.instantiate(quantity)
+	instance.emptied.connect(func() -> void: empty_instance(get_instance_index(instance)))
+	item_instances[index] = instance
+	item_changed.emit(index)
+	return instance
 
 func create_new_stacks(new_item: Item, quantity: int) -> int:
 	while quantity > 0:
-		var empty_idx := get_first_empty_index()
-		if empty_idx == -1: break
+		var empty_index := get_first_empty_index()
+		if empty_index == -1: break
 		
 		var to_add: int = min(quantity, new_item.max_quantity)
-		var instance := new_item.get_instance(to_add)
-		instance.emptied.connect(empty_instance.bind(instance))
-		
-		item_instances[empty_idx] = instance
+		create_instance(empty_index, new_item, to_add)
 		quantity -= to_add
 	return quantity
-
-func _is_stackable_with(instance: ItemInstance, item: Item) -> bool:
-	return instance != null and item != null and instance.item.equals(item) and instance.quantity < item.max_quantity
 
 func remove_item(item: Item, quantity: int, must_reach_quantity: bool = false) -> int:
 	if constant:
@@ -114,39 +166,48 @@ func remove_item(item: Item, quantity: int, must_reach_quantity: bool = false) -
 		return 0
 	
 	var total_available := get_item_quantity(item)
-	if must_reach_quantity and quantity > total_available: return quantity
+	if must_reach_quantity and quantity > total_available:
+		return quantity
 	
-	var start_quantity := quantity
-	for i in range(item_instances.size() - 1, -1, -1):
-		var inst = item_instances[i]
-		if inst == null or not inst.item.equals(item): continue
+	for index in range(item_instances.size() - 1, -1, -1):
+		if not is_occupied(index):
+			continue
 		
-		quantity = remove_instance(inst, quantity)
-		if quantity <= 0: break
+		var instance := item_instances[index]
+		if not instance.item.equals(item):
+			continue
 		
-	if quantity != start_quantity:
-		changed.emit()
+		quantity = remove_instance(index, quantity)
+		
+		if quantity <= 0:
+			break
+	
 	return quantity
 
-func remove_instance(instance: ItemInstance, quantity: int) -> int:
-	if constant: return 0
-	if instance == null: return quantity
+func remove_instance(index: int, quantity: int) -> int:
+	if constant:
+		return 0
+	if not is_occupied(index):
+		return quantity
+	
+	var instance := get_instance(index)
 	
 	if instance.quantity > quantity:
 		instance.quantity -= quantity
-		changed.emit()
+		instance_changed.emit(index)
 		return 0
 	else:
 		quantity -= instance.quantity
-		empty_instance(instance)
+		empty_instance(index)
 		return quantity
 
-func empty_instance(instance: ItemInstance) -> void:
-	var idx := item_instances.find(instance)
-	if idx == -1:
+func empty_instance(index: int) -> void:
+	if not has_index(index):
 		return
-	item_instances[idx] = null
-	changed.emit()
+	
+	item_instances[index] = null
+	item_changed.emit(index)
+	print("Changed: emptied instance")
 
 func give_item(item: Item, quantity: int, to: Inventory) -> int:
 	var available := quantity if constant else quantity - remove_item(item, quantity)
@@ -154,26 +215,32 @@ func give_item(item: Item, quantity: int, to: Inventory) -> int:
 
 func clear() -> void:
 	item_instances.fill(null)
-	changed.emit()
+	for i in size:
+		item_changed.emit(i)
 
 func give_everything(to: Inventory) -> void:
-	for inst in get_valid_instances():
-		give_item(inst.item, inst.quantity, to)
+	for index in get_occupied_indexes():
+		var instance := get_instance(index)
+		give_item(instance.item, instance.quantity, to)
 
 func get_random_index_weighted() -> int:
-	var quantities := get_item_quantities()
+	var occupied := get_occupied_indexes()
 	var total_weight := 0
-	for weight in quantities.values(): total_weight += weight
-	if total_weight <= 0: return -1
+	
+	for index in occupied:
+		total_weight += get_instance(index).quantity
+	
+	if total_weight <= 0:
+		return -1
 	
 	var r := randi() % total_weight
 	var cumulative := 0
-	var keys := quantities.keys()
 	
-	for i in len(keys):
-		cumulative += quantities[keys[i]]
-		if r < cumulative: return i
+	for index in occupied:
+		cumulative += get_instance(index).quantity
+		if r < cumulative: 
+			return index
 	return -1
 
 func _to_string() -> String:
-	return "Inventory of %s" % str(get_valid_instances())
+	return "Inventory of %s" % str(get_occupied_indexes())
