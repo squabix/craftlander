@@ -7,10 +7,11 @@
 [ext_resource type="Script" uid="uid://chlki14yu5ulm" path="res://player/player_controller.gd" id="4_qjkh3"]
 [ext_resource type="Script" uid="uid://cb1suk3avv5yq" path="res://common/mouse_mode_controller.gd" id="5_g6k8r"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="6_j55il"]
+[ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="8_237xx"]
 [ext_resource type="Script" uid="uid://bx3dqx6ebaugu" path="res://player/states/player_walking_state.gd" id="8_hg6s5"]
-[ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="8_w7j2h"]
 [ext_resource type="Script" uid="uid://ioo6s3m7wbha" path="res://common/inventory_system/inventory_selector.gd" id="9_bjvpn"]
 [ext_resource type="Script" uid="uid://ccbg8iw3gs48v" path="res://player/states/player_crouched_state.gd" id="9_hg6s5"]
+[ext_resource type="Resource" uid="uid://b37h3pr83pcu4" path="res://items/materials/rock/rock_item.tres" id="9_wpyo2"]
 [ext_resource type="Script" uid="uid://cody42elqcrek" path="res://player/states/player_sprinting_state.gd" id="10_8t03j"]
 [ext_resource type="Script" uid="uid://bypxgjqugqucx" path="res://common3d/interactions/interactor3d.gd" id="10_32hag"]
 [ext_resource type="Script" uid="uid://b5danpxdbcbqx" path="res://player/stamina.gd" id="10_fjxoa"]
@@ -51,6 +52,8 @@
 [ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/tools/shoddy_mace/shoddy_mace_item.tres" id="41_a2xo5"]
 [ext_resource type="Resource" uid="uid://w52cknmpa167" path="res://items/tools/shoddy_pickaxe/shoddy_pickaxe_item.tres" id="41_art4l"]
 [ext_resource type="Script" uid="uid://s6yjbusuc0uo" path="res://player/hud/current_item_label.gd" id="43_8pxes"]
+[ext_resource type="Script" uid="uid://hdyfq5riitj7" path="res://player/complete_crafting_panel.gd" id="43_n0b8q"]
+[ext_resource type="Texture2D" uid="uid://c3o13o5vrivr" path="res://items/tools/shoddy_pickaxe/shoddy_pickaxe.png" id="44_jfgyi"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -72,8 +75,14 @@ metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Resource" id="Resource_n0b8q"]
 script = ExtResource("6_j55il")
-item = ExtResource("8_w7j2h")
+item = ExtResource("8_237xx")
 quantity = 5
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_7crtr"]
+script = ExtResource("6_j55il")
+item = ExtResource("9_wpyo2")
+quantity = 10
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Curve" id="Curve_2uvqg"]
@@ -384,7 +393,7 @@ metadata/_custom_type_script = "uid://bki5ij8task16"
 
 [node name="Inventory" type="Node" parent="." unique_id=710458340]
 script = ExtResource("19_c35mf")
-item_instances = Array[ExtResource("6_j55il")]([SubResource("Resource_mmwog"), SubResource("Resource_n0b8q")])
+item_instances = Array[ExtResource("6_j55il")]([SubResource("Resource_mmwog"), SubResource("Resource_n0b8q"), SubResource("Resource_7crtr")])
 size = 50
 
 [node name="Hunger" type="Node" parent="." unique_id=1790864786 node_paths=PackedStringArray("bar", "health", "stamina")]
@@ -825,8 +834,6 @@ custom_minimum_size = Vector2(1000, 1000)
 layout_mode = 1
 offset_right = 1152.0
 offset_bottom = 648.0
-grow_horizontal = 1
-grow_vertical = 1
 scale = Vector2(0.5, 0.5)
 inventory_selector = NodePath("../../../PrimaryInventorySelector")
 pause_interface = NodePath("../..")
@@ -1102,6 +1109,62 @@ offset_top = 553.0
 offset_right = 1066.0
 offset_bottom = 623.0
 text = "Settings"
+
+[node name="CompletePanel" type="Control" parent="HUD/PauseInterface/CraftingMenu" unique_id=54349966 node_paths=PackedStringArray("crafting_environment", "craft_button", "preview_rect", "preview_label")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -311.0
+offset_top = 146.0
+offset_right = -152.0
+offset_bottom = 307.0
+grow_horizontal = 0
+script = ExtResource("43_n0b8q")
+crafting_environment = NodePath("../CraftingEnvironment")
+craft_button = NodePath("CraftButton")
+preview_rect = NodePath("Preview/PreviewRect")
+preview_label = NodePath("Preview/PreviewLabel")
+
+[node name="CraftButton" type="Button" parent="HUD/PauseInterface/CraftingMenu/CompletePanel" unique_id=1652755923]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "CRAFT"
+
+[node name="Preview" type="Control" parent="HUD/PauseInterface/CraftingMenu/CompletePanel" unique_id=32465888]
+anchors_preset = 0
+offset_right = 164.0
+offset_bottom = 118.0
+
+[node name="PreviewRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/CompletePanel/Preview" unique_id=365104826]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -30.0
+offset_right = 34.0
+offset_bottom = 64.0
+grow_horizontal = 2
+texture = ExtResource("44_jfgyi")
+expand_mode = 2
+
+[node name="PreviewLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/CompletePanel/Preview" unique_id=247202588]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "item"
+horizontal_alignment = 1
 
 [node name="SettingsMenu" parent="HUD/PauseInterface" unique_id=788547277 instance=ExtResource("39_xcnuv")]
 visible = false

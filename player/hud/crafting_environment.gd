@@ -1,6 +1,8 @@
 extends SubViewportContainer
 class_name CraftingEnvironment
 
+signal grid_changed
+
 const MAX_DRAG_DISTANCE := 1.0
 const MAX_SLOT_DISTANCE := 1.0
 const DRAG_SPEED := 0.2
@@ -117,9 +119,13 @@ func get_current_slot() -> Variant:
 
 func move_item_to_grid_inventory(item: Item) -> void:
 	inventory_selector.inventory.give_item(item, 1, grid_inventory)
+	update_selection_visuals()
+	grid_changed.emit()
 
 func remove_item_from_grid_inventory(item: Item) -> void:
 	grid_inventory.give_item(item, 1, inventory_selector.inventory)
+	update_selection_visuals()
+	grid_changed.emit()
 
 func place_current() -> void:
 	if not is_instance_valid(selection_visuals):
@@ -143,6 +149,7 @@ func clear() -> void:
 	for slot in slots_contents:
 		Util.safe_free(slots_contents[slot])
 		slots_contents[slot] = null
+	grid_changed.emit()
 
 func interpolate_slots_contents() -> void:
 	for slot in slots_contents:
