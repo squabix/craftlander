@@ -612,7 +612,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("17_g4c7l")
-inventory_display_rows = [NodePath("HotbarInterface/HotbarDisplay"), NodePath("PauseInterface/BackpackDisplay/RowDisplay1"), NodePath("PauseInterface/BackpackDisplay/RowDisplay2"), NodePath("PauseInterface/BackpackDisplay/RowDisplay3"), NodePath("PauseInterface/BackpackDisplay/RowDisplay4")]
+inventory_display_rows = [NodePath("HotbarInterface/HotbarDisplay"), NodePath("PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1"), NodePath("PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2"), NodePath("PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3"), NodePath("PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4")]
 primary_inventory_selector = NodePath("PrimaryInventorySelector")
 secondary_inventory_selector = NodePath("SecondaryInventorySelector")
 inventory = NodePath("../Inventory")
@@ -1175,11 +1175,7 @@ grow_vertical = 0
 text = "item"
 horizontal_alignment = 1
 
-[node name="SettingsMenu" parent="HUD/PauseInterface" unique_id=788547277 instance=ExtResource("39_xcnuv")]
-visible = false
-layout_mode = 1
-
-[node name="BackpackDisplay" type="VBoxContainer" parent="HUD/PauseInterface" unique_id=346564196]
+[node name="BackpackDisplay" type="VBoxContainer" parent="HUD/PauseInterface/CraftingMenu" unique_id=346564196]
 layout_mode = 0
 anchor_left = 0.30729166
 anchor_top = 0.6018519
@@ -1188,12 +1184,12 @@ anchor_bottom = 0.8827159
 offset_top = -3.0517578e-05
 metadata/_edit_use_anchors_ = true
 
-[node name="RowDisplay1" type="HBoxContainer" parent="HUD/PauseInterface/BackpackDisplay" unique_id=1854711009]
+[node name="RowDisplay1" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay" unique_id=1854711009]
 layout_mode = 2
 mouse_filter = 0
 theme_override_constants/separation = 5
 
-[node name="ItemDisplay1" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1733163599 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay1" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1" unique_id=1733163599 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1202,17 +1198,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay1" unique_id=231042655]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay1" unique_id=231042655]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1223,7 +1219,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay1" unique_id=1642755907]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay1" unique_id=1642755907]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1234,7 +1230,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay1" unique_id=466764263]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay1" unique_id=466764263]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1249,7 +1245,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay1" unique_id=1642140600]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay1" unique_id=1642140600]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1259,7 +1255,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay2" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1560585739 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay2" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1" unique_id=1560585739 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1268,17 +1264,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay2" unique_id=421201971]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay2" unique_id=421201971]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1289,7 +1285,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay2" unique_id=736044015]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay2" unique_id=736044015]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1300,7 +1296,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay2" unique_id=1184746645]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay2" unique_id=1184746645]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1315,7 +1311,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay2" unique_id=208140048]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay2" unique_id=208140048]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1325,7 +1321,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay3" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1406269891 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay3" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1" unique_id=1406269891 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1334,17 +1330,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay3" unique_id=1377561658]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay3" unique_id=1377561658]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1355,7 +1351,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay3" unique_id=87529847]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay3" unique_id=87529847]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1366,7 +1362,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay3" unique_id=30271494]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay3" unique_id=30271494]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1381,7 +1377,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay3" unique_id=2142815124]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay3" unique_id=2142815124]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1391,7 +1387,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay4" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=36782617 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay4" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1" unique_id=36782617 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1400,17 +1396,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay4" unique_id=209322114]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay4" unique_id=209322114]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1421,7 +1417,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay4" unique_id=1367607949]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay4" unique_id=1367607949]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1432,7 +1428,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay4" unique_id=399583750]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay4" unique_id=399583750]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1447,7 +1443,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay4" unique_id=1990551245]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay4" unique_id=1990551245]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1457,7 +1453,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay5" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=611962087 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay5" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1" unique_id=611962087 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1466,17 +1462,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay5" unique_id=1812355872]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay5" unique_id=1812355872]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1487,7 +1483,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay5" unique_id=2014847364]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay5" unique_id=2014847364]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1498,7 +1494,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay5" unique_id=156295181]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay5" unique_id=156295181]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1513,7 +1509,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay5" unique_id=1160813121]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay5" unique_id=1160813121]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1523,7 +1519,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay6" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=167817826 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay6" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1" unique_id=167817826 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1532,17 +1528,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay6" unique_id=186335977]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay6" unique_id=186335977]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1553,7 +1549,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay6" unique_id=1007049460]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay6" unique_id=1007049460]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1564,7 +1560,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay6" unique_id=2035193575]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay6" unique_id=2035193575]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1579,7 +1575,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay6" unique_id=1726468004]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay6" unique_id=1726468004]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1589,7 +1585,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay7" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=154602108 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay7" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1" unique_id=154602108 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1598,17 +1594,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay7" unique_id=42507078]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay7" unique_id=42507078]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1619,7 +1615,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay7" unique_id=185567434]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay7" unique_id=185567434]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1630,7 +1626,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay7" unique_id=1774113156]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay7" unique_id=1774113156]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1645,7 +1641,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay7" unique_id=863960569]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay7" unique_id=863960569]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1655,7 +1651,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay8" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1058436826 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay8" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1" unique_id=1058436826 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1664,17 +1660,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay8" unique_id=1515621425]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay8" unique_id=1515621425]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1685,7 +1681,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay8" unique_id=1807487400]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay8" unique_id=1807487400]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1696,7 +1692,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay8" unique_id=507430137]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay8" unique_id=507430137]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1711,7 +1707,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay8" unique_id=2137955992]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay8" unique_id=2137955992]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1721,7 +1717,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay9" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1307079016 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay9" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1" unique_id=1307079016 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1730,17 +1726,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay9" unique_id=1561593606]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay9" unique_id=1561593606]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1751,7 +1747,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay9" unique_id=1897636335]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay9" unique_id=1897636335]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1762,7 +1758,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay9" unique_id=2019509936]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay9" unique_id=2019509936]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1777,7 +1773,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay9" unique_id=331079273]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay9" unique_id=331079273]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1787,7 +1783,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay10" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1" unique_id=1750960175 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay10" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1" unique_id=1750960175 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1796,17 +1792,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay10" unique_id=351435304]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay10" unique_id=351435304]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1817,7 +1813,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay10" unique_id=1308632292]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay10" unique_id=1308632292]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1828,7 +1824,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay10" unique_id=1593516922]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay10" unique_id=1593516922]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1843,7 +1839,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay1/ItemDisplay10" unique_id=1153596618]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay1/ItemDisplay10" unique_id=1153596618]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1853,12 +1849,12 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="RowDisplay2" type="HBoxContainer" parent="HUD/PauseInterface/BackpackDisplay" unique_id=1750740063]
+[node name="RowDisplay2" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay" unique_id=1750740063]
 layout_mode = 2
 mouse_filter = 0
 theme_override_constants/separation = 5
 
-[node name="ItemDisplay1" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=2103486419 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay1" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2" unique_id=2103486419 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1867,17 +1863,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 20
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay1" unique_id=62946278]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay1" unique_id=62946278]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1888,7 +1884,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay1" unique_id=1018490670]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay1" unique_id=1018490670]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1899,7 +1895,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay1" unique_id=923287785]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay1" unique_id=923287785]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1914,7 +1910,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay1" unique_id=1462766675]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay1" unique_id=1462766675]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1924,7 +1920,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay2" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=313686191 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay2" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2" unique_id=313686191 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1933,17 +1929,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 20
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay2" unique_id=1008178590]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay2" unique_id=1008178590]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1954,7 +1950,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay2" unique_id=1140587736]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay2" unique_id=1140587736]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1965,7 +1961,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay2" unique_id=950489683]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay2" unique_id=950489683]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -1980,7 +1976,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay2" unique_id=1785874927]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay2" unique_id=1785874927]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1990,7 +1986,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay3" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=2119846412 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay3" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2" unique_id=2119846412 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -1999,17 +1995,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 20
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay3" unique_id=620150183]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay3" unique_id=620150183]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2020,7 +2016,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay3" unique_id=1484343707]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay3" unique_id=1484343707]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2031,7 +2027,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay3" unique_id=989455100]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay3" unique_id=989455100]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -2046,7 +2042,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay3" unique_id=1805549961]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay3" unique_id=1805549961]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2056,7 +2052,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay4" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=1162672368 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay4" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2" unique_id=1162672368 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2065,17 +2061,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 20
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay4" unique_id=1740021588]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay4" unique_id=1740021588]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2086,7 +2082,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay4" unique_id=2012064969]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay4" unique_id=2012064969]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2097,7 +2093,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay4" unique_id=980349780]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay4" unique_id=980349780]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -2112,7 +2108,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay4" unique_id=661962118]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay4" unique_id=661962118]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2122,7 +2118,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay5" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=1881498847 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay5" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2" unique_id=1881498847 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2131,17 +2127,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 20
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay5" unique_id=1493517088]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay5" unique_id=1493517088]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2152,7 +2148,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay5" unique_id=1119655795]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay5" unique_id=1119655795]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2163,7 +2159,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay5" unique_id=591750575]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay5" unique_id=591750575]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -2178,7 +2174,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay5" unique_id=1163458934]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay5" unique_id=1163458934]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2188,7 +2184,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay6" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=745454295 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay6" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2" unique_id=745454295 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2197,17 +2193,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 20
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay6" unique_id=934232251]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay6" unique_id=934232251]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2218,7 +2214,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay6" unique_id=1777863876]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay6" unique_id=1777863876]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2229,7 +2225,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay6" unique_id=1300064421]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay6" unique_id=1300064421]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -2244,7 +2240,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay6" unique_id=340876626]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay6" unique_id=340876626]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2254,7 +2250,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay7" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=1102511587 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay7" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2" unique_id=1102511587 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2263,17 +2259,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 20
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay7" unique_id=958677755]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay7" unique_id=958677755]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2284,7 +2280,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay7" unique_id=532739544]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay7" unique_id=532739544]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2295,7 +2291,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay7" unique_id=2009078399]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay7" unique_id=2009078399]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -2310,7 +2306,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay7" unique_id=2137942653]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay7" unique_id=2137942653]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2320,7 +2316,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay8" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=1292109159 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay8" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2" unique_id=1292109159 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2329,17 +2325,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 20
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay8" unique_id=849310178]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay8" unique_id=849310178]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2350,7 +2346,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay8" unique_id=180459415]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay8" unique_id=180459415]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2361,7 +2357,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay8" unique_id=629146463]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay8" unique_id=629146463]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -2376,7 +2372,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay8" unique_id=1984636010]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay8" unique_id=1984636010]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2386,7 +2382,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay9" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=754304230 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay9" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2" unique_id=754304230 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2395,17 +2391,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 20
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay9" unique_id=1847743672]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay9" unique_id=1847743672]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2416,7 +2412,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay9" unique_id=397428198]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay9" unique_id=397428198]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2427,7 +2423,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay9" unique_id=1209866210]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay9" unique_id=1209866210]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -2442,7 +2438,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay9" unique_id=318327459]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay9" unique_id=318327459]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2452,7 +2448,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay10" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2" unique_id=270353714 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay10" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2" unique_id=270353714 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2461,17 +2457,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 20
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay10" unique_id=2022956936]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay10" unique_id=2022956936]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2482,7 +2478,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay10" unique_id=238392649]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay10" unique_id=238392649]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2493,7 +2489,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay10" unique_id=549315886]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay10" unique_id=549315886]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -2508,7 +2504,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay2/ItemDisplay10" unique_id=1877397095]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay2/ItemDisplay10" unique_id=1877397095]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2518,12 +2514,12 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="RowDisplay3" type="HBoxContainer" parent="HUD/PauseInterface/BackpackDisplay" unique_id=1016003750]
+[node name="RowDisplay3" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay" unique_id=1016003750]
 layout_mode = 2
 mouse_filter = 0
 theme_override_constants/separation = 5
 
-[node name="ItemDisplay1" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=1046851539 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay1" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3" unique_id=1046851539 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2532,17 +2528,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 30
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay1" unique_id=1289321144]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay1" unique_id=1289321144]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2553,7 +2549,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay1" unique_id=472393109]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay1" unique_id=472393109]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2564,7 +2560,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay1" unique_id=1593512777]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay1" unique_id=1593512777]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -2579,7 +2575,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay1" unique_id=1849884858]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay1" unique_id=1849884858]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2589,7 +2585,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay2" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=1066216402 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay2" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3" unique_id=1066216402 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2598,17 +2594,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 30
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay2" unique_id=495510910]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay2" unique_id=495510910]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2619,7 +2615,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay2" unique_id=1587950713]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay2" unique_id=1587950713]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2630,7 +2626,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay2" unique_id=2065310911]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay2" unique_id=2065310911]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -2645,7 +2641,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay2" unique_id=1926479233]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay2" unique_id=1926479233]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2655,7 +2651,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay3" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=634972052 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay3" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3" unique_id=634972052 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2664,17 +2660,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 30
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay3" unique_id=1112819178]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay3" unique_id=1112819178]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2685,7 +2681,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay3" unique_id=809646042]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay3" unique_id=809646042]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2696,7 +2692,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay3" unique_id=995172447]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay3" unique_id=995172447]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -2711,7 +2707,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay3" unique_id=1226303034]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay3" unique_id=1226303034]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2721,7 +2717,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay4" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=862879204 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay4" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3" unique_id=862879204 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2730,17 +2726,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 30
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay4" unique_id=1075890853]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay4" unique_id=1075890853]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2751,7 +2747,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay4" unique_id=1458429715]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay4" unique_id=1458429715]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2762,7 +2758,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay4" unique_id=1209908994]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay4" unique_id=1209908994]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -2777,7 +2773,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay4" unique_id=1314213379]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay4" unique_id=1314213379]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2787,7 +2783,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay5" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=1495625235 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay5" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3" unique_id=1495625235 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2796,17 +2792,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 30
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay5" unique_id=2078156821]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay5" unique_id=2078156821]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2817,7 +2813,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay5" unique_id=804173848]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay5" unique_id=804173848]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2828,7 +2824,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay5" unique_id=15395791]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay5" unique_id=15395791]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -2843,7 +2839,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay5" unique_id=117753686]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay5" unique_id=117753686]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2853,7 +2849,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay6" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=1984033998 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay6" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3" unique_id=1984033998 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2862,17 +2858,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 30
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay6" unique_id=166074707]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay6" unique_id=166074707]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2883,7 +2879,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay6" unique_id=1406459557]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay6" unique_id=1406459557]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2894,7 +2890,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay6" unique_id=188333035]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay6" unique_id=188333035]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -2909,7 +2905,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay6" unique_id=597229023]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay6" unique_id=597229023]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2919,7 +2915,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay7" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=776807590 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay7" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3" unique_id=776807590 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2928,17 +2924,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 30
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay7" unique_id=834965665]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay7" unique_id=834965665]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2949,7 +2945,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay7" unique_id=1625218089]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay7" unique_id=1625218089]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2960,7 +2956,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay7" unique_id=1539298492]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay7" unique_id=1539298492]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -2975,7 +2971,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay7" unique_id=313028797]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay7" unique_id=313028797]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2985,7 +2981,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay8" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=909090026 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay8" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3" unique_id=909090026 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -2994,17 +2990,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 30
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay8" unique_id=680286921]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay8" unique_id=680286921]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3015,7 +3011,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay8" unique_id=1038971940]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay8" unique_id=1038971940]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3026,7 +3022,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay8" unique_id=1332050987]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay8" unique_id=1332050987]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -3041,7 +3037,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay8" unique_id=923795300]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay8" unique_id=923795300]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3051,7 +3047,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay9" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=609790293 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay9" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3" unique_id=609790293 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -3060,17 +3056,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 30
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay9" unique_id=1010763375]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay9" unique_id=1010763375]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3081,7 +3077,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay9" unique_id=510607250]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay9" unique_id=510607250]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3092,7 +3088,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay9" unique_id=13554877]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay9" unique_id=13554877]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -3107,7 +3103,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay9" unique_id=1868446751]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay9" unique_id=1868446751]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3117,7 +3113,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay10" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3" unique_id=434601853 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay10" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3" unique_id=434601853 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -3126,17 +3122,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 30
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay10" unique_id=1352230625]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay10" unique_id=1352230625]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3147,7 +3143,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay10" unique_id=1203329349]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay10" unique_id=1203329349]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3158,7 +3154,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay10" unique_id=1364942104]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay10" unique_id=1364942104]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -3173,7 +3169,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay3/ItemDisplay10" unique_id=1698270789]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay3/ItemDisplay10" unique_id=1698270789]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3183,12 +3179,12 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="RowDisplay4" type="HBoxContainer" parent="HUD/PauseInterface/BackpackDisplay" unique_id=172463121]
+[node name="RowDisplay4" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay" unique_id=172463121]
 layout_mode = 2
 mouse_filter = 0
 theme_override_constants/separation = 5
 
-[node name="ItemDisplay1" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=1521061378 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay1" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4" unique_id=1521061378 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -3197,17 +3193,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 40
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay1" unique_id=1428855644]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay1" unique_id=1428855644]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3218,7 +3214,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay1" unique_id=541348381]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay1" unique_id=541348381]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3229,7 +3225,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay1" unique_id=1159711817]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay1" unique_id=1159711817]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -3244,7 +3240,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay1" unique_id=1779357197]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay1" unique_id=1779357197]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3254,7 +3250,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay2" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=829021038 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay2" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4" unique_id=829021038 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -3263,17 +3259,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 40
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay2" unique_id=2078502433]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay2" unique_id=2078502433]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3284,7 +3280,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay2" unique_id=121118303]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay2" unique_id=121118303]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3295,7 +3291,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay2" unique_id=154151452]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay2" unique_id=154151452]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -3310,7 +3306,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay2" unique_id=1115298695]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay2" unique_id=1115298695]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3320,7 +3316,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay3" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=736826601 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay3" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4" unique_id=736826601 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -3329,17 +3325,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 40
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay3" unique_id=397269297]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay3" unique_id=397269297]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3350,7 +3346,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay3" unique_id=1420778922]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay3" unique_id=1420778922]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3361,7 +3357,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay3" unique_id=137222995]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay3" unique_id=137222995]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -3376,7 +3372,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay3" unique_id=512126672]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay3" unique_id=512126672]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3386,7 +3382,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay4" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=1421898138 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay4" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4" unique_id=1421898138 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -3395,17 +3391,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 40
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay4" unique_id=490257187]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay4" unique_id=490257187]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3416,7 +3412,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay4" unique_id=1583922405]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay4" unique_id=1583922405]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3427,7 +3423,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay4" unique_id=1438570898]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay4" unique_id=1438570898]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -3442,7 +3438,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay4" unique_id=1871572143]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay4" unique_id=1871572143]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3452,7 +3448,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay5" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=1095176777 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay5" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4" unique_id=1095176777 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -3461,17 +3457,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 40
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay5" unique_id=1321299132]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay5" unique_id=1321299132]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3482,7 +3478,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay5" unique_id=397670845]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay5" unique_id=397670845]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3493,7 +3489,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay5" unique_id=1721503809]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay5" unique_id=1721503809]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -3508,7 +3504,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay5" unique_id=1553295244]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay5" unique_id=1553295244]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3518,7 +3514,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay6" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=95388718 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay6" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4" unique_id=95388718 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -3527,17 +3523,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 40
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay6" unique_id=1524790019]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay6" unique_id=1524790019]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3548,7 +3544,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay6" unique_id=37354974]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay6" unique_id=37354974]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3559,7 +3555,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay6" unique_id=62187038]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay6" unique_id=62187038]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -3574,7 +3570,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay6" unique_id=1378553983]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay6" unique_id=1378553983]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3584,7 +3580,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay7" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=2069564156 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay7" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4" unique_id=2069564156 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -3593,17 +3589,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 40
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay7" unique_id=964365725]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay7" unique_id=964365725]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3614,7 +3610,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay7" unique_id=1448397992]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay7" unique_id=1448397992]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3625,7 +3621,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay7" unique_id=102978035]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay7" unique_id=102978035]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -3640,7 +3636,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay7" unique_id=1108615602]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay7" unique_id=1108615602]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3650,7 +3646,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay8" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=812668640 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay8" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4" unique_id=812668640 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -3659,17 +3655,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 40
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay8" unique_id=260207866]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay8" unique_id=260207866]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3680,7 +3676,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay8" unique_id=429606426]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay8" unique_id=429606426]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3691,7 +3687,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay8" unique_id=978687752]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay8" unique_id=978687752]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -3706,7 +3702,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay8" unique_id=1791177972]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay8" unique_id=1791177972]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3716,7 +3712,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay9" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=404388599 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay9" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4" unique_id=404388599 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -3725,17 +3721,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 40
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay9" unique_id=1068253649]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay9" unique_id=1068253649]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3746,7 +3742,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay9" unique_id=328285488]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay9" unique_id=328285488]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3757,7 +3753,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay9" unique_id=971903089]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay9" unique_id=971903089]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -3772,7 +3768,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay9" unique_id=516031512]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay9" unique_id=516031512]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3782,7 +3778,7 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay10" type="Control" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4" unique_id=667606792 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
+[node name="ItemDisplay10" type="Control" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4" unique_id=667606792 node_paths=PackedStringArray("icon_rect", "quantity_label", "inventory_selectors", "inventory", "select_button", "selected_scale_targets")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
@@ -3791,17 +3787,17 @@ quantity_label = NodePath("QuantityLabel")
 do_auto_set_index = true
 auto_set_index_offset = 40
 inventory_selectors = {
-NodePath("../../../../PrimaryInventorySelector"): 0,
-NodePath("../../../../SecondaryInventorySelector"): 1
+NodePath("../../../../../PrimaryInventorySelector"): 0,
+NodePath("../../../../../SecondaryInventorySelector"): 1
 }
-inventory = NodePath("../../../../../Inventory")
+inventory = NodePath("../../../../../../Inventory")
 select_button = NodePath("Button")
 selected_modulate = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.4
 selected_scale_speed = 0.3
 selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
 
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay10" unique_id=2052594533]
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay10" unique_id=2052594533]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3812,7 +3808,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_bjvpn")
 expand_mode = 1
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay10" unique_id=475638073]
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay10" unique_id=475638073]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3823,7 +3819,7 @@ pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("23_g4c7l")
 expand_mode = 1
 
-[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay10" unique_id=1874795911]
+[node name="QuantityLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay10" unique_id=1874795911]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -3838,7 +3834,7 @@ grow_vertical = 0
 text = "#"
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="HUD/PauseInterface/BackpackDisplay/RowDisplay4/ItemDisplay10" unique_id=1047062796]
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/BackpackDisplay/RowDisplay4/ItemDisplay10" unique_id=1047062796]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3847,6 +3843,10 @@ grow_horizontal = 2
 grow_vertical = 2
 action_mode = 0
 flat = true
+
+[node name="SettingsMenu" parent="HUD/PauseInterface" unique_id=788547277 instance=ExtResource("39_xcnuv")]
+visible = false
+layout_mode = 1
 
 [node name="HotbarInterface" type="Control" parent="HUD" unique_id=858532635]
 unique_name_in_owner = true
