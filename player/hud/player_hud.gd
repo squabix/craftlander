@@ -7,6 +7,7 @@ const HOTBAR_INDEX := 0
 @export var secondary_inventory_selector: InventorySelector
 @export var inventory: Inventory
 @export var hold_inventory_selector: InventorySelector
+@export var held_item_label: Label
 @export var pause_interface: Control
 
 func _ready() -> void:
@@ -41,4 +42,5 @@ func update_selection_mode(paused_mode: bool) -> void:
 	hold_inventory_selector.enabled = not paused_mode
 	primary_inventory_selector.enabled = paused_mode
 	secondary_inventory_selector.enabled = paused_mode
+	held_item_label.visible = not paused_mode
 	#update_hotbar_display(primary_inventory_selector if paused_mode else hold_inventory_selector)

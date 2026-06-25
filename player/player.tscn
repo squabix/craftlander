@@ -603,7 +603,7 @@ force_from_start = false
 signal_name = &"was_hurt"
 metadata/_custom_type_script = "uid://dapeyi3eetek1"
 
-[node name="HUD" type="Control" parent="." unique_id=1406402649 node_paths=PackedStringArray("inventory_display_rows", "primary_inventory_selector", "secondary_inventory_selector", "inventory", "hold_inventory_selector", "pause_interface")]
+[node name="HUD" type="Control" parent="." unique_id=1406402649 node_paths=PackedStringArray("inventory_display_rows", "primary_inventory_selector", "secondary_inventory_selector", "inventory", "hold_inventory_selector", "held_item_label", "pause_interface")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -617,6 +617,7 @@ primary_inventory_selector = NodePath("PrimaryInventorySelector")
 secondary_inventory_selector = NodePath("SecondaryInventorySelector")
 inventory = NodePath("../Inventory")
 hold_inventory_selector = NodePath("../Head/Camera3D/ItemHolder/HoldSelector")
+held_item_label = NodePath("HotbarInterface/HeldItemLabel")
 pause_interface = NodePath("PauseInterface")
 
 [node name="PrimaryInventorySelector" type="Node" parent="HUD" unique_id=573150197 node_paths=PackedStringArray("inventory")]
@@ -3197,7 +3198,7 @@ grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="CurrentItemLabel" type="Label" parent="HUD/HotbarInterface" unique_id=272445762 node_paths=PackedStringArray("anim_player", "item_holder")]
+[node name="HeldItemLabel" type="Label" parent="HUD/HotbarInterface" unique_id=272445762 node_paths=PackedStringArray("anim_player", "item_holder")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -3215,7 +3216,7 @@ script = ExtResource("43_8pxes")
 anim_player = NodePath("AnimationPlayer")
 item_holder = NodePath("../../../Head/Camera3D/ItemHolder")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/HotbarInterface/CurrentItemLabel" unique_id=1735479515]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD/HotbarInterface/HeldItemLabel" unique_id=1735479515]
 libraries/ = SubResource("AnimationLibrary_7pqkx")
 
 [node name="HotbarDisplay" type="HBoxContainer" parent="HUD/HotbarInterface" unique_id=1354943621]
