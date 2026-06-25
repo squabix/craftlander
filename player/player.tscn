@@ -359,7 +359,7 @@ items = Array[ExtResource("40_a2xo5")]([ExtResource("41_a2xo5"), ExtResource("22
 start_anim = "swing_tool"
 metadata/_custom_type_script = "uid://c622jer80j3sk"
 
-[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("head", "movement_state_machine", "interactor", "respawn_button", "inventory", "item_holder", "inventory_selector", "dropper", "health", "hunger", "stamina", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
+[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("head", "movement_state_machine", "interactor", "respawn_button", "item_holder", "dropper", "health", "hunger", "stamina", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
 collision_layer = 17
 floor_constant_speed = true
 floor_block_on_wall = false
@@ -370,9 +370,7 @@ head = NodePath("Head")
 movement_state_machine = NodePath("Controller3D/Default")
 interactor = NodePath("Head/Camera3D/InteratorRay/Interactor")
 respawn_button = NodePath("HUD/DeathScreen/OptionsContainer/RespawnButton")
-inventory = NodePath("Inventory")
 item_holder = NodePath("Head/Camera3D/ItemHolder")
-inventory_selector = NodePath("Head/Camera3D/ItemHolder/HoldSelector")
 dropper = NodePath("Head/Camera3D/DropperRayCast/InventoryDropper3D")
 health = NodePath("Health")
 hunger = NodePath("Hunger")
@@ -4301,3 +4299,4 @@ inventory_selector = NodePath("../Head/Camera3D/ItemHolder/HoldSelector")
 [node name="BuildTimer" type="Timer" parent="." unique_id=1941720648]
 
 [connection signal="updated_instance" from="Head/Camera3D/ItemHolder" to="HUD" method="_on_item_holder_updated_instance"]
+[connection signal="updated_pause" from="HUD/PauseInterface" to="." method="_on_pause_interface_updated_pause"]

@@ -26,7 +26,7 @@ func update(_delta: float) -> void:
 		root.jump()
 	
 	if Input.is_action_just_pressed(ACTION_DROP):
-		root.drop_current_item()
+		root.drop_selected_item()
 
 func physics_update(delta: float) -> void:
 	super(delta)

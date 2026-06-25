@@ -39,7 +39,6 @@ func hold_instance(new_instance: ItemInstance) -> void:
 	updated_instance.emit(held_item_instance)
 	
 	connect_triggered_event(held_item_instance)
-	print("Success")
 
 func connect_triggered_event(instance: ItemInstance) -> void:
 	if instance == null or instance.item == null:

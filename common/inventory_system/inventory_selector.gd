@@ -2,12 +2,14 @@ extends Node
 class_name InventorySelector
 
 signal selected_new_index(index: int)
+signal selected_instance_changed(instance: ItemInstance)
 
 @export var enabled := true:
 	set(to):
 		enabled = to
 		if not enabled and reset_selection_on_disable:
 			selected_index = -1
+
 @export var reset_selection_on_disable := false
 @export var inventory: Inventory
 @export var selected_index := 0:
@@ -19,9 +21,13 @@ signal selected_new_index(index: int)
 		if selected_index == to:
 			return
 		
-		selected_index = wrapi(to, 0, inventory.size)
+		if to == -1:
+			selected_index = -1
+		else:
+			selected_index = wrapi(to, 0, inventory.size if inventory else 1)
 		
 		selected_new_index.emit(selected_index)
+		update_current_instance()
 
 var _last_instance: ItemInstance = null
 
@@ -31,21 +37,23 @@ func _ready() -> void:
 		return
 	
 	selected_new_index.emit.call_deferred(selected_index)
+	update_current_instance.call_deferred()
 	
-	# Check instance update
 	inventory.item_changed.connect(
 		func(index: int) -> void:
 			if index != selected_index:
 				return
-			check_instance_update()
+			update_current_instance()
 	)
 
-func is_index_valid(index: int) -> bool: return enabled and inventory.is_occupied(index)
+func is_index_valid(index: int) -> bool: 
+	return enabled and inventory.is_occupied(index)
 
-func check_instance_update() -> void:
+func update_current_instance() -> void:
 	var current := get_current_instance()
 	if _last_instance != current:
 		_last_instance = current
+		selected_instance_changed.emit.call_deferred(current)
 
 func get_current_instance() -> ItemInstance:
 	if not is_index_valid(selected_index):

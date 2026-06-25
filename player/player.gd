@@ -13,9 +13,7 @@ const HEAD_SPEED := 0.1
 @export var docking_hidden_interfaces: Array[Control] = []
 
 @export_group("Inventory")
-@export var inventory: Inventory
-@export var item_holder: ItemHolder3D
-@export var inventory_selector: InventorySelector
+@export var item_holder: InventoryHolder3D
 @export var dropper: InventoryDropper3D
 
 @export_group("Stats")
@@ -52,8 +50,8 @@ func adjust_head() -> void:
 		HEAD_SPEED
 	)
 
-func drop_current_item() -> void:
-	dropper.drop(inventory_selector.selected_index)
+func drop_selected_item() -> void:
+	dropper.drop(item_holder.selector.selected_index)
 
 func _process(_delta: float) -> void:
 	adjust_head()
@@ -85,3 +83,10 @@ func respawn() -> void:
 	
 	MouseModeController.capture()
 	get_tree().paused = false
+
+
+func _on_pause_interface_updated_pause(to: bool) -> void:
+	if to == true:
+		return
+	await get_tree().process_frame
+	item_holder.selector.update_current_instance()

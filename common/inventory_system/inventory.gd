@@ -207,7 +207,6 @@ func empty_instance(index: int) -> void:
 	
 	item_instances[index] = null
 	item_changed.emit(index)
-	print("Changed: emptied instance")
 
 func give_item(item: Item, quantity: int, to: Inventory) -> int:
 	var available := quantity if constant else quantity - remove_item(item, quantity)
