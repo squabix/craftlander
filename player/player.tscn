@@ -193,8 +193,8 @@ font_size = 20
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pnw6m"]
 shader = ExtResource("28_ge24q")
 shader_parameter/blur_amount = 1.0000001424999998
-shader_parameter/mix_amount = 0.50000002375
-shader_parameter/color_over = Color(0, 0, 0, 1)
+shader_parameter/mix_amount = 0.650000030875
+shader_parameter/color_over = Color(0.035, 0.035, 0.05, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_7crtr"]
 font_size = 12
