@@ -1,6 +1,7 @@
 extends Node
 
 var all_recipes: Array
+var recipe_types: Dictionary[String, Array]
 
 func _ready() -> void:
 	all_recipes = Util.find_all_resources("ItemRecipe", "res://items/")
@@ -8,6 +9,13 @@ func _ready() -> void:
 		func(a: ItemRecipe, b: ItemRecipe) -> bool:
 			return a.result.item.name < b.result.item.name
 	)
+	
+	for recipe in all_recipes:
+		var item: Item = recipe.result.item
+		if item.type in recipe_types:
+			recipe_types[item.type].append(item)
+			continue
+		recipe_types[item.type] = [item]
 
 func get_recipe(layout: Dictionary[Vector2i, Item]) -> ItemRecipe:
 	for recipe in all_recipes:
