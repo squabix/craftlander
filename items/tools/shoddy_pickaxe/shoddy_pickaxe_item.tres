@@ -6,9 +6,10 @@
 
 [resource]
 script = ExtResource("3_aaxip")
-scene = ExtResource("2_4lcjq")
 name = "Shoddy Pickaxe"
 icon = ExtResource("1_4lcjq")
+type = "Tool"
+scene = ExtResource("2_4lcjq")
 cooldown_mode = 1
 default_cooldown_length = 0.3
 metadata/_custom_type_script = "uid://6x786nnhteca"

@@ -6,9 +6,10 @@
 
 [resource]
 script = ExtResource("1_0lrxf")
-scene = ExtResource("2_pqrwp")
 name = "Shoddy Mace"
 icon = ExtResource("1_mixkx")
+type = "Tool"
+scene = ExtResource("2_pqrwp")
 cooldown_mode = 1
 default_cooldown_length = 0.5
 metadata/_custom_type_script = "uid://6x786nnhteca"
