@@ -39,8 +39,8 @@ grow_amount = -0.9
 
 [sub_resource type="SphereMesh" id="SphereMesh_4aq3d"]
 material = SubResource("StandardMaterial3D_mqnoh")
-radius = 0.04
-height = 0.08
+radius = 0.025
+height = 0.05
 radial_segments = 12
 rings = 6
 
