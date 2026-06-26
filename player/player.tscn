@@ -53,7 +53,9 @@
 [ext_resource type="Texture2D" uid="uid://1xbns4oq6pfw" path="res://player/hud/recipe_display_slot.tres" id="42_7crtr"]
 [ext_resource type="Script" uid="uid://s6yjbusuc0uo" path="res://player/hud/current_item_label.gd" id="43_8pxes"]
 [ext_resource type="Script" uid="uid://hdyfq5riitj7" path="res://player/complete_crafting_panel.gd" id="43_n0b8q"]
+[ext_resource type="Script" uid="uid://bwcomtie8q510" path="res://player/hud/recipe_panel_group.gd" id="44_a1u5o"]
 [ext_resource type="Texture2D" uid="uid://c3o13o5vrivr" path="res://items/tools/shoddy_pickaxe/shoddy_pickaxe.png" id="44_jfgyi"]
+[ext_resource type="Texture2D" uid="uid://b02s8vle3kjwk" path="res://items/food/raw_meat/raw_meat.png" id="44_vgvch"]
 [ext_resource type="Script" uid="uid://copdmdj2us45e" path="res://player/inventory_organization_label.gd" id="47_wpyo2"]
 [ext_resource type="Texture2D" uid="uid://douq42dkvsywk" path="res://player/hud/inventory_slot.tres" id="48_vgvch"]
 
@@ -196,6 +198,16 @@ shader_parameter/color_over = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_7crtr"]
 font_size = 12
+
+[sub_resource type="Resource" id="Resource_3dxkp"]
+script = ExtResource("44_a1u5o")
+icon = ExtResource("44_vgvch")
+metadata/_custom_type_script = "uid://bwcomtie8q510"
+
+[sub_resource type="Resource" id="Resource_6wior"]
+script = ExtResource("44_a1u5o")
+icon = ExtResource("44_jfgyi")
+metadata/_custom_type_script = "uid://bwcomtie8q510"
 
 [sub_resource type="LabelSettings" id="LabelSettings_wpyo2"]
 font_size = 20
@@ -1224,7 +1236,7 @@ layout_mode = 2
 texture = ExtResource("42_7crtr")
 expand_mode = 1
 
-[node name="RecipePanel" type="Control" parent="HUD/PauseInterface/CraftingMenu" unique_id=1393690572 node_paths=PackedStringArray("recipe_list_box", "recipe_entry_template", "recipe_display")]
+[node name="RecipePanel" type="Control" parent="HUD/PauseInterface/CraftingMenu" unique_id=1393690572 node_paths=PackedStringArray("recipe_list_box", "recipe_entry_template", "recipe_display", "back_button")]
 layout_mode = 1
 anchor_left = 0.0069444445
 anchor_top = 0.057098765
@@ -1234,6 +1246,11 @@ script = ExtResource("38_1so5t")
 recipe_list_box = NodePath("RecipeList/RecipeListBox")
 recipe_entry_template = NodePath("RecipeList/RecipeListBox/RecipeEntry")
 recipe_display = NodePath("../RecipeDisplay")
+back_button = NodePath("RecipeList/RecipeListBox/BackButton")
+recipe_groups = Dictionary[String, ExtResource("44_a1u5o")]({
+"Food": SubResource("Resource_3dxkp"),
+"Tool": SubResource("Resource_6wior")
+})
 metadata/_edit_use_anchors_ = true
 
 [node name="RecipeList" type="ScrollContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel" unique_id=1782315597]
@@ -1252,12 +1269,28 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="RecipeEntry" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox" unique_id=2103479977]
+visible = false
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Item"
 
 [node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox/RecipeEntry" unique_id=370566999]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 48.0
+grow_vertical = 2
+expand_mode = 1
+
+[node name="BackButton" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox" unique_id=519946777]
+visible = false
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Back"
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox/BackButton" unique_id=401260894]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
