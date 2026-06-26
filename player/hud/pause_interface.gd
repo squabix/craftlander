@@ -6,6 +6,7 @@ const ACTION_PAUSE := "ui_cancel"
 
 @export var crafting_menu: Control
 @export var crafting_environment: CraftingEnvironment
+@export var recipe_panel: Control
 @export var settings_menu: Menu
 @export var settings_button: Button
 @export var health: Health
@@ -41,6 +42,9 @@ func toggle_pause() -> void:
 	get_tree().paused = is_paused
 	crafting_environment.is_crafting = is_paused
 	update()
+	if is_paused == false:
+		recipe_panel.show_types()
+		recipe_panel.recipe_display.clear()
 	updated_pause.emit(is_paused)
 
 func _process(_delta: float) -> void:

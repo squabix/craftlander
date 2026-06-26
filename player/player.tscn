@@ -809,7 +809,7 @@ custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 text = "Continue"
 
-[node name="PauseInterface" type="Control" parent="HUD" unique_id=1163003515 node_paths=PackedStringArray("crafting_menu", "crafting_environment", "settings_menu", "settings_button", "health")]
+[node name="PauseInterface" type="Control" parent="HUD" unique_id=1163003515 node_paths=PackedStringArray("crafting_menu", "crafting_environment", "recipe_panel", "settings_menu", "settings_button", "health")]
 unique_name_in_owner = true
 process_mode = 3
 layout_mode = 1
@@ -821,6 +821,7 @@ grow_vertical = 2
 script = ExtResource("28_pnw6m")
 crafting_menu = NodePath("CraftingMenu")
 crafting_environment = NodePath("CraftingMenu/CraftingEnvironment")
+recipe_panel = NodePath("CraftingMenu/RecipePanel")
 settings_menu = NodePath("SettingsMenu")
 settings_button = NodePath("CraftingMenu/SettingsButton")
 health = NodePath("../../Health")
