@@ -192,8 +192,8 @@ font_size = 20
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pnw6m"]
 shader = ExtResource("28_ge24q")
-shader_parameter/blur_amount = 1.0000001424999998
-shader_parameter/mix_amount = 0.650000030875
+shader_parameter/blur_amount = 2.2500002018750003
+shader_parameter/mix_amount = 0.70000003325
 shader_parameter/color_over = Color(0.035, 0.035, 0.05, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_7crtr"]
@@ -862,14 +862,14 @@ metadata/_edit_use_anchors_ = true
 
 [node name="RecipeDisplay" type="VBoxContainer" parent="HUD/PauseInterface/CraftingMenu" unique_id=899494565 node_paths=PackedStringArray("grid_container", "recipe_label")]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = -1
+anchor_left = 0.69200003
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -220.0
-offset_top = -220.0
-offset_right = -20.0
+offset_left = 76.81598
+offset_top = -237.0
+offset_right = -78.0
 offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -1239,9 +1239,9 @@ expand_mode = 1
 
 [node name="RecipePanel" type="Control" parent="HUD/PauseInterface/CraftingMenu" unique_id=1393690572 node_paths=PackedStringArray("recipe_list_box", "recipe_entry_template", "recipe_display", "back_button")]
 layout_mode = 1
-anchor_left = 0.0069444445
+anchor_left = 0.020833334
 anchor_top = 0.057098765
-anchor_right = 0.2734375
+anchor_right = 0.2873264
 anchor_bottom = 0.9722222
 script = ExtResource("38_1so5t")
 recipe_list_box = NodePath("RecipeList/RecipeListBox")
