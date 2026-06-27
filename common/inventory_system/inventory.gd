@@ -78,6 +78,43 @@ func get_item_quantity(item: Item) -> int:
 	var quantities := get_item_quantities()
 	return quantities.get(item, 0)
 
+func has_room(item: Item, quantity: int) -> bool:
+	if constant:
+		return false
+		
+	if item == null or quantity <= 0:
+		return true
+	
+	# Check space inside existing stackable matching item slots
+	var remaining_quantity := quantity - get_stackable_room(item)
+	if remaining_quantity <= 0:
+		return true
+	
+	# Check if the remaining empty slots can handle what's left over
+	var total_empty_slot_capacity := count_empty_slots() * item.max_quantity
+	return remaining_quantity <= total_empty_slot_capacity
+
+func count_empty_slots() -> int:
+	var count := 0
+	for instance in item_instances:
+		if instance == null:
+			count += 1
+	return count
+
+func get_stackable_room(item: Item) -> int:
+	if item.max_quantity <= 1:
+		return 0
+	
+	var room := 0
+	
+	for index in get_occupied_indexes():
+		var instance := get_instance(index)
+		if not instance.is_stackable_with(item):
+			continue
+		room += item.max_quantity - instance.quantity
+		
+	return room
+
 func add_item(new_item: Item, quantity: int = 1, must_reach_quantity: bool = false) -> int:
 	if constant:
 		return quantity
