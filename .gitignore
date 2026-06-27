@@ -21,3 +21,5 @@ BUGS.txt
 /testing
 testing/test_scene1.tscn
 /assets/outsourced_assets
+.vscode/
+addons/IgnoreFolders/
