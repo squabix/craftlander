@@ -1,0 +1,132 @@
+[gd_resource type="Theme" format=3 uid="uid://dy5fmdtb6xfr7"]
+
+[ext_resource type="FontFile" uid="uid://jt0w0dik8jva" path="res://assets/acid_medium.otf" id="1_2h7nn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dh8sq"]
+bg_color = Color(0.14732629, 0.1673831, 0.19746816, 1)
+corner_radius_top_left = 21
+corner_radius_top_right = 21
+corner_radius_bottom_right = 21
+corner_radius_bottom_left = 21
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2h7nn"]
+bg_color = Color(0.19140002, 0.25838998, 0.33, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.17254902, 0.28235295, 0.39607844, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3lri3"]
+bg_color = Color(0.20392157, 0.20392157, 0.21568628, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cdrs1"]
+bg_color = Color(0.17090032, 0.28357786, 0.39581516, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.34509805, 0.54901963, 0.76862746, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2h7nn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3lri3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cdrs1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dh8sq"]
+
+[sub_resource type="Texture2DRD" id="Texture2DRD_2h7nn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iqjrn"]
+bg_color = Color(0.17254902, 0.28235295, 0.39607844, 1)
+border_width_top = 2
+border_width_right = 3
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p33eb"]
+bg_color = Color(0.34509805, 0.54901963, 0.76862746, 1)
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hmvnr"]
+bg_color = Color(0.34509805, 0.54901963, 0.76862746, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bkqn5"]
+bg_color = Color(0.17254902, 0.28235295, 0.39607844, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c85jt"]
+bg_color = Color(0.2276282, 0.23128644, 0.2773377, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gpt0j"]
+bg_color = Color(0.30838102, 0.46558154, 0.62938195, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[resource]
+default_font = ExtResource("1_2h7nn")
+default_font_size = 18
+Button/styles/disabled = SubResource("StyleBoxFlat_dh8sq")
+Button/styles/hover = SubResource("StyleBoxFlat_2h7nn")
+Button/styles/normal = SubResource("StyleBoxFlat_3lri3")
+Button/styles/pressed = SubResource("StyleBoxFlat_cdrs1")
+CheckBox/colors/checkbox_checked_color = Color(0.44, 0.71066654, 1, 1)
+CheckBox/styles/hover = SubResource("StyleBoxEmpty_2h7nn")
+CheckBox/styles/hover_pressed = SubResource("StyleBoxEmpty_3lri3")
+CheckBox/styles/normal = SubResource("StyleBoxEmpty_cdrs1")
+CheckBox/styles/pressed = SubResource("StyleBoxEmpty_dh8sq")
+HSlider/icons/tick = SubResource("Texture2DRD_2h7nn")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_iqjrn")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_p33eb")
+PopupMenu/constants/h_separation = 10
+PopupMenu/styles/hover = SubResource("StyleBoxFlat_hmvnr")
+PopupMenu/styles/panel = SubResource("StyleBoxFlat_bkqn5")
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_c85jt")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_gpt0j")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_gpt0j")

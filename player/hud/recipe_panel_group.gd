@@ -1,6 +1,7 @@
 extends Resource
 class_name RecipePanelGroup
 
+@export var name: String
 @export var icon: Texture
 
 var type_entry: Button

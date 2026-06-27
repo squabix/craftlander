@@ -36,7 +36,7 @@ func add_type_entry(type: String) -> Button:
 	
 	set_icon(entry, group.icon)
 	
-	entry.text = type
+	entry.text = group.name
 	entry.pressed.connect(show_recipes.bind(type))
 	group.type_entry = entry
 	

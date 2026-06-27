@@ -21,10 +21,10 @@ grow_vertical = 2
 script = ExtResource("1_83qjl")
 music_slider = NodePath("SettingsContainer/MusicVolume/MusicSlider")
 sfx_slider = NodePath("SettingsContainer/SFXVolume/SFXSlider")
-vsync_toggle = NodePath("SettingsContainer/VSync/VSyncToggle")
-full_screen_toggle = NodePath("SettingsContainer/FullScreen/FullScreenToggle")
+vsync_toggle = NodePath("SettingsContainer/VSync/CenterContainer/VSyncToggle")
+full_screen_toggle = NodePath("SettingsContainer/FullScreen/CenterContainer/FullScreenToggle")
 aa_option = NodePath("SettingsContainer/AntiAliasing/AAOption")
-invert_y_toggle = NodePath("SettingsContainer/InvertY/InvertYToggle")
+invert_y_toggle = NodePath("SettingsContainer/InvertY/CenterContainer/InvertYToggle")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1518470332]
 custom_minimum_size = Vector2(380, 370)
@@ -65,7 +65,11 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Full Screen"
 
-[node name="FullScreenToggle" type="CheckBox" parent="SettingsContainer/FullScreen" unique_id=2049426436]
+[node name="CenterContainer" type="CenterContainer" parent="SettingsContainer/FullScreen" unique_id=547709853]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+
+[node name="FullScreenToggle" type="CheckBox" parent="SettingsContainer/FullScreen/CenterContainer" unique_id=2049426436]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -78,7 +82,11 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "VSync"
 
-[node name="VSyncToggle" type="CheckBox" parent="SettingsContainer/VSync" unique_id=1518537055]
+[node name="CenterContainer" type="CenterContainer" parent="SettingsContainer/VSync" unique_id=1022507826]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+
+[node name="VSyncToggle" type="CheckBox" parent="SettingsContainer/VSync/CenterContainer" unique_id=1518537055]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -92,11 +100,15 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Invert Y"
 
-[node name="InvertYToggle" type="CheckBox" parent="SettingsContainer/InvertY" unique_id=1517878780]
+[node name="CenterContainer" type="CenterContainer" parent="SettingsContainer/InvertY" unique_id=1327443351]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+
+[node name="InvertYToggle" type="CheckBox" parent="SettingsContainer/InvertY/CenterContainer" unique_id=1517878780]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-button_pressed = true
+alignment = 1
 
 [node name="AntiAliasing" type="HBoxContainer" parent="SettingsContainer" unique_id=289704489]
 layout_mode = 2
@@ -110,6 +122,7 @@ text = "Anti Aliasing"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+alignment = 1
 selected = 1
 item_count = 4
 popup/item_0/text = "Disabled"
@@ -133,6 +146,7 @@ text = "Shadow Quality"
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+alignment = 1
 selected = 1
 item_count = 4
 popup/item_0/text = "Low"
@@ -184,9 +198,9 @@ ticks_on_borders = true
 layout_mode = 2
 text = "BACK"
 
-[connection signal="toggled" from="SettingsContainer/FullScreen/FullScreenToggle" to="." method="_on_full_screen_toggled"]
-[connection signal="toggled" from="SettingsContainer/VSync/VSyncToggle" to="." method="_on_vsync_toggled"]
-[connection signal="toggled" from="SettingsContainer/InvertY/InvertYToggle" to="." method="_on_invert_y_toggled"]
+[connection signal="toggled" from="SettingsContainer/FullScreen/CenterContainer/FullScreenToggle" to="." method="_on_full_screen_toggled"]
+[connection signal="toggled" from="SettingsContainer/VSync/CenterContainer/VSyncToggle" to="." method="_on_vsync_toggled"]
+[connection signal="toggled" from="SettingsContainer/InvertY/CenterContainer/InvertYToggle" to="." method="_on_invert_y_toggled"]
 [connection signal="item_selected" from="SettingsContainer/AntiAliasing/AAOption" to="." method="_on_anti_aliasing_selected"]
 [connection signal="item_selected" from="SettingsContainer/ShadowQuality/ShadowOption" to="." method="_on_shadow_quality_selected"]
 [connection signal="value_changed" from="SettingsContainer/MusicVolume/MusicSlider" to="." method="_on_music_volume_changed"]
