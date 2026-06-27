@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://s3ufjlvtqovq" path="res://player/hud/crafting_environment.gd" id="1_mqnoh"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="2_4aq3d"]
+[ext_resource type="Material" uid="uid://dfhykr3iod543" path="res://player/hud/craft_particles_material.tres" id="3_5krih"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mqnoh"]
 size = Vector3(30, 1, 30)
@@ -47,7 +48,19 @@ rings = 6
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4aq3d"]
 height = 0.01
 
-[node name="CraftingEnvironment" type="SubViewportContainer" unique_id=2022052365 node_paths=PackedStringArray("sub_viewport", "space", "item_origin", "camera", "grid", "grid_inventory", "cursor3d")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_18auj"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.1
+normal_enabled = true
+proximity_fade_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_snws6"]
+material = SubResource("StandardMaterial3D_18auj")
+radial_segments = 16
+rings = 8
+
+[node name="CraftingEnvironment" type="SubViewportContainer" unique_id=2022052365 node_paths=PackedStringArray("sub_viewport", "space", "item_origin", "camera", "grid", "grid_inventory", "cursor3d", "craft_particles")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -62,6 +75,10 @@ camera = NodePath("SubViewport/Space/Camera3D")
 grid = NodePath("SubViewport/Space/Grid")
 grid_inventory = NodePath("SubViewport/Space/GridInventory")
 cursor3d = NodePath("SubViewport/Space/Cursor3D")
+craft_particles = NodePath("SubViewport/Space/CraftParticles")
+selection_wiggle_intensity = 10.0
+fail_wiggle_intensity = 10.0
+success_merge_stagger_delay_offset = 0.02
 
 [node name="SubViewport" type="SubViewport" parent="." unique_id=635865808]
 transparent_bg = true
@@ -393,3 +410,14 @@ target_position = Vector3(0, 0.1, 0)
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="CraftParticles" type="GPUParticles3D" parent="SubViewport/Space" unique_id=528645837]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+cast_shadow = 0
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 1.0
+process_material = ExtResource("3_5krih")
+draw_pass_1 = SubResource("SphereMesh_snws6")
