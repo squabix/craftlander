@@ -8,8 +8,12 @@ const ACTION_PAUSE := "ui_cancel"
 @export var crafting_environment: CraftingEnvironment
 @export var recipe_panel: Control
 @export var settings_menu: Menu
-@export var settings_button: Button
 @export var health: Health
+
+@export_group("Options Buttons")
+@export var resume_button: Button
+@export var settings_button: Button
+@export var quit_button: Button
 
 var is_paused := false
 var can_update_pause := true
@@ -18,7 +22,11 @@ func _ready() -> void:
 	update()
 	health.died.connect(disable_update_pause)
 	health.revived.connect(enable_update_pause)
+	
+	# Connect options buttons
+	resume_button.pressed.connect(toggle_pause)
 	settings_button.pressed.connect(open_settings)
+	quit_button.pressed.connect(EventBus.trigger.bind("quit_to_title"))
 
 func open_settings() -> void:
 	crafting_menu.hide()

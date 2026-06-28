@@ -830,7 +830,7 @@ custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 text = "Continue"
 
-[node name="PauseInterface" type="Control" parent="HUD" unique_id=1163003515 node_paths=PackedStringArray("crafting_menu", "crafting_environment", "recipe_panel", "settings_menu", "settings_button", "health")]
+[node name="PauseInterface" type="Control" parent="HUD" unique_id=1163003515 node_paths=PackedStringArray("crafting_menu", "crafting_environment", "recipe_panel", "settings_menu", "health", "resume_button", "settings_button", "quit_button")]
 unique_name_in_owner = true
 process_mode = 3
 layout_mode = 1
@@ -844,8 +844,10 @@ crafting_menu = NodePath("CraftingMenu")
 crafting_environment = NodePath("CraftingMenu/CraftingEnvironment")
 recipe_panel = NodePath("CraftingMenu/RecipePanel")
 settings_menu = NodePath("SettingsMenu")
-settings_button = NodePath("CraftingMenu/OptionsContainer/SettingsButton")
 health = NodePath("../../Health")
+resume_button = NodePath("CraftingMenu/OptionsContainer/ResumeButton")
+settings_button = NodePath("CraftingMenu/OptionsContainer/SettingsButton")
+quit_button = NodePath("../DeathScreen/OptionsContainer/QuitButton")
 
 [node name="BlurRect" type="ColorRect" parent="HUD/PauseInterface" unique_id=1141508559]
 material = SubResource("ShaderMaterial_pnw6m")
@@ -866,32 +868,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="OptionsContainer" type="VBoxContainer" parent="HUD/PauseInterface/CraftingMenu" unique_id=1312813458]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -232.0
-offset_top = 10.0
-offset_right = -16.000366
-offset_bottom = 123.0
-grow_horizontal = 0
-
-[node name="BackToGameButton" type="Button" parent="HUD/PauseInterface/CraftingMenu/OptionsContainer" unique_id=1612901605]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-text = "BACK TO GAME"
-
-[node name="SettingsButton" type="Button" parent="HUD/PauseInterface/CraftingMenu/OptionsContainer" unique_id=1494540130]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-text = "SETTINGS"
-
-[node name="QuitButton" type="Button" parent="HUD/PauseInterface/CraftingMenu/OptionsContainer" unique_id=729008343]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-text = "QUIT TO TITLE SCREEN"
-
 [node name="CraftingEnvironment" parent="HUD/PauseInterface/CraftingMenu" unique_id=651686952 node_paths=PackedStringArray("inventory_selector", "pause_interface") instance=ExtResource("28_q28gw")]
 custom_minimum_size = Vector2(1000, 1000)
 layout_mode = 1
@@ -909,9 +885,9 @@ anchor_left = 0.69200003
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 76.81598
+offset_left = -721.184
 offset_top = -237.0
-offset_right = -78.0
+offset_right = -876.0
 offset_bottom = -20.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -1284,7 +1260,7 @@ layout_mode = 1
 anchor_left = 0.020833334
 anchor_top = 0.057098765
 anchor_right = 0.2873264
-anchor_bottom = 0.9722222
+anchor_bottom = 0.6527778
 script = ExtResource("38_1so5t")
 entry_container = NodePath("RecipeList/EntryContainer")
 entry_template = NodePath("RecipeList/EntryContainer/Entry")
@@ -1309,7 +1285,7 @@ horizontal_alignment = 1
 [node name="RecipeList" type="ScrollContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel" unique_id=1782315597]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.0539629
+anchor_top = 0.08615385
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -3481,6 +3457,34 @@ label_settings = SubResource("LabelSettings_wpyo2")
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true
+
+[node name="OptionsContainer" type="VBoxContainer" parent="HUD/PauseInterface/CraftingMenu" unique_id=1312813458]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.753
+anchor_top = 1.0
+anchor_right = 0.94000006
+anchor_bottom = 1.0
+offset_left = -0.4560547
+offset_top = -113.0
+offset_right = 0.119506836
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ResumeButton" type="Button" parent="HUD/PauseInterface/CraftingMenu/OptionsContainer" unique_id=1612901605]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+text = "BACK TO GAME"
+
+[node name="SettingsButton" type="Button" parent="HUD/PauseInterface/CraftingMenu/OptionsContainer" unique_id=1494540130]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+text = "SETTINGS"
+
+[node name="QuitButton" type="Button" parent="HUD/PauseInterface/CraftingMenu/OptionsContainer" unique_id=729008343]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+text = "QUIT TO TITLE SCREEN"
 
 [node name="SettingsMenu" parent="HUD/PauseInterface" unique_id=788547277 instance=ExtResource("39_xcnuv")]
 visible = false
