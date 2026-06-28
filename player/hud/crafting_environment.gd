@@ -160,6 +160,8 @@ func get_current_slot() -> int:
 
 func move_item_to_grid_inventory(item: Item) -> void:
 	inventory_selector.inventory.give_item(item, 1, grid_inventory)
+	if selection_visuals != null:
+		selection_visuals.rotation_degrees = VISUALS_TILT
 	update_selection_visuals()
 	grid_changed.emit()
 
