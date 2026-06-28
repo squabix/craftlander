@@ -1,4 +1,4 @@
-extends Control
+extends VBoxContainer
 
 const LAYOUT_OFFSET := Vector2i(2, -3)
 

@@ -32,11 +32,12 @@ radial_segments = 16
 rings = 8
 
 [node name="CraftingEnvironment" type="SubViewportContainer" unique_id=2022052365 node_paths=PackedStringArray("sub_viewport", "space", "item_origin", "camera", "grid", "grid_inventory", "cursor3d", "craft_particles")]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_right = 2.0
+anchor_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.5, 0.5)
 stretch = true
 script = ExtResource("1_mqnoh")
 sub_viewport = NodePath("SubViewport")
@@ -54,7 +55,7 @@ success_merge_stagger_delay_offset = 0.02
 [node name="SubViewport" type="SubViewport" parent="." unique_id=635865808]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1152, 648)
+size = Vector2i(2304, 1296)
 render_target_update_mode = 4
 
 [node name="Space" type="Node3D" parent="SubViewport" unique_id=440212288]

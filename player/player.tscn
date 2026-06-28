@@ -208,8 +208,6 @@ shader_parameter/blur_amount = 2.2500002018750003
 shader_parameter/mix_amount = 0.70000003325
 shader_parameter/color_over = Color(0.035, 0.035, 0.05, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_7crtr"]
-
 [sub_resource type="Resource" id="Resource_3dxkp"]
 script = ExtResource("44_a1u5o")
 name = "Food"
@@ -224,6 +222,8 @@ metadata/_custom_type_script = "uid://bwcomtie8q510"
 
 [sub_resource type="LabelSettings" id="LabelSettings_jbx34"]
 font_size = 26
+
+[sub_resource type="LabelSettings" id="LabelSettings_7crtr"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s3g0c"]
 font_size = 26
@@ -587,18 +587,21 @@ metadata/_custom_type_script = "uid://bpmbg0e28ujs7"
 remote_path = NodePath("../../SubViewportContainer/SubViewport/Camera3D")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Head" unique_id=702739673]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
+anchors_preset = -1
+anchor_right = 2.0
+anchor_bottom = 2.0
+grow_horizontal = 0
 grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 10
+size_flags_vertical = 3
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="Head/SubViewportContainer" unique_id=1289466890]
 transparent_bg = true
 handle_input_locally = false
 msaa_3d = 2
-size = Vector2i(1152, 648)
+size = Vector2i(2304, 1296)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="Head/SubViewportContainer/SubViewport" unique_id=849292685]
@@ -871,402 +874,22 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="CraftingEnvironment" parent="HUD/PauseInterface/CraftingMenu" unique_id=651686952 node_paths=PackedStringArray("inventory_selector", "pause_interface") instance=ExtResource("28_q28gw")]
-custom_minimum_size = Vector2(1000, 1000)
 layout_mode = 1
-anchors_preset = -1
-offset_right = 1152.0
-offset_bottom = 648.0
-scale = Vector2(0.5, 0.5)
 inventory_selector = NodePath("../../../PrimaryInventorySelector")
 pause_interface = NodePath("../..")
 
-[node name="RecipeDisplay" type="VBoxContainer" parent="HUD/PauseInterface/CraftingMenu" unique_id=899494565 node_paths=PackedStringArray("grid_container", "recipe_label")]
+[node name="RecipePanel" type="VBoxContainer" parent="HUD/PauseInterface/CraftingMenu" unique_id=219499038 node_paths=PackedStringArray("entry_container", "entry_template", "recipe_display", "back_entry")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.69200003
-anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -721.184
-offset_top = -237.0
-offset_right = -876.0
-offset_bottom = -20.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_constants/separation = 0
-script = ExtResource("41_7crtr")
-grid_container = NodePath("GridContainer")
-recipe_label = NodePath("RecipeLabel")
-
-[node name="RecipeLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay" unique_id=1286421521]
-layout_mode = 2
-label_settings = SubResource("LabelSettings_7crtr")
-horizontal_alignment = 1
-
-[node name="GridContainer" type="VBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay" unique_id=914428979]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="Row1" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer" unique_id=2057981750]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ItemTextureContainer" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row1" unique_id=1219651666]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row1/ItemTextureContainer" unique_id=1651860714]
-layout_mode = 2
-expand_mode = 1
-
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row1/ItemTextureContainer" unique_id=553915409]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="ItemTextureContainer2" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row1" unique_id=1436645007]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row1/ItemTextureContainer2" unique_id=1532354280]
-layout_mode = 2
-
-[node name="BackgroundRect2" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row1/ItemTextureContainer2" unique_id=980018062]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="ItemTextureContainer3" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row1" unique_id=3039435]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row1/ItemTextureContainer3" unique_id=87486874]
-layout_mode = 2
-
-[node name="BackgroundRect3" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row1/ItemTextureContainer3" unique_id=2100470516]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="ItemTextureContainer4" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row1" unique_id=1933387428]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row1/ItemTextureContainer4" unique_id=2020158053]
-layout_mode = 2
-
-[node name="BackgroundRect4" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row1/ItemTextureContainer4" unique_id=27186043]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="ItemTextureContainer5" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row1" unique_id=542011349]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row1/ItemTextureContainer5" unique_id=756031247]
-layout_mode = 2
-
-[node name="BackgroundRect5" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row1/ItemTextureContainer5" unique_id=132159902]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="Row2" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer" unique_id=101783796]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ItemTextureContainer" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row2" unique_id=1200343179]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row2/ItemTextureContainer" unique_id=2139784211]
-layout_mode = 2
-expand_mode = 1
-
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row2/ItemTextureContainer" unique_id=2100450747]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="ItemTextureContainer2" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row2" unique_id=953361796]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row2/ItemTextureContainer2" unique_id=909543612]
-layout_mode = 2
-
-[node name="BackgroundRect2" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row2/ItemTextureContainer2" unique_id=1259105472]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="ItemTextureContainer3" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row2" unique_id=1557629166]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row2/ItemTextureContainer3" unique_id=2051773883]
-layout_mode = 2
-
-[node name="BackgroundRect3" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row2/ItemTextureContainer3" unique_id=743583954]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="ItemTextureContainer4" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row2" unique_id=1831665100]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row2/ItemTextureContainer4" unique_id=1067344024]
-layout_mode = 2
-
-[node name="BackgroundRect4" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row2/ItemTextureContainer4" unique_id=1742337038]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="ItemTextureContainer5" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row2" unique_id=1011856445]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row2/ItemTextureContainer5" unique_id=1710862452]
-layout_mode = 2
-
-[node name="BackgroundRect5" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row2/ItemTextureContainer5" unique_id=863943636]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="Row3" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer" unique_id=600352779]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ItemTextureContainer" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row3" unique_id=674662454]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row3/ItemTextureContainer" unique_id=872699474]
-layout_mode = 2
-expand_mode = 1
-
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row3/ItemTextureContainer" unique_id=1447548781]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="ItemTextureContainer2" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row3" unique_id=1020725291]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row3/ItemTextureContainer2" unique_id=163660647]
-layout_mode = 2
-
-[node name="BackgroundRect2" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row3/ItemTextureContainer2" unique_id=826405074]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="ItemTextureContainer3" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row3" unique_id=681408810]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row3/ItemTextureContainer3" unique_id=905374069]
-layout_mode = 2
-
-[node name="BackgroundRect3" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row3/ItemTextureContainer3" unique_id=53599641]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="ItemTextureContainer4" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row3" unique_id=1210860425]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row3/ItemTextureContainer4" unique_id=737844845]
-layout_mode = 2
-
-[node name="BackgroundRect4" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row3/ItemTextureContainer4" unique_id=1070141586]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="ItemTextureContainer5" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row3" unique_id=1868434917]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row3/ItemTextureContainer5" unique_id=1462630265]
-layout_mode = 2
-
-[node name="BackgroundRect5" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row3/ItemTextureContainer5" unique_id=798124540]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="Row4" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer" unique_id=191488819]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ItemTextureContainer" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row4" unique_id=241886581]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row4/ItemTextureContainer" unique_id=102053703]
-layout_mode = 2
-expand_mode = 1
-
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row4/ItemTextureContainer" unique_id=535084112]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="ItemTextureContainer2" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row4" unique_id=697493253]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row4/ItemTextureContainer2" unique_id=1712755450]
-layout_mode = 2
-
-[node name="BackgroundRect2" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row4/ItemTextureContainer2" unique_id=1460646009]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="ItemTextureContainer3" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row4" unique_id=2068052245]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row4/ItemTextureContainer3" unique_id=161721276]
-layout_mode = 2
-
-[node name="BackgroundRect3" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row4/ItemTextureContainer3" unique_id=1375773131]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="ItemTextureContainer4" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row4" unique_id=629493490]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row4/ItemTextureContainer4" unique_id=516424800]
-layout_mode = 2
-
-[node name="BackgroundRect4" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row4/ItemTextureContainer4" unique_id=1498961735]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="ItemTextureContainer5" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row4" unique_id=1829067978]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row4/ItemTextureContainer5" unique_id=1088330772]
-layout_mode = 2
-
-[node name="BackgroundRect5" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row4/ItemTextureContainer5" unique_id=222504993]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="Row5" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer" unique_id=1481342531]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="ItemTextureContainer" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row5" unique_id=1372976158]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row5/ItemTextureContainer" unique_id=1170570600]
-layout_mode = 2
-expand_mode = 1
-
-[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row5/ItemTextureContainer" unique_id=1409177348]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="ItemTextureContainer2" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row5" unique_id=1555432615]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row5/ItemTextureContainer2" unique_id=2118903658]
-layout_mode = 2
-
-[node name="BackgroundRect2" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row5/ItemTextureContainer2" unique_id=737426215]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="ItemTextureContainer3" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row5" unique_id=1222672429]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row5/ItemTextureContainer3" unique_id=1012253582]
-layout_mode = 2
-
-[node name="BackgroundRect3" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row5/ItemTextureContainer3" unique_id=1452345872]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="ItemTextureContainer4" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row5" unique_id=1458053964]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row5/ItemTextureContainer4" unique_id=180980524]
-layout_mode = 2
-
-[node name="BackgroundRect4" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row5/ItemTextureContainer4" unique_id=747375565]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="ItemTextureContainer5" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row5" unique_id=956348620]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row5/ItemTextureContainer5" unique_id=1737504473]
-layout_mode = 2
-
-[node name="BackgroundRect5" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipeDisplay/GridContainer/Row5/ItemTextureContainer5" unique_id=755677005]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("42_7crtr")
-expand_mode = 1
-
-[node name="RecipePanel" type="Control" parent="HUD/PauseInterface/CraftingMenu" unique_id=1393690572 node_paths=PackedStringArray("entry_container", "entry_template", "recipe_display", "back_entry")]
-layout_mode = 1
-anchor_left = 0.020833334
-anchor_top = 0.057098765
-anchor_right = 0.2873264
-anchor_bottom = 0.6527778
+offset_left = 24.0
+offset_top = 37.0
+offset_right = 331.0
+offset_bottom = -22.0
 script = ExtResource("38_1so5t")
 entry_container = NodePath("RecipeList/EntryContainer")
 entry_template = NodePath("RecipeList/EntryContainer/Entry")
-recipe_display = NodePath("../RecipeDisplay")
+recipe_display = NodePath("CenterContainer/RecipeDisplay")
 back_entry = NodePath("RecipeList/EntryContainer/BackEntry")
 recipe_groups = Dictionary[String, ExtResource("44_a1u5o")]({
 "Food": SubResource("Resource_3dxkp"),
@@ -1275,23 +898,17 @@ recipe_groups = Dictionary[String, ExtResource("44_a1u5o")]({
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel" unique_id=2068748904]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 30.0
-grow_horizontal = 2
+layout_mode = 2
 text = "RECIPE BOOK"
 label_settings = SubResource("LabelSettings_jbx34")
 horizontal_alignment = 1
 
+[node name="HSeparator" type="HSeparator" parent="HUD/PauseInterface/CraftingMenu/RecipePanel" unique_id=1952632775]
+layout_mode = 2
+
 [node name="RecipeList" type="ScrollContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel" unique_id=1782315597]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.08615385
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
+size_flags_vertical = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="EntryContainer" type="VBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList" unique_id=1086293113]
@@ -1310,8 +927,9 @@ texture = ExtResource("50_jbx34")
 expand_mode = 1
 
 [node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/EntryContainer/Entry" unique_id=2103479977]
-custom_minimum_size = Vector2(275, 32)
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Item"
 
 [node name="BackEntry" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/EntryContainer" unique_id=626121332]
@@ -1322,16 +940,388 @@ custom_minimum_size = Vector2(64, 24)
 layout_mode = 2
 text = "Back"
 
+[node name="CenterContainer" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel" unique_id=1737049201]
+layout_mode = 2
+
+[node name="RecipeDisplay" type="VBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer" unique_id=899494565 node_paths=PackedStringArray("grid_container", "recipe_label")]
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("41_7crtr")
+grid_container = NodePath("GridContainer")
+recipe_label = NodePath("RecipeLabel")
+
+[node name="RecipeLabel" type="Label" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay" unique_id=1286421521]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_7crtr")
+horizontal_alignment = 1
+
+[node name="GridContainer" type="VBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay" unique_id=914428979]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Row1" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer" unique_id=2057981750]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ItemTextureContainer" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1" unique_id=1219651666]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1/ItemTextureContainer" unique_id=1651860714]
+layout_mode = 2
+expand_mode = 1
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1/ItemTextureContainer" unique_id=553915409]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="ItemTextureContainer2" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1" unique_id=1436645007]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1/ItemTextureContainer2" unique_id=1532354280]
+layout_mode = 2
+
+[node name="BackgroundRect2" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1/ItemTextureContainer2" unique_id=980018062]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="ItemTextureContainer3" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1" unique_id=3039435]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1/ItemTextureContainer3" unique_id=87486874]
+layout_mode = 2
+
+[node name="BackgroundRect3" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1/ItemTextureContainer3" unique_id=2100470516]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="ItemTextureContainer4" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1" unique_id=1933387428]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1/ItemTextureContainer4" unique_id=2020158053]
+layout_mode = 2
+
+[node name="BackgroundRect4" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1/ItemTextureContainer4" unique_id=27186043]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="ItemTextureContainer5" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1" unique_id=542011349]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1/ItemTextureContainer5" unique_id=756031247]
+layout_mode = 2
+
+[node name="BackgroundRect5" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1/ItemTextureContainer5" unique_id=132159902]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="Row2" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer" unique_id=101783796]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ItemTextureContainer" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2" unique_id=1200343179]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2/ItemTextureContainer" unique_id=2139784211]
+layout_mode = 2
+expand_mode = 1
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2/ItemTextureContainer" unique_id=2100450747]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="ItemTextureContainer2" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2" unique_id=953361796]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2/ItemTextureContainer2" unique_id=909543612]
+layout_mode = 2
+
+[node name="BackgroundRect2" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2/ItemTextureContainer2" unique_id=1259105472]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="ItemTextureContainer3" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2" unique_id=1557629166]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2/ItemTextureContainer3" unique_id=2051773883]
+layout_mode = 2
+
+[node name="BackgroundRect3" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2/ItemTextureContainer3" unique_id=743583954]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="ItemTextureContainer4" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2" unique_id=1831665100]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2/ItemTextureContainer4" unique_id=1067344024]
+layout_mode = 2
+
+[node name="BackgroundRect4" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2/ItemTextureContainer4" unique_id=1742337038]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="ItemTextureContainer5" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2" unique_id=1011856445]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2/ItemTextureContainer5" unique_id=1710862452]
+layout_mode = 2
+
+[node name="BackgroundRect5" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2/ItemTextureContainer5" unique_id=863943636]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="Row3" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer" unique_id=600352779]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ItemTextureContainer" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3" unique_id=674662454]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3/ItemTextureContainer" unique_id=872699474]
+layout_mode = 2
+expand_mode = 1
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3/ItemTextureContainer" unique_id=1447548781]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="ItemTextureContainer2" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3" unique_id=1020725291]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3/ItemTextureContainer2" unique_id=163660647]
+layout_mode = 2
+
+[node name="BackgroundRect2" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3/ItemTextureContainer2" unique_id=826405074]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="ItemTextureContainer3" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3" unique_id=681408810]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3/ItemTextureContainer3" unique_id=905374069]
+layout_mode = 2
+
+[node name="BackgroundRect3" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3/ItemTextureContainer3" unique_id=53599641]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="ItemTextureContainer4" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3" unique_id=1210860425]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3/ItemTextureContainer4" unique_id=737844845]
+layout_mode = 2
+
+[node name="BackgroundRect4" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3/ItemTextureContainer4" unique_id=1070141586]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="ItemTextureContainer5" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3" unique_id=1868434917]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3/ItemTextureContainer5" unique_id=1462630265]
+layout_mode = 2
+
+[node name="BackgroundRect5" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3/ItemTextureContainer5" unique_id=798124540]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="Row4" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer" unique_id=191488819]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ItemTextureContainer" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4" unique_id=241886581]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4/ItemTextureContainer" unique_id=102053703]
+layout_mode = 2
+expand_mode = 1
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4/ItemTextureContainer" unique_id=535084112]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="ItemTextureContainer2" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4" unique_id=697493253]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4/ItemTextureContainer2" unique_id=1712755450]
+layout_mode = 2
+
+[node name="BackgroundRect2" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4/ItemTextureContainer2" unique_id=1460646009]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="ItemTextureContainer3" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4" unique_id=2068052245]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4/ItemTextureContainer3" unique_id=161721276]
+layout_mode = 2
+
+[node name="BackgroundRect3" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4/ItemTextureContainer3" unique_id=1375773131]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="ItemTextureContainer4" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4" unique_id=629493490]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4/ItemTextureContainer4" unique_id=516424800]
+layout_mode = 2
+
+[node name="BackgroundRect4" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4/ItemTextureContainer4" unique_id=1498961735]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="ItemTextureContainer5" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4" unique_id=1829067978]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4/ItemTextureContainer5" unique_id=1088330772]
+layout_mode = 2
+
+[node name="BackgroundRect5" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4/ItemTextureContainer5" unique_id=222504993]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="Row5" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer" unique_id=1481342531]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ItemTextureContainer" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5" unique_id=1372976158]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5/ItemTextureContainer" unique_id=1170570600]
+layout_mode = 2
+expand_mode = 1
+
+[node name="BackgroundRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5/ItemTextureContainer" unique_id=1409177348]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="ItemTextureContainer2" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5" unique_id=1555432615]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5/ItemTextureContainer2" unique_id=2118903658]
+layout_mode = 2
+
+[node name="BackgroundRect2" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5/ItemTextureContainer2" unique_id=737426215]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="ItemTextureContainer3" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5" unique_id=1222672429]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5/ItemTextureContainer3" unique_id=1012253582]
+layout_mode = 2
+
+[node name="BackgroundRect3" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5/ItemTextureContainer3" unique_id=1452345872]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="ItemTextureContainer4" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5" unique_id=1458053964]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5/ItemTextureContainer4" unique_id=180980524]
+layout_mode = 2
+
+[node name="BackgroundRect4" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5/ItemTextureContainer4" unique_id=747375565]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
+[node name="ItemTextureContainer5" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5" unique_id=956348620]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5/ItemTextureContainer5" unique_id=1737504473]
+layout_mode = 2
+
+[node name="BackgroundRect5" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5/ItemTextureContainer5" unique_id=755677005]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("42_7crtr")
+expand_mode = 1
+
 [node name="CompletePanel" type="Control" parent="HUD/PauseInterface/CraftingMenu" unique_id=54349966 node_paths=PackedStringArray("crafting_environment", "craft_button", "preview_rect", "preview_label")]
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = 6
 anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-offset_left = -311.0
-offset_top = 146.0
-offset_right = -152.0
-offset_bottom = 307.0
-grow_horizontal = 0
+anchor_bottom = 0.5
+offset_left = -252.0
+offset_top = -136.0
+offset_right = -95.303955
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("43_n0b8q")
 crafting_environment = NodePath("../CraftingEnvironment")
 craft_button = NodePath("CraftButton")
@@ -1380,12 +1370,17 @@ horizontal_alignment = 1
 
 [node name="BackpackPanel" type="Control" parent="HUD/PauseInterface/CraftingMenu" unique_id=60503757]
 layout_mode = 1
-anchor_left = 0.30729166
-anchor_top = 0.61265427
-anchor_right = 0.6935764
-anchor_bottom = 0.91049385
-offset_top = -6.9999695
-offset_bottom = -7.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -222.0
+offset_top = -258.0
+offset_right = 223.0
+offset_bottom = -65.0
+grow_horizontal = 2
+grow_vertical = 0
 metadata/_edit_use_anchors_ = true
 
 [node name="BackpackTitle" type="Label" parent="HUD/PauseInterface/CraftingMenu/BackpackPanel" unique_id=2062010731]
@@ -3496,10 +3491,14 @@ layout_mode = 1
 unique_name_in_owner = true
 z_index = 1
 layout_mode = 1
-anchor_left = 0.3090278
-anchor_top = 0.86728394
-anchor_right = 0.6909722
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -86.0
+offset_right = 220.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -3507,15 +3506,15 @@ metadata/_edit_use_anchors_ = true
 
 [node name="HeldItemLabel" type="Label" parent="HUD/HotbarInterface" unique_id=272445762 node_paths=PackedStringArray("anim_player", "item_holder")]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 1.0
 offset_left = -200.0
-offset_top = -39.0
+offset_top = -82.0
 offset_right = 200.0
-offset_bottom = -16.0
+offset_bottom = -59.0
 grow_horizontal = 2
 grow_vertical = 2
 horizontal_alignment = 1
@@ -3528,15 +3527,15 @@ libraries/ = SubResource("AnimationLibrary_7pqkx")
 
 [node name="HotbarDisplay" type="HBoxContainer" parent="HUD/HotbarInterface" unique_id=1354943621]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_bottom = 1.0
 offset_left = -222.5
-offset_top = -15.0
+offset_top = -58.0
 offset_right = 222.5
-offset_bottom = 25.0
+offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 0
