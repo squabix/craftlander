@@ -5,6 +5,7 @@ const LAYOUT_OFFSET := Vector2i(2, -3)
 @export var entry_container: VBoxContainer
 @export var entry_template: Control
 @export var recipe_display: RecipeDisplay
+@export var recipe_learner: RecipeLearner
 @export var back_entry: Control
 @export var back_text := "Back"
 
@@ -65,7 +66,7 @@ func add_recipe_entry(recipe: ItemRecipe) -> Control:
 	set_icon(entry, item.icon)
 	set_up_button(entry, item.name, recipe_display.display.bind(recipe))
 	
-	recipe_groups[item.type].add_recipe(entry)
+	recipe_groups[item.type].add_recipe(recipe, entry)
 	return entry
 
 func show_recipes(type: String) -> void:
@@ -73,8 +74,10 @@ func show_recipes(type: String) -> void:
 	var group: RecipePanelGroup = recipe_groups.get(type, null)
 	if group == null:
 		return
-	for entry in group.recipe_entries:
-		entry.show()
+	for recipe in recipe_learner.known_recipes:
+		if not recipe in group.recipe_entries.keys():
+			continue
+		group.recipe_entries[recipe].show()
 	back_entry.show()
 
 func set_up_button(entry: Control, text: String, pressed_callable: Callable) -> void:
@@ -87,7 +90,10 @@ func set_up_button(entry: Control, text: String, pressed_callable: Callable) -> 
 func show_types() -> void:
 	hide_all()
 	for group in recipe_groups.values():
-		group.type_entry.show()
+		for known_recipe in recipe_learner.known_recipes:
+			if group.recipe_entries.has(known_recipe):
+				group.type_entry.show()
+				break
 
 func set_icon(entry: Control, to: Texture) -> void:
 	var icon_rect: TextureRect = entry.get_node(icon_rect_path)

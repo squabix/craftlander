@@ -50,7 +50,7 @@ func toggle_pause() -> void:
 	get_tree().paused = is_paused
 	crafting_environment.is_crafting = is_paused
 	update()
-	if is_paused == false:
+	if is_paused == true:
 		recipe_panel.show_types()
 		recipe_panel.recipe_display.clear()
 	updated_pause.emit(is_paused)

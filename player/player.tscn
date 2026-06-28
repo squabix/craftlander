@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_g6k8r"]
 [ext_resource type="Script" uid="uid://chlki14yu5ulm" path="res://player/player_controller.gd" id="4_qjkh3"]
 [ext_resource type="Script" uid="uid://cb1suk3avv5yq" path="res://common/mouse_mode_controller.gd" id="5_g6k8r"]
-[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="6_p5tca"]
 [ext_resource type="Script" uid="uid://bx3dqx6ebaugu" path="res://player/states/player_walking_state.gd" id="8_hg6s5"]
 [ext_resource type="Script" uid="uid://ioo6s3m7wbha" path="res://common/inventory_system/inventory_selector.gd" id="9_bjvpn"]
 [ext_resource type="Script" uid="uid://ccbg8iw3gs48v" path="res://player/states/player_crouched_state.gd" id="9_hg6s5"]
@@ -58,8 +57,14 @@
 [ext_resource type="Texture2D" uid="uid://b02s8vle3kjwk" path="res://items/food/raw_meat/raw_meat.png" id="44_vgvch"]
 [ext_resource type="Script" uid="uid://copdmdj2us45e" path="res://player/inventory_organization_label.gd" id="47_wpyo2"]
 [ext_resource type="Texture2D" uid="uid://douq42dkvsywk" path="res://player/hud/inventory_slot.tres" id="48_vgvch"]
+[ext_resource type="Script" uid="uid://bs8sryrpq1j3b" path="res://player/hud/recipe_learner.gd" id="49_jbx34"]
 [ext_resource type="Texture2D" uid="uid://dst7iet4aksej" path="res://items/materials/rock/rock.png" id="50_jbx34"]
+[ext_resource type="Script" uid="uid://cpv5s708r1wvo" path="res://items/crafting/recipe_discovery.gd" id="50_or4qq"]
+[ext_resource type="Script" uid="uid://c5ntwgpouf24m" path="res://items/crafting/item_recipe.gd" id="50_pjwc4"]
+[ext_resource type="Resource" uid="uid://c2ysy7ee3bxr6" path="res://items/tools/shoddy_axe/shoddy_axe_recipe.tres" id="51_or4qq"]
+[ext_resource type="Resource" uid="uid://b3nw0sd58a2j" path="res://items/tools/shoddy_pickaxe/shoddy_pickaxe_recipe.tres" id="52_hggc2"]
 [ext_resource type="LabelSettings" uid="uid://b4f3g1d2cp3py" path="res://player/hud/quantity_label_settings.tres" id="52_p5tca"]
+[ext_resource type="Resource" uid="uid://6a5notvdv1ei" path="res://items/tools/shoddy_mace/shoddy_mace_recipe.tres" id="53_hggc2"]
 [ext_resource type="Script" uid="uid://bubfjagdkgrlq" path="res://player/inventory_organizer.gd" id="55_jbx34"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
@@ -74,28 +79,6 @@ bool_vector = SubResource("Resource_qjkh3")
 x_min = -90.0
 x_max = 90.0
 metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
-
-[sub_resource type="Resource" id="Resource_35wys"]
-script = ExtResource("6_p5tca")
-item = ExtResource("22_bjvpn")
-metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
-
-[sub_resource type="Resource" id="Resource_pjwc4"]
-script = ExtResource("6_p5tca")
-item = ExtResource("41_art4l")
-metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
-
-[sub_resource type="Resource" id="Resource_or4qq"]
-script = ExtResource("6_p5tca")
-item = ExtResource("9_jbx34")
-quantity = 15
-metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
-
-[sub_resource type="Resource" id="Resource_hggc2"]
-script = ExtResource("6_p5tca")
-item = ExtResource("10_s3g0c")
-quantity = 15
-metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Curve" id="Curve_2uvqg"]
 _limits = [0.0, 30.0, 0.0, 1.0]
@@ -223,6 +206,18 @@ metadata/_custom_type_script = "uid://bwcomtie8q510"
 font_size = 26
 
 [sub_resource type="LabelSettings" id="LabelSettings_7crtr"]
+
+[sub_resource type="Resource" id="Resource_b2j0d"]
+script = ExtResource("50_or4qq")
+item = ExtResource("9_jbx34")
+discovered_recipes = Array[ExtResource("50_pjwc4")]([ExtResource("52_hggc2"), ExtResource("53_hggc2"), ExtResource("51_or4qq")])
+metadata/_custom_type_script = "uid://cpv5s708r1wvo"
+
+[sub_resource type="Resource" id="Resource_7l6ig"]
+script = ExtResource("50_or4qq")
+item = ExtResource("10_s3g0c")
+discovered_recipes = Array[ExtResource("50_pjwc4")]([ExtResource("51_or4qq"), ExtResource("53_hggc2"), ExtResource("52_hggc2")])
+metadata/_custom_type_script = "uid://cpv5s708r1wvo"
 
 [sub_resource type="LabelSettings" id="LabelSettings_s3g0c"]
 font_size = 26
@@ -418,7 +413,6 @@ metadata/_custom_type_script = "uid://bki5ij8task16"
 
 [node name="Inventory" type="Node" parent="." unique_id=710458340]
 script = ExtResource("19_c35mf")
-item_instances = Array[ExtResource("6_p5tca")]([SubResource("Resource_35wys"), SubResource("Resource_pjwc4"), SubResource("Resource_or4qq"), SubResource("Resource_hggc2")])
 size = 40
 
 [node name="Hunger" type="Node" parent="." unique_id=1790864786 node_paths=PackedStringArray("bar", "health", "stamina")]
@@ -877,7 +871,7 @@ layout_mode = 1
 inventory_selector = NodePath("../../../HUD/PrimaryInventorySelector")
 pause_interface = NodePath("../..")
 
-[node name="RecipePanel" type="VBoxContainer" parent="PauseInterface/CraftingMenu" unique_id=219499038 node_paths=PackedStringArray("entry_container", "entry_template", "recipe_display", "back_entry")]
+[node name="RecipePanel" type="VBoxContainer" parent="PauseInterface/CraftingMenu" unique_id=219499038 node_paths=PackedStringArray("entry_container", "entry_template", "recipe_display", "recipe_learner", "back_entry")]
 layout_mode = 1
 anchors_preset = -1
 anchor_bottom = 1.0
@@ -889,6 +883,7 @@ script = ExtResource("38_1so5t")
 entry_container = NodePath("RecipeList/EntryContainer")
 entry_template = NodePath("RecipeList/EntryContainer/Entry")
 recipe_display = NodePath("CenterContainer/RecipeDisplay")
+recipe_learner = NodePath("RecipeLearner")
 back_entry = NodePath("RecipeList/EntryContainer/BackEntry")
 recipe_groups = Dictionary[String, ExtResource("44_a1u5o")]({
 "Food": SubResource("Resource_3dxkp"),
@@ -1307,6 +1302,12 @@ custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("42_7crtr")
 expand_mode = 1
+
+[node name="RecipeLearner" type="Node" parent="PauseInterface/CraftingMenu/RecipePanel" unique_id=489266171 node_paths=PackedStringArray("inventory")]
+script = ExtResource("49_jbx34")
+inventory = NodePath("../../../../Inventory")
+all_recipe_discoveries = Array[ExtResource("50_or4qq")]([SubResource("Resource_b2j0d"), SubResource("Resource_7l6ig")])
+known_recipes = Array[ExtResource("50_pjwc4")]([ExtResource("51_or4qq")])
 
 [node name="CompletePanel" type="Control" parent="PauseInterface/CraftingMenu" unique_id=54349966 node_paths=PackedStringArray("crafting_environment", "craft_button", "preview_rect", "preview_label")]
 layout_mode = 1
