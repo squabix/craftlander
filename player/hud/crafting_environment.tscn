@@ -10,6 +10,7 @@ size = Vector3(30, 1, 30)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pwhj0"]
 transparency = 1
+no_depth_test = true
 albedo_texture = ExtResource("2_snws6")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_xy7ao"]
