@@ -25,8 +25,10 @@ func _process(_delta: float) -> void:
 func swap() -> void:
 	var primary_selection := primary_inventory_selector.selected_index
 	var secondary_selection := secondary_inventory_selector.selected_index
-	if inventory.swap(primary_selection, secondary_selection) and secondary_inventory_selector.get_current_instance() != null:
-		primary_inventory_selector.selected_index = secondary_selection
+	if inventory.swap(primary_selection, secondary_selection):
+		if secondary_inventory_selector.get_current_instance() != null:
+			primary_inventory_selector.selected_index = secondary_selection
+		primary_inventory_selector.selected_new_index.emit(primary_inventory_selector.selected_index)
 
 func get_hotbar_displays() -> Array[Node]:
 	return inventory_display_rows[HOTBAR_INDEX].get_children() as Array[Node]
