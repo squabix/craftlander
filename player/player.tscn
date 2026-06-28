@@ -60,6 +60,7 @@
 [ext_resource type="Texture2D" uid="uid://b02s8vle3kjwk" path="res://items/food/raw_meat/raw_meat.png" id="44_vgvch"]
 [ext_resource type="Script" uid="uid://copdmdj2us45e" path="res://player/inventory_organization_label.gd" id="47_wpyo2"]
 [ext_resource type="Texture2D" uid="uid://douq42dkvsywk" path="res://player/hud/inventory_slot.tres" id="48_vgvch"]
+[ext_resource type="Texture2D" uid="uid://dst7iet4aksej" path="res://items/materials/rock/rock.png" id="50_jbx34"]
 [ext_resource type="LabelSettings" uid="uid://b4f3g1d2cp3py" path="res://player/hud/quantity_label_settings.tres" id="52_p5tca"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
@@ -843,7 +844,7 @@ crafting_menu = NodePath("CraftingMenu")
 crafting_environment = NodePath("CraftingMenu/CraftingEnvironment")
 recipe_panel = NodePath("CraftingMenu/RecipePanel")
 settings_menu = NodePath("SettingsMenu")
-settings_button = NodePath("CraftingMenu/SettingsButton")
+settings_button = NodePath("CraftingMenu/OptionsContainer/SettingsButton")
 health = NodePath("../../Health")
 
 [node name="BlurRect" type="ColorRect" parent="HUD/PauseInterface" unique_id=1141508559]
@@ -864,6 +865,32 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="OptionsContainer" type="VBoxContainer" parent="HUD/PauseInterface/CraftingMenu" unique_id=1312813458]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -232.0
+offset_top = 10.0
+offset_right = -16.000366
+offset_bottom = 123.0
+grow_horizontal = 0
+
+[node name="BackToGameButton" type="Button" parent="HUD/PauseInterface/CraftingMenu/OptionsContainer" unique_id=1612901605]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+text = "BACK TO GAME"
+
+[node name="SettingsButton" type="Button" parent="HUD/PauseInterface/CraftingMenu/OptionsContainer" unique_id=1494540130]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+text = "SETTINGS"
+
+[node name="QuitButton" type="Button" parent="HUD/PauseInterface/CraftingMenu/OptionsContainer" unique_id=729008343]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+text = "QUIT TO TITLE SCREEN"
 
 [node name="CraftingEnvironment" parent="HUD/PauseInterface/CraftingMenu" unique_id=651686952 node_paths=PackedStringArray("inventory_selector", "pause_interface") instance=ExtResource("28_q28gw")]
 custom_minimum_size = Vector2(1000, 1000)
@@ -1252,17 +1279,17 @@ layout_mode = 2
 texture = ExtResource("42_7crtr")
 expand_mode = 1
 
-[node name="RecipePanel" type="Control" parent="HUD/PauseInterface/CraftingMenu" unique_id=1393690572 node_paths=PackedStringArray("recipe_list_box", "recipe_entry_template", "recipe_display", "back_button")]
+[node name="RecipePanel" type="Control" parent="HUD/PauseInterface/CraftingMenu" unique_id=1393690572 node_paths=PackedStringArray("entry_container", "entry_template", "recipe_display", "back_entry")]
 layout_mode = 1
 anchor_left = 0.020833334
 anchor_top = 0.057098765
 anchor_right = 0.2873264
 anchor_bottom = 0.9722222
 script = ExtResource("38_1so5t")
-recipe_list_box = NodePath("RecipeList/RecipeListBox")
-recipe_entry_template = NodePath("RecipeList/RecipeListBox/RecipeEntry")
+entry_container = NodePath("RecipeList/EntryContainer")
+entry_template = NodePath("RecipeList/EntryContainer/Entry")
 recipe_display = NodePath("../RecipeDisplay")
-back_button = NodePath("RecipeList/RecipeListBox/BackButton")
+back_entry = NodePath("RecipeList/EntryContainer/BackEntry")
 recipe_groups = Dictionary[String, ExtResource("44_a1u5o")]({
 "Food": SubResource("Resource_3dxkp"),
 "Tool": SubResource("Resource_6wior")
@@ -1289,218 +1316,33 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="RecipeListBox" type="VBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList" unique_id=1086293113]
+[node name="EntryContainer" type="VBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList" unique_id=1086293113]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="RecipeEntry" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox" unique_id=2103479977]
-custom_minimum_size = Vector2(0, 48)
+[node name="Entry" type="HBoxContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/EntryContainer" unique_id=1802325341]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/EntryContainer/Entry" unique_id=370566999]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("50_jbx34")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/EntryContainer/Entry" unique_id=2103479977]
+custom_minimum_size = Vector2(275, 32)
 layout_mode = 2
 text = "Item"
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox/RecipeEntry" unique_id=370566999]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 48.0
-grow_vertical = 2
-expand_mode = 1
-
-[node name="RecipeEntry2" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox" unique_id=1902542190]
-custom_minimum_size = Vector2(0, 48)
+[node name="BackEntry" type="CenterContainer" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/EntryContainer" unique_id=626121332]
 layout_mode = 2
-text = "Item"
 
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox/RecipeEntry2" unique_id=963399614]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 48.0
-grow_vertical = 2
-expand_mode = 1
-
-[node name="RecipeEntry3" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox" unique_id=1731643467]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-text = "Item"
-
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox/RecipeEntry3" unique_id=841908839]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 48.0
-grow_vertical = 2
-expand_mode = 1
-
-[node name="RecipeEntry4" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox" unique_id=293115765]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-text = "Item"
-
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox/RecipeEntry4" unique_id=717902491]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 48.0
-grow_vertical = 2
-expand_mode = 1
-
-[node name="RecipeEntry5" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox" unique_id=959687613]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-text = "Item"
-
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox/RecipeEntry5" unique_id=1706367685]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 48.0
-grow_vertical = 2
-expand_mode = 1
-
-[node name="RecipeEntry6" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox" unique_id=1455646254]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-text = "Item"
-
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox/RecipeEntry6" unique_id=1111408333]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 48.0
-grow_vertical = 2
-expand_mode = 1
-
-[node name="RecipeEntry7" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox" unique_id=433373905]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-text = "Item"
-
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox/RecipeEntry7" unique_id=1900262132]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 48.0
-grow_vertical = 2
-expand_mode = 1
-
-[node name="RecipeEntry8" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox" unique_id=1805230584]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-text = "Item"
-
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox/RecipeEntry8" unique_id=1020000405]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 48.0
-grow_vertical = 2
-expand_mode = 1
-
-[node name="RecipeEntry9" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox" unique_id=1722600326]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-text = "Item"
-
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox/RecipeEntry9" unique_id=1750772215]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 48.0
-grow_vertical = 2
-expand_mode = 1
-
-[node name="RecipeEntry10" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox" unique_id=785113647]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-text = "Item"
-
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox/RecipeEntry10" unique_id=1760064958]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 48.0
-grow_vertical = 2
-expand_mode = 1
-
-[node name="RecipeEntry11" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox" unique_id=1895608331]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-text = "Item"
-
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox/RecipeEntry11" unique_id=1758853906]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 48.0
-grow_vertical = 2
-expand_mode = 1
-
-[node name="RecipeEntry12" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox" unique_id=1940724204]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-text = "Item"
-
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox/RecipeEntry12" unique_id=1437747000]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 48.0
-grow_vertical = 2
-expand_mode = 1
-
-[node name="RecipeEntry13" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox" unique_id=1279495173]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-text = "Item"
-
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox/RecipeEntry13" unique_id=293846913]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 48.0
-grow_vertical = 2
-expand_mode = 1
-
-[node name="RecipeEntry14" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox" unique_id=460556440]
-custom_minimum_size = Vector2(0, 48)
-layout_mode = 2
-text = "Item"
-
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox/RecipeEntry14" unique_id=122823314]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 48.0
-grow_vertical = 2
-expand_mode = 1
-
-[node name="BackButton" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox" unique_id=519946777]
-visible = false
-custom_minimum_size = Vector2(0, 48)
+[node name="Button" type="Button" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/EntryContainer/BackEntry" unique_id=519946777]
+custom_minimum_size = Vector2(64, 24)
 layout_mode = 2
 text = "Back"
-
-[node name="IconRect" type="TextureRect" parent="HUD/PauseInterface/CraftingMenu/RecipePanel/RecipeList/RecipeListBox/BackButton" unique_id=401260894]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 48.0
-grow_vertical = 2
-expand_mode = 1
-
-[node name="SettingsButton" type="Button" parent="HUD/PauseInterface/CraftingMenu" unique_id=1494540130]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -149.0
-offset_top = 20.0
-offset_right = -20.0
-offset_bottom = 65.0
-grow_horizontal = 0
-text = "SETTINGS"
 
 [node name="CompletePanel" type="Control" parent="HUD/PauseInterface/CraftingMenu" unique_id=54349966 node_paths=PackedStringArray("crafting_environment", "craft_button", "preview_rect", "preview_label")]
 layout_mode = 1
