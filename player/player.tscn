@@ -52,7 +52,7 @@
 [ext_resource type="Script" uid="uid://cf1x38wu72w8n" path="res://player/recipe_display.gd" id="41_7crtr"]
 [ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/tools/shoddy_mace/shoddy_mace_item.tres" id="41_a2xo5"]
 [ext_resource type="Resource" uid="uid://w52cknmpa167" path="res://items/tools/shoddy_pickaxe/shoddy_pickaxe_item.tres" id="41_art4l"]
-[ext_resource type="Texture2D" uid="uid://1xbns4oq6pfw" path="res://player/hud/recipe_display_slot.tres" id="42_7crtr"]
+[ext_resource type="Texture2D" uid="uid://1xbns4oq6pfw" path="res://player/hud/crafting_slot.tres" id="42_7crtr"]
 [ext_resource type="Script" uid="uid://s6yjbusuc0uo" path="res://player/hud/current_item_label.gd" id="43_8pxes"]
 [ext_resource type="Script" uid="uid://hdyfq5riitj7" path="res://player/complete_crafting_panel.gd" id="43_n0b8q"]
 [ext_resource type="Script" uid="uid://bwcomtie8q510" path="res://player/hud/recipe_panel_group.gd" id="44_a1u5o"]
