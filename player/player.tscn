@@ -281,7 +281,9 @@ fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="LabelSettings" id="LabelSettings_xcnuv"]
 font_size = 100
-font_color = Color(0.73, 0.1825, 0.1825, 1)
+font_color = Color(0.4990024, 0.07549464, 0.13403434, 1)
+outline_size = 10
+outline_color = Color(0.22169957, 0.027884055, 0.028120998, 1)
 
 [sub_resource type="Animation" id="Animation_tqiix"]
 length = 0.001
@@ -4259,13 +4261,11 @@ grow_vertical = 0
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.65697014, 0.65697014, 0.65697014, 1)
 text = "Respawn"
-flat = true
 
 [node name="QuitButton" type="Button" parent="HUD/DeathScreen/OptionsContainer" unique_id=394106598]
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.65697014, 0.65697014, 0.65697014, 1)
 text = "Quit to Title Screen"
-flat = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1780880928]
 libraries/ = SubResource("AnimationLibrary_tqiix")
