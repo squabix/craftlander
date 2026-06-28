@@ -11,7 +11,7 @@ func _ready() -> void:
 	selector.selected_instance_changed.connect(hold_instance)
 	
 	current_index = selector.selected_index
-	hold_instance(selector.get_current_instance())
+	hold_instance.call_deferred(selector.get_current_instance())
 
 func consume_item() -> void:
 	selector.inventory.remove_instance(current_index, 1)
