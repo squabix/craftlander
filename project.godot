@@ -56,6 +56,10 @@ folder_colors={
 player=""
 navigation_mesh_source_group=""
 
+[gui]
+
+theme/custom="uid://dy5fmdtb6xfr7"
+
 [input]
 
 move_forward={

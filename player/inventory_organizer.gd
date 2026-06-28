@@ -1,20 +1,19 @@
-extends Control
+extends Node
 
 const HOTBAR_INDEX := 0
 
-@export var inventory_display_rows: Array[HBoxContainer]
-@export var primary_inventory_selector: InventorySelector
-@export var secondary_inventory_selector: InventorySelector
 @export var inventory: Inventory
-@export var hold_inventory_selector: InventorySelector
+@export var inventory_display_rows: Array[HBoxContainer]
 @export var held_item_label: Label
 @export var pause_interface: Control
 
+@export_group("Selectors")
+@export var primary_inventory_selector: InventorySelector
+@export var secondary_inventory_selector: InventorySelector
+@export var hold_inventory_selector: InventorySelector
+
 func _ready() -> void:
 	pause_interface.updated_pause.connect(update_selection_mode)
-	
-	#for display in get_all_displays():
-		#display.inventory_selector = primary_inventory_selector
 	
 	# Not paused when game starts
 	update_selection_mode(false)
@@ -43,4 +42,3 @@ func update_selection_mode(paused_mode: bool) -> void:
 	primary_inventory_selector.enabled = paused_mode
 	secondary_inventory_selector.enabled = paused_mode
 	held_item_label.visible = not paused_mode
-	#update_hotbar_display(primary_inventory_selector if paused_mode else hold_inventory_selector)
