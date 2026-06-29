@@ -248,9 +248,31 @@ func empty(slot_index: int) -> void:
 		return
 	
 	var item_to_remove = old_visuals.get_item()
-	Util.safe_free(old_visuals)
+	
 	slots_contents[slot_index] = null 
 	remove_item_from_grid_inventory(item_to_remove)
+	
+	tween_empty(old_visuals)
+
+func tween_empty(visuals: ItemVisualsContainer3D) -> void:
+	var drop_tween := create_tween().set_parallel(true).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	
+	drop_tween.tween_property(
+		visuals, 
+		"global_position", 
+		visuals.global_position + Vector3.DOWN * success_drop_sink_depth, 
+		success_drop_duration
+	)
+	drop_tween.tween_property(
+		visuals, 
+		"scale", 
+		Vector3.ZERO, 
+		success_drop_duration
+	)
+	
+	drop_tween.finished.connect(func() -> void:
+		Util.safe_free(visuals)
+	)
 
 func tween_craft_fail() -> void:
 	is_tweening_craft_result = true
