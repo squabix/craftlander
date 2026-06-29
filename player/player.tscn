@@ -56,7 +56,6 @@
 [ext_resource type="Script" uid="uid://bwcomtie8q510" path="res://player/hud/recipe_panel_group.gd" id="44_a1u5o"]
 [ext_resource type="Texture2D" uid="uid://c3o13o5vrivr" path="res://items/tools/shoddy_pickaxe/shoddy_pickaxe.png" id="44_jfgyi"]
 [ext_resource type="Texture2D" uid="uid://b02s8vle3kjwk" path="res://items/food/raw_meat/raw_meat.png" id="44_vgvch"]
-[ext_resource type="Script" uid="uid://copdmdj2us45e" path="res://player/inventory_organization_label.gd" id="47_wpyo2"]
 [ext_resource type="Texture2D" uid="uid://douq42dkvsywk" path="res://player/hud/inventory_slot.tres" id="48_vgvch"]
 [ext_resource type="Script" uid="uid://bs8sryrpq1j3b" path="res://player/hud/recipe_learner.gd" id="49_jbx34"]
 [ext_resource type="Texture2D" uid="uid://dst7iet4aksej" path="res://items/materials/rock/rock.png" id="50_jbx34"]
@@ -1388,11 +1387,10 @@ horizontal_alignment = 1
 
 [node name="BackpackPanel" type="Control" parent="PauseInterface/CraftingMenu" unique_id=60503757]
 layout_mode = 1
-anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 1.0385803
 anchor_right = 0.5
-anchor_bottom = 1.0
+anchor_bottom = 1.0000001
 offset_left = -222.0
 offset_top = -258.0
 offset_right = 223.0
@@ -1417,8 +1415,8 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -64.0
-offset_bottom = 64.0
+offset_top = -54.0
+offset_bottom = 74.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -3447,21 +3445,6 @@ grow_vertical = 2
 action_mode = 0
 flat = true
 
-[node name="OrganizationLabel" type="Label" parent="PauseInterface/CraftingMenu/BackpackPanel" unique_id=1777336426 node_paths=PackedStringArray("primary_inventory_selector", "secondary_inventory_selector")]
-visible = false
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -23.0
-grow_horizontal = 2
-grow_vertical = 0
-horizontal_alignment = 1
-script = ExtResource("47_wpyo2")
-primary_inventory_selector = NodePath("../../../../HUD/PrimaryInventorySelector")
-secondary_inventory_selector = NodePath("../../../../HUD/SecondaryInventorySelector")
-
 [node name="CraftingTitle" type="Label" parent="PauseInterface/CraftingMenu" unique_id=1769498989]
 layout_mode = 1
 anchors_preset = 10
@@ -3513,6 +3496,7 @@ secondary_inventory_selector = NodePath("../../../HUD/SecondaryInventorySelector
 hold_inventory_selector = NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector")
 
 [node name="ItemInspector" type="PanelContainer" parent="PauseInterface/CraftingMenu" unique_id=482564874 node_paths=PackedStringArray("inventory_selector", "name_label", "info_label", "container")]
+visible = false
 z_index = 2
 layout_mode = 0
 offset_left = 542.0
