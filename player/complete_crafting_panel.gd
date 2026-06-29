@@ -20,4 +20,4 @@ func update() -> void:
 	
 	craft_button.disabled = false
 	preview_rect.texture = recipe.result.item.icon
-	preview_label.text = "%s × %s" % [recipe.result.item.name, recipe.result.quantity]
+	preview_label.text = str(recipe.result)

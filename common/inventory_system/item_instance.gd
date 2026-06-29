@@ -44,4 +44,4 @@ func subtract(amount: int) -> int:
 	return remainder
 
 func _to_string() -> String:
-	return item.name + " * " + str(quantity)
+	return item.name + " × " + str(quantity)
