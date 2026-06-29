@@ -48,7 +48,8 @@ folder_colors={
 "res://items/crafting/": "gray",
 "res://items/food/": "orange",
 "res://main/": "gray",
-"res://player/": "blue"
+"res://player/": "blue",
+"res://player/ui/": "green"
 }
 
 [global_group]

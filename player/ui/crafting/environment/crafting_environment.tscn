@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cw2ir860alcgt"]
 
-[ext_resource type="Script" uid="uid://s3ufjlvtqovq" path="res://player/hud/crafting_environment.gd" id="1_mqnoh"]
+[ext_resource type="Script" uid="uid://s3ufjlvtqovq" path="res://player/ui/crafting/environment/crafting_environment.gd" id="1_mqnoh"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="2_4aq3d"]
-[ext_resource type="Texture2D" uid="uid://1xbns4oq6pfw" path="res://player/hud/crafting_slot.tres" id="2_snws6"]
-[ext_resource type="Material" uid="uid://dfhykr3iod543" path="res://player/hud/craft_particles_material.tres" id="3_5krih"]
+[ext_resource type="Texture2D" uid="uid://1xbns4oq6pfw" path="res://player/ui/crafting/crafting_slot.tres" id="2_snws6"]
+[ext_resource type="Material" uid="uid://dfhykr3iod543" path="res://player/ui/crafting/environment/craft_particles_material.tres" id="3_5krih"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mqnoh"]
 size = Vector3(30, 1, 30)
