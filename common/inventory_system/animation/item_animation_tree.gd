@@ -2,7 +2,6 @@ extends AnimationTree
 class_name ItemAnimationTree
 
 @export var item_animations: Array[ItemAnimations] = []
-@export var inventory_selector: InventorySelector
 
 @export_group("Defaults")
 @export var default_start_anim := ""
@@ -31,14 +30,6 @@ func _ready() -> void:
 	default_animations()
 	initialize_playback()
 	disable_item_blend()
-	
-	# Update when inventory selector selects new instance
-	if is_instance_valid(inventory_selector):
-		inventory_selector.selected_instance_changed.connect(
-			func(_instance: ItemInstance) -> void:
-				update_item(inventory_selector.get_current_item())
-		)
-		update_item(inventory_selector.get_current_item())
 	
 	active = true
 
@@ -151,7 +142,7 @@ func update_tree_animations() -> void:
 		printerr("%s's state machine is null" % self)
 		return
 		
-	var state_anim_map: Dictionary[String, String] = get_state_anim_map()
+	var state_anim_map := get_state_anim_map()
 	
 	for state_node_name in state_anim_map:
 		if not state_machine.has_node(state_node_name):

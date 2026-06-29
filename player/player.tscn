@@ -42,7 +42,6 @@
 [ext_resource type="Script" uid="uid://bn55l5h1rwjsn" path="res://player/hunger.gd" id="31_2uvqg"]
 [ext_resource type="FontFile" uid="uid://cbr5ncx4f3a1n" path="res://assets/sineas.otf" id="34_6wior"]
 [ext_resource type="Script" uid="uid://crew0n1e8xk4r" path="res://player/ui/crafting/recipes/recipe_panel.gd" id="38_1so5t"]
-[ext_resource type="Script" uid="uid://bi8ev1kcq2ayf" path="res://common/inventory_system/animation/item_animation_tree.gd" id="38_a2xo5"]
 [ext_resource type="Script" uid="uid://c622jer80j3sk" path="res://common/inventory_system/animation/item_animation.gd" id="39_dx5ib"]
 [ext_resource type="PackedScene" uid="uid://byosfqwobl3sl" path="res://menus/settings_menu.tscn" id="39_xcnuv"]
 [ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="40_a2xo5"]
@@ -67,6 +66,7 @@
 [ext_resource type="Resource" uid="uid://6a5notvdv1ei" path="res://items/tools/shoddy_mace/shoddy_mace_recipe.tres" id="53_hggc2"]
 [ext_resource type="Script" uid="uid://bubfjagdkgrlq" path="res://player/ui/inventory/inventory_organizer.gd" id="55_jbx34"]
 [ext_resource type="Script" uid="uid://uwx6xnt2vr38" path="res://player/ui/inventory/item_inspector.gd" id="59_b2j0d"]
+[ext_resource type="Script" uid="uid://npp0tkr64ms6" path="res://common/inventory_system/animation/inventory_animation_tree.gd" id="63_b2j0d"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -81,16 +81,14 @@ x_min = -90.0
 x_max = 90.0
 metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
 
-[sub_resource type="Resource" id="Resource_utr5e"]
+[sub_resource type="Resource" id="Resource_j3r50"]
 script = ExtResource("6_hggc2")
-item = ExtResource("9_jbx34")
-quantity = 22
+item = ExtResource("41_art4l")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Resource" id="Resource_hggc2"]
 script = ExtResource("6_hggc2")
 item = ExtResource("10_s3g0c")
-quantity = 37
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Curve" id="Curve_2uvqg"]
@@ -364,7 +362,6 @@ animation = &"RESET"
 animation = &"RESET"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fjxoa"]
-animation = &"swing_tool"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gswnw"]
 advance_mode = 2
@@ -385,7 +382,7 @@ states/continue_use/position = Vector2(529.5, 104.166664)
 states/end_use/node = SubResource("AnimationNodeAnimation_art4l")
 states/end_use/position = Vector2(698.8333, 96.833336)
 states/start_use/node = SubResource("AnimationNodeAnimation_fjxoa")
-states/start_use/position = Vector2(373.49997, 100.31482)
+states/start_use/position = Vector2(373.49997, 100.03498)
 transitions = ["Start", "start_use", SubResource("AnimationNodeStateMachineTransition_gswnw"), "start_use", "continue_use", SubResource("AnimationNodeStateMachineTransition_xcnuv"), "continue_use", "end_use", SubResource("AnimationNodeStateMachineTransition_j55il"), "end_use", "End", SubResource("AnimationNodeStateMachineTransition_hjies")]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_1so5t"]
@@ -429,7 +426,7 @@ metadata/_custom_type_script = "uid://bki5ij8task16"
 
 [node name="Inventory" type="Node" parent="." unique_id=710458340]
 script = ExtResource("19_c35mf")
-item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_utr5e"), SubResource("Resource_hggc2")])
+item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_j3r50"), SubResource("Resource_hggc2")])
 size = 40
 
 [node name="Hunger" type="Node" parent="." unique_id=1790864786 node_paths=PackedStringArray("bar", "health", "stamina")]
@@ -4320,9 +4317,9 @@ autoplay = &"idle"
 tree_root = SubResource("AnimationNodeBlendTree_1so5t")
 anim_player = NodePath("../AnimationPlayer")
 parameters/ItemBlend/blend_amount = 1.0
-script = ExtResource("38_a2xo5")
-item_animations = Array[ExtResource("39_dx5ib")]([SubResource("Resource_art4l")])
+script = ExtResource("63_b2j0d")
 inventory_selector = NodePath("../Head/Camera3D/ItemHolder/HoldSelector")
+item_animations = Array[ExtResource("39_dx5ib")]([SubResource("Resource_art4l")])
 
 [node name="BuildTimer" type="Timer" parent="." unique_id=1941720648]
 
