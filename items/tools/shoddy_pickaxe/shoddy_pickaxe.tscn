@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://dd8qskwv1nlqx" path="res://common3d/damage_system/hit_ray3d.gd" id="1_j4v36"]
 [ext_resource type="Resource" uid="uid://boheablqansj2" path="res://items/tools/shoddy_pickaxe/shoddy_pickaxe_damage.tres" id="2_hi6ji"]
 [ext_resource type="PackedScene" uid="uid://oxrw6o32lsp2" path="res://items/tools/shoddy_pickaxe/shoddy_pickaxe.blend" id="3_85u4g"]
-[ext_resource type="Material" path="res://assets/materials/stone.tres" id="4_oy1cy"]
-[ext_resource type="Material" path="res://assets/materials/bark.tres" id="5_hs6a6"]
+[ext_resource type="Material" uid="uid://bh8sv2icydggs" path="res://assets/materials/stone.tres" id="4_oy1cy"]
+[ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="5_hs6a6"]
 
 [node name="ShoddyPickaxe" type="Node3D" unique_id=1232378476]
 
@@ -19,13 +19,12 @@ metadata/_custom_type_script = "uid://dd8qskwv1nlqx"
 
 [node name="Visuals" type="Node3D" parent="." unique_id=551632359]
 
-[node name="BlenderMeshes" parent="Visuals" unique_id=1841154329 instance=ExtResource("3_85u4g")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+[node name="BlenderMeshes" parent="Visuals" unique_id=595334990 instance=ExtResource("3_85u4g")]
 
-[node name="Cube" parent="Visuals/BlenderMeshes" index="0" unique_id=627453686]
+[node name="Cube" parent="Visuals/BlenderMeshes" index="0" unique_id=1442943594]
 surface_material_override/0 = ExtResource("4_oy1cy")
 
-[node name="Cube_001" parent="Visuals/BlenderMeshes" index="1" unique_id=282144386]
+[node name="Cube_001" parent="Visuals/BlenderMeshes" index="1" unique_id=549238222]
 surface_material_override/0 = ExtResource("5_hs6a6")
 
 [editable path="Visuals/BlenderMeshes"]
