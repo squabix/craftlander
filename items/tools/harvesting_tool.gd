@@ -2,6 +2,7 @@ extends Item
 class_name HarvestingTool
 
 @export var harvest_animation: String = "harvest"
+@export var damage: Damage
 
 var harvest_ray: HitRay3D
 var anim_player: AnimationPlayer
@@ -16,7 +17,8 @@ func set_up_scene() -> void:
 		return
 	super()
 	harvest_ray = scene_instance.get_node("HarvestRay")
-	harvest_ray.damage.source = root
+	damage.source = root
+	harvest_ray.damage = damage
 
 func start_use() -> bool:
 	if is_instance_valid(anim_player) and anim_player.has_animation(harvest_animation):

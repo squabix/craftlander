@@ -2,10 +2,12 @@
 
 [ext_resource type="Script" uid="uid://6x786nnhteca" path="res://items/tools/harvesting_tool.gd" id="1_0lrxf"]
 [ext_resource type="Texture2D" uid="uid://bgbuk7j54yb0v" path="res://items/tools/shoddy_mace/shoddy_mace.png" id="1_mixkx"]
+[ext_resource type="Resource" uid="uid://nv3owcu3xvi8" path="res://items/tools/shoddy_mace/shoddy_mace_damage.tres" id="1_pqrwp"]
 [ext_resource type="PackedScene" uid="uid://1b3xwsw4p1gp" path="res://items/tools/shoddy_mace/shoddy_mace.tscn" id="2_pqrwp"]
 
 [resource]
 script = ExtResource("1_0lrxf")
+damage = ExtResource("1_pqrwp")
 name = "Shoddy Mace"
 icon = ExtResource("1_mixkx")
 type = "Tool"

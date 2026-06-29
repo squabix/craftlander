@@ -1,11 +1,13 @@
 [gd_resource type="Resource" script_class="HarvestingTool" format=3 uid="uid://bah3rou15fcfh"]
 
 [ext_resource type="Texture2D" uid="uid://djncico7ttqhm" path="res://items/tools/shoddy_axe/shoddy_axe.png" id="1_gclnw"]
+[ext_resource type="Resource" uid="uid://cuocphjk88kaf" path="res://items/tools/shoddy_axe/shoddy_axe_damage.tres" id="1_jrudf"]
 [ext_resource type="Script" uid="uid://6x786nnhteca" path="res://items/tools/harvesting_tool.gd" id="1_udkp1"]
 [ext_resource type="PackedScene" uid="uid://jlwffnpxmq3x" path="res://items/tools/shoddy_axe/shoddy_axe.tscn" id="2_gclnw"]
 
 [resource]
 script = ExtResource("1_udkp1")
+damage = ExtResource("1_jrudf")
 name = "Shoddy Axe"
 icon = ExtResource("1_gclnw")
 type = "Tool"
