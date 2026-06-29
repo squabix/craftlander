@@ -15,7 +15,7 @@ func handle_input(event: InputEvent) -> void:
 	super(event)
 	if event.is_action_pressed(ACTION_INTERACT):
 		root.interact()
-	if Input.is_action_pressed(ACTION_USE_PRIMARY):
+	if event.is_action_pressed(ACTION_USE_PRIMARY):
 		root.use_item()
 
 func update(_delta: float) -> void:
