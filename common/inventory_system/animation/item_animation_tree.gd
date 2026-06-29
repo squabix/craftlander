@@ -10,7 +10,7 @@ class_name ItemAnimationTree
 @export var default_end_anim := ""
 
 @export_group("Tree Parameter Paths")
-@export var state_machine_path := "parameters/ItemStateMachine"
+@export var playback_path := "parameters/ItemStateMachine/playback"
 @export var item_state_path := "parameters/ItemUseTransition/current_state"
 @export var item_blend_path := "parameters/ItemBlend/blend_amount"
 
@@ -23,7 +23,9 @@ var current_item: Item
 var start_anim := ""
 var continue_anim := ""
 var end_anim := ""
+
 var playback: AnimationNodeStateMachinePlayback
+var state_machine: AnimationNodeStateMachine
 
 func _ready() -> void:
 	default_animations()
@@ -36,13 +38,18 @@ func _ready() -> void:
 			func(_instance: ItemInstance) -> void:
 				update_item(inventory_selector.get_current_item())
 		)
+		update_item(inventory_selector.get_current_item())
 	
 	active = true
 
 func initialize_playback() -> void:
-	playback = get(state_machine_path + "/playback")
-	if playback != null:
-		playback.state_finished.connect(_on_state_finished)
+	playback = get(playback_path) as AnimationNodeStateMachinePlayback
+	if playback == null:
+		printerr("%s found null playback at path: ", playback_path)
+		return
+	
+	playback.state_finished.connect(_on_state_finished)
+	state_machine = tree_root.get_node(playback_path.replace("parameters/", "").replace("/playback", "")) as AnimationNodeStateMachine
 
 func _on_state_finished(state_name: String) -> void:
 	
@@ -64,11 +71,11 @@ func update_item(new_item: Item) -> void:
 	
 	if new_item == null:
 		return
-	if new_item != null:
-		await new_item.ensure_unique()
 	
 	load_animations(get_animations(new_item))
 	update_tree_animations()
+	
+	await new_item.ensure_unique()
 	
 	# Connect new item's signals (only start signal)
 	new_item.started_use.connect(play_start)
@@ -87,7 +94,6 @@ func get_animations(item: Item) -> ItemAnimations:
 		if key != null:
 			return item_anims
 	return null
-
 
 func load_animations(anims: ItemAnimations) -> void:
 	if anims == null:
@@ -114,7 +120,7 @@ func play_start() -> void:
 
 func play_state(state: String) -> void:
 	if playback == null:
-		printerr("Null playback cannot travel to state ", state)
+		printerr("%s's null playback cannot travel to state %s " % [self, state])
 		return
 	playback.start(state)
 
@@ -134,6 +140,24 @@ func get_state_anim_map() -> Dictionary[String, String]:
 	}
 
 func update_tree_animations() -> void:
+	if tree_root == null:
+		printerr("%s's tree root is null" % self)
+		return
+		
+	if state_machine == null:
+		printerr("%s's state machine is null" % self)
+		return
+		
 	var state_anim_map: Dictionary[String, String] = get_state_anim_map()
-	for state in state_anim_map:
-		set(state_machine_path + "/" + state + "/animation", state_anim_map[state])
+	
+	for state_node_name in state_anim_map:
+		if not state_machine.has_node(state_node_name):
+			printerr("%s's state machine does not contain a node named: %s" % [self, state_node_name])
+			continue
+		
+		var anim_node := state_machine.get_node(state_node_name) as AnimationNodeAnimation
+		if anim_node == null:
+			printerr("State machine node '", state_node_name, "' is invalid in %s" % self)
+			continue
+		
+		anim_node.animation = state_anim_map[state_node_name]
