@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_g6k8r"]
 [ext_resource type="Script" uid="uid://chlki14yu5ulm" path="res://player/player_controller.gd" id="4_qjkh3"]
 [ext_resource type="Script" uid="uid://cb1suk3avv5yq" path="res://common/mouse_mode_controller.gd" id="5_g6k8r"]
+[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="6_hggc2"]
 [ext_resource type="Script" uid="uid://bx3dqx6ebaugu" path="res://player/states/player_walking_state.gd" id="8_hg6s5"]
 [ext_resource type="Script" uid="uid://ioo6s3m7wbha" path="res://common/inventory_system/inventory_selector.gd" id="9_bjvpn"]
 [ext_resource type="Script" uid="uid://ccbg8iw3gs48v" path="res://player/states/player_crouched_state.gd" id="9_hg6s5"]
@@ -66,6 +67,7 @@
 [ext_resource type="LabelSettings" uid="uid://b4f3g1d2cp3py" path="res://player/hud/quantity_label_settings.tres" id="52_p5tca"]
 [ext_resource type="Resource" uid="uid://6a5notvdv1ei" path="res://items/tools/shoddy_mace/shoddy_mace_recipe.tres" id="53_hggc2"]
 [ext_resource type="Script" uid="uid://bubfjagdkgrlq" path="res://player/inventory_organizer.gd" id="55_jbx34"]
+[ext_resource type="Script" uid="uid://uwx6xnt2vr38" path="res://player/hud/item_inspector.gd" id="59_b2j0d"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -79,6 +81,18 @@ bool_vector = SubResource("Resource_qjkh3")
 x_min = -90.0
 x_max = 90.0
 metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
+
+[sub_resource type="Resource" id="Resource_utr5e"]
+script = ExtResource("6_hggc2")
+item = ExtResource("9_jbx34")
+quantity = 22
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_hggc2"]
+script = ExtResource("6_hggc2")
+item = ExtResource("10_s3g0c")
+quantity = 37
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Curve" id="Curve_2uvqg"]
 _limits = [0.0, 30.0, 0.0, 1.0]
@@ -224,6 +238,9 @@ font_size = 26
 
 [sub_resource type="LabelSettings" id="LabelSettings_wpyo2"]
 font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_hggc2"]
+font_size = 20
 
 [sub_resource type="Animation" id="Animation_knn7v"]
 length = 0.001
@@ -413,6 +430,7 @@ metadata/_custom_type_script = "uid://bki5ij8task16"
 
 [node name="Inventory" type="Node" parent="." unique_id=710458340]
 script = ExtResource("19_c35mf")
+item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_utr5e"), SubResource("Resource_hggc2")])
 size = 40
 
 [node name="Hunger" type="Node" parent="." unique_id=1790864786 node_paths=PackedStringArray("bar", "health", "stamina")]
@@ -3430,6 +3448,7 @@ action_mode = 0
 flat = true
 
 [node name="OrganizationLabel" type="Label" parent="PauseInterface/CraftingMenu/BackpackPanel" unique_id=1777336426 node_paths=PackedStringArray("primary_inventory_selector", "secondary_inventory_selector")]
+visible = false
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -3492,6 +3511,38 @@ pause_interface = NodePath("../..")
 primary_inventory_selector = NodePath("../../../HUD/PrimaryInventorySelector")
 secondary_inventory_selector = NodePath("../../../HUD/SecondaryInventorySelector")
 hold_inventory_selector = NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector")
+
+[node name="ItemInspector" type="PanelContainer" parent="PauseInterface/CraftingMenu" unique_id=482564874 node_paths=PackedStringArray("inventory_selector", "name_label", "info_label", "container")]
+z_index = 2
+layout_mode = 0
+offset_left = 542.0
+offset_top = 124.0
+offset_right = 710.0
+offset_bottom = 178.0
+script = ExtResource("59_b2j0d")
+inventory_selector = NodePath("../../../HUD/SecondaryInventorySelector")
+name_label = NodePath("VBoxContainer/NameLabel")
+info_label = NodePath("VBoxContainer/InfoLabel")
+container = NodePath("VBoxContainer")
+mouse_offset = Vector2(8, -8)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseInterface/CraftingMenu/ItemInspector" unique_id=2033278544]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="NameLabel" type="Label" parent="PauseInterface/CraftingMenu/ItemInspector/VBoxContainer" unique_id=1183865509]
+layout_mode = 2
+text = "Item Name"
+label_settings = SubResource("LabelSettings_hggc2")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PauseInterface/CraftingMenu/ItemInspector/VBoxContainer" unique_id=1825800133]
+layout_mode = 2
+
+[node name="InfoLabel" type="Label" parent="PauseInterface/CraftingMenu/ItemInspector/VBoxContainer" unique_id=1550717015]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Item Namef"
 
 [node name="SettingsMenu" parent="PauseInterface" unique_id=788547277 instance=ExtResource("39_xcnuv")]
 visible = false
