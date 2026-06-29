@@ -95,13 +95,16 @@ func get_animations(item: Item) -> ItemAnimations:
 			return item_anims
 	return null
 
+func _get_valid_animation(anim: String) -> String: return anim if has_animation(anim) else ""
+
 func load_animations(anims: ItemAnimations) -> void:
 	if anims == null:
 		default_animations()
 		return
-	start_anim = anims.start_anim if has_animation(anims.start_anim) else ""
-	continue_anim = anims.continue_anim if has_animation(anims.continue_anim) else ""
-	end_anim = anims.end_anim if has_animation(anims.end_anim) else ""
+	
+	start_anim = _get_valid_animation(anims.start_anim)
+	continue_anim = _get_valid_animation(anims.continue_anim)
+	end_anim = _get_valid_animation(anims.end_anim)
 
 func get_player() -> AnimationPlayer:
 	return get_node(anim_player)
