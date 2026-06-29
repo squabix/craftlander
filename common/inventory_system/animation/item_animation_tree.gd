@@ -32,8 +32,8 @@ func _ready() -> void:
 	
 	# Update when inventory selector selects new instance
 	if is_instance_valid(inventory_selector):
-		inventory_selector.selected_new_index.connect(
-			func(_index: int) -> void:
+		inventory_selector.selected_instance_changed.connect(
+			func(_instance: ItemInstance) -> void:
 				update_item(inventory_selector.get_current_item())
 		)
 	
