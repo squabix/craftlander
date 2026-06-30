@@ -1,15 +1,17 @@
-extends ItemAnimationTree
 class_name InventoryAnimationTree
+extends ItemAnimationTree
 
 @export var inventory_selector: InventorySelector
 
+
 func _ready() -> void:
 	super()
-	
+
 	# Update when inventory selector selects new instance
 	if is_instance_valid(inventory_selector):
 		inventory_selector.selected_instance_changed.connect(update_to_selection.unbind(1))
 		update_to_selection()
+
 
 func update_to_selection() -> void:
 	if not is_instance_valid(inventory_selector):

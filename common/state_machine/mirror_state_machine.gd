@@ -1,15 +1,11 @@
-extends StateMachine
 class_name MirrorStateMachine
+extends StateMachine
 
 @export var initial_target: StateMachine
 @export var do_find_root_machine := true
 
 var target: StateMachine
 
-func enter() -> void:
-	if do_find_root_machine:
-		set_target(Util.find_child_of_class(root, "StateMachine"))
-		match_state(target.current)
 
 func _ready() -> void:
 	super()
@@ -19,8 +15,16 @@ func _ready() -> void:
 	if target:
 		match_state(target.current)
 
+
+func enter() -> void:
+	if do_find_root_machine:
+		set_target(Util.find_child_of_class(root, "StateMachine"))
+		match_state(target.current)
+
+
 func match_state(state: State) -> void:
 	enter_state(str(state))
+
 
 func set_target(to: StateMachine) -> void:
 	if target != null:

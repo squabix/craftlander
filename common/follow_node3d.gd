@@ -9,8 +9,10 @@ extends Node3D
 
 var direction: Vector3
 
+
 func _process(_delta: float) -> void:
 	update_direction()
+
 
 func update_target(to: Node3D) -> void:
 	if to == null or not is_instance_valid(to):
@@ -18,33 +20,44 @@ func update_target(to: Node3D) -> void:
 			target = null
 	target = to
 
+
 func get_direction() -> Vector3:
 	return direction
+
 
 func get_distance() -> float:
 	if is_instance_valid(target):
 		return global_position.distance_to(target.global_position)
 	return INF
 
+
 func retreat() -> void:
 	direction = direction.lerp(-global_position.direction_to(target.global_position), lerp_weight)
+
 
 func idle() -> void:
 	direction = direction.lerp(Vector3.ZERO, lerp_weight)
 
+
 func approach() -> void:
 	direction = direction.lerp(global_position.direction_to(target.global_position), lerp_weight)
 
-func has_min_approach_distance() -> bool: return min_approach_distance > 0.0
-func has_max_approach_distance() -> bool: return max_approach_distance > 0.0
+
+func has_min_approach_distance() -> bool:
+	return min_approach_distance > 0.0
+
+
+func has_max_approach_distance() -> bool:
+	return max_approach_distance > 0.0
+
 
 func update_direction() -> void:
 	if target == null:
 		idle()
 		return
-	
+
 	var distance: float = get_distance()
-	
+
 	if has_min_approach_distance() and distance < min_approach_distance:
 		if distance < min_retreat_distance:
 			retreat()
@@ -52,4 +65,3 @@ func update_direction() -> void:
 			idle()
 	elif not has_max_approach_distance() or distance < max_approach_distance:
 		approach()
-	

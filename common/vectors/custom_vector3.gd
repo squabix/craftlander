@@ -1,9 +1,10 @@
-extends Object
 class_name CustomVector3
+extends Object
 
 var x: Variant
 var y: Variant
 var z: Variant
+
 
 static func is_valid(v: Variant) -> bool:
 	if v is Vector3 or v is Vector3i:
@@ -12,10 +13,22 @@ static func is_valid(v: Variant) -> bool:
 		return "x" in v and "y" in v and "z" in v
 	return false
 
+
 static func from(v: Variant) -> CustomVector3:
 	if not v.is_valid():
 		return null
 	return CustomVector3.new(v.x, v.y, v.z)
+
+
+func _init(custom_x: Variant = null, custom_y: Variant = null, custom_z: Variant = null) -> void:
+	x = custom_x
+	y = custom_y
+	z = custom_z
+
+
+func _to_string() -> String:
+	return "(" + str(x) + ", " + str(y) + ", " + str(z) + ")"
+
 
 func find(a: Variant) -> Vector3i:
 	if x == a:
@@ -26,8 +39,10 @@ func find(a: Variant) -> Vector3i:
 		return Util.VECTOR3Z
 	return Vector3i.ZERO
 
+
 func as_array() -> Array:
 	return [x, y, z]
+
 
 func default(to: Variant) -> CustomVector3:
 	if x == null:
@@ -38,8 +53,10 @@ func default(to: Variant) -> CustomVector3:
 		z = to
 	return self
 
+
 func contains(a: Variant) -> bool:
 	return x == a or y == a or z == a
+
 
 func classify() -> Variant:
 	if x is float and y is float and z is float:
@@ -53,11 +70,3 @@ func classify() -> Variant:
 	if x is Array and y is Array and z is Array:
 		return ArrayVector3.new(x, y, z)
 	return self
-
-func _init(custom_x: Variant=null, custom_y: Variant=null, custom_z: Variant=null) -> void:
-	x = custom_x
-	y = custom_y
-	z = custom_z
-
-func _to_string() -> String:
-	return "(" + str(x) + ", " + str(y) + ", " + str(z) + ")"

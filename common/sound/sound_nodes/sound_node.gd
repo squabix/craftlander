@@ -1,5 +1,5 @@
-extends Node
 class_name SoundNode
+extends Node
 
 signal started_play
 signal ended_play
@@ -12,9 +12,11 @@ signal ended_play
 
 var is_playing := false
 
+
 func _ready() -> void:
 	if autoplay:
 		play()
+
 
 func play() -> void:
 	if is_playing and not do_interupt:

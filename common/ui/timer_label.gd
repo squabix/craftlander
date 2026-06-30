@@ -1,5 +1,5 @@
-extends Label
 class_name TimerLabel
+extends Label
 
 signal time_reset
 signal time_ended
@@ -7,7 +7,7 @@ signal started
 signal stopped
 signal ticked
 
-enum TimerMode {STOPWATCH, COUNTDOWN}
+enum TimerMode { STOPWATCH, COUNTDOWN }
 
 @export var active: bool
 @export var mode: TimerMode
@@ -25,13 +25,22 @@ enum TimerMode {STOPWATCH, COUNTDOWN}
 var time: float
 var last_text: String = text
 
+
 func _ready() -> void:
 	time = start_time
+
+
+func _process(delta: float) -> void:
+	if active:
+		update_time(delta)
+		update_text()
+
 
 func get_time_passed() -> float:
 	if mode == TimerMode.COUNTDOWN:
 		return start_time - time
 	return time
+
 
 func start() -> void:
 	if active == true:
@@ -39,16 +48,13 @@ func start() -> void:
 	active = true
 	started.emit()
 
+
 func stop() -> void:
 	if active == false:
 		return
 	active = false
 	stopped.emit()
 
-func _process(delta: float) -> void:
-	if active:
-		update_time(delta)
-		update_text()
 
 func update_time(delta: float) -> float:
 	var time_change: float = delta * multiplier
@@ -63,13 +69,15 @@ func update_time(delta: float) -> float:
 			stop()
 	return time_change
 
+
 func restart() -> void:
 	reset_time()
 	start()
 
+
 func update_text() -> void:
 	var total_seconds: int = int(time)
-	
+
 	if auto_adjust_display:
 		if total_seconds >= 1:
 			show_seconds = true
@@ -77,14 +85,14 @@ func update_text() -> void:
 			show_minutes = true
 		if total_seconds >= 360:
 			show_hours = true
-	
+
 	var ms: int = int((time - total_seconds) * 1000)
 	var seconds: int = total_seconds % 60
 	var minutes: int = int(total_seconds / 60.0) % 60
 	var hours: int = int(total_seconds / 3600.0)
 
 	var parts: PackedStringArray = []
-	
+
 	if show_hours:
 		parts.append("%02d" % hours)
 	if show_minutes:
@@ -102,6 +110,7 @@ func update_text() -> void:
 	if text != last_text:
 		ticked.emit()
 		last_text = text
+
 
 func reset_time() -> void:
 	time = start_time

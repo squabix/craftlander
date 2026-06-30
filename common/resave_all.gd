@@ -1,17 +1,19 @@
 @tool
 extends EditorScript
 
+
 func _run():
 	var dir = DirAccess.open("res://")
 	var processed_count := _process_dir("res://")
 	print("Batch save complete! Processed %s files" % processed_count)
+
 
 func _process_dir(path) -> int:
 	var count := 0
 	var dir = DirAccess.open(path)
 	dir.list_dir_begin()
 	var file_name := dir.get_next()
-	
+
 	while file_name != "":
 		if dir.current_is_dir():
 			if not file_name.begins_with("."):

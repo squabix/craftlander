@@ -3,8 +3,10 @@ extends Spawner2D
 
 @export var free_on_finish: bool = true
 
+
 func initialize_instance(instance: Node2D) -> void:
 	emit_particles(instance)
+
 
 func emit_particles(node: Node) -> void:
 	for child in node.get_children():
@@ -14,4 +16,3 @@ func emit_particles(node: Node) -> void:
 		if free_on_finish:
 			await node.finished
 			Util.safe_free(node)
-	

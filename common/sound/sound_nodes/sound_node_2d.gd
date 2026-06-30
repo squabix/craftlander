@@ -1,8 +1,9 @@
-extends Node2D
 class_name SoundNode2D
+extends Node2D
 
 @export var sound: Sound
 @export var autoplay: bool
+
 
 func _ready() -> void:
 	if autoplay:
