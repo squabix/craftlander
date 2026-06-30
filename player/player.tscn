@@ -41,6 +41,7 @@
 [ext_resource type="PackedScene" uid="uid://cw2ir860alcgt" path="res://player/ui/crafting/environment/crafting_environment.tscn" id="28_q28gw"]
 [ext_resource type="Script" uid="uid://bn55l5h1rwjsn" path="res://player/hunger.gd" id="31_2uvqg"]
 [ext_resource type="FontFile" uid="uid://cbr5ncx4f3a1n" path="res://assets/sineas.otf" id="34_6wior"]
+[ext_resource type="StyleBox" uid="uid://defeb68kadnmc" path="res://player/ui/player_stat_bar_background.tres" id="35_b2j0d"]
 [ext_resource type="Script" uid="uid://crew0n1e8xk4r" path="res://player/ui/crafting/recipes/recipe_panel.gd" id="38_1so5t"]
 [ext_resource type="Script" uid="uid://c622jer80j3sk" path="res://common/inventory_system/animation/item_animation.gd" id="39_dx5ib"]
 [ext_resource type="PackedScene" uid="uid://byosfqwobl3sl" path="res://menus/settings_menu.tscn" id="39_xcnuv"]
@@ -188,12 +189,39 @@ font = ExtResource("34_6wior")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7pn3"]
 bg_color = Color(1, 0.28235295, 0.3764706, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8hi5"]
 bg_color = Color(0.89, 0.62299997, 0.35599998, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fjxoa"]
 bg_color = Color(0.538974, 0.8672089, 0.34119555, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
 
 [sub_resource type="LabelSettings" id="LabelSettings_7pqkx"]
 font_size = 20
@@ -436,7 +464,7 @@ size = 40
 
 [node name="Hunger" type="Node" parent="." unique_id=1790864786 node_paths=PackedStringArray("bar", "health", "stamina")]
 script = ExtResource("31_2uvqg")
-bar = NodePath("../HUD/BarContainer/HungerBar")
+bar = NodePath("../HUD/BarContainer/HBoxContainer/HungerBar")
 loss_per_minute = 0.15
 health = NodePath("../Health")
 hurt_curve = SubResource("Curve_2uvqg")
@@ -448,7 +476,7 @@ metadata/_custom_type_script = "uid://bn55l5h1rwjsn"
 [node name="Stamina" type="Node" parent="." unique_id=260796409 node_paths=PackedStringArray("bar", "idle_timer", "hunger")]
 unique_name_in_owner = true
 script = ExtResource("10_fjxoa")
-bar = NodePath("../HUD/BarContainer/StaminaBar")
+bar = NodePath("../HUD/BarContainer/HBoxContainer/StaminaBar")
 idle_timer = NodePath("IdleTimer")
 hunger = NodePath("../Hunger")
 hunger_fill_curve = SubResource("Curve_fjxoa")
@@ -727,20 +755,17 @@ interactor = NodePath("../../Head/Camera3D/InteratorRay/Interactor")
 
 [node name="BarContainer" type="VBoxContainer" parent="HUD" unique_id=1488788714]
 unique_name_in_owner = true
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
 offset_left = 10.0
 offset_top = 10.0
-offset_right = 218.0
-offset_bottom = 128.0
-
-[node name="FPSLabel" type="Label" parent="HUD/BarContainer" unique_id=1610708313]
-layout_mode = 2
-text = "FPS"
-script = ExtResource("19_bjvpn")
+offset_right = 245.0
+offset_bottom = 162.0
 
 [node name="HealthBar" type="ProgressBar" parent="HUD/BarContainer" unique_id=231774684 node_paths=PackedStringArray("health")]
-custom_minimum_size = Vector2(0, 10)
+custom_minimum_size = Vector2(0, 14)
 layout_mode = 2
+theme_override_styles/background = ExtResource("35_b2j0d")
 theme_override_styles/fill = SubResource("StyleBoxFlat_r7pn3")
 value = 4.58
 show_percentage = false
@@ -748,9 +773,13 @@ script = ExtResource("26_r7pn3")
 health = NodePath("../../../Health")
 lerp_weight = 0.3
 
-[node name="HungerBar" type="ProgressBar" parent="HUD/BarContainer" unique_id=446841129]
-custom_minimum_size = Vector2(0, 10)
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/BarContainer" unique_id=1103359367]
 layout_mode = 2
+
+[node name="HungerBar" type="ProgressBar" parent="HUD/BarContainer/HBoxContainer" unique_id=446841129]
+custom_minimum_size = Vector2(115, 11)
+layout_mode = 2
+theme_override_styles/background = ExtResource("35_b2j0d")
 theme_override_styles/fill = SubResource("StyleBoxFlat_b8hi5")
 max_value = 1.0
 value = 0.41
@@ -759,9 +788,10 @@ script = ExtResource("27_b8hi5")
 lerp_weight = 0.3
 metadata/_custom_type_script = "uid://c3xfbb8ay0ghk"
 
-[node name="StaminaBar" type="ProgressBar" parent="HUD/BarContainer" unique_id=609152098]
-custom_minimum_size = Vector2(0, 4)
+[node name="StaminaBar" type="ProgressBar" parent="HUD/BarContainer/HBoxContainer" unique_id=609152098]
+custom_minimum_size = Vector2(115, 11)
 layout_mode = 2
+theme_override_styles/background = ExtResource("35_b2j0d")
 theme_override_styles/fill = SubResource("StyleBoxFlat_fjxoa")
 max_value = 1.0
 value = 0.41
@@ -769,6 +799,11 @@ show_percentage = false
 script = ExtResource("27_b8hi5")
 lerp_weight = 0.3
 metadata/_custom_type_script = "uid://c3xfbb8ay0ghk"
+
+[node name="FPSLabel" type="Label" parent="HUD/BarContainer" unique_id=1610708313]
+layout_mode = 2
+text = "FPS"
+script = ExtResource("19_bjvpn")
 
 [node name="PopupDisplay" type="Control" parent="HUD" unique_id=2003166414 node_paths=PackedStringArray("title_label", "body_label")]
 unique_name_in_owner = true
@@ -850,6 +885,7 @@ text = "Continue"
 [node name="PauseInterface" type="Control" parent="." unique_id=1163003515 node_paths=PackedStringArray("crafting_menu", "crafting_environment", "recipe_panel", "settings_menu", "health", "resume_button", "settings_button", "quit_button")]
 unique_name_in_owner = true
 process_mode = 3
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
