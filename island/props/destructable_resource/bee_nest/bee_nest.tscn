@@ -124,7 +124,7 @@ metadata/_custom_type_script = "uid://bhjxscxhtg2se"
 
 [node name="BlenderMeshes" parent="." unique_id=340605420 instance=ExtResource("11_b76o0")]
 
-[node name="Nest" parent="BlenderMeshes" index="0" unique_id=1407380297]
+[node name="Nest" parent="BlenderMeshes" index="0" unique_id=1644635692]
 surface_material_override/1 = SubResource("StandardMaterial3D_ioeyq")
 
 [node name="BeeSpawner1" type="Node3D" parent="." unique_id=694305899]

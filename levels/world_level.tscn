@@ -37,3 +37,4 @@ turn_acceleration = 0.02
 initial_entity = NodePath("../../Player")
 
 [editable path="Boat"]
+[editable path="Boat/BlenderMeshes1"]

@@ -102,7 +102,7 @@ metadata/_custom_type_script = "uid://dapeyi3eetek1"
 [node name="BlenderMeshes" parent="." unique_id=1560999619 instance=ExtResource("4_a54gr")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.39999998, 0)
 
-[node name="Cube" parent="BlenderMeshes" index="0" unique_id=53737742]
+[node name="Cube" parent="BlenderMeshes" index="0" unique_id=676287644]
 surface_material_override/0 = ExtResource("6_pwnbr")
 
 [node name="Inventory" type="Node" parent="." unique_id=836906820]

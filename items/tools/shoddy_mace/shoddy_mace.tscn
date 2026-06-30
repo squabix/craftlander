@@ -4,7 +4,6 @@
 [ext_resource type="Resource" uid="uid://nv3owcu3xvi8" path="res://items/tools/shoddy_mace/shoddy_mace_damage.tres" id="2_550cs"]
 [ext_resource type="PackedScene" uid="uid://7qerylnupfr3" path="res://items/tools/shoddy_mace/shoddy_mace.blend" id="3_550cs"]
 [ext_resource type="Material" uid="uid://bh8sv2icydggs" path="res://assets/materials/stone.tres" id="4_w4m4n"]
-[ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="5_6a3s8"]
 
 [node name="ShoddyMace" type="Node3D" unique_id=1538443592]
 
@@ -21,10 +20,7 @@ metadata/_custom_type_script = "uid://dd8qskwv1nlqx"
 
 [node name="BlenderMeshes" parent="Visuals" unique_id=742673609 instance=ExtResource("3_550cs")]
 
-[node name="Tip" parent="Visuals/BlenderMeshes" index="0" unique_id=2070121304]
+[node name="Tip" parent="Visuals/BlenderMeshes" index="0" unique_id=1428554323]
 surface_material_override/0 = ExtResource("4_w4m4n")
-
-[node name="Handle" parent="Visuals/BlenderMeshes" index="1" unique_id=2991337]
-material_override = ExtResource("5_6a3s8")
 
 [editable path="Visuals/BlenderMeshes"]

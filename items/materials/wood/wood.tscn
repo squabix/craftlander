@@ -8,7 +8,7 @@
 
 [node name="Visuals" parent="." unique_id=1919549888 instance=ExtResource("1_mxk7r")]
 
-[node name="Stump" parent="Visuals" index="0" unique_id=29378343]
+[node name="Stump" parent="Visuals" index="0" unique_id=1020439426]
 surface_material_override/0 = ExtResource("2_3oktv")
 surface_material_override/1 = ExtResource("3_vo0lx")
 

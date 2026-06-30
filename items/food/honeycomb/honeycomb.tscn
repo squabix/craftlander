@@ -8,13 +8,13 @@
 [node name="Visuals" parent="." unique_id=1564862642 instance=ExtResource("1_2uevs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.27)
 
-[node name="Circle1" parent="Visuals" index="0" unique_id=707338699]
+[node name="Circle1" parent="Visuals" index="0" unique_id=901536190]
 visible = false
 
-[node name="Circle2" parent="Visuals" index="1" unique_id=649791028]
+[node name="Circle2" parent="Visuals" index="1" unique_id=1632109620]
 visible = false
 
-[node name="Honeycomb" parent="Visuals" index="2" unique_id=1342536534]
+[node name="Honeycomb" parent="Visuals" index="2" unique_id=869139565]
 transform = Transform3D(0.099999994, 0, 0.17320509, 0, 0.2, 0, -0.17320509, 0, 0.099999994, 0, 0, 0.89256847)
 surface_material_override/0 = ExtResource("2_uif06")
 

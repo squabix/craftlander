@@ -20,7 +20,7 @@ metadata/_custom_type_script = "uid://dd8qskwv1nlqx"
 
 [node name="BlenderMeshes" parent="Visuals" unique_id=1873865866 instance=ExtResource("3_7cxoo")]
 
-[node name="Tip" parent="Visuals/BlenderMeshes" index="0" unique_id=2046155379]
+[node name="Tip" parent="Visuals/BlenderMeshes" index="0" unique_id=561274868]
 transform = Transform3D(1, 0, 0, 0, 0.9707029, -0.24028307, 0, 0.24028307, 0.9707029, 0, 4.1100097, -0.0687084)
 surface_material_override/0 = ExtResource("4_pi6by")
 

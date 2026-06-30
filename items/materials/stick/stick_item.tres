@@ -6,8 +6,8 @@
 
 [resource]
 script = ExtResource("1_8ubk6")
-scene = ExtResource("1_f62wd")
 name = "Stick"
 max_quantity = 99
 icon = ExtResource("1_h40hw")
+scene = ExtResource("1_f62wd")
 metadata/_custom_type_script = "uid://bfstlagsbeqe2"

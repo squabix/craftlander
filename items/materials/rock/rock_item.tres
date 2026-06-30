@@ -6,8 +6,8 @@
 
 [resource]
 script = ExtResource("1_p5fvs")
-scene = ExtResource("2_one12")
 name = "Rock"
 max_quantity = 99
 icon = ExtResource("1_3vdst")
+scene = ExtResource("2_one12")
 metadata/_custom_type_script = "uid://bfstlagsbeqe2"

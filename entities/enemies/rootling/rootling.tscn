@@ -543,11 +543,13 @@ animation = &"idle"
 animation = &"run"
 
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_7mn0t"]
+min_space = 0.0
 blend_point_0/node = SubResource("AnimationNodeAnimation_7mn0t")
 blend_point_0/pos = 0.3
+blend_point_0/name = &"0"
 blend_point_1/node = SubResource("AnimationNodeAnimation_p5gg5")
 blend_point_1/pos = 0.8
-min_space = 0.0
+blend_point_1/name = &"1"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_p5gg5"]
 graph_offset = Vector2(-1130.5316, -137.93541)
@@ -703,11 +705,11 @@ update_scale = false
 [node name="Visuals" parent="." unique_id=1269952913 instance=ExtResource("13_v4fp6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
-[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1269952913, 1317121624) index="0" unique_id=1593283826]
+[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1269952913, 1533031829) index="0" unique_id=2034195538]
 bones/7/rotation = Quaternion(-0.35355338, 0.14644662, -0.35355335, 0.8535534)
 bones/10/rotation = Quaternion(-0.35355338, -0.14644662, 0.35355335, 0.8535534)
 
-[node name="Woodling" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=55884219]
+[node name="Woodling" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=1986003523]
 surface_material_override/0 = ExtResource("21_uefcv")
 surface_material_override/1 = ExtResource("22_c3uxn")
 

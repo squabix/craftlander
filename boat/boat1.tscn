@@ -89,7 +89,7 @@ metadata/_custom_type_script = "uid://sw1ikf32qnw0"
 [node name="BlenderMeshes1" parent="." unique_id=562094623 instance=ExtResource("2_6h0kv")]
 transform = Transform3D(0.9998477, -0.017452406, 0, 0.017449748, 0.9996954, -0.017452406, 0.00030458646, 0.017449748, 0.9998477, 0, 0.2, 2.78762)
 
-[node name="Walkway" parent="BlenderMeshes1" index="0" unique_id=593954362]
+[node name="Walkway" parent="BlenderMeshes1" index="0" unique_id=1530214676]
 surface_material_override/0 = ExtResource("6_wbjwq")
 surface_material_override/1 = ExtResource("7_e44pp")
 

@@ -18,7 +18,7 @@ metadata/_custom_type_script = "uid://dd8qskwv1nlqx"
 
 [node name="BlenderMeshes" parent="Visuals" unique_id=239118429 instance=ExtResource("1_pr832")]
 
-[node name="Cube" parent="Visuals/BlenderMeshes" index="0" unique_id=2085752947]
+[node name="Cube" parent="Visuals/BlenderMeshes" index="0" unique_id=823090578]
 surface_material_override/0 = ExtResource("4_vh8m0")
 
 [editable path="Visuals/BlenderMeshes"]
