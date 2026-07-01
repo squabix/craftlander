@@ -6,7 +6,7 @@ const TIME_SCALE := 1.0
 
 static var _current: GameWorld
 
-@export var gravity_strength := 17.0
+@export var gravity_strength := 25.0
 @export var gravity_direction := Vector3.DOWN
 
 var tree: SceneTree
