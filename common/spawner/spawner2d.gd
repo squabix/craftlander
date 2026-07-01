@@ -14,7 +14,7 @@ enum PositionRangeSampleMode { INSIDE, OUTSIDE }
 
 @export_group("Transform")
 @export var default_position := Vector2(0.0, 0.0)
-@export_range(-360.0, 360.0) var default_rotation_degrees := 0.0
+@export_range(-360.0, 360.0, 0.01, "°") var default_rotation_degrees := 0.0
 
 #@export var position_range_node: PositionRangeNode2D
 var all_spawned_nodes: Array[Node2D]

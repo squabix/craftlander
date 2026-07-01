@@ -7,9 +7,9 @@ extends ProgressBar
 
 @export_group("Fade")
 @export var fade_when_idle := false
-@export var idle_fade_wait_time := 2.0
-@export var fade_in_duration := 0.1
-@export var fade_out_duration := 0.1
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var idle_fade_wait_time := 2.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var fade_in_duration := 0.1
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var fade_out_duration := 0.1
 
 var target_value := value:
 	set(to):

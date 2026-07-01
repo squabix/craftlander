@@ -29,7 +29,7 @@ enum UseState { START_USE, CONTINUE_USE, END_USE }
 
 @export_group("Cooldown")
 @export var cooldown_mode := CooldownMode.DISABLED
-@export var default_cooldown_length := 0.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var default_cooldown_length := 0.0
 
 var max_uses := 1 # Maximum consecutive uses (frames)
 var scene_instance: Node

@@ -2,7 +2,7 @@ extends Node
 class_name RigidBodyVelocityLimiter3D
 
 @export var enabled := true
-@export var limit: float = 5.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var limit: float = 5.0
 @export var axes: BoolVector3
 
 func _process(delta: float) -> void:

@@ -1,13 +1,14 @@
 extends State
 
 @export var nav_guide: NavEntityGuide3D
-@export var inner_wander_radius := 4.0
-@export var outter_wander_radius := 12.0
-@export var reach_distance := 1.5
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var inner_wander_radius := 4.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var outter_wander_radius := 12.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var reach_distance := 1.5
+
 @export_group("Idling")
 @export var enable_idling := true
-@export var min_idle_time := 1.0
-@export var max_idle_time := 5.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var min_idle_time := 1.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var max_idle_time := 5.0
 @export var idle_timer: Timer
 
 var is_moving := false

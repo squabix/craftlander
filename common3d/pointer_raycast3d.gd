@@ -1,7 +1,7 @@
 extends RayCast3D
 class_name PointerRayCast3D
 
-@export var offset := 0.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var offset := 0.0
 
 func get_end() -> Vector3:
 	return global_position + global_transform.basis * target_position

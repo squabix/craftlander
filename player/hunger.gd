@@ -10,7 +10,6 @@ extends Node
 @export var health: Health
 @export var hurt_curve: Curve
 @export var regeneration_curve: Curve
-@export var hurt_frequency := 1.0
 
 @export_group("Stamina")
 @export var stamina: Stamina

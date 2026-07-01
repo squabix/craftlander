@@ -3,7 +3,7 @@ extends Resource
 
 @export var stream: AudioStream
 @export var pitch_scale := 1.0
-@export var volume_db := 1.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:db") var volume_db := 1.0
 
 
 func get_player() -> AudioStreamPlayer:

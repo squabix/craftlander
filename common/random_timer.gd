@@ -1,7 +1,7 @@
 class_name RandomTimer
 extends Timer
 
-@export var variation: float = 0.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var variation: float = 0.0
 
 var base_wait_time: float
 

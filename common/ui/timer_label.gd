@@ -11,7 +11,7 @@ enum TimerMode { STOPWATCH, COUNTDOWN }
 
 @export var active: bool
 @export var mode: TimerMode
-@export var start_time: float
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var start_time: float
 @export var multiplier: float = 1.0
 @export var autoreset: bool
 @export var auto_adjust_display: bool

@@ -1,7 +1,7 @@
 class_name SinWaver
 extends Node
 
-@export var frequency: float = 5.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var period: float = 5.0
 @export var strength: float = 10.0
 @export var random: bool = true
 
@@ -23,7 +23,7 @@ func time_sample() -> float:
 
 
 func sample(x: float) -> float:
-	return sin(x * frequency) * strength
+	return sin(x * period) * strength
 
 
 func get_minimum() -> float:

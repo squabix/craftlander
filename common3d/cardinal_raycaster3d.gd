@@ -2,7 +2,7 @@ extends Node3D
 class_name CardinalRayCaster3D
 
 @export_flags_3d_physics var collision_mask := 1
-@export var ray_length: float = 1.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var ray_length := 1.0
 
 func get_colliding_directions() -> PackedVector3Array:
 	var space_state := get_world_3d().direct_space_state

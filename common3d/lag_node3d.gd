@@ -3,8 +3,8 @@ class_name LagNode3D
 
 @export_range(0.0, 1.0) var position_speed := 1.0
 @export_range(0.0, 1.0) var rotation_speed := 1.0
-@export var max_position_distance := 0.0
-@export var max_rotation_distance := 0.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var max_position_distance := 0.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var max_rotation_distance := 0.0
 
 var last_global_position: Vector3
 var last_global_rotation: Vector3

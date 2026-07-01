@@ -1,8 +1,8 @@
 class_name Boat
 extends EntityVehicle3D
 
-@export var max_turn_speed := 0.0
-@export_range(0.0, 1.0) var turn_acceleration := 0.1 # Lower values mean heavier/drifting turns
+@export_custom(PROPERTY_HINT_NONE, "suffix:°/s") var max_turn_speed := 0.0
+@export_range(0.0, 1.0, 0.01, "suffix:°/s²") var turn_acceleration := 0.1
 @export var driver_seat: Seat3D
 @export var state_machine: StateMachine
 

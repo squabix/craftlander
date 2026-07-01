@@ -10,11 +10,12 @@ signal recovered_from_depletion
 @export var idle_timer: Timer
 @export var depletable := false
 
-@export_group("Rates")
-@export var fill_base_rate := 0.05
-@export var fill_acceleration := 0.03
+@export_group("Filling", "fill")
+@export_custom(PROPERTY_HINT_NONE, "suffix:/s") var fill_base_rate := 0.05
+@export_custom(PROPERTY_HINT_NONE, "suffix:/s²") var fill_acceleration := 0.03
 @export var fill_multiplier := 1.0
-@export var recovery_threshold := 1.0
+
+@export_range(0.0, 1.0) var recovery_threshold := 1.0
 
 @export_group("Hunger")
 @export var hunger: Hunger

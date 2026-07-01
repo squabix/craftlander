@@ -4,10 +4,10 @@ class_name RadialSight3D
 signal found_target(new_target: Node3D)
 signal lost_target
 
-@export var radius := 20.0
-@export var lose_distance := 40.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var radius := 20.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var lose_distance := 40.0
 @export var can_lose_target := true
-@export var target_update_frequency := 0.2
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var target_update_period := 0.2
 @export_flags_3d_physics var target_collision_mask := 1
 @export_flags_3d_physics var ray_collision_mask := 1
 
@@ -46,7 +46,7 @@ func add_ray() -> void:
 func add_timer() -> void:
 	update_timer = Timer.new()
 	add_child(update_timer)
-	update_timer.wait_time = target_update_frequency
+	update_timer.wait_time = target_update_period
 	update_timer.start()
 	update_timer.timeout.connect(update_target)
 

@@ -2,9 +2,9 @@ class_name FollowNode3D
 extends Node3D
 
 @export var target: Node3D
-@export var min_approach_distance: float = 0.0
-@export var min_retreat_distance: float = 0.0
-@export var max_approach_distance: float = 0.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var min_approach_distance: float = 0.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var min_retreat_distance: float = 0.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var max_approach_distance: float = 0.0
 @export_range(0.0, 1.0) var lerp_weight: float = 1.0
 
 var direction: Vector3

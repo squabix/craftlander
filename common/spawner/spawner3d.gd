@@ -13,8 +13,8 @@ enum TransformMode { SELF, PARENT, DEFAULT }
 @export_group("Transform")
 @export var position_mode: TransformMode = TransformMode.PARENT
 @export var rotation_mode: TransformMode = TransformMode.PARENT
-@export var default_position: Vector3
-@export var default_rotation_degrees: Vector3
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var default_position: Vector3
+@export_custom(PROPERTY_HINT_NONE, "suffix:°") var default_rotation_degrees: Vector3
 
 @export_group("Timing")
 @export var spawn_frequency: float

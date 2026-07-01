@@ -25,24 +25,23 @@ const RECIPE_LAYOUT_SCALE := 1.0
 @export_group("Tween Settings")
 
 @export_subgroup("Selection Wiggle")
-@export var selection_wiggle_speed := 8.0
-@export var selection_wiggle_intensity := 12.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:Hz") var selection_wiggle_frequency := 8.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:°") var selection_wiggle_intensity := 12.0
 
 @export_subgroup("Craft Fail")
-@export var fail_wiggle_speed := 8.0
-@export var fail_wiggle_intensity := 15.0
-@export var fail_wiggle_duration := 0.24
+@export_custom(PROPERTY_HINT_NONE, "suffix:°") var fail_wiggle_intensity := 15.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var fail_wiggle_duration := 0.24
 
 @export_subgroup("Craft Success")
-@export var success_merge_duration := 0.35
-@export var success_merge_stagger_delay_offset := 0.05
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var success_merge_duration := 0.35
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var success_merge_stagger_delay_offset := 0.05
 
-@export var success_showcase_height := 0.6
-@export var success_showcase_pop_duration := 0.3
-@export var success_showcase_hang_duration := 0.3
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var success_showcase_height := 0.6
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var success_showcase_pop_duration := 0.3
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var success_showcase_hang_duration := 0.3
 
-@export var success_drop_sink_depth := 1.5
-@export var success_drop_duration := 0.35
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var success_drop_sink_depth := 1.5
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var success_drop_duration := 0.35
 
 @export_group("External Dependencies")
 @export var inventory_selector: InventorySelector
@@ -235,7 +234,7 @@ func _process(_delta: float) -> void:
 func _wiggle_selection() -> void:
 	if not is_instance_valid(selection_visuals):
 		return
-	var time := Time.get_ticks_msec() * selection_wiggle_speed * 0.001
+	var time := Time.get_ticks_msec() * selection_wiggle_frequency * 0.001
 	var wiggle := sin(time) * selection_wiggle_intensity
 	selection_visuals.rotation_degrees = VISUALS_TILT + Vector3.UP * wiggle
 
