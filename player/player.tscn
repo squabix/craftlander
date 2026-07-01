@@ -516,11 +516,6 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Walking" type="Node" parent="Controller3D/Default" unique_id=732487638 node_paths=PackedStringArray("stamina", "root")]
 script = ExtResource("8_hg6s5")
-priority = null
-locked = null
-process_update = null
-physics_process_update = null
-do_handle_input = null
 stamina = NodePath("../../../Stamina")
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
@@ -540,22 +535,12 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Sprinting" type="Node" parent="Controller3D/Default" unique_id=900263776 node_paths=PackedStringArray("stamina", "root")]
 script = ExtResource("10_8t03j")
-priority = null
-locked = null
-process_update = null
-physics_process_update = null
-do_handle_input = null
 stamina = NodePath("../../../Stamina")
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Swimming" type="Node" parent="Controller3D" unique_id=708197157 node_paths=PackedStringArray("stamina")]
 script = ExtResource("16_art4l")
-priority = null
-locked = null
-process_update = null
-physics_process_update = null
-do_handle_input = null
 stamina = NodePath("../../Stamina")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 

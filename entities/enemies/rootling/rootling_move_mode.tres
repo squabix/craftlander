@@ -1,10 +1,9 @@
-[gd_resource type="Resource" script_class="MovementMode3D" format=3 uid="uid://o4s4d0gqgsng"]
+[gd_resource type="Resource" script_class="MoveMode" format=3 uid="uid://o4s4d0gqgsng"]
 
-[ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common3d/move_mode3d.gd" id="1_2tr1n"]
+[ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common/move_mode.gd" id="1_2tr1n"]
 
 [resource]
 script = ExtResource("1_2tr1n")
-max_speed = Vector2(3, 0)
-acceleration = Vector2(15, 1)
-friction = Vector2(30, 0)
+max_speed = Vector2(3.5, 0)
+friction_sharpness = Vector2(30, 0)
 metadata/_custom_type_script = "uid://edbvsbdtvgtj"

@@ -1,10 +1,10 @@
-[gd_resource type="Resource" script_class="MovementMode3D" format=3 uid="uid://c86fer36qsomd"]
+[gd_resource type="Resource" script_class="MoveMode" format=3 uid="uid://c86fer36qsomd"]
 
-[ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common3d/move_mode3d.gd" id="1_srm2e"]
+[ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common/move_mode.gd" id="1_18dji"]
 
 [resource]
-script = ExtResource("1_srm2e")
-max_speed = Vector2(8.3, 8)
-acceleration = Vector2(10, 1)
-friction = Vector2(10, 0)
+script = ExtResource("1_18dji")
+max_speed = Vector2(7, 7.5)
+accelerate_sharpness = Vector2(10, 0)
+friction_sharpness = Vector2(10, 0)
 metadata/_custom_type_script = "uid://edbvsbdtvgtj"

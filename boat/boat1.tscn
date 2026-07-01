@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://c2ss32j8grhn8"]
 
 [ext_resource type="Script" uid="uid://bj8pokcrjdf2c" path="res://boat/boat.gd" id="1_1ek77"]
-[ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common3d/move_mode3d.gd" id="2_0q3wp"]
 [ext_resource type="PackedScene" uid="uid://j53nm0t5m7rf" path="res://boat/boat1.blend" id="2_6h0kv"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="2_fs7t1"]
 [ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="3_0q3wp"]
@@ -12,13 +11,6 @@
 [ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="6_wbjwq"]
 [ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="7_e44pp"]
 [ext_resource type="Script" uid="uid://bcwgfvcnnjoac" path="res://boat/boat_piloting_state.gd" id="10_0q3wp"]
-
-[sub_resource type="Resource" id="Resource_e44pp"]
-script = ExtResource("2_0q3wp")
-max_speed = Vector2(10, 0)
-acceleration = Vector2(0.5, 1)
-friction = Vector2(3, 0)
-metadata/_custom_type_script = "uid://edbvsbdtvgtj"
 
 [sub_resource type="Resource" id="Resource_1blct"]
 script = ExtResource("2_fs7t1")
@@ -80,7 +72,6 @@ max_turn_speed = 1650.0
 driver_seat = NodePath("DriverSeat")
 seats = [NodePath("DriverSeat")]
 type = "boat"
-movement_mode = SubResource("Resource_e44pp")
 move_up_as_jump = false
 gravity_multiplier = 0.0
 rotation_range = SubResource("Resource_wbjwq")

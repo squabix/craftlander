@@ -2,7 +2,7 @@ extends State
 
 @export var stamina: Stamina
 
-@onready var move_mode: MoveMode3D = preload("res://player/states/player_walking_move_mode.tres")
+@onready var move_mode: MoveMode = preload("res://player/states/player_walking_move_mode.tres")
 
 func enter() -> void:
 	root.move_mode = move_mode
