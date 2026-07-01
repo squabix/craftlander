@@ -4,10 +4,10 @@ const STAMINA_COST := 0.12
 
 @export var stamina: Stamina
 
-@onready var movement_mode: MovementMode3D = preload("res://player/states/player_swmming_movement_mode.tres")
+@onready var move_mode: MoveMode3D = preload("res://player/states/player_swmming_move_mode.tres")
 
 func enter() -> void:
-	root.movement_mode = movement_mode
+	root.move_mode = move_mode
 
 func physics_update(_delta: float) -> void:
 	stamina.spend(STAMINA_COST)

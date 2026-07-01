@@ -5,7 +5,7 @@ signal landed
 signal left_ground
 
 @export var type := "default_entity"
-@export var movement_mode: MovementMode3D
+@export var move_mode: MoveMode3D
 @export var move_up_as_jump := true
 
 @export_group("Gravity")
@@ -93,7 +93,7 @@ func move_up(amount: float = 1.0) -> void: motion_direction.y = amount
 func move_down(amount: float = 1.0) -> void: motion_direction.y = -amount
 
 func _accelerate(direction: Vector3, delta: float) -> void:
-	if movement_mode == null:
+	if move_mode == null:
 		return
 	
 	if frozen:
@@ -101,7 +101,7 @@ func _accelerate(direction: Vector3, delta: float) -> void:
 	elif accelerate_rotation_base != null:
 		direction = direction.rotated(Vector3.UP, accelerate_rotation_base.global_rotation.y)
 	
-	velocity = movement_mode.accel(velocity, direction, delta)
+	velocity = move_mode.accel(velocity, direction, delta)
 	if not queued_impulse.is_zero_approx():
 		velocity += queued_impulse
 		queued_impulse = Vector3.ZERO
@@ -156,4 +156,4 @@ func _to_string() -> String:
 	return "%s (%s)" % [name, type]
 
 func print_movement() -> void:
-	print("%s velocity: %s via %s\n" % [self, velocity, movement_mode])
+	print("%s velocity: %s via %s\n" % [self, velocity, move_mode])

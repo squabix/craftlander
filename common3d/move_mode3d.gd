@@ -1,5 +1,5 @@
-extends MovementMode
-class_name MovementMode3D
+extends MoveMode
+class_name MoveMode3D
 
 @export var max_speed: Vector2 = Vector2(0, 0)
 @export var acceleration: Vector2 = Vector2(1, 1)
@@ -13,4 +13,4 @@ func accel(velocity: Vector3, direction: Vector3, delta: float) -> Vector3:
 	)
 
 func _to_string() -> String:
-	return "MovementMode3D (accelerate to " + str(max_speed) + " by " + str(acceleration) + ", friction of " + str(friction) + ")"
+	return "MoveMode3D (accelerate to " + str(max_speed) + " by " + str(acceleration) + ", friction of " + str(friction) + ")"

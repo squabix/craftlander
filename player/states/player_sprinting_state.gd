@@ -5,13 +5,13 @@ const STAMINA_COST := 0.18
 
 @export var stamina: Stamina
 
-@onready var movement_mode: MovementMode3D = preload("res://player/states/player_sprinting_movement_mode.tres")
+@onready var move_mode: MoveMode3D = preload("res://player/states/player_sprinting_move_mode.tres")
 
 func is_walking_forward() -> bool:
 	return root.last_motion_direction.z <= -MIN_FORWARD_MOTION
 
 func enter() -> void:
-	root.movement_mode = movement_mode
+	root.move_mode = move_mode
 
 func physics_update(_delta: float) -> void:
 	stamina.spend(STAMINA_COST)

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c2ss32j8grhn8"]
 
 [ext_resource type="Script" uid="uid://bj8pokcrjdf2c" path="res://boat/boat.gd" id="1_1ek77"]
-[ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common3d/movement_mode3d.gd" id="2_0q3wp"]
+[ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common3d/move_mode3d.gd" id="2_0q3wp"]
 [ext_resource type="PackedScene" uid="uid://j53nm0t5m7rf" path="res://boat/boat1.blend" id="2_6h0kv"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="2_fs7t1"]
 [ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="3_0q3wp"]

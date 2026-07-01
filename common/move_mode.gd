@@ -1,4 +1,4 @@
-class_name MovementMode
+class_name MoveMode
 extends Resource
 
 ## The minimum direction magnitude before interpolating via acceleration instead of friction

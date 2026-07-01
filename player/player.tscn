@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://ucyt6h7yjc6k" path="res://player/player.gd" id="1_g1dw6"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="2_g1dw6"]
-[ext_resource type="Resource" uid="uid://mx3f8ldvvndd" path="res://player/states/player_walking_movement_mode.tres" id="2_g6k8r"]
 [ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_g6k8r"]
 [ext_resource type="Script" uid="uid://chlki14yu5ulm" path="res://player/player_controller.gd" id="4_qjkh3"]
 [ext_resource type="Script" uid="uid://cb1suk3avv5yq" path="res://common/mouse_mode_controller.gd" id="5_g6k8r"]
@@ -451,7 +450,6 @@ health = NodePath("Health")
 hunger = NodePath("Hunger")
 stamina = NodePath("Stamina")
 type = "player"
-movement_mode = ExtResource("2_g6k8r")
 horizontal_rotation_target = NodePath(".")
 vertical_rotation_target = NodePath("Head/Camera3D")
 rotation_range = SubResource("Resource_g6k8r")
@@ -518,6 +516,11 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Walking" type="Node" parent="Controller3D/Default" unique_id=732487638 node_paths=PackedStringArray("stamina", "root")]
 script = ExtResource("8_hg6s5")
+priority = null
+locked = null
+process_update = null
+physics_process_update = null
+do_handle_input = null
 stamina = NodePath("../../../Stamina")
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
@@ -528,16 +531,31 @@ stamina = NodePath("../../../Stamina")
 standing_collision = NodePath("../../../StandingCollisionShape")
 crouched_collision = NodePath("../../../CrouchedCollisionShape")
 root = NodePath("../../..")
+priority = null
+locked = null
+process_update = null
+physics_process_update = null
+do_handle_input = null
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Sprinting" type="Node" parent="Controller3D/Default" unique_id=900263776 node_paths=PackedStringArray("stamina", "root")]
 script = ExtResource("10_8t03j")
+priority = null
+locked = null
+process_update = null
+physics_process_update = null
+do_handle_input = null
 stamina = NodePath("../../../Stamina")
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Swimming" type="Node" parent="Controller3D" unique_id=708197157 node_paths=PackedStringArray("stamina")]
 script = ExtResource("16_art4l")
+priority = null
+locked = null
+process_update = null
+physics_process_update = null
+do_handle_input = null
 stamina = NodePath("../../Stamina")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 

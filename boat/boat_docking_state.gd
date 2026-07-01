@@ -7,7 +7,7 @@ var dock_speed: float
 
 func enter() -> void:
 	root.driver_seat.is_driver = false
-	dock_speed = root.movement_mode.max_speed.x
+	dock_speed = root.move_mode.max_speed.x
 
 
 func physics_update(delta: float) -> void:

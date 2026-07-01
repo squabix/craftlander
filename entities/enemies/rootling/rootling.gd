@@ -17,5 +17,5 @@ func _process(_delta: float) -> void:
 	if anim_tree:
 		anim_tree.set(
 			"parameters/RunBlendSpace/blend_position",
-			velocity_length / movement_mode.max_speed.x
+			velocity_length / move_mode.max_speed.x
 		)

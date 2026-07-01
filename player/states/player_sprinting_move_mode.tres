@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="MovementMode3D" format=3 uid="uid://c86fer36qsomd"]
 
-[ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common3d/movement_mode3d.gd" id="1_srm2e"]
+[ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common3d/move_mode3d.gd" id="1_srm2e"]
 
 [resource]
 script = ExtResource("1_srm2e")
