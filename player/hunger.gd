@@ -25,7 +25,6 @@ var value := 1.0:
 
 func _ready() -> void:
 	value = initial_value
-	process_mode = Node.PROCESS_MODE_ALWAYS
 	add_hurt_timer()
 	if stamina:
 		stamina.spent.connect(
