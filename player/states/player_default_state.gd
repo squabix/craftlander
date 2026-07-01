@@ -18,7 +18,7 @@ func handle_input(event: InputEvent) -> void:
 	if event.is_action_pressed(ACTION_USE_PRIMARY):
 		root.use_item()
 
-func update(_delta: float) -> void:
+func update(delta: float) -> void:
 	if root.is_in_water:
 		transition_to("Swimming")
 	
@@ -27,6 +27,8 @@ func update(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed(ACTION_DROP):
 		root.drop_selected_item()
+	
+	super(delta)
 
 func physics_update(delta: float) -> void:
 	super(delta)
