@@ -1,16 +1,14 @@
-extends Node
 class_name Stamina
+extends Node
 
 signal spent(amount: float)
-
 signal started_fill
 signal became_depleted
 signal recovered_from_depletion
 
 @export var bar: InterpolatedBar
 @export var idle_timer: Timer
-
-@export var depletable := false 
+@export var depletable := false
 
 @export_group("Rates")
 @export var fill_base_rate := 0.05
@@ -25,18 +23,17 @@ signal recovered_from_depletion
 var value := 1.0:
 	set(to):
 		value = clampf(to, 0.0, 1.0)
-		
+
 		# Never deplete
 		if not depletable:
 			is_depleted = false
 			return
-		
+
 		# Depletion logic
 		if value <= 0.0 and not is_depleted:
 			is_depleted = true
 		elif value >= recovery_threshold and is_depleted:
 			is_depleted = false
-
 var is_depleted := false:
 	set(to):
 		if is_depleted != to:
@@ -45,61 +42,43 @@ var is_depleted := false:
 				became_depleted.emit()
 			else:
 				recovered_from_depletion.emit()
-
 var last_value := 1.0
 var queued_spend := 0.0
 var is_filling := false
 var _current_fill_time := 0.0
 
+
 func _ready() -> void:
 	idle_timer.timeout.connect(start_fill)
 	idle_timer.one_shot = true
 
-func start_fill() -> void:
-	is_filling = true
-	_current_fill_time = 0.0
-	started_fill.emit()
-
-func spend(amount_per_second: float) -> void:
-	queued_spend += amount_per_second
-
-func is_usable() -> bool:
-	if depletable:
-		return value > 0.0 and not is_depleted
-	return value > 0.0
-
-func get_hunger_multiplier() -> float:
-	if hunger == null or hunger_fill_curve == null:
-		return 1.0
-	return hunger_fill_curve.sample(hunger.value)
 
 func _process(delta: float) -> void:
 	bar.target_value = value
-	
+
 	if get_tree().paused:
 		return
-	
+
 	last_value = value
-	
+
 	# Refill if not spending or are locked in depletion
 	if queued_spend == 0.0 or (depletable and is_depleted):
 		if is_filling:
 			_current_fill_time += delta * GameWorld.TIME_SCALE
-			
+
 			# Current rate: (Base + Accel * Time) * Multipliers
 			value += (fill_base_rate + fill_acceleration * _current_fill_time) * fill_multiplier * get_hunger_multiplier() * delta * GameWorld.TIME_SCALE
-			
+
 			# Stop filling if hit max
 			if value >= 1.0:
 				is_filling = false
 				_current_fill_time = 0.0
-				
+
 		elif idle_timer.is_stopped() and value < 1.0:
 			idle_timer.start()
-	
+
 	# Spend logic
 	if queued_spend != 0.0:
-		
 		# If depletable and depleted, block spending
 		if depletable and is_depleted:
 			queued_spend = 0.0
@@ -107,11 +86,33 @@ func _process(delta: float) -> void:
 
 		is_filling = false
 		_current_fill_time = 0.0
-		
+
 		if not idle_timer.is_stopped():
 			idle_timer.stop()
-		
+
 		value -= queued_spend * delta * GameWorld.TIME_SCALE
 		spent.emit(queued_spend)
-	
+
 	queued_spend = 0.0
+
+
+func start_fill() -> void:
+	is_filling = true
+	_current_fill_time = 0.0
+	started_fill.emit()
+
+
+func spend(amount_per_second: float) -> void:
+	queued_spend += amount_per_second
+
+
+func is_usable() -> bool:
+	if depletable:
+		return value > 0.0 and not is_depleted
+	return value > 0.0
+
+
+func get_hunger_multiplier() -> float:
+	if hunger == null or hunger_fill_curve == null:
+		return 1.0
+	return hunger_fill_curve.sample(hunger.value)

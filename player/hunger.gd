@@ -1,5 +1,5 @@
-extends Node
 class_name Hunger
+extends Node
 
 @export var bar: InterpolatedBar
 @export_range(0.0, 1.0) var initial_value := 0.75
@@ -18,10 +18,10 @@ class_name Hunger
 
 var hurt_timer: Timer
 var queued_loss := 0.0
-
 var value := 1.0:
 	set(to):
 		value = clampf(to, 0.0, 1.0)
+
 
 func _ready() -> void:
 	value = initial_value
@@ -32,17 +32,20 @@ func _ready() -> void:
 				lose(amount * stamina_hunger_loss)
 		)
 
+
 func _process(_delta: float) -> void:
 	bar.target_value = value
 	if get_tree().paused:
 		return
 
+
 func _physics_process(delta: float) -> void:
 	lose(loss_per_minute * loss_multiplier / 60.0)
 	value -= queued_loss * delta * GameWorld.TIME_SCALE
 	queued_loss = 0.0
-	
+
 	health.heal(regeneration_curve.sample(value) * delta * GameWorld.TIME_SCALE)
+
 
 func add_hurt_timer() -> void:
 	hurt_timer = Timer.new()
@@ -52,6 +55,7 @@ func add_hurt_timer() -> void:
 		func() -> void:
 			health.hurt(hurt_curve.sample(value))
 	)
+
 
 func lose(amount: float) -> void:
 	queued_loss += amount
