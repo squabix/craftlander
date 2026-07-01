@@ -801,6 +801,7 @@ value = 0.41
 show_percentage = false
 script = ExtResource("27_b8hi5")
 lerp_weight = 0.3
+fade_when_idle = true
 metadata/_custom_type_script = "uid://c3xfbb8ay0ghk"
 
 [node name="FPSLabel" type="Label" parent="HUD/BarContainer" unique_id=1610708313]
