@@ -1,11 +1,13 @@
-extends Entity3D
 class_name EntityVehicle3D
+extends Entity3D
 
 @export var seats: Array[Seat3D]
 @export var initial_fill: Array[Entity3D]
 
+
 func _ready() -> void:
 	fill_seats(initial_fill)
+
 
 func get_open_seats() -> Array[Seat3D]:
 	var open_seats: Array[Seat3D]
@@ -14,17 +16,18 @@ func get_open_seats() -> Array[Seat3D]:
 			open_seats.append(seat)
 	return open_seats
 
+
 func fill_seats(entities: Array[Entity3D]) -> Array[Entity3D]:
 	var open_seats: Array[Seat3D] = get_open_seats()
 	for entity in entities:
 		if open_seats.is_empty():
 			return entities
-		
+
 		for seat in open_seats:
 			if not seat.mount(entity):
 				continue
 			entities.erase(entity)
 			open_seats.erase(seat)
 			break
-	
+
 	return entities

@@ -1,5 +1,5 @@
-extends RayCast3D
 class_name HitRay3D
+extends RayCast3D
 
 signal hit_node
 
@@ -8,11 +8,6 @@ signal hit_node
 
 var hit_nodes: Array[Node]
 
-func enable() -> void:
-	enabled = true
-
-func disable() -> void:
-	enabled = false
 
 func _ready() -> void:
 	collide_with_areas = true
@@ -20,23 +15,32 @@ func _ready() -> void:
 	if damage == null:
 		printerr(name, " has no damage")
 
+
+func enable() -> void:
+	enabled = true
+
+
+func disable() -> void:
+	enabled = false
+
+
 func hit() -> Area3D:
 	var area := get_collider() as Area3D
-	
+
 	# ERROR if area does not exist
 	if not is_instance_valid(area):
 		return null
-	
+
 	# BAIL if area is not a hurtbox
 	if not (area is Hurtbox3D):
 		return null
-	
+
 	# BAIL if area has already been hit & can only be hit once
 	if area in hit_nodes and one_shot:
 		return null
-	
+
 	area.hurt(damage, Vector3.FORWARD.rotated(Util.VECTOR3Y, global_rotation.y))
 	hit_nodes.append(area)
 	hit_node.emit()
-	
+
 	return area
