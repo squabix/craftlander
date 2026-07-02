@@ -56,7 +56,10 @@ func hurt(damage: Damage, direction: Vector3 = Vector3.ZERO) -> float:
 		return 0.0
 
 	if damage_override != null:
-		damage = damage_override # Override damage
+		# Override damage
+		var temp: Damage = damage_override.duplicate()
+		temp.source = damage.source
+		damage = temp
 	else:
 		# Confirm damage is valid
 		if damage == null:
