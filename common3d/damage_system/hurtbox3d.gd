@@ -10,6 +10,7 @@ signal was_dealt_damage(damage: Damage)
 @export var damage_multiplier := 1.0
 @export var center := Vector3.ZERO
 @export var type_whitelist: Array[String] = []
+@export var damage_override: Damage
 
 @export_group("Knockback")
 @export var knockback_entity: Entity3D
@@ -51,14 +52,17 @@ func apply_damage_amount(base_amount: float) -> float:
 	return damage_amount
 
 func hurt(damage: Damage, direction: Vector3=Vector3.ZERO) -> float:
-	if damage == null:
-		return 0.0
-	
-	if not is_type_whitelisted(damage.type):
-		return 0.0
-	
 	if inactive:
 		return 0.0
+	
+	if damage_override != null:
+		damage = damage_override # Override damage
+	else:
+		# Confirm damage is valid
+		if damage == null:
+			return 0.0
+		if not is_type_whitelisted(damage.type):
+			return 0.0
 	
 	var damage_amount := apply_damage_amount(damage.sample())
 	
