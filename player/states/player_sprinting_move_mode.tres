@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_18dji")
-max_speed = Vector2(7, 7.5)
+max_speed = Vector2(6, 7.5)
 accelerate_sharpness = Vector2(10, 0)
 friction_sharpness = Vector2(10, 0)
 metadata/_custom_type_script = "uid://edbvsbdtvgtj"
