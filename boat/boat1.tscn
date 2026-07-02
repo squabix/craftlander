@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bj8pokcrjdf2c" path="res://boat/boat.gd" id="1_1ek77"]
 [ext_resource type="PackedScene" uid="uid://j53nm0t5m7rf" path="res://boat/boat1.blend" id="2_6h0kv"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="2_fs7t1"]
+[ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common/move_mode.gd" id="2_wbjwq"]
 [ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="3_0q3wp"]
 [ext_resource type="Script" uid="uid://dukhrkatonywt" path="res://common3d/entity/vehicle/entity_vehicle_seat3d.gd" id="3_qqn3m"]
 [ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="4_qqn3m"]
@@ -11,6 +12,11 @@
 [ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="6_wbjwq"]
 [ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="7_e44pp"]
 [ext_resource type="Script" uid="uid://bcwgfvcnnjoac" path="res://boat/boat_piloting_state.gd" id="10_0q3wp"]
+
+[sub_resource type="Resource" id="Resource_thr0k"]
+script = ExtResource("2_wbjwq")
+max_speed = Vector2(5, 0)
+metadata/_custom_type_script = "uid://edbvsbdtvgtj"
 
 [sub_resource type="Resource" id="Resource_1blct"]
 script = ExtResource("2_fs7t1")
@@ -73,6 +79,7 @@ driver_seat = NodePath("DriverSeat")
 state_machine = NodePath("StateMachine")
 seats = [NodePath("DriverSeat")]
 type = "boat"
+move_mode = SubResource("Resource_thr0k")
 move_up_as_jump = false
 gravity_multiplier = 0.0
 rotation_range = SubResource("Resource_wbjwq")
