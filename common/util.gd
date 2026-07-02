@@ -469,6 +469,10 @@ static func roll_basis_toward(from: Basis, toward: Vector3, axis: Vector3i, amou
 	return Basis(normalized_cross_product, amount * toward.length()) * from
 
 
+static func get_time_seconds() -> float:
+	return Time.get_ticks_msec() * 0.001
+
+
 static func get_ray_query_parameters_3d(from: Vector3, to: Vector3, collide_areas := false, collide_bodies := true) -> PhysicsRayQueryParameters3D:
 	var parameters := PhysicsRayQueryParameters3D.new()
 	parameters.from = from
