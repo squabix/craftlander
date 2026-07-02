@@ -107,10 +107,25 @@ func disable_item_blend() -> void:
 
 
 func play_start() -> void:
-	enable_item_blend()
 	if start_anim.is_empty():
+		play_continue()
 		return
+	enable_item_blend()
 	play_state(start_use_state)
+
+
+func play_continue() -> void:
+	if continue_anim.is_empty():
+		play_end()
+		return
+	enable_item_blend()
+	play_state(continue_use_state)
+
+
+func play_end() -> void:
+	play_state(end_use_state)
+	if end_anim.is_empty():
+		disable_item_blend()
 
 
 func play_state(state: String) -> void:
@@ -122,12 +137,6 @@ func play_state(state: String) -> void:
 
 func get_current_item_anim() -> String:
 	return get(item_state_path)
-
-
-func play_end() -> void:
-	play_state(end_use_state)
-	if end_anim.is_empty():
-		disable_item_blend()
 
 
 func get_state_anim_map() -> Dictionary[String, String]:
