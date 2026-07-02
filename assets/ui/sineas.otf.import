@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bxlabgy0ii0ao"
-path="res://.godot/imported/maqui.otf-05ab234b22c08ca6e72596c9dfa850f9.fontdata"
+uid="uid://cbr5ncx4f3a1n"
+path="res://.godot/imported/sineas.otf-9217ef852454fd3b9008a614b06846e6.fontdata"
 
 [deps]
 
-source_file="res://assets/maqui.otf"
-dest_files=["res://.godot/imported/maqui.otf-05ab234b22c08ca6e72596c9dfa850f9.fontdata"]
+source_file="res://assets/ui/sineas.otf"
+dest_files=["res://.godot/imported/sineas.otf-9217ef852454fd3b9008a614b06846e6.fontdata"]
 
 [params]
 

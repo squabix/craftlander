@@ -23,7 +23,7 @@
 [ext_resource type="Script" uid="uid://b1eix6p0204fp" path="res://common/inventory_system/displays/item_display.gd" id="16_e7oew"]
 [ext_resource type="Script" uid="uid://c3r6ofqamuc13" path="res://common/state_machine/mirror_state_machine.gd" id="16_mmwog"]
 [ext_resource type="Script" uid="uid://bn1bpe1hvtv7u" path="res://player/player_piloting_boat_state.gd" id="17_hjies"]
-[ext_resource type="Texture2D" uid="uid://c4jkghkqifcm7" path="res://assets/crosshair.tres" id="17_tqiix"]
+[ext_resource type="Texture2D" uid="uid://c4jkghkqifcm7" path="res://assets/ui/crosshair.tres" id="17_tqiix"]
 [ext_resource type="Script" uid="uid://b7pvp0pnngnem" path="res://common/ui/fps_label.gd" id="19_bjvpn"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="19_c35mf"]
 [ext_resource type="Script" uid="uid://7vqcc56mnyjs" path="res://common/ui/tooltip_label.gd" id="19_knn7v"]
@@ -39,8 +39,9 @@
 [ext_resource type="Script" uid="uid://7qluctwrt8qk" path="res://player/ui/pause_interface.gd" id="28_pnw6m"]
 [ext_resource type="PackedScene" uid="uid://cw2ir860alcgt" path="res://player/ui/crafting/environment/crafting_environment.tscn" id="28_q28gw"]
 [ext_resource type="Script" uid="uid://bn55l5h1rwjsn" path="res://player/hunger.gd" id="31_2uvqg"]
-[ext_resource type="FontFile" uid="uid://cbr5ncx4f3a1n" path="res://assets/sineas.otf" id="34_6wior"]
-[ext_resource type="StyleBox" uid="uid://defeb68kadnmc" path="res://player/ui/player_stat_bar_background.tres" id="35_b2j0d"]
+[ext_resource type="FontFile" uid="uid://cbr5ncx4f3a1n" path="res://assets/ui/sineas.otf" id="34_6wior"]
+[ext_resource type="StyleBox" uid="uid://chib047rjc57t" path="res://assets/ui/health_bar_fill.tres" id="34_b2j0d"]
+[ext_resource type="StyleBox" uid="uid://defeb68kadnmc" path="res://assets/ui/stat_bar_background.tres" id="35_b2j0d"]
 [ext_resource type="Script" uid="uid://crew0n1e8xk4r" path="res://player/ui/crafting/recipes/recipe_panel.gd" id="38_1so5t"]
 [ext_resource type="Script" uid="uid://c622jer80j3sk" path="res://common/inventory_system/animation/item_animation.gd" id="39_dx5ib"]
 [ext_resource type="PackedScene" uid="uid://byosfqwobl3sl" path="res://menus/settings_menu.tscn" id="39_xcnuv"]
@@ -185,18 +186,6 @@ _data = {
 
 [sub_resource type="LabelSettings" id="LabelSettings_p5tca"]
 font = ExtResource("34_6wior")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7pn3"]
-bg_color = Color(1, 0.28235295, 0.3764706, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.8, 0.8, 0.8, 0)
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8hi5"]
 bg_color = Color(0.89, 0.62299997, 0.35599998, 1)
@@ -769,7 +758,7 @@ offset_bottom = 162.0
 custom_minimum_size = Vector2(0, 14)
 layout_mode = 2
 theme_override_styles/background = ExtResource("35_b2j0d")
-theme_override_styles/fill = SubResource("StyleBoxFlat_r7pn3")
+theme_override_styles/fill = ExtResource("34_b2j0d")
 value = 4.58
 show_percentage = false
 script = ExtResource("26_r7pn3")

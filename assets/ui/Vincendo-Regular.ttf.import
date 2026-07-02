@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cbr5ncx4f3a1n"
-path="res://.godot/imported/sineas.otf-6c234c5550df297249bb722d097e1361.fontdata"
+uid="uid://cwixp86lp1ro2"
+path="res://.godot/imported/Vincendo-Regular.ttf-bdcc48f752a08a2d3b6d8f73fbd266ee.fontdata"
 
 [deps]
 
-source_file="res://assets/sineas.otf"
-dest_files=["res://.godot/imported/sineas.otf-6c234c5550df297249bb722d097e1361.fontdata"]
+source_file="res://assets/ui/Vincendo-Regular.ttf"
+dest_files=["res://.godot/imported/Vincendo-Regular.ttf-bdcc48f752a08a2d3b6d8f73fbd266ee.fontdata"]
 
 [params]
 

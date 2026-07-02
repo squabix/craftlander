@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://jt0w0dik8jva"
-path="res://.godot/imported/acid_medium.otf-9519570e173d48b0f7f28d2055262530.fontdata"
+path="res://.godot/imported/acid_medium.otf-c0db5aa10e5a7f8488f3c13a60617779.fontdata"
 
 [deps]
 
-source_file="res://assets/acid_medium.otf"
-dest_files=["res://.godot/imported/acid_medium.otf-9519570e173d48b0f7f28d2055262530.fontdata"]
+source_file="res://assets/ui/acid_medium.otf"
+dest_files=["res://.godot/imported/acid_medium.otf-c0db5aa10e5a7f8488f3c13a60617779.fontdata"]
 
 [params]
 
