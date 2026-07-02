@@ -25,7 +25,7 @@ var continue_anim := ""
 var end_anim := ""
 
 var playback: AnimationNodeStateMachinePlayback
-var state_machine: AnimationNodeStateMachine
+var animation_state_machine: AnimationNodeStateMachine
 
 
 func _ready() -> void:
@@ -43,7 +43,7 @@ func initialize_playback() -> void:
 		return
 
 	playback.state_finished.connect(_on_state_finished)
-	state_machine = tree_root.get_node(playback_path.replace("parameters/", "").replace("/playback", "")) as AnimationNodeStateMachine
+	animation_state_machine = tree_root.get_node(playback_path.replace("parameters/", "").replace("/playback", "")) as AnimationNodeStateMachine
 
 
 func default_animations() -> void:
@@ -143,18 +143,18 @@ func update_tree_animations() -> void:
 		printerr("%s's tree root is null" % self)
 		return
 
-	if state_machine == null:
+	if animation_state_machine == null:
 		printerr("%s's state machine is null" % self)
 		return
 
 	var state_anim_map := get_state_anim_map()
 
 	for state_node_name in state_anim_map:
-		if not state_machine.has_node(state_node_name):
+		if not animation_state_machine.has_node(state_node_name):
 			printerr("%s's state machine does not contain a node named: %s" % [self, state_node_name])
 			continue
 
-		var anim_node := state_machine.get_node(state_node_name) as AnimationNodeAnimation
+		var anim_node := animation_state_machine.get_node(state_node_name) as AnimationNodeAnimation
 		if anim_node == null:
 			printerr("State machine node '", state_node_name, "' is invalid in %s" % self)
 			continue
