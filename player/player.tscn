@@ -766,11 +766,13 @@ health = NodePath("../../../Health")
 lerp_weight = 0.3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/BarContainer" unique_id=1103359367]
+custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
 [node name="HungerBar" type="ProgressBar" parent="HUD/BarContainer/HBoxContainer" unique_id=446841129]
-custom_minimum_size = Vector2(115, 11)
+custom_minimum_size = Vector2(115, 0)
 layout_mode = 2
+size_flags_vertical = 1
 theme_override_styles/background = ExtResource("35_b2j0d")
 theme_override_styles/fill = SubResource("StyleBoxFlat_b8hi5")
 max_value = 1.0
@@ -781,8 +783,9 @@ lerp_weight = 0.3
 metadata/_custom_type_script = "uid://c3xfbb8ay0ghk"
 
 [node name="StaminaBar" type="ProgressBar" parent="HUD/BarContainer/HBoxContainer" unique_id=609152098]
-custom_minimum_size = Vector2(115, 11)
+custom_minimum_size = Vector2(115, 0)
 layout_mode = 2
+size_flags_vertical = 1
 theme_override_styles/background = ExtResource("35_b2j0d")
 theme_override_styles/fill = SubResource("StyleBoxFlat_fjxoa")
 max_value = 1.0
