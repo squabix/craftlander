@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://h3veu2e18ij1"]
+
+[ext_resource type="Script" uid="uid://wj8nssetqs7w" path="res://entities/entity_health_bar.gd" id="1_142cj"]
+[ext_resource type="StyleBox" uid="uid://defeb68kadnmc" path="res://assets/ui/stat_bar_background.tres" id="2_tru74"]
+[ext_resource type="StyleBox" uid="uid://chib047rjc57t" path="res://assets/ui/health_bar_fill.tres" id="3_6q06m"]
+[ext_resource type="Script" uid="uid://q5lh058bmpum" path="res://common/damage_system/health_bar.gd" id="4_75a66"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c4qwy"]
+font_size = 22
+outline_size = 1
+
+[node name="HealthBar3D" type="Marker3D" unique_id=1387087405 node_paths=PackedStringArray("health_bar", "type_label", "target")]
+script = ExtResource("1_142cj")
+health_bar = NodePath("VBoxContainer/HealthBar")
+type_label = NodePath("VBoxContainer/TypeLabel")
+target = NodePath("VBoxContainer")
+reference_distance = 2.0
+max_scale = 6.0
+min_scale = 0.6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=731562515]
+z_index = -5
+offset_right = 123.0
+offset_bottom = 40.0
+theme_override_constants/separation = 2
+
+[node name="TypeLabel" type="Label" parent="VBoxContainer" unique_id=444816529]
+layout_mode = 2
+text = "Name"
+label_settings = SubResource("LabelSettings_c4qwy")
+horizontal_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="VBoxContainer" unique_id=981899147 node_paths=PackedStringArray("fade_target_override")]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+theme_override_styles/background = ExtResource("2_tru74")
+theme_override_styles/fill = ExtResource("3_6q06m")
+value = 17.86
+show_percentage = false
+script = ExtResource("4_75a66")
+fade_when_idle = true
+idle_fade_wait_time = 5.0
+fade_target_override = NodePath("..")
+metadata/_custom_type_script = "uid://q5lh058bmpum"

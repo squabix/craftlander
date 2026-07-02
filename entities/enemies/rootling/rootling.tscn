@@ -32,6 +32,7 @@
 [ext_resource type="Script" uid="uid://bi8ev1kcq2ayf" path="res://common/inventory_system/animation/item_animation_tree.gd" id="26_f0qrw"]
 [ext_resource type="Script" uid="uid://bwd4jx8u5uct2" path="res://common/inventory_system/item_holder3d.gd" id="27_7307j"]
 [ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/tools/shoddy_mace/shoddy_mace_item.tres" id="29_5b15m"]
+[ext_resource type="PackedScene" uid="uid://h3veu2e18ij1" path="res://entities/entity_health_bar.tscn" id="33_c3uxn"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
 script = ExtResource("3_wtogd")
@@ -577,6 +578,7 @@ metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 collision_mask = 17
 script = ExtResource("1_wtogd")
 anim_tree = NodePath("AnimationTree")
+type = "Rootling"
 move_mode = ExtResource("2_f0qrw")
 horizontal_rotation_target = NodePath(".")
 vertical_rotation_target = NodePath(".")
@@ -714,7 +716,7 @@ surface_material_override/0 = ExtResource("21_uefcv")
 surface_material_override/1 = ExtResource("22_c3uxn")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Visuals/Armature/Skeleton3D" index="1" unique_id=319653899]
-transform = Transform3D(0.6309289, 0.58678883, 0.50755054, 0.10083783, -0.7106663, 0.69626504, 0.7692597, -0.38811332, -0.5075505, 0.539253, 0.32030398, -0.13925302)
+transform = Transform3D(0.6298519, 0.59437907, 0.5, 0.09933779, -0.7000942, 0.7071068, 0.7703367, -0.39570355, -0.5, 0.54142135, 0.32332414, -0.14142136)
 bone_name = "Bone.012"
 bone_idx = 11
 
@@ -754,6 +756,11 @@ initial_item_instance = SubResource("Resource_7307j")
 root = NodePath("..")
 anim_tree = NodePath("../AnimationTree")
 metadata/_custom_type_script = "uid://bwd4jx8u5uct2"
+
+[node name="HealthBar3D" parent="." unique_id=1387087405 node_paths=PackedStringArray("entity", "health") instance=ExtResource("33_c3uxn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
+entity = NodePath("..")
+health = NodePath("../Health")
 
 [connection signal="deleted" from="DeletionAlarm" to="ParticleSpawner3D" method="spawn"]
 

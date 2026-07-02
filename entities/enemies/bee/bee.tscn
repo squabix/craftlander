@@ -13,6 +13,7 @@
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="12_0rn6u"]
 [ext_resource type="Script" uid="uid://c6m4guogk1s1y" path="res://common/follow_node3d.gd" id="13_121pw"]
 [ext_resource type="PackedScene" uid="uid://btvdb6drbsbg6" path="res://entities/enemies/bee/bee.blend" id="14_0lxgi"]
+[ext_resource type="PackedScene" uid="uid://h3veu2e18ij1" path="res://entities/entity_health_bar.tscn" id="14_nj0qj"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="15_7niy0"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="16_0hiqi"]
 
@@ -194,7 +195,7 @@ script = ExtResource("1_4hd4j")
 sight = NodePath("Sight3D")
 hit_timer = NodePath("HitTimer")
 form_nodes = [NodePath("BlenderVisuals"), NodePath("Sight3D"), NodePath("InventoryDropper3D"), NodePath("RemoteTransform3D"), NodePath("Hurtbox3D")]
-type = "enemy"
+type = "Bee"
 move_mode = ExtResource("2_vtgqy")
 move_up_as_jump = false
 metadata/_custom_type_script = "uid://bki5ij8task16"
@@ -302,6 +303,11 @@ transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, 
 [node name="Wings2" type="MeshInstance3D" parent="BlenderVisuals/Visuals" unique_id=1431738844]
 transform = Transform3D(1, 0, 0, 0, -4.371138e-08, -0.9999998, 0, 0.9999998, -4.371138e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_44jin")
+
+[node name="HealthBar3D" parent="BlenderVisuals" unique_id=1387087405 node_paths=PackedStringArray("entity", "health") instance=ExtResource("14_nj0qj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+entity = NodePath("../..")
+health = NodePath("../../Health")
 
 [node name="WingAnimationPlayer" type="AnimationPlayer" parent="." unique_id=365137237]
 libraries/ = SubResource("AnimationLibrary_x7bfg")
