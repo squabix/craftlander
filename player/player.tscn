@@ -29,8 +29,10 @@
 [ext_resource type="Script" uid="uid://7vqcc56mnyjs" path="res://common/ui/tooltip_label.gd" id="19_knn7v"]
 [ext_resource type="Script" uid="uid://dk37mcui4c45e" path="res://common/inventory_system/inventory_holder3d.gd" id="20_mmwog"]
 [ext_resource type="Script" uid="uid://bghx5ubltmjf7" path="res://common/inventory_system/input_inventory_selector.gd" id="21_fmu53"]
+[ext_resource type="PackedScene" uid="uid://4lmb1r25uhnr" path="res://items/materials/stick/stick.tscn" id="22_7l6ig"]
 [ext_resource type="Resource" uid="uid://bah3rou15fcfh" path="res://items/tools/shoddy_axe/shoddy_axe_item.tres" id="22_bjvpn"]
 [ext_resource type="Script" uid="uid://c07qmsd7epd0h" path="res://common/ui/popup_display.gd" id="23_7pqkx"]
+[ext_resource type="PackedScene" uid="uid://oxrw6o32lsp2" path="res://items/tools/shoddy_pickaxe/shoddy_pickaxe.blend" id="23_kewli"]
 [ext_resource type="Script" uid="uid://dapeyi3eetek1" path="res://common/signal_triggrs/signal_animation_trigger.gd" id="25_j55il"]
 [ext_resource type="Script" uid="uid://q5lh058bmpum" path="res://common/damage_system/health_bar.gd" id="26_r7pn3"]
 [ext_resource type="Script" uid="uid://c3xfbb8ay0ghk" path="res://common/interpolated_bar.gd" id="27_b8hi5"]
@@ -67,7 +69,9 @@
 [ext_resource type="Resource" uid="uid://6a5notvdv1ei" path="res://items/tools/shoddy_mace/shoddy_mace_recipe.tres" id="53_hggc2"]
 [ext_resource type="Script" uid="uid://bubfjagdkgrlq" path="res://player/ui/inventory/inventory_organizer.gd" id="55_jbx34"]
 [ext_resource type="Script" uid="uid://uwx6xnt2vr38" path="res://player/ui/inventory/item_inspector.gd" id="59_b2j0d"]
-[ext_resource type="Script" uid="uid://npp0tkr64ms6" path="res://common/inventory_system/animation/inventory_animation_tree.gd" id="63_b2j0d"]
+[ext_resource type="Script" uid="uid://xu4t7vci1g06" path="res://player/player_animation_tree.gd" id="65_7l6ig"]
+[ext_resource type="Resource" uid="uid://mx3f8ldvvndd" path="res://player/states/player_walking_move_mode.tres" id="66_utr5e"]
+[ext_resource type="Resource" uid="uid://c86fer36qsomd" path="res://player/states/player_sprinting_move_mode.tres" id="67_kewli"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -328,6 +332,30 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(7.4505815e-09, 1.4901159e-08, -6.519257e-09)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Head/Camera3D/ItemHolder/ItemVisualsContainer3D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.57, -0.349, -0.55)]
+}
 
 [sub_resource type="Animation" id="Animation_32hag"]
 resource_name = "idle"
@@ -338,13 +366,144 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Head/Camera3D/ItemHolder/ItemVisualsContainer3D:rotation")
-tracks/0/interp = 1
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(7.4505815e-09, 1.4901159e-08, -6.519257e-09), Vector3(0.034906585, 0, 0.017453292), Vector3(7.4505815e-09, 1.4901159e-08, -6.519257e-09)]
+}
+
+[sub_resource type="Animation" id="Animation_utr5e"]
+resource_name = "midair"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D/ItemHolder/ItemVisualsContainer3D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.017453292, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Camera3D/ItemHolder/ItemVisualsContainer3D:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.57, -0.365, -0.55)]
+}
+
+[sub_resource type="Animation" id="Animation_7l6ig"]
+resource_name = "sprint"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D/ItemHolder/ItemVisualsContainer3D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.20000002, 0.4, 0.49999997),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(7.4505815e-09, 1.4901159e-08, -6.519257e-09), Vector3(-0.06981317, 0, 0), Vector3(-0.06981317, 0, 0), Vector3(0.06981317, 0, 0), Vector3(0.06981317, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Camera3D:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.1, 0), Vector3(0, 0, 0), Vector3(0, 0.1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Head/Camera3D/ItemHolder/ItemVisualsContainer3D:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.57, -0.349, -0.55), Vector3(0.57, -0.355, -0.55), Vector3(0.57, -0.349, -0.55)]
+}
+
+[sub_resource type="Animation" id="Animation_kewli"]
+resource_name = "swim"
+length = 2.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D/ItemHolder/ItemVisualsContainer3D:rotation")
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(7.4505815e-09, 1.4901159e-08, -6.519257e-09)]
+"values": [Vector3(0, 1.7453293, -1.3962634)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Camera3D/ItemHolder/ItemVisualsContainer3D:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.3, -0.6, 0.45)]
+}
+
+[sub_resource type="Animation" id="Animation_do7qw"]
+resource_name = "swim_motion"
+length = 2.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D/ItemHolder/ItemVisualsContainer3D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.7453293, -1.3962634), Vector3(-0.41015238, 0.9110619, -1.3962634), Vector3(-0.41015238, 0.9110619, -1.3962634)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Camera3D/ItemHolder/ItemVisualsContainer3D:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.57, -0.349, -0.4)]
 }
 
 [sub_resource type="Animation" id="Animation_1so5t"]
@@ -359,20 +518,85 @@ tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
+"transitions": PackedFloat32Array(0.2973018, 1, 3.8637385),
 "update": 0,
 "values": [Vector3(0.2617994, 0, 0), Vector3(-0.7749262, 1.1606439, -0.21642083), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_j3r50"]
+resource_name = "walk"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head/Camera3D/ItemHolder/ItemVisualsContainer3D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(7.4505815e-09, 1.4901159e-08, -6.519257e-09), Vector3(-0.017453292, 0, 0), Vector3(7.4505815e-09, 1.4901159e-08, -6.519257e-09)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Head/Camera3D:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.1, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Head/Camera3D/ItemHolder/ItemVisualsContainer3D:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.57, -0.339, -0.55), Vector3(0.57, -0.35, -0.55)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tqiix"]
 _data = {
 &"RESET": SubResource("Animation_tqiix"),
 &"idle": SubResource("Animation_32hag"),
-&"swing_tool": SubResource("Animation_1so5t")
+&"midair": SubResource("Animation_utr5e"),
+&"sprint": SubResource("Animation_7l6ig"),
+&"swim": SubResource("Animation_kewli"),
+&"swim_motion": SubResource("Animation_do7qw"),
+&"swing_tool": SubResource("Animation_1so5t"),
+&"walk": SubResource("Animation_j3r50")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pnw6m"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7l6ig"]
 animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_j3r50"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_utr5e"]
+animation = &"sprint"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_utr5e"]
+min_space = 0.0
+blend_point_0/node = SubResource("AnimationNodeAnimation_7l6ig")
+blend_point_0/pos = 0.1
+blend_point_0/name = &"idle"
+blend_point_1/node = SubResource("AnimationNodeAnimation_j3r50")
+blend_point_1/pos = 0.5
+blend_point_1/name = &"walk"
+blend_point_2/node = SubResource("AnimationNodeAnimation_utr5e")
+blend_point_2/pos = 1.0
+blend_point_2/name = &"sprint"
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_art4l"]
 
@@ -406,15 +630,48 @@ states/start_use/node = SubResource("AnimationNodeAnimation_fjxoa")
 states/start_use/position = Vector2(373.49997, 100.03498)
 transitions = ["Start", "start_use", SubResource("AnimationNodeStateMachineTransition_gswnw"), "start_use", "continue_use", SubResource("AnimationNodeStateMachineTransition_xcnuv"), "continue_use", "end_use", SubResource("AnimationNodeStateMachineTransition_j55il"), "end_use", "End", SubResource("AnimationNodeStateMachineTransition_hjies")]
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_do7qw"]
+animation = &"midair"
+
+[sub_resource type="Curve" id="Curve_kewli"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_2h6tc"]
+xfade_time = 0.2
+xfade_curve = SubResource("Curve_kewli")
+input_0/name = "default"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "midair"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "swim"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kewli"]
+animation = &"swim"
+
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_1so5t"]
+graph_offset = Vector2(-959.159, -107.76217)
 nodes/output/position = Vector2(146.66667, 226.66667)
-nodes/Idle/node = SubResource("AnimationNodeAnimation_pnw6m")
-nodes/Idle/position = Vector2(-320, 253.33333)
+nodes/DefaultMoveBlendSpace/node = SubResource("AnimationNodeBlendSpace1D_utr5e")
+nodes/DefaultMoveBlendSpace/position = Vector2(-786.6667, 26.666666)
 nodes/ItemBlend/node = SubResource("AnimationNodeBlend2_art4l")
 nodes/ItemBlend/position = Vector2(-40, 226.66667)
 nodes/ItemStateMachine/node = SubResource("AnimationNodeStateMachine_mmwog")
 nodes/ItemStateMachine/position = Vector2(-320, 466.66666)
-node_connections = [&"output", 0, &"ItemBlend", &"ItemBlend", 0, &"Idle", &"ItemBlend", 1, &"ItemStateMachine"]
+nodes/MoveTransition/node = SubResource("AnimationNodeTransition_2h6tc")
+nodes/MoveTransition/position = Vector2(-400, 93.333336)
+nodes/MidairAnimation/node = SubResource("AnimationNodeAnimation_do7qw")
+nodes/MidairAnimation/position = Vector2(-706.6667, 253.33333)
+nodes/SwimAnimation/node = SubResource("AnimationNodeAnimation_kewli")
+nodes/SwimAnimation/position = Vector2(-706.6667, 453.33334)
+node_connections = [&"output", 0, &"ItemBlend", &"ItemBlend", 0, &"MoveTransition", &"ItemBlend", 1, &"ItemStateMachine", &"MoveTransition", 0, &"DefaultMoveBlendSpace", &"MoveTransition", 1, &"MidairAnimation", &"MoveTransition", 2, &"SwimAnimation"]
 
 [sub_resource type="Resource" id="Resource_art4l"]
 script = ExtResource("39_dx5ib")
@@ -564,12 +821,18 @@ metadata/_edit_group_ = true
 
 [node name="ItemVisualsContainer3D" type="Node3D" parent="Head/Camera3D/ItemHolder" unique_id=482834376 node_paths=PackedStringArray("item_holder")]
 unique_name_in_owner = true
-transform = Transform3D(1.0000001, 6.5192567e-09, 1.4901159e-08, -6.519258e-09, 0.99999994, -7.4505815e-09, -1.4901161e-08, 7.450581e-09, 1, 0.532, -0.349, -0.55)
+transform = Transform3D(1.0000001, 6.5192567e-09, 1.4901159e-08, -6.519258e-09, 0.99999994, -7.4505815e-09, -1.4901161e-08, 7.450581e-09, 1, 0.57, -0.349, -0.55)
 script = SubResource("GDScript_art4l")
 item_holder = NodePath("..")
 visuals_scale_ratio = 0.75
 do_disable_shadows = true
 layers = 2
+
+[node name="Stick" parent="Head/Camera3D/ItemHolder/ItemVisualsContainer3D" unique_id=156442345 instance=ExtResource("22_7l6ig")]
+visible = false
+
+[node name="shoddy_pickaxe" parent="Head/Camera3D/ItemHolder/ItemVisualsContainer3D" unique_id=118340073 instance=ExtResource("23_kewli")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 
 [node name="HoldSelector" type="Node" parent="Head/Camera3D/ItemHolder" unique_id=2089262331 node_paths=PackedStringArray("inventory")]
 process_mode = 3
@@ -4349,12 +4612,21 @@ text = "Quit to Title Screen"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1780880928]
 libraries/ = SubResource("AnimationLibrary_tqiix")
 autoplay = &"idle"
+playback_default_blend_time = 0.2
 
-[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1076057530 node_paths=PackedStringArray("inventory_selector")]
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1076057530 node_paths=PackedStringArray("player", "inventory_selector")]
+active = false
 tree_root = SubResource("AnimationNodeBlendTree_1so5t")
 anim_player = NodePath("../AnimationPlayer")
-parameters/ItemBlend/blend_amount = 1.0
-script = ExtResource("63_b2j0d")
+parameters/DefaultMoveBlendSpace/blend_position = 1.0
+parameters/ItemBlend/blend_amount = 0.0
+parameters/MoveTransition/current_state = "swim"
+parameters/MoveTransition/transition_request = "default"
+parameters/MoveTransition/current_index = 2
+script = ExtResource("65_7l6ig")
+player = NodePath("..")
+walking_move_mode = ExtResource("66_utr5e")
+sprinting_move_mode = ExtResource("67_kewli")
 inventory_selector = NodePath("../Head/Camera3D/ItemHolder/HoldSelector")
 item_animations = Array[ExtResource("39_dx5ib")]([SubResource("Resource_art4l")])
 
