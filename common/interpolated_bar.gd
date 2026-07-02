@@ -10,6 +10,7 @@ extends ProgressBar
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var idle_fade_wait_time := 2.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var fade_in_duration := 0.1
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var fade_out_duration := 0.1
+@export var fade_target_override: CanvasItem
 
 var target_value := value:
 	set(to):
@@ -28,7 +29,7 @@ var target_value := value:
 		
 		# Smoothly fade in to 1.0 alpha
 		_fade_tween = create_tween()
-		_fade_tween.tween_property(self, "modulate:a", 1.0, fade_in_duration)
+		_fade_tween.tween_property(fade_target, "modulate:a", 1.0, fade_in_duration)
 		
 		# Create/Reset the idle timer
 		_idle_timer = get_tree().create_timer(idle_fade_wait_time)
@@ -40,14 +41,16 @@ var target_value := value:
 				if current_timer == _idle_timer:
 					_start_fade_out()
 		)
+var fade_target: CanvasItem
 var _idle_timer: SceneTreeTimer
 var _fade_tween: Tween
 
 
 func _ready() -> void:
+	fade_target = fade_target_override if is_instance_valid(fade_target_override) else self
 	target_value = value
 	if fade_when_idle:
-		modulate.a = 0.0
+		fade_target.modulate.a = 0.0
 
 
 func _process(_delta: float) -> void:
@@ -62,4 +65,4 @@ func _start_fade_out() -> void:
 		_fade_tween.kill()
 
 	_fade_tween = create_tween()
-	_fade_tween.tween_property(self, "modulate:a", 0.0, fade_out_duration)
+	_fade_tween.tween_property(fade_target, "modulate:a", 0.0, fade_out_duration)
