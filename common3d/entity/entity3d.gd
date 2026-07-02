@@ -4,7 +4,7 @@ class_name Entity3D
 signal landed
 signal left_ground
 
-@export var type := "default_entity"
+@export var type := "Entity"
 @export var move_mode: MoveMode
 @export var move_up_as_jump := true
 
