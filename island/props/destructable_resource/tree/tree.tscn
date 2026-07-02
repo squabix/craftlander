@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://bwsaqjbx2ith8" path="res://island/props/destructable_resource/tree/tree_falling_state.gd" id="7_n32rl"]
 [ext_resource type="Script" uid="uid://ihbhsm4c4qtv" path="res://island/props/destructable_resource/tree/chopped_state.gd" id="8_agfax"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="10_4ojav"]
+[ext_resource type="Resource" uid="uid://bwurefwkj4gjj" path="res://common/damage_system/single_damage.tres" id="10_j52tm"]
 [ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="10_rngja"]
 [ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="11_55jnn"]
 [ext_resource type="Shader" uid="uid://d0g1tx71qh1wb" path="res://assets/shaders/tree_wind_shader.gdshader" id="11_rngja"]
@@ -305,8 +306,6 @@ metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [node name="Tree" type="Node3D" unique_id=1544571203 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
 script = ExtResource("1_27px0")
-min_hp = 6
-max_hp = 10
 hurtbox = NodePath("Trunk/Hurtbox3D")
 inventory = NodePath("Inventory")
 health = NodePath("Health")
@@ -357,6 +356,7 @@ monitoring = false
 script = ExtResource("1_r4p3j")
 health = NodePath("../../Health")
 type_whitelist = Array[String](["axe"])
+damage_override = ExtResource("10_j52tm")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="HurtboxCollision" type="CollisionShape3D" parent="Trunk/Hurtbox3D" unique_id=29216433]

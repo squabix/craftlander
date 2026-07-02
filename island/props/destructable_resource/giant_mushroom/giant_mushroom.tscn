@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://ihbhsm4c4qtv" path="res://island/props/destructable_resource/tree/chopped_state.gd" id="8_e6e5w"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="9_0sf1c"]
 [ext_resource type="Material" uid="uid://drfxxufa84pj2" path="res://assets/materials/white_mushroom.tres" id="10_jcypt"]
+[ext_resource type="Resource" uid="uid://bwurefwkj4gjj" path="res://common/damage_system/single_damage.tres" id="10_ve6jj"]
 [ext_resource type="ArrayMesh" uid="uid://cxtofsxxgyuua" path="res://island/props/destructable_resource/giant_mushroom/giant_mushroom_top.tres" id="11_thgfp"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="12_e47mg"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="14_hjpsa"]
@@ -186,8 +187,7 @@ metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [node name="GiantMushroom" type="Node3D" unique_id=1544571203 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
 script = ExtResource("1_xeyix")
-min_hp = 6
-max_hp = 10
+max_hp = 6
 hurtbox = NodePath("Trunk/Hurtbox3D")
 inventory = NodePath("Inventory")
 health = NodePath("Health")
@@ -239,6 +239,7 @@ monitoring = false
 script = ExtResource("9_0sf1c")
 health = NodePath("../../Health")
 type_whitelist = Array[String](["axe"])
+damage_override = ExtResource("10_ve6jj")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="HurtboxCollision" type="CollisionShape3D" parent="Trunk/Hurtbox3D" unique_id=29216433]
