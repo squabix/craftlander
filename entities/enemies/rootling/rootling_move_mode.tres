@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_2tr1n")
-max_speed = Vector2(3.5, 0)
+max_speed = Vector2(2.6, 0)
 friction_sharpness = Vector2(30, 0)
 metadata/_custom_type_script = "uid://edbvsbdtvgtj"
