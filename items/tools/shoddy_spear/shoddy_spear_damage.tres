@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_nghgf")
-base_amount = 4.0
+base_amount = 12.0
 force = 5.0
 type = "weapon"
 metadata/_custom_type_script = "uid://bl5x717nsijmk"

@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1_1gf2x")
+base_amount = 6.0
 force = 5.0
 type = "pickaxe"
 metadata/_custom_type_script = "uid://bl5x717nsijmk"

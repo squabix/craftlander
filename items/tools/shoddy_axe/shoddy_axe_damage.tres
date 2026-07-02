@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_wxwtj")
-base_amount = 2.0
+base_amount = 8.5
 type = "axe"
 metadata/_custom_type_script = "uid://bl5x717nsijmk"

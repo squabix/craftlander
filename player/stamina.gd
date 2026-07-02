@@ -54,9 +54,10 @@ func _ready() -> void:
 	idle_timer.one_shot = true
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	bar.target_value = value
 
+func _physics_process(delta: float) -> void:
 	if get_tree().paused:
 		return
 
@@ -68,7 +69,7 @@ func _process(delta: float) -> void:
 			_current_fill_time += delta * GameWorld.TIME_SCALE
 
 			# Current rate: (Base + Accel * Time) * Multipliers
-			value += (fill_base_rate + fill_acceleration * _current_fill_time) * fill_multiplier * get_hunger_multiplier() * delta * GameWorld.TIME_SCALE
+			value += (fill_base_rate + fill_acceleration * _current_fill_time) * fill_multiplier * delta * get_hunger_multiplier() * GameWorld.TIME_SCALE
 
 			# Stop filling if hit max
 			if value >= 1.0:

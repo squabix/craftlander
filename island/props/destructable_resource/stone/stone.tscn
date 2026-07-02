@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cmlllb7wq80s" path="res://island/props/destructable_resource/destructable_resource.gd" id="1_a54gr"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="2_sq77v"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="3_qeat1"]
+[ext_resource type="Resource" uid="uid://bwurefwkj4gjj" path="res://common/damage_system/single_damage.tres" id="3_yqmf4"]
 [ext_resource type="Script" uid="uid://dapeyi3eetek1" path="res://common/signal_triggrs/signal_animation_trigger.gd" id="4_5v37a"]
 [ext_resource type="PackedScene" uid="uid://bo0n5cj4oc8wo" path="res://island/props/destructable_resource/stone/stone1.blend" id="4_a54gr"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="5_isl6o"]
@@ -82,6 +83,7 @@ monitoring = false
 script = ExtResource("2_sq77v")
 health = NodePath("../Health")
 type_whitelist = Array[String](["pickaxe"])
+damage_override = ExtResource("3_yqmf4")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D" unique_id=388016066]

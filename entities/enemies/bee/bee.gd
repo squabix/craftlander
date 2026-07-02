@@ -1,6 +1,6 @@
 extends Entity3D
 
-const DAMAGE_AMOUNT := 1.0
+const DAMAGE_AMOUNT := 5.0
 
 const MIN_ATTACK_TIME := 0.3
 const MAX_ATTACK_TIME := 0.6

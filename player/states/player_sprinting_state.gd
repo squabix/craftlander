@@ -1,7 +1,7 @@
 extends State
 
 const MIN_FORWARD_MOTION: float = 0.7
-const STAMINA_COST := 0.18
+const STAMINA_COST := 0.25
 
 @export var stamina: Stamina
 

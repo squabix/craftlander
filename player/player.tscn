@@ -102,16 +102,16 @@ item = ExtResource("9_jbx34")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Curve" id="Curve_2uvqg"]
-_limits = [0.0, 30.0, 0.0, 1.0]
-_data = [Vector2(0, 20), 0.0, 0.0, 0, 0, Vector2(0.03, 0), 0.0, 0.0, 0, 0]
+_limits = [0.0, 5.0, 0.0, 1.0]
+_data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(0.01, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_1s1yo"]
-_data = [Vector2(0.892, 0), 0.0, 0.6109068, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.95, 0), 0.0, 0.6109068, 0, 0, Vector2(1, 0.5), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_fjxoa"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.8228518, 0.0, 0, 0]
+_data = [Vector2(0, 0.197191), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.8228518, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r1lm2"]
@@ -709,7 +709,8 @@ size = 40
 [node name="Hunger" type="Node" parent="." unique_id=1790864786 node_paths=PackedStringArray("bar", "health", "stamina")]
 script = ExtResource("31_2uvqg")
 bar = NodePath("../HUD/BarContainer/HBoxContainer/HungerBar")
-loss_per_minute = 0.15
+initial_value = 1.0
+loss_per_minute = 0.1
 health = NodePath("../Health")
 hurt_curve = SubResource("Curve_2uvqg")
 regeneration_curve = SubResource("Curve_1s1yo")
@@ -722,6 +723,8 @@ unique_name_in_owner = true
 script = ExtResource("10_fjxoa")
 bar = NodePath("../HUD/BarContainer/HBoxContainer/StaminaBar")
 idle_timer = NodePath("IdleTimer")
+fill_base_rate = 0.1
+fill_acceleration = 0.01
 hunger = NodePath("../Hunger")
 hunger_fill_curve = SubResource("Curve_fjxoa")
 metadata/_custom_type_script = "uid://b5danpxdbcbqx"

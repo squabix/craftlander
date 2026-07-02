@@ -315,7 +315,7 @@ autoplay = &"fly"
 
 [node name="Health" type="Node" parent="." unique_id=780116179]
 script = ExtResource("15_7niy0")
-one_shot = true
+hp = 15.0
 free_parent_on_death = true
 metadata/_custom_type_script = "uid://cbb5o5ykqwxfp"
 
