@@ -34,3 +34,5 @@ shader_parameter/wave_scale = 4.0
 shader_parameter/wave_height = 1.0
 shader_parameter/roughness = 0.0
 shader_parameter/metallic = 0.0
+shader_parameter/fade_radius = 500.0
+shader_parameter/fade_max = 850.0

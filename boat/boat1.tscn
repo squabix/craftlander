@@ -15,7 +15,7 @@
 
 [sub_resource type="Resource" id="Resource_thr0k"]
 script = ExtResource("2_wbjwq")
-max_speed = Vector2(5, 0)
+max_speed = Vector2(10, 0)
 metadata/_custom_type_script = "uid://edbvsbdtvgtj"
 
 [sub_resource type="Resource" id="Resource_1blct"]

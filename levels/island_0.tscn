@@ -68,12 +68,6 @@ size = Vector2(600, 600)
 subdivide_width = 800
 subdivide_depth = 800
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_i8ckm"]
-material = ExtResource("8_25b7h")
-size = Vector2(1000, 1000)
-subdivide_width = 800
-subdivide_depth = 800
-
 [sub_resource type="HeightMapShape3D" id="HeightMapShape3D_f11vp"]
 map_width = 800
 map_depth = 800
@@ -93,11 +87,16 @@ metadata/_custom_type_script = "uid://b0gc85inin6ad"
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_h5spq"]
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_i8ckm"]
+material = ExtResource("8_25b7h")
+size = Vector2(1500, 1500)
+subdivide_width = 1000
+subdivide_depth = 1000
+
 [node name="Island0" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "boat_driver_seat")]
 script = ExtResource("1_1lm7x")
 player = NodePath("DockingManager/Player")
 boat_driver_seat = NodePath("DockingManager/Boat/DriverSeat")
-current_player_spawn_mode = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2120940629]
 environment = ExtResource("2_f11vp")
@@ -133,10 +132,6 @@ metadata/_edit_group_ = true
 material_override = ExtResource("7_6o2sf")
 cast_shadow = 2
 mesh = SubResource("PlaneMesh_1lm7x")
-
-[node name="WaterMesh" type="MeshInstance3D" parent="IslandGenerator" unique_id=264507659]
-mesh = SubResource("PlaneMesh_i8ckm")
-skeleton = NodePath("../..")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="IslandGenerator" unique_id=615417199 groups=["navigation_mesh_source_group"]]
 visible = false
@@ -213,12 +208,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 400)
 initial_state = NodePath("Docking")
 
 [node name="IslandWater" type="Area3D" parent="." unique_id=927597]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 monitorable = false
 script = ExtResource("24_fb2aq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="IslandWater" unique_id=710207219]
 shape = SubResource("WorldBoundaryShape3D_h5spq")
+
+[node name="WaterMesh" type="MeshInstance3D" parent="IslandWater" unique_id=264507659]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+mesh = SubResource("PlaneMesh_i8ckm")
+skeleton = NodePath("../..")
 
 [editable path="DockingManager/Dock"]
 [editable path="DockingManager/Dock/BlenderMeshes"]
