@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_mlrgu")
 scene = ExtResource("1_prhdk")
-min_height = 5.0
+min_height = 2.5
 normal_conformity = 0.0
 metadata/_custom_type_script = "uid://csprfavexgrle"
