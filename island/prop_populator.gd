@@ -41,26 +41,25 @@ func get_random_point() -> Vector2i:
 	)
 
 
-func add_prop(prop: IslandProp, point: Vector2i) -> Node3D:
+func add_prop(prop: IslandProp, point: Vector2i, spawn_position: Vector3) -> Node3D:
 	# Add instance
 	var instance: Node3D = prop.scene.instantiate()
 	add_child.call_deferred(instance)
-
+	
 	# Place/transform instance
 	island_generator.place_node(instance, point.x, point.y, prop.normal_conformity)
 	instance.rotation_degrees.y = rng.randf_range(0.0, 360.0)
 	instance.scale = Vector3.ONE * rng.randf_range(prop.min_scale, prop.max_scale)
 
 	# Assign prop instance in dictionaries
-	props[instance.global_position] = instance
-	prop_resources[instance.global_position] = prop
+	props[spawn_position] = instance
+	prop_resources[spawn_position] = prop
 
 	return instance
 
 
 func populate() -> void:
 	rng.seed = rng_seed
-
 	reset()
 
 	var sorted_props := prop_quantities.keys()
@@ -74,15 +73,18 @@ func populate() -> void:
 		var attempts := 0
 		var max_attempts := prop_quantities[prop] * max_attempts_per_prop
 
-		while prop_count < prop_quantities[prop] and attempts < max_attempts:
+		while prop_count < prop_quantities[prop]:
+			if attempts >= max_attempts:
+				break
+
 			attempts += 1
 			var point := get_random_point()
 			var spawn_position := island_generator.get_pixel_position(point.x, point.y)
-
-			# Position is outside height bounds (Fixed: now also checks max_height)
+			
+			# Position is outside height bounds
 			if spawn_position.y < prop.min_height or spawn_position.y > prop.max_height:
 				continue
-
+			
 			# Already spawned at this exact position
 			if spawn_position in props:
 				continue
@@ -90,9 +92,9 @@ func populate() -> void:
 			# Check custom radius constraints against already placed props
 			if not avoids_intersecting_radii(prop.radius, spawn_position):
 				continue
-
+			
 			# Successfully add prop
-			add_prop(prop, point)
+			add_prop(prop, point, spawn_position)
 			prop_count += 1
 
 	await get_tree().process_frame
@@ -101,11 +103,13 @@ func populate() -> void:
 
 func avoids_intersecting_radii(radius: float, radius_position: Vector3) -> bool:
 	for other_position in prop_resources.keys():
-		var other_radius := prop_resources[other_position].radius
+		var square_distance: float = Util.vec3to2(other_position, Util.VECTOR3Y).distance_squared_to(Util.vec3to2(radius_position, Util.VECTOR3Y))
 
-		var square_distance: float = other_position.distance_squared_to(radius_position)
-		var square_radius := maxf(radius, other_radius) ** 2 # Square of the greatest (dominant) radius
+		var other_radius := prop_resources[other_position].radius
+		var min_required_distance := maxf(radius, other_radius)
+		var square_radius := min_required_distance * min_required_distance
 
 		if square_distance < square_radius:
 			return false
+	
 	return true
