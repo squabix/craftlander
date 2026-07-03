@@ -11,11 +11,17 @@ uniform float hue_variance : hint_range(0.0, 0.1) = 0.03;
 uniform float sat_variance : hint_range(0.0, 0.2) = 0.05;
 uniform float val_variance : hint_range(0.0, 0.2) = 0.05;
 
+uniform sampler2D biome_noise_map : hint_default_white;
+uniform float macro_noise_influence : hint_range(0.0, 0.5) = 0.12;
+uniform float macro_noise_frequency = 0.02;
+
+uniform float micro_jitter_scale : hint_range(0.0, 0.1) = 0.02;
+
 varying flat float v_height;
 varying flat vec3 v_flat_world_pos; 
 uniform float grid_distortion : hint_range(0.0, 0.5) = 0.15;
 
-// Generate a offset vector based on grid position
+// Generate an offset vector based on grid position
 vec2 hash22(vec2 p) {
 	p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
 	return fract(sin(p) * 43758.5453123) - 0.5;
@@ -64,7 +70,19 @@ vec3 hsv2rgb(vec3 c) {
 }
 
 void fragment() {
-	vec3 grad_color = texture(gradient, vec2(1.0 - v_height, 0.5)).rgb;
+	// Per-triangle random variation
+	float micro_jitter = hash3(v_flat_world_pos + vec3(0.123, 0.456, 0.789)) * 2.0 - 1.0;
+	
+	// Continuous sweeping noise across the island
+	vec2 noise_uv = v_flat_world_pos.xz * macro_noise_frequency;
+	float macro_noise = texture(biome_noise_map, noise_uv).r * 2.0 - 1.0;
+	
+	// Combine both noise factors to offset the sampled height
+	float total_offset = (micro_jitter * micro_jitter_scale) + (macro_noise * macro_noise_influence);
+	float noisy_height = clamp(v_height + total_offset, 0.0, 1.0);
+
+	// Look up color based on our fully modified height map
+	vec3 grad_color = texture(gradient, vec2(1.0 - noisy_height, 0.5)).rgb;
 
 	vec3 x_deriv = dFdx(VERTEX);
 	vec3 y_deriv = dFdy(VERTEX);
