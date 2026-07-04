@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IslandEntityResource" format=3 uid="uid://cruqoikfgerld"]
+
+[ext_resource type="PackedScene" uid="uid://d0a4ydiqu4jj6" path="res://entities/enemies/bee/bee.tscn" id="1_41ayq"]
+[ext_resource type="Script" uid="uid://b0gc85inin6ad" path="res://island/island_entity_resource.gd" id="2_a1ldj"]
+
+[resource]
+script = ExtResource("2_a1ldj")
+scene = ExtResource("1_41ayq")
+min_height = 3.0
+metadata/_custom_type_script = "uid://b0gc85inin6ad"

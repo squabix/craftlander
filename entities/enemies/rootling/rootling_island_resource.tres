@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IslandEntityResource" format=3 uid="uid://5qlscmspqjay"]
+
+[ext_resource type="PackedScene" uid="uid://mwsmthp4sn6c" path="res://entities/enemies/rootling/rootling.tscn" id="1_qj3qa"]
+[ext_resource type="Script" uid="uid://b0gc85inin6ad" path="res://island/island_entity_resource.gd" id="1_ryqr4"]
+
+[resource]
+script = ExtResource("1_ryqr4")
+scene = ExtResource("1_qj3qa")
+min_height = 2.0
+metadata/_custom_type_script = "uid://b0gc85inin6ad"

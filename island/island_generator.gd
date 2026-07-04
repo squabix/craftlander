@@ -4,20 +4,36 @@ extends HeightmapTerrainGenerator
 @export var noise_textures: Array[Texture2D]
 @export var taper_gradient_texture: GradientTexture2D
 @export var absolute_gradient_texture: GradientTexture2D
+@export var seed_override := 0
 
 @export_group("Settings")
 @export var taper_gradient_strength := 0.9
-@export_range(0.0, 100.0, 0.5, "suffix:px") var domain_warp_strength := 15.0
+@export_range(0.0, 100.0, 0.5, "suffix:px") var domain_warp_max_strength := 50.0
+@export var domain_warp_mask_texture: GradientTexture2D
 @export_range(0.0, 1.0) var ridged_noise_influence := 0.4
 @export var taper_power := 2.0
 @export_range(1.0, 5.0, 0.1) var beach_flattening := 2.0
 
 
 func is_missing_textures() -> bool:
-	return noise_textures.is_empty() or taper_gradient_texture == null or absolute_gradient_texture == null
+	return noise_textures.is_empty() or taper_gradient_texture == null or absolute_gradient_texture == null or domain_warp_mask_texture == null
+
+
+func seed_noise_textures() -> void:
+	if seed_override != 0:
+		Main.base_seed = (seed_override)
+	
+	var hash_offset := hash(get_parent().name) # Add a hash offset based on name of island
+	
+	for i in noise_textures.size():
+		if noise_textures[i] == null or noise_textures[i].noise == null:
+			continue
+		noise_textures[i].noise = noise_textures[i].noise.duplicate()
+		noise_textures[i].noise.seed = Main.base_seed + hash_offset + i
 
 
 func generate_image_texture() -> ImageTexture:
+	seed_noise_textures()
 	var output_image := create_empty_image()
 
 	if is_missing_textures():
@@ -29,6 +45,7 @@ func generate_image_texture() -> ImageTexture:
 	# Extract direct object references here to store them on the local stack in order to reduce lookups
 	var taper_gradient_image: Image = texture_images[taper_gradient_texture]
 	var absolute_gradient_image: Image = texture_images[absolute_gradient_texture]
+	var warp_mask_image: Image = texture_images[domain_warp_mask_texture]
 
 	var noise_imgs: Array[Image] = []
 	for tex in noise_textures:
@@ -41,8 +58,8 @@ func generate_image_texture() -> ImageTexture:
 	var noises_count := float(noise_imgs.size()) # Float for later division
 	var has_noise := noises_count > 0.0
 
-	var _domain_warp_strength := domain_warp_strength
-	var do_warp := domain_warp_strength > 0.0 and has_noise
+	var _domain_warp_max_strength := domain_warp_max_strength
+	var do_warp := domain_warp_mask_texture != null and _domain_warp_max_strength > 0.0 and has_noise
 	var _ridged_noise_influence := ridged_noise_influence
 	var _taper_power := taper_power
 	var _beach_flattening := beach_flattening
@@ -56,21 +73,23 @@ func generate_image_texture() -> ImageTexture:
 			# Warp domain by distorting grid coordinates so features look organic
 			# Instead of sampling at (x, y), sample at (x + dx, y + dy)
 			if do_warp:
-				var warp_noise: float = noise_imgs[0].get_pixel(x, y).r
+				var mask_value := warp_mask_image.get_pixel(x, y).r
+				var current_warp_strength := mask_value * _domain_warp_max_strength
+				
+				if current_warp_strength > 0.0:
+					var warp_noise: float = noise_imgs[0].get_pixel(x, y).r
 
-				# Convert the 0.0-1.0 scalar into a full 360-degree radian angle: θ = noise * 2π
-				var angle := warp_noise * 6.28318530718
+					# Convert the 0.0-1.0 scalar into a full 360-degree radian angle: θ = noise * 2π
+					var angle := warp_noise * 6.28318530718
 
-				# Calculate delta offsets
-				# dx = sin(θ) * strength, dy = cos(θ) * strength
-				var offset_x := sin(angle) * _domain_warp_strength
-				var offset_y := cos(angle) * _domain_warp_strength
+					# Calculate delta offsets scaled by local spatial weight
+					# dx = sin(θ) * local_strength, dy = cos(θ) * local_strength
+					var offset_x := sin(angle) * current_warp_strength
+					var offset_y := cos(angle) * current_warp_strength
 
-				# Displace original coordinates and clamp them within valid array boundaries
-				sampled_x = clampi(x + int(offset_x), 0, map_resolution_x - 1)
-				sampled_y = clampi(y + int(offset_y), 0, map_resolution_y - 1)
+					sampled_x = clampi(x + int(offset_x), 0, map_resolution_x - 1)
+					sampled_y = clampi(y + int(offset_y), 0, map_resolution_y - 1)
 
-			# Noise blending and ridges
 			var base_noise := 0.0
 			for img in noise_imgs:
 				var raw_noise := img.get_pixel(sampled_x, sampled_y).r
@@ -84,7 +103,7 @@ func generate_image_texture() -> ImageTexture:
 			if has_noise:
 				base_noise /= noises_count
 
-			# Goal: Taper the terrain downwards the further it gets from the center
+			# Taper the terrain downwards the further it gets from the center
 			var taper_val := taper_gradient_image.get_pixel(sampled_x, sampled_y).r
 
 			# Exponential Falloff Calculation: Falloff = (1.0 - taper_val)^power
@@ -118,6 +137,7 @@ func load_image_textures() -> Dictionary[Texture2D, Image]:
 	var all_textures: Array[Texture2D] = [
 		taper_gradient_texture,
 		absolute_gradient_texture,
+		domain_warp_mask_texture,
 	]
 	all_textures.append_array(noise_textures)
 
