@@ -8,6 +8,11 @@ class_name Main
 
 static var title_screen: TitleScreen
 static var level: Node3D
+static var base_seed := 0:
+	set(to):
+		base_seed = to
+		seed(to)
+		randi() # Throw away first generated number
 
 func _ready() -> void:
 	load_title()
