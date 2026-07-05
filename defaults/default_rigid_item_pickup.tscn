@@ -15,6 +15,7 @@ metadata/_custom_type_script = "uid://bh8pcyeueeoey"
 collision_layer = 32
 collision_mask = 36
 gravity_scale = 3.0
+continuous_cd = true
 linear_velocity = Vector3(0, -2, 0)
 linear_damp = 0.3
 script = ExtResource("1_kqrhr")
