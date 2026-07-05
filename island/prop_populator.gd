@@ -2,32 +2,32 @@
 class_name PropPopulator
 extends Node3D
 
+const PLACEMENT_STEP := Vector2i(2, 2)
+const JITTER_AMOUNT := Vector2i(1, 1)
+
 @export_tool_button("Populate")
 var populate_tool_button := populate
-@export_tool_button("Reset")
-var reset_tool_button := reset
+@export_tool_button("Clear")
+var clear_tool_button := clear
 
 @export var island_generator: HeightmapTerrainGenerator
 @export var prop_quantities: Dictionary[IslandProp, int]
-@export var rng_seed := 0
 @export var populate_on_ready := true
-@export var max_attempts_per_prop := 16
 
-var rng := RandomNumberGenerator.new()
 var props: Dictionary[Vector3, Node3D] = { }
 var prop_resources: Dictionary[Vector3, IslandProp] = { }
 
 
 func _ready() -> void:
-	if not Engine.is_editor_hint() and not populate_on_ready:
-		return
-	EventBus.subscribe("island_terrain_generated", populate)
+	EventBus.subscribe("island_terrain_generated", populate if populate_on_ready else EventBus.trigger.bind("island_populated"))
 
 
-func reset() -> void:
+func clear() -> void:
 	# Free all prop instances
 	for prop in props.values():
-		Util.safe_free(prop)
+		if not is_instance_valid(prop):
+			continue
+		prop.free()
 
 	# Clear prop dictionaries
 	props = { }
@@ -36,8 +36,8 @@ func reset() -> void:
 
 func get_random_point() -> Vector2i:
 	return Vector2i(
-		rng.randi_range(0, island_generator.map_resolution.x - 1),
-		rng.randi_range(0, island_generator.map_resolution.y - 1),
+		randi_range(0, island_generator.map_resolution.x - 1),
+		randi_range(0, island_generator.map_resolution.y - 1),
 	)
 
 
@@ -45,12 +45,17 @@ func add_prop(prop: IslandProp, point: Vector2i, spawn_position: Vector3) -> Nod
 	# Add instance
 	var instance: Node3D = prop.scene.instantiate()
 	add_child.call_deferred(instance)
-	
+
 	# Place/transform instance
 	island_generator.place_node(instance, point.x, point.y, prop.normal_conformity)
-	instance.rotation_degrees.y = rng.randf_range(0.0, 360.0)
-	instance.scale = Vector3.ONE * rng.randf_range(prop.min_scale, prop.max_scale)
-
+	instance.rotation_degrees.y = randf() * 360.0
+	instance.scale = Vector3.ONE * randf_range(prop.min_scale, prop.max_scale)
+	
+	# If running inside the editor, set the owner to the current scene root
+	if Engine.is_editor_hint():
+		instance.set.call_deferred("owner", get_tree().edited_scene_root)
+		print("Set owner")
+	
 	# Assign prop instance in dictionaries
 	props[spawn_position] = instance
 	prop_resources[spawn_position] = prop
@@ -59,32 +64,46 @@ func add_prop(prop: IslandProp, point: Vector2i, spawn_position: Vector3) -> Nod
 
 
 func populate() -> void:
-	rng.seed = rng_seed
-	reset()
+	clear()
 
+	# Sort props by radius largest to smallest
 	var sorted_props := prop_quantities.keys()
 	sorted_props.sort_custom(
 		func(a: IslandProp, b: IslandProp):
 			return a.radius > b.radius
 	)
 
+	# Process each prop type independently
 	for prop in sorted_props:
-		var prop_count := 0
-		var attempts := 0
-		var max_attempts := prop_quantities[prop] * max_attempts_per_prop
+		var target_quantity := prop_quantities[prop]
+		var spawned_count := 0
 
-		while prop_count < prop_quantities[prop]:
-			if attempts >= max_attempts:
-				break
+		# Gather every coordinate on the map where this prop can spawn
+		var valid_points: Array[Vector2i] = []
 
-			attempts += 1
-			var point := get_random_point()
-			var spawn_position := island_generator.get_pixel_position(point.x, point.y)
-			
+		for x in range(0, island_generator.map_resolution.x, PLACEMENT_STEP.x):
+			for y in range(0, island_generator.map_resolution.y, PLACEMENT_STEP.y):
+				var pt := Vector2i(x, y)
+				var pos := island_generator.get_pixel_position(pt.x, pt.y)
+
+				if pos.y >= prop.min_height and pos.y <= prop.max_height:
+					valid_points.append(pt)
+
+		# Shuffle only the valid locations for this prop
+		valid_points.shuffle()
+
+		for point in valid_points:
+			if spawned_count >= target_quantity:
+				break # Met quota for this prop
+
+			# Apply organic jitter
+			var jittered_point := jitter_point(point)
+			var spawn_position := island_generator.get_pixel_position(jittered_point.x, jittered_point.y)
+
 			# Position is outside height bounds
 			if spawn_position.y < prop.min_height or spawn_position.y > prop.max_height:
 				continue
-			
+
 			# Already spawned at this exact position
 			if spawn_position in props:
 				continue
@@ -92,13 +111,20 @@ func populate() -> void:
 			# Check custom radius constraints against already placed props
 			if not avoids_intersecting_radii(prop.radius, spawn_position):
 				continue
-			
+
 			# Successfully add prop
-			add_prop(prop, point, spawn_position)
-			prop_count += 1
+			add_prop(prop, jittered_point, spawn_position)
+			spawned_count += 1
 
 	await get_tree().process_frame
 	EventBus.trigger("island_populated")
+
+
+func jitter_point(point: Vector2i) -> Vector2i:
+	return Vector2i(
+		clampi(point.x + randi_range(-JITTER_AMOUNT.x, +JITTER_AMOUNT.x), 0, island_generator.map_resolution.x - 1),
+		clampi(point.y + randi_range(-JITTER_AMOUNT.y, +JITTER_AMOUNT.y), 0, island_generator.map_resolution.y - 1),
+	)
 
 
 func avoids_intersecting_radii(radius: float, radius_position: Vector3) -> bool:
@@ -111,5 +137,5 @@ func avoids_intersecting_radii(radius: float, radius_position: Vector3) -> bool:
 
 		if square_distance < square_radius:
 			return false
-	
+
 	return true
