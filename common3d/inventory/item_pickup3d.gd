@@ -11,6 +11,11 @@ const FLOOR_MARGIN: float = 0.05
 @export var generate_floor_raycast := true
 @export var unformatted_tooltip := "Pick up %s?"
 
+@export_group("Visibility Fading")
+@export var visibility_fading_enabled := false
+@export var visibility_fading_distance := 50.0
+@export var visibility_fading_margin := 5.0
+
 var visuals: Node3D
 
 
@@ -25,6 +30,14 @@ func _ready() -> void:
 		printerr(self, " has no item instance")
 		return
 	update_visuals()
+	
+	if visibility_fading_enabled:
+		var geometry_instances: Array[GeometryInstance3D]
+		geometry_instances.assign(Util.find_children_of_class(visuals, "GeometryInstance3D"))
+		for instance in geometry_instances:
+			instance.visibility_range_fade_mode = GeometryInstance3D.VISIBILITY_RANGE_FADE_SELF
+			instance.visibility_range_end = visibility_fading_distance
+			instance.visibility_range_end_margin = visibility_fading_margin
 
 	enabled_tooltip = unformatted_tooltip % item.name
 
