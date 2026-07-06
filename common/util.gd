@@ -198,6 +198,13 @@ static func find_children_of_class(parent: Node, class_string: String) -> Array[
 	return children
 
 
+static func get_ancestor(of: Node, level: int) -> Node:
+	var ancestor := of
+	for i in max(0, level):
+		ancestor = ancestor.get_parent()
+	return ancestor
+
+
 static func snap_to_floor(
 		node: Node3D,
 		margin: float = 0.05,
