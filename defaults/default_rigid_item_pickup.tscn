@@ -11,7 +11,7 @@ script = ExtResource("5_ncujj")
 y = false
 metadata/_custom_type_script = "uid://bh8pcyeueeoey"
 
-[node name="DefaultRigidItemPickup" type="RigidBody3D" unique_id=1935409248 node_paths=PackedStringArray("item_pickup_interactable", "hurtbox")]
+[node name="DefaultRigidItemPickup" type="RigidBody3D" unique_id=1935409248 node_paths=PackedStringArray("item_pickup_interactable")]
 collision_layer = 32
 collision_mask = 36
 gravity_scale = 3.0
@@ -20,7 +20,6 @@ linear_velocity = Vector3(0, -2, 0)
 linear_damp = 0.3
 script = ExtResource("1_kqrhr")
 item_pickup_interactable = NodePath("ItemPickup3D")
-hurtbox = NodePath("Hurtbox3D")
 metadata/_custom_type_script = "uid://oexynjvr31bs"
 
 [node name="ItemPickup3D" type="Area3D" parent="." unique_id=1836251032]
