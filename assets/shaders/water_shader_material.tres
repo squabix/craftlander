@@ -23,7 +23,7 @@ noise = SubResource("FastNoiseLite_epvbt")
 seamless = true
 
 [resource]
-render_priority = 0
+render_priority = -1
 shader = ExtResource("1_f81ln")
 shader_parameter/noise_tex_1 = SubResource("NoiseTexture2D_q07lh")
 shader_parameter/noise_tex_2 = SubResource("NoiseTexture2D_wyq6a")
