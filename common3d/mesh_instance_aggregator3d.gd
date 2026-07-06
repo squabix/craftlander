@@ -1,0 +1,207 @@
+@tool
+class_name MeshInstanceAggregator3D
+extends Node3D
+
+@export var mesh_source: Node
+
+@export var aggregate_on_ready := false
+@export var use_material_override := true
+@export var multi_instance_unformatted_name := "MultiMesh_%s"
+
+@export_group("Instance Visibility")
+@export var invert_instance_visibility := true
+@export var reset_instance_visibility := true
+
+var generated_multimeshes: Array[MultiMeshInstance3D] = []
+var _instance_registry: Dictionary[MeshInstance3D, MultiMeshData] = { }
+
+@export_tool_button("Aggregate")
+var aggregate_action: Callable = aggregate
+
+@export_tool_button("Reset")
+var reset_action: Callable = reset
+
+
+static func get_material_override(mesh_instance: MeshInstance3D) -> Material:
+	if mesh_instance == null:
+		return null
+
+	if mesh_instance.material_override != null:
+		return mesh_instance.material_override
+
+	if mesh_instance.get_surface_override_material_count() == 0:
+		return null
+
+	return mesh_instance.get_surface_override_material(0)
+
+
+func _ready() -> void:
+	if aggregate_on_ready:
+		aggregate.call_deferred()
+
+
+func get_all_mesh_instances() -> Array[MeshInstance3D]:
+	var instances: Array[MeshInstance3D]
+	instances.assign(Util.find_children_of_class(mesh_source, "MeshInstance3D"))
+	return instances
+
+
+func get_mesh_groups() -> Dictionary[Mesh, Array]:
+	var all_mesh_instances := get_all_mesh_instances()
+	var mesh_groups: Dictionary[Mesh, Array] = { }
+
+	for instance in all_mesh_instances:
+		if not instance.mesh:
+			continue
+
+		if mesh_groups.has(instance.mesh):
+			mesh_groups[instance.mesh].append(instance)
+		else:
+			mesh_groups[instance.mesh] = [instance]
+
+	return mesh_groups
+
+
+func add_multi_instance(name_infix: String, material_override: Material = null) -> MultiMeshInstance3D:
+	var multi_instance := MultiMeshInstance3D.new()
+	multi_instance.name = multi_instance_unformatted_name % name_infix
+	add_child(multi_instance)
+	generated_multimeshes.append(multi_instance)
+
+	if use_material_override:
+		multi_instance.material_override = material_override
+
+	return multi_instance
+
+
+func generate_multi_mesh(mesh: Mesh, instances: Array[MeshInstance3D], multi_instance: MultiMeshInstance3D) -> MultiMesh:
+	var multimesh := MultiMesh.new()
+	multimesh.transform_format = MultiMesh.TRANSFORM_3D
+	multimesh.mesh = mesh
+	multimesh.instance_count = instances.size()
+
+	var inverse_global_transform := multi_instance.global_transform.affine_inverse()
+
+	for i in range(instances.size()):
+		var instance: MeshInstance3D = instances[i]
+		var relative_transform: Transform3D = inverse_global_transform * instance.global_transform
+
+		_instance_registry[instance] = MultiMeshData.new(multi_instance, i, relative_transform)
+
+		instance.hide() # Hide the original mesh source so only the MultiMesh is visible initially
+		multimesh.set_instance_transform(i, relative_transform)
+
+		connect_visibility_inversion(instance)
+
+	return multimesh
+
+
+func aggregate() -> void:
+	reset()
+
+	if not is_instance_valid(mesh_source):
+		return
+
+	var mesh_groups := get_mesh_groups()
+
+	for mesh in mesh_groups:
+		var instances: Array[MeshInstance3D]
+		instances.assign(mesh_groups[mesh])
+		if instances.is_empty():
+			continue
+
+		var multi_instance := add_multi_instance(mesh.resource_name, get_material_override(instances[0]))
+		multi_instance.multimesh = generate_multi_mesh(mesh, instances, multi_instance)
+
+
+func connect_visibility_inversion(instance: MeshInstance3D) -> void:
+	if Engine.is_editor_hint():
+		return
+	
+	if not invert_instance_visibility:
+		return
+
+	var callable := _on_instance_visibility_changed.bind(instance)
+	if instance.visibility_changed.is_connected(callable):
+		return
+
+	instance.visibility_changed.connect(callable)
+
+
+func disconnect_visibility_inversion(instance: MeshInstance3D) -> void:
+	if Engine.is_editor_hint():
+		return
+	
+	if not is_instance_valid(instance):
+		return
+
+	var callable := _on_instance_visibility_changed.bind(instance)
+	if not instance.visibility_changed.is_connected(callable):
+		return
+
+	instance.visibility_changed.disconnect(callable)
+
+func reset() -> void:
+	# Disconnect all bound visibility signals to prevent leaks
+	for instance in _instance_registry.keys():
+		disconnect_visibility_inversion(instance)
+
+	# Remove generated multi meshes
+	for mm in generated_multimeshes:
+		Util.safe_free(mm)
+	generated_multimeshes.clear()
+
+	# Make all the original individual mesh instances visible again
+	if reset_instance_visibility:
+		for instance in get_all_mesh_instances():
+			instance.show()
+
+	_instance_registry.clear()
+
+
+func set_instance_visibility(instance: MeshInstance3D, visibility: bool) -> void:
+	if not _instance_registry.has(instance):
+		return
+
+	var data: MultiMeshData = _instance_registry[instance]
+
+	if visibility == true:
+		data.show()
+	else:
+		data.hide()
+
+
+func _on_instance_visibility_changed(instance: MeshInstance3D) -> void:
+	if not invert_instance_visibility:
+		return
+
+	# If the source mesh is shown, then hide the multimesh element (and vice versa)
+	set_instance_visibility(instance, not instance.visible)
+
+
+class MultiMeshData:
+	var multi_mesh_instance: MultiMeshInstance3D
+	var index: int
+	var transform: Transform3D
+
+
+	func _init(data_instance: MultiMeshInstance3D, data_index: int, data_transform: Transform3D) -> void:
+		multi_mesh_instance = data_instance
+		index = data_index
+		transform = data_transform
+
+
+	func is_mesh_valid() -> bool:
+		return is_instance_valid(multi_mesh_instance) and multi_mesh_instance.multimesh != null
+
+
+	func show() -> void:
+		if not is_mesh_valid():
+			return
+		multi_mesh_instance.multimesh.set_instance_transform(index, transform)
+
+
+	func hide() -> void:
+		if not is_mesh_valid():
+			return
+		multi_mesh_instance.multimesh.set_instance_transform(index, Transform3D().scaled(Vector3.ZERO))
