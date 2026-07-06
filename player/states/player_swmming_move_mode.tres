@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_bdv71")
 max_speed = Vector2(4, 0)
-accelerate_sharpness = Vector2(5, 0)
-friction_sharpness = Vector2(7, 0)
+accelerate_sharpness = Vector2(3, 0)
+friction_sharpness = Vector2(5, 0)
 metadata/_custom_type_script = "uid://edbvsbdtvgtj"

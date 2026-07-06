@@ -3,7 +3,7 @@ extends Entity3D
 
 const DEFAULT_HEAD_HEIGHT := 1.4
 const CROUCHED_HEAD_HEIGHT := 0.7
-const SWIMMING_HEAD_HEIGHT := 1.1
+const SWIMMING_HEAD_HEIGHT := 0.85
 const HEAD_SPEED := 0.1
 
 @export var head: Node3D
