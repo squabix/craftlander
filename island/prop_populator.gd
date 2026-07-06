@@ -28,6 +28,11 @@ func clear() -> void:
 		if not is_instance_valid(prop):
 			continue
 		prop.free()
+	
+	for child in get_children():
+		if not is_instance_valid(child):
+			continue
+		child.free()
 
 	# Clear prop dictionaries
 	props = { }
