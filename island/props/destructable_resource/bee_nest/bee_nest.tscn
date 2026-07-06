@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="6_0bi5d"]
 [ext_resource type="Resource" uid="uid://j8xwx023phbg" path="res://items/food/honeycomb/honeycomb_item.tres" id="7_b76o0"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="7_yyl5a"]
+[ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="9_b7s5p"]
 [ext_resource type="Script" uid="uid://cmmmo3xnygmau" path="res://common/deletion_alarm.gd" id="9_t1ty2"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="10_085ko"]
 [ext_resource type="PackedScene" uid="uid://bkber348p7jtw" path="res://island/props/destructable_resource/bee_nest/bee_nest.blend" id="11_b76o0"]
@@ -112,8 +113,10 @@ constant = true
 size = 1
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=341026177]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=659248640]
 libraries/ = SubResource("AnimationLibrary_5d4n1")
+script = ExtResource("9_b7s5p")
+metadata/_custom_type_script = "uid://c1bce1sw2dgnf"
 
 [node name="DeletionAlarm" type="Node" parent="." unique_id=261330463]
 script = ExtResource("9_t1ty2")

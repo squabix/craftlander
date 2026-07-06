@@ -14,6 +14,7 @@
 [ext_resource type="ArrayMesh" uid="uid://cxtofsxxgyuua" path="res://island/props/destructable_resource/giant_mushroom/giant_mushroom_top.tres" id="11_thgfp"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="12_e47mg"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="14_hjpsa"]
+[ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="14_pu6jt"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="15_vwjnp"]
 [ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="16_5epkt"]
 [ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="17_wdv32"]
@@ -306,8 +307,10 @@ surface_material_override/0 = ExtResource("10_jcypt")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stump" unique_id=894602809]
 shape = SubResource("ConvexPolygonShape3D_jcypt")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1144088072]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=199521748]
 libraries/ = SubResource("AnimationLibrary_4ojav")
+script = ExtResource("14_pu6jt")
+metadata/_custom_type_script = "uid://c1bce1sw2dgnf"
 
 [node name="Inventory" type="Node" parent="." unique_id=997929093]
 script = ExtResource("14_hjpsa")
