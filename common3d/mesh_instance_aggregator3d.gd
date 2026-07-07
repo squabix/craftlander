@@ -2,6 +2,8 @@
 class_name MeshInstanceAggregator3D
 extends Node3D
 
+static var aggregated_mesh_instances: Dictionary[MeshInstance3D, MeshInstanceAggregator3D]
+
 @export var mesh_source: Node
 
 @export var aggregate_on_ready := false
@@ -13,12 +15,33 @@ extends Node3D
 @export var reset_instance_visibility := true
 
 var generated_multimeshes: Array[MultiMeshInstance3D] = []
-var _instance_registry: Dictionary[MeshInstance3D, MultiMeshData] = { }
+var instance_registry: Dictionary[MeshInstance3D, MultiMeshData] = { }
 
 @export_tool_button("Aggregate", "MultiMesh")
 var aggregate_action: Callable = aggregate
 @export_tool_button("Reset", "Reload")
 var reset_action: Callable = reset
+
+
+static func disassociate_mesh_instance(instance: MeshInstance3D) -> void:
+	var aggregator: MeshInstanceAggregator3D = aggregated_mesh_instances.get(instance, null)
+	if not is_instance_valid(aggregator):
+		if is_instance_valid(instance):
+			printerr("Could not find aggregator for %s" % instance)
+		return
+	
+	var data: MultiMeshData = aggregator.instance_registry.get(instance, null)
+	if data == null:
+		printerr("%s could not find data for %s in instance registry" % [aggregator, instance])
+		return
+	
+	aggregator.disconnect_visibility_inversion(instance)
+	data.hide()
+	aggregator.instance_registry.erase(instance)
+	aggregated_mesh_instances.erase(instance)
+	
+	if aggregator.invert_instance_visibility:
+		instance.show()
 
 
 static func get_material_override(mesh_instance: MeshInstance3D) -> Material:
@@ -85,7 +108,8 @@ func generate_multi_mesh(mesh: Mesh, instances: Array[MeshInstance3D], multi_ins
 		var instance: MeshInstance3D = instances[i]
 		var relative_transform: Transform3D = inverse_global_transform * instance.global_transform
 
-		_instance_registry[instance] = MultiMeshData.new(multi_instance, i, relative_transform)
+		instance_registry[instance] = MultiMeshData.new(multi_instance, i, relative_transform)
+		aggregated_mesh_instances[instance] = self
 
 		instance.hide() # Hide the original mesh source so only the MultiMesh is visible initially
 		multimesh.set_instance_transform(i, relative_transform)
@@ -142,27 +166,32 @@ func disconnect_visibility_inversion(instance: MeshInstance3D) -> void:
 
 func reset() -> void:
 	# Disconnect all bound visibility signals to prevent leaks
-	for instance in _instance_registry.keys():
+	for instance in instance_registry.keys():
 		disconnect_visibility_inversion(instance)
 
 	# Remove generated multi meshes
 	for mm in generated_multimeshes:
 		Util.safe_free(mm)
 	generated_multimeshes.clear()
+	
+	for instance in aggregated_mesh_instances:
+		if aggregated_mesh_instances[instance] == self:
+			aggregated_mesh_instances.erase(instance)
 
 	# Make all the original individual mesh instances visible again
 	if reset_instance_visibility:
 		for instance in get_all_mesh_instances():
 			instance.show()
 
-	_instance_registry.clear()
+	instance_registry.clear()
 
 
 func set_instance_visibility(instance: MeshInstance3D, visibility: bool) -> void:
-	if not _instance_registry.has(instance):
+	print("Setting visibility for %s" % instance)
+	if not instance_registry.has(instance):
 		return
 
-	var data: MultiMeshData = _instance_registry[instance]
+	var data: MultiMeshData = instance_registry[instance]
 
 	if visibility == true:
 		data.show()
@@ -175,7 +204,7 @@ func _on_instance_visibility_changed(instance: MeshInstance3D) -> void:
 		return
 
 	# If the source mesh is shown, then hide the multimesh element (and vice versa)
-	set_instance_visibility(instance, not instance.visible)
+	set_instance_visibility(instance, not instance.is_visible_in_tree())
 
 
 class MultiMeshData:

@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dapeyi3eetek1" path="res://common/signal_triggrs/signal_animation_trigger.gd" id="4_agfax"]
 [ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/signal_triggrs/signal_state_trigger.gd" id="5_afesh"]
 [ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="5_s0q6f"]
-[ext_resource type="Script" uid="uid://2c2w68kia23g" path="res://island/props/destructable_resource/tree/standing_state.gd" id="7_afesh"]
+[ext_resource type="Script" uid="uid://dmd1q78n1xm4s" path="res://common/state_machine/state.gd" id="6_k7n08"]
 [ext_resource type="Script" uid="uid://bwsaqjbx2ith8" path="res://island/props/destructable_resource/tree/tree_falling_state.gd" id="7_n32rl"]
 [ext_resource type="Script" uid="uid://ihbhsm4c4qtv" path="res://island/props/destructable_resource/tree/chopped_state.gd" id="8_agfax"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="10_4ojav"]
@@ -307,6 +307,7 @@ metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [node name="Tree" type="Node3D" unique_id=1544571203 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
 script = ExtResource("1_27px0")
+max_hp = 3
 hurtbox = NodePath("Trunk/Hurtbox3D")
 inventory = NodePath("Inventory")
 health = NodePath("Health")
@@ -335,19 +336,25 @@ root = NodePath("..")
 metadata/_custom_type_script = "uid://bqonxtntgndfr"
 
 [node name="Standing" type="Node" parent="StateMachine" unique_id=1333531181]
-script = ExtResource("7_afesh")
+script = ExtResource("6_k7n08")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Falling" type="Node" parent="StateMachine" unique_id=490514813]
+[node name="Falling" type="Node" parent="StateMachine" unique_id=490514813 node_paths=PackedStringArray("hurtbox_collision", "continue_fall_area", "trunk", "animation_player", "falling_mesh_instances")]
 script = ExtResource("7_n32rl")
+hurtbox_collision = NodePath("../../Trunk/Hurtbox3D/HurtboxCollision")
+continue_fall_area = NodePath("../../Trunk/ContinueFallArea")
+trunk = NodePath("../../Trunk")
+animation_player = NodePath("../../AnimationPlayer")
+falling_mesh_instances = [NodePath("../../Trunk/TrunkMesh"), NodePath("../../Trunk/LeavesMesh")]
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Chopped" type="Node" parent="StateMachine" unique_id=1969503386]
+[node name="Chopped" type="Node" parent="StateMachine" unique_id=1969503386 node_paths=PackedStringArray("trunk", "chop_particles")]
 script = ExtResource("8_agfax")
+trunk = NodePath("../../Trunk")
+chop_particles = NodePath("../../ChopParticles")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Trunk" type="AnimatableBody3D" parent="." unique_id=202807730]
-unique_name_in_owner = true
 collision_layer = 5
 
 [node name="Hurtbox3D" type="Area3D" parent="Trunk" unique_id=1330554951 node_paths=PackedStringArray("health")]
@@ -361,12 +368,10 @@ damage_override = ExtResource("10_j52tm")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="HurtboxCollision" type="CollisionShape3D" parent="Trunk/Hurtbox3D" unique_id=29216433]
-unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.625, 0)
 shape = SubResource("CylinderShape3D_r4p3j")
 
 [node name="ContinueFallArea" type="Area3D" parent="Trunk" unique_id=167287806]
-unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, 0)
 collision_layer = 0
 collision_mask = 4
@@ -387,7 +392,6 @@ material_override = SubResource("ShaderMaterial_j52tm")
 mesh = SubResource("ArrayMesh_r1bcm")
 
 [node name="Spawner3D" type="Node3D" parent="Trunk" unique_id=737068488 node_paths=PackedStringArray("inventory")]
-unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 script = ExtResource("10_4ojav")
 inventory = NodePath("../../Inventory")
@@ -399,7 +403,6 @@ metadata/_custom_type_script = "uid://iyqixpr4un6s"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 
 [node name="ChopParticles" type="GPUParticles3D" parent="." unique_id=931223418]
-unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 visible = false
 cast_shadow = 0

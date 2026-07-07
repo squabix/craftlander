@@ -113,7 +113,7 @@ constant = true
 size = 1
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=659248640]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1430977876]
 libraries/ = SubResource("AnimationLibrary_5d4n1")
 script = ExtResource("9_b7s5p")
 metadata/_custom_type_script = "uid://c1bce1sw2dgnf"

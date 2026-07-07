@@ -3,6 +3,7 @@ extends AnimationPlayer
 
 @export var show_on_play := true
 @export var hide_on_finish := true
+@export var deep := true
 
 var _affected_nodes: Array[Node] = []
 
@@ -10,6 +11,11 @@ var _affected_nodes: Array[Node] = []
 func _ready() -> void:
 	animation_started.connect(_on_animation_started)
 	animation_finished.connect(_on_animation_finished)
+
+
+func disable_visibility_updates() -> void:
+	show_on_play = false
+	hide_on_finish = false
 
 
 func is_affectable(node: Node) -> bool:
@@ -33,7 +39,10 @@ func _on_animation_started(anim_name: StringName) -> void:
 			continue
 
 		_affected_nodes.append(target_node)
-		target_node.show()
+		if deep:
+			Util.set_visibility_deep(target_node, true)
+		else:
+			target_node.show()
 
 
 func _on_animation_finished(_anim_name: StringName) -> void:
@@ -43,6 +52,9 @@ func _on_animation_finished(_anim_name: StringName) -> void:
 	for node in _affected_nodes:
 		if not is_instance_valid(node):
 			continue
-		node.hide()
+		if deep:
+			Util.set_visibility_deep(node, false)
+		else:
+			node.hide()
 
 	_affected_nodes.clear()
