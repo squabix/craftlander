@@ -1,18 +1,21 @@
-extends Node3D
 class_name EntityPopulator
+extends Node3D
 
 const MIN_CAMERA_DISTANCE_SQUARED := 100.0
 const MAX_CAMERA_DISTANCE_SQUARED := 10000000.0
 
 @export var entity_quantities: Dictionary[IslandEntityResource, int]
-@export var timer: Timer
+@export var populate_timer: Timer
+@export var disabled := false
 
 var entities: Dictionary[IslandEntityResource, Array]
+var populate_in_frustum := true
+var has_populated := false
+
 
 func _ready() -> void:
-	for i in 3: await get_tree().process_frame # Wait 3 frames before population
-	populate(true)
-	timer.timeout.connect(populate.bind(false))
+	EventBus.subscribe("island_navigation_baked", populate)
+
 
 func clear_invalid_entities() -> void:
 	for entity_resource in entities:
@@ -21,33 +24,37 @@ func clear_invalid_entities() -> void:
 				continue
 			entities[entity_resource].erase(entity)
 
+
 func get_missing_quantity(entity_resource: IslandEntityResource) -> int:
 	clear_invalid_entities()
 	var intended_quantity := entity_quantities[entity_resource]
 	return max(0, intended_quantity - get_current_quantity(entity_resource))
+
 
 func get_current_quantity(entity_resource: IslandEntityResource):
 	if not entity_resource in entities:
 		return 0
 	return entities[entity_resource].size()
 
+
 func get_random_point(rid: RID) -> Vector3:
 	return NavigationServer3D.region_get_random_point(rid, 1, false)
 
-func get_spawnpoint(allow_frustom: bool, min_height: float=0.0, max_height: float=1000.0) -> Vector3:
+
+func get_spawnpoint(min_height: float = 0.0, max_height: float = 1000.0) -> Vector3:
 	var rid := IslandNavRegion.current.get_rid()
 	var point: Vector3
 	var camera: Camera3D = get_viewport().get_camera_3d()
 	while true:
 		point = get_random_point(rid)
-		
+
 		if point.y < min_height:
 			continue # Too high
 		if point.y > max_height:
 			continue # Too low
-		if not allow_frustom and camera.is_position_in_frustum(point):
+		if not populate_in_frustum and camera.is_position_in_frustum(point):
 			continue # In frustum
-		
+
 		var distance_squared := camera.global_position.distance_squared_to(point)
 		if distance_squared > MAX_CAMERA_DISTANCE_SQUARED:
 			continue # Too far from camera
@@ -55,6 +62,7 @@ func get_spawnpoint(allow_frustom: bool, min_height: float=0.0, max_height: floa
 			continue # Too close to camera
 		break
 	return point
+
 
 func add_entity(entity_resource: IslandEntityResource, spawnpoint: Vector3) -> Entity3D:
 	var entity: Entity3D = entity_resource.scene.instantiate()
@@ -66,13 +74,26 @@ func add_entity(entity_resource: IslandEntityResource, spawnpoint: Vector3) -> E
 		entities[entity_resource] = [entity]
 	return entity
 
-func populate(allow_frustom := false) -> void:
+
+func populate() -> void:
+	# First populate
+	if not has_populated:
+		has_populated = true
+		populate_in_frustum = true
+		populate()
+		populate_in_frustum = false
+		populate_timer.timeout.connect(populate)
+		return
+
+	if disabled:
+		return
+
+	# Subsequent populates
 	for entity_resource in entity_quantities:
 		var quantity_to_spawn := get_missing_quantity(entity_resource)
 		for i in quantity_to_spawn:
 			var spawnpoint := get_spawnpoint(
-				allow_frustom,
 				entity_resource.min_height,
-				entity_resource.max_height
+				entity_resource.max_height,
 			)
 			add_entity(entity_resource, spawnpoint)
