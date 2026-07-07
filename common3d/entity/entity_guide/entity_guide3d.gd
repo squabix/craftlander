@@ -25,13 +25,3 @@ func get_distance_to_target() -> float:
 
 func move_forward() -> void:
 	entity.move_forward()
-
-	#func accel_toward(target: Vector3, accelerator: Accelerator) -> void:
-	#if not is_instance_valid(accelerator):
-	#return
-	#var direction: Vector3 = get_direction(target)
-	#var velocity: Vector3 = accelerator.accel3d(
-	#entity.velocity,
-	#Util.flatten_vec3(direction)
-	#)
-	#entity.get_velocity_state().set_reactive(velocity)

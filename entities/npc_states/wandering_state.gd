@@ -12,14 +12,19 @@ extends State
 @export var idle_timer: Timer
 
 var is_moving := false
+var _reach_distance_sq: float
+
 
 func _ready() -> void:
+	_reach_distance_sq = reach_distance * reach_distance
 	if enable_idling:
 		idle_timer.one_shot = true
 		idle_timer.timeout.connect(start_moving)
 
+
 func enter() -> void:
 	restart()
+
 
 func start_idle_timer() -> void:
 	if not is_active:
@@ -28,6 +33,7 @@ func start_idle_timer() -> void:
 	idle_timer.wait_time = randf_range(min_idle_time, max_idle_time)
 	idle_timer.start()
 
+
 func restart() -> void:
 	is_moving = false
 	if enable_idling:
@@ -35,12 +41,18 @@ func restart() -> void:
 	else:
 		start_moving()
 
-func update(_delta: float) -> void:
+
+func physics_update(_delta: float) -> void:
 	if is_moving:
-		if root.global_position.distance_to(nav_guide.target_position) <= reach_distance:
+		# Using distance_squared_to to bypass slow square-root evaluations
+		var distance_sq: float = root.global_position.distance_squared_to(nav_guide.target_position)
+		if distance_sq <= _reach_distance_sq:
 			restart()
+			return
+
 		nav_guide.face_target()
 		nav_guide.entity.move_forward()
+
 
 func start_moving() -> void:
 	if not is_active:
@@ -48,7 +60,7 @@ func start_moving() -> void:
 	nav_guide.set_target(
 		nav_guide.get_nearby_navigable_position(
 			inner_wander_radius,
-			outter_wander_radius
-		)
+			outter_wander_radius,
+		),
 	)
 	is_moving = true

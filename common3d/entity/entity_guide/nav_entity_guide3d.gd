@@ -5,6 +5,9 @@ extends EntityGuide3D
 
 
 func set_target(to: Vector3) -> void:
+	if target_position.is_equal_approx(to):
+		return
+	
 	target_position = to
 	nav.target_position = to
 
@@ -59,7 +62,6 @@ func get_nearby_navigable_position(inner_radius: float, outer_radius: float, att
 	var nav_map := nav.get_navigation_map()
 	var origin := entity.global_position
 
-	# Fail to navigate if no RID
 	if not nav_map.is_valid():
 		return origin
 
@@ -67,11 +69,16 @@ func get_nearby_navigable_position(inner_radius: float, outer_radius: float, att
 	outer_radius = max(outer_radius, inner_radius)
 	attempts = max(attempts, 1)
 
+	# Pre-calculate squared values to eliminate square-root overhead inside the loop
+	var inner_radius_sq := inner_radius * inner_radius
+	var outer_radius_sq := outer_radius * outer_radius
+
 	for i in attempts:
-		# Random point in an annulus on the XZ plane
-		var nav_point := NavigationServer3D.map_get_closest_point(nav_map, get_annulus_point(inner_radius, outer_radius))
-		var distance := nav_point.distance_to(origin)
-		if distance >= inner_radius and distance <= outer_radius:
+		var sample_point := get_annulus_point(inner_radius, outer_radius)
+		var nav_point := NavigationServer3D.map_get_closest_point(nav_map, sample_point)
+		var distance_sq := nav_point.distance_squared_to(origin)
+
+		if distance_sq >= inner_radius_sq and distance_sq <= outer_radius_sq:
 			return nav_point
 
 	return entity.global_position
