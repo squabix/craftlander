@@ -386,6 +386,15 @@ static func safe_free(node: Variant) -> bool:
 	return true
 
 
+static func set_visibility_deep(node: Node, to: bool) -> void:
+	if not is_instance_valid(node):
+		return
+	if node is CanvasItem or node is Node3D:
+		node.visible = to
+	for child in node.get_children():
+		set_visibility_deep(child, to)
+
+
 # TODO: Make own node
 static func turn_off_all_particles(parent: Node) -> void:
 	if not is_instance_valid(parent):
