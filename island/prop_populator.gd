@@ -5,9 +5,9 @@ extends Node3D
 const PLACEMENT_STEP := Vector2i(2, 2)
 const JITTER_AMOUNT := Vector2i(1, 1)
 
-@export_tool_button("Populate")
+@export_tool_button("Populate", "TileMapDock")
 var populate_tool_button := populate
-@export_tool_button("Clear")
+@export_tool_button("Clear", "Reload")
 var clear_tool_button := clear
 
 @export var island_generator: HeightmapTerrainGenerator

@@ -4,10 +4,9 @@ extends Node3D
 
 signal updated_mesh
 
-@export_tool_button("Update Mesh")
+@export_tool_button("Update Mesh", "MeshInstance3D")
 var update_texture_action: Callable = update_mesh
-
-@export_tool_button("Generate Collision Shape")
+@export_tool_button("Generate Collision Shape", "CollisionShape3D")
 var generate_collision_shape_action: Callable = update_collision_shape
 
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var map_size := Vector3(1, 1, 1)

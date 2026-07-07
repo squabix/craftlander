@@ -15,10 +15,9 @@ extends Node3D
 var generated_multimeshes: Array[MultiMeshInstance3D] = []
 var _instance_registry: Dictionary[MeshInstance3D, MultiMeshData] = { }
 
-@export_tool_button("Aggregate")
+@export_tool_button("Aggregate", "MultiMesh")
 var aggregate_action: Callable = aggregate
-
-@export_tool_button("Reset")
+@export_tool_button("Reset", "Reload")
 var reset_action: Callable = reset
 
 
