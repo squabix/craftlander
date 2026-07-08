@@ -86,7 +86,7 @@ const BUILT_IN_INPUT_ACTIONS: Array[String] = [
 ]
 
 
-static func interval_print(interval_seconds: float, ...args: Array) -> void:
+static func iprint(interval_seconds: float, ...args: Array) -> void:
 	if interval_seconds <= 0.0:
 		return
 
