@@ -9,9 +9,16 @@ const RUN_THRESHOLD := 0.5
 const WALK_THESHOLD := 0.3
 
 @export var anim_tree: AnimationTree
+@export var item_holder: ItemHolder3D
+@export var culling_controller: CullingController3D
+
+func _ready() -> void:
+	# Wait two frames then update visibility range (held item)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	culling_controller.update_visibility_range()
 
 func _process(_delta: float) -> void:
-	
 	# Interpolate between animations by velocity
 	var velocity_length := Util.vec3to2(velocity, Util.VECTOR3Y).length()
 	if anim_tree:

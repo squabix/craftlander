@@ -4,18 +4,22 @@
 [ext_resource type="Resource" uid="uid://dgd8cmju8w3ba" path="res://entities/enemies/bee/bee_move_mode.tres" id="2_vtgqy"]
 [ext_resource type="Script" uid="uid://v1m6kagbghjv" path="res://common3d/radial_sight_3d.gd" id="2_wnfpe"]
 [ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/signal_triggrs/signal_state_trigger.gd" id="3_rq2ym"]
-[ext_resource type="Script" uid="uid://crmxhu5iujbq1" path="res://entities/enemies/rootling/rootling_controller.gd" id="4_qp58c"]
 [ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="5_4vry0"]
 [ext_resource type="Script" uid="uid://cf04j3voj4xyc" path="res://entities/npc_states/wandering_state.gd" id="6_wpegq"]
 [ext_resource type="Script" uid="uid://pdvlr6l3n04n" path="res://entities/npc_states/chasing_state.gd" id="7_bfxyu"]
 [ext_resource type="Script" uid="uid://c5asagc5dswqt" path="res://common3d/entity/entity_guide/nav_entity_guide3d.gd" id="8_elujw"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="9_xkejc"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="12_0rn6u"]
-[ext_resource type="Script" uid="uid://c6m4guogk1s1y" path="res://common/follow_node3d.gd" id="13_121pw"]
 [ext_resource type="PackedScene" uid="uid://btvdb6drbsbg6" path="res://entities/enemies/bee/bee.blend" id="14_0lxgi"]
 [ext_resource type="PackedScene" uid="uid://h3veu2e18ij1" path="res://entities/entity_health_bar.tscn" id="14_nj0qj"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="15_7niy0"]
+[ext_resource type="Script" uid="uid://bp5ab438ufrus" path="res://common3d/culling_controller3d.gd" id="15_nj0qj"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="16_0hiqi"]
+[ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="16_t5evv"]
+
+[sub_resource type="GDScript" id="GDScript_exvl0"]
+script/source = "extends EntityController3D
+"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ff1s"]
 resource_name = "Material.002"
@@ -194,7 +198,7 @@ collision_mask = 17
 script = ExtResource("1_4hd4j")
 sight = NodePath("Sight3D")
 hit_timer = NodePath("HitTimer")
-form_nodes = [NodePath("BlenderVisuals"), NodePath("Sight3D"), NodePath("InventoryDropper3D"), NodePath("RemoteTransform3D"), NodePath("Hurtbox3D")]
+form_nodes = [NodePath("BlenderVisuals"), NodePath("Sight3D"), NodePath("InventoryDropper3D"), NodePath(""), NodePath("Hurtbox3D")]
 type = "Bee"
 move_mode = ExtResource("2_vtgqy")
 move_up_as_jump = false
@@ -208,7 +212,7 @@ one_shot = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("2_wnfpe")
 radius = 15.0
-lose_distance = 23.0
+lose_distance = 18.0
 target_collision_mask = 16
 ray_collision_mask = 21
 group_whitelist = Array[String](["player"])
@@ -221,10 +225,8 @@ from_state_whitelist = Array[String](["Wandering"])
 signal_name = &"found_target"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 
-[node name="Controller3D" type="Node" parent="." unique_id=1315753818 node_paths=PackedStringArray("sight", "on_screen_notifier", "initial_entity")]
-script = ExtResource("4_qp58c")
-sight = NodePath("../Sight3D")
-on_screen_notifier = NodePath("../Node/FollowNode3D/VisibleOnScreenNotifier3D")
+[node name="Controller3D" type="Node" parent="." unique_id=1315753818 node_paths=PackedStringArray("initial_entity")]
+script = SubResource("GDScript_exvl0")
 initial_entity = NodePath("..")
 metadata/_custom_type_script = "uid://ccwod33h53a5s"
 
@@ -238,7 +240,7 @@ metadata/_custom_type_script = "uid://bqonxtntgndfr"
 
 [node name="Wandering" type="Node" parent="Controller3D/Default" unique_id=1882444428 node_paths=PackedStringArray("nav_guide", "idle_timer", "root")]
 script = ExtResource("6_wpegq")
-nav_guide = NodePath("../../NavEntityGuide3D")
+nav_guide = NodePath("../NavEntityGuide3D")
 idle_timer = NodePath("Timer")
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
@@ -247,17 +249,17 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=1883496829 node_paths=PackedStringArray("guide", "sight", "root")]
 script = ExtResource("7_bfxyu")
-max_item_use_distance = 0.75
-guide = NodePath("../../NavEntityGuide3D")
+guide = NodePath("../NavEntityGuide3D")
 sight = NodePath("../../../Sight3D")
+max_item_use_distance = 0.75
 lose_target_state = "Wandering"
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="NavEntityGuide3D" type="Node" parent="Controller3D" unique_id=377578045 node_paths=PackedStringArray("nav", "entity")]
+[node name="NavEntityGuide3D" type="Node" parent="Controller3D/Default" unique_id=377578045 node_paths=PackedStringArray("nav", "entity")]
 script = ExtResource("8_elujw")
-nav = NodePath("../../NavigationAgent3D")
-entity = NodePath("../..")
+nav = NodePath("../../../NavigationAgent3D")
+entity = NodePath("../../..")
 face_interpolation = 0.1
 metadata/_custom_type_script = "uid://c5asagc5dswqt"
 
@@ -276,20 +278,6 @@ death_drop_mode = 1
 metadata/_custom_type_script = "uid://bpmbg0e28ujs7"
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1081978445]
-
-[node name="Node" type="Node" parent="." unique_id=1936843058]
-
-[node name="FollowNode3D" type="Node3D" parent="Node" unique_id=1527888734 node_paths=PackedStringArray("target")]
-script = ExtResource("13_121pw")
-target = NodePath("../..")
-metadata/_custom_type_script = "uid://c6m4guogk1s1y"
-
-[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="Node/FollowNode3D" unique_id=2055379880]
-
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="." unique_id=1901715806]
-remote_path = NodePath("../Node/FollowNode3D/VisibleOnScreenNotifier3D")
-update_rotation = false
-update_scale = false
 
 [node name="BlenderVisuals" type="Node3D" parent="." unique_id=71307781]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
@@ -338,5 +326,24 @@ metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1632674445]
 shape = SubResource("SphereShape3D_nw5ty")
+
+[node name="CullingController3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=844525548 node_paths=PackedStringArray("root", "visibility_control_list")]
+aabb = AABB(-0.2, 0.75, -0.2, 0.4, 1.2, 0.4)
+script = ExtResource("15_nj0qj")
+root = NodePath("..")
+on_screen_process_radius = 85.0
+off_screen_process_radius = 18.0
+on_screen_visible_radius = 85.0
+visibility_control_list = [NodePath("../BlenderVisuals/Visuals/Body"), NodePath("../BlenderVisuals/Visuals/Wings"), NodePath("../BlenderVisuals/Visuals/Stinger"), NodePath("../BlenderVisuals/Visuals/Wings2")]
+control_visibility_deep = false
+visibility_range_fade_margin = 10.0
+
+[node name="IntervalStaggerer" type="Node" parent="CullingController3D" unique_id=948510164 node_paths=PackedStringArray("target_methods")]
+script = ExtResource("16_t5evv")
+base_interval = 0.3
+target_methods = {
+NodePath(".."): &"evaluate_culling"
+}
+metadata/_custom_type_script = "uid://73ya7jxulyl4"
 
 [editable path="BlenderVisuals/Visuals"]

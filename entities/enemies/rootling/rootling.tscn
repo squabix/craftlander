@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://doai6uyyht5am" path="res://entities/enemies/rootling/rootling.gd" id="1_wtogd"]
 [ext_resource type="Resource" uid="uid://o4s4d0gqgsng" path="res://entities/enemies/rootling/rootling_move_mode.tres" id="2_f0qrw"]
-[ext_resource type="Script" uid="uid://crmxhu5iujbq1" path="res://entities/enemies/rootling/rootling_controller.gd" id="2_nauqg"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="3_ihgra"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="3_wtogd"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="4_nauqg"]
@@ -15,12 +14,13 @@
 [ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="10_v53xr"]
 [ext_resource type="Script" uid="uid://cf04j3voj4xyc" path="res://entities/npc_states/wandering_state.gd" id="11_7mn0t"]
 [ext_resource type="Script" uid="uid://c5asagc5dswqt" path="res://common3d/entity/entity_guide/nav_entity_guide3d.gd" id="11_8jseq"]
-[ext_resource type="Script" uid="uid://c6m4guogk1s1y" path="res://common/follow_node3d.gd" id="12_4es1i"]
+[ext_resource type="Script" uid="uid://ccwod33h53a5s" path="res://common3d/controller/entity_controller3d.gd" id="11_hswny"]
 [ext_resource type="Script" uid="uid://pdvlr6l3n04n" path="res://entities/npc_states/chasing_state.gd" id="13_7mn0t"]
 [ext_resource type="PackedScene" uid="uid://bl745esge18tq" path="res://entities/enemies/rootling/rootling.blend" id="13_v4fp6"]
 [ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="16_f0qrw"]
 [ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="17_rvntx"]
 [ext_resource type="Script" uid="uid://ljihr86cv3xk" path="res://common3d/item_visuals_container_3d.gd" id="20_geuk7"]
+[ext_resource type="Script" uid="uid://bp5ab438ufrus" path="res://common3d/culling_controller3d.gd" id="20_hswny"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://clw23t4rpt3rl" path="res://common/inventory_system/animation/item_anim_tree_state_machine.tres" id="21_5b15m"]
 [ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="21_40hqq"]
 [ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="21_uefcv"]
@@ -33,6 +33,7 @@
 [ext_resource type="Script" uid="uid://bwd4jx8u5uct2" path="res://common/inventory_system/item_holder3d.gd" id="27_7307j"]
 [ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/tools/shoddy_mace/shoddy_mace_item.tres" id="29_5b15m"]
 [ext_resource type="PackedScene" uid="uid://h3veu2e18ij1" path="res://entities/entity_health_bar.tscn" id="33_c3uxn"]
+[ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="34_hswny"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
 script = ExtResource("3_wtogd")
@@ -574,10 +575,12 @@ script = ExtResource("8_8jseq")
 item = ExtResource("29_5b15m")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
-[node name="Rootling" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "horizontal_rotation_target", "vertical_rotation_target")]
+[node name="Rootling" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "item_holder", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
 script = ExtResource("1_wtogd")
 anim_tree = NodePath("AnimationTree")
+item_holder = NodePath("ItemHolder3D")
+culling_controller = NodePath("CullingController3D")
 type = "Rootling"
 move_mode = ExtResource("2_f0qrw")
 horizontal_rotation_target = NodePath(".")
@@ -588,6 +591,24 @@ metadata/_custom_type_script = "uid://bki5ij8task16"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2121250733]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_3emv6")
+
+[node name="CullingController3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=1066206516 node_paths=PackedStringArray("root", "visibility_control_list")]
+aabb = AABB(-1, 0, -1, 2, 2, 2)
+script = ExtResource("20_hswny")
+root = NodePath("..")
+on_screen_process_radius = 110.0
+off_screen_process_radius = 24.0
+on_screen_visible_radius = 110.0
+visibility_control_list = [NodePath("../Visuals")]
+visibility_range_fade_margin = 10.0
+
+[node name="IntervalStaggerer" type="Node" parent="CullingController3D" unique_id=171446592 node_paths=PackedStringArray("target_methods")]
+script = ExtResource("34_hswny")
+base_interval = 0.3
+target_methods = {
+NodePath(".."): &"evaluate_culling"
+}
+metadata/_custom_type_script = "uid://73ya7jxulyl4"
 
 [node name="Hurtbox3D" type="Area3D" parent="." unique_id=884870034 node_paths=PackedStringArray("health", "knockback_entity")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -632,11 +653,8 @@ from_state_whitelist = Array[String](["Wandering"])
 signal_name = &"found_target"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 
-[node name="Controller3D" type="Node" parent="." unique_id=1315753818 node_paths=PackedStringArray("sight", "on_screen_notifier", "initial_entity")]
-script = ExtResource("2_nauqg")
-sight = NodePath("../Sight3D")
-on_screen_notifier = NodePath("../Node/FollowNode3D/VisibleOnScreenNotifier3D")
-initial_entity = NodePath("..")
+[node name="Controller3D" type="Node" parent="." unique_id=1315753818]
+script = ExtResource("11_hswny")
 metadata/_custom_type_script = "uid://ccwod33h53a5s"
 
 [node name="Default" type="Node" parent="Controller3D" unique_id=1574117420 node_paths=PackedStringArray("initial_state", "root")]
@@ -689,20 +707,6 @@ death_drop_mode = 1
 metadata/_custom_type_script = "uid://bpmbg0e28ujs7"
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1081978445]
-
-[node name="Node" type="Node" parent="." unique_id=1936843058]
-
-[node name="FollowNode3D" type="Node3D" parent="Node" unique_id=1527888734 node_paths=PackedStringArray("target")]
-script = ExtResource("12_4es1i")
-target = NodePath("../..")
-metadata/_custom_type_script = "uid://c6m4guogk1s1y"
-
-[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="Node/FollowNode3D" unique_id=2055379880]
-
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="." unique_id=1901715806]
-remote_path = NodePath("../Node/FollowNode3D/VisibleOnScreenNotifier3D")
-update_rotation = false
-update_scale = false
 
 [node name="Visuals" parent="." unique_id=1269952913 instance=ExtResource("13_v4fp6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
