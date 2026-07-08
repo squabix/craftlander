@@ -2,6 +2,5 @@
 
 [resource]
 resource_name = "Material"
-cull_mode = 2
 albedo_color = Color(0.9735407, 0.81312996, 0.598258, 1)
 roughness = 0.6
