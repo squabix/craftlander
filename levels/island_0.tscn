@@ -2033,7 +2033,7 @@ metadata/_custom_type_script = "uid://dpyn65ul3fu6v"
 [node name="EntityPopulator" type="Node3D" parent="." unique_id=2086147732 node_paths=PackedStringArray("populate_timer")]
 script = ExtResource("16_ai0lq")
 entity_quantities = Dictionary[ExtResource("17_lx06o"), int]({
-ExtResource("17_tks2c"): 12
+ExtResource("17_tks2c"): 30
 })
 populate_timer = NodePath("../EntityPopulateTimer")
 
