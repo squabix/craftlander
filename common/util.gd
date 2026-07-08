@@ -186,8 +186,12 @@ static func find_stored_child_of_class(dictionary: Dictionary, parent: Node) -> 
 	return dictionary[parent]
 
 
-static func find_children_of_class(parent: Node, class_string: String) -> Array[Node]:
+static func find_children_of_class(parent: Node, class_string: String, include_parent := false) -> Array[Node]:
 	var children: Array[Node] = []
+	
+	if include_parent and is_object_class(parent, class_string):
+		children.append(parent)
+	
 	for child in parent.get_children():
 		if is_object_class(child, class_string):
 			children.append(child)
@@ -386,13 +390,13 @@ static func safe_free(node: Variant) -> bool:
 	return true
 
 
-static func set_visibility_deep(node: Node, to: bool) -> void:
-	if not is_instance_valid(node):
+static func set_visibility_deep(node: Node, to: bool, exclude: Array[Node] = []) -> void:
+	if not is_instance_valid(node) or node in exclude:
 		return
 	if node is CanvasItem or node is Node3D:
 		node.visible = to
 	for child in node.get_children():
-		set_visibility_deep(child, to)
+		set_visibility_deep(child, to, exclude)
 
 
 # TODO: Make own node
