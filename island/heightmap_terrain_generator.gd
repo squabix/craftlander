@@ -13,7 +13,7 @@ extends Node3D
 @export_custom(PROPERTY_HINT_NONE, "suffix:px") var map_resolution := Vector2i(1, 1)
 
 var mesh: PlaneMesh
-var sample_heightmap: Callable
+var heightmap_sampler: Callable
 
 
 func _ready() -> void:
@@ -59,10 +59,10 @@ func calculate_single_normal(x: int, y: int, dx: float, dy: float) -> Vector3:
 	var y0 := clampi(y - 1, 0, map_resolution.y - 1)
 	var y1 := clampi(y + 1, 0, map_resolution.y - 1)
 
-	var h_l: float = sample_heightmap.call(x0, y) * map_size.y
-	var h_r: float = sample_heightmap.call(x1, y) * map_size.y
-	var h_d: float = sample_heightmap.call(x, y0) * map_size.y
-	var h_u: float = sample_heightmap.call(x, y1) * map_size.y
+	var h_l: float = heightmap_sampler.call(x0, y) * map_size.y
+	var h_r: float = heightmap_sampler.call(x1, y) * map_size.y
+	var h_d: float = heightmap_sampler.call(x, y0) * map_size.y
+	var h_u: float = heightmap_sampler.call(x, y1) * map_size.y
 
 	# Horizontal and vertical rate of change
 	var dhdx := (h_r - h_l) / dx
@@ -148,14 +148,18 @@ func resize_to_resolution(image: Image) -> Image:
 	return image
 
 
-func get_sample_heightmap_callable(image: Image) -> Callable:
+func get_heightmap_sampler(image: Image) -> Callable:
 	return func(x: int, y: int) -> float: return image.get_pixel(x, y).r
+
+
+func default_heightmap_sampler() -> void:
+	heightmap_sampler = get_heightmap_sampler((shader_get("heightmap") as ImageTexture).get_image())
 
 
 func get_pixel_position(x: int, y: int) -> Vector3:
 	return global_transform * Vector3(
 		(float(x) / float(map_resolution.x - 1)) * map_size.x - map_size.x / 2.0,
-		sample_heightmap.call(x, y) * map_size.y,
+		heightmap_sampler.call(x, y) * map_size.y,
 		(float(y) / float(map_resolution.y - 1)) * map_size.z - map_size.z / 2.0,
 	)
 
@@ -169,6 +173,6 @@ func _generate_heightmap_image() -> void:
 
 
 func _finalize_generation(output_image: Image) -> void:
+	heightmap_sampler = get_heightmap_sampler(output_image)
 	var image_texture := update_shader_texture(output_image)
 	update_collision_shape(image_texture)
-	EventBus.trigger("island_terrain_generated")

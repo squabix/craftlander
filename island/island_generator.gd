@@ -17,6 +17,14 @@ extends HeightMapTerrainGenerator
 var texture_images: Dictionary[Texture2D, Image]
 
 
+func _ready() -> void:
+	if generate_on_ready:
+		generate.call_deferred()
+	else:
+		default_heightmap_sampler()
+		EventBus.trigger.call_deferred("island_terrain_generated")
+
+
 func is_missing_textures() -> bool:
 	return (
 			noise_textures.is_empty()
@@ -152,5 +160,5 @@ func _generate_heightmap_image() -> void:
 
 
 func _finalize_generation(heightmap_image: Image) -> void:
-	sample_heightmap = get_sample_heightmap_callable(heightmap_image)
 	super(heightmap_image)
+	EventBus.trigger("island_terrain_generated")
