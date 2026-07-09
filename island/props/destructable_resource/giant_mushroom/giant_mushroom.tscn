@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="15_vwjnp"]
 [ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="16_5epkt"]
 [ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="17_wdv32"]
+[ext_resource type="ArrayOccluder3D" uid="uid://t5b0oo38rw5o" path="res://island/props/destructable_resource/giant_mushroom/giant_mushroom.occ" id="19_uemo8"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_r4p3j"]
 height = 10.25
@@ -220,12 +221,13 @@ metadata/_custom_type_script = "uid://bqonxtntgndfr"
 script = ExtResource("6_pu6jt")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Falling" type="Node" parent="StateMachine" unique_id=490514813 node_paths=PackedStringArray("hurtbox_collision", "continue_fall_area", "trunk", "animation_player", "falling_mesh_instances")]
+[node name="Falling" type="Node" parent="StateMachine" unique_id=490514813 node_paths=PackedStringArray("hurtbox_collision", "continue_fall_area", "trunk", "animation_player", "occluder_instance", "falling_mesh_instances")]
 script = ExtResource("7_gswg4")
 hurtbox_collision = NodePath("../../Trunk/Hurtbox3D/HurtboxCollision")
 continue_fall_area = NodePath("../../Trunk/ContinueFallArea")
 trunk = NodePath("../../Trunk")
 animation_player = NodePath("../../AnimationPlayer")
+occluder_instance = NodePath("../../OccluderInstance3D")
 falling_mesh_instances = [NodePath("../../Trunk/StemMesh"), NodePath("../../Trunk/TopMesh")]
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
@@ -320,3 +322,6 @@ item_instances = Array[ExtResource("15_vwjnp")]([SubResource("Resource_xgieu"), 
 constant = true
 size = 2
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
+
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=23111598]
+occluder = ExtResource("19_uemo8")

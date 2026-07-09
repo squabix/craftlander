@@ -4,6 +4,7 @@ extends State
 @export var continue_fall_area: Area3D
 @export var trunk: Node3D
 @export var animation_player: VisibilityAnimationPlayer
+@export var occluder_instance: OccluderInstance3D
 @export var falling_mesh_instances: Array[MeshInstance3D]
 
 const FALL_ACCEL := 0.002
@@ -16,6 +17,9 @@ func enter() -> void:
 	fall_speed = 0.0
 	fall_direction = root.hurtbox.last_hurt_direction
 	hurtbox_collision.disabled = true
+	
+	occluder_instance.queue_free()
+	
 	for instance in falling_mesh_instances:
 		MeshInstanceAggregator3D.disassociate_mesh_instance(instance)
 	animation_player.disable_visibility_updates()
