@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://ckqbqx6uikqth" path="res://island/props/item_dropper_props/forest_dropper_prop.tscn" id="21_m5ony"]
 [ext_resource type="PackedScene" uid="uid://dxwqj0o18t8o2" path="res://island/docking/dock.tscn" id="22_yjw2i"]
 [ext_resource type="PackedScene" uid="uid://c2ss32j8grhn8" path="res://boat/boat1.tscn" id="23_hfmnx"]
+[ext_resource type="Resource" uid="uid://cruqoikfgerld" path="res://entities/enemies/bee/bee_island_resource.tres" id="24_6o2sf"]
 [ext_resource type="Script" uid="uid://6poppt70f3rp" path="res://island/island_water.gd" id="24_fb2aq"]
 [ext_resource type="Script" uid="uid://dpyn65ul3fu6v" path="res://common3d/mesh_instance_aggregator3d.gd" id="29_b35xs"]
 
@@ -2033,7 +2034,8 @@ metadata/_custom_type_script = "uid://dpyn65ul3fu6v"
 [node name="EntityPopulator" type="Node3D" parent="." unique_id=2086147732 node_paths=PackedStringArray("populate_timer")]
 script = ExtResource("16_ai0lq")
 entity_quantities = Dictionary[ExtResource("17_lx06o"), int]({
-ExtResource("17_tks2c"): 30
+ExtResource("17_tks2c"): 30,
+ExtResource("24_6o2sf"): 12
 })
 populate_timer = NodePath("../EntityPopulateTimer")
 

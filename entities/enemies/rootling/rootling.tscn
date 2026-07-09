@@ -674,14 +674,23 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Timer" type="Timer" parent="Controller3D/Default/Wandering" unique_id=1600727395]
 
-[node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=1883496829 node_paths=PackedStringArray("item_holder", "guide", "sight", "root")]
+[node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=1883496829 node_paths=PackedStringArray("item_holder", "guide", "sight", "interval_staggerer", "root")]
 script = ExtResource("13_7mn0t")
 item_holder = NodePath("../../../ItemHolder3D")
 guide = NodePath("../../NavEntityGuide3D")
 sight = NodePath("../../../Sight3D")
+interval_staggerer = NodePath("IntervalStaggerer")
 lose_target_state = "Wandering"
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="IntervalStaggerer" type="Node" parent="Controller3D/Default/Chasing" unique_id=1668925528 node_paths=PackedStringArray("target_methods")]
+script = ExtResource("34_hswny")
+base_interval = 0.25
+target_methods = {
+NodePath(".."): &"update_path"
+}
+metadata/_custom_type_script = "uid://73ya7jxulyl4"
 
 [node name="NavEntityGuide3D" type="Node" parent="Controller3D" unique_id=377578045 node_paths=PackedStringArray("nav", "entity")]
 script = ExtResource("11_8jseq")

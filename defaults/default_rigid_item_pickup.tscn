@@ -48,14 +48,13 @@ limit = 3.0
 axes = SubResource("Resource_nmw4j")
 metadata/_custom_type_script = "uid://nqxuax0fbdf8"
 
-[node name="CullingController3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=807598888 node_paths=PackedStringArray("root", "visibility_control_list")]
+[node name="CullingController3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=807598888 node_paths=PackedStringArray("root")]
 aabb = AABB(-1, 0, -1, 2, 2, 2)
 script = ExtResource("6_qvpsa")
 root = NodePath("..")
 on_screen_process_radius = 0.0
 off_screen_process_radius = 0.0
 on_screen_visible_radius = 55.0
-visibility_control_list = [NodePath("..")]
 visibility_range_fade_margin = 10.0
 
 [node name="IntervalStaggerer" type="Node" parent="CullingController3D" unique_id=1935407582 node_paths=PackedStringArray("target_methods")]
