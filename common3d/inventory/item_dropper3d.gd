@@ -99,7 +99,7 @@ func die() -> void:
 		# Drop next available item(s)
 		DeathDropMode.NEXT:
 			for i in death_drop_quantity:
-				drop(inventory.get_first_empty_index())
+				drop(inventory.find_empty_index())
 
 		# Drop everything
 		DeathDropMode.EVERYTHING:

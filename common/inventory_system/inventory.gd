@@ -13,15 +13,16 @@ signal item_changed(index: int)
 
 
 func _ready() -> void:
-	process_mode = Node.PROCESS_MODE_ALWAYS
 	item_instances.resize(size)
 	for i in item_instances.size():
 		_initialize_slot(i)
+		
+	# Emit instance changed whenever item changed
 	item_changed.connect(instance_changed.emit)
 
 
 func _to_string() -> String:
-	return "Inventory of %s" % str(get_occupied_indexes())
+	return "Inventory of %s" % str(item_instances.filter(func(i): return i != null))
 
 
 func get_item(index: int) -> Item:
@@ -37,23 +38,22 @@ func has_index(index: int) -> bool:
 
 
 func is_occupied(index: int) -> bool:
-	return index >= 0 and index < size and item_instances[index] != null and item_instances[index].item != null
+	return has_index(index) and item_instances[index] != null and item_instances[index].item != null
 
 
-func get_first_empty_index() -> int:
+func find_first_empty_index() -> int:
 	return item_instances.find(null)
 
 
-func get_instance_index(item_instance: ItemInstance) -> int:
+func find_instance(item_instance: ItemInstance) -> int:
 	return item_instances.find(item_instance)
 
 
-func get_item_index(item: Item) -> int:
+func find_item(item: Item) -> int:
+	if item == null:
+		return find_first_empty_index()
 	for index in len(item_instances):
-		if not is_occupied(index):
-			continue
-		var instance := item_instances[index]
-		if not instance.item.equals(item):
+		if not item.equals(get_item(index)):
 			continue
 		return index
 	return -1
@@ -63,20 +63,22 @@ func is_empty() -> bool:
 	return item_instances.all(func(instance: ItemInstance) -> bool: return instance == null)
 
 
-func get_occupied_indexes() -> Array:
-	return get_all_indexes().filter(
+func get_occupied_indicies() -> Array:
+	return get_all_indicies().filter(
 		func(index: int) -> bool:
 			return is_occupied(index)
 	)
 
 
-func get_all_indexes() -> Array:
-	return range(len(item_instances))
+func get_all_indicies() -> Array[int]:
+	var indicies: Array[int]
+	indicies.assign(range(len(item_instances)))
+	return indicies
 
 
 func get_item_quantities() -> Dictionary[Item, int]:
 	var quantities: Dictionary[Item, int] = { }
-	for index in get_occupied_indexes():
+	for index in get_occupied_indicies():
 		var instance := get_instance(index)
 		if quantities.has(instance.item):
 			quantities[instance.item] += instance.quantity
@@ -96,8 +98,9 @@ func get_item_quantity(item: Item) -> int:
 func has_room(item: Item, quantity: int) -> bool:
 	if constant:
 		return false
-
-	if item == null or quantity <= 0:
+	if item == null:
+		return true
+	if quantity <= 0:
 		return true
 
 	# Check space inside existing stackable matching item slots
@@ -105,26 +108,26 @@ func has_room(item: Item, quantity: int) -> bool:
 	if remaining_quantity <= 0:
 		return true
 
-	# Check if the remaining empty slots can handle what's left over
-	var total_empty_slot_capacity := count_empty_slots() * item.max_quantity
+	# Check if the remaining empty slots can handle what is left over
+	var total_empty_slot_capacity := count_empty() * item.max_quantity
 	return remaining_quantity <= total_empty_slot_capacity
 
 
-func count_empty_slots() -> int:
-	var count := 0
-	for instance in item_instances:
-		if instance == null:
-			count += 1
-	return count
+func count_empty() -> int:
+	return item_instances.count(null)
 
 
 func get_stackable_room(item: Item) -> int:
+	if item == null:
+		printerr("%s cannot find stackable room for null item")
+		return 0
+	
 	if item.max_quantity <= 1:
 		return 0
 
 	var room := 0
 
-	for index in get_occupied_indexes():
+	for index in get_occupied_indicies():
 		var instance := get_instance(index)
 		if not instance.is_stackable_with(item):
 			continue
@@ -133,28 +136,27 @@ func get_stackable_room(item: Item) -> int:
 	return room
 
 
-func add_item(new_item: Item, quantity: int = 1, must_reach_quantity: bool = false) -> int:
+func add_item(item: Item, quantity: int = 1, must_reach_quantity: bool = false) -> int:
 	if constant:
 		return quantity
-
-	if new_item == null:
+	if item == null:
 		return quantity
 
 	if quantity <= 0:
-		printerr("%s cannot add %s with quantity of %s" % [self, new_item, quantity])
+		printerr("%s cannot add %s with quantity of %s" % [self, item, quantity])
 		return 0
 
 	var original_quantity := quantity
 
-	if new_item.max_quantity > 1:
-		quantity = fill_existing_stacks(new_item, quantity)
+	if item.max_quantity > 1:
+		quantity = fill_existing_stacks(item, quantity)
 
 	if quantity > 0:
-		quantity = create_new_stacks(new_item, quantity)
+		quantity = create_new_stacks(item, quantity)
 
 	# If didn't reach goal quantity, reverse all the work done
 	if quantity > 0 and must_reach_quantity:
-		remove_item(new_item, original_quantity - quantity)
+		remove_item(item, original_quantity - quantity)
 		return original_quantity
 
 	return quantity
@@ -168,8 +170,8 @@ func fill_existing_stacks(new_item: Item, quantity: int) -> int:
 	if new_item == null:
 		return quantity
 
-	var indexes := get_occupied_indexes()
-	for index in indexes:
+	var indicies := get_occupied_indicies()
+	for index in indicies:
 		var instance := get_instance(index)
 
 		if not instance.is_stackable_with(new_item):
@@ -191,8 +193,8 @@ func create_instance(index: int, item: Item, quantity: int, overwrite_occupied :
 	if item == null:
 		printerr("%s cannot create instance at %s with null item" % [self, index])
 		return null
-	if quantity == 0:
-		printerr("%s cannot create instance at %s with quantity of zero" % [self, index])
+	if quantity <= 0:
+		printerr("%s cannot create instance at %s with quantity of" % [self, index, quantity])
 		return null
 
 	if index == -1:
@@ -201,26 +203,32 @@ func create_instance(index: int, item: Item, quantity: int, overwrite_occupied :
 		return null
 
 	var instance := item.instantiate(quantity)
-	instance.emptied.connect(func() -> void: empty_instance(get_instance_index(instance)))
+	instance.emptied.connect(func() -> void: empty_instance(find_instance(instance)))
 	item_instances[index] = instance
 	item_changed.emit(index)
 	return instance
 
 
-func create_new_stacks(new_item: Item, quantity: int) -> int:
+func create_new_stacks(item: Item, quantity: int) -> int:
+	if item == null:
+		printerr("%s cannot create stacks of null item")
+		return quantity
+	
 	while quantity > 0:
-		var empty_index := get_first_empty_index()
+		var empty_index := find_first_empty_index()
 		if empty_index == -1:
 			break
 
-		var to_add: int = min(quantity, new_item.max_quantity)
-		create_instance(empty_index, new_item, to_add)
+		var to_add: int = min(quantity, item.max_quantity)
+		create_instance(empty_index, item, to_add)
 		quantity -= to_add
 	return quantity
 
 
 func remove_item(item: Item, quantity: int, must_reach_quantity: bool = false) -> int:
 	if constant:
+		return quantity
+	if item == null:
 		return quantity
 	if quantity == 0:
 		return 0
@@ -257,28 +265,39 @@ func remove_instance(index: int, quantity: int) -> int:
 		instance.quantity -= quantity
 		instance_changed.emit(index)
 		return 0
-	else:
-		quantity -= instance.quantity
-		empty_instance(index)
-		return quantity
+	
+	quantity -= instance.quantity
+	empty_instance(index)
+	return quantity
 
 
-func empty_instance(index: int) -> void:
+func empty_instance(index: int) -> ItemInstance:
 	if not has_index(index):
 		return
-
+	
+	var instance := item_instances[index]
 	item_instances[index] = null
 	item_changed.emit(index)
+	return instance
 
 
 func give_item(item: Item, quantity: int, to: Inventory) -> int:
+	if not is_instance_valid(to):
+		printerr("%s cannot give %s to invalid inventory %s" % [self, item, to])
+		return quantity
+	if item == null:
+		return quantity
+	if quantity == 0:
+		return 0
 	var available := quantity if constant else quantity - remove_item(item, quantity)
 	return to.add_item(item, available)
 
 
 func clear() -> void:
+	var filled_indicies: Array[int]
+	filled_indicies.assign(range(size).filter(func(i): return get_instance(i) != null))
 	item_instances.fill(null)
-	for i in size:
+	for i in filled_indicies:
 		item_changed.emit(i)
 
 
@@ -297,18 +316,19 @@ func swap(index1: int, index2: int) -> bool:
 	item_changed.emit(index2)
 	return true
 
-	#instance_changed.emit(index1)
-	#instance_changed.emit(index2)
-
 
 func give_everything(to: Inventory) -> void:
-	for index in get_occupied_indexes():
+	if not is_instance_valid(to):
+		printerr("%s cannot give everything to invalid inventory: %s")
+		return
+	
+	for index in get_occupied_indicies():
 		var instance := get_instance(index)
 		give_item(instance.item, instance.quantity, to)
 
 
 func get_random_index_weighted() -> int:
-	var occupied := get_occupied_indexes()
+	var occupied := get_occupied_indicies()
 	var total_weight := 0
 
 	for index in occupied:
