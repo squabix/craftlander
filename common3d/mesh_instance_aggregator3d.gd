@@ -4,10 +4,14 @@ extends Node3D
 
 static var aggregated_mesh_instances: Dictionary[MeshInstance3D, MeshInstanceAggregator3D]
 
+@export_tool_button("Aggregate", "MultiMesh") var aggregate_action: Callable = aggregate
+@export_tool_button("Reset", "Reload") var reset_action: Callable = reset
+
 @export var mesh_source: Node
 
 @export var aggregate_on_ready := false
 @export var use_material_override := true
+
 @export var multi_instance_unformatted_name := "MultiMesh_%s"
 
 @export_group("Instance Visibility")
@@ -17,11 +21,6 @@ static var aggregated_mesh_instances: Dictionary[MeshInstance3D, MeshInstanceAgg
 var generated_multimeshes: Array[MultiMeshInstance3D] = []
 var instance_registry: Dictionary[MeshInstance3D, MultiMeshData] = { }
 
-@export_tool_button("Aggregate", "MultiMesh")
-var aggregate_action: Callable = aggregate
-@export_tool_button("Reset", "Reload")
-var reset_action: Callable = reset
-
 
 static func disassociate_mesh_instance(instance: MeshInstance3D) -> void:
 	var aggregator: MeshInstanceAggregator3D = aggregated_mesh_instances.get(instance, null)
@@ -29,17 +28,17 @@ static func disassociate_mesh_instance(instance: MeshInstance3D) -> void:
 		if is_instance_valid(instance):
 			printerr("Could not find aggregator for %s" % instance)
 		return
-	
+
 	var data: MultiMeshData = aggregator.instance_registry.get(instance, null)
 	if data == null:
 		printerr("%s could not find data for %s in instance registry" % [aggregator, instance])
 		return
-	
+
 	aggregator.disconnect_visibility_inversion(instance)
 	data.hide()
 	aggregator.instance_registry.erase(instance)
 	aggregated_mesh_instances.erase(instance)
-	
+
 	if aggregator.invert_instance_visibility:
 		instance.show()
 
@@ -140,7 +139,7 @@ func aggregate() -> void:
 func connect_visibility_inversion(instance: MeshInstance3D) -> void:
 	if Engine.is_editor_hint():
 		return
-	
+
 	if not invert_instance_visibility:
 		return
 
@@ -154,7 +153,7 @@ func connect_visibility_inversion(instance: MeshInstance3D) -> void:
 func disconnect_visibility_inversion(instance: MeshInstance3D) -> void:
 	if Engine.is_editor_hint():
 		return
-	
+
 	if not is_instance_valid(instance):
 		return
 
@@ -164,18 +163,21 @@ func disconnect_visibility_inversion(instance: MeshInstance3D) -> void:
 
 	instance.visibility_changed.disconnect(callable)
 
+
 func reset() -> void:
 	# Disconnect all bound visibility signals to prevent leaks
 	for instance in instance_registry.keys():
+		if not is_instance_valid(instance):
+			continue
 		disconnect_visibility_inversion(instance)
 
 	# Remove generated multi meshes
 	for mm in generated_multimeshes:
 		Util.safe_free(mm)
 	generated_multimeshes.clear()
-	
+
 	for instance in aggregated_mesh_instances:
-		if aggregated_mesh_instances[instance] == self:
+		if aggregated_mesh_instances.get(instance, null):
 			aggregated_mesh_instances.erase(instance)
 
 	# Make all the original individual mesh instances visible again
