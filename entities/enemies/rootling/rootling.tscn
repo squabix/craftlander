@@ -690,6 +690,7 @@ base_interval = 0.25
 target_methods = {
 NodePath(".."): &"update_path"
 }
+initial_time_left = 5.0
 metadata/_custom_type_script = "uid://73ya7jxulyl4"
 
 [node name="NavEntityGuide3D" type="Node" parent="Controller3D" unique_id=377578045 node_paths=PackedStringArray("nav", "entity")]

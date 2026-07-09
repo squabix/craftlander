@@ -353,6 +353,7 @@ base_interval = 0.3
 target_methods = {
 NodePath(".."): &"evaluate_culling"
 }
+initial_time_left = 3.0
 metadata/_custom_type_script = "uid://73ya7jxulyl4"
 
 [editable path="BlenderVisuals/Visuals"]
