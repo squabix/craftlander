@@ -189,7 +189,6 @@ func reset() -> void:
 
 
 func set_instance_visibility(instance: MeshInstance3D, visibility: bool) -> void:
-	print("Setting visibility for %s" % instance)
 	if not instance_registry.has(instance):
 		return
 

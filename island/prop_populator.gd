@@ -59,7 +59,6 @@ func add_prop(prop: IslandProp, point: Vector2i, spawn_position: Vector3) -> Nod
 	# If running inside the editor, set the owner to the current scene root
 	if Engine.is_editor_hint():
 		instance.set.call_deferred("owner", get_tree().edited_scene_root)
-		print("Set owner")
 	
 	# Assign prop instance in dictionaries
 	props[spawn_position] = instance
