@@ -1,5 +1,5 @@
 @tool
-extends HeightmapTerrainGenerator
+extends HeightMapTerrainGenerator
 
 @export var noise_textures: Array[Texture2D]
 @export var taper_gradient_texture: GradientTexture2D
@@ -12,16 +12,39 @@ extends HeightmapTerrainGenerator
 @export var domain_warp_mask_texture: GradientTexture2D
 @export_range(0.0, 1.0) var ridged_noise_influence := 0.4
 @export var taper_power := 2.0
-@export_range(1.0, 5.0, 0.1) var beach_flattening := 2.0
+@export var beach_flattening := 2.0
+
+var texture_images: Dictionary[Texture2D, Image]
 
 
 func is_missing_textures() -> bool:
-	return noise_textures.is_empty() or taper_gradient_texture == null or absolute_gradient_texture == null or domain_warp_mask_texture == null
+	return (
+			noise_textures.is_empty()
+			or taper_gradient_texture == null
+			or absolute_gradient_texture == null
+			or domain_warp_mask_texture == null
+	)
+
+
+func load_image_textures() -> Dictionary[Texture2D, Image]:
+	var all_textures: Array[Texture2D] = [
+		taper_gradient_texture,
+		absolute_gradient_texture,
+		domain_warp_mask_texture,
+	]
+	all_textures.append_array(noise_textures)
+
+	var filtered_textures := all_textures.filter(func(t) -> bool: return t != null)
+
+	var loaded_texture_images: Dictionary[Texture2D, Image]
+	for texture in filtered_textures:
+		loaded_texture_images[texture] = resize_to_resolution(texture.get_image())
+	return loaded_texture_images
 
 
 func seed_noise_textures() -> void:
 	if seed_override != 0:
-		Main.base_seed = (seed_override)
+		Main.base_seed = seed_override
 	
 	var hash_offset := hash(get_parent().name) # Add a hash offset based on name of island
 	
@@ -32,17 +55,19 @@ func seed_noise_textures() -> void:
 		noise_textures[i].noise.seed = Main.base_seed + hash_offset + i
 
 
-func generate_image_texture() -> ImageTexture:
+func generate() -> void:
 	seed_noise_textures()
-	var output_image := create_empty_image()
-
 	if is_missing_textures():
-		printerr(self, " is missing required textures to generate")
-		return ImageTexture.create_from_image(output_image)
+		printerr("%s is missing required textures to generate" % self)
+		_finalize_generation.call_deferred(create_empty_image())
+		return
+	texture_images = load_image_textures()
+	super()
 
-	var texture_images := load_image_textures()
 
-	# Extract direct object references here to store them on the local stack in order to reduce lookups
+func _generate_heightmap_image() -> void:
+	var heightmap_image := create_empty_image()
+	
 	var taper_gradient_image: Image = texture_images[taper_gradient_texture]
 	var absolute_gradient_image: Image = texture_images[absolute_gradient_texture]
 	var warp_mask_image: Image = texture_images[domain_warp_mask_texture]
@@ -121,47 +146,11 @@ func generate_image_texture() -> ImageTexture:
 				value = abs_val
 
 			value = clampf(value, 0.0, 1.0)
-			output_image.set_pixel(x, y, Color(value, value, value))
+			heightmap_image.set_pixel(x, y, Color(value, value, value))
 
-	sample_heightmap = get_sample_heightmap_callable(output_image)
-
-	return ImageTexture.create_from_image(output_image)
+	_finalize_generation.call_deferred(heightmap_image)
 
 
-func generate() -> void:
-	super()
-	EventBus.trigger("island_terrain_generated")
-
-
-func load_image_textures() -> Dictionary[Texture2D, Image]:
-	var all_textures: Array[Texture2D] = [
-		taper_gradient_texture,
-		absolute_gradient_texture,
-		domain_warp_mask_texture,
-	]
-	all_textures.append_array(noise_textures)
-
-	var filtered_textures := all_textures.filter(func(t): return t != null)
-
-	var loaded_texture_images: Dictionary[Texture2D, Image]
-	for texture in filtered_textures:
-		loaded_texture_images[texture] = resize_to_resolution(texture.get_image())
-	return loaded_texture_images
-
-
-func resize_to_resolution(image: Image) -> Image:
-	image.resize(map_resolution.x, map_resolution.y, Image.INTERPOLATE_LANCZOS)
-	return image
-
-
-func create_empty_image() -> Image:
-	return Image.create_empty(
-		map_resolution.x,
-		map_resolution.y,
-		false,
-		Image.FORMAT_L8,
-	)
-
-
-func get_sample_heightmap_callable(image: Image) -> Callable:
-	return func(x: int, y: int) -> float: return image.get_pixel(x, y).r
+func _finalize_generation(heightmap_image: Image) -> void:
+	sample_heightmap = get_sample_heightmap_callable(heightmap_image)
+	super(heightmap_image)

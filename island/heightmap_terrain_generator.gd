@@ -1,19 +1,16 @@
 @tool
-class_name HeightmapTerrainGenerator
+class_name HeightMapTerrainGenerator
 extends Node3D
 
-signal updated_mesh
+@export_tool_button("Generate", "Noise") var generate_action: Callable = generate
 
-@export_tool_button("Update Mesh", "MeshInstance3D")
-var update_texture_action: Callable = update_mesh
-@export_tool_button("Generate Collision Shape", "CollisionShape3D")
-var generate_collision_shape_action: Callable = update_collision_shape
-
-@export_custom(PROPERTY_HINT_NONE, "suffix:m") var map_size := Vector3(1, 1, 1)
-@export_custom(PROPERTY_HINT_NONE, "suffix:px") var map_resolution := Vector2i(1, 1)
 @export var mesh_instance: MeshInstance3D
 @export var collision_shape: CollisionShape3D
 @export var generate_on_ready := true
+
+@export_group("Map Measurements", "map")
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var map_size := Vector3(1, 1, 1)
+@export_custom(PROPERTY_HINT_NONE, "suffix:px") var map_resolution := Vector2i(1, 1)
 
 var mesh: PlaneMesh
 var sample_heightmap: Callable
@@ -25,30 +22,15 @@ func _ready() -> void:
 
 
 func shader_set(parameter: String, to: Variant) -> void:
-	if mesh_instance == null:
-		printerr(self, " cannot set shader parameter without mesh instance")
+	if mesh_instance == null or mesh_instance.material_override == null:
 		return
-	if mesh_instance.material_override == null:
-		printerr(self, " cannot set shader parameter without mesh instance material override")
-		return
-
-	mesh_instance.material_override.set_shader_parameter(
-		parameter,
-		to,
-	)
+	mesh_instance.material_override.set_shader_parameter(parameter, to)
 
 
 func shader_get(parameter: String) -> Variant:
-	if mesh_instance == null:
-		printerr(self, " cannot set shader parameter without mesh instance")
-		return
-	if mesh_instance.material_override == null:
-		printerr(self, " cannot set shader parameter without mesh instance material override")
-		return
-
-	return mesh_instance.material_override.get_shader_parameter(
-		parameter,
-	)
+	if mesh_instance == null or mesh_instance.material_override == null:
+		return null
+	return mesh_instance.material_override.get_shader_parameter(parameter)
 
 
 func add_new_mesh() -> void:
@@ -59,20 +41,12 @@ func add_new_mesh() -> void:
 	mesh = mesh_instance.mesh
 
 
-func generate() -> void:
-	add_new_mesh()
-	var image_texture := update_shader_texture()
-	update_collision_shape(image_texture)
+func create_empty_image() -> Image:
+	return Image.create_empty(map_resolution.x, map_resolution.y, false, Image.FORMAT_L8)
 
 
-func update_mesh() -> void:
-	add_new_mesh()
-	update_shader_texture()
-	updated_mesh.emit()
-
-
-func update_shader_texture() -> ImageTexture:
-	var image_texture := generate_image_texture()
+func update_shader_texture(image: Image) -> ImageTexture:
+	var image_texture := ImageTexture.create_from_image(image)
 	shader_set("heightmap", image_texture)
 	shader_set("max_height", map_size.y)
 	shader_set("albedo_texture", image_texture)
@@ -120,28 +94,26 @@ func get_pixel_normal(x: int, y: int, radius: int = 2) -> Vector3:
 
 func update_collision_shape(image_texture: ImageTexture = null) -> void:
 	if not is_instance_valid(collision_shape):
+		printerr("%s cannot update invalid collision shape")
 		return
+
 	if image_texture == null:
 		image_texture = shader_get("heightmap")
+
 	var image := image_texture.get_image()
 	image.convert(Image.FORMAT_RF)
-	var shape := HeightMapShape3D.new()
-	shape.update_map_data_from_image(image, 0.0, map_size.y)
+
+	var shape := get_heightmap_shape(image)
 
 	collision_shape.shape = shape
 	collision_shape.scale.x = mesh.size.x / image.get_width()
 	collision_shape.scale.z = mesh.size.y / image.get_height()
 
 
-func generate_image_texture() -> ImageTexture:
-	return ImageTexture.create_from_image(
-		Image.create_empty(
-			map_resolution.x,
-			map_resolution.y,
-			false,
-			Image.FORMAT_L8,
-		),
-	)
+func get_heightmap_shape(image: Image) -> HeightMapShape3D:
+	var shape := HeightMapShape3D.new()
+	shape.update_map_data_from_image(image, 0.0, map_size.y)
+	return shape
 
 
 func align_node_to_normal(node: Node3D, px: int, py: int, conformity := 1.0) -> void:
@@ -171,9 +143,32 @@ func place_node(node: Node3D, px: int, py: int, normal_conformity := 1.0) -> voi
 	align_node_to_normal.call_deferred(node, px, py, normal_conformity)
 
 
+func resize_to_resolution(image: Image) -> Image:
+	image.resize(map_resolution.x, map_resolution.y, Image.INTERPOLATE_LANCZOS)
+	return image
+
+
+func get_sample_heightmap_callable(image: Image) -> Callable:
+	return func(x: int, y: int) -> float: return image.get_pixel(x, y).r
+
+
 func get_pixel_position(x: int, y: int) -> Vector3:
 	return global_transform * Vector3(
 		(float(x) / float(map_resolution.x - 1)) * map_size.x - map_size.x / 2.0,
 		sample_heightmap.call(x, y) * map_size.y,
 		(float(y) / float(map_resolution.y - 1)) * map_size.z - map_size.z / 2.0,
 	)
+
+func generate() -> void:
+	add_new_mesh()
+	WorkerThreadPool.add_task(_generate_heightmap_image)
+
+
+func _generate_heightmap_image() -> void:
+	_finalize_generation.call_deferred(create_empty_image())
+
+
+func _finalize_generation(output_image: Image) -> void:
+	var image_texture := update_shader_texture(output_image)
+	update_collision_shape(image_texture)
+	EventBus.trigger("island_terrain_generated")

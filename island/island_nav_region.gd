@@ -1,7 +1,7 @@
 extends NavigationRegion3D
 class_name IslandNavRegion
 
-@export var island_generator: HeightmapTerrainGenerator
+@export var island_generator: HeightMapTerrainGenerator
 
 static var current: IslandNavRegion
 

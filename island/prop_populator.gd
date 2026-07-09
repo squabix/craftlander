@@ -10,7 +10,7 @@ var populate_tool_button := populate
 @export_tool_button("Clear", "Reload")
 var clear_tool_button := clear
 
-@export var island_generator: HeightmapTerrainGenerator
+@export var island_generator: HeightMapTerrainGenerator
 @export var prop_quantities: Dictionary[IslandProp, int]
 @export var populate_on_ready := true
 
