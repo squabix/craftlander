@@ -5,6 +5,9 @@ static var subscribed_events: Dictionary[String, Array] = { }
 
 
 static func subscribe(to: String, subscriber: Callable, unsubscribe_signal: Signal = Signal()) -> bool:
+	if Engine.is_editor_hint():
+		return false
+	
 	if not subscriber.is_valid():
 		printerr("Invalid Callable cannot subscribe to EventBus")
 		return false
@@ -30,6 +33,9 @@ static func initialize_event(event: String) -> void:
 
 
 static func trigger(event: String, etc: Variant = null) -> bool:
+	if Engine.is_editor_hint():
+		return false
+	
 	# Event is not subscribed to
 	if not event in subscribed_events:
 		return false
