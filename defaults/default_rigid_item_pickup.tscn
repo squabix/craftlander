@@ -52,7 +52,7 @@ metadata/_custom_type_script = "uid://nqxuax0fbdf8"
 aabb = AABB(-1, 0, -1, 2, 2, 2)
 script = ExtResource("6_qvpsa")
 root = NodePath("..")
-on_screen_process_radius = 0.0
+on_screen_process_radius = 5.0
 off_screen_process_radius = 0.0
 on_screen_visible_radius = 55.0
 visibility_range_fade_margin = 10.0
@@ -63,4 +63,5 @@ base_interval = 0.3
 target_methods = {
 NodePath(".."): &"evaluate_culling"
 }
+initial_time_left = 3.0
 metadata/_custom_type_script = "uid://73ya7jxulyl4"
