@@ -9,7 +9,7 @@ static var aggregated_mesh_instances: Dictionary[MeshInstance3D, MeshInstanceAgg
 
 @export var mesh_source: Node
 
-@export var aggregate_on_ready := false
+@export var aggregate_on_ready := true
 @export var use_material_override := true
 
 @export var multi_instance_unformatted_name := "MultiMesh_%s"
