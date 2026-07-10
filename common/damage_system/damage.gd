@@ -18,3 +18,13 @@ static func from_base(base: float, damage_source: Node = null) -> Damage:
 
 func sample() -> float:
 	return base_amount + randf_range(0.0, variation)
+
+func override(other_damage: Damage) -> Damage:
+	if other_damage == null:
+		return self.duplicate()
+	
+	var overrided_damage: Damage = other_damage.duplicate()
+	overrided_damage.base_amount = self.base_amount
+	overrided_damage.variation = self.variation
+	overrided_damage.force = self.force
+	return overrided_damage
