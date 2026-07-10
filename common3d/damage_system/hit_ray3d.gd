@@ -12,8 +12,6 @@ var hit_nodes: Array[Node]
 func _ready() -> void:
 	collide_with_areas = true
 	collide_with_bodies = false
-	if damage == null:
-		printerr(name, " has no damage")
 
 
 func enable() -> void:
