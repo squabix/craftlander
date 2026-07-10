@@ -2,19 +2,15 @@ class_name Unprojector3D
 extends Marker3D
 
 @export var target: CanvasItem
+
 @export_group("Offsets")
-@export var constant_offset := Vector2(0.0, 0.0)
+@export_custom(PROPERTY_HINT_NONE, "suffix:px") var constant_offset := Vector2(0.0, 0.0)
 @export var control_size_ratio_offset := Vector2(-0.5, -0.5)
 
 @export_group("Distance Scaling")
-## The distance (in meters) from the camera where the UI element is at its default scale (1.0).
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var reference_distance := 10.0
-## Controls how much it scales with distance. 
-## 1.0 is realistic perspective. 0.0 keeps it a completely flat, constant size.
 @export_range(0.0, 1.0) var scale_intensity := 1.0
-## The maximum scale limit when very close to the camera.
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var max_scale := 1.0
-## The minimum scale limit so it doesn't shrink into invisible pixels far away.
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var min_scale := 0.25
 
 var camera: Camera3D
