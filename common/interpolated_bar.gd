@@ -7,10 +7,10 @@ extends ProgressBar
 
 @export_group("Fade")
 @export var fade_when_idle := false
-@export_custom(PROPERTY_HINT_NONE, "suffix:s") var idle_fade_wait_time := 2.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var fade_in_duration := 0.1
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var fade_out_duration := 0.1
-@export_custom(PROPERTY_HINT_NONE, "suffix:s") var initial_fade_in_suspension := 0.1
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var idle_fade_wait_time := 2.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var initial_fade_in_suspension := 0.5
 @export var fade_target_override: CanvasItem
 
 var target_value := value:
@@ -20,6 +20,7 @@ var target_value := value:
 			return
 
 		target_value = to
+		show()
 
 		# Kill active fade tween
 		if _fade_tween != null and _fade_tween.is_valid():
@@ -50,6 +51,7 @@ func _ready() -> void:
 	target_value = value
 	if fade_when_idle:
 		fade_target.modulate.a = 0.0
+		hide()
 	_initial_time = Util.get_time_seconds()
 
 
