@@ -88,6 +88,7 @@ const BUILT_IN_INPUT_ACTIONS: Array[String] = [
 
 static func iprint(interval_seconds: float, ...args: Array) -> void:
 	if interval_seconds <= 0.0:
+		print.callv(args)
 		return
 
 	# Convert to milliseconds
@@ -124,7 +125,10 @@ static func disable_all_colliders(parent: Node) -> Array[Node]:
 
 
 static func is_object_class(object: Object, class_string: String) -> bool:
-	if not object:
+	if class_string.is_empty():
+		return false
+	
+	if object == null:
 		return false
 
 	# Check for built-in classes
@@ -144,45 +148,62 @@ static func is_object_class(object: Object, class_string: String) -> bool:
 static func classify_dict_key(dictionary: Dictionary, default_to_builtin := true) -> String:
 	if not dictionary.is_typed_key():
 		return ""
+	
 	var typed_script: Script = dictionary.get_typed_key_script()
 	if typed_script != null:
 		return typed_script.get_global_name()
+	
 	var typed_class := dictionary.get_typed_key_class_name()
 	if not typed_class.is_empty():
 		return typed_class
+	
 	if not default_to_builtin:
 		return ""
+	
 	return type_string(dictionary.get_typed_key_builtin())
 
 
 static func classify_dict_value(dictionary: Dictionary, default_to_builtin := true) -> String:
 	if not dictionary.is_typed_value():
 		return ""
+	
 	var typed_script: Script = dictionary.get_typed_value_script()
 	if typed_script != null:
 		return typed_script.get_global_name()
+	
 	var typed_class := dictionary.get_typed_value_class_name()
 	if not typed_class.is_empty():
 		return typed_class
+	
 	if not default_to_builtin:
 		return ""
+	
 	return type_string(dictionary.get_typed_value_builtin())
 
 
 static func find_child_of_class(parent: Node, class_string: String) -> Node:
+	if not is_instance_valid(parent):
+		return null
+	
 	for child in parent.get_children():
 		if is_object_class(child, class_string):
 			return child
+		
 		var grandchild := find_child_of_class(child, class_string)
 		if grandchild != null:
 			return grandchild
+	
 	return null
 
 
 static func find_stored_child_of_class(dictionary: Dictionary, parent: Node) -> Node:
+	if not is_instance_valid(parent):
+		return null
+	
 	var class_string := classify_dict_value(dictionary, false)
 	if not parent in dictionary:
 		dictionary[parent] = find_child_of_class(parent, class_string)
+	
 	return dictionary[parent]
 
 
@@ -195,10 +216,14 @@ static func find_children_of_class(parent: Node, class_string: String, include_p
 	for child in parent.get_children():
 		if is_object_class(child, class_string):
 			children.append(child)
-		else:
-			var grandchildren := find_children_of_class(child, class_string)
-			if not grandchildren.is_empty():
-				children.append_array(grandchildren)
+			continue
+		
+		var grandchildren := find_children_of_class(child, class_string)
+		if grandchildren.is_empty():
+			continue
+		
+		children.append_array(grandchildren)
+		
 	return children
 
 
@@ -209,12 +234,7 @@ static func get_ancestor(of: Node, level: int) -> Node:
 	return ancestor
 
 
-static func snap_to_floor(
-		node: Node3D,
-		margin: float = 0.05,
-		max_distance: float = 1000.0,
-		collision_mask: int = 0xFFFFFFFF,
-) -> bool:
+static func snap_to_floor(node: Node3D, margin: float = 0.05, max_distance: float = 1000.0, collision_mask: int = 0xFFFFFFFF) -> bool:
 	var world := node.get_world_3d()
 	if world == null:
 		return false
@@ -326,13 +346,16 @@ static func distance_sort_3d(nodes: Array, position: Vector3) -> Array[Node3D]:
 static func search_up_tree(child: Node, check: Callable, ignore_children: bool = false) -> Node:
 	if not is_instance_valid(child):
 		return null
+	
 	if check.call(child) == true:
 		return child
+	
 	var parent := child.get_parent()
 	if is_instance_valid(parent) and not ignore_children:
 		var parent_result := search_down_tree(parent, check)
 		if parent_result != null:
 			return parent_result
+	
 	return search_up_tree(parent, check, ignore_children)
 
 
@@ -340,12 +363,15 @@ static func search_up_tree(child: Node, check: Callable, ignore_children: bool =
 static func search_down_tree(parent: Node, check: Callable) -> Node:
 	if not is_instance_valid(parent):
 		return null
+	
 	if check.call(parent) == true:
 		return parent
+	
 	for child in parent.get_children():
 		var child_result := search_down_tree(child, check)
 		if child_result != null:
 			return child_result
+	
 	return null
 
 
@@ -383,6 +409,8 @@ static func safe_free(node: Variant) -> bool:
 	if node == null:
 		return false
 	if not node is Node:
+		return false
+	if not is_instance_valid(node):
 		return false
 	if not node.has_method("queue_free"):
 		return false
@@ -474,7 +502,7 @@ static func flatten_vec3(v: Vector3, axis: Vector3i) -> Vector3:
 
 
 static func is_3d_axis(v: Vector3i) -> bool:
-	return v == VECTOR3X or v == VECTOR3Y or v == VECTOR3Z
+	return v in [VECTOR3X, VECTOR3Y, VECTOR3Z]
 
 
 static func roll_basis_toward(from: Basis, toward: Vector3, axis: Vector3i, amount: float) -> Basis:
@@ -513,6 +541,8 @@ static func get_spherical_velocity_rotation(velocity: Vector3, radius: float, de
 
 
 static func lerp_look_at_3d(node: Node3D, position: Vector3, weight: float) -> void:
+	if not is_instance_valid(node):
+		return
 	node.global_rotation = lerp_angle_3d(
 		node.global_rotation,
 		get_rotation_between_points_3d(node.global_position, position),
@@ -521,6 +551,9 @@ static func lerp_look_at_3d(node: Node3D, position: Vector3, weight: float) -> v
 
 
 static func get_property_names(of: Object) -> PackedStringArray:
+	if not is_instance_valid(of):
+		return []
+	
 	var property_names := PackedStringArray()
 	for property in of.get_property_list():
 		var property_name: String = property.name
@@ -606,6 +639,9 @@ static func rad_to_deg_vec2(vector: Vector2) -> Vector2:
 
 
 static func get_mouse_position_3d(camera: Camera3D, mouse_position_2d: Vector2 = camera.get_viewport().get_mouse_position(), collide_areas := false, collide_bodies := true, in_space: bool = true, default_plane: Plane = Plane(Vector3.UP, 0.0), z_depth: float = 1000.0, use_camera_plane: bool = true) -> Vector3:
+	if not is_instance_valid(camera):
+		return Vector3.ZERO
+	
 	var from := camera.project_ray_origin(mouse_position_2d)
 	var to := camera.project_position(mouse_position_2d, z_depth)
 
@@ -643,5 +679,7 @@ static func get_mouse_position_3d(camera: Camera3D, mouse_position_2d: Vector2 =
 
 
 static func get_camera_rect(camera: Camera2D) -> Rect2:
+	if not is_instance_valid(camera):
+		return Rect2()
 	var size := camera.get_viewport_rect().size
 	return Rect2(camera.position - size * 0.5, size)
