@@ -21,10 +21,9 @@ func sample() -> float:
 
 func override(other_damage: Damage) -> Damage:
 	if other_damage == null:
-		return self.duplicate()
+		return duplicate()
 	
-	var overrided_damage: Damage = other_damage.duplicate()
-	overrided_damage.base_amount = self.base_amount
-	overrided_damage.variation = self.variation
-	overrided_damage.force = self.force
+	var overrided_damage: Damage = duplicate()
+	overrided_damage.type = other_damage.type
+	overrided_damage.source = other_damage.source
 	return overrided_damage
