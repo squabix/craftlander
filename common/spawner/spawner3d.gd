@@ -4,11 +4,15 @@ extends Node3D
 signal spawned(node3d: Node3D)
 
 enum TransformMode { SELF, PARENT, DEFAULT }
+enum DefaultParentMode { ROOT, SELF, CUSTOM }
 
-@export var ignore_pausing: bool
-@export var child_of_root: bool = true
-@export var default_parent: Node
 @export var default_scene: PackedScene
+@export var ignore_pausing: bool
+@export var spawn_on_exit_tree := false
+
+@export_group("Default Parent")
+@export var default_parent_mode := DefaultParentMode.ROOT
+@export var custom_default_parent: Node
 
 @export_group("Transform")
 @export var position_mode: TransformMode = TransformMode.PARENT
@@ -22,6 +26,7 @@ enum TransformMode { SELF, PARENT, DEFAULT }
 @export var autostart_timer: bool
 
 var has_started_timer: bool
+var root: Node
 
 
 static func spawn_at(spawn_position: Vector3, spawn_rotation_degrees: Vector3, scene: PackedScene, parent: Node, initializer: Callable = Callable()) -> Node3D:
@@ -42,21 +47,30 @@ static func spawn_at(spawn_position: Vector3, spawn_rotation_degrees: Vector3, s
 
 
 func _ready() -> void:
-	if child_of_root:
-		default_parent = get_tree().root
-	else:
-		if default_parent == null:
-			default_parent = self
+	root = get_tree().root
+	if spawn_on_exit_tree:
+		tree_exiting.connect(spawn)
+		assert(
+				default_parent_mode == DefaultParentMode.SELF,
+				"Default parent mode of %s is set to self, so cannot spawn %s on exit tree"
+		)
+
+
+func get_default_parent() -> Node:
+	match default_parent_mode:
+		DefaultParentMode.ROOT:
+			return root
+		DefaultParentMode.SELF:
+			return self
+		DefaultParentMode.CUSTOM:
+			return custom_default_parent
+	return null
 
 
 func get_spawn_position(parent: Node) -> Vector3:
 	match position_mode:
 		TransformMode.PARENT:
-			if child_of_root:
-				pass
-			elif not parent is Node3D:
-				pass
-			else:
+			if is_instance_valid(parent) and parent is Node3D:
 				return parent.global_position
 		TransformMode.DEFAULT:
 			return default_position
@@ -69,11 +83,7 @@ func get_spawn_position(parent: Node) -> Vector3:
 func get_spawn_rotation_degrees(parent: Node) -> Vector3:
 	match position_mode:
 		TransformMode.PARENT:
-			if child_of_root:
-				pass
-			elif not parent is Node2D:
-				pass
-			else:
+			if is_instance_valid(parent) and parent is Node3D:
 				return parent.global_rotation_degrees
 		TransformMode.DEFAULT:
 			return default_rotation_degrees
@@ -90,8 +100,12 @@ func get_scene() -> PackedScene:
 	return default_scene
 
 
-func spawn(custom_scene: PackedScene = null, custom_parent: Node = null) -> Node3D:
-	var parent := custom_parent if custom_parent != null else (get_tree().root if child_of_root else default_parent)
+func spawn(custom_scene: PackedScene = null, parent: Node = null) -> Node3D:
+	if not is_instance_valid(parent):
+		parent = get_default_parent()
+		if not is_instance_valid(parent):
+			return
+	
 	var scene := custom_scene if custom_scene != null else get_scene()
 
 	var spawn_position: Vector3 = get_spawn_position(parent)

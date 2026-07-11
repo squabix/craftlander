@@ -10,7 +10,6 @@
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="6_5v37a"]
 [ext_resource type="Material" uid="uid://bh8sv2icydggs" path="res://assets/materials/stone.tres" id="6_pwnbr"]
 [ext_resource type="Resource" uid="uid://b37h3pr83pcu4" path="res://items/materials/rock/rock_item.tres" id="7_ir3ee"]
-[ext_resource type="Script" uid="uid://cmmmo3xnygmau" path="res://common/deletion_alarm.gd" id="9_toofl"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="10_pwnbr"]
 [ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="11_uqalf"]
 [ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="11_yqmf4"]
@@ -121,18 +120,12 @@ libraries/ = SubResource("AnimationLibrary_5d4n1")
 script = ExtResource("11_uqalf")
 metadata/_custom_type_script = "uid://c1bce1sw2dgnf"
 
-[node name="DeletionAlarm" type="Node" parent="." unique_id=261330463]
-script = ExtResource("9_toofl")
-metadata/_custom_type_script = "uid://cmmmo3xnygmau"
-
 [node name="ParticleSpawner3D" type="Node3D" parent="." unique_id=1579406573]
 script = ExtResource("10_pwnbr")
-particles_scene = ExtResource("11_yqmf4")
+default_scene = ExtResource("11_yqmf4")
 metadata/_custom_type_script = "uid://bhjxscxhtg2se"
 
 [node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=374514710]
 occluder = ExtResource("15_t7rk0")
-
-[connection signal="deleted" from="DeletionAlarm" to="ParticleSpawner3D" method="spawn"]
 
 [editable path="BlenderMeshes"]

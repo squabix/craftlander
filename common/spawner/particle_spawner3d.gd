@@ -1,19 +1,14 @@
 class_name ParticleSpawner3D
 extends Spawner3D
 
-@export var particles_scene: PackedScene
 @export var free_on_finish := true
 
 
-func get_scene() -> PackedScene:
-	return particles_scene
-
-
 func initialize_instance(instance: Node3D) -> void:
-	emit_particles(instance)
+	emit_particles(instance, free_on_finish)
 
 
-func emit_particles(node: Node) -> void:
+static func emit_particles(node: Node, free_node_on_finish := true) -> void:
 	for child in node.get_children():
 		emit_particles(child)
 
@@ -21,5 +16,5 @@ func emit_particles(node: Node) -> void:
 		return
 
 	node.emitting = true
-	if free_on_finish:
+	if free_node_on_finish:
 		node.finished.connect(Util.safe_free.bind(node))

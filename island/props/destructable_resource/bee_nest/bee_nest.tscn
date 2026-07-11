@@ -9,7 +9,6 @@
 [ext_resource type="Resource" uid="uid://j8xwx023phbg" path="res://items/food/honeycomb/honeycomb_item.tres" id="7_b76o0"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="7_yyl5a"]
 [ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="9_b7s5p"]
-[ext_resource type="Script" uid="uid://cmmmo3xnygmau" path="res://common/deletion_alarm.gd" id="9_t1ty2"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="10_085ko"]
 [ext_resource type="PackedScene" uid="uid://bkber348p7jtw" path="res://island/props/destructable_resource/bee_nest/bee_nest.blend" id="11_b76o0"]
 [ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="11_stmp3"]
@@ -119,13 +118,10 @@ libraries/ = SubResource("AnimationLibrary_5d4n1")
 script = ExtResource("9_b7s5p")
 metadata/_custom_type_script = "uid://c1bce1sw2dgnf"
 
-[node name="DeletionAlarm" type="Node" parent="." unique_id=261330463]
-script = ExtResource("9_t1ty2")
-metadata/_custom_type_script = "uid://cmmmo3xnygmau"
-
 [node name="ParticleSpawner3D" type="Node3D" parent="." unique_id=1579406573]
 script = ExtResource("10_085ko")
-particles_scene = ExtResource("11_stmp3")
+default_scene = ExtResource("11_stmp3")
+spawn_on_exit_tree = true
 metadata/_custom_type_script = "uid://bhjxscxhtg2se"
 
 [node name="BlenderMeshes" parent="." unique_id=340605420 instance=ExtResource("11_b76o0")]
@@ -165,7 +161,5 @@ metadata/_custom_type_script = "uid://iyqixpr4un6s"
 
 [node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=1012315334]
 occluder = ExtResource("16_m5g4y")
-
-[connection signal="deleted" from="DeletionAlarm" to="ParticleSpawner3D" method="spawn"]
 
 [editable path="BlenderMeshes"]
