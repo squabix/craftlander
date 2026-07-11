@@ -51,8 +51,8 @@ func _ready() -> void:
 	if spawn_on_exit_tree:
 		tree_exiting.connect(spawn)
 		assert(
-				default_parent_mode == DefaultParentMode.SELF,
-				"Default parent mode of %s is set to self, so cannot spawn %s on exit tree"
+				default_parent_mode != DefaultParentMode.SELF,
+				"Default parent mode of %s is set to self, so cannot spawn %s on exit tree" % [self, default_scene]
 		)
 
 
