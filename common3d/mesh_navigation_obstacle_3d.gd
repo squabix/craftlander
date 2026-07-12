@@ -11,21 +11,24 @@ extends NavigationObstacle3D
 	set(value):
 		flip_winding_order = value
 		generate()
-
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var buffer := 0.05:
+	set(value):
+		buffer = max(value, 0.0) # Prevent negative buffers
+		generate()
 @export_tool_button("Regenerate", "ArrayMesh") var generate_action := generate
 
 
-static func get_bottom_center(aabb: AABB) -> Vector3:
+static func get_bottom_center(min_position: Vector3, max_position: Vector3) -> Vector3:
 	return Vector3(
-		aabb.position.x + (aabb.size.x / 2.0),
-		aabb.position.y,
-		aabb.position.z + (aabb.size.z / 2.0),
+		min_position.x + (max_position.x - min_position.x) / 2.0,
+		min_position.y,
+		min_position.z + (max_position.z - min_position.z) / 2.0,
 	)
 
 
 func _ready() -> void:
 	if generate_on_ready:
-		generate()
+		generate.call_deferred()
 
 
 func reset() -> void:
@@ -34,44 +37,63 @@ func reset() -> void:
 	height = 0.0
 
 
+static func global_to_local_plane(global_vertices: PackedVector3Array, global_bottom_center: Vector3) -> PackedVector2Array:
+	var points := PackedVector2Array()
+	for global_vertex in global_vertices:
+		points.append(Util.vec3to2(global_vertex - global_bottom_center, Util.VECTOR3Y))
+	return points
+
+
 func generate() -> void:
-	# Ensure the node is active in the scene tree before calculating relative transforms
+	# Ensure the node is active in the scene tree
 	if not is_inside_tree():
+		print("%s is not inside tree and cannot generate" % self)
 		return
 
-	if not mesh_instance or not mesh_instance.mesh:
+	if mesh_instance == null or mesh_instance.mesh == null:
 		reset()
 		return
 
-	var mesh: Mesh = mesh_instance.mesh
-	var instance_transform := mesh_instance.global_transform
-	var local_aabb: AABB = mesh.get_aabb()
-
-	# Move the obstacle to the bottom-center of the mesh geometry
-	global_transform = Transform3D(
-		instance_transform.basis.orthonormalized(), # Unscaled global rotation matrix
-		instance_transform * get_bottom_center(local_aabb), # Horizontal midpoint (X and Z), vertical lowest point (Y)
-	)
-
-	var mesh_vertices := mesh.get_faces()
+	var mesh_vertices := mesh_instance.mesh.get_faces()
 	if mesh_vertices.is_empty():
 		printerr("%s has no vertices, so %s cannot generate" % [mesh_instance, self])
 		return
 
-	# Calculate vertices
-	var global_to_obstacle := global_transform.affine_inverse()
-	var points_2d := PackedVector2Array()
+	var min_pos := Vector3(INF, INF, INF)
+	var max_pos := Vector3(-INF, -INF, -INF)
+	var global_vertices: PackedVector3Array = []
 
 	for vertex in mesh_vertices:
-		points_2d.append(
-			Util.vec3to2(
-				global_to_obstacle * instance_transform * vertex,
-				Util.VECTOR3Y,
-			),
-		)
+		var global_vertex := mesh_instance.global_transform * vertex
+		global_vertices.append(global_vertex)
 
+		min_pos.x = min(min_pos.x, global_vertex.x)
+		min_pos.y = min(min_pos.y, global_vertex.y)
+		min_pos.z = min(min_pos.z, global_vertex.z)
+
+		max_pos.x = max(max_pos.x, global_vertex.x)
+		max_pos.y = max(max_pos.y, global_vertex.y)
+		max_pos.z = max(max_pos.z, global_vertex.z)
+
+	var global_bottom_center := get_bottom_center(min_pos, max_pos)
+
+	# Keep obstacle completely upright relative to world floor to ensure its local XZ plane aligns with navigation map plane
+	global_transform = Transform3D(Basis.IDENTITY, global_bottom_center)
+
+	var max_radius_sq := 0.0
 	var obstacle_vertices := PackedVector3Array()
-	for point in Geometry2D.convex_hull(points_2d):
+	
+	var points := global_to_local_plane(global_vertices, global_bottom_center)
+	for point in Geometry2D.convex_hull(points):
+		# Track the maximum horizontal distance from the center (0,0) before buffer
+		var distance_sq := point.length_squared()
+		if distance_sq > max_radius_sq:
+			max_radius_sq = distance_sq
+
+		# Push the vertex outward from the center (0,0) along its directional vector
+		if buffer > 0.0 and point != Vector2.ZERO:
+			point += point.normalized() * buffer
+
 		obstacle_vertices.append(Util.vec2to3(point, Util.VECTOR3Y))
 
 	if flip_winding_order:
@@ -79,10 +101,5 @@ func generate() -> void:
 
 	vertices = obstacle_vertices
 
-	var instance_global_scale: Vector3 = instance_transform.basis.get_scale()
-	height = local_aabb.size.y * instance_global_scale.y
-
-	# Radius is half the widest side
-	var scaled_size_x: float = local_aabb.size.x * instance_global_scale.x
-	var scaled_size_z: float = local_aabb.size.z * instance_global_scale.z
-	radius = max(scaled_size_x, scaled_size_z) / 2.0
+	height = max_pos.y - min_pos.y
+	radius = sqrt(max_radius_sq) + buffer
