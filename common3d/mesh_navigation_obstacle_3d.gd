@@ -45,11 +45,6 @@ static func global_to_local_plane(global_vertices: PackedVector3Array, global_bo
 
 
 func generate() -> void:
-	# Ensure the node is active in the scene tree
-	if not is_inside_tree():
-		print("%s is not inside tree and cannot generate" % self)
-		return
-
 	if mesh_instance == null or mesh_instance.mesh == null:
 		reset()
 		return
