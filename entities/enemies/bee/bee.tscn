@@ -287,6 +287,10 @@ death_drop_mode = 1
 metadata/_custom_type_script = "uid://bpmbg0e28ujs7"
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1081978445]
+avoidance_enabled = true
+height = 3.0
+neighbor_distance = 20.0
+max_speed = 4.0
 
 [node name="BlenderVisuals" type="Node3D" parent="." unique_id=71307781]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
