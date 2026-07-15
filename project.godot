@@ -23,6 +23,10 @@ SoundManager="*res://common/sound/sound_manager.gd"
 RecipeBook="*res://items/crafting/recipe_book.gd"
 GameSettings="*uid://dybhrs6lws1mr"
 
+[debug]
+
+gdscript/warnings/integer_division=0
+
 [display]
 
 window/stretch/mode="canvas_items"
