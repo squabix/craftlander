@@ -5,6 +5,11 @@ extends Object
 const VECTOR3X := Vector3i(1, 0, 0)
 const VECTOR3Y := Vector3i(0, 1, 0)
 const VECTOR3Z := Vector3i(0, 0, 1)
+
+const VECTOR3XY := Vector3i(1, 1, 0)
+const VECTOR3XZ := Vector3i(1, 0, 1)
+const VECTOR3YZ := Vector3i(0, 1, 1)
+
 const BUILT_IN_INPUT_ACTIONS: Array[String] = [
 	"ui_accept",
 	"ui_select",
