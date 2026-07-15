@@ -14,6 +14,10 @@ extends HeightMapTerrainGenerator
 @export var taper_power := 2.0
 @export var beach_flattening := 2.0
 
+@export_subgroup("Land Continuity")
+@export var filter_isolated_landmasses := true
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var water_threshold := 0.0
+
 var texture_images: Dictionary[Texture2D, Image]
 
 
@@ -155,8 +159,89 @@ func _generate_heightmap_image() -> void:
 
 			value = clampf(value, 0.0, 1.0)
 			heightmap_image.set_pixel(x, y, Color(value, value, value))
-
+	
+	if filter_isolated_landmasses:
+		_remove_isolated_landmasses(heightmap_image)
+	
 	_finalize_generation.call_deferred(heightmap_image)
+
+func _remove_isolated_landmasses(image: Image) -> void:
+	var width := image.get_width()
+	var height := image.get_height()
+	
+	var visited := PackedByteArray()
+	visited.resize(width * height)
+	visited.fill(0)
+	
+	var landmasses: Array[Array] = [] # Array of arrays of indices representing each landmass
+	var threshold := water_threshold
+	
+	for y in height:
+		for x in width:
+			var index := y * width + x
+			if visited[index] == 1:
+				continue
+			
+			var val := image.get_pixel(x, y).r
+			if val <= threshold:
+				continue
+			
+			var current_landmass: Array[int] = []
+			var queue: Array[int] = [index]
+			visited[index] = 1
+			
+			while queue.size() > 0:
+				var current: int = queue.pop_back()
+				current_landmass.append(current)
+				
+				var current_x := current % width
+				var current_y := current / width
+				
+				# Check 4-way neighbors safely
+				# Left
+				if current_x > 0:
+					var n_index := current - 1
+					if visited[n_index] == 0 and image.get_pixel(current_x - 1, current_y).r > threshold:
+						visited[n_index] = 1
+						queue.append(n_index)
+				# Right
+				if current_x < width - 1:
+					var n_index := current + 1
+					if visited[n_index] == 0 and image.get_pixel(current_x + 1, current_y).r > threshold:
+						visited[n_index] = 1
+						queue.append(n_index)
+				# Up
+				if current_y > 0:
+					var n_index := current - width
+					if visited[n_index] == 0 and image.get_pixel(current_x, current_y - 1).r > threshold:
+						visited[n_index] = 1
+						queue.append(n_index)
+				# Down
+				if current_y < height - 1:
+					var n_index := current + width
+					if visited[n_index] == 0 and image.get_pixel(current_x, current_y + 1).r > threshold:
+						visited[n_index] = 1
+						queue.append(n_index)
+			
+			landmasses.append(current_landmass)
+				
+	if landmasses.is_empty():
+		return
+		
+	# Determine largest landmass
+	var main_landmass_index := 0
+	var max_size := 0
+	for i in landmasses.size():
+		if landmasses[i].size() > max_size:
+			max_size = landmasses[i].size()
+			main_landmass_index = i
+			
+	# Erase smaller landmasses
+	for i in landmasses.size():
+		if i == main_landmass_index:
+			continue
+		for flat_index in landmasses[i]:
+			image.set_pixel(flat_index % width, flat_index / width, Color.BLACK)
 
 
 func _finalize_generation(heightmap_image: Image) -> void:
