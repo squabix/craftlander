@@ -26,9 +26,6 @@ static func from_item(_item: Item) -> ItemPickup3D:
 
 
 func _ready() -> void:
-	if item == null:
-		printerr(self, " has no item instance")
-		return
 	update_visuals()
 	
 	if visibility_fading_enabled:

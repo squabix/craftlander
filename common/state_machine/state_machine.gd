@@ -97,7 +97,7 @@ func enter_state(state_name: String, force_ancestors := false) -> bool:
 
 	var state := states[state_name]
 	if not is_instance_valid(state):
-		printerr("Cannot enter invalid state: " + str(state))
+		printerr("Cannot enter invalid state: %s" % state)
 		return false
 	if state == current:
 		return true

@@ -44,7 +44,7 @@ static func replace(v: Vector2, with: Vector2, bv: BoolVector2) -> Vector2:
 
 
 func _to_string() -> String:
-	return "(" + str(x) + ", " + str(y) + ")"
+	return "(%s, %s)" % [x, y]
 
 
 func interpolate(from: Vector2, to: Vector2, weight: float, default: Vector2 = Vector2.ZERO) -> Vector2:

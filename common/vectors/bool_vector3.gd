@@ -49,7 +49,7 @@ static func replace(v: Vector3, with: Vector3, bv: BoolVector3) -> Vector3:
 
 
 func _to_string() -> String:
-	return "(" + str(x) + ", " + str(y) + ", " + str(z) + ")"
+	return "(%s, %s, %s)" % [x, y, z]
 
 
 func interpolate(from: Vector3, to: Vector3, weight: float, default: Vector3 = Vector3.ZERO) -> Vector3:

@@ -39,7 +39,7 @@ func _ready() -> void:
 func initialize_playback() -> void:
 	playback = get(playback_path) as AnimationNodeStateMachinePlayback
 	if playback == null:
-		printerr("%s found null playback at path: ", playback_path)
+		printerr("%s found null playback at path: %s" %[self, playback_path])
 		return
 
 	playback.state_finished.connect(_on_state_finished)
@@ -130,7 +130,7 @@ func play_end() -> void:
 
 func play_state(state: String) -> void:
 	if playback == null:
-		printerr("%s's null playback cannot travel to state %s " % [self, state])
+		printerr("%s's null playback cannot travel to state: %s" % [self, state])
 		return
 	playback.start(state)
 
@@ -165,7 +165,7 @@ func update_tree_animations() -> void:
 
 		var anim_node := animation_state_machine.get_node(state_node_name) as AnimationNodeAnimation
 		if anim_node == null:
-			printerr("State machine node '", state_node_name, "' is invalid in %s" % self)
+			printerr("State machine node '%s' is invalid in %s" % [state_node_name, self])
 			continue
 
 		anim_node.animation = state_anim_map[state_node_name]

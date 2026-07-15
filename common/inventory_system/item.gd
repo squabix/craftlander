@@ -36,7 +36,7 @@ var scene_instance: Node
 var visuals: Node:
 	get:
 		if not is_instance_valid(visuals) and not is_scene_set_up:
-			printerr(self, " has no visuals without setting up scene")
+			printerr("%s has no visuals without setting up scene" % self)
 			return null
 		return visuals
 var current_use_state: UseState = UseState.END_USE
@@ -182,7 +182,7 @@ func set_up_scene() -> void:
 
 func duplicate_visuals() -> Node:
 	if scene == null:
-		printerr(self, " cannot get visuals duplicate from null scene")
+		printerr("%s cannot get visuals duplicate from null scene" % self)
 		return null
 
 	var temp_instance := scene.instantiate()
@@ -192,7 +192,7 @@ func duplicate_visuals() -> Node:
 	if is_instance_valid(target_node):
 		duplicate_node = target_node.duplicate()
 	else:
-		printerr(self, " failed to find visuals path for duplication: ", visuals_scene_path)
+		printerr("%s failed to find visuals path for duplication: %s", [self, visuals_scene_path])
 
 	temp_instance.queue_free()
 	return duplicate_node
@@ -200,7 +200,7 @@ func duplicate_visuals() -> Node:
 
 func add_scene(parent: Node) -> Node:
 	if scene == null:
-		printerr(name, " cannot instantiate null scene")
+		printerr("%s cannot instantiate null scene", self)
 		return
 
 	if not is_scene_set_up or scene_instance == null:

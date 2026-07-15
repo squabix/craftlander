@@ -37,7 +37,7 @@ func untint() -> void:
 
 func _check_parent() -> bool:
 	if not get_parent() is Control:
-		print_debug("ControlTinter will not work on ", get_parent().name, " because it is not a Control node")
+		print_debug("ControlTinter will not work on %s because it is not a Control node" % get_parent())
 		queue_free()
 		return false
 	return true

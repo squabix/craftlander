@@ -8,7 +8,7 @@ const MAX: String = "MAX"
 
 @export_group("Label")
 @export var label: Label
-@export var label_format: String = CURRENT + " / " + MAX
+@export var label_format: String = "%s / %s"
 @export var rounding_places: int = 1
 
 

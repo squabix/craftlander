@@ -11,7 +11,7 @@ extends Resource
 
 
 func _to_string() -> String:
-	return "(" + str(x_min) + " to " + str(x_max) + ", " + str(y_min) + " to " + str(y_max) + ", " + str(z_min) + " to " + str(z_max) + ")"
+	return "(%s to %s, %s to %s, %s to %s)" % [x_min, x_max, y_min, y_max, z_min, z_max]
 
 
 func clamp_vector(vector: Vector3) -> Vector3:

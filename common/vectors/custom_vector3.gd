@@ -27,7 +27,7 @@ func _init(custom_x: Variant = null, custom_y: Variant = null, custom_z: Variant
 
 
 func _to_string() -> String:
-	return "(" + str(x) + ", " + str(y) + ", " + str(z) + ")"
+	return "(%s, %s, %s)" % [x, y, z]
 
 
 func find(a: Variant) -> Vector3i:

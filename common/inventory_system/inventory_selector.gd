@@ -33,7 +33,7 @@ var _last_instance: ItemInstance = null
 
 func _ready() -> void:
 	if inventory == null:
-		printerr(self, " has no inventory and will not work")
+		printerr("%s has no inventory and will not work")
 		return
 
 	selected_new_index.emit.call_deferred(selected_index)

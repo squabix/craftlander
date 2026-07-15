@@ -15,9 +15,6 @@ var hit_nodes: Array[Node]
 
 
 func _ready() -> void:
-	if damage == null:
-		printerr(name, " has no damage")
-
 	area_entered.connect(_hit_enter)
 	if auto_enable_wait_time > 0.0:
 		enabled = false
@@ -52,7 +49,7 @@ func hit(area: Area3D) -> bool:
 
 	# ERROR if area does not exist
 	if not is_instance_valid(area):
-		printerr(name, " cannot hit ", area, " because it is invalid")
+		printerr("%s cannot hit invalid area %s" % [self, area])
 		return false
 
 	# BAIL if area has already been hit & can only be hit once

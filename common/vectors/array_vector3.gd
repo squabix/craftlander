@@ -13,7 +13,7 @@ func _init(x_array: Array = [], y_array: Array = [], z_array: Array = []) -> voi
 
 
 func _to_string() -> String:
-	return "(" + str(x) + ", " + str(y) + ", " + str(z) + ")"
+	return "(%s, %s, %s)" % [x, y, z]
 
 
 func append(v: Variant) -> void:

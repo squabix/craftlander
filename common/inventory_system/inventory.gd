@@ -119,7 +119,7 @@ func count_empty() -> int:
 
 func get_stackable_room(item: Item) -> int:
 	if item == null:
-		printerr("%s cannot find stackable room for null item")
+		printerr("%s cannot find stackable room for null item" % self)
 		return 0
 	
 	if item.max_quantity <= 1:
@@ -319,7 +319,7 @@ func swap(index1: int, index2: int) -> bool:
 
 func give_everything(to: Inventory) -> void:
 	if not is_instance_valid(to):
-		printerr("%s cannot give everything to invalid inventory: %s")
+		printerr("%s cannot give everything to invalid inventory: %s" % [self, to])
 		return
 	
 	for index in get_occupied_indicies():

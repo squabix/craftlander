@@ -22,7 +22,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if not is_instance_valid(camera):
-		printerr(name, " cannot unproject with invalid camera")
+		printerr("%s cannot unproject with invalid camera" % self)
 		set_process(false)
 		return
 

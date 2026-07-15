@@ -13,7 +13,7 @@ func _init(x_callable: Callable, y_callable: Callable, z_callable: Callable) -> 
 
 
 func _to_string() -> String:
-	return "(" + str(x) + ", " + str(y) + ", " + str(z) + ")"
+	return "(%s, %s, %s)" % [x, y, z]
 
 
 func vector_call(vector: Variant = null) -> Variant:

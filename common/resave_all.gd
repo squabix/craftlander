@@ -24,7 +24,7 @@ func _process_dir(path) -> int:
 				var res = load(full_path)
 				if res:
 					ResourceSaver.save(res, full_path)
-					print("Updated: ", file_name)
+					print("Updated %s" % file_name)
 					count += 1
 		file_name = dir.get_next()
 	return count
