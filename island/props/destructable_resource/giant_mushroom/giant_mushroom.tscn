@@ -248,7 +248,7 @@ collision_layer = 8
 monitoring = false
 script = ExtResource("9_0sf1c")
 health = NodePath("../../Health")
-type_whitelist = Array[String](["axe"])
+type_whitelist = Array[StringName]([&"axe"])
 damage_override = ExtResource("10_ve6jj")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 

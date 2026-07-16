@@ -2,7 +2,7 @@ class_name SignalAnimationTrigger
 extends SignalTrigger
 
 @export var anim_player: AnimationPlayer
-@export var anim_name: String
+@export var anim_name: StringName
 @export var force_from_start: bool = true
 
 

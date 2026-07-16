@@ -9,7 +9,7 @@ static var identification := Identification.new()
 @export var body_label: Label
 @export var id := 0
 @export var handle_mouse_mode := true
-@export var continue_action := "ui_accept"
+@export var continue_action := &"ui_accept"
 
 var buttons: Array[Node]
 
@@ -44,7 +44,7 @@ static func display(body: String, title: String = "", display_id: int = 0) -> Po
 func _ready() -> void:
 	identification.auto_register(self)
 	hide()
-	buttons = Util.find_children_of_class(self, "Button")
+	buttons = Util.find_children_of_class(self, &"Button")
 	for i in buttons.size():
 		buttons[i].pressed.connect(
 			func():

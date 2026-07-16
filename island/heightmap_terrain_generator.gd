@@ -21,13 +21,13 @@ func _ready() -> void:
 		generate.call_deferred()
 
 
-func shader_set(parameter: String, to: Variant) -> void:
+func shader_set(parameter: StringName, to: Variant) -> void:
 	if mesh_instance == null or mesh_instance.material_override == null:
 		return
 	mesh_instance.material_override.set_shader_parameter(parameter, to)
 
 
-func shader_get(parameter: String) -> Variant:
+func shader_get(parameter: StringName) -> Variant:
 	if mesh_instance == null or mesh_instance.material_override == null:
 		return null
 	return mesh_instance.material_override.get_shader_parameter(parameter)
@@ -47,9 +47,9 @@ func create_empty_image() -> Image:
 
 func update_shader_texture(image: Image) -> ImageTexture:
 	var image_texture := ImageTexture.create_from_image(image)
-	shader_set("heightmap", image_texture)
-	shader_set("max_height", map_size.y)
-	shader_set("albedo_texture", image_texture)
+	shader_set(&"heightmap", image_texture)
+	shader_set(&"max_height", map_size.y)
+	shader_set(&"albedo_texture", image_texture)
 	return image_texture
 
 
@@ -98,7 +98,7 @@ func update_collision_shape(image_texture: ImageTexture = null) -> void:
 		return
 
 	if image_texture == null:
-		image_texture = shader_get("heightmap")
+		image_texture = shader_get(&"heightmap")
 
 	var image := image_texture.get_image()
 	image.convert(Image.FORMAT_RF)
@@ -153,7 +153,7 @@ func get_heightmap_sampler(image: Image) -> Callable:
 
 
 func default_heightmap_sampler() -> void:
-	heightmap_sampler = get_heightmap_sampler((shader_get("heightmap") as ImageTexture).get_image())
+	heightmap_sampler = get_heightmap_sampler((shader_get(&"heightmap") as ImageTexture).get_image())
 
 
 func get_pixel_position(x: int, y: int) -> Vector3:

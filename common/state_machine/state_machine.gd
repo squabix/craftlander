@@ -7,7 +7,7 @@ signal exited_state(state: State)
 @export var initial_state: State
 
 var current: State
-var states: Dictionary[String, State]
+var states: Dictionary[StringName, State]
 
 
 func _ready() -> void:
@@ -58,7 +58,7 @@ func is_valid() -> bool:
 	return is_instance_valid(current)
 
 
-func is_currently(state_name: String) -> bool:
+func is_currently(state_name: StringName) -> bool:
 	if not is_valid():
 		return false
 	return current.name == state_name
@@ -87,11 +87,11 @@ func exit_current() -> void:
 	current = null
 
 
-func get_state(state_name: String) -> State:
+func get_state(state_name: StringName) -> State:
 	return states[state_name]
 
 
-func enter_state(state_name: String, force_ancestors := false) -> bool:
+func enter_state(state_name: StringName, force_ancestors := false) -> bool:
 	if not state_name in states:
 		return false
 

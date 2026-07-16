@@ -1,7 +1,7 @@
 class_name Identification
 extends Object
 
-const DEFAULT_ID_PROPERTY: String = "id"
+const DEFAULT_ID_PROPERTY := &"id"
 
 var _pool: Dictionary
 

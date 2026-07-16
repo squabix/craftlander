@@ -13,7 +13,7 @@ func physics_update(_delta: float) -> void:
 	stamina.spend(STAMINA_COST)
 	
 	if not root.is_in_water:
-		transition_to("Default")
+		transition_to(&"Default")
 		return
 	
 	root.move_planar(PlayerController.get_input_motion_vector().normalized())

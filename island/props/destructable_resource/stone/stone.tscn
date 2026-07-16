@@ -84,7 +84,7 @@ collision_mask = 0
 monitoring = false
 script = ExtResource("2_sq77v")
 health = NodePath("../Health")
-type_whitelist = Array[String](["pickaxe"])
+type_whitelist = Array[StringName]([&"pickaxe"])
 damage_override = ExtResource("3_yqmf4")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
@@ -106,7 +106,7 @@ metadata/_custom_type_script = "uid://dapeyi3eetek1"
 [node name="BlenderMeshes" parent="." unique_id=1560999619 instance=ExtResource("4_a54gr")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.39999998, 0)
 
-[node name="Cube" parent="BlenderMeshes" index="0" unique_id=676287644]
+[node name="Cube" parent="BlenderMeshes" index="0" unique_id=1682304301]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.28464794, 0, 0.33760533)
 surface_material_override/0 = ExtResource("6_pwnbr")
 

@@ -2,7 +2,7 @@ extends Control
 
 signal updated_pause(to: bool)
 
-const ACTION_PAUSE := "ui_cancel"
+const ACTION_PAUSE := &"ui_cancel"
 
 @export var crafting_menu: Control
 @export var crafting_environment: CraftingEnvironment

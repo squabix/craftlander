@@ -16,4 +16,4 @@ func physics_update(delta: float) -> void:
 
 func update(_delta: float):
 	if root.global_position.distance_to(root.dock_position) < SUCCESS_DISTANCE:
-		transition_to("Docked")
+		transition_to(&"Docked")

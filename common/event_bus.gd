@@ -1,10 +1,10 @@
 class_name EventBus
 extends Object
 
-static var subscribed_events: Dictionary[String, Array] = { }
+static var subscribed_events: Dictionary[StringName, Array] = { }
 
 
-static func subscribe(to: String, subscriber: Callable, unsubscribe_signal: Signal = Signal()) -> bool:
+static func subscribe(to: StringName, subscriber: Callable, unsubscribe_signal: Signal = Signal()) -> bool:
 	if Engine.is_editor_hint():
 		return false
 	
@@ -27,12 +27,12 @@ static func subscribe(to: String, subscriber: Callable, unsubscribe_signal: Sign
 	return true
 
 
-static func initialize_event(event: String) -> void:
+static func initialize_event(event: StringName) -> void:
 	if not subscribed_events.has(event):
 		subscribed_events[event] = []
 
 
-static func trigger(event: String, etc: Variant = null) -> bool:
+static func trigger(event: StringName, etc: Variant = null) -> bool:
 	if Engine.is_editor_hint():
 		return false
 	
@@ -52,7 +52,7 @@ static func trigger(event: String, etc: Variant = null) -> bool:
 	return true
 
 
-static func unsubscribe(from: String, subscriber: Callable) -> bool:
+static func unsubscribe(from: StringName, subscriber: Callable) -> bool:
 	if from in subscribed_events and subscribed_events[from] is Array:
 		subscribed_events[from].erase(subscriber)
 		return true

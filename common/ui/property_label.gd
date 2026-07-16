@@ -2,7 +2,7 @@ class_name PropertyLabel
 extends Label
 
 @export var target_node: Node
-@export var target_property_name: String
+@export var target_property_name: StringName
 @export var insertion_character: String = "*"
 
 var raw_text: String = ""

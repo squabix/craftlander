@@ -10,84 +10,84 @@ const VECTOR3XY := Vector3i(1, 1, 0)
 const VECTOR3XZ := Vector3i(1, 0, 1)
 const VECTOR3YZ := Vector3i(0, 1, 1)
 
-const BUILT_IN_INPUT_ACTIONS: Array[String] = [
-	"ui_accept",
-	"ui_select",
-	"ui_cancel",
-	"ui_focus_next",
-	"ui_focus_prev",
-	"ui_left",
-	"ui_right",
-	"ui_up",
-	"ui_down",
-	"ui_page_up",
-	"ui_page_down",
-	"ui_home",
-	"ui_end",
-	"ui_cut",
-	"ui_copy",
-	"ui_paste",
-	"ui_undo",
-	"ui_redo",
-	"ui_text_completion_query",
-	"ui_text_completion_accept",
-	"ui_text_completion_replace",
-	"ui_text_newline",
-	"ui_text_newline_blank",
-	"ui_text_newline_above",
-	"ui_text_indent",
-	"ui_text_dedent",
-	"ui_text_backspace",
-	"ui_text_backspace_word",
-	"ui_text_backspace_word.macos",
-	"ui_text_backspace_all_to_left",
-	"ui_text_backspace_all_to_left.macos",
-	"ui_text_delete",
-	"ui_text_delete_word",
-	"ui_text_delete_word.macos",
-	"ui_text_delete_all_to_right",
-	"ui_text_delete_all_to_right.macos",
-	"ui_text_caret_left",
-	"ui_text_caret_word_left",
-	"ui_text_caret_word_left.macos",
-	"ui_text_caret_right",
-	"ui_text_caret_word_right",
-	"ui_text_caret_word_right.macos",
-	"ui_text_caret_up",
-	"ui_text_caret_down",
-	"ui_text_caret_line_start",
-	"ui_text_caret_line_start.macos",
-	"ui_text_caret_line_end",
-	"ui_text_caret_line_end.macos",
-	"ui_text_caret_page_up",
-	"ui_text_caret_page_down",
-	"ui_text_caret_document_start",
-	"ui_text_caret_document_start.macos",
-	"ui_text_caret_document_end",
-	"ui_text_caret_document_end.macos",
-	"ui_text_caret_add_below",
-	"ui_text_caret_add_below.macos",
-	"ui_text_caret_add_above",
-	"ui_text_caret_add_above.macos",
-	"ui_text_scroll_up",
-	"ui_text_scroll_up.macos",
-	"ui_text_scroll_down",
-	"ui_text_scroll_down.macos",
-	"ui_text_select_all",
-	"ui_text_select_word_under_caret",
-	"ui_text_select_word_under_caret.macos",
-	"ui_text_add_selection_for_next_occurrence",
-	"ui_text_skip_selection_for_next_occurrence",
-	"ui_text_clear_carets_and_selection",
-	"ui_text_toggle_insert_mode",
-	"ui_menu",
-	"ui_text_submit",
-	"ui_graph_duplicate",
-	"ui_graph_delete",
-	"ui_filedialog_up_one_level",
-	"ui_filedialog_refresh",
-	"ui_filedialog_show_hidden",
-	"ui_swap_input_direction",
+const BUILT_IN_INPUT_ACTIONS: Array[StringName] = [
+	&"ui_accept",
+	&"ui_select",
+	&"ui_cancel",
+	&"ui_focus_next",
+	&"ui_focus_prev",
+	&"ui_left",
+	&"ui_right",
+	&"ui_up",
+	&"ui_down",
+	&"ui_page_up",
+	&"ui_page_down",
+	&"ui_home",
+	&"ui_end",
+	&"ui_cut",
+	&"ui_copy",
+	&"ui_paste",
+	&"ui_undo",
+	&"ui_redo",
+	&"ui_text_completion_query",
+	&"ui_text_completion_accept",
+	&"ui_text_completion_replace",
+	&"ui_text_newline",
+	&"ui_text_newline_blank",
+	&"ui_text_newline_above",
+	&"ui_text_indent",
+	&"ui_text_dedent",
+	&"ui_text_backspace",
+	&"ui_text_backspace_word",
+	&"ui_text_backspace_word.macos",
+	&"ui_text_backspace_all_to_left",
+	&"ui_text_backspace_all_to_left.macos",
+	&"ui_text_delete",
+	&"ui_text_delete_word",
+	&"ui_text_delete_word.macos",
+	&"ui_text_delete_all_to_right",
+	&"ui_text_delete_all_to_right.macos",
+	&"ui_text_caret_left",
+	&"ui_text_caret_word_left",
+	&"ui_text_caret_word_left.macos",
+	&"ui_text_caret_right",
+	&"ui_text_caret_word_right",
+	&"ui_text_caret_word_right.macos",
+	&"ui_text_caret_up",
+	&"ui_text_caret_down",
+	&"ui_text_caret_line_start",
+	&"ui_text_caret_line_start.macos",
+	&"ui_text_caret_line_end",
+	&"ui_text_caret_line_end.macos",
+	&"ui_text_caret_page_up",
+	&"ui_text_caret_page_down",
+	&"ui_text_caret_document_start",
+	&"ui_text_caret_document_start.macos",
+	&"ui_text_caret_document_end",
+	&"ui_text_caret_document_end.macos",
+	&"ui_text_caret_add_below",
+	&"ui_text_caret_add_below.macos",
+	&"ui_text_caret_add_above",
+	&"ui_text_caret_add_above.macos",
+	&"ui_text_scroll_up",
+	&"ui_text_scroll_up.macos",
+	&"ui_text_scroll_down",
+	&"ui_text_scroll_down.macos",
+	&"ui_text_select_all",
+	&"ui_text_select_word_under_caret",
+	&"ui_text_select_word_under_caret.macos",
+	&"ui_text_add_selection_for_next_occurrence",
+	&"ui_text_skip_selection_for_next_occurrence",
+	&"ui_text_clear_carets_and_selection",
+	&"ui_text_toggle_insert_mode",
+	&"ui_menu",
+	&"ui_text_submit",
+	&"ui_graph_duplicate",
+	&"ui_graph_delete",
+	&"ui_filedialog_up_one_level",
+	&"ui_filedialog_refresh",
+	&"ui_filedialog_show_hidden",
+	&"ui_swap_input_direction",
 ]
 
 
@@ -129,7 +129,7 @@ static func disable_all_colliders(parent: Node) -> Array[Node]:
 	return disabled_colliders
 
 
-static func is_object_class(object: Object, class_string: String) -> bool:
+static func is_object_class(object: Object, class_string: StringName) -> bool:
 	if class_string.is_empty():
 		return false
 	
@@ -150,9 +150,9 @@ static func is_object_class(object: Object, class_string: String) -> bool:
 	return false
 
 
-static func classify_dict_key(dictionary: Dictionary, default_to_builtin := true) -> String:
+static func classify_dict_key(dictionary: Dictionary, default_to_builtin := true) -> StringName:
 	if not dictionary.is_typed_key():
-		return ""
+		return &""
 	
 	var typed_script: Script = dictionary.get_typed_key_script()
 	if typed_script != null:
@@ -163,14 +163,14 @@ static func classify_dict_key(dictionary: Dictionary, default_to_builtin := true
 		return typed_class
 	
 	if not default_to_builtin:
-		return ""
+		return &""
 	
 	return type_string(dictionary.get_typed_key_builtin())
 
 
-static func classify_dict_value(dictionary: Dictionary, default_to_builtin := true) -> String:
+static func classify_dict_value(dictionary: Dictionary, default_to_builtin := true) -> StringName:
 	if not dictionary.is_typed_value():
-		return ""
+		return &""
 	
 	var typed_script: Script = dictionary.get_typed_value_script()
 	if typed_script != null:
@@ -181,12 +181,12 @@ static func classify_dict_value(dictionary: Dictionary, default_to_builtin := tr
 		return typed_class
 	
 	if not default_to_builtin:
-		return ""
+		return &""
 	
 	return type_string(dictionary.get_typed_value_builtin())
 
 
-static func find_child_of_class(parent: Node, class_string: String) -> Node:
+static func find_child_of_class(parent: Node, class_string: StringName) -> Node:
 	if not is_instance_valid(parent):
 		return null
 	
@@ -212,7 +212,7 @@ static func find_stored_child_of_class(dictionary: Dictionary, parent: Node) -> 
 	return dictionary[parent]
 
 
-static func find_children_of_class(parent: Node, class_string: String, include_parent := false) -> Array[Node]:
+static func find_children_of_class(parent: Node, class_string: StringName, include_parent := false) -> Array[Node]:
 	var children: Array[Node] = []
 	
 	if include_parent and is_object_class(parent, class_string):
@@ -272,14 +272,14 @@ static func is_collider(node: Node) -> bool:
 static func disable_collider(collider: Node) -> bool:
 	if not is_collider(collider):
 		return false
-	collider.set_deferred("disabled", true)
+	collider.set_deferred(&"disabled", true)
 	return true
 
 
 static func enable_collider(collider: Node) -> bool:
 	if not is_collider(collider):
 		return false
-	collider.set_deferred("disabled", false)
+	collider.set_deferred(&"disabled", false)
 	return true
 
 
@@ -380,7 +380,7 @@ static func search_down_tree(parent: Node, check: Callable) -> Node:
 	return null
 
 
-static func find_all_resources(resource_type: String, start_path: String = "res://") -> Array:
+static func find_all_resources(resource_type: StringName, start_path: String = "res://") -> Array:
 	var results: Array = []
 
 	var scan_dir: Callable = func(path: String, function: Callable) -> void:
@@ -417,7 +417,7 @@ static func safe_free(node: Variant) -> bool:
 		return false
 	if not is_instance_valid(node):
 		return false
-	if not node.has_method("queue_free"):
+	if not node.has_method(&"queue_free"):
 		return false
 	node.queue_free()
 	return true
@@ -565,7 +565,7 @@ static func get_property_names(of: Object) -> PackedStringArray:
 		if property_name.is_empty():
 			continue
 		var first_char := property_name[0]
-		if first_char == "_":
+		if first_char == &"_":
 			continue
 		if first_char == first_char.to_upper():
 			continue

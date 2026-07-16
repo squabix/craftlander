@@ -5,7 +5,7 @@ signal updated_entity(to: Entity3D)
 
 static var _entity_controller_map: Dictionary[Entity3D, EntityController3D]
 
-@export var entity_type_state_map: Dictionary[String, String]
+@export var entity_type_state_map: Dictionary[StringName, StringName]
 @export var initial_entity: Entity3D
 
 var entity: Entity3D

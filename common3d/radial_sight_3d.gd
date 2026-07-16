@@ -11,7 +11,7 @@ signal lost_target
 @export_flags_3d_physics var target_collision_mask := 1
 @export_flags_3d_physics var ray_collision_mask := 1
 
-@export var group_whitelist: Array[String] = []
+@export var group_whitelist: Array[StringName] = []
 
 var area: Area3D
 var collision_shape: CollisionShape3D

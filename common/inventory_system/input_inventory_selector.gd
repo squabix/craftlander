@@ -18,8 +18,8 @@ extends InventorySelector
 
 @export_group("Scrolling")
 @export var use_scrolling := true
-@export var scroll_up_input_action := ""
-@export var scroll_down_input_action := ""
+@export var scroll_up_input_action := &""
+@export var scroll_down_input_action := &""
 @export var scroll_min_index := 0
 @export var scroll_max_index := -1
 

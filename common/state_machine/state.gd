@@ -61,7 +61,7 @@ func add_check(target: State, callable: Callable) -> void:
 	transition_checks[callable] = target
 
 
-func transition_to(state_name: String) -> void:
+func transition_to(state_name: StringName) -> void:
 	if not enter_callable.is_valid():
 		printerr("%s has invalid enter callable")
 		return

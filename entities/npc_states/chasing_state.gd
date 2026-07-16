@@ -9,7 +9,7 @@ extends State
 
 @export_group("Target Losing")
 @export var can_lose_target := true
-@export var lose_target_state := ""
+@export var lose_target_state := &""
 
 
 func _ready() -> void:

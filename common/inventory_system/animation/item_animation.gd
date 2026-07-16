@@ -2,9 +2,9 @@ class_name ItemAnimations
 extends Resource
 
 @export var items: Array[Item]
-@export var start_anim := ""
-@export var continue_anim := ""
-@export var end_anim := ""
+@export var start_anim := &""
+@export var continue_anim := &""
+@export var end_anim := &""
 
 
 func _to_string() -> String:

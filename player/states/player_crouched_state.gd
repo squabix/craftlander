@@ -16,7 +16,7 @@ func exit() -> void:
 	crouched_collision.disabled = true
 
 func update(_delta: float) -> void:
-	if Input.is_action_just_pressed("crouch") or Input.is_action_just_pressed("jump"):
-		transition_to("Walking")
-	elif Input.is_action_just_pressed("sprint") and stamina.is_usable():
-		transition_to("Sprinting")
+	if Input.is_action_just_pressed(&"crouch") or Input.is_action_just_pressed(&"jump"):
+		transition_to(&"Walking")
+	elif Input.is_action_just_pressed(&"sprint") and stamina.is_usable():
+		transition_to(&"Sprinting")

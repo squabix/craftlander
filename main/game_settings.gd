@@ -17,7 +17,7 @@ func load_settings():
 	apply_video_settings()
 	apply_audio_settings()
 
-func set_volume(bus_name: String, value: float):
+func set_volume(bus_name: StringName, value: float):
 	var bus_index = AudioServer.get_bus_index(bus_name)
 	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
 	config.set_value("audio", bus_name, value)

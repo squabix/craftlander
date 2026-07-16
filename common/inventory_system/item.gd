@@ -12,7 +12,7 @@ signal ended_use
 enum CooldownMode { DISABLED, START_USE, END_USE }
 enum UseState { START_USE, CONTINUE_USE, END_USE }
 
-@export var name := "":
+@export var name := &"":
 	get:
 		# Fallback to resource path if no name is set
 		if name.is_empty():
@@ -21,7 +21,7 @@ enum UseState { START_USE, CONTINUE_USE, END_USE }
 @export var max_quantity := 1
 @export var icon: Texture2D
 @export var consumable := false
-@export var type := "Miscellaneous"
+@export var type := &"Miscellaneous"
 
 @export_group("Scene")
 @export var scene: PackedScene

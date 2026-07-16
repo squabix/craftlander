@@ -63,7 +63,7 @@ func _ready() -> void:
 
 func get_all_mesh_instances() -> Array[MeshInstance3D]:
 	var instances: Array[MeshInstance3D]
-	instances.assign(Util.find_children_of_class(mesh_source, "MeshInstance3D"))
+	instances.assign(Util.find_children_of_class(mesh_source, &"MeshInstance3D"))
 	return instances
 
 

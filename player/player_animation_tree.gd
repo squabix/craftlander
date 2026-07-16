@@ -6,13 +6,13 @@ const MOVE_TRANSITION_PATH := "MoveTransition"
 const DEFAULT_MOVE_BLEND_POSITION_PATH := "parameters/%s/blend_position" % DEFAULT_MOVE_BLEND_SPACE_PATH
 const MOVE_TRANSITION_REQUEST_PATH := "parameters/%s/transition_request" % MOVE_TRANSITION_PATH
 
-const IDLE_ANIM := "idle"
-const WALK_ANIM := "walk"
-const SPRINT_ANIM := "sprint"
+const IDLE_ANIM := &"idle"
+const WALK_ANIM := &"walk"
+const SPRINT_ANIM := &"sprint"
 
-const DEFAULT_TRANSITION_REQUEST := "default"
-const SWIM_TRANSITION_REQUEST := "swim"
-const MIDAIR_TRANSITION_REQUEST := "midair"
+const DEFAULT_TRANSITION_REQUEST := &"default"
+const SWIM_TRANSITION_REQUEST := &"swim"
+const MIDAIR_TRANSITION_REQUEST := &"midair"
 
 @export var player: Player
 @export var walking_move_mode: MoveMode
@@ -43,7 +43,7 @@ func _ready() -> void:
 		var anim_node := default_move_blend_space.get_blend_point_node(i) as AnimationNodeAnimation
 		if anim_node == null:
 			continue
-		var anim_name: String = anim_node.animation.to_lower()
+		var anim_name := StringName(anim_node.animation.to_lower())
 		default_move_blend_space.set_blend_point_position(i, blend_positions.get(anim_name, 0.0))
 
 
@@ -67,7 +67,7 @@ func set_default_move_blend_position(to: float) -> void:
 	set(DEFAULT_MOVE_BLEND_POSITION_PATH, to)
 
 
-func get_anim_blend_positions() -> Dictionary[String, float]:
+func get_anim_blend_positions() -> Dictionary[StringName, float]:
 	return {
 		IDLE_ANIM: 0.0,
 		WALK_ANIM: walking_move_mode.max_speed.x,
@@ -75,7 +75,7 @@ func get_anim_blend_positions() -> Dictionary[String, float]:
 	}
 
 
-func get_move_state() -> String:
+func get_move_state() -> StringName:
 	if player.is_in_water:
 		return SWIM_TRANSITION_REQUEST
 	if not player.is_on_floor():

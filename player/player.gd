@@ -47,7 +47,7 @@ func _process(_delta: float) -> void:
 
 
 func get_target_head_height() -> float:
-	if movement_state_machine.is_currently("Crouching"):
+	if movement_state_machine.is_currently(&"Crouching"):
 		return CROUCHED_HEAD_HEIGHT
 	if is_in_water:
 		return SWIMMING_HEAD_HEIGHT

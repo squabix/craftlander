@@ -4,7 +4,7 @@ class_name Menu
 signal backed_out
 
 @export var back_button: Button
-@export var back_input_action: StringName = "ui_cancel"
+@export var back_input_action: StringName = &"ui_cancel"
 @export var visibility_proxy: CanvasItem
 
 var active_submenu: Menu

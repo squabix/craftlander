@@ -4,7 +4,7 @@ extends CharacterBody3D
 signal landed
 signal left_ground
 
-@export var type := "Entity"
+@export var type := &"Entity"
 @export var move_mode: MoveMode
 @export var move_up_as_jump := true
 

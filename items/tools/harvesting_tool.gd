@@ -1,7 +1,7 @@
 extends Item
 class_name HarvestingTool
 
-@export var harvest_animation: String = "harvest"
+@export var harvest_animation: StringName = &"harvest"
 @export var damage: Damage
 
 var harvest_ray: HitRay3D

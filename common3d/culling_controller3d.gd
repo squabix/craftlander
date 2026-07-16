@@ -53,12 +53,12 @@ func evaluate_culling() -> void:
 func get_geometry_instances() -> Array[GeometryInstance3D]:
 	var geometry_instances: Array[GeometryInstance3D] = []
 	if visibility_control_list.is_empty():
-		geometry_instances.assign(Util.find_children_of_class(root, "GeometryInstance3D", true))
+		geometry_instances.assign(Util.find_children_of_class(root, &"GeometryInstance3D", true))
 	elif control_visibility_deep:
 		for node in visibility_control_list:
-			geometry_instances.append_array(Util.find_children_of_class(node, "GeometryInstance3D", true))
+			geometry_instances.append_array(Util.find_children_of_class(node, &"GeometryInstance3D", true))
 	else:
-		geometry_instances.assign(visibility_control_list.filter(Util.is_object_class.bind("GeometryInstance3D")))
+		geometry_instances.assign(visibility_control_list.filter(Util.is_object_class.bind(&"GeometryInstance3D")))
 	return geometry_instances
 
 

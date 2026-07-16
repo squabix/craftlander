@@ -9,7 +9,7 @@ class AteFoodEvent extends ItemEvent:
 	@export var hunger_restoration: float
 	
 	func _init(event_health_restoration: float, event_hunger_restoration: float) -> void:
-		name = "ate_food"
+		name = &"ate_food"
 		health_restoration = event_health_restoration
 		hunger_restoration = event_hunger_restoration
 

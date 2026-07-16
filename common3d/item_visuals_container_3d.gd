@@ -82,11 +82,11 @@ func update_visuals() -> void:
 	contained_visuals.scale *= visuals_scale_ratio
 
 	# Set visual instances' layers
-	var visual_instances := Util.find_children_of_class(contained_visuals, "VisualInstance3D")
+	var visual_instances := Util.find_children_of_class(contained_visuals, &"VisualInstance3D")
 	for visual_instance in visual_instances:
 		visual_instance.layers = layers
 
 
 func disable_shadows() -> void:
-	for mesh_instance in Util.find_children_of_class(contained_visuals, "MeshInstance3D"):
+	for mesh_instance in Util.find_children_of_class(contained_visuals, &"MeshInstance3D"):
 		mesh_instance.cast_shadow = false

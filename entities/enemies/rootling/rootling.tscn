@@ -625,7 +625,7 @@ shape = SubResource("CapsuleShape3D_3emv6")
 script = ExtResource("8_7mn0t")
 state_machine = NodePath("../../Controller3D/Default")
 state_name = "Chasing"
-from_state_whitelist = Array[String](["Wandering"])
+from_state_whitelist = Array[StringName]([&"Wandering"])
 signal_name = &"was_hurt"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 
@@ -642,13 +642,13 @@ radius = 15.0
 lose_distance = 23.0
 target_collision_mask = 16
 ray_collision_mask = 21
-group_whitelist = Array[String](["player"])
+group_whitelist = Array[StringName]([&"player"])
 
 [node name="StartChaseTrigger" type="Node" parent="Sight3D" unique_id=1196415362 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("8_7mn0t")
 state_machine = NodePath("../../Controller3D/Default")
 state_name = "Chasing"
-from_state_whitelist = Array[String](["Wandering"])
+from_state_whitelist = Array[StringName]([&"Wandering"])
 signal_name = &"found_target"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 
@@ -725,7 +725,7 @@ radius = 1.0
 [node name="Visuals" parent="." unique_id=1269952913 instance=ExtResource("13_v4fp6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
-[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1269952913, 1533031829) index="0" unique_id=2034195538]
+[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1269952913, 981011866) index="0" unique_id=1388828898]
 bones/7/rotation = Quaternion(-0.35355338, 0.14644662, -0.35355335, 0.8535534)
 bones/10/rotation = Quaternion(-0.35355338, -0.14644662, 0.35355335, 0.8535534)
 

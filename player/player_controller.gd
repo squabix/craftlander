@@ -1,10 +1,10 @@
 extends EntityController3D
 class_name PlayerController
 
-const ACTION_MOVE_LEFT := "move_left"
-const ACTION_MOVE_RIGHT := "move_right"
-const ACTION_MOVE_FORWARD := "move_forward"
-const ACTION_MOVE_BACKWARD := "move_backward"
+const ACTION_MOVE_LEFT := &"move_left"
+const ACTION_MOVE_RIGHT := &"move_right"
+const ACTION_MOVE_FORWARD := &"move_forward"
+const ACTION_MOVE_BACKWARD := &"move_backward"
 
 const MOUSE_SENSITIVITY := 0.35
 

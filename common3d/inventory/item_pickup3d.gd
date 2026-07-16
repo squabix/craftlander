@@ -30,7 +30,7 @@ func _ready() -> void:
 	
 	if visibility_fading_enabled:
 		var geometry_instances: Array[GeometryInstance3D]
-		geometry_instances.assign(Util.find_children_of_class(visuals, "GeometryInstance3D"))
+		geometry_instances.assign(Util.find_children_of_class(visuals, &"GeometryInstance3D"))
 		for instance in geometry_instances:
 			instance.visibility_range_fade_mode = GeometryInstance3D.VISIBILITY_RANGE_FADE_SELF
 			instance.visibility_range_end = visibility_fading_distance
@@ -54,7 +54,7 @@ func update_visuals() -> void:
 
 func generate_all_collision(target_parent: Node3D = self) -> Array[CollisionShape3D]:
 	var collision_shapes: Array[CollisionShape3D] = []
-	var mesh_instances := Util.find_children_of_class(visuals, "MeshInstance3D")
+	var mesh_instances := Util.find_children_of_class(visuals, &"MeshInstance3D")
 
 	for mesh_instance: MeshInstance3D in mesh_instances:
 		collision_shapes.append(add_collision_shape(mesh_instance, target_parent))
@@ -79,7 +79,7 @@ func add_collision_shape(mesh_instance: MeshInstance3D, parent: Node) -> Collisi
 
 
 func interact(_source: Node, _etc: Dictionary = { }) -> void:
-	var inventory: Inventory = Util.find_child_of_class(_source, "Inventory")
+	var inventory: Inventory = Util.find_child_of_class(_source, &"Inventory")
 	inventory.add_item(item, 1)
 	Util.safe_free(self)
 	picked_up.emit()

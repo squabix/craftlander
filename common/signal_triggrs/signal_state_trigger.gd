@@ -2,8 +2,8 @@ class_name SignalStateTrigger
 extends SignalTrigger
 
 @export var state_machine: StateMachine
-@export var state_name: String
-@export var from_state_whitelist: Array[String]
+@export var state_name: StringName
+@export var from_state_whitelist: Array[StringName]
 
 
 func _ready() -> void:

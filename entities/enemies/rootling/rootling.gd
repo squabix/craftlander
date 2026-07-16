@@ -1,9 +1,9 @@
 extends Entity3D
 
-const ANIM_RUN := "run"
-const ANIM_WALK := "walk"
-const ANIM_IDLE := "idle"
-const ANIM_ATTACK := "attack"
+const ANIM_RUN := &"run"
+const ANIM_WALK := &"walk"
+const ANIM_IDLE := &"idle"
+const ANIM_ATTACK := &"attack"
 
 const RUN_THRESHOLD := 0.5
 const WALK_THESHOLD := 0.3

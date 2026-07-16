@@ -1,9 +1,9 @@
 extends StateMachine
 
-const ACTION_JUMP := "jump"
-const ACTION_INTERACT := "interact"
-const ACTION_USE_PRIMARY := "use_primary"
-const ACTION_DROP := "drop"
+const ACTION_JUMP := &"jump"
+const ACTION_INTERACT := &"interact"
+const ACTION_USE_PRIMARY := &"use_primary"
+const ACTION_DROP := &"drop"
 
 func enter() -> void:
 	super()
@@ -20,7 +20,7 @@ func handle_input(event: InputEvent) -> void:
 
 func update(delta: float) -> void:
 	if root.is_in_water:
-		transition_to("Swimming")
+		transition_to(&"Swimming")
 	
 	if Input.is_action_just_pressed(ACTION_JUMP):
 		root.jump()

@@ -4,9 +4,9 @@ extends AnimationTree
 @export var item_animations: Array[ItemAnimations] = []
 
 @export_group("Defaults")
-@export var default_start_anim := ""
-@export var default_continue_anim := ""
-@export var default_end_anim := ""
+@export var default_start_anim := &""
+@export var default_continue_anim := &""
+@export var default_end_anim := &""
 
 @export_group("Tree Parameter Paths")
 @export var playback_path := "parameters/ItemStateMachine/playback"
@@ -14,15 +14,15 @@ extends AnimationTree
 @export var item_blend_path := "parameters/ItemBlend/blend_amount"
 
 @export_group("State Machine States")
-@export var start_use_state := "start_use"
-@export var continue_use_state := "continue_use"
-@export var end_use_state := "end_use"
+@export var start_use_state := &"start_use"
+@export var continue_use_state := &"continue_use"
+@export var end_use_state := &"end_use"
 
 var current_item: Item
 
-var start_anim := ""
-var continue_anim := ""
-var end_anim := ""
+var start_anim := &""
+var continue_anim := &""
+var end_anim := &""
 
 var playback: AnimationNodeStateMachinePlayback
 var animation_state_machine: AnimationNodeStateMachine
@@ -128,18 +128,18 @@ func play_end() -> void:
 		disable_item_blend()
 
 
-func play_state(state: String) -> void:
+func play_state(state: StringName) -> void:
 	if playback == null:
 		printerr("%s's null playback cannot travel to state: %s" % [self, state])
 		return
 	playback.start(state)
 
 
-func get_current_item_anim() -> String:
+func get_current_item_anim() -> StringName:
 	return get(item_state_path)
 
 
-func get_state_anim_map() -> Dictionary[String, String]:
+func get_state_anim_map() -> Dictionary[StringName, StringName]:
 	return {
 		start_use_state: start_anim,
 		continue_use_state: continue_anim,
@@ -171,7 +171,7 @@ func update_tree_animations() -> void:
 		anim_node.animation = state_anim_map[state_node_name]
 
 
-func _on_state_finished(state_name: String) -> void:
+func _on_state_finished(state_name: StringName) -> void:
 	# Disable current item blend when item state machine finishes
 	if state_name == end_use_state:
 		disable_item_blend()
@@ -181,5 +181,5 @@ func _on_state_finished(state_name: String) -> void:
 		play_end()
 
 
-func _get_valid_animation(anim: String) -> String:
-	return anim if has_animation(anim) else ""
+func _get_valid_animation(anim: StringName) -> StringName:
+	return anim if has_animation(anim) else &""

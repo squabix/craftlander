@@ -18,7 +18,7 @@ func _ready() -> void:
 
 func enter() -> void:
 	if do_find_root_machine:
-		set_target(Util.find_child_of_class(root, "StateMachine"))
+		set_target(Util.find_child_of_class(root, &"StateMachine"))
 		match_state(target.current)
 
 

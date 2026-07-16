@@ -32,7 +32,7 @@ func physics_update(_delta: float) -> void:
 	
 	# Greater than 1 to discount colliding with own trunk
 	if has_landed():
-		transition_to("Chopped")
+		transition_to(&"Chopped")
 		return
 	
 	if not is_instance_valid(trunk):

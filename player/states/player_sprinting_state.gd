@@ -20,8 +20,8 @@ func update(_delta: float) -> void:
 	
 	# Crouching is currently disabled
 	#if Input.is_action_just_pressed("crouch") and root.is_on_floor():
-		#transition_to("Crouching")
+		#transition_to(&"Crouching")
 	
 	# 'elif' when crouching enabled
 	if not (stamina.is_usable() and is_walking_forward()):
-		transition_to("Walking")
+		transition_to(&"Walking")

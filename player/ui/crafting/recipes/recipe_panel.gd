@@ -9,7 +9,7 @@ const LAYOUT_OFFSET := Vector2i(2, -3)
 @export var back_entry: Control
 @export var back_text := "Back"
 
-@export var recipe_groups: Dictionary[String, RecipePanelGroup]
+@export var recipe_groups: Dictionary[StringName, RecipePanelGroup]
 
 @export_group("Entry Node Paths")
 @export var icon_rect_path := "IconRect"
@@ -31,7 +31,7 @@ func _ready() -> void:
 	
 	show_types()
 
-func add_type_entry(type: String) -> Control:
+func add_type_entry(type: StringName) -> Control:
 	var group := recipe_groups[type]
 	
 	var entry := add_empty_entry()
