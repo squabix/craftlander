@@ -4,15 +4,21 @@ extends NavigationObstacle3D
 
 @export var mesh_instance: MeshInstance3D:
 	set(value):
+		if not is_inside_tree():
+			return
 		mesh_instance = value
 		generate()
 @export var generate_on_ready := false
 @export var flip_winding_order: bool = false:
 	set(value):
+		if not is_inside_tree():
+			return
 		flip_winding_order = value
 		generate()
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var buffer := 0.05:
 	set(value):
+		if not is_inside_tree():
+			return
 		buffer = max(value, 0.0) # Prevent negative buffers
 		generate()
 @export_tool_button("Regenerate", "ArrayMesh") var generate_action := generate
@@ -27,7 +33,7 @@ static func get_bottom_center(min_position: Vector3, max_position: Vector3) -> V
 
 
 func _ready() -> void:
-	if generate_on_ready:
+	if generate_on_ready and not Engine.is_editor_hint():
 		generate.call_deferred()
 
 
