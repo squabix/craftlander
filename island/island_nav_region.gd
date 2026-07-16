@@ -30,18 +30,29 @@ static func transform_to_region_space(vertices: PackedFloat32Array, relative_tra
 
 func _ready() -> void:
 	current = self
-	EventBus.subscribe("island_terrain_generated", reset)
+	EventBus.subscribe("island_populated", reset)
 
 
 func reset() -> void:
 	if navigation_mesh == null:
 		navigation_mesh = NavigationMesh.new()
+	else:
+		update_map_cell_dimensions()
 
 	base_geometry = NavigationMeshSourceGeometryData3D.new()
 	parse_geometry_data(base_geometry, terrain)
 
 	if prop_geometry_cache.is_empty():
 		initialize_prop_cache()
+
+
+func update_map_cell_dimensions() -> void:
+	var map := get_navigation_map()
+	if not map.is_valid():
+		printerr("%s cannot update cell dimensions for invalid map: %s " % [self, map])
+		return
+	NavigationServer3D.map_set_cell_size(map, navigation_mesh.cell_size)
+	NavigationServer3D.map_set_cell_height(map, navigation_mesh.cell_height)
 
 
 func connect_prop_removal(prop: Node) -> void:
