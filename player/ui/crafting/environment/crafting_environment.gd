@@ -280,7 +280,6 @@ func tween_craft_fail() -> void:
 	
 	var step1_time := fail_wiggle_duration / 4.0
 	var step2_time := fail_wiggle_duration / 2.0
-	var step3_time := fail_wiggle_duration / 4.0
 	
 	var turn := func(visual: Node3D, amount: float, delay: float) -> void:
 		tween.tween_property(visual, "rotation_degrees", VISUALS_TILT + Vector3(0.0, amount, 0.0), step1_time).set_delay(delay)
@@ -289,9 +288,9 @@ func tween_craft_fail() -> void:
 		if not is_instance_valid(visual):
 			continue
 		
-		turn.call(visual, +fail_wiggle_intensity, 0.0) # Turn left
-		turn.call(visual, -fail_wiggle_intensity, step1_time) # Turn right
-		turn.call(visual, 0.0, step1_time + step2_time) # Return to normal tilt
+		turn.call(visual, +fail_wiggle_intensity, 0.0) # Turn left (step 1)
+		turn.call(visual, -fail_wiggle_intensity, step1_time) # Turn right (step 2)
+		turn.call(visual, 0.0, step1_time + step2_time) # Return to normal tilt (step 3)
 	
 	await tween.finished
 	is_tweening_craft_result = false
