@@ -5,7 +5,7 @@ class_name RigidBodyVelocityLimiter3D
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var limit: float = 5.0
 @export var axes: BoolVector3
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not enabled:
 		return
 	var parent := get_parent()
