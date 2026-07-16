@@ -328,12 +328,11 @@ metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 occluder = ExtResource("19_uemo8")
 
 [node name="MeshNavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=374949707 node_paths=PackedStringArray("mesh_instance")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9604645e-08, -0.2585466, -5.9604645e-08)
-radius = 0.7886392
-height = 0.56107557
-vertices = PackedVector3Array(-0.7886499, 0, 5.9604645e-08, -0.56854993, 0, -0.56854993, 5.9604645e-08, 0, -0.7886499, 0.56855005, 0, -0.56854993, 0.78865004, 0, 5.9604645e-08, 0.56855005, 0, 0.56855005, 5.9604645e-08, 0, 0.78865004, -0.56854993, 0, 0.56855005, -0.7886499, 0, 5.9604645e-08)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25854647, 0)
+radius = 0.8540511
+height = 0.5611
+vertices = PackedVector3Array(-0.83865, 0, 0, -0.6039053, 0, -0.6039053, 0, 0, -0.83865, 0.6039053, 0, -0.6039053, 0.83865, 0, 0, 0.6039053, 0, 0.6039053, 0, 0, 0.83865, -0.6039053, 0, 0.6039053, -0.83865, 0, 0)
 script = ExtResource("20_efdsh")
 mesh_instance = NodePath("../Stump/StumpMesh")
 generate_on_ready = true
-avoidance_margin = null
 metadata/_custom_type_script = "uid://bf4816o00o0s5"

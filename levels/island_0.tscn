@@ -126,7 +126,6 @@ domain_warp_max_strength = 80.0
 domain_warp_mask_texture = SubResource("GradientTexture2D_rsakh")
 ridged_noise_influence = 0.1
 beach_flattening = 2.5
-filter_isolated_landmasses = null
 mesh_instance = NodePath("MeshInstance3D")
 collision_shape = NodePath("StaticBody3D/CollisionShape3D")
 map_size = Vector3(600, 20, 600)

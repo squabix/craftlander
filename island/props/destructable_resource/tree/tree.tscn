@@ -440,10 +440,10 @@ metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 occluder = ExtResource("21_msvuo")
 
 [node name="MeshNavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=534165458 node_paths=PackedStringArray("mesh_instance")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -0.09549153)
-radius = 0.95105654
-height = 13.03
-vertices = PackedVector3Array(-0.9511, 0, -0.21350846, 0, 0, -0.9045085, 0.9511, 0, -0.21350846, 0.58779997, 0, 0.9044915, -0.58779997, 0, 0.9044915, -0.9511, 0, -0.21350846)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -0.09550002)
+radius = 1.1287163
+height = 2.0
+vertices = PackedVector3Array(-0.9998859, 0, -0.22445127, 0, 0, -0.9545, 0.9998859, 0, -0.22445127, 0.6150453, 0, 0.94642484, -0.6150453, 0, 0.94642484, -0.9998859, 0, -0.22445127)
 script = ExtResource("22_x34uo")
 mesh_instance = NodePath("../Stump/StumpMesh")
 generate_on_ready = true

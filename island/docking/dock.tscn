@@ -21,23 +21,23 @@ shape = SubResource("BoxShape3D_wrd2w")
 [node name="BlenderMeshes" parent="." unique_id=1351219446 instance=ExtResource("1_r7o7e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.40487766)
 
-[node name="Walkway" parent="BlenderMeshes" index="0" unique_id=1973546864]
+[node name="Walkway" parent="BlenderMeshes" index="0" unique_id=1101519416]
 surface_material_override/0 = ExtResource("2_jqbpu")
 surface_material_override/1 = ExtResource("3_g2y3g")
 
-[node name="Log1" parent="BlenderMeshes" index="1" unique_id=320616188]
+[node name="Log1" parent="BlenderMeshes" index="1" unique_id=910842540]
 surface_material_override/0 = ExtResource("2_jqbpu")
 surface_material_override/1 = ExtResource("3_g2y3g")
 
-[node name="Log2" parent="BlenderMeshes" index="2" unique_id=426026850]
+[node name="Log2" parent="BlenderMeshes" index="2" unique_id=1119714971]
 surface_material_override/0 = ExtResource("2_jqbpu")
 surface_material_override/1 = ExtResource("3_g2y3g")
 
-[node name="Log1_002" parent="BlenderMeshes" index="3" unique_id=848071644]
+[node name="Log1_002" parent="BlenderMeshes" index="3" unique_id=2055820054]
 surface_material_override/0 = ExtResource("2_jqbpu")
 surface_material_override/1 = ExtResource("3_g2y3g")
 
-[node name="Log2_002" parent="BlenderMeshes" index="4" unique_id=1837347863]
+[node name="Log2_002" parent="BlenderMeshes" index="4" unique_id=1680449771]
 surface_material_override/0 = ExtResource("2_jqbpu")
 surface_material_override/1 = ExtResource("3_g2y3g")
 

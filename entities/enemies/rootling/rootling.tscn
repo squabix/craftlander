@@ -729,7 +729,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 bones/7/rotation = Quaternion(-0.35355338, 0.14644662, -0.35355335, 0.8535534)
 bones/10/rotation = Quaternion(-0.35355338, -0.14644662, 0.35355335, 0.8535534)
 
-[node name="Woodling" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=1986003523]
+[node name="Woodling" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=491800460]
 surface_material_override/0 = ExtResource("21_uefcv")
 surface_material_override/1 = ExtResource("22_c3uxn")
 
