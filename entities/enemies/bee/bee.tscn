@@ -201,6 +201,10 @@ radius = 0.15
 
 [node name="Bee" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("sight", "hit_timer", "form_nodes")]
 collision_mask = 17
+wall_min_slide_angle = 3.1415927
+floor_constant_speed = true
+floor_block_on_wall = false
+floor_max_angle = 3.1415927
 script = ExtResource("1_4hd4j")
 sight = NodePath("Sight3D")
 hit_timer = NodePath("HitTimer")
