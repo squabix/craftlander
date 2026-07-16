@@ -100,7 +100,6 @@ subdivide_depth = 1000
 script = ExtResource("1_1lm7x")
 player = NodePath("DockingManager/Player")
 boat_driver_seat = NodePath("DockingManager/Boat/DriverSeat")
-current_player_spawn_mode = 1
 mesh_aggregator = NodePath("MeshInstanceAggregator3D")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2120940629]
@@ -126,6 +125,7 @@ ridged_noise_influence = 0.1
 beach_flattening = 2.5
 mesh_instance = NodePath("MeshInstance3D")
 collision_shape = NodePath("StaticBody3D/CollisionShape3D")
+generate_on_ready = false
 map_size = Vector3(600, 20, 600)
 map_resolution = Vector2i(800, 800)
 metadata/_edit_group_ = true
@@ -2056,10 +2056,9 @@ boat = NodePath("Boat")
 [node name="Player" parent="DockingManager" unique_id=30929158 node_paths=PackedStringArray("respawn_point_node") instance=ExtResource("21_kn3q4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4989454, 403.02567)
 respawn_point_node = NodePath("../Boat/DriverSeat")
-type = &"Entity"
 
 [node name="DockPlaceRayContainer" type="Node3D" parent="DockingManager" unique_id=1759140989]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 400)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 400)
 
 [node name="DockPlaceRay" type="RayCast3D" parent="DockingManager/DockPlaceRayContainer" unique_id=2080415802]
 target_position = Vector3(0, 0, -400)
@@ -2083,7 +2082,6 @@ collision_mask = 4
 
 [node name="Boat" parent="DockingManager" unique_id=782602740 instance=ExtResource("23_hfmnx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 400)
-type = &"Entity"
 
 [node name="StateMachine" parent="DockingManager/Boat" index="3" unique_id=266798118 node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Docking")

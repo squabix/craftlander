@@ -10,10 +10,13 @@ const DOCK_EXPOSED_LENGTH := 6.0
 @export var boat: Boat
 
 func _ready() -> void:
-	await get_tree().process_frame
-	place_dock()
-	boat.dock_position = boat_dock_point.global_position
-	boat.look_at(boat.dock_position)
+	EventBus.subscribe(
+			&"island_terrain_generated",
+			func():
+					place_dock()
+					boat.dock_position = boat_dock_point.global_position
+					boat.look_at(boat.dock_position)
+	)
 
 func extend_dock_place_rays() -> void:
 	for ray in dock_place_ray_container.get_children():
