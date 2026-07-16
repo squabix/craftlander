@@ -37,7 +37,7 @@ func hit() -> Area3D:
 	if area in hit_nodes and one_shot:
 		return null
 
-	area.hurt(damage, Vector3.FORWARD.rotated(Util.VECTOR3Y, global_rotation.y))
+	area.hurt(damage, Hitbox3D.get_knock_direction(global_rotation.y, damage))
 	hit_nodes.append(area)
 	hit_node.emit()
 

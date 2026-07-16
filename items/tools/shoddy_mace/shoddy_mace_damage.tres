@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource("1_7s0vo")
 base_amount = 10.0
-force = 22.0
-type = "weapon"
+type = &"melee"
+knockback_force = 18.0
+knockback_angle = 12.5
 metadata/_custom_type_script = "uid://bl5x717nsijmk"

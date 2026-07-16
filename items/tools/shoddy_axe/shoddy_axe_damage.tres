@@ -5,5 +5,7 @@
 [resource]
 script = ExtResource("1_wxwtj")
 base_amount = 8.5
-type = "axe"
+type = &"axe"
+knockback_force = 15.0
+knockback_angle = 10.0
 metadata/_custom_type_script = "uid://bl5x717nsijmk"

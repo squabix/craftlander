@@ -42,6 +42,13 @@ func hit_overlap() -> Array[Area3D]:
 	return overlap
 
 
+static func get_knock_direction(y_rotation: float, knocking_damage: Damage) -> Vector3:
+	var forward_direction := Vector3.FORWARD.rotated(Vector3.UP, y_rotation).normalized()
+	if knocking_damage != null:
+		return forward_direction.rotated(forward_direction.cross(Vector3.UP).normalized(), -deg_to_rad(knocking_damage.knockback_angle))
+	return forward_direction
+
+
 func hit(area: Area3D) -> bool:
 	# BAIL if not enabled
 	if not enabled:
@@ -59,8 +66,8 @@ func hit(area: Area3D) -> bool:
 	# BAIL if area is not a hurtbox
 	if not (area is Hurtbox3D):
 		return false
-
-	area.hurt(damage, Vector3.FORWARD.rotated(Util.VECTOR3Y, global_rotation.y))
+	
+	area.hurt(damage, get_knock_direction(global_rotation.y, damage))
 	hit_nodes.append(area)
 	hit_node.emit()
 

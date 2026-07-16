@@ -3,8 +3,11 @@ extends Resource
 
 @export var base_amount := 1.0
 @export var variation := 0.0
-@export var force := 10.0
 @export var type: StringName
+
+@export_group("Knockback", "knockback")
+@export var knockback_force := 10.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:°") var knockback_angle := 0.0
 
 var source: Node
 

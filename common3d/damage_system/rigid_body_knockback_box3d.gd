@@ -6,5 +6,5 @@ extends Hurtbox3D
 
 
 func hurt(damage: Damage, direction: Vector3 = Vector3.ZERO) -> float:
-	rigid_body.apply_central_force(direction * base_force * damage.force)
+	rigid_body.apply_central_force(direction * base_force * damage.knockback_force)
 	return super(damage, direction)

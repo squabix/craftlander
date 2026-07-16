@@ -16,7 +16,7 @@ signal was_dealt_damage(damage: Damage)
 
 @export_group("Knockback", "knockback")
 @export var knockback_entity: Entity3D
-@export var knockback_multiplier := 1.0
+@export var knockback_multiplier := Vector3.ONE
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var knockback_center_offset := Vector3.ZERO
 
 @export_group("Auto Hurt", "auto_hurt")
@@ -70,7 +70,7 @@ func hurt(damage: Damage, direction: Vector3 = Vector3.ZERO) -> float:
 
 	var damage_amount := apply_damage_amount(damage.sample())
 
-	knock(direction, damage.force)
+	knock(direction, damage.knockback_force)
 
 	was_hurt.emit()
 	was_dealt_damage.emit(damage)
