@@ -29,10 +29,8 @@
 [ext_resource type="Script" uid="uid://7vqcc56mnyjs" path="res://common/ui/tooltip_label.gd" id="19_knn7v"]
 [ext_resource type="Script" uid="uid://dk37mcui4c45e" path="res://common/inventory_system/inventory_holder3d.gd" id="20_mmwog"]
 [ext_resource type="Script" uid="uid://bghx5ubltmjf7" path="res://common/inventory_system/input_inventory_selector.gd" id="21_fmu53"]
-[ext_resource type="PackedScene" uid="uid://4lmb1r25uhnr" path="res://items/materials/stick/stick.tscn" id="22_7l6ig"]
 [ext_resource type="Resource" uid="uid://bah3rou15fcfh" path="res://items/tools/shoddy_axe/shoddy_axe_item.tres" id="22_bjvpn"]
 [ext_resource type="Script" uid="uid://c07qmsd7epd0h" path="res://common/ui/popup_display.gd" id="23_7pqkx"]
-[ext_resource type="PackedScene" uid="uid://oxrw6o32lsp2" path="res://items/tools/shoddy_pickaxe/shoddy_pickaxe.blend" id="23_kewli"]
 [ext_resource type="Script" uid="uid://dapeyi3eetek1" path="res://common/signal_triggrs/signal_animation_trigger.gd" id="25_j55il"]
 [ext_resource type="Script" uid="uid://q5lh058bmpum" path="res://common/damage_system/health_bar.gd" id="26_r7pn3"]
 [ext_resource type="Script" uid="uid://c3xfbb8ay0ghk" path="res://common/interpolated_bar.gd" id="27_b8hi5"]
@@ -847,12 +845,6 @@ item_holder = NodePath("..")
 visuals_scale_ratio = 0.75
 do_disable_shadows = true
 layers = 2
-
-[node name="Stick" parent="Head/Camera3D/ItemHolder/ItemVisualsContainer3D" unique_id=156442345 instance=ExtResource("22_7l6ig")]
-visible = false
-
-[node name="shoddy_pickaxe" parent="Head/Camera3D/ItemHolder/ItemVisualsContainer3D" unique_id=118340073 instance=ExtResource("23_kewli")]
-transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 
 [node name="HoldSelector" type="Node" parent="Head/Camera3D/ItemHolder" unique_id=2089262331 node_paths=PackedStringArray("inventory")]
 process_mode = 3
