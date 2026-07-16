@@ -19,7 +19,11 @@ var safe_velocity := Vector3.ZERO # Calculated by the NavigationServer
 
 func _ready() -> void:
 	nav.avoidance_enabled = true
-	nav.velocity_computed.connect(set.bind("safe_velocity")) # Update safe velocity whenever computed
+	nav.velocity_computed.connect(update_computed_velocity) # Update safe velocity whenever computed
+
+
+func update_computed_velocity(to: Vector3) -> void:
+	safe_velocity = to
 
 
 func set_target(to: Vector3) -> void:
