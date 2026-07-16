@@ -26,7 +26,7 @@ func _ready() -> void:
 		generate.call_deferred()
 	else:
 		default_heightmap_sampler()
-		EventBus.trigger.call_deferred("island_terrain_generated")
+		EventBus.trigger.call_deferred(&"island_terrain_generated")
 
 
 func is_missing_textures() -> bool:
@@ -246,4 +246,4 @@ func _remove_isolated_landmasses(image: Image) -> void:
 
 func _finalize_generation(heightmap_image: Image) -> void:
 	super(heightmap_image)
-	EventBus.trigger("island_terrain_generated")
+	EventBus.trigger(&"island_terrain_generated")

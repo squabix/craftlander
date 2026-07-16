@@ -12,7 +12,7 @@ enum PlayerSpawnMode {BOAT, ISLAND_CENTER}
 
 func _ready() -> void:
 	if aggregate_props:
-		EventBus.subscribe("island_populated", mesh_aggregator.aggregate)
+		EventBus.subscribe(&"island_populated", mesh_aggregator.aggregate)
 	match current_player_spawn_mode:
 		PlayerSpawnMode.BOAT:
 			boat_driver_seat.mount(player)

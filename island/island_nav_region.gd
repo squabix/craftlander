@@ -30,7 +30,7 @@ static func transform_to_region_space(vertices: PackedFloat32Array, relative_tra
 
 func _ready() -> void:
 	current = self
-	EventBus.subscribe("island_populated", reset)
+	EventBus.subscribe(&"island_populated", reset)
 
 
 func reset() -> void:
@@ -137,4 +137,4 @@ func _complete_baking() -> void:
 		bake_props()
 	elif not has_baked:
 		has_baked = true
-		EventBus.trigger("island_navigation_baked")
+		EventBus.trigger(&"island_navigation_baked")

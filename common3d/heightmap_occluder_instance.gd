@@ -11,7 +11,7 @@ extends OccluderInstance3D
 
 func _ready() -> void:
 	if generate_on_ready:
-		EventBus.subscribe("island_terrain_generated", generate)
+		EventBus.subscribe(&"island_terrain_generated", generate)
 
 
 func generate() -> void:

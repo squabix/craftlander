@@ -36,7 +36,7 @@ func _ready() -> void:
 	
 	if wait_for_island_population:
 		EventBus.subscribe(
-			"island_populated",
+			&"island_populated",
 			connect_hurtbox_damage,
 			tree_exiting
 		)

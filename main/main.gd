@@ -16,7 +16,7 @@ static var base_seed := 0:
 
 func _ready() -> void:
 	load_title()
-	EventBus.subscribe("quit_to_title", quit_to_title)
+	EventBus.subscribe(&"quit_to_title", quit_to_title)
 
 func start_new_game(save: int) -> void:
 	clear()

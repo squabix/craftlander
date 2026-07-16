@@ -19,7 +19,7 @@ var prop_resources: Dictionary[Vector3, IslandProp] = { }
 
 
 func _ready() -> void:
-	EventBus.subscribe("island_terrain_generated", populate if populate_on_ready else EventBus.trigger.bind("island_populated"))
+	EventBus.subscribe(&"island_terrain_generated", populate if populate_on_ready else EventBus.trigger.bind(&"island_populated"))
 
 
 func clear() -> void:
@@ -121,7 +121,7 @@ func populate() -> void:
 			spawned_count += 1
 
 	await get_tree().process_frame
-	EventBus.trigger("island_populated")
+	EventBus.trigger(&"island_populated")
 
 
 func jitter_point(point: Vector2i) -> Vector2i:

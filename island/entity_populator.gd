@@ -14,7 +14,7 @@ var has_populated := false
 
 
 func _ready() -> void:
-	EventBus.subscribe("island_navigation_baked", populate)
+	EventBus.subscribe(&"island_navigation_baked", populate)
 
 
 func clear_invalid_entities() -> void:

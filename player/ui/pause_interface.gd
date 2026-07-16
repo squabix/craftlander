@@ -26,7 +26,7 @@ func _ready() -> void:
 	# Connect options buttons
 	resume_button.pressed.connect(toggle_pause)
 	settings_button.pressed.connect(open_settings)
-	quit_button.pressed.connect(EventBus.trigger.bind("quit_to_title"))
+	quit_button.pressed.connect(EventBus.trigger.bind(&"quit_to_title"))
 
 func open_settings() -> void:
 	crafting_menu.hide()

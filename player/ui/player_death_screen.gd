@@ -8,4 +8,4 @@ func _ready() -> void:
 	%Health.died.connect(show)
 	%Health.revived.connect(hide)
 	
-	quit_button.pressed.connect(EventBus.trigger.bind("quit_to_title"))
+	quit_button.pressed.connect(EventBus.trigger.bind(&"quit_to_title"))
