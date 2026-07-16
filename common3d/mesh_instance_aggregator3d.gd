@@ -8,10 +8,8 @@ static var aggregated_mesh_instances: Dictionary[MeshInstance3D, MeshInstanceAgg
 @export_tool_button("Reset", "Reload") var reset_action: Callable = reset
 
 @export var mesh_source: Node
-
 @export var aggregate_on_ready := true
 @export var use_material_override := true
-
 @export var multi_instance_unformatted_name := "MultiMesh_%s"
 
 @export_group("Instance Visibility")
@@ -47,13 +45,7 @@ static func get_material_override(mesh_instance: MeshInstance3D) -> Material:
 	if mesh_instance == null:
 		return null
 
-	if mesh_instance.material_override != null:
-		return mesh_instance.material_override
-
-	if mesh_instance.get_surface_override_material_count() == 0:
-		return null
-
-	return mesh_instance.get_surface_override_material(0)
+	return mesh_instance.material_override
 
 
 func _ready() -> void:
@@ -69,16 +61,34 @@ func get_all_mesh_instances() -> Array[MeshInstance3D]:
 
 func get_mesh_groups() -> Dictionary[Mesh, Array]:
 	var all_mesh_instances := get_all_mesh_instances()
-	var mesh_groups: Dictionary[Mesh, Array] = { }
+	var instance_key_groups: Dictionary[StringName, Array] = { }
 
+	# Group instances by their unique combination of mesh + overrides
 	for instance in all_mesh_instances:
 		if not instance.mesh:
 			continue
 
-		if mesh_groups.has(instance.mesh):
-			mesh_groups[instance.mesh].append(instance)
-		else:
-			mesh_groups[instance.mesh] = [instance]
+		var key := _get_instance_group_key(instance)
+		if not instance_key_groups.has(key):
+			instance_key_groups[key] = []
+		instance_key_groups[key].append(instance)
+
+	# Duplicate the meshes and bake the surface overrides directly onto them
+	var mesh_groups: Dictionary[Mesh, Array] = { }
+	for key in instance_key_groups:
+		var group: Array[MeshInstance3D]
+		group.assign(instance_key_groups[key])
+
+		var base_instance := group[0]
+		var mesh_duplicate: Mesh = base_instance.mesh.duplicate()
+
+		for i in range(base_instance.get_surface_override_material_count()):
+			var override := base_instance.get_surface_override_material(i)
+			if override == null:
+				continue
+			mesh_duplicate.surface_set_material(i, override)
+
+		mesh_groups[mesh_duplicate] = group
 
 	return mesh_groups
 
@@ -89,7 +99,7 @@ func add_multi_instance(name_infix: String, material_override: Material = null) 
 	add_child(multi_instance)
 	generated_multimeshes.append(multi_instance)
 
-	if use_material_override:
+	if use_material_override and material_override != null:
 		multi_instance.material_override = material_override
 
 	return multi_instance
@@ -198,6 +208,21 @@ func set_instance_visibility(instance: MeshInstance3D, visibility: bool) -> void
 		data.show()
 	else:
 		data.hide()
+
+
+func _get_instance_group_key(instance: MeshInstance3D) -> StringName:
+	var key := str(instance.mesh.get_instance_id()) + (
+			"_g:null" if instance.material_override == null
+			else "_g:%s" % str(instance.material_override.get_instance_id())
+	)
+	
+	for i in range(instance.get_surface_override_material_count()):
+		var material := instance.get_surface_override_material(i)
+		key += (
+				"_s%s:null" % i if material == null
+				else "_s%s:%s" % [i, str(material.get_instance_id())]
+		)
+	return StringName(key)
 
 
 func _on_instance_visibility_changed(instance: MeshInstance3D) -> void:
