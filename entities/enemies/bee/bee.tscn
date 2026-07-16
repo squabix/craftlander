@@ -21,6 +21,12 @@
 script/source = "extends EntityController3D
 "
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jwu52"]
+albedo_color = Color(0.8, 0.71693337, 0.088000014, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c6ibj"]
+albedo_color = Color(0.17112508, 0.09764192, 0.04864355, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ff1s"]
 resource_name = "Material.002"
 transparency = 4
@@ -297,6 +303,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 
 [node name="Visuals" parent="BlenderVisuals" unique_id=2002060618 instance=ExtResource("14_0lxgi")]
 transform = Transform3D(0.225, 0, 0, 0, 0.22158168, -0.03907083, 0, 0.03907083, 0.22158168, 0, 0.05, 0)
+
+[node name="Body" parent="BlenderVisuals/Visuals" index="0" unique_id=298979506]
+surface_material_override/0 = SubResource("StandardMaterial3D_jwu52")
+surface_material_override/1 = SubResource("StandardMaterial3D_c6ibj")
 
 [node name="Wings" parent="BlenderVisuals/Visuals" index="1" unique_id=430225119]
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0)

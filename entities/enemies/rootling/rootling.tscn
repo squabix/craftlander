@@ -58,6 +58,12 @@ script = ExtResource("8_8jseq")
 item = ExtResource("17_rvntx")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m5g4y"]
+albedo_color = Color(0.6784314, 0.24313726, 0.33333334, 1)
+emission_enabled = true
+emission = Color(0.68, 0, 0.1360002, 1)
+emission_energy_multiplier = 4.37
+
 [sub_resource type="Animation" id="Animation_3emv6"]
 length = 0.001
 tracks/0/type = "rotation_3d"
@@ -732,6 +738,7 @@ bones/10/rotation = Quaternion(-0.35355338, -0.14644662, 0.35355335, 0.8535534)
 [node name="Woodling" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=491800460]
 surface_material_override/0 = ExtResource("21_uefcv")
 surface_material_override/1 = ExtResource("22_c3uxn")
+surface_material_override/2 = SubResource("StandardMaterial3D_m5g4y")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Visuals/Armature/Skeleton3D" index="1" unique_id=319653899]
 transform = Transform3D(0.6298519, 0.59437907, 0.5, 0.09933779, -0.7000942, 0.7071068, 0.7703367, -0.39570355, -0.5, 0.54142135, 0.32332414, -0.14142136)

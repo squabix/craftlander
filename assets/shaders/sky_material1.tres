@@ -3,13 +3,13 @@
 [ext_resource type="Shader" uid="uid://bkbty48k6awb1" path="res://assets/shaders/sky_shader1.gdshader" id="1_yxbb3"]
 
 [sub_resource type="Gradient" id="Gradient_fh26t"]
-offsets = PackedFloat32Array(0.055841923, 0.124570444, 0.14862543, 0.28608248)
-colors = PackedColorArray(1, 1, 1, 1, 0.9600888, 0.8626332, 0.4831741, 1, 1, 1, 1, 0.2901961, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0.04595828, 0.08767927, 0.10202086, 0.2363103, 0.48011735)
+colors = PackedColorArray(1, 1, 1, 1, 0.983751, 0.9337405, 0.73941714, 1, 1, 1, 1, 0.25882354, 1, 1, 1, 0.101960786, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_q07lh"]
 gradient = SubResource("Gradient_fh26t")
-width = 256
-height = 256
+width = 512
+height = 512
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
@@ -18,7 +18,7 @@ colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_7t3mh"]
 gradient = SubResource("Gradient_rskvw")
-fill_to = Vector2(0.730057, 0)
+fill_to = Vector2(0.94060284, 0.036347516)
 
 [sub_resource type="Gradient" id="Gradient_7qw7f"]
 
@@ -30,10 +30,10 @@ color_ramp = SubResource("Gradient_7qw7f")
 seamless = true
 
 [sub_resource type="Gradient" id="Gradient_q07lh"]
+offsets = PackedFloat32Array(0.24327958, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_fh26t"]
 noise_type = 5
-frequency = 0.025
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_epvbt"]
 noise = SubResource("FastNoiseLite_fh26t")
@@ -48,15 +48,15 @@ shader_parameter/cloud_curves = SubResource("GradientTexture2D_7t3mh")
 shader_parameter/clouds_samples = 16
 shader_parameter/shadow_sample = 4
 shader_parameter/clouds_density = 0.40000000596048
-shader_parameter/clouds_scale = 0.5
-shader_parameter/clouds_smoothness = 0.0999999977648
+shader_parameter/clouds_scale = 1.0
+shader_parameter/clouds_smoothness = 0.08999999798832001
 shader_parameter/clouds_light_color = Color(1, 1, 1, 1)
 shader_parameter/clouds_shadow_intensity = 1.0
 shader_parameter/high_clouds_density = 0.0
-shader_parameter/top_color = Color(0.66710144, 0.8157107, 0.95419544, 1)
+shader_parameter/top_color = Color(0.35000002, 0.46916658, 1, 1)
 shader_parameter/bottom_color = Color(0, 0, 0, 1)
-shader_parameter/ground_color = Color(0.51, 0.7958334, 1, 1)
-shader_parameter/sun_scatter = Color(0.5245193, 0.8061467, 0.9174949, 1)
+shader_parameter/ground_color = Color(0.32941177, 0.83137256, 1, 1)
+shader_parameter/sun_scatter = Color(0.32941177, 0.83137256, 1, 1)
 shader_parameter/astro_tint = Color(1, 1, 1, 1)
 shader_parameter/astro_sampler = SubResource("GradientTexture2D_q07lh")
 shader_parameter/astro_scale = 1.0

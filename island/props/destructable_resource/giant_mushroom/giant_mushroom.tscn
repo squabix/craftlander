@@ -13,8 +13,10 @@
 [ext_resource type="Resource" uid="uid://bwurefwkj4gjj" path="res://common/damage_system/single_damage.tres" id="10_ve6jj"]
 [ext_resource type="ArrayMesh" uid="uid://cxtofsxxgyuua" path="res://island/props/destructable_resource/giant_mushroom/giant_mushroom_top.tres" id="11_thgfp"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="12_e47mg"]
+[ext_resource type="Material" uid="uid://bntpptj6c08nu" path="res://assets/materials/red_mushroom.tres" id="14_7kk6m"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="14_hjpsa"]
 [ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="14_pu6jt"]
+[ext_resource type="Material" uid="uid://fs0rcuantoc5" path="res://assets/materials/mushroom_spot.tres" id="15_j4jsq"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="15_vwjnp"]
 [ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="16_5epkt"]
 [ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="17_wdv32"]
@@ -283,6 +285,8 @@ metadata/_custom_type_script = "uid://iyqixpr4un6s"
 [node name="TopMesh" type="MeshInstance3D" parent="Trunk" unique_id=188167528]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.7516966, 0)
 mesh = ExtResource("11_thgfp")
+surface_material_override/0 = ExtResource("14_7kk6m")
+surface_material_override/1 = ExtResource("15_j4jsq")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="Trunk" unique_id=1009868672]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.7516966, 0)

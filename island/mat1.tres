@@ -11,7 +11,7 @@ seamless = true
 
 [sub_resource type="Gradient" id="Gradient_oo7eo"]
 offsets = PackedFloat32Array(0, 0.0021588947, 0.898532, 0.9244387, 1)
-colors = PackedColorArray(0.6784314, 0.5647059, 0.33333334, 1, 0.0351, 0.27, 0.093825, 1, 0.03529412, 0.27058825, 0.09411765, 1, 0.59, 0.5015, 0.3245, 1, 0.68, 0.5644, 0.3332, 1)
+colors = PackedColorArray(0.6784314, 0.5647059, 0.33333334, 1, 0.08627451, 0.27058825, 0.0627451, 1, 0.08635504, 0.27, 0.062100008, 1, 0.59, 0.5015, 0.3245, 1, 0.68, 0.5644, 0.3332, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_it87k"]
 gradient = SubResource("Gradient_oo7eo")
