@@ -712,7 +712,7 @@ dropper = NodePath("Head/Camera3D/DropperRayCast/InventoryDropper3D")
 health = NodePath("Health")
 hunger = NodePath("Hunger")
 stamina = NodePath("Stamina")
-type = "player"
+type = &"Player"
 horizontal_rotation_target = NodePath(".")
 vertical_rotation_target = NodePath("Head/Camera3D")
 rotation_range = SubResource("Resource_g6k8r")
@@ -764,8 +764,8 @@ shape = SubResource("CapsuleShape3D_yw30f")
 unique_name_in_owner = true
 script = ExtResource("4_qjkh3")
 entity_type_state_map = Dictionary[StringName, StringName]({
-&"boat": &"Boat",
-&"player": &"Default"
+&"Boat": &"Boat",
+&"Player": &"Default"
 })
 initial_entity = NodePath("..")
 initial_state = NodePath("Default")

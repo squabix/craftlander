@@ -15,7 +15,7 @@
 
 [sub_resource type="Resource" id="Resource_thr0k"]
 script = ExtResource("2_wbjwq")
-max_speed = Vector2(10, 0)
+max_speed = Vector2(20, 0)
 metadata/_custom_type_script = "uid://edbvsbdtvgtj"
 
 [sub_resource type="Resource" id="Resource_1blct"]
@@ -78,7 +78,7 @@ max_turn_speed = 1650.0
 driver_seat = NodePath("DriverSeat")
 state_machine = NodePath("StateMachine")
 seats = [NodePath("DriverSeat")]
-type = "boat"
+type = &"Boat"
 move_mode = SubResource("Resource_thr0k")
 move_up_as_jump = false
 gravity_multiplier = 0.0
