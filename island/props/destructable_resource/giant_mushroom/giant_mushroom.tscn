@@ -67,7 +67,7 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_tj84h")
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qxxyi"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_efdsh"]
 points = PackedVector3Array(0, 0.12215091, 0.94003695, -0.68367994, 0.12215091, 0.68349594, 0.6834959, 0.12215091, 0.68349594, 0, 13.019581, 0.86918455, -0.9400369, 0.12215091, 0, -0.6317828, 13.015652, 0.6315989, -0.8693685, 13.019581, 0, 0.9400369, 0.12215091, 0, 0.8691845, 13.019581, 0, 0.63159883, 13.015652, 0.6315989, 0.49983168, 13.356126, 0.49983174, 0, 13.403269, 0.609515, -0.50001574, 13.356126, 0.49983174, -0.68367994, 0.12215091, -0.68367994, -0.60969895, 13.403269, 0, -0.50001574, 13.356126, -0.50001574, -0.6317828, 13.015652, -0.6317829, 0.6834959, 0.12215091, -0.68367994, 0.63159883, 13.015652, -0.6317829, 0.49983168, 13.356126, -0.50001574, 0.60951495, 13.403269, 0, 0, 13.500173, 0, 0, 0.12215091, -0.94003695, 0, 13.019581, -0.86936855, 0, 13.403269, -0.609699)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pu6jt"]
@@ -269,8 +269,8 @@ shape = SubResource("SphereShape3D_8mlu7")
 material_override = ExtResource("10_jcypt")
 mesh = SubResource("ArrayMesh_hbewo")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Trunk" unique_id=226286952]
-shape = SubResource("ConvexPolygonShape3D_qxxyi")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trunk" unique_id=643273777]
+shape = SubResource("ConvexPolygonShape3D_efdsh")
 
 [node name="Spawner3D" type="Node3D" parent="Trunk" unique_id=737068488 node_paths=PackedStringArray("inventory")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
@@ -327,12 +327,11 @@ metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 [node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=23111598]
 occluder = ExtResource("19_uemo8")
 
-[node name="MeshNavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=374949707 node_paths=PackedStringArray("mesh_instance")]
+[node name="MeshNavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=374949707]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25854647, 0)
 radius = 0.8540511
 height = 0.5611
 vertices = PackedVector3Array(-0.83865, 0, 0, -0.6039053, 0, -0.6039053, 0, 0, -0.83865, 0.6039053, 0, -0.6039053, 0.83865, 0, 0, 0.6039053, 0, 0.6039053, 0, 0, 0.83865, -0.6039053, 0, 0.6039053, -0.83865, 0, 0)
 script = ExtResource("20_efdsh")
-mesh_instance = NodePath("../Stump/StumpMesh")
 generate_on_ready = true
 metadata/_custom_type_script = "uid://bf4816o00o0s5"
