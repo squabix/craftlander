@@ -6,6 +6,7 @@ extends Resource
 @export var z: bool = true
 
 
+@warning_ignore("shadowed_variable")
 static func construct(x: bool, y: bool, z: bool) -> BoolVector3:
 	var bv: BoolVector3 = BoolVector3.new()
 	bv.x = x
