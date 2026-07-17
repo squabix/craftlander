@@ -5,6 +5,7 @@ extends State
 @export var sight: RadialSight3D
 @export var interval_staggerer: IntervalStaggerer
 @export var default_target: Node3D
+@export var approach_in_water := false
 @export_custom(PROPERTY_HINT_NONE, "m") var max_item_use_distance := 1.5
 
 @export_group("Target Losing")
@@ -24,6 +25,10 @@ func exit() -> void:
 	interval_staggerer.disabled = true
 
 
+func is_in_water() -> bool:
+	return is_instance_valid(sight.target) and sight.target.get(&"is_in_water") == true
+
+
 func physics_update(_delta: float) -> void:
 	if not is_instance_valid(guide):
 		printerr("Chasing state of %s has no guide" % root)
@@ -37,7 +42,7 @@ func physics_update(_delta: float) -> void:
 			item_holder.use_item()
 
 	# Move forward to get in range
-	else:
+	elif approach_in_water or not is_in_water():
 		guide.move_forward()
 
 
