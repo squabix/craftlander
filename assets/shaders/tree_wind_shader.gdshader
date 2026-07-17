@@ -1,6 +1,7 @@
 //https://godotshaders.com/shader/3d-tree-sway-wind-shader-v0-5/
 
-shader_type spatial; 
+shader_type spatial;
+render_mode cull_disabled;
 
 uniform bool debug_mode = false;
 
