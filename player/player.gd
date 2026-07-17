@@ -8,7 +8,7 @@ const HEAD_SPEED := 0.1
 
 @export var head: Node3D
 @export var movement_state_machine: StateMachine
-@export var interactor: Interactor3D
+@export var interactors: Array[Interactor3D]
 @export var respawn_button: Button
 @export var docking_hidden_interfaces: Array[Control] = []
 
@@ -71,7 +71,9 @@ func use_item() -> void:
 
 
 func interact() -> void:
-	interactor.interact()
+	for interactor in interactors:
+		if interactor.interact() != null:
+			return
 
 
 func die() -> void:

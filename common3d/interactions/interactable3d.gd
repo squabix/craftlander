@@ -2,9 +2,11 @@ class_name Interactable3D
 extends Area3D
 
 @export var enabled := true
-@export var id := 0
-@export var enabled_tooltip := ""
-@export var disabled_tooltip := ""
+@export var channel := 0
+
+@export_group("Tooltips", "tooltip")
+@export var tooltip_enabled := ""
+@export var tooltip_disabled := ""
 
 
 func enable() -> void:
@@ -20,4 +22,4 @@ func interact(_source: Node, _etc: Dictionary = { }) -> void:
 
 
 func get_tooltip() -> String:
-	return enabled_tooltip if enabled else disabled_tooltip
+	return tooltip_enabled if enabled else tooltip_disabled

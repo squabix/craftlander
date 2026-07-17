@@ -36,7 +36,7 @@ func _ready() -> void:
 			instance.visibility_range_end = visibility_fading_distance
 			instance.visibility_range_end_margin = visibility_fading_margin
 
-	enabled_tooltip = unformatted_tooltip % item.name
+	tooltip_enabled = unformatted_tooltip % item.name
 
 	if generate_floor_raycast:
 		Util.snap_to_floor(self, FLOOR_MARGIN)

@@ -4,7 +4,7 @@ extends Node
 signal interacted_with(interactable: Interactable3D)
 
 @export var root: Node
-@export var id := 0
+@export var channel := 0
 
 
 func interact() -> Interactable3D:
@@ -35,7 +35,7 @@ func get_current_interactable() -> Interactable3D:
 
 
 func is_interactable_valid(interactable: Interactable3D) -> bool:
-	return is_instance_valid(interactable) and interactable.id == id
+	return is_instance_valid(interactable) and interactable.channel == channel
 
 
 func get_closest_interactable(interacbles: Array) -> Interactable3D:

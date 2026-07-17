@@ -1,7 +1,7 @@
 class_name TooltipLabel
 extends Label
 
-@export var interactor: Interactor3D
+@export var interactors: Array[Interactor3D]
 @export var visible_when_paused := false
 
 
@@ -10,11 +10,11 @@ func _process(_delta: float) -> void:
 		hide()
 		return
 
-	if interactor == null:
+	for interactor in interactors:
+		var interactable := interactor.get_current_interactable()
+		if interactable == null:
+			continue
+		text = interactable.get_tooltip()
+		show()
 		return
-	var interactable := interactor.get_current_interactable()
-	if interactable == null:
-		hide()
-		return
-	text = interactable.get_tooltip()
-	show()
+	hide()

@@ -694,7 +694,11 @@ items = Array[ExtResource("40_a2xo5")]([ExtResource("41_a2xo5"), ExtResource("22
 start_anim = "swing_tool"
 metadata/_custom_type_script = "uid://c622jer80j3sk"
 
-[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("head", "movement_state_machine", "interactor", "respawn_button", "item_holder", "dropper", "health", "hunger", "stamina", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hjjmf"]
+height = 1.5
+radius = 0.3
+
+[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("head", "movement_state_machine", "interactors", "respawn_button", "item_holder", "dropper", "health", "hunger", "stamina", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
 collision_layer = 17
 floor_constant_speed = true
 floor_block_on_wall = false
@@ -703,7 +707,7 @@ floor_snap_length = 0.5
 script = ExtResource("1_g1dw6")
 head = NodePath("Head")
 movement_state_machine = NodePath("Controller3D/Default")
-interactor = NodePath("Head/Camera3D/InteratorRay/Interactor")
+interactors = [NodePath("InteractorArea/Interactor3D"), NodePath("Head/Camera3D/InteratorRay/Interactor")]
 respawn_button = NodePath("DeathScreen/OptionsContainer/RespawnButton")
 item_holder = NodePath("Head/Camera3D/ItemHolder")
 dropper = NodePath("Head/Camera3D/DropperRayCast/InventoryDropper3D")
@@ -1004,7 +1008,7 @@ grow_vertical = 2
 texture = ExtResource("17_tqiix")
 expand_mode = 1
 
-[node name="TooltipLabel" type="Label" parent="HUD" unique_id=189793984 node_paths=PackedStringArray("interactor")]
+[node name="TooltipLabel" type="Label" parent="HUD" unique_id=189793984 node_paths=PackedStringArray("interactors")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1020,7 +1024,7 @@ grow_vertical = 2
 label_settings = SubResource("LabelSettings_p5tca")
 autowrap_mode = 3
 script = ExtResource("19_knn7v")
-interactor = NodePath("../../Head/Camera3D/InteratorRay/Interactor")
+interactors = [NodePath("../../InteractorArea/Interactor3D"), NodePath("../../Head/Camera3D/InteratorRay/Interactor")]
 
 [node name="BarContainer" type="VBoxContainer" parent="HUD" unique_id=1488788714]
 unique_name_in_owner = true
@@ -4645,6 +4649,21 @@ inventory_selector = NodePath("../Head/Camera3D/ItemHolder/HoldSelector")
 item_animations = Array[ExtResource("39_dx5ib")]([SubResource("Resource_art4l")])
 
 [node name="BuildTimer" type="Timer" parent="." unique_id=1941720648]
+
+[node name="InteractorArea" type="Area3D" parent="." unique_id=1498770132]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractorArea" unique_id=452254216]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CylinderShape3D_hjjmf")
+
+[node name="Interactor3D" type="Node" parent="InteractorArea" unique_id=666555348 node_paths=PackedStringArray("root")]
+script = ExtResource("10_32hag")
+root = NodePath("../..")
+channel = 1
+metadata/_custom_type_script = "uid://bypxgjqugqucx"
 
 [connection signal="updated_instance" from="Head/Camera3D/ItemHolder" to="HUD" method="_on_item_holder_updated_instance"]
 [connection signal="updated_pause" from="PauseInterface" to="." method="_on_pause_interface_updated_pause"]
