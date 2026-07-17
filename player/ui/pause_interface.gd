@@ -1,3 +1,4 @@
+class_name PauseInterface
 extends Control
 
 signal updated_pause(to: bool)
