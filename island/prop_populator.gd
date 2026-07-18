@@ -52,9 +52,17 @@ func add_prop(prop: IslandProp, point: Vector2i, spawn_position: Vector3) -> Nod
 	add_child.call_deferred(instance)
 
 	# Place/transform instance
-	island_generator.place_node(instance, point.x, point.y, prop.normal_conformity)
-	instance.rotation_degrees.y = randf() * 360.0
-	instance.scale = Vector3.ONE * randf_range(prop.min_scale, prop.max_scale)
+	island_generator.place_node(
+		instance,
+		point.x,
+		point.y,
+		prop.normal_conformity, 
+		func():
+			# Finish transforming instance after island generator placement
+			instance.rotation_degrees.y = randf() * 360.0
+			instance.scale = Vector3.ONE * randf_range(prop.min_scale, prop.max_scale)
+	)
+	
 	
 	# If running inside the editor, set the owner to the current scene root
 	if Engine.is_editor_hint():

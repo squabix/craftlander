@@ -138,9 +138,11 @@ func align_node_to_normal(node: Node3D, px: int, py: int, conformity := 1.0) -> 
 	node.global_transform.basis = target_basis.orthonormalized().scaled(current_basis.get_scale())
 
 
-func place_node(node: Node3D, px: int, py: int, normal_conformity := 1.0) -> void:
+func place_node(node: Node3D, px: int, py: int, normal_conformity := 1.0, callback := Callable()) -> void:
 	node.global_position = get_pixel_position(px, py)
 	align_node_to_normal.call_deferred(node, px, py, normal_conformity)
+	if callback.is_valid():
+		callback.call()
 
 
 func resize_to_resolution(image: Image) -> Image:
