@@ -6,9 +6,14 @@ const CROUCHED_HEAD_HEIGHT := 0.7
 const SWIMMING_HEAD_HEIGHT := 0.85
 const HEAD_SPEED := 0.1
 
-@export var head: Node3D
+@export_group("Components")
 @export var movement_state_machine: StateMachine
+
+@export_subgroup("3D")
+@export var head: Node3D
 @export var interactors: Array[Interactor3D]
+
+@export_subgroup("Control")
 @export var respawn_button: Button
 @export var docking_hidden_interfaces: Array[Control] = []
 
