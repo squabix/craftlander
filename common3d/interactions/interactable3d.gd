@@ -2,6 +2,7 @@ class_name Interactable3D
 extends Area3D
 
 @export var enabled := true
+signal interacted_with(source: Node)
 @export var channel := 0
 
 @export_group("Tooltips", "tooltip")
@@ -17,8 +18,8 @@ func disable() -> void:
 	enabled = false
 
 
-func interact(_source: Node, _etc: Dictionary = { }) -> void:
-	printerr("Interact")
+func interact(source: Node, _etc: Dictionary = { }) -> void:
+	interacted_with.emit(source)
 
 
 func get_tooltip() -> String:
