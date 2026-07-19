@@ -2,6 +2,8 @@
 class_name PropPopulator
 extends Node3D
 
+signal populated
+
 const PLACEMENT_STEP := Vector2i(2, 2)
 const JITTER_AMOUNT := Vector2i(1, 1)
 
@@ -16,10 +18,6 @@ var clear_tool_button := clear
 
 var props: Dictionary[Vector3, Node3D] = { }
 var prop_resources: Dictionary[Vector3, IslandProp] = { }
-
-
-func _ready() -> void:
-	EventBus.subscribe(&"island_terrain_generated", populate if populate_on_ready else EventBus.trigger.bind(&"island_populated"))
 
 
 func clear() -> void:
@@ -130,6 +128,7 @@ func populate() -> void:
 
 	await get_tree().process_frame
 	EventBus.trigger(&"island_populated")
+	populated.emit()
 
 
 func jitter_point(point: Vector2i) -> Vector2i:
