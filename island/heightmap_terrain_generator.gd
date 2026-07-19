@@ -15,7 +15,11 @@ signal generated
 @export_custom(PROPERTY_HINT_NONE, "suffix:px") var map_resolution := Vector2i(1, 1)
 
 var mesh: PlaneMesh
-var heightmap_sampler: Callable
+var heightmap_sampler: Callable:
+	get:
+		if not heightmap_sampler.is_valid():
+			heightmap_sampler = get_heightmap_sampler((shader_get(&"heightmap") as ImageTexture).get_image())
+		return heightmap_sampler
 
 
 func _ready() -> void:
@@ -154,10 +158,6 @@ func resize_to_resolution(image: Image) -> Image:
 
 func get_heightmap_sampler(image: Image) -> Callable:
 	return func(x: int, y: int) -> float: return image.get_pixel(x, y).r
-
-
-func default_heightmap_sampler() -> void:
-	heightmap_sampler = get_heightmap_sampler((shader_get(&"heightmap") as ImageTexture).get_image())
 
 
 func get_pixel_position(x: int, y: int) -> Vector3:

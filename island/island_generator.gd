@@ -25,7 +25,6 @@ func _ready() -> void:
 	if generate_on_ready:
 		generate.call_deferred()
 	else:
-		default_heightmap_sampler()
 		EventBus.trigger.call_deferred(&"island_terrain_generated")
 
 
