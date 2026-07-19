@@ -6,23 +6,18 @@ extends OccluderInstance3D
 
 @export var terrain_generator: HeightMapTerrainGenerator
 @export_range(2, 32, 1, "suffix:px") var step_size := 4
-@export var generate_on_ready := true
+@export var generate_on_ready := false
 
 
 func _ready() -> void:
 	if generate_on_ready:
-		EventBus.subscribe(&"island_terrain_generated", generate)
+		generate()
 
 
 func generate() -> void:
-	assert(
-			is_instance_valid(terrain_generator),
-			"%s cannot generate occluder with invalid terrain generator %s" % [self, terrain_generator]
-	)
-	assert(
-		not terrain_generator.heightmap_sampler.is_null(),
-		"%s cannot generate occluder with null heightmap sampler from %s" % [self, terrain_generator]
-	)
+	if not is_instance_valid(terrain_generator):
+		printerr("%s cannot generate occluder with invalid terrain generator %s" % [self, terrain_generator])
+		return
 
 	WorkerThreadPool.add_task(
 			_bake_occluder_thread.bind(
