@@ -2,6 +2,8 @@
 class_name HeightMapTerrainGenerator
 extends Node3D
 
+signal generated
+
 @export_tool_button("Generate", "Noise") var generate_action: Callable = generate
 
 @export var mesh_instance: MeshInstance3D
@@ -178,3 +180,4 @@ func _finalize_generation(output_image: Image) -> void:
 	heightmap_sampler = get_heightmap_sampler(output_image)
 	var image_texture := update_shader_texture(output_image)
 	update_collision_shape(image_texture)
+	generated.emit()
