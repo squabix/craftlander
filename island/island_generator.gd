@@ -8,7 +8,7 @@ extends HeightMapTerrainGenerator
 
 @export_group("Settings")
 @export var taper_gradient_strength := 0.9
-@export_range(0.0, 100.0, 0.5, "suffix:px") var domain_warp_max_strength := 50.0
+@export_range(0.0, 200.0, 0.5, "suffix:px") var domain_warp_max_strength := 50.0
 @export var domain_warp_mask_texture: GradientTexture2D
 @export_range(0.0, 1.0) var ridged_noise_influence := 0.4
 @export var taper_power := 2.0
