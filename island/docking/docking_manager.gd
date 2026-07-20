@@ -1,3 +1,4 @@
+class_name DockingManager
 extends Node3D
 
 const DOCK_ELEVATION_OFFSET := 0.65
@@ -9,14 +10,12 @@ const DOCK_EXPOSED_LENGTH := 6.0
 @export var dock: Node3D
 @export var boat: Boat
 
-func _ready() -> void:
-	EventBus.subscribe(
-			&"island_terrain_generated",
-			func():
-					place_dock()
-					boat.dock_position = boat_dock_point.global_position
-					boat.look_at(boat.dock_position)
-	)
+func initialize() -> void:
+	place_dock()
+	if not is_instance_valid(boat):
+		return
+	boat.dock_position = boat_dock_point.global_position
+	boat.look_at(boat.dock_position)
 
 func extend_dock_place_rays() -> void:
 	for ray in dock_place_ray_container.get_children():
