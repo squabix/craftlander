@@ -1,6 +1,12 @@
 class_name NodeSaver
 extends Node
 
+enum OffloadMode {
+	FREE,
+	IGNORE_PROPERTIES,
+	DISABLED,
+}
+
 static var save: Save
 static var scene_root: Node
 static var all: Dictionary[Node, NodeSaver] = { }
@@ -14,8 +20,13 @@ static var all: Dictionary[Node, NodeSaver] = { }
 @export var saved_properties: Array[StringName]
 @export var custom_target: Node
 
+@export_group("Offloading", "offload")
+@export var offload_mode: OffloadMode = OffloadMode.FREE
+@export var offload_on_free := true
+
 var target: Node
 var dynamic_uuid := &""
+var _is_offloaded: bool = false
 
 
 static func get_scene_context() -> String:
@@ -56,11 +67,41 @@ func _ready() -> void:
 
 
 func _exit_tree() -> void:
+	_free_offload()
+				
 	all.erase(target)
 
 
-func get_uuid() -> StringName:
-	return StringName("%s_%s" % [str(ResourceUID.create_id()), str(randi())])
+func _free_offload() -> bool:
+	if not offload_on_free:
+		return false
+	
+	if not is_instance_valid(scene_root):
+		printerr("%s cannot free offload with invalid scene root: %s" % [self, scene_root])
+		return false
+	
+	if not (is_instance_valid(target) and target.is_queued_for_deletion()):
+		return false
+		
+	
+	# Check if scene root or scene root ancestors are being freed
+	var check := scene_root
+	while is_instance_valid(check):
+		if check.is_queued_for_deletion():
+			return false
+		check = check.get_parent()
+	
+	offload()
+	save_properties()
+	return true
+
+
+func offload() -> void:
+	_is_offloaded = true
+
+
+func onload() -> void:
+	_is_offloaded = false
 
 
 func get_property_data() -> Dictionary[StringName, Variant]:
@@ -91,11 +132,19 @@ func save_properties() -> void:
 	if save_mode == NodeSave.Mode.DYNAMIC and dynamic_uuid.is_empty():
 		dynamic_uuid = get_uuid()
 
-	var property_data := get_property_data()
-	if property_data.is_empty():
-		return 
+	var property_data: Dictionary[StringName, Variant] = { }
+	
+	# Determine if we should bypass property collection entirely
+	var skip_properties := _is_offloaded and offload_mode == OffloadMode.IGNORE_PROPERTIES
+
+	if not skip_properties:
+		property_data = get_property_data()
+		# Only block saving empty data if it's a standard static/global node and NOT offloaded
+		if property_data.is_empty() and save_mode != NodeSave.Mode.DYNAMIC and not _is_offloaded:
+			return 
 
 	var node_save := NodeSave.new(saver_id, save_mode, get_scene_context(), property_data)
+	node_save.offloaded = _is_offloaded
 
 	match save_mode:
 		NodeSave.Mode.DYNAMIC:
@@ -121,7 +170,25 @@ func load_properties() -> void:
 	if index == -1:
 		return
 
-	set_property_data(save.node_properties[index].properties)
+	var node_save: NodeSave = save.node_properties[index]
+	
+	_is_offloaded = node_save.offloaded
+	if node_save.offloaded:
+		match offload_mode:
+			OffloadMode.FREE:
+				if is_instance_valid(target):
+					target.queue_free()
+				return
+			OffloadMode.IGNORE_PROPERTIES:
+				return
+			OffloadMode.DISABLED:
+				pass # Load properties normally
+
+	set_property_data(node_save.properties)
+
+
+func get_uuid() -> StringName:
+	return StringName("%s_%s" % [str(ResourceUID.create_id()), str(randi())])
 
 
 func find_index() -> int:

@@ -25,6 +25,8 @@ enum ParentType {
 @export var parent_path: NodePath
 @export var relative_path: NodePath
 
+@export var offloaded := false
+
 
 func _init(save_saver_id: StringName = &"", save_mode: Mode = Mode.NONE, save_scene_context: String = "", property_data: Dictionary[StringName, Variant] = {}) -> void:
 	saver_id = save_saver_id
