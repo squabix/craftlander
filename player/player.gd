@@ -15,6 +15,7 @@ const HEAD_SPEED := 0.1
 
 @export_subgroup("Control")
 @export var respawn_button: Button
+@export var boat_interface: BoatInterface
 @export var docking_hidden_interfaces: Array[Control] = []
 
 @export_group("Inventory")

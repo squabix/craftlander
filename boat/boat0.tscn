@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://7e05ki6ll213"]
+[gd_scene format=3 uid="uid://c2ss32j8grhn8"]
 
 [ext_resource type="Script" uid="uid://bj8pokcrjdf2c" path="res://boat/boat.gd" id="1_1ek77"]
 [ext_resource type="PackedScene" uid="uid://j53nm0t5m7rf" path="res://boat/boat1.blend" id="2_6h0kv"]
@@ -11,12 +11,12 @@
 [ext_resource type="Script" uid="uid://8bgokntpuh33" path="res://boat/boat_docked_state.gd" id="6_c4lax"]
 [ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="6_wbjwq"]
 [ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="7_e44pp"]
-[ext_resource type="Script" uid="uid://bcwgfvcnnjoac" path="res://boat/boat_piloting_state.gd" id="10_0q3wp"]
+[ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="13_8aujj"]
 [ext_resource type="Script" uid="uid://favgu1tbe1tq" path="res://common3d/interactions/interactable3d.gd" id="13_e44pp"]
 
 [sub_resource type="Resource" id="Resource_thr0k"]
 script = ExtResource("2_wbjwq")
-max_speed = Vector2(40, 0)
+max_speed = Vector2(50, 0)
 metadata/_custom_type_script = "uid://edbvsbdtvgtj"
 
 [sub_resource type="Resource" id="Resource_1blct"]
@@ -86,19 +86,14 @@ height = 1.0
 height = 1.0
 radius = 1.0
 
-[sub_resource type="BoxMesh" id="BoxMesh_hjjmf"]
-size = Vector3(5.3583984, 0.5961914, 6.1746826)
-
-[node name="Boat1" type="CharacterBody3D" unique_id=782602740 node_paths=PackedStringArray("state_machine", "driver_seat", "interactable", "seats")]
+[node name="Boat0" type="CharacterBody3D" unique_id=782602740 node_paths=PackedStringArray("state_machine", "driver_seat", "interactable")]
 collision_layer = 5
 axis_lock_linear_y = true
 motion_mode = 1
 script = ExtResource("1_1ek77")
-level = 1
 state_machine = NodePath("StateMachine")
 driver_seat = NodePath("DriverSeat")
 interactable = NodePath("Interactable3D")
-seats = [NodePath("DriverSeat")]
 type = &"Boat"
 move_mode = SubResource("Resource_thr0k")
 move_up_as_jump = false
@@ -124,9 +119,8 @@ script = ExtResource("3_qqn3m")
 vehicle = NodePath("..")
 metadata/_custom_type_script = "uid://dukhrkatonywt"
 
-[node name="StateMachine" type="Node" parent="." unique_id=266798118 node_paths=PackedStringArray("initial_state", "root")]
+[node name="StateMachine" type="Node" parent="." unique_id=266798118 node_paths=PackedStringArray("root")]
 script = ExtResource("4_qqn3m")
-initial_state = NodePath("Docking")
 root = NodePath("..")
 process_update = true
 physics_process_update = true
@@ -141,10 +135,6 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 script = ExtResource("6_c4lax")
 driver_seat = NodePath("../../DriverSeat")
 interactable = NodePath("../../Interactable3D")
-metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
-
-[node name="Piloting" type="Node" parent="StateMachine" unique_id=1893954928]
-script = ExtResource("10_0q3wp")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1985380001]
@@ -168,8 +158,10 @@ mesh = SubResource("CylinderMesh_hjjmf")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable3D" unique_id=1797498647]
 shape = SubResource("CylinderShape3D_hjjmf")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=713837168]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.50146484, 0.2019043, 3.0271976)
-mesh = SubResource("BoxMesh_hjjmf")
+[node name="NodeSaver" type="Node" parent="." unique_id=550251567]
+script = ExtResource("13_8aujj")
+saver_id = &"boat"
+saved_properties = Array[StringName]([&"dock_position"])
+metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 
 [editable path="BlenderMeshes1"]

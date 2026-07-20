@@ -22,7 +22,6 @@
 [ext_resource type="Script" uid="uid://b6gq5g1xvdnsu" path="res://player/states/player_swimming_state.gd" id="16_art4l"]
 [ext_resource type="Script" uid="uid://b1eix6p0204fp" path="res://common/inventory_system/displays/item_display.gd" id="16_e7oew"]
 [ext_resource type="Script" uid="uid://c3r6ofqamuc13" path="res://common/state_machine/mirror_state_machine.gd" id="16_mmwog"]
-[ext_resource type="Script" uid="uid://bn1bpe1hvtv7u" path="res://player/player_piloting_boat_state.gd" id="17_hjies"]
 [ext_resource type="Texture2D" uid="uid://c4jkghkqifcm7" path="res://assets/ui/crosshair.tres" id="17_tqiix"]
 [ext_resource type="Script" uid="uid://b7pvp0pnngnem" path="res://common/ui/fps_label.gd" id="19_bjvpn"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="19_c35mf"]
@@ -67,9 +66,13 @@
 [ext_resource type="Resource" uid="uid://6a5notvdv1ei" path="res://items/tools/shoddy_mace/shoddy_mace_recipe.tres" id="53_hggc2"]
 [ext_resource type="Script" uid="uid://bubfjagdkgrlq" path="res://player/ui/inventory/inventory_organizer.gd" id="55_jbx34"]
 [ext_resource type="Script" uid="uid://uwx6xnt2vr38" path="res://player/ui/inventory/item_inspector.gd" id="59_b2j0d"]
+[ext_resource type="Script" uid="uid://rroukmbv64vv" path="res://player/ui/boat_interface.gd" id="64_2h6tc"]
+[ext_resource type="Script" uid="uid://b6r50f8akgpp7" path="res://player/ui/island_option.gd" id="64_kewli"]
+[ext_resource type="Texture2D" uid="uid://dvu8avo8cfq2c" path="res://icon.svg" id="64_utr5e"]
 [ext_resource type="Script" uid="uid://xu4t7vci1g06" path="res://player/player_animation_tree.gd" id="65_7l6ig"]
 [ext_resource type="Resource" uid="uid://mx3f8ldvvndd" path="res://player/states/player_walking_move_mode.tres" id="66_utr5e"]
 [ext_resource type="Resource" uid="uid://c86fer36qsomd" path="res://player/states/player_sprinting_move_mode.tres" id="67_kewli"]
+[ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="74_2h6tc"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -303,6 +306,61 @@ tracks/0/keys = {
 _data = {
 &"RESET": SubResource("Animation_knn7v"),
 &"show": SubResource("Animation_g4c7l")
+}
+
+[sub_resource type="Gradient" id="Gradient_kewli"]
+interpolation_mode = 2
+colors = PackedColorArray(0.25882354, 0.7607843, 0.7607843, 1, 0.27450982, 0.5647059, 0.72156864, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hjjmf"]
+gradient = SubResource("Gradient_kewli")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_do7qw"]
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.6)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_o385s"]
+gradient = SubResource("Gradient_do7qw")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Animation" id="Animation_2h6tc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:offset_transform_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.08726646]
+}
+
+[sub_resource type="Animation" id="Animation_8rogd"]
+resource_name = "float"
+length = 4.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:offset_transform_rotation")
+tracks/0/interp = 4
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.08726646, 0.08726646, -0.08726646]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_48p26"]
+_data = {
+&"RESET": SubResource("Animation_2h6tc"),
+&"float": SubResource("Animation_8rogd")
 }
 
 [sub_resource type="Gradient" id="Gradient_fjxoa"]
@@ -695,20 +753,21 @@ start_anim = "swing_tool"
 metadata/_custom_type_script = "uid://c622jer80j3sk"
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hjjmf"]
-height = 1.5
+height = 0.3
 radius = 0.3
 
-[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("head", "movement_state_machine", "interactors", "respawn_button", "item_holder", "dropper", "health", "hunger", "stamina", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
+[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("movement_state_machine", "head", "interactors", "respawn_button", "boat_interface", "item_holder", "dropper", "health", "hunger", "stamina", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
 collision_layer = 17
 floor_constant_speed = true
 floor_block_on_wall = false
 floor_max_angle = 1.0471976
 floor_snap_length = 0.5
 script = ExtResource("1_g1dw6")
-head = NodePath("Head")
 movement_state_machine = NodePath("Controller3D/Default")
+head = NodePath("Head")
 interactors = [NodePath("InteractorArea/Interactor3D"), NodePath("Head/Camera3D/InteratorRay/Interactor")]
 respawn_button = NodePath("DeathScreen/OptionsContainer/RespawnButton")
+boat_interface = NodePath("BoatInterface")
 item_holder = NodePath("Head/Camera3D/ItemHolder")
 dropper = NodePath("Head/Camera3D/DropperRayCast/InventoryDropper3D")
 health = NodePath("Health")
@@ -724,6 +783,13 @@ metadata/_custom_type_script = "uid://bki5ij8task16"
 script = ExtResource("19_c35mf")
 item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_j3r50"), SubResource("Resource_hggc2"), SubResource("Resource_utr5e"), SubResource("Resource_k7n08")])
 size = 40
+
+[node name="NodeSaver" type="Node" parent="Inventory" unique_id=137251970]
+script = ExtResource("74_2h6tc")
+save_mode = 1
+saver_id = &"player_inventory"
+saved_properties = Array[StringName]([&"item_instances"])
+metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 
 [node name="Hunger" type="Node" parent="." unique_id=1790864786 node_paths=PackedStringArray("bar", "health", "stamina")]
 script = ExtResource("31_2uvqg")
@@ -818,9 +884,6 @@ script = ExtResource("16_mmwog")
 [node name="Docking" type="Node" parent="Controller3D/Boat" unique_id=1555341780]
 script = ExtResource("12_fjxoa")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
-
-[node name="Piloting" type="Node" parent="Controller3D/Boat" unique_id=1749152635]
-script = ExtResource("17_hjies")
 
 [node name="MouseController" type="Node" parent="." unique_id=766266427]
 script = ExtResource("5_g6k8r")
@@ -936,6 +999,12 @@ anim_name = "hurt"
 force_from_start = false
 signal_name = &"was_hurt"
 metadata/_custom_type_script = "uid://dapeyi3eetek1"
+
+[node name="NodeSaver" type="Node" parent="Health" unique_id=86546930]
+script = ExtResource("74_2h6tc")
+save_mode = 1
+saver_id = &"hp"
+metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 
 [node name="ScreenEffectContainer" type="Control" parent="." unique_id=1989509956]
 layout_mode = 3
@@ -4571,6 +4640,158 @@ grow_horizontal = 2
 grow_vertical = 2
 action_mode = 0
 flat = true
+
+[node name="BoatInterface" type="Control" parent="." unique_id=520927744 node_paths=PackedStringArray("island_option_container", "pause_interface", "sail_button", "upgrade_button")]
+process_mode = 2
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("64_2h6tc")
+island_option_container = NodePath("IslandOptionContainer")
+pause_interface = NodePath("../PauseInterface")
+sail_button = NodePath("Control/SailButton")
+upgrade_button = NodePath("Control/UpgradeButton")
+
+[node name="BlurRect" type="TextureRect" parent="BoatInterface" unique_id=1913048716]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_hjjmf")
+
+[node name="Control" type="Control" parent="BoatInterface" unique_id=849476876]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -106.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="BoatInterface/Control" unique_id=1192747138]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -66.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_o385s")
+
+[node name="SailButton" type="Button" parent="BoatInterface/Control" unique_id=1632329268]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -79.5
+offset_right = 79.5
+offset_bottom = 40.0
+grow_horizontal = 2
+disabled = true
+text = "Set Sail"
+
+[node name="UpgradeButton" type="Button" parent="BoatInterface/Control" unique_id=1038887707]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 283.0
+offset_top = 2.0
+offset_right = 442.0
+offset_bottom = 42.0
+grow_horizontal = 2
+text = "Upgrade"
+
+[node name="IslandOptionContainer" type="Control" parent="BoatInterface" unique_id=288135614]
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 447.0
+
+[node name="IslandOption0" type="VBoxContainer" parent="BoatInterface/IslandOptionContainer" unique_id=1381974933 node_paths=PackedStringArray("name_label", "texture_rect", "select_button")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.119791664
+anchor_top = 0.3914989
+anchor_right = 0.203125
+anchor_bottom = 0.64876956
+script = ExtResource("64_kewli")
+island_name = &"Lush Isle"
+name_label = NodePath("../../../PauseInterface/CraftingMenu/ItemInspector/VBoxContainer/NameLabel")
+texture_rect = NodePath("TextureRect")
+select_button = NodePath("SelectButton")
+metadata/_edit_use_anchors_ = true
+
+[node name="NameLabel" type="Label" parent="BoatInterface/IslandOptionContainer/IslandOption0" unique_id=913994242]
+layout_mode = 2
+text = "Island Name"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="BoatInterface/IslandOptionContainer/IslandOption0" unique_id=1068335054]
+layout_mode = 2
+size_flags_vertical = 3
+offset_transform_enabled = true
+offset_transform_rotation = -0.08726646
+offset_transform_pivot_ratio = Vector2(0.5, 1)
+texture = ExtResource("64_utr5e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectButton" type="Button" parent="BoatInterface/IslandOptionContainer/IslandOption0" unique_id=2011677331]
+layout_mode = 2
+toggle_mode = true
+text = "Select
+"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BoatInterface/IslandOptionContainer/IslandOption0" unique_id=1649012698]
+libraries/ = SubResource("AnimationLibrary_48p26")
+autoplay = &"float"
+
+[node name="IslandOption1" type="VBoxContainer" parent="BoatInterface/IslandOptionContainer" unique_id=2020411067 node_paths=PackedStringArray("name_label", "texture_rect", "select_button")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.35243055
+anchor_top = 0.14317673
+anchor_right = 0.4357639
+anchor_bottom = 0.40044743
+script = ExtResource("64_kewli")
+island_name = &"Skelly Sandbar"
+island_index = 1
+name_label = NodePath("../../../PauseInterface/CraftingMenu/ItemInspector/VBoxContainer/NameLabel")
+texture_rect = NodePath("TextureRect")
+select_button = NodePath("SelectButton")
+metadata/_edit_use_anchors_ = true
+
+[node name="NameLabel" type="Label" parent="BoatInterface/IslandOptionContainer/IslandOption1" unique_id=754380171]
+layout_mode = 2
+text = "Island Name"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="BoatInterface/IslandOptionContainer/IslandOption1" unique_id=1784712706]
+layout_mode = 2
+size_flags_vertical = 3
+offset_transform_enabled = true
+offset_transform_rotation = -0.08726646
+offset_transform_pivot_ratio = Vector2(0.5, 1)
+texture = ExtResource("64_utr5e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectButton" type="Button" parent="BoatInterface/IslandOptionContainer/IslandOption1" unique_id=1764367371]
+layout_mode = 2
+toggle_mode = true
+text = "Select
+"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BoatInterface/IslandOptionContainer/IslandOption1" unique_id=511994397]
+libraries/ = SubResource("AnimationLibrary_48p26")
+autoplay = &"float"
 
 [node name="DeathScreen" type="Control" parent="." unique_id=1492309495]
 visible = false
