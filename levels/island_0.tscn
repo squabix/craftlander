@@ -141,7 +141,6 @@ shape = SubResource("HeightMapShape3D_mngd6")
 [node name="NodeSaver" type="Node" parent="IslandGenerator" unique_id=13729155]
 script = ExtResource("19_d3ct1")
 saver_id = &"island_generator"
-saved_properties = Array[StringName]([&""])
 metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 
 [node name="PropGenerator" type="Node3D" parent="." unique_id=1547821051 node_paths=PackedStringArray("island_generator")]
@@ -222,7 +221,9 @@ collision_mask = 4
 [node name="NodeSaver" type="Node" parent="DockingManager/Dock" unique_id=150164347]
 script = ExtResource("19_d3ct1")
 saver_id = &"dock"
-saved_properties = Array[StringName]([&"transform"])
+saved_properties = Dictionary[StringName, bool]({
+&"transform": true
+})
 metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 
 [node name="Boat" parent="DockingManager" unique_id=782602740 instance=ExtResource("23_hfmnx")]
@@ -231,7 +232,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 400)
 [node name="NodeSaver" type="Node" parent="DockingManager" unique_id=1612669471]
 script = ExtResource("19_d3ct1")
 saver_id = &"docking_rotation"
-saved_properties = Array[StringName]([&"rotation"])
+saved_properties = Dictionary[StringName, bool]({
+&"rotation": true
+})
 metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 
 [node name="IslandWater" type="Area3D" parent="." unique_id=927597]

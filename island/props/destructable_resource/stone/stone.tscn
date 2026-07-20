@@ -144,7 +144,9 @@ generate_on_ready = true
 script = ExtResource("16_ugyle")
 save_mode = 2
 saver_id = &"stone"
-saved_properties = Array[StringName]([&"global_transform"])
+saved_properties = Dictionary[StringName, bool]({
+&"global_transform": true
+})
 metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 
 [editable path="BlenderMeshes"]

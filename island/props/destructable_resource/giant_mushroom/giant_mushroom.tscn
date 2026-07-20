@@ -345,5 +345,7 @@ metadata/_custom_type_script = "uid://bf4816o00o0s5"
 script = ExtResource("23_j4jsq")
 save_mode = 2
 saver_id = &"giant_mushroom"
-saved_properties = Array[StringName]([&"global_transform"])
+saved_properties = Dictionary[StringName, bool]({
+&"global_transform": true
+})
 metadata/_custom_type_script = "uid://b7jfh6p1qykgr"

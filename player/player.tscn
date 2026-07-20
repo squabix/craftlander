@@ -788,7 +788,9 @@ size = 40
 script = ExtResource("74_2h6tc")
 save_mode = 1
 saver_id = &"player_inventory"
-saved_properties = Array[StringName]([&"item_instances"])
+saved_properties = Dictionary[StringName, bool]({
+&"item_instances": true
+})
 metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 
 [node name="Hunger" type="Node" parent="." unique_id=1790864786 node_paths=PackedStringArray("bar", "health", "stamina")]
@@ -802,6 +804,15 @@ regeneration_curve = SubResource("Curve_1s1yo")
 stamina = NodePath("../Stamina")
 stamina_hunger_loss = 0.05
 metadata/_custom_type_script = "uid://bn55l5h1rwjsn"
+
+[node name="NodeSaver" type="Node" parent="Hunger" unique_id=2051710689]
+script = ExtResource("74_2h6tc")
+save_mode = 1
+saver_id = &"player_hunger"
+saved_properties = Dictionary[StringName, bool]({
+&"value": true
+})
+metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 
 [node name="Stamina" type="Node" parent="." unique_id=260796409 node_paths=PackedStringArray("bar", "idle_timer", "hunger")]
 unique_name_in_owner = true
@@ -1003,7 +1014,10 @@ metadata/_custom_type_script = "uid://dapeyi3eetek1"
 [node name="NodeSaver" type="Node" parent="Health" unique_id=86546930]
 script = ExtResource("74_2h6tc")
 save_mode = 1
-saver_id = &"hp"
+saver_id = &"player_health"
+saved_properties = Dictionary[StringName, bool]({
+&"hp": true
+})
 metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 
 [node name="ScreenEffectContainer" type="Control" parent="." unique_id=1989509956]
