@@ -38,8 +38,9 @@ func _ready() -> void:
 		Main.loaded_save.add_dynamic_nodes(self)
 		await island_generator.generated
 	
-	mesh_aggregator.aggregate()
 	NodeSaver.load_all()
+	
+	mesh_aggregator.aggregate()
 	
 	occluder_instance.generate()
 	nav_region.reset.call_deferred()
