@@ -4,17 +4,51 @@ const ISLAND_CENTER_SPAWN_HEIGHT := 55.0
 
 enum PlayerSpawnMode {BOAT, ISLAND_CENTER}
 
+@export_group("Player")
 @export var player: Player
-@export var boat_driver_seat: Seat3D
-@export var current_player_spawn_mode := PlayerSpawnMode.BOAT
+@export var player_spawn_mode := PlayerSpawnMode.BOAT
+
+@export_group("Generation Components")
+@export var island_generator: HeightMapTerrainGenerator
+@export var nav_region: IslandNavRegion
+@export var prop_populator: PropPopulator
 @export var mesh_aggregator: MeshInstanceAggregator3D
-@export var aggregate_props := true
+@export var occluder_instance: HeightMapOccluderInstance
+@export var docking_manager: DockingManager
 
 func _ready() -> void:
-	if aggregate_props:
-		EventBus.subscribe(&"island_populated", mesh_aggregator.aggregate)
-	match current_player_spawn_mode:
+	MouseModeController.show()
+	get_tree().paused = true
+	
+	NodeSaver.scene_root = self
+	
+	seed(Main.base_seed)
+	island_generator.generate()
+	
+	if not Main.loaded_save.is_current_level_generated():
+		await island_generator.generated
+		
+		docking_manager.initialize()
+		prop_populator.populate()
+		
+		await prop_populator.populated
+		Main.loaded_save.mark_current_level_as_generated()
+	else:
+		prop_populator.clear()
+		Main.loaded_save.add_dynamic_nodes(self)
+		await island_generator.generated
+	
+	mesh_aggregator.aggregate()
+	NodeSaver.load_all()
+	
+	occluder_instance.generate()
+	nav_region.reset.call_deferred()
+	
+	match player_spawn_mode:
 		PlayerSpawnMode.BOAT:
-			boat_driver_seat.mount(player)
+			docking_manager.boat.driver_seat.mount(player)
 		PlayerSpawnMode.ISLAND_CENTER:
 			player.global_position = Vector3(0.0, ISLAND_CENTER_SPAWN_HEIGHT, 0.0)
+	
+	get_tree().paused = false
+	MouseModeController.capture()

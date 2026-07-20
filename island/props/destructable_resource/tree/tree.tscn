@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="16_k7n08"]
 [ext_resource type="ArrayOccluder3D" uid="uid://dxvs6e1pbvl0h" path="res://island/props/destructable_resource/tree/tree.occ" id="21_msvuo"]
 [ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="22_x34uo"]
+[ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="23_0tytk"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_r4p3j"]
 height = 10.25
@@ -357,7 +358,7 @@ trunk = NodePath("../../Trunk")
 chop_particles = NodePath("../../ChopParticles")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Trunk" type="AnimatableBody3D" parent="." unique_id=202807730]
+[node name="Trunk" type="StaticBody3D" parent="." unique_id=1771553810]
 collision_layer = 5
 
 [node name="Hurtbox3D" type="Area3D" parent="Trunk" unique_id=1330554951 node_paths=PackedStringArray("health")]
@@ -416,7 +417,7 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_hah18")
 draw_pass_1 = SubResource("SphereMesh_kblrq")
 
-[node name="Stump" type="AnimatableBody3D" parent="." unique_id=697088835]
+[node name="Stump" type="StaticBody3D" parent="." unique_id=935938505]
 
 [node name="StumpMesh" type="MeshInstance3D" parent="Stump" unique_id=1272186461]
 mesh = SubResource("ArrayMesh_nrtbk")
@@ -447,3 +448,10 @@ vertices = PackedVector3Array(-0.9998859, 0, -0.22445127, 0, 0, -0.9545, 0.99988
 script = ExtResource("22_x34uo")
 generate_on_ready = true
 metadata/_custom_type_script = "uid://bf4816o00o0s5"
+
+[node name="NodeSaver" type="Node" parent="." unique_id=172222562]
+script = ExtResource("23_0tytk")
+save_mode = 2
+saver_id = &"tree"
+saved_properties = Array[StringName]([&"global_transform"])
+metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
