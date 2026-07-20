@@ -8,9 +8,9 @@ static var aggregated_mesh_instances: Dictionary[MeshInstance3D, MeshInstanceAgg
 @export_tool_button("Reset", "Reload") var reset_action: Callable = reset
 
 @export var mesh_source: Node
-@export var aggregate_on_ready := true
+@export var aggregate_on_ready := false
 @export var use_material_override := true
-@export var multi_instance_unformatted_name := "MultiMesh_%s"
+@export var multi_instance_name_format := "MultiMesh_%s"
 
 @export_group("Instance Visibility")
 @export var invert_instance_visibility := true
@@ -95,7 +95,7 @@ func get_mesh_groups() -> Dictionary[Mesh, Array]:
 
 func add_multi_instance(name_infix: String, material_override: Material = null) -> MultiMeshInstance3D:
 	var multi_instance := MultiMeshInstance3D.new()
-	multi_instance.name = multi_instance_unformatted_name % name_infix
+	multi_instance.name = multi_instance_name_format % name_infix
 	add_child(multi_instance)
 	generated_multimeshes.append(multi_instance)
 
