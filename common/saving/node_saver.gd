@@ -51,12 +51,19 @@ static func load_all() -> void:
 static func filter_all() -> void:
 	var filtered: Dictionary[Node, NodeSaver] = { }
 	for node in all:
-		if is_instance_valid(node) and is_instance_valid(all[node]):
-			filtered[node] = all[node]
+		if not is_instance_valid(node):
+			continue
+		var saver := all[node]
+		if not is_instance_valid(saver):
+			continue
+		filtered[node] = saver
 	all = filtered
 
 
 static func get_root_path(node: Node) -> NodePath:
+	if not is_instance_valid(node):
+		printerr("Cannot get root path from invalid node: %s" % node)
+		return NodePath()
 	if is_instance_valid(scene_root) and scene_root != node:
 		return scene_root.get_path_to(node)
 	return node.get_path()
@@ -69,7 +76,6 @@ func _ready() -> void:
 
 func _exit_tree() -> void:
 	_free_offload()
-
 	all.erase(target)
 
 
@@ -85,11 +91,13 @@ func get_property_data() -> Dictionary[StringName, Variant]:
 	if not is_instance_valid(target):
 		printerr("%s cannot get property data from invalid target: %s" % target)
 		return { }
+	
 	var property_data: Dictionary[StringName, Variant] = { }
 	for property in saved_properties:
 		if saved_properties[property] == false:
 			continue # Property is disabled
 		if not property in target:
+			printerr("%s cannot get nonexistant property '%s' from %s" % [self, property, target])
 			continue
 		property_data[property] = target.get(property)
 	return property_data
@@ -100,8 +108,14 @@ func set_property_data(property_data: Dictionary[StringName, Variant]) -> void:
 		printerr("%s cannot set property data to invalid target: %s" % target)
 		return
 	for property: StringName in property_data:
+		if not property in saved_properties:
+			printerr("%s cannot set unsaved property '%s' to '%s' in %s" % [self, property, property_data[property], target])
+			continue
 		if saved_properties[property] == false:
 			continue # Property is disabled
+		if not property in target:
+			printerr("%s cannot set nonexistant property '%s' to '%s' in %s" % [self, property, property_data[property], target])
+			continue
 		target.set(property, property_data[property])
 
 
