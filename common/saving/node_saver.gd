@@ -21,13 +21,13 @@ static var all: Dictionary[Node, NodeSaver] = { }
 @export var load_methods: Array[StringName]
 @export var custom_target: Node
 
-@export_group("Offloading", "offload")
+@export_group("Offloading")
+@export var offloaded := false
 @export var offload_mode: OffloadMode = OffloadMode.FREE
 @export var offload_on_free := true
 
 var target: Node
 var dynamic_uuid := &""
-var _is_offloaded: bool = false
 
 
 static func get_scene_context() -> String:
@@ -80,11 +80,11 @@ func _exit_tree() -> void:
 
 
 func offload() -> void:
-	_is_offloaded = true
+	offloaded = true
 
 
 func onload() -> void:
-	_is_offloaded = false
+	offloaded = false
 
 
 func get_property_data() -> Dictionary[StringName, Variant]:
@@ -128,16 +128,16 @@ func save_properties() -> void:
 		dynamic_uuid = get_uuid()
 
 	var property_data: Dictionary[StringName, Variant] = { }
-	var skip_properties := _is_offloaded and offload_mode == OffloadMode.IGNORE_MEMBERS
+	var skip_properties := offloaded and offload_mode == OffloadMode.IGNORE_MEMBERS
 
 	if not skip_properties:
 		property_data = get_property_data()
 		# Only block saving empty data if it's a standard static/global node and NOT offloaded
-		if property_data.is_empty() and save_mode != NodeSave.Mode.DYNAMIC and not _is_offloaded:
+		if property_data.is_empty() and save_mode != NodeSave.Mode.DYNAMIC and not offloaded:
 			return
 
 	var node_save := NodeSave.new(saver_id, save_mode, get_scene_context(), property_data)
-	node_save.offloaded = _is_offloaded
+	node_save.offloaded = offloaded
 
 	match save_mode:
 		NodeSave.Mode.DYNAMIC:
@@ -165,7 +165,7 @@ func load_properties() -> void:
 
 	var node_save: NodeSave = save.node_properties[index]
 
-	_is_offloaded = node_save.offloaded
+	offloaded = node_save.offloaded
 	if node_save.offloaded:
 		match offload_mode:
 			OffloadMode.FREE:
