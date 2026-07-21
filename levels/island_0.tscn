@@ -138,11 +138,6 @@ collision_layer = 5
 transform = Transform3D(0.75, 0, 0, 0, 1, 0, 0, 0, 0.75, 0, 0, 0)
 shape = SubResource("HeightMapShape3D_mngd6")
 
-[node name="NodeSaver" type="Node" parent="IslandGenerator" unique_id=13729155]
-script = ExtResource("19_d3ct1")
-saver_id = &"island_generator"
-metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
-
 [node name="PropGenerator" type="Node3D" parent="." unique_id=1547821051 node_paths=PackedStringArray("island_generator")]
 script = ExtResource("9_d3ct1")
 island_generator = NodePath("../IslandGenerator")
