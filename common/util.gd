@@ -187,7 +187,7 @@ static func classify_dict_value(dictionary: Dictionary, default_to_builtin := tr
 
 
 static func find_child_of_class(parent: Node, class_string: StringName) -> Node:
-	if not is_instance_valid(parent):
+	if not is_instance_valid(parent) or class_string.is_empty():
 		return null
 	
 	for child in parent.get_children():
@@ -213,6 +213,8 @@ static func find_stored_child_of_class(dictionary: Dictionary, parent: Node) -> 
 
 
 static func find_children_of_class(parent: Node, class_string: StringName, include_parent := false) -> Array[Node]:
+	if not is_instance_valid(parent) or class_string.is_empty():
+		return []
 	var children: Array[Node] = []
 	
 	if include_parent and is_object_class(parent, class_string):
