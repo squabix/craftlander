@@ -3,7 +3,7 @@ extends Node
 
 enum OffloadMode {
 	FREE,
-	IGNORE_PROPERTIES,
+	IGNORE_MEMBERS,
 	DISABLED,
 }
 
@@ -17,7 +17,8 @@ static var all: Dictionary[Node, NodeSaver] = { }
 		if saver_id.is_empty():
 			return StringName(target.name if is_instance_valid(target) else name)
 		return saver_id
-@export var saved_properties: Dictionary[StringName, bool] # Covert to dictionary of StringName: bool
+@export var saved_properties: Dictionary[StringName, bool]
+@export var load_methods: Array[StringName]
 @export var custom_target: Node
 
 @export_group("Offloading", "offload")
@@ -113,9 +114,7 @@ func save_properties() -> void:
 		dynamic_uuid = get_uuid()
 
 	var property_data: Dictionary[StringName, Variant] = { }
-
-	# Determine if we should bypass property collection entirely
-	var skip_properties := _is_offloaded and offload_mode == OffloadMode.IGNORE_PROPERTIES
+	var skip_properties := _is_offloaded and offload_mode == OffloadMode.IGNORE_MEMBERS
 
 	if not skip_properties:
 		property_data = get_property_data()
@@ -159,12 +158,24 @@ func load_properties() -> void:
 				if is_instance_valid(target):
 					target.queue_free()
 				return
-			OffloadMode.IGNORE_PROPERTIES:
+			OffloadMode.IGNORE_MEMBERS:
 				return
 			OffloadMode.DISABLED:
 				pass # Load properties normally
 
 	set_property_data(node_save.properties)
+	call_load_callables()
+
+
+func call_load_callables() -> void:
+	if not is_instance_valid(target):
+		printerr("%s cannot call load methods (%s) on invalid target: %s" % [self, load_methods, target])
+		return
+	for method_name in load_methods:
+		if not target.has_method(method_name):
+			printerr("%s cannot call nonexistant method (%s) on %s" % [self, method_name, target])
+			return
+		target.call(method_name)
 
 
 func get_uuid() -> StringName:
