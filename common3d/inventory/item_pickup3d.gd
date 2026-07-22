@@ -38,14 +38,18 @@ func _ready() -> void:
 			instance.visibility_range_fade_mode = GeometryInstance3D.VISIBILITY_RANGE_FADE_SELF
 			instance.visibility_range_end = visibility_fading_distance
 			instance.visibility_range_end_margin = visibility_fading_margin
-
-	tooltip_enabled = tooltip_format % item.name if is_instance_valid(item) else invalid_tooltip
-
+	
 	if generate_floor_raycast:
 		Util.snap_to_floor(self, FLOOR_MARGIN)
+	
+	update_tooltip()
 
 	if auto_generate_collision:
 		generate_all_collision(self)
+
+
+func update_tooltip() -> void:
+	tooltip_enabled = tooltip_format % item.name if is_instance_valid(item) else invalid_tooltip
 
 
 func update_visuals() -> void:
