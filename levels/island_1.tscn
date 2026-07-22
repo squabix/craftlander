@@ -132,17 +132,17 @@ size = Vector2(1500, 1500)
 subdivide_width = 1000
 subdivide_depth = 1000
 
-[node name="Island1" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "prop_populator", "mesh_aggregator", "occluder_instance", "pickup_container", "boat_adder", "docking_manager")]
+[node name="Island1" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "boat_adder", "docking_manager", "pickup_container")]
 script = ExtResource("1_0eh6l")
 player = NodePath("DockingManager/Player")
 island_generator = NodePath("IslandGenerator")
 nav_region = NodePath("NavigationRegion3D")
+occluder_instance = NodePath("HeightMapOccluderInstance")
 prop_populator = NodePath("PropGenerator")
 mesh_aggregator = NodePath("MeshInstanceAggregator3D")
-occluder_instance = NodePath("HeightMapOccluderInstance")
-pickup_container = NodePath("PickupContainer")
 boat_adder = NodePath("DockingManager/BoatAdder")
 docking_manager = NodePath("DockingManager")
+pickup_container = NodePath("PickupContainer")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2120940629]
 environment = ExtResource("2_vwc2c")

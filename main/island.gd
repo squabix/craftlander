@@ -8,15 +8,21 @@ enum PlayerSpawnMode {BOAT, ISLAND_CENTER}
 @export var player: Player
 @export var player_spawn_mode := PlayerSpawnMode.BOAT
 
-@export_group("Generation Components")
+@export_group("Terrain")
 @export var island_generator: HeightMapTerrainGenerator
 @export var nav_region: IslandNavRegion
+@export var occluder_instance: HeightMapOccluderInstance
+
+@export_group("Props")
 @export var prop_populator: PropPopulator
 @export var mesh_aggregator: MeshInstanceAggregator3D
-@export var occluder_instance: HeightMapOccluderInstance
-@export var pickup_container: Node3D
+
+@export_group("Boat")
 @export var boat_adder: BoatAdder
 @export var docking_manager: DockingManager
+
+@export_group("Misc")
+@export var pickup_container: Node3D
 
 func _ready() -> void:
 	MouseModeController.show()
