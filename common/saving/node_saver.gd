@@ -44,13 +44,13 @@ static func get_scene_context() -> String:
 
 static func save_all() -> void:
 	filter_all()
-	for saver in all.values():
+	for saver in all.values() as Array[NodeSaver]:
 		saver.save_properties()
 
 
 static func load_all() -> void:
 	filter_all()
-	for saver in all.values():
+	for saver in all.values() as Array[NodeSaver]:
 		saver.load_properties()
 
 
@@ -114,8 +114,10 @@ func set_property_data(property_data: Dictionary[StringName, Variant]) -> void:
 		printerr("%s cannot set property data to invalid target: %s" % target)
 		return
 	for property: StringName in property_data:
+		var value: Variant = property_data[property]
 		if not property in saved_properties:
 			printerr("%s cannot set unsaved property '%s' to '%s' in %s" % [self, property, property_data[property], target])
+			printerr("%s cannot set unsaved property '%s' to '%s' in %s" % [self, property, value, target])
 			continue
 		if saved_properties[property] == false:
 			continue # Property is disabled
@@ -123,6 +125,7 @@ func set_property_data(property_data: Dictionary[StringName, Variant]) -> void:
 			printerr("%s cannot set nonexistant property '%s' to '%s' in %s" % [self, property, property_data[property], target])
 			continue
 		target.set(property, property_data[property])
+		target.set(property, value)
 
 
 func save_properties() -> void:
@@ -175,7 +178,7 @@ func load_properties() -> void:
 	if index == -1:
 		return
 
-	var node_save: NodeSave = save.node_properties[index]
+	var node_save := save.node_properties[index]
 
 	offloaded = node_save.offloaded
 	if node_save.offloaded:
@@ -213,7 +216,7 @@ func find_index() -> int:
 	var current_scene := get_scene_context()
 
 	for i in range(save.node_properties.size()):
-		var node_save: NodeSave = save.node_properties[i]
+		var node_save := save.node_properties[i]
 		if node_save.mode != save_mode:
 			continue
 
