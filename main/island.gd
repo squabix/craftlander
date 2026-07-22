@@ -14,8 +14,9 @@ enum PlayerSpawnMode {BOAT, ISLAND_CENTER}
 @export var prop_populator: PropPopulator
 @export var mesh_aggregator: MeshInstanceAggregator3D
 @export var occluder_instance: HeightMapOccluderInstance
-@export var docking_manager: DockingManager
 @export var pickup_container: Node3D
+@export var boat_adder: BoatAdder
+@export var docking_manager: DockingManager
 
 func _ready() -> void:
 	MouseModeController.show()
@@ -23,6 +24,7 @@ func _ready() -> void:
 	
 	NodeSaver.scene_root = self
 	NodeSaver.offload_on_free_enabled = false
+	InventoryDropper3D.default_pickup_parent = pickup_container
 	
 	seed(Main.base_seed)
 	island_generator.generate()
@@ -30,13 +32,10 @@ func _ready() -> void:
 	await (reload_save if Main.loaded_save.is_current_level_generated() else initial_save_load).call()
 	
 	NodeSaver.load_all()
-	InventoryDropper3D.default_pickup_parent = pickup_container
 	
 	mesh_aggregator.aggregate()
 	occluder_instance.generate()
 	nav_region.reset.call_deferred()
-	
-	position_player_at_spawn()
 	
 	get_tree().paused = false
 	MouseModeController.capture()
@@ -46,7 +45,8 @@ func _ready() -> void:
 
 func initial_save_load() -> void:
 	await island_generator.generated
-		
+	
+	boat_adder.added_boat.connect(position_player_at_spawn)
 	docking_manager.initialize()
 	prop_populator.populate()
 	
@@ -54,6 +54,7 @@ func initial_save_load() -> void:
 	Main.loaded_save.mark_current_level_as_generated()
 
 func reload_save() -> void:
+	docking_manager.boat_adder.added_boat.connect(position_player_at_spawn)
 	prop_populator.clear()
 	await island_generator.generated
 	Main.loaded_save.add_dynamic_nodes(self)
@@ -61,6 +62,6 @@ func reload_save() -> void:
 func position_player_at_spawn() -> void:
 	match player_spawn_mode:
 		PlayerSpawnMode.BOAT:
-			docking_manager.boat.driver_seat.mount(player)
+			boat_adder.boat.driver_seat.mount(player)
 		PlayerSpawnMode.ISLAND_CENTER:
 			player.global_position = Vector3(0.0, ISLAND_CENTER_SPAWN_HEIGHT, 0.0)

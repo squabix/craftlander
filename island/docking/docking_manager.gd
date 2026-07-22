@@ -8,13 +8,20 @@ const DOCK_EXPOSED_LENGTH := 6.0
 @export var dock_place_ray_container: Node3D
 @export var boat_dock_point: Node3D
 @export var dock: Node3D
-@export var boat: Boat
+@export var boat_adder: BoatAdder
+
+var boat: Boat
 
 func initialize() -> void:
 	place_dock()
-	if not is_instance_valid(boat):
+	add_boat()
+
+func add_boat() -> void:
+	if not is_instance_valid(boat_adder):
+		printerr("%s cannot add boat with invalid boat adder (%s)" % [self, boat_adder])
 		return
-	boat.dock_position = boat_dock_point.global_position
+	boat_adder.dock_position = boat_dock_point.global_position
+	boat = boat_adder.add()
 	boat.look_at(boat.dock_position)
 
 func extend_dock_place_rays() -> void:

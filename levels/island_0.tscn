@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c4gehucq85wxc" path="res://island/island_absolute_texture.tres" id="6_b35xs"]
 [ext_resource type="Material" uid="uid://drm8bdv4es6et" path="res://island/mat1.tres" id="7_6o2sf"]
 [ext_resource type="Material" uid="uid://d06u1efqiqr8e" path="res://assets/shaders/water_shader_material.tres" id="8_25b7h"]
+[ext_resource type="Script" uid="uid://ckgs8ho78e8eq" path="res://boat/boat_adder.gd" id="8_mngd6"]
 [ext_resource type="Script" uid="uid://bg82eansdlgrc" path="res://island/prop_populator.gd" id="9_d3ct1"]
 [ext_resource type="Script" uid="uid://csprfavexgrle" path="res://island/props/island_prop.gd" id="10_kngna"]
 [ext_resource type="Resource" uid="uid://dntsc8a8c3qsr" path="res://island/props/destructable_resource/tree/tree_prop.tres" id="11_kgk3b"]
@@ -22,7 +23,6 @@
 [ext_resource type="Script" uid="uid://bm2wgrxee7bdu" path="res://island/docking/docking_manager.gd" id="20_gk71k"]
 [ext_resource type="PackedScene" uid="uid://dmbp0klxo0b0c" path="res://player/player.tscn" id="21_kn3q4"]
 [ext_resource type="PackedScene" uid="uid://dxwqj0o18t8o2" path="res://island/docking/dock.tscn" id="22_yjw2i"]
-[ext_resource type="PackedScene" uid="uid://c2ss32j8grhn8" path="res://boat/boat0.tscn" id="23_hfmnx"]
 [ext_resource type="Resource" uid="uid://cruqoikfgerld" path="res://entities/enemies/bee/bee_island_resource.tres" id="24_6o2sf"]
 [ext_resource type="Script" uid="uid://6poppt70f3rp" path="res://island/island_water.gd" id="24_fb2aq"]
 [ext_resource type="Script" uid="uid://dpyn65ul3fu6v" path="res://common3d/mesh_instance_aggregator3d.gd" id="29_b35xs"]
@@ -57,12 +57,12 @@ frequency = 0.002
 noise = SubResource("FastNoiseLite_6u0jn")
 color_ramp = SubResource("Gradient_12n5x")
 
-[sub_resource type="Gradient" id="Gradient_2rfdt"]
+[sub_resource type="Gradient" id="Gradient_laodj"]
 offsets = PackedFloat32Array(0.16147742, 0.33730158, 0.41910866, 0.5668498, 1)
 colors = PackedColorArray(0.16086823, 0.16086814, 0.16086811, 1, 0.6899758, 0.6899758, 0.68997574, 1, 0.90986854, 0.90986854, 0.90986854, 1, 0.2909656, 0.2909656, 0.29096556, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_rsakh"]
-gradient = SubResource("Gradient_2rfdt")
+gradient = SubResource("Gradient_laodj")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
@@ -88,7 +88,7 @@ size = Vector2(1500, 1500)
 subdivide_width = 1000
 subdivide_depth = 1000
 
-[node name="Island0" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "prop_populator", "mesh_aggregator", "occluder_instance", "docking_manager", "pickup_container")]
+[node name="Island0" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "prop_populator", "mesh_aggregator", "occluder_instance", "docking_manager", "pickup_container", "boat_adder")]
 script = ExtResource("1_1lm7x")
 player = NodePath("DockingManager/Player")
 island_generator = NodePath("IslandGenerator")
@@ -98,6 +98,7 @@ mesh_aggregator = NodePath("MeshInstanceAggregator3D")
 occluder_instance = NodePath("HeightMapOccluderInstance")
 docking_manager = NodePath("DockingManager")
 pickup_container = NodePath("PickupContainer")
+boat_adder = NodePath("DockingManager/BoatAdder")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2120940629]
 environment = ExtResource("2_f11vp")
@@ -108,16 +109,16 @@ layers = 3
 shadow_enabled = true
 shadow_blur = 2.0
 
-[node name="DockingManager" type="Node3D" parent="." unique_id=493778674 node_paths=PackedStringArray("dock_place_ray_container", "boat_dock_point", "dock", "boat")]
+[node name="DockingManager" type="Node3D" parent="." unique_id=493778674 node_paths=PackedStringArray("dock_place_ray_container", "boat_dock_point", "dock", "boat_adder")]
 script = ExtResource("20_gk71k")
 dock_place_ray_container = NodePath("DockPlaceRayContainer")
 boat_dock_point = NodePath("Dock/BoatDockPoint")
 dock = NodePath("Dock")
-boat = NodePath("Boat")
+boat_adder = NodePath("BoatAdder")
 
 [node name="Player" parent="DockingManager" unique_id=30929158 node_paths=PackedStringArray("respawn_point_node") instance=ExtResource("21_kn3q4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4989454, 403.02567)
-respawn_point_node = NodePath("../Boat/DriverSeat")
+respawn_point_node = NodePath("")
 
 [node name="DockPlaceRayContainer" type="Node3D" parent="DockingManager" unique_id=1759140989]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 400)
@@ -150,15 +151,26 @@ saved_properties = Dictionary[StringName, bool]({
 })
 metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 
-[node name="Boat" parent="DockingManager" unique_id=782602740 instance=ExtResource("23_hfmnx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 400)
-
 [node name="NodeSaver" type="Node" parent="DockingManager" unique_id=1612669471]
 script = ExtResource("19_d3ct1")
 saver_id = &"docking_rotation"
 saved_properties = Dictionary[StringName, bool]({
 &"rotation": true
 })
+metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
+
+[node name="BoatAdder" type="Node3D" parent="DockingManager" unique_id=1766073217]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 400)
+script = ExtResource("8_mngd6")
+metadata/_custom_type_script = "uid://ckgs8ho78e8eq"
+
+[node name="NodeSaver" type="Node" parent="DockingManager/BoatAdder" unique_id=161916831]
+script = ExtResource("19_d3ct1")
+saver_id = &"boat_adder"
+saved_properties = Dictionary[StringName, bool]({
+&"dock_position": true
+})
+load_methods = Array[StringName]([&"add"])
 metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 
 [node name="IslandGenerator" type="Node3D" parent="." unique_id=1195768552 node_paths=PackedStringArray("mesh_instance", "collision_shape")]

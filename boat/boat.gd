@@ -34,6 +34,7 @@ static func instantiate(boat_level: int) -> Boat:
 
 func _ready() -> void:
 	interactable.interacted_with.connect(open_boat_interface)
+	set_physics_process(false)
 
 
 func open_boat_interface(interact_source: Node) -> void:
@@ -61,6 +62,7 @@ func make_current() -> Boat:
 		return null
 	get_parent().add_child(next_boat)
 	next_boat.global_transform = self.global_transform
+	next_boat.state_machine.enter_state(&"Docked")
 	queue_free()
 	return next_boat
 

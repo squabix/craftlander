@@ -91,7 +91,6 @@ size = Vector3(5.3583984, 0.5961914, 6.1746826)
 
 [node name="Boat1" type="CharacterBody3D" unique_id=782602740 node_paths=PackedStringArray("state_machine", "driver_seat", "interactable", "seats")]
 collision_layer = 5
-axis_lock_linear_y = true
 motion_mode = 1
 script = ExtResource("1_1ek77")
 level = 1

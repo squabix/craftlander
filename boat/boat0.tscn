@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://8bgokntpuh33" path="res://boat/boat_docked_state.gd" id="6_c4lax"]
 [ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="6_wbjwq"]
 [ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="7_e44pp"]
-[ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="13_8aujj"]
 [ext_resource type="Script" uid="uid://favgu1tbe1tq" path="res://common3d/interactions/interactable3d.gd" id="13_e44pp"]
 
 [sub_resource type="Resource" id="Resource_thr0k"]
@@ -28,7 +27,7 @@ script = ExtResource("3_0q3wp")
 bool_vector = SubResource("Resource_1blct")
 metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_enlnh"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_e44pp"]
 size = Vector3(4.5, 0.5, 5.5)
 
 [sub_resource type="Animation" id="Animation_0q3wp"]
@@ -88,7 +87,6 @@ radius = 1.0
 
 [node name="Boat0" type="CharacterBody3D" unique_id=782602740 node_paths=PackedStringArray("state_machine", "driver_seat", "interactable")]
 collision_layer = 5
-axis_lock_linear_y = true
 motion_mode = 1
 script = ExtResource("1_1ek77")
 state_machine = NodePath("StateMachine")
@@ -110,7 +108,7 @@ surface_material_override/1 = ExtResource("7_e44pp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=653007229]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 2.78762)
-shape = SubResource("BoxShape3D_enlnh")
+shape = SubResource("BoxShape3D_e44pp")
 
 [node name="DriverSeat" type="Node3D" parent="." unique_id=238917161 node_paths=PackedStringArray("vehicle")]
 unique_name_in_owner = true
@@ -157,13 +155,5 @@ mesh = SubResource("CylinderMesh_hjjmf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable3D" unique_id=1797498647]
 shape = SubResource("CylinderShape3D_hjjmf")
-
-[node name="NodeSaver" type="Node" parent="." unique_id=550251567]
-script = ExtResource("13_8aujj")
-saver_id = &"boat"
-saved_properties = Dictionary[StringName, bool]({
-&"dock_position": true
-})
-metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 
 [editable path="BlenderMeshes1"]
