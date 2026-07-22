@@ -70,15 +70,18 @@ func add_dynamic_nodes(scene_root: Node) -> void:
 			if not is_instance_valid(instance):
 				continue
 			
+			
+			parent_node.add_child(instance)
+			
 			var uuid: StringName = node_save.dynamic_uuid
+			spawned_nodes[uuid] = instance
 			
 			var saver: NodeSaver = Util.find_child_of_class(instance, &"NodeSaver")
 			if is_instance_valid(saver):
 				saver.dynamic_uuid = uuid
 			
-			parent_node.add_child(instance)
-			spawned_nodes[uuid] = instance
 			progress = true # Mark progress so the loop continues processing defers
+			
 
 		dynamic_entries = deferred_entries
 
