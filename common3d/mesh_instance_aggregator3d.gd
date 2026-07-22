@@ -187,6 +187,8 @@ func reset() -> void:
 	generated_multimeshes.clear()
 
 	for instance in aggregated_mesh_instances:
+		if not is_instance_valid(instance):
+			continue
 		if aggregated_mesh_instances.get(instance, null):
 			aggregated_mesh_instances.erase(instance)
 
