@@ -11,7 +11,10 @@ config_version=5
 [application]
 
 config/name="CRAFTLANDER"
+config/version="1.0"
 run/main_scene="uid://xw1mkjxlbnke"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="CRAFTLANDER"
 config/features=PackedStringArray("4.7", "Mobile")
 boot_splash/bg_color=Color(0.0406, 0.0406, 0.07, 1)
 boot_splash/image="uid://6rsobsln1x1t"

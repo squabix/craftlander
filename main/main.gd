@@ -123,7 +123,7 @@ func load_title() -> void:
 	title_screen = title_screen_scene.instantiate()
 	add_child(title_screen)
 	title_screen.save_submenu.started_new_game.connect(start_new_game)
-	# Connect UI load button to load_game(slot) here
+	title_screen.save_submenu.loaded_game.connect(load_game)
 
 
 func clear() -> void:
