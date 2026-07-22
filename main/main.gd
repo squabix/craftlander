@@ -31,24 +31,32 @@ var level: Node3D
 @onready var game_save: Script = preload("res://main/game_save.gd")
 
 
-func load_level(index: int) -> void:
-	var path := ISLAND_SCENE_PATH_FORMAT % index
-	if not ResourceLoader.exists(path):
-		printerr("Cannot load nonexistant level %s from %s" % index)
-		return
-	
-	current_level_index = index
-	
-	clear()
-	level = load(path).instantiate()
-	NodeSaver.scene_root = level
-	add_child(level)
+static func get_slot_path(slot: int) -> String:
+	return SAVE_PATH_FORMAT % slot
+
+
+static func is_saved(slot: int) -> bool:
+	return ResourceLoader.exists(SAVE_PATH_FORMAT % slot)
 
 
 func _ready() -> void:
 	root = self
 	load_title()
 	EventBus.subscribe(&"quit_to_title", quit_to_title)
+
+
+func load_level(index: int) -> void:
+	var path := ISLAND_SCENE_PATH_FORMAT % index
+	if not ResourceLoader.exists(path):
+		printerr("Cannot load nonexistant level %s from %s" % index)
+		return
+
+	current_level_index = index
+
+	clear()
+	level = load(path).instantiate()
+	NodeSaver.scene_root = level
+	add_child(level)
 
 
 func new_save() -> Save:
@@ -72,7 +80,7 @@ func save_game(slot: int) -> void:
 	if slot < 0 or slot >= MAX_SLOT:
 		printerr("%s cannot save game to invalid slot number: %s" % [self, slot])
 		return
-	
+
 	if loaded_save == null:
 		loaded_save = new_save()
 
@@ -82,7 +90,7 @@ func save_game(slot: int) -> void:
 	NodeSaver.save = loaded_save
 	NodeSaver.save_all()
 
-	var err := loaded_save.write_to_disk(SAVE_PATH_FORMAT % slot)
+	var err := loaded_save.write_to_disk(get_slot_path(slot))
 	if err == OK:
 		print("Successfully saved game to slot %s" % slot)
 	else:
@@ -93,8 +101,8 @@ func load_game(slot: int) -> void:
 	if slot < 0 or slot >= MAX_SLOT:
 		printerr("%s cannot load game from invalid slot number: %s" % [self, slot])
 		return
-	
-	var path := SAVE_PATH_FORMAT % slot
+
+	var path := get_slot_path(slot)
 	var res := Save.load_from_disk(path)
 
 	if res == null:

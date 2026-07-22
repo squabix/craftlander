@@ -189,7 +189,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_eujrm")
-save_buttons = [NodePath("SaveButtonContainer/Save1Button")]
+save_buttons = [NodePath("SaveButtonContainer/SaveButton1"), NodePath("SaveButtonContainer/SaveButton2"), NodePath("SaveButtonContainer/SaveButton3"), NodePath("SaveButtonContainer/SaveButton4"), NodePath("SaveButtonContainer/SaveButton5")]
 back_button = NodePath("SaveButtonContainer/BackButton")
 metadata/_custom_type_script = "uid://b6yko3fl1r3fe"
 
@@ -206,9 +206,25 @@ offset_right = 160.5
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Save1Button" type="Button" parent="SaveMenu/SaveButtonContainer" unique_id=1088268271]
+[node name="SaveButton1" type="Button" parent="SaveMenu/SaveButtonContainer" unique_id=1088268271]
 layout_mode = 2
-text = "SAVE 1"
+text = "SAVE"
+
+[node name="SaveButton2" type="Button" parent="SaveMenu/SaveButtonContainer" unique_id=1267240113]
+layout_mode = 2
+text = "SAVE"
+
+[node name="SaveButton3" type="Button" parent="SaveMenu/SaveButtonContainer" unique_id=1627002612]
+layout_mode = 2
+text = "SAVE"
+
+[node name="SaveButton4" type="Button" parent="SaveMenu/SaveButtonContainer" unique_id=135203483]
+layout_mode = 2
+text = "SAVE"
+
+[node name="SaveButton5" type="Button" parent="SaveMenu/SaveButtonContainer" unique_id=1729324462]
+layout_mode = 2
+text = "SAVE"
 
 [node name="BackButton" type="Button" parent="SaveMenu/SaveButtonContainer" unique_id=1162609949]
 layout_mode = 2
