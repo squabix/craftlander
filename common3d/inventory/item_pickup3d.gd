@@ -62,6 +62,10 @@ func update_visuals() -> void:
 
 
 func generate_all_collision(target_parent: Node3D = self) -> Array[CollisionShape3D]:
+	if not is_instance_valid(target_parent):
+		printerr("%s cannot add generated collision to invalid parent (%s)" % [self, target_parent])
+		return []
+	
 	var collision_shapes: Array[CollisionShape3D] = []
 	var mesh_instances := Util.find_children_of_class(visuals, &"MeshInstance3D")
 
@@ -72,11 +76,14 @@ func generate_all_collision(target_parent: Node3D = self) -> Array[CollisionShap
 
 
 func add_collision_shape(mesh_instance: MeshInstance3D, parent: Node) -> CollisionShape3D:
-	if mesh_instance == null:
-		return null
-	if parent == null:
+	if not is_instance_valid(mesh_instance):
+		printerr("%s cannot create collision shape from invalid mesh instance (%s)" % [self, mesh_instance])
 		return null
 	if mesh_instance.mesh == null:
+		printerr("%s cannot create collision shape from null mesh of %s" % [self, mesh_instance])
+		return null
+	if not is_instance_valid(parent):
+		printerr("%s cannot add collision shape to invalid parent (%s)" % [self, parent])
 		return null
 
 	var collision_shape := CollisionShape3D.new()
@@ -87,8 +94,18 @@ func add_collision_shape(mesh_instance: MeshInstance3D, parent: Node) -> Collisi
 	return collision_shape
 
 
-func interact(_source: Node, _etc: Dictionary = { }) -> void:
-	var inventory: Inventory = Util.find_child_of_class(_source, &"Inventory")
-	inventory.add_item(item, 1)
-	Util.safe_free(self)
+func interact(source: Node, _etc: Dictionary = { }) -> void:
+	if not is_instance_valid(source):
+		printerr("%s cannot be picked up by invalid interaction source (%s)" % [self, source])
+		return
+	
+	var inventory: Inventory = Util.find_child_of_class(source, &"Inventory", true)
+	if not is_instance_valid(inventory):
+		printerr("%s cannot be added to invalid inventory (%s) from %s" % [self, inventory, source])
+		return
+	
+	if inventory.add_item(item, 1) == 1:
+		return # Inventory was too full to pick up
+	
+	queue_free()
 	picked_up.emit()
