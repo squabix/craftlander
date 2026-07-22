@@ -116,7 +116,6 @@ func set_property_data(property_data: Dictionary[StringName, Variant]) -> void:
 	for property: StringName in property_data:
 		var value: Variant = property_data[property]
 		if not property in saved_properties:
-			printerr("%s cannot set unsaved property '%s' to '%s' in %s" % [self, property, property_data[property], target])
 			printerr("%s cannot set unsaved property '%s' to '%s' in %s" % [self, property, value, target])
 			continue
 		if saved_properties[property] == false:
@@ -124,7 +123,6 @@ func set_property_data(property_data: Dictionary[StringName, Variant]) -> void:
 		if not property in target:
 			printerr("%s cannot set nonexistant property '%s' to '%s' in %s" % [self, property, property_data[property], target])
 			continue
-		target.set(property, property_data[property])
 		target.set(property, value)
 
 
