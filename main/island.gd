@@ -55,8 +55,8 @@ func initial_save_load() -> void:
 
 func reload_save() -> void:
 	prop_populator.clear()
-	Main.loaded_save.add_dynamic_nodes(self)
 	await island_generator.generated
+	Main.loaded_save.add_dynamic_nodes(self)
 
 func position_player_at_spawn() -> void:
 	match player_spawn_mode:
