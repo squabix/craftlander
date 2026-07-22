@@ -21,6 +21,7 @@ func _ready() -> void:
 	get_tree().paused = true
 	
 	NodeSaver.scene_root = self
+	NodeSaver.offload_on_free_enabled = false
 	
 	seed(Main.base_seed)
 	island_generator.generate()
@@ -37,6 +38,9 @@ func _ready() -> void:
 	
 	get_tree().paused = false
 	MouseModeController.capture()
+	
+	await get_tree().physics_frame
+	NodeSaver.offload_on_free_enabled = true
 
 func initial_save_load() -> void:
 	await island_generator.generated

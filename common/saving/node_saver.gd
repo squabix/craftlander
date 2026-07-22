@@ -9,6 +9,7 @@ enum OffloadMode {
 
 static var save: Save
 static var scene_root: Node
+static var offload_on_free_enabled := true
 static var all: Dictionary[Node, NodeSaver] = { }
 
 @export var save_mode := NodeSave.Mode.STATIC_SCENE
@@ -218,7 +219,7 @@ func find_index() -> int:
 
 
 func _free_offload() -> bool:
-	if not offload_on_free:
+	if not offload_on_free or not offload_on_free_enabled:
 		return false
 
 	if not is_instance_valid(scene_root):
