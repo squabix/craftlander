@@ -9,7 +9,10 @@ const FLOOR_MARGIN: float = 0.05
 @export var auto_generate_collision := true
 @export var collision_scale: float = 1.0
 @export var generate_floor_raycast := true
-@export var unformatted_tooltip := "Pick up %s?"
+
+@export_group("Tooltip")
+@export var tooltip_format := "Pick up %s?"
+@export var invalid_tooltip := "Pick up?"
 
 @export_group("Visibility Fading")
 @export var visibility_fading_enabled := false
@@ -30,13 +33,13 @@ func _ready() -> void:
 	
 	if visibility_fading_enabled:
 		var geometry_instances: Array[GeometryInstance3D]
-		geometry_instances.assign(Util.find_children_of_class(visuals, &"GeometryInstance3D"))
+		geometry_instances.assign(Util.find_children_of_class(visuals, &"GeometryInstance3D").filter(is_instance_valid))
 		for instance in geometry_instances:
 			instance.visibility_range_fade_mode = GeometryInstance3D.VISIBILITY_RANGE_FADE_SELF
 			instance.visibility_range_end = visibility_fading_distance
 			instance.visibility_range_end_margin = visibility_fading_margin
 
-	tooltip_enabled = unformatted_tooltip % item.name
+	tooltip_enabled = tooltip_format % item.name if is_instance_valid(item) else invalid_tooltip
 
 	if generate_floor_raycast:
 		Util.snap_to_floor(self, FLOOR_MARGIN)
@@ -46,6 +49,9 @@ func _ready() -> void:
 
 
 func update_visuals() -> void:
+	if item == null:
+		printerr("%s cannot update visuals with null item" % self)
+		return
 	visuals = item.duplicate_visuals()
 	add_child(visuals)
 	visuals.global_position = self.global_position
