@@ -88,7 +88,7 @@ size = Vector2(1500, 1500)
 subdivide_width = 1000
 subdivide_depth = 1000
 
-[node name="Island0" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "prop_populator", "mesh_aggregator", "occluder_instance", "docking_manager")]
+[node name="Island0" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "prop_populator", "mesh_aggregator", "occluder_instance", "docking_manager", "pickup_container")]
 script = ExtResource("1_1lm7x")
 player = NodePath("DockingManager/Player")
 island_generator = NodePath("IslandGenerator")
@@ -97,6 +97,7 @@ prop_populator = NodePath("PropGenerator")
 mesh_aggregator = NodePath("MeshInstanceAggregator3D")
 occluder_instance = NodePath("HeightMapOccluderInstance")
 docking_manager = NodePath("DockingManager")
+pickup_container = NodePath("PickupContainer")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2120940629]
 environment = ExtResource("2_f11vp")
@@ -106,6 +107,59 @@ transform = Transform3D(0.926288, 0.3698345, -0.07220116, -0.23284376, 0.7124198
 layers = 3
 shadow_enabled = true
 shadow_blur = 2.0
+
+[node name="DockingManager" type="Node3D" parent="." unique_id=493778674 node_paths=PackedStringArray("dock_place_ray_container", "boat_dock_point", "dock", "boat")]
+script = ExtResource("20_gk71k")
+dock_place_ray_container = NodePath("DockPlaceRayContainer")
+boat_dock_point = NodePath("Dock/BoatDockPoint")
+dock = NodePath("Dock")
+boat = NodePath("Boat")
+
+[node name="Player" parent="DockingManager" unique_id=30929158 node_paths=PackedStringArray("respawn_point_node") instance=ExtResource("21_kn3q4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4989454, 403.02567)
+respawn_point_node = NodePath("../Boat/DriverSeat")
+
+[node name="DockPlaceRayContainer" type="Node3D" parent="DockingManager" unique_id=1759140989]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 400)
+
+[node name="DockPlaceRay" type="RayCast3D" parent="DockingManager/DockPlaceRayContainer" unique_id=2080415802]
+target_position = Vector3(0, 0, -400)
+collision_mask = 4
+
+[node name="DockPlaceRay2" type="RayCast3D" parent="DockingManager/DockPlaceRayContainer" unique_id=1222682182]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+target_position = Vector3(0, 0, -400)
+collision_mask = 4
+
+[node name="DockPlaceRay3" type="RayCast3D" parent="DockingManager/DockPlaceRayContainer" unique_id=1289275818]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+target_position = Vector3(0, 0, -400)
+collision_mask = 4
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="DockingManager" unique_id=574315992]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DockingManager/AnimatableBody3D" unique_id=1976859986]
+
+[node name="Dock" parent="DockingManager" unique_id=1417096960 instance=ExtResource("22_yjw2i")]
+
+[node name="NodeSaver" type="Node" parent="DockingManager/Dock" unique_id=150164347]
+script = ExtResource("19_d3ct1")
+saver_id = &"dock"
+saved_properties = Dictionary[StringName, bool]({
+&"transform": true
+})
+metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
+
+[node name="Boat" parent="DockingManager" unique_id=782602740 instance=ExtResource("23_hfmnx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 400)
+
+[node name="NodeSaver" type="Node" parent="DockingManager" unique_id=1612669471]
+script = ExtResource("19_d3ct1")
+saver_id = &"docking_rotation"
+saved_properties = Dictionary[StringName, bool]({
+&"rotation": true
+})
+metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 
 [node name="IslandGenerator" type="Node3D" parent="." unique_id=1195768552 node_paths=PackedStringArray("mesh_instance", "collision_shape")]
 unique_name_in_owner = true
@@ -179,59 +233,6 @@ repopulate_timer = NodePath("../EntityRepopulateTimer")
 wait_time = 10.0
 autostart = true
 
-[node name="DockingManager" type="Node3D" parent="." unique_id=493778674 node_paths=PackedStringArray("dock_place_ray_container", "boat_dock_point", "dock", "boat")]
-script = ExtResource("20_gk71k")
-dock_place_ray_container = NodePath("DockPlaceRayContainer")
-boat_dock_point = NodePath("Dock/BoatDockPoint")
-dock = NodePath("Dock")
-boat = NodePath("Boat")
-
-[node name="Player" parent="DockingManager" unique_id=30929158 node_paths=PackedStringArray("respawn_point_node") instance=ExtResource("21_kn3q4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4989454, 403.02567)
-respawn_point_node = NodePath("../Boat/DriverSeat")
-
-[node name="DockPlaceRayContainer" type="Node3D" parent="DockingManager" unique_id=1759140989]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 400)
-
-[node name="DockPlaceRay" type="RayCast3D" parent="DockingManager/DockPlaceRayContainer" unique_id=2080415802]
-target_position = Vector3(0, 0, -400)
-collision_mask = 4
-
-[node name="DockPlaceRay2" type="RayCast3D" parent="DockingManager/DockPlaceRayContainer" unique_id=1222682182]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
-target_position = Vector3(0, 0, -400)
-collision_mask = 4
-
-[node name="DockPlaceRay3" type="RayCast3D" parent="DockingManager/DockPlaceRayContainer" unique_id=1289275818]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
-target_position = Vector3(0, 0, -400)
-collision_mask = 4
-
-[node name="AnimatableBody3D" type="AnimatableBody3D" parent="DockingManager" unique_id=574315992]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DockingManager/AnimatableBody3D" unique_id=1976859986]
-
-[node name="Dock" parent="DockingManager" unique_id=1417096960 instance=ExtResource("22_yjw2i")]
-
-[node name="NodeSaver" type="Node" parent="DockingManager/Dock" unique_id=150164347]
-script = ExtResource("19_d3ct1")
-saver_id = &"dock"
-saved_properties = Dictionary[StringName, bool]({
-&"transform": true
-})
-metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
-
-[node name="Boat" parent="DockingManager" unique_id=782602740 instance=ExtResource("23_hfmnx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 400)
-
-[node name="NodeSaver" type="Node" parent="DockingManager" unique_id=1612669471]
-script = ExtResource("19_d3ct1")
-saver_id = &"docking_rotation"
-saved_properties = Dictionary[StringName, bool]({
-&"rotation": true
-})
-metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
-
 [node name="IslandWater" type="Area3D" parent="." unique_id=927597]
 monitorable = false
 script = ExtResource("24_fb2aq")
@@ -244,6 +245,8 @@ shape = SubResource("WorldBoundaryShape3D_h5spq")
 ignore_occlusion_culling = true
 mesh = SubResource("PlaneMesh_i8ckm")
 skeleton = NodePath("../..")
+
+[node name="PickupContainer" type="Node3D" parent="." unique_id=944627734]
 
 [editable path="DockingManager/Dock"]
 [editable path="DockingManager/Dock/BlenderMeshes"]

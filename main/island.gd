@@ -15,6 +15,7 @@ enum PlayerSpawnMode {BOAT, ISLAND_CENTER}
 @export var mesh_aggregator: MeshInstanceAggregator3D
 @export var occluder_instance: HeightMapOccluderInstance
 @export var docking_manager: DockingManager
+@export var pickup_container: Node3D
 
 func _ready() -> void:
 	MouseModeController.show()
@@ -29,6 +30,7 @@ func _ready() -> void:
 	await (reload_save if Main.loaded_save.is_current_level_generated() else initial_save_load).call()
 	
 	NodeSaver.load_all()
+	InventoryDropper3D.default_pickup_parent = pickup_container
 	
 	mesh_aggregator.aggregate()
 	occluder_instance.generate()
