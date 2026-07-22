@@ -193,7 +193,8 @@ static func find_child_of_class(parent: Node, class_string: StringName) -> Node:
 	for child in parent.get_children():
 		if is_object_class(child, class_string):
 			return child
-		
+	
+	for child in parent.get_children():
 		var grandchild := find_child_of_class(child, class_string)
 		if grandchild != null:
 			return grandchild
