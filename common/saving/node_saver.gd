@@ -37,9 +37,7 @@ var dynamic_uuid := &""
 
 
 static func get_scene_context() -> String:
-	if not is_instance_valid(scene_root):
-		return ""
-	return scene_root.scene_file_path
+	return scene_root.scene_file_path if is_instance_valid(scene_root) else ""
 
 
 static func save_all() -> void:
@@ -70,9 +68,10 @@ static func get_root_path(node: Node) -> NodePath:
 	if not is_instance_valid(node):
 		printerr("Cannot get root path from invalid node: %s" % node)
 		return NodePath()
-	if is_instance_valid(scene_root) and scene_root != node:
-		return scene_root.get_path_to(node)
-	return node.get_path()
+	return (
+			node.get_path() if not is_instance_valid(scene_root) or scene_root == node
+			else scene_root.get_path_to(node)
+	)
 
 
 func _ready() -> void:
@@ -97,7 +96,7 @@ func get_property_data() -> Dictionary[StringName, Variant]:
 	if not is_instance_valid(target):
 		printerr("%s cannot get property data from invalid target: %s" % target)
 		return { }
-	
+
 	var property_data: Dictionary[StringName, Variant] = { }
 	for property in saved_properties:
 		if saved_properties[property] == false:
@@ -130,7 +129,7 @@ func save_properties() -> void:
 	var index := find_index()
 	if not loaded and not save_when_unloaded and index != -1:
 		return
-	
+
 	if save == null:
 		printerr("%s cannot save properties with null save")
 		return
@@ -167,7 +166,7 @@ func save_properties() -> void:
 func load_properties() -> void:
 	if loaded and not reload_when_loaded:
 		return
-	
+
 	if save == null:
 		printerr("%s cannot load properties with null save")
 		return
@@ -215,19 +214,28 @@ func find_index() -> int:
 
 	for i in range(save.node_properties.size()):
 		var node_save := save.node_properties[i]
-		if node_save.mode != save_mode:
+		if node_save.mode != save_mode or node_save.mode == NodeSave.Mode.NONE:
 			continue
 
-		match save_mode:
-			NodeSave.Mode.DYNAMIC:
-				if node_save.dynamic_uuid == dynamic_uuid and not dynamic_uuid.is_empty():
-					return i
-			NodeSave.Mode.STATIC_SCENE:
-				if node_save.saver_id == saver_id and node_save.scene_context == current_scene and node_save.relative_path == get_root_path(self):
-					return i
-			NodeSave.Mode.GLOBAL:
-				if node_save.saver_id == saver_id:
-					return i
+		if (
+				(
+						save_mode == NodeSave.Mode.DYNAMIC
+						and node_save.dynamic_uuid == dynamic_uuid
+						and not dynamic_uuid.is_empty()
+				)
+				or (
+						save_mode == NodeSave.Mode.STATIC_SCENE
+						and node_save.saver_id == saver_id
+						and node_save.scene_context == current_scene
+						and node_save.relative_path == get_root_path(self)
+				)
+				or (
+						save_mode == NodeSave.Mode.GLOBAL
+						and node_save.saver_id == saver_id
+				)
+		):
+			return i
+
 	return -1
 
 
