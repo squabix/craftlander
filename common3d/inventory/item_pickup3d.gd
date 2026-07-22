@@ -7,7 +7,6 @@ const FLOOR_MARGIN: float = 0.05
 
 @export var item: Item
 @export var auto_generate_collision := true
-@export var collision_scale: float = 1.0
 @export var generate_floor_raycast := true
 
 @export_group("Tooltip")
