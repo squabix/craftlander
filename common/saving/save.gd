@@ -79,6 +79,7 @@ func add_dynamic_nodes(scene_root: Node) -> void:
 			var saver: NodeSaver = Util.find_child_of_class(instance, &"NodeSaver")
 			if is_instance_valid(saver):
 				saver.dynamic_uuid = uuid
+				saver.load_properties()
 			
 			progress = true # Mark progress so the loop continues processing defers
 			

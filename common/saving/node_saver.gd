@@ -22,6 +22,11 @@ static var all: Dictionary[Node, NodeSaver] = { }
 @export var load_methods: Array[StringName]
 @export var custom_target: Node
 
+@export_group("Loading")
+@export var loaded := false
+@export var reload_when_loaded := false
+@export var save_when_unloaded := false
+
 @export_group("Offloading")
 @export var offloaded := false
 @export var offload_mode: OffloadMode = OffloadMode.FREE
@@ -121,6 +126,10 @@ func set_property_data(property_data: Dictionary[StringName, Variant]) -> void:
 
 
 func save_properties() -> void:
+	var index := find_index()
+	if not loaded and not save_when_unloaded and index != -1:
+		return
+	
 	if save == null:
 		printerr("%s cannot save properties with null save")
 		return
@@ -148,7 +157,6 @@ func save_properties() -> void:
 		NodeSave.Mode.GLOBAL:
 			node_save.make_global()
 
-	var index := find_index()
 	if index != -1:
 		save.node_properties[index] = node_save
 	else:
@@ -156,6 +164,9 @@ func save_properties() -> void:
 
 
 func load_properties() -> void:
+	if loaded and not reload_when_loaded:
+		return
+	
 	if save == null:
 		printerr("%s cannot load properties with null save")
 		return
@@ -180,6 +191,7 @@ func load_properties() -> void:
 
 	set_property_data(node_save.properties)
 	call_load_callables()
+	loaded = true
 
 
 func call_load_callables() -> void:
