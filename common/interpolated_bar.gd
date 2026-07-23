@@ -1,7 +1,9 @@
 class_name InterpolatedBar
 extends ProgressBar
 
-@export_group("Interpolation")
+enum Mode {LERP, MOVE_TOWARD}
+
+@export var mode := Mode.LERP
 @export_range(0.0, 1.0) var lerp_weight := 0.5
 @export var jump_distance := 0.05
 
@@ -56,7 +58,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	value = lerp(value, target_value, lerp_weight)
+	value = lerp(value, target_value, lerp_weight) if mode == Mode.LERP else move_toward(value, target_value, lerp_weight * max_value)
 	var distance: float = abs(value - target_value)
 	if distance <= jump_distance:
 		value = target_value
