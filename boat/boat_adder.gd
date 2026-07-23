@@ -9,8 +9,6 @@ var dock_position: Vector3
 var boat: Boat
 
 func add() -> Boat:
-	if is_instance_valid(boat):
-		boat.queue_free()
 	print("Adding boat (position is %s)" % dock_position)
 	boat = Boat.instantiate(Main.loaded_save.boat_level)
 	if not is_instance_valid(boat):
