@@ -3,6 +3,8 @@ extends Node
 
 @export var bar: InterpolatedBar
 @export_range(0.0, 1.0) var initial_value := 0.75
+
+@export_group("Loss")
 @export var loss_per_minute := 0.2
 @export var loss_multiplier := 1.0
 
