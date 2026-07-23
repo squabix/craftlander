@@ -116,9 +116,8 @@ boat_dock_point = NodePath("Dock/BoatDockPoint")
 dock = NodePath("Dock")
 boat_adder = NodePath("BoatAdder")
 
-[node name="Player" parent="DockingManager" unique_id=30929158 node_paths=PackedStringArray("respawn_point_node") instance=ExtResource("21_kn3q4")]
+[node name="Player" parent="DockingManager" unique_id=30929158 instance=ExtResource("21_kn3q4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4989454, 403.02567)
-respawn_point_node = NodePath("")
 
 [node name="DockPlaceRayContainer" type="Node3D" parent="DockingManager" unique_id=1759140989]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 400)

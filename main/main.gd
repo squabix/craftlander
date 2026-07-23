@@ -27,8 +27,11 @@ static var base_seed := 0:
 var title_screen: TitleScreen
 var level: Node3D
 
-@onready var title_screen_scene: PackedScene = preload("res://menus/title_screen.tscn")
+@onready var title_screen_path := "res://menus/title_screen.tscn"
 @onready var game_save: Script = preload("res://main/game_save.gd")
+@onready var loading_screen_scene: PackedScene = preload("res://main/loading_screen.tscn")
+
+var loading_screen: LoadingScreen
 
 
 static func get_slot_path(slot: int) -> String:
@@ -44,6 +47,16 @@ func _ready() -> void:
 	load_title()
 
 
+func advance_loading_step() -> String:
+	if not is_instance_valid(loading_screen):
+		printerr("Cannot advance loading step of invalid loading screen (%s)" % loading_screen)
+		return ""
+	var step := loading_screen.advance_step()
+	await get_tree().process_frame
+	return step
+
+
+# In main.gd
 func load_level(index: int) -> void:
 	var path := ISLAND_SCENE_PATH_FORMAT % index
 	if not ResourceLoader.exists(path):
@@ -51,11 +64,27 @@ func load_level(index: int) -> void:
 		return
 
 	current_level_index = index
-
+	
+	var loaded_level := await load_scene(path)
+	if loaded_level == null:
+		printerr("Loaded null level")
+		return
+	
 	clear()
-	level = load(path).instantiate()
+	level = loaded_level
+	print("Loaded level %s" % level)
 	NodeSaver.scene_root = level
 	add_child(level)
+
+
+func load_scene(path: String) -> Node:
+	Util.safe_free(loading_screen)
+	loading_screen = loading_screen_scene.instantiate()
+	add_child(loading_screen)
+	print("Loading %s..." % path)
+	
+	var scene := (await loading_screen.load_resource(path) as PackedScene)
+	return scene.instantiate() if scene != null else null
 
 
 func new_save() -> Save:
@@ -64,7 +93,7 @@ func new_save() -> Save:
 
 func start_new_game(slot: int) -> void:
 	if slot < 0 or slot >= MAX_SLOT:
-		printerr("%s cannot start new game in invalid slot number: %s" % [self, slot])
+		printerr("Cannot start new game in invalid slot number: %s" % slot)
 		return
 	loaded_save = new_save()
 	loaded_save.base_seed = randi() # Give the new game a random seed
@@ -81,7 +110,7 @@ func save_current_game() -> void:
 
 func save_game(slot: int) -> void:
 	if slot < 0 or slot >= MAX_SLOT:
-		printerr("%s cannot save game to invalid slot number: %s" % [self, slot])
+		printerr("%s cannot save game to invalid slot number: %s" % slot)
 		return
 
 	if loaded_save == null:
@@ -128,12 +157,12 @@ func quit_level() -> void:
 func quit_to_title() -> void:
 	save_current_game()
 	quit_level()
-	load_title()
+	await load_title()
 	MouseModeController.show()
 
 
 func load_title() -> void:
-	title_screen = title_screen_scene.instantiate()
+	title_screen = await load_scene(title_screen_path)
 	add_child(title_screen)
 	title_screen.save_submenu.started_new_game.connect(start_new_game)
 	title_screen.save_submenu.loaded_game.connect(load_game)
@@ -142,6 +171,8 @@ func load_title() -> void:
 func clear() -> void:
 	InventoryDropper3D.clear_dropped_pickups()
 	for child in get_children():
+		if child == loading_screen:
+			continue
 		child.queue_free()
 
 	title_screen = null

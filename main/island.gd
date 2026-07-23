@@ -24,9 +24,19 @@ enum PlayerSpawnMode {BOAT, ISLAND_CENTER}
 @export_group("Misc")
 @export var pickup_container: Node3D
 
+
 func _ready() -> void:
 	MouseModeController.show()
 	get_tree().paused = true
+	
+	var is_reloading: bool = Main.loaded_save.is_current_level_generated()
+	
+	Main.root.loading_screen.add_steps(
+			"Generating terrain",
+			"Restoring level state" if is_reloading else "Spawning props",
+			"Loading save data",
+			"Adding finishing touches",
+		)
 	
 	NodeSaver.scene_root = self
 	NodeSaver.offload_on_free_enabled = false
@@ -35,35 +45,53 @@ func _ready() -> void:
 	seed(Main.base_seed)
 	island_generator.generate()
 	
-	await (reload_save if Main.loaded_save.is_current_level_generated() else initial_save_load).call()
+	await (reload_save if is_reloading else initial_save_load).call()
 	
+	advance_step()
 	NodeSaver.load_all()
 	
+	advance_step()
 	mesh_aggregator.aggregate()
 	occluder_instance.generate()
 	nav_region.reset.call_deferred()
 	
-	get_tree().paused = false
 	MouseModeController.capture()
 	
 	await get_tree().physics_frame
+	get_tree().paused = false
+	advance_step()
 	NodeSaver.offload_on_free_enabled = true
+	print()
+
+
+func advance_step() -> void:
+	print(await Main.root.advance_loading_step())
+
 
 func initial_save_load() -> void:
+	advance_step()
 	await island_generator.generated
 	
 	boat_adder.added_boat.connect(position_player_at_spawn)
 	docking_manager.initialize()
 	prop_populator.populate()
 	
+	advance_step()
 	await prop_populator.populated
+	
 	Main.loaded_save.mark_current_level_as_generated()
+
 
 func reload_save() -> void:
 	docking_manager.boat_adder.added_boat.connect(position_player_at_spawn)
 	prop_populator.clear()
+	advance_step()
+	
 	await island_generator.generated
+	
+	advance_step()
 	Main.loaded_save.add_dynamic_nodes(self)
+
 
 func position_player_at_spawn() -> void:
 	match player_spawn_mode:

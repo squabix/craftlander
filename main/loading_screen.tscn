@@ -1,0 +1,178 @@
+[gd_scene format=3 uid="uid://cpphyqi0fnoa0"]
+
+[ext_resource type="Script" uid="uid://bd1a0f6qshhu2" path="res://main/loading_screen.gd" id="1_0tjga"]
+[ext_resource type="Script" uid="uid://c3xfbb8ay0ghk" path="res://common/interpolated_bar.gd" id="2_i0ak1"]
+[ext_resource type="Script" uid="uid://bhaucaorisylp" path="res://common/clear_color_setter.gd" id="3_jtvs6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7a5v"]
+bg_color = Color(0.10237106, 0.14374623, 0.11776816, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i0ak1"]
+bg_color = Color(0.08161672, 0.35237053, 0.43015346, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="Animation" id="Animation_k28ss"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ProgressBar:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_io1vx"]
+resource_name = "fade_in"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ProgressBar:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_l2fgc"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ProgressBar:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p8eha"]
+_data = {
+&"RESET": SubResource("Animation_k28ss"),
+&"fade_in": SubResource("Animation_io1vx"),
+&"fade_out": SubResource("Animation_l2fgc")
+}
+
+[node name="LoadingScene" type="Control" unique_id=714779176 node_paths=PackedStringArray("progress_bar", "transition_player", "step_label")]
+modulate = Color(1, 1, 1, 0)
+z_index = 1000
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0tjga")
+free_mode = 2
+progress_bar = NodePath("ProgressBar")
+progress_steps_ratio = 0.4
+transition_player = NodePath("AnimationPlayer")
+transition_in_anim = &"fade_in"
+transition_out_anim = &"fade_out"
+transition_in_before_load = true
+step_label = NodePath("ProgressBar/StepLabel")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=405762196]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=184740032]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -228.0
+offset_top = -16.125
+offset_right = 228.0
+offset_bottom = 16.125
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/background = SubResource("StyleBoxFlat_m7a5v")
+theme_override_styles/fill = SubResource("StyleBoxFlat_i0ak1")
+value = 16.38
+show_percentage = false
+script = ExtResource("2_i0ak1")
+mode = 1
+lerp_weight = 0.006
+metadata/_custom_type_script = "uid://c3xfbb8ay0ghk"
+
+[node name="StepLabel" type="Label" parent="ProgressBar" unique_id=1402013776]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "step"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=878930927]
+libraries/ = SubResource("AnimationLibrary_p8eha")
+
+[node name="ClearColorSetter" type="Node" parent="." unique_id=499691982]
+script = ExtResource("3_jtvs6")
