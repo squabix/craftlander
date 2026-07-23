@@ -42,7 +42,6 @@ static func is_saved(slot: int) -> bool:
 func _ready() -> void:
 	root = self
 	load_title()
-	EventBus.subscribe(&"quit_to_title", quit_to_title)
 
 
 func load_level(index: int) -> void:
@@ -74,6 +73,10 @@ func start_new_game(slot: int) -> void:
 	current_save_slot = slot
 	save_game(slot)
 	load_level(0)
+
+
+func save_current_game() -> void:
+	save_game(current_save_slot)
 
 
 func save_game(slot: int) -> void:
@@ -110,6 +113,7 @@ func load_game(slot: int) -> void:
 		return
 
 	loaded_save = res
+	current_save_slot = slot
 	base_seed = loaded_save.base_seed
 
 	NodeSaver.save = loaded_save
@@ -122,6 +126,7 @@ func quit_level() -> void:
 
 
 func quit_to_title() -> void:
+	save_current_game()
 	quit_level()
 	load_title()
 	MouseModeController.show()

@@ -1242,10 +1242,9 @@ custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 text = "Continue"
 
-[node name="PauseInterface" type="Control" parent="." unique_id=1163003515 node_paths=PackedStringArray("crafting_menu", "crafting_environment", "recipe_panel", "settings_menu", "health", "resume_button", "settings_button", "quit_button")]
+[node name="PauseInterface" type="Control" parent="." unique_id=1163003515 node_paths=PackedStringArray("crafting_menu", "crafting_environment", "recipe_panel", "settings_menu", "health", "resume_button", "save_button", "settings_button", "quit_button")]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1259,8 +1258,9 @@ recipe_panel = NodePath("CraftingMenu/RecipePanel")
 settings_menu = NodePath("SettingsMenu")
 health = NodePath("../Health")
 resume_button = NodePath("CraftingMenu/OptionsContainer/ResumeButton")
+save_button = NodePath("CraftingMenu/OptionsContainer/SaveButton")
 settings_button = NodePath("CraftingMenu/OptionsContainer/SettingsButton")
-quit_button = NodePath("../DeathScreen/OptionsContainer/QuitButton")
+quit_button = NodePath("CraftingMenu/OptionsContainer/QuitButton")
 
 [node name="BlurRect" type="ColorRect" parent="PauseInterface" unique_id=1141508559]
 material = SubResource("ShaderMaterial_pnw6m")
@@ -3873,6 +3873,11 @@ custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 text = "BACK TO GAME"
 
+[node name="SaveButton" type="Button" parent="PauseInterface/CraftingMenu/OptionsContainer" unique_id=2070345147]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+text = "SAVE"
+
 [node name="SettingsButton" type="Button" parent="PauseInterface/CraftingMenu/OptionsContainer" unique_id=1494540130]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
@@ -3881,7 +3886,7 @@ text = "SETTINGS"
 [node name="QuitButton" type="Button" parent="PauseInterface/CraftingMenu/OptionsContainer" unique_id=729008343]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-text = "QUIT TO TITLE SCREEN"
+text = "SAVE AND QUIT TO TITLE"
 
 [node name="InventoryOrganizer" type="Node" parent="PauseInterface/CraftingMenu" unique_id=1412121172 node_paths=PackedStringArray("inventory", "inventory_display_rows", "held_item_label", "pause_interface", "primary_inventory_selector", "secondary_inventory_selector", "hold_inventory_selector")]
 script = ExtResource("55_jbx34")
@@ -4657,6 +4662,7 @@ flat = true
 
 [node name="BoatInterface" type="Control" parent="." unique_id=520927744 node_paths=PackedStringArray("island_option_container", "pause_interface", "sail_button", "upgrade_button")]
 process_mode = 2
+visible = false
 z_index = 1
 layout_mode = 3
 anchors_preset = 15
@@ -4807,8 +4813,7 @@ text = "Select
 libraries/ = SubResource("AnimationLibrary_48p26")
 autoplay = &"float"
 
-[node name="DeathScreen" type="Control" parent="." unique_id=1492309495]
-visible = false
+[node name="DeathScreen" type="Control" parent="." unique_id=1492309495 node_paths=PackedStringArray("respawn_button", "quit_button", "health")]
 z_index = 2
 layout_mode = 3
 anchors_preset = 15
@@ -4817,6 +4822,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("40_gswnw")
+respawn_button = NodePath("OptionsContainer/RespawnButton")
+quit_button = NodePath("OptionsContainer/QuitButton")
+health = NodePath("../Health")
 
 [node name="BackgroundRect" type="TextureRect" parent="DeathScreen" unique_id=690622334]
 layout_mode = 1
@@ -4831,7 +4839,7 @@ texture = SubResource("GradientTexture2D_gswnw")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 368.0
+offset_bottom = 289.0
 grow_horizontal = 2
 text = "YOU DIED"
 label_settings = SubResource("LabelSettings_xcnuv")

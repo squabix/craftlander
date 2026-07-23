@@ -164,13 +164,13 @@ offset_right = 160.5
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="NewGameButton" type="Button" parent="MainButtonContainer" unique_id=376012814]
-layout_mode = 2
-text = "NEW GAME"
-
 [node name="LoadGameButton" type="Button" parent="MainButtonContainer" unique_id=236735888]
 layout_mode = 2
 text = "LOAD GAME"
+
+[node name="NewGameButton" type="Button" parent="MainButtonContainer" unique_id=376012814]
+layout_mode = 2
+text = "NEW GAME"
 
 [node name="SettingsButton" type="Button" parent="MainButtonContainer" unique_id=1918295979]
 layout_mode = 2
