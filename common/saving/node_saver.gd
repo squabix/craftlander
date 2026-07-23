@@ -1,6 +1,10 @@
 class_name NodeSaver
 extends Node
 
+signal set_property(property: StringName, value: Variant)
+signal finished_load
+signal finished_save
+
 enum OffloadMode {
 	FREE,
 	IGNORE_MEMBERS,
@@ -123,6 +127,7 @@ func set_property_data(property_data: Dictionary[StringName, Variant]) -> void:
 			printerr("%s cannot set nonexistant property '%s' to '%s' in %s" % [self, property, property_data[property], target])
 			continue
 		target.set(property, value)
+		set_property.emit(property, value)
 
 
 func save_properties() -> void:
@@ -161,6 +166,8 @@ func save_properties() -> void:
 		save.node_properties[index] = node_save
 	else:
 		save.node_properties.append(node_save)
+	
+	finished_save.emit()
 
 
 func load_properties() -> void:
@@ -192,6 +199,8 @@ func load_properties() -> void:
 	set_property_data(node_save.properties)
 	call_load_callables()
 	loaded = true
+	
+	finished_load.emit()
 
 
 func call_load_callables() -> void:
