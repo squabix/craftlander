@@ -756,7 +756,7 @@ metadata/_custom_type_script = "uid://c622jer80j3sk"
 height = 0.3
 radius = 0.3
 
-[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("movement_state_machine", "head", "interactors", "respawn_button", "boat_interface", "item_holder", "dropper", "health", "hunger", "stamina", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
+[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("movement_state_machine", "head", "interactors", "respawn_button", "boat_interface", "item_holder", "dropper", "health", "health_saver", "hunger", "hunger_saver", "stamina", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
 collision_layer = 17
 floor_constant_speed = true
 floor_block_on_wall = false
@@ -771,7 +771,9 @@ boat_interface = NodePath("BoatInterface")
 item_holder = NodePath("Head/Camera3D/ItemHolder")
 dropper = NodePath("Head/Camera3D/DropperRayCast/InventoryDropper3D")
 health = NodePath("Health")
+health_saver = NodePath("Health/NodeSaver")
 hunger = NodePath("Hunger")
+hunger_saver = NodePath("Hunger/NodeSaver")
 stamina = NodePath("Stamina")
 type = &"Player"
 horizontal_rotation_target = NodePath(".")
@@ -4814,6 +4816,7 @@ libraries/ = SubResource("AnimationLibrary_48p26")
 autoplay = &"float"
 
 [node name="DeathScreen" type="Control" parent="." unique_id=1492309495 node_paths=PackedStringArray("respawn_button", "quit_button", "health")]
+process_mode = 2
 z_index = 2
 layout_mode = 3
 anchors_preset = 15
@@ -4859,6 +4862,7 @@ offset_right = 139.5
 offset_bottom = -95.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/separation = 10
 
 [node name="RespawnButton" type="Button" parent="DeathScreen/OptionsContainer" unique_id=361444523]
 layout_mode = 2
