@@ -3,29 +3,38 @@ extends Control
 
 enum SelectMode { PRESS, HOVER, MANUAL }
 
-@export var icon_rect: TextureRect
-@export var quantity_label: Label
-@export var index := 0
 @export var instance_override: ItemInstance
 
-@export_group("Auto Set Index")
-@export var do_auto_set_index := false
+@export_group("Index")
+@export var index := 0
+
+@export_subgroup("Auto Set", "auto_set_index")
+@export var auto_set_index_enabled := false
 @export var auto_set_index_offset := 0
 
 @export_group("Selection")
+
+@export_subgroup("Components")
 @export var inventory_selectors: Dictionary[InventorySelector, SelectMode]
-@export var inventory: Inventory
 @export var select_button: Button
-@export var unselected_modulate := Color.WHITE
-@export var selected_modulate := Color.WHITE
+
+@export_subgroup("Modulate", "modulate")
+@export var modulate_unselected := Color.WHITE
+@export var modulate_selected := Color.WHITE
+
+@export_subgroup("Selected Scale", "selected_scale")
 @export var selected_scale_amount := 1.0
 @export_range(0.0, 1.0) var selected_scale_speed := 1.0
 @export var selected_scale_targets: Array[Control] = []
 
+@export_group("Components")
+@export var inventory: Inventory
+@export var icon_rect: TextureRect
+@export var quantity_label: Label
 
 func _ready() -> void:
 	# Auto set index
-	if do_auto_set_index:
+	if auto_set_index_enabled:
 		index = get_index() + auto_set_index_offset
 
 	# Connect selection signal
@@ -99,7 +108,7 @@ func is_selected() -> bool:
 
 
 func selection_modulate(selected: bool) -> void:
-	modulate = selected_modulate if selected else unselected_modulate
+	modulate = modulate_selected if selected else modulate_unselected
 
 
 func selection_scale(selected: bool) -> void:
