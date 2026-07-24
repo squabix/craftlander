@@ -219,6 +219,9 @@ func get_uuid() -> StringName:
 
 
 func find_index() -> int:
+	if save == null:
+		return -1
+	
 	var current_scene := get_scene_context()
 
 	for i in range(save.node_properties.size()):
