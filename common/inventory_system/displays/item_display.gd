@@ -2,6 +2,7 @@ class_name ItemDisplay
 extends Control
 
 enum SelectMode { PRESS, HOVER, MANUAL }
+enum LabelMode { QUANTITY, FULL_STRING }
 
 @export var instance_override: ItemInstance
 @export var hide_when_empty := false
@@ -31,7 +32,11 @@ enum SelectMode { PRESS, HOVER, MANUAL }
 @export_group("Components")
 @export var inventory: Inventory
 @export var icon_rect: TextureRect
-@export var quantity_label: Label
+
+@export_subgroup("Label")
+@export var label: Label
+@export var label_mode := LabelMode.QUANTITY
+@export var label_empty_text := ""
 
 func _ready() -> void:
 	# Auto set index
@@ -49,7 +54,7 @@ func _process(_delta: float) -> void:
 	var selected := is_selected()
 	selection_modulate(selected)
 	selection_scale(selected)
-
+	
 	var instance := get_instance()
 	visible = not (instance == null and hide_when_empty)
 	update_icon_texture(instance)
@@ -128,6 +133,13 @@ func update_icon_texture(instance: ItemInstance) -> void:
 
 
 func update_quantity_label(instance: ItemInstance) -> void:
-	if quantity_label == null:
+	if label == null:
 		return
-	quantity_label.text = "" if instance == null or instance.quantity <= 1 else str(instance.quantity)
+	if instance == null:
+		label.text = label_empty_text
+		return
+	match label_mode:
+		LabelMode.QUANTITY:
+			label.text = "" if instance.quantity <= 1 else str(instance.quantity)
+		LabelMode.FULL_STRING:
+			label.text = str(instance)
