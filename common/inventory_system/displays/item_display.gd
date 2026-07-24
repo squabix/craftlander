@@ -31,11 +31,15 @@ enum LabelMode { QUANTITY, FULL_STRING }
 
 @export_group("Components")
 @export var inventory: Inventory
-@export var icon_rect: TextureRect
 
-@export_subgroup("Label")
+@export var icon_rect: TextureRect
+@export_subgroup("Icon Rect Settings", "icon_rect")
+@export var icon_rect_empty_texture: Texture2D
+
 @export var label: Label
+@export_subgroup("Label Settings", "label")
 @export var label_mode := LabelMode.QUANTITY
+@export var label_format := "%s"
 @export var label_empty_text := ""
 
 func _ready() -> void:
@@ -129,7 +133,7 @@ func selection_scale(selected: bool) -> void:
 func update_icon_texture(instance: ItemInstance) -> void:
 	if icon_rect == null:
 		return
-	icon_rect.texture = null if instance == null or instance.item == null else instance.item.icon
+	icon_rect.texture = icon_rect_empty_texture if instance == null or instance.item == null else instance.item.icon
 
 
 func update_quantity_label(instance: ItemInstance) -> void:
@@ -140,6 +144,6 @@ func update_quantity_label(instance: ItemInstance) -> void:
 		return
 	match label_mode:
 		LabelMode.QUANTITY:
-			label.text = "" if instance.quantity <= 1 else str(instance.quantity)
+			label.text = label_format % ("" if instance.quantity <= 1 else str(instance.quantity))
 		LabelMode.FULL_STRING:
-			label.text = str(instance)
+			label.text = label_format % instance

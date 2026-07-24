@@ -1,4 +1,4 @@
-extends Control
+extends ItemDisplay
 
 @export var crafting_environment: CraftingEnvironment
 @export var craft_button: Button
@@ -14,10 +14,8 @@ func update() -> void:
 	var recipe := RecipeBook.get_recipe(crafting_environment.get_recipe_layout())
 	if recipe == null:
 		craft_button.disabled = true
-		preview_rect.texture = null
-		preview_label.text = ""
+		instance_override = null
 		return
 	
 	craft_button.disabled = false
-	preview_rect.texture = recipe.result.item.icon
-	preview_label.text = str(recipe.result)
+	instance_override = recipe.result
