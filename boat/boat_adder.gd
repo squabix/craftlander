@@ -10,7 +10,7 @@ var boat: Boat
 
 func add() -> Boat:
 	print("Adding boat (position is %s)" % dock_position)
-	boat = Boat.instantiate(Main.loaded_save.boat_level)
+	boat = Boat.instantiate(Main.loaded_save.boat_level if &"boat_level" in Main.loaded_save else 0)
 	if not is_instance_valid(boat):
 		return null
 	get_parent().add_child(boat)

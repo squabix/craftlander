@@ -29,14 +29,15 @@ func _ready() -> void:
 	MouseModeController.show()
 	get_tree().paused = true
 	
-	var is_reloading: bool = Main.loaded_save.is_current_level_generated()
+	var is_reloading: bool = Main.is_save_loaded and Main.loaded_save.is_current_level_generated()
 	
-	Main.root.loading_screen.add_steps(
-			"Generating terrain",
-			"Restoring level state" if is_reloading else "Spawning props",
-			"Loading save data",
-			"Adding finishing touches",
-		)
+	if Main.root.loading_screen != null:
+		Main.root.loading_screen.add_steps(
+				"Generating terrain",
+				"Restoring level state" if is_reloading else "Spawning props",
+				"Loading save data",
+				"Adding finishing touches",
+			)
 	
 	NodeSaver.scene_root = self
 	NodeSaver.offload_on_free_enabled = false

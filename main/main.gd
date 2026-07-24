@@ -15,8 +15,12 @@ static var current_save_slot := 0
 static var loaded_save: Save:
 	get:
 		if loaded_save == null:
-			return Save.new()
+			return preload("res://main/game_save.gd").new()
 		return loaded_save
+	set(to):
+		loaded_save = to
+		is_save_loaded = true
+static var is_save_loaded := false
 static var current_level_index := 0
 static var base_seed := 0:
 	set(to):
