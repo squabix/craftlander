@@ -72,7 +72,9 @@
 [ext_resource type="Script" uid="uid://xu4t7vci1g06" path="res://player/player_animation_tree.gd" id="65_7l6ig"]
 [ext_resource type="Script" uid="uid://blknest0w8djr" path="res://player/ui/boat_upgrader.gd" id="66_2h6tc"]
 [ext_resource type="Resource" uid="uid://mx3f8ldvvndd" path="res://player/states/player_walking_move_mode.tres" id="66_utr5e"]
+[ext_resource type="Texture2D" uid="uid://3ucwktxgxqby" path="res://assets/materials/checkmark.png" id="67_48p26"]
 [ext_resource type="Resource" uid="uid://c86fer36qsomd" path="res://player/states/player_sprinting_move_mode.tres" id="67_kewli"]
+[ext_resource type="Texture2D" uid="uid://dejgw2p87pi2y" path="res://assets/materials/cross.png" id="68_anp34"]
 [ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="74_2h6tc"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
@@ -345,9 +347,28 @@ gradient = SubResource("Gradient_83qjl")
 fill = 2
 fill_from = Vector2(0.5, 0.5)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_48p26"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
 [sub_resource type="Resource" id="Resource_8rogd"]
 script = ExtResource("6_hggc2")
 item = ExtResource("10_s3g0c")
+quantity = 5
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_48p26"]
+script = ExtResource("6_hggc2")
+item = ExtResource("9_jbx34")
+quantity = 10
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Animation" id="Animation_2h6tc"]
@@ -4691,7 +4712,6 @@ flat = true
 
 [node name="BoatInterface" type="Control" parent="." unique_id=520927744 node_paths=PackedStringArray("island_option_container", "pause_interface", "boat_upgrader", "sail_button")]
 process_mode = 2
-visible = false
 z_index = 1
 layout_mode = 3
 anchors_preset = 15
@@ -4770,14 +4790,21 @@ layout_mode = 2
 layout_mode = 2
 columns = 3
 
-[node name="RequirementDisplay1" type="Control" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer" unique_id=850313658 node_paths=PackedStringArray("icon_rect", "label")]
+[node name="RequirementDisplay1" type="Control" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer" unique_id=850313658 node_paths=PackedStringArray("fraction_texture_rect", "fraction_progress_bar", "icon_rect", "label")]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 hide_when_empty = true
 auto_set_index_enabled = true
+fraction_is_flipped = true
+fraction_texture_rect = NodePath("HBoxContainer/Indicator")
+fraction_texture_sufficient = ExtResource("67_48p26")
+fraction_texture_sufficient_modulate = Color(0.6345549, 1, 0.61431986, 1)
+fraction_texture_insufficient = ExtResource("68_anp34")
+fraction_texture_insufficient_modulate = Color(1, 0.62, 0.62, 1)
+fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
 icon_rect = NodePath("HBoxContainer/TextureRect")
-label = NodePath("HBoxContainer/Label")
+label = NodePath("HBoxContainer/VBoxContainer/Label")
 label_mode = 1
 metadata/_custom_type_script = "uid://b1eix6p0204fp"
 
@@ -4806,23 +4833,52 @@ layout_mode = 2
 texture = ExtResource("64_utr5e")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay1/HBoxContainer" unique_id=1054943036]
+[node name="VBoxContainer" type="VBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay1/HBoxContainer" unique_id=2001014725]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Item x 10"
 
-[node name="RequirementDisplay2" type="Control" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer" unique_id=1090723969 node_paths=PackedStringArray("icon_rect", "label")]
+[node name="Label" type="Label" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay1/HBoxContainer/VBoxContainer" unique_id=1054943036]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Item x 10"
+vertical_alignment = 2
+autowrap_trim_flags = 64
+
+[node name="ProgressBar" type="ProgressBar" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay1/HBoxContainer/VBoxContainer" unique_id=804228075]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_48p26")
+max_value = 1.0
+show_percentage = false
+
+[node name="Indicator" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay1/HBoxContainer" unique_id=1891763813]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture = ExtResource("68_anp34")
+expand_mode = 4
+
+[node name="RequirementDisplay2" type="Control" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer" unique_id=2117778025 node_paths=PackedStringArray("fraction_texture_rect", "fraction_progress_bar", "icon_rect", "label")]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 hide_when_empty = true
 auto_set_index_enabled = true
+fraction_is_flipped = true
+fraction_texture_rect = NodePath("HBoxContainer/Indicator")
+fraction_texture_sufficient = ExtResource("67_48p26")
+fraction_texture_sufficient_modulate = Color(0.6345549, 1, 0.61431986, 1)
+fraction_texture_insufficient = ExtResource("68_anp34")
+fraction_texture_insufficient_modulate = Color(1, 0.62, 0.62, 1)
+fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
 icon_rect = NodePath("HBoxContainer/TextureRect")
-label = NodePath("HBoxContainer/Label")
+label = NodePath("HBoxContainer/VBoxContainer/Label")
 label_mode = 1
 metadata/_custom_type_script = "uid://b1eix6p0204fp"
 
-[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay2" unique_id=694651081]
+[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay2" unique_id=1927772075]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -4832,7 +4888,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_2h6tc")
 expand_mode = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay2" unique_id=1636348875]
+[node name="HBoxContainer" type="HBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay2" unique_id=1747899167]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 1
 anchors_preset = 15
@@ -4841,29 +4897,58 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay2/HBoxContainer" unique_id=80304267]
+[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay2/HBoxContainer" unique_id=1676066562]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("64_utr5e")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay2/HBoxContainer" unique_id=839969353]
+[node name="VBoxContainer" type="VBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay2/HBoxContainer" unique_id=1910102268]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Item x 10"
 
-[node name="RequirementDisplay3" type="Control" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer" unique_id=1863246588 node_paths=PackedStringArray("icon_rect", "label")]
+[node name="Label" type="Label" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay2/HBoxContainer/VBoxContainer" unique_id=1038421638]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Item x 10"
+vertical_alignment = 2
+autowrap_trim_flags = 64
+
+[node name="ProgressBar" type="ProgressBar" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay2/HBoxContainer/VBoxContainer" unique_id=1741645324]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_48p26")
+max_value = 1.0
+show_percentage = false
+
+[node name="Indicator" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay2/HBoxContainer" unique_id=200655119]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture = ExtResource("68_anp34")
+expand_mode = 4
+
+[node name="RequirementDisplay3" type="Control" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer" unique_id=1099232990 node_paths=PackedStringArray("fraction_texture_rect", "fraction_progress_bar", "icon_rect", "label")]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 hide_when_empty = true
 auto_set_index_enabled = true
+fraction_is_flipped = true
+fraction_texture_rect = NodePath("HBoxContainer/Indicator")
+fraction_texture_sufficient = ExtResource("67_48p26")
+fraction_texture_sufficient_modulate = Color(0.6345549, 1, 0.61431986, 1)
+fraction_texture_insufficient = ExtResource("68_anp34")
+fraction_texture_insufficient_modulate = Color(1, 0.62, 0.62, 1)
+fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
 icon_rect = NodePath("HBoxContainer/TextureRect")
-label = NodePath("HBoxContainer/Label")
+label = NodePath("HBoxContainer/VBoxContainer/Label")
 label_mode = 1
 metadata/_custom_type_script = "uid://b1eix6p0204fp"
 
-[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay3" unique_id=1672010247]
+[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay3" unique_id=371247133]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -4873,7 +4958,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_2h6tc")
 expand_mode = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay3" unique_id=755341303]
+[node name="HBoxContainer" type="HBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay3" unique_id=45725982]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 1
 anchors_preset = 15
@@ -4882,29 +4967,58 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay3/HBoxContainer" unique_id=1446895859]
+[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay3/HBoxContainer" unique_id=135318720]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("64_utr5e")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay3/HBoxContainer" unique_id=990861076]
+[node name="VBoxContainer" type="VBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay3/HBoxContainer" unique_id=1919318723]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Item x 10"
 
-[node name="RequirementDisplay4" type="Control" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer" unique_id=1981430355 node_paths=PackedStringArray("icon_rect", "label")]
+[node name="Label" type="Label" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay3/HBoxContainer/VBoxContainer" unique_id=1065806565]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Item x 10"
+vertical_alignment = 2
+autowrap_trim_flags = 64
+
+[node name="ProgressBar" type="ProgressBar" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay3/HBoxContainer/VBoxContainer" unique_id=972474159]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_48p26")
+max_value = 1.0
+show_percentage = false
+
+[node name="Indicator" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay3/HBoxContainer" unique_id=109839896]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture = ExtResource("68_anp34")
+expand_mode = 4
+
+[node name="RequirementDisplay4" type="Control" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer" unique_id=1793816336 node_paths=PackedStringArray("fraction_texture_rect", "fraction_progress_bar", "icon_rect", "label")]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 hide_when_empty = true
 auto_set_index_enabled = true
+fraction_is_flipped = true
+fraction_texture_rect = NodePath("HBoxContainer/Indicator")
+fraction_texture_sufficient = ExtResource("67_48p26")
+fraction_texture_sufficient_modulate = Color(0.6345549, 1, 0.61431986, 1)
+fraction_texture_insufficient = ExtResource("68_anp34")
+fraction_texture_insufficient_modulate = Color(1, 0.62, 0.62, 1)
+fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
 icon_rect = NodePath("HBoxContainer/TextureRect")
-label = NodePath("HBoxContainer/Label")
+label = NodePath("HBoxContainer/VBoxContainer/Label")
 label_mode = 1
 metadata/_custom_type_script = "uid://b1eix6p0204fp"
 
-[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay4" unique_id=207340889]
+[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay4" unique_id=393713129]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -4914,7 +5028,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_2h6tc")
 expand_mode = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay4" unique_id=1427092841]
+[node name="HBoxContainer" type="HBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay4" unique_id=852912099]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 1
 anchors_preset = 15
@@ -4923,29 +5037,58 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay4/HBoxContainer" unique_id=1744523304]
+[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay4/HBoxContainer" unique_id=1861005633]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("64_utr5e")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay4/HBoxContainer" unique_id=1895162969]
+[node name="VBoxContainer" type="VBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay4/HBoxContainer" unique_id=1771667420]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Item x 10"
 
-[node name="RequirementDisplay5" type="Control" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer" unique_id=1910730098 node_paths=PackedStringArray("icon_rect", "label")]
+[node name="Label" type="Label" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay4/HBoxContainer/VBoxContainer" unique_id=1256235407]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Item x 10"
+vertical_alignment = 2
+autowrap_trim_flags = 64
+
+[node name="ProgressBar" type="ProgressBar" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay4/HBoxContainer/VBoxContainer" unique_id=695806832]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_48p26")
+max_value = 1.0
+show_percentage = false
+
+[node name="Indicator" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay4/HBoxContainer" unique_id=602521469]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture = ExtResource("68_anp34")
+expand_mode = 4
+
+[node name="RequirementDisplay5" type="Control" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer" unique_id=895408771 node_paths=PackedStringArray("fraction_texture_rect", "fraction_progress_bar", "icon_rect", "label")]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 hide_when_empty = true
 auto_set_index_enabled = true
+fraction_is_flipped = true
+fraction_texture_rect = NodePath("HBoxContainer/Indicator")
+fraction_texture_sufficient = ExtResource("67_48p26")
+fraction_texture_sufficient_modulate = Color(0.6345549, 1, 0.61431986, 1)
+fraction_texture_insufficient = ExtResource("68_anp34")
+fraction_texture_insufficient_modulate = Color(1, 0.62, 0.62, 1)
+fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
 icon_rect = NodePath("HBoxContainer/TextureRect")
-label = NodePath("HBoxContainer/Label")
+label = NodePath("HBoxContainer/VBoxContainer/Label")
 label_mode = 1
 metadata/_custom_type_script = "uid://b1eix6p0204fp"
 
-[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay5" unique_id=1862478896]
+[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay5" unique_id=1832817902]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -4955,7 +5098,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_2h6tc")
 expand_mode = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay5" unique_id=347597320]
+[node name="HBoxContainer" type="HBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay5" unique_id=1476953414]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 1
 anchors_preset = 15
@@ -4964,29 +5107,58 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay5/HBoxContainer" unique_id=1355914186]
+[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay5/HBoxContainer" unique_id=2051527910]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("64_utr5e")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay5/HBoxContainer" unique_id=1553128364]
+[node name="VBoxContainer" type="VBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay5/HBoxContainer" unique_id=69895804]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Item x 10"
 
-[node name="RequirementDisplay6" type="Control" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer" unique_id=1552047316 node_paths=PackedStringArray("icon_rect", "label")]
+[node name="Label" type="Label" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay5/HBoxContainer/VBoxContainer" unique_id=1043015510]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Item x 10"
+vertical_alignment = 2
+autowrap_trim_flags = 64
+
+[node name="ProgressBar" type="ProgressBar" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay5/HBoxContainer/VBoxContainer" unique_id=1960745736]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_48p26")
+max_value = 1.0
+show_percentage = false
+
+[node name="Indicator" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay5/HBoxContainer" unique_id=2131562757]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture = ExtResource("68_anp34")
+expand_mode = 4
+
+[node name="RequirementDisplay6" type="Control" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer" unique_id=1013469979 node_paths=PackedStringArray("fraction_texture_rect", "fraction_progress_bar", "icon_rect", "label")]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 hide_when_empty = true
 auto_set_index_enabled = true
+fraction_is_flipped = true
+fraction_texture_rect = NodePath("HBoxContainer/Indicator")
+fraction_texture_sufficient = ExtResource("67_48p26")
+fraction_texture_sufficient_modulate = Color(0.6345549, 1, 0.61431986, 1)
+fraction_texture_insufficient = ExtResource("68_anp34")
+fraction_texture_insufficient_modulate = Color(1, 0.62, 0.62, 1)
+fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
 icon_rect = NodePath("HBoxContainer/TextureRect")
-label = NodePath("HBoxContainer/Label")
+label = NodePath("HBoxContainer/VBoxContainer/Label")
 label_mode = 1
 metadata/_custom_type_script = "uid://b1eix6p0204fp"
 
-[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay6" unique_id=1080412043]
+[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay6" unique_id=727160265]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -4996,7 +5168,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_2h6tc")
 expand_mode = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay6" unique_id=1651599153]
+[node name="HBoxContainer" type="HBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay6" unique_id=2136232007]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 1
 anchors_preset = 15
@@ -5005,29 +5177,58 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay6/HBoxContainer" unique_id=189831504]
+[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay6/HBoxContainer" unique_id=1722737567]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("64_utr5e")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay6/HBoxContainer" unique_id=850164135]
+[node name="VBoxContainer" type="VBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay6/HBoxContainer" unique_id=1201358460]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Item x 10"
 
-[node name="RequirementDisplay7" type="Control" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer" unique_id=1301613750 node_paths=PackedStringArray("icon_rect", "label")]
+[node name="Label" type="Label" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay6/HBoxContainer/VBoxContainer" unique_id=1884483153]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Item x 10"
+vertical_alignment = 2
+autowrap_trim_flags = 64
+
+[node name="ProgressBar" type="ProgressBar" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay6/HBoxContainer/VBoxContainer" unique_id=253349967]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_48p26")
+max_value = 1.0
+show_percentage = false
+
+[node name="Indicator" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay6/HBoxContainer" unique_id=1800091869]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture = ExtResource("68_anp34")
+expand_mode = 4
+
+[node name="RequirementDisplay7" type="Control" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer" unique_id=1351672655 node_paths=PackedStringArray("fraction_texture_rect", "fraction_progress_bar", "icon_rect", "label")]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 hide_when_empty = true
 auto_set_index_enabled = true
+fraction_is_flipped = true
+fraction_texture_rect = NodePath("HBoxContainer/Indicator")
+fraction_texture_sufficient = ExtResource("67_48p26")
+fraction_texture_sufficient_modulate = Color(0.6345549, 1, 0.61431986, 1)
+fraction_texture_insufficient = ExtResource("68_anp34")
+fraction_texture_insufficient_modulate = Color(1, 0.62, 0.62, 1)
+fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
 icon_rect = NodePath("HBoxContainer/TextureRect")
-label = NodePath("HBoxContainer/Label")
+label = NodePath("HBoxContainer/VBoxContainer/Label")
 label_mode = 1
 metadata/_custom_type_script = "uid://b1eix6p0204fp"
 
-[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay7" unique_id=2005921958]
+[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay7" unique_id=315803849]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -5037,7 +5238,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_2h6tc")
 expand_mode = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay7" unique_id=1800723878]
+[node name="HBoxContainer" type="HBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay7" unique_id=1209312179]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 1
 anchors_preset = 15
@@ -5046,29 +5247,58 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay7/HBoxContainer" unique_id=1682096311]
+[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay7/HBoxContainer" unique_id=59162103]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("64_utr5e")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay7/HBoxContainer" unique_id=1711989025]
+[node name="VBoxContainer" type="VBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay7/HBoxContainer" unique_id=508691933]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Item x 10"
 
-[node name="RequirementDisplay8" type="Control" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer" unique_id=1492920275 node_paths=PackedStringArray("icon_rect", "label")]
+[node name="Label" type="Label" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay7/HBoxContainer/VBoxContainer" unique_id=2107185708]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Item x 10"
+vertical_alignment = 2
+autowrap_trim_flags = 64
+
+[node name="ProgressBar" type="ProgressBar" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay7/HBoxContainer/VBoxContainer" unique_id=964320458]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_48p26")
+max_value = 1.0
+show_percentage = false
+
+[node name="Indicator" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay7/HBoxContainer" unique_id=1570096539]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture = ExtResource("68_anp34")
+expand_mode = 4
+
+[node name="RequirementDisplay8" type="Control" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer" unique_id=482144341 node_paths=PackedStringArray("fraction_texture_rect", "fraction_progress_bar", "icon_rect", "label")]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 hide_when_empty = true
 auto_set_index_enabled = true
+fraction_is_flipped = true
+fraction_texture_rect = NodePath("HBoxContainer/Indicator")
+fraction_texture_sufficient = ExtResource("67_48p26")
+fraction_texture_sufficient_modulate = Color(0.6345549, 1, 0.61431986, 1)
+fraction_texture_insufficient = ExtResource("68_anp34")
+fraction_texture_insufficient_modulate = Color(1, 0.62, 0.62, 1)
+fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
 icon_rect = NodePath("HBoxContainer/TextureRect")
-label = NodePath("HBoxContainer/Label")
+label = NodePath("HBoxContainer/VBoxContainer/Label")
 label_mode = 1
 metadata/_custom_type_script = "uid://b1eix6p0204fp"
 
-[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay8" unique_id=1292657411]
+[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay8" unique_id=424007201]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -5078,7 +5308,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_2h6tc")
 expand_mode = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay8" unique_id=1271024178]
+[node name="HBoxContainer" type="HBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay8" unique_id=1396147419]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 1
 anchors_preset = 15
@@ -5087,29 +5317,58 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay8/HBoxContainer" unique_id=1869190712]
+[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay8/HBoxContainer" unique_id=226705870]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("64_utr5e")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay8/HBoxContainer" unique_id=2053776606]
+[node name="VBoxContainer" type="VBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay8/HBoxContainer" unique_id=1803317874]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Item x 10"
 
-[node name="RequirementDisplay9" type="Control" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer" unique_id=1133817875 node_paths=PackedStringArray("icon_rect", "label")]
+[node name="Label" type="Label" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay8/HBoxContainer/VBoxContainer" unique_id=544863943]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Item x 10"
+vertical_alignment = 2
+autowrap_trim_flags = 64
+
+[node name="ProgressBar" type="ProgressBar" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay8/HBoxContainer/VBoxContainer" unique_id=1577429874]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_48p26")
+max_value = 1.0
+show_percentage = false
+
+[node name="Indicator" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay8/HBoxContainer" unique_id=317482330]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture = ExtResource("68_anp34")
+expand_mode = 4
+
+[node name="RequirementDisplay9" type="Control" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer" unique_id=1595614655 node_paths=PackedStringArray("fraction_texture_rect", "fraction_progress_bar", "icon_rect", "label")]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 2
 script = ExtResource("16_e7oew")
 hide_when_empty = true
 auto_set_index_enabled = true
+fraction_is_flipped = true
+fraction_texture_rect = NodePath("HBoxContainer/Indicator")
+fraction_texture_sufficient = ExtResource("67_48p26")
+fraction_texture_sufficient_modulate = Color(0.6345549, 1, 0.61431986, 1)
+fraction_texture_insufficient = ExtResource("68_anp34")
+fraction_texture_insufficient_modulate = Color(1, 0.62, 0.62, 1)
+fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
 icon_rect = NodePath("HBoxContainer/TextureRect")
-label = NodePath("HBoxContainer/Label")
+label = NodePath("HBoxContainer/VBoxContainer/Label")
 label_mode = 1
 metadata/_custom_type_script = "uid://b1eix6p0204fp"
 
-[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay9" unique_id=2136800516]
+[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay9" unique_id=1102658946]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -5119,7 +5378,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_2h6tc")
 expand_mode = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay9" unique_id=1451507081]
+[node name="HBoxContainer" type="HBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay9" unique_id=967947060]
 custom_minimum_size = Vector2(200, 40)
 layout_mode = 1
 anchors_preset = 15
@@ -5128,16 +5387,38 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay9/HBoxContainer" unique_id=317397860]
+[node name="TextureRect" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay9/HBoxContainer" unique_id=740118040]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("64_utr5e")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay9/HBoxContainer" unique_id=532552056]
+[node name="VBoxContainer" type="VBoxContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay9/HBoxContainer" unique_id=2046576887]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay9/HBoxContainer/VBoxContainer" unique_id=727316915]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "Item x 10"
+vertical_alignment = 2
+autowrap_trim_flags = 64
+
+[node name="ProgressBar" type="ProgressBar" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay9/HBoxContainer/VBoxContainer" unique_id=662589323]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_48p26")
+max_value = 1.0
+show_percentage = false
+
+[node name="Indicator" type="TextureRect" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay9/HBoxContainer" unique_id=104691539]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+texture = ExtResource("68_anp34")
+expand_mode = 4
 
 [node name="UpgradeButtonContainer" type="CenterContainer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader" unique_id=1666945089]
 layout_mode = 2
@@ -5150,7 +5431,7 @@ text = "Upgrade"
 
 [node name="UpgradeRequirement1" type="Node" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader" unique_id=1136310646]
 script = ExtResource("19_c35mf")
-item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_8rogd")])
+item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_8rogd"), SubResource("Resource_48p26")])
 constant = true
 size = 9
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
@@ -5173,13 +5454,13 @@ offset_bottom = 447.0
 [node name="IslandOption0" type="VBoxContainer" parent="BoatInterface/IslandOptionContainer" unique_id=1381974933 node_paths=PackedStringArray("name_label", "texture_rect", "select_button")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.119791664
-anchor_top = 0.3914989
-anchor_right = 0.203125
-anchor_bottom = 0.64876956
+anchor_left = 0.17100695
+anchor_top = 0.38926175
+anchor_right = 0.2543403
+anchor_bottom = 0.6465324
 script = ExtResource("64_kewli")
-island_name = &"Lush Isle"
-name_label = NodePath("../../../PauseInterface/CraftingMenu/ItemInspector/VBoxContainer/NameLabel")
+island_name = "Lush Isle"
+name_label = NodePath("NameLabel")
 texture_rect = NodePath("TextureRect")
 select_button = NodePath("SelectButton")
 metadata/_edit_use_anchors_ = true
@@ -5209,27 +5490,27 @@ text = "Select
 libraries/ = SubResource("AnimationLibrary_48p26")
 autoplay = &"float"
 
-[node name="IslandOption1" type="VBoxContainer" parent="BoatInterface/IslandOptionContainer" unique_id=2020411067 node_paths=PackedStringArray("name_label", "texture_rect", "select_button")]
+[node name="IslandOption1" type="VBoxContainer" parent="BoatInterface/IslandOptionContainer" unique_id=687684142 node_paths=PackedStringArray("name_label", "texture_rect", "select_button")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.35243055
-anchor_top = 0.14317673
-anchor_right = 0.4357639
-anchor_bottom = 0.40044743
+anchor_left = 0.34895834
+anchor_top = 0.5302013
+anchor_right = 0.43229166
+anchor_bottom = 0.787472
 script = ExtResource("64_kewli")
-island_name = &"Skelly Sandbar"
+island_name = "Skelly Sandbar"
 island_index = 1
-name_label = NodePath("../../../PauseInterface/CraftingMenu/ItemInspector/VBoxContainer/NameLabel")
+name_label = NodePath("NameLabel")
 texture_rect = NodePath("TextureRect")
 select_button = NodePath("SelectButton")
 metadata/_edit_use_anchors_ = true
 
-[node name="NameLabel" type="Label" parent="BoatInterface/IslandOptionContainer/IslandOption1" unique_id=754380171]
+[node name="NameLabel" type="Label" parent="BoatInterface/IslandOptionContainer/IslandOption1" unique_id=1736962781]
 layout_mode = 2
 text = "Island Name"
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="BoatInterface/IslandOptionContainer/IslandOption1" unique_id=1784712706]
+[node name="TextureRect" type="TextureRect" parent="BoatInterface/IslandOptionContainer/IslandOption1" unique_id=705747668]
 layout_mode = 2
 size_flags_vertical = 3
 offset_transform_enabled = true
@@ -5239,13 +5520,93 @@ texture = ExtResource("64_utr5e")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="SelectButton" type="Button" parent="BoatInterface/IslandOptionContainer/IslandOption1" unique_id=1764367371]
+[node name="SelectButton" type="Button" parent="BoatInterface/IslandOptionContainer/IslandOption1" unique_id=291589597]
 layout_mode = 2
 toggle_mode = true
 text = "Select
 "
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="BoatInterface/IslandOptionContainer/IslandOption1" unique_id=511994397]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BoatInterface/IslandOptionContainer/IslandOption1" unique_id=1337352907]
+libraries/ = SubResource("AnimationLibrary_48p26")
+autoplay = &"float"
+
+[node name="IslandOption2" type="VBoxContainer" parent="BoatInterface/IslandOptionContainer" unique_id=2004637537 node_paths=PackedStringArray("name_label", "texture_rect", "select_button")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5104167
+anchor_top = 0.24832214
+anchor_right = 0.59375
+anchor_bottom = 0.5055929
+script = ExtResource("64_kewli")
+island_name = "Skelly Sandbar"
+island_index = 1
+name_label = NodePath("NameLabel")
+texture_rect = NodePath("TextureRect")
+select_button = NodePath("SelectButton")
+metadata/_edit_use_anchors_ = true
+
+[node name="NameLabel" type="Label" parent="BoatInterface/IslandOptionContainer/IslandOption2" unique_id=776332412]
+layout_mode = 2
+text = "Island Name"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="BoatInterface/IslandOptionContainer/IslandOption2" unique_id=1826701770]
+layout_mode = 2
+size_flags_vertical = 3
+offset_transform_enabled = true
+offset_transform_rotation = -0.08726646
+offset_transform_pivot_ratio = Vector2(0.5, 1)
+texture = ExtResource("64_utr5e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectButton" type="Button" parent="BoatInterface/IslandOptionContainer/IslandOption2" unique_id=1934516890]
+layout_mode = 2
+toggle_mode = true
+text = "Select
+"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BoatInterface/IslandOptionContainer/IslandOption2" unique_id=93032834]
+libraries/ = SubResource("AnimationLibrary_48p26")
+autoplay = &"float"
+
+[node name="IslandOption3" type="VBoxContainer" parent="BoatInterface/IslandOptionContainer" unique_id=1909481650 node_paths=PackedStringArray("name_label", "texture_rect", "select_button")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7517361
+anchor_top = 0.4720358
+anchor_right = 0.8350694
+anchor_bottom = 0.72930646
+script = ExtResource("64_kewli")
+island_name = "Skelly Sandbar"
+island_index = 1
+name_label = NodePath("NameLabel")
+texture_rect = NodePath("TextureRect")
+select_button = NodePath("SelectButton")
+metadata/_edit_use_anchors_ = true
+
+[node name="NameLabel" type="Label" parent="BoatInterface/IslandOptionContainer/IslandOption3" unique_id=2138815517]
+layout_mode = 2
+text = "Island Name"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="BoatInterface/IslandOptionContainer/IslandOption3" unique_id=47659230]
+layout_mode = 2
+size_flags_vertical = 3
+offset_transform_enabled = true
+offset_transform_rotation = -0.08726646
+offset_transform_pivot_ratio = Vector2(0.5, 1)
+texture = ExtResource("64_utr5e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SelectButton" type="Button" parent="BoatInterface/IslandOptionContainer/IslandOption3" unique_id=527816358]
+layout_mode = 2
+toggle_mode = true
+text = "Select
+"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BoatInterface/IslandOptionContainer/IslandOption3" unique_id=2038206447]
 libraries/ = SubResource("AnimationLibrary_48p26")
 autoplay = &"float"
 

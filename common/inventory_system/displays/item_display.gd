@@ -29,6 +29,20 @@ enum LabelMode { QUANTITY, FULL_STRING }
 @export_range(0.0, 1.0) var selected_scale_speed := 1.0
 @export var selected_scale_targets: Array[Control] = []
 
+@export_group("Fraction", "fraction")
+@export var fraction_number := 0
+@export var fraction_is_flipped := false
+
+@export_subgroup("Texture", "fraction_texture")
+@export var fraction_texture_rect: TextureRect
+@export var fraction_texture_sufficient: Texture2D
+@export var fraction_texture_sufficient_modulate := Color.WHITE
+@export var fraction_texture_insufficient: Texture2D
+@export var fraction_texture_insufficient_modulate := Color.WHITE
+
+@export var fraction_suffix := "/%s"
+@export var fraction_progress_bar: ProgressBar
+
 @export_group("Components")
 @export var inventory: Inventory
 
@@ -63,6 +77,15 @@ func _process(_delta: float) -> void:
 	visible = not (instance == null and hide_when_empty)
 	update_icon_texture(instance)
 	update_quantity_label(instance)
+	update_fraction_rect(instance)
+	update_fraction_progress_bar(instance)
+
+
+func update_fraction_progress_bar(instance: ItemInstance) -> void:
+	if not is_instance_valid(fraction_progress_bar):
+		return
+	fraction_progress_bar.max_value = get_denominator(instance)
+	fraction_progress_bar.value = get_numerator(instance)
 
 
 func select_self(inventory_selector: InventorySelector) -> bool:
@@ -111,6 +134,13 @@ func get_instance() -> ItemInstance:
 	return inventory.get_instance(index)
 
 
+func get_item() -> Item:
+	var instance := get_instance()
+	if instance == null:
+		return null
+	return instance.item
+
+
 func is_selected() -> bool:
 	for selector in inventory_selectors:
 		if selector.enabled and selector.selected_index == index:
@@ -122,12 +152,50 @@ func selection_modulate(selected: bool) -> void:
 	modulate = modulate_selected if selected else modulate_unselected
 
 
+func get_numerator(instance: ItemInstance) -> int:
+	if not is_fraction_valid(instance):
+		return 1
+	return fraction_number if fraction_is_flipped else instance.quantity
+
+
+func get_denominator(instance: ItemInstance) -> int:
+	if not is_fraction_valid(instance):
+		return 1
+	return instance.quantity if fraction_is_flipped else fraction_number
+
+
 func selection_scale(selected: bool) -> void:
 	for target in selected_scale_targets:
 		target.scale = target.scale.lerp(
 			Vector2.ONE * (selected_scale_amount if selected else 1.0),
 			selected_scale_speed,
 		)
+
+
+func is_fraction_valid(instance: ItemInstance) -> bool:
+	if instance == null:
+		return false
+	if fraction_is_flipped:
+		return instance.quantity > 0
+	return fraction_number > 0
+
+
+func is_quantity_sufficient(instance: ItemInstance) -> bool:
+	if not is_fraction_valid(instance):
+		return false
+	return get_numerator(instance) >= get_denominator(instance)
+
+
+func update_fraction_rect(instance: ItemInstance) -> void:
+	if not is_instance_valid(fraction_texture_rect):
+		return
+	if not is_fraction_valid(instance):
+		fraction_texture_rect.texture = null
+		return
+	var sufficient := is_quantity_sufficient(instance)
+	
+	fraction_texture_rect.modulate = fraction_texture_sufficient_modulate if sufficient else fraction_texture_insufficient_modulate
+	fraction_texture_rect.texture = fraction_texture_sufficient if sufficient else fraction_texture_insufficient
 
 
 func update_icon_texture(instance: ItemInstance) -> void:
@@ -144,6 +212,13 @@ func update_quantity_label(instance: ItemInstance) -> void:
 		return
 	match label_mode:
 		LabelMode.QUANTITY:
-			label.text = label_format % ("" if instance.quantity <= 1 else str(instance.quantity))
+			if fraction_is_flipped:
+				label.text = label_format % str(fraction_number) + fraction_suffix % instance.quantity
+			else:
+				var qty_str := "" if (instance.quantity <= 1 and fraction_number <= 0) else str(instance.quantity)
+				var frac_str := fraction_suffix % fraction_number if fraction_number > 0 else ""
+				label.text = label_format % qty_str + frac_str
 		LabelMode.FULL_STRING:
-			label.text = label_format % instance
+			var start := label_format % (instance.item.instantiate(fraction_number) if fraction_is_flipped else instance)
+			var end := fraction_suffix % instance.quantity if fraction_is_flipped else fraction_suffix % fraction_number if fraction_number > 0 else ""
+			label.text = start + end

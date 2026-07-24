@@ -29,6 +29,7 @@ func update() -> void:
 	current_requirement = requirements.get(current_upgrade_level, default_requirement)
 	for display in requirement_displays:
 		display.inventory = current_requirement
+		display.fraction_number = player_inventory.get_item_quantity(display.get_item())
 	
 	var can_upgrade := current_requirement.is_inside(player_inventory)
 	upgrade_button.disabled = not can_upgrade

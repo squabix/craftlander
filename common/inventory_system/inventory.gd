@@ -56,6 +56,12 @@ func get_instance(index: int) -> ItemInstance:
 	return item_instances[index] if is_occupied(index) else null
 
 
+func get_total_instance(item: Item) -> ItemInstance:
+	if item == null:
+		return null
+	return item.instantiate(get_item_quantity(item))
+
+
 func has_index(index: int) -> bool:
 	return index >= 0 and index < size
 
