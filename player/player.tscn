@@ -236,11 +236,11 @@ font_size = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_uw77l"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pnw6m"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_48p26"]
 shader = ExtResource("28_ge24q")
 shader_parameter/blur_amount = 2.2500002018750003
 shader_parameter/mix_amount = 0.70000003325
-shader_parameter/color_over = Color(0.035099987, 0.15931496, 0.39, 1)
+shader_parameter/color_over = Color(0.05, 0.07083334, 0.1, 1)
 
 [sub_resource type="Resource" id="Resource_3dxkp"]
 script = ExtResource("44_a1u5o")
@@ -318,6 +318,12 @@ _data = {
 &"show": SubResource("Animation_g4c7l")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pnw6m"]
+shader = ExtResource("28_ge24q")
+shader_parameter/blur_amount = 2.2500002018750003
+shader_parameter/mix_amount = 0.70000003325
+shader_parameter/color_over = Color(0.035099987, 0.15931496, 0.39, 1)
+
 [sub_resource type="Gradient" id="Gradient_do7qw"]
 offsets = PackedFloat32Array(0, 0.2635234, 0.70650584, 1)
 colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.2901961, 0, 0, 0, 0.5274123, 0, 0, 0, 0.6)
@@ -328,6 +334,9 @@ fill_to = Vector2(0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_hjjmf"]
 font_size = 33
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.23529412)
+shadow_offset = Vector2(0, 1)
 
 [sub_resource type="Gradient" id="Gradient_83qjl"]
 offsets = PackedFloat32Array(0.99756944)
@@ -1285,7 +1294,6 @@ text = "Continue"
 [node name="PauseInterface" type="Control" parent="." unique_id=1163003515 node_paths=PackedStringArray("crafting_menu", "crafting_environment", "recipe_panel", "settings_menu", "health", "resume_button", "save_button", "settings_button", "quit_button")]
 unique_name_in_owner = true
 process_mode = 3
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1304,7 +1312,7 @@ settings_button = NodePath("CraftingMenu/OptionsContainer/SettingsButton")
 quit_button = NodePath("CraftingMenu/OptionsContainer/QuitButton")
 
 [node name="BlurRect" type="ColorRect" parent="PauseInterface" unique_id=1141508559]
-material = SubResource("ShaderMaterial_pnw6m")
+material = SubResource("ShaderMaterial_48p26")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -4703,6 +4711,7 @@ flat = true
 
 [node name="BoatInterface" type="Control" parent="." unique_id=520927744 node_paths=PackedStringArray("island_option_container", "pause_interface", "boat_upgrader", "sail_button")]
 process_mode = 2
+visible = false
 z_index = 1
 layout_mode = 3
 anchors_preset = 15

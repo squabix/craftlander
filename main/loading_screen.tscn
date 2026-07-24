@@ -134,7 +134,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(0.03529412, 0.0627451, 0.09019608, 1)
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=184740032]
 visible = false
@@ -176,3 +176,4 @@ libraries/ = SubResource("AnimationLibrary_p8eha")
 
 [node name="ClearColorSetter" type="Node" parent="." unique_id=499691982]
 script = ExtResource("3_jtvs6")
+color = Color(0.03529412, 0.0627451, 0.09019608, 1)
