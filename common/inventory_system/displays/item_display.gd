@@ -4,6 +4,7 @@ extends Control
 enum SelectMode { PRESS, HOVER, MANUAL }
 
 @export var instance_override: ItemInstance
+@export var hide_when_empty := false
 
 @export_group("Index")
 @export var index := 0
@@ -50,6 +51,7 @@ func _process(_delta: float) -> void:
 	selection_scale(selected)
 
 	var instance := get_instance()
+	visible = not (instance == null and hide_when_empty)
 	update_icon_texture(instance)
 	update_quantity_label(instance)
 
