@@ -240,7 +240,7 @@ font_size = 20
 shader = ExtResource("28_ge24q")
 shader_parameter/blur_amount = 2.2500002018750003
 shader_parameter/mix_amount = 0.70000003325
-shader_parameter/color_over = Color(0.035, 0.035, 0.05, 1)
+shader_parameter/color_over = Color(0.035099987, 0.15931496, 0.39, 1)
 
 [sub_resource type="Resource" id="Resource_3dxkp"]
 script = ExtResource("44_a1u5o")
@@ -317,15 +317,6 @@ _data = {
 &"RESET": SubResource("Animation_knn7v"),
 &"show": SubResource("Animation_g4c7l")
 }
-
-[sub_resource type="Gradient" id="Gradient_kewli"]
-interpolation_mode = 2
-colors = PackedColorArray(0.25839996, 0.54264, 0.76, 1, 0.2736, 0.45960006, 0.72, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_hjjmf"]
-gradient = SubResource("Gradient_kewli")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="Gradient" id="Gradient_do7qw"]
 offsets = PackedFloat32Array(0, 0.2635234, 0.70650584, 1)
@@ -4725,14 +4716,15 @@ pause_interface = NodePath("../PauseInterface")
 boat_upgrader = NodePath("BottomOptions/HBoxContainer/BoatUpgrader")
 sail_button = NodePath("BottomOptions/HBoxContainer/Control/SailButton")
 
-[node name="BlurRect" type="TextureRect" parent="BoatInterface" unique_id=1913048716]
+[node name="BlurRect" type="ColorRect" parent="BoatInterface" unique_id=286208560]
+material = SubResource("ShaderMaterial_pnw6m")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture2D_hjjmf")
+mouse_filter = 1
 
 [node name="BottomOptions" type="Control" parent="BoatInterface" unique_id=849476876]
 layout_mode = 1
