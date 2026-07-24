@@ -59,6 +59,7 @@ func get_current_state() -> State:
 func make_current() -> Boat:
 	var next_boat := instantiate(Main.loaded_save.boat_level)
 	if not is_instance_valid(next_boat):
+		printerr("%s cannot become current without valid next boat")
 		return null
 	get_parent().add_child(next_boat)
 	next_boat.global_transform = self.global_transform

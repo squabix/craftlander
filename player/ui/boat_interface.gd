@@ -3,10 +3,8 @@ extends Control
 
 @export var island_option_container: Control
 @export var pause_interface: PauseInterface
-
-@export_group("Buttons")
+@export var boat_upgrader: BoatUpgrader
 @export var sail_button: Button
-@export var upgrade_button: Button
 
 var selected_option: IslandOption
 var current_boat: Boat
@@ -20,7 +18,6 @@ func _ready() -> void:
 		option.select_button.toggled.connect(_on_option_toggled.bind(option))
 		option.hide()
 
-	upgrade_button.pressed.connect(upgrade)
 	sail_button.pressed.connect(load_selected_island)
 
 
@@ -36,6 +33,7 @@ func open(boat: Boat) -> void:
 	sail_button.disabled = true
 	set_pause(true)
 	current_boat = boat
+	boat_upgrader.boat = boat
 	reload_options()
 
 
@@ -61,12 +59,6 @@ func set_pause(to: bool) -> void:
 	get_tree().paused = to
 	pause_interface.can_update_pause = not to
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if to else Input.MOUSE_MODE_CAPTURED
-
-
-func upgrade() -> void:
-	Main.loaded_save.boat_level = current_boat.level + 1
-	current_boat = current_boat.make_current()
-	close()
 
 
 func load_selected_island() -> void:
