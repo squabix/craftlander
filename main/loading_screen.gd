@@ -206,7 +206,7 @@ func transition_out(force_free := false) -> void:
 		printerr("%s cannot play nonexistant transition out animation '%s'" % [transition_player, transition_out_anim])
 		return
 	transition_player.play(transition_out_anim)
-	if force_free:
+	if force_free or free_mode == FreeMode.TRANSITION_OUT:
 		await transition_player.animation_finished
 		queue_free()
 
