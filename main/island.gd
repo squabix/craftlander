@@ -92,6 +92,7 @@ func reload_save() -> void:
 	
 	advance_step()
 	Main.loaded_save.add_dynamic_nodes(self)
+	
 
 
 func position_player_at_spawn() -> void:
