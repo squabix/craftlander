@@ -3,6 +3,8 @@ extends VBoxContainer
 
 signal selected
 
+@export var current_alpha := 1.0
+
 @export_group("Island Information", "island")
 @export var island_name := "Island"
 @export var island_index := 0
@@ -19,3 +21,5 @@ func _ready() -> void:
 
 func reload() -> void:
 	show()
+	modulate.a = current_alpha if Main.current_level_index == island_index else 1.0
+	select_button.disabled =  Main.current_level_index == island_index
