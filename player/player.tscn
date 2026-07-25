@@ -72,9 +72,11 @@
 [ext_resource type="Script" uid="uid://xu4t7vci1g06" path="res://player/player_animation_tree.gd" id="65_7l6ig"]
 [ext_resource type="Script" uid="uid://blknest0w8djr" path="res://player/ui/boat_upgrader.gd" id="66_2h6tc"]
 [ext_resource type="Resource" uid="uid://mx3f8ldvvndd" path="res://player/states/player_walking_move_mode.tres" id="66_utr5e"]
-[ext_resource type="Texture2D" uid="uid://3ucwktxgxqby" path="res://assets/materials/checkmark.png" id="67_48p26"]
+[ext_resource type="Texture2D" uid="uid://752u5qngsxn2" path="res://assets/ui/checkmark.png" id="67_jdjat"]
 [ext_resource type="Resource" uid="uid://c86fer36qsomd" path="res://player/states/player_sprinting_move_mode.tres" id="67_kewli"]
 [ext_resource type="Texture2D" uid="uid://dejgw2p87pi2y" path="res://assets/materials/cross.png" id="68_anp34"]
+[ext_resource type="Texture2D" uid="uid://cfkuouoibr014" path="res://assets/ui/cross.png" id="68_j420s"]
+[ext_resource type="Texture2D" uid="uid://beudtbsirofjr" path="res://assets/ui/island0.png" id="71_anp34"]
 [ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="74_2h6tc"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
@@ -4799,10 +4801,10 @@ hide_when_empty = true
 auto_set_index_enabled = true
 fraction_is_flipped = true
 fraction_texture_rect = NodePath("HBoxContainer/Indicator")
-fraction_texture_sufficient = ExtResource("67_48p26")
-fraction_texture_sufficient_modulate = Color(0.6345549, 1, 0.61431986, 1)
-fraction_texture_insufficient = ExtResource("68_anp34")
-fraction_texture_insufficient_modulate = Color(1, 0.62, 0.62, 1)
+fraction_texture_sufficient = ExtResource("67_jdjat")
+fraction_texture_sufficient_modulate = Color(0.23346883, 0.9999996, 0.25140026, 1)
+fraction_texture_insufficient = ExtResource("68_j420s")
+fraction_texture_insufficient_modulate = Color(1, 0.24000001, 0.24000001, 1)
 fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
 icon_rect = NodePath("HBoxContainer/TextureRect")
 label = NodePath("HBoxContainer/VBoxContainer/Label")
@@ -4869,10 +4871,10 @@ hide_when_empty = true
 auto_set_index_enabled = true
 fraction_is_flipped = true
 fraction_texture_rect = NodePath("HBoxContainer/Indicator")
-fraction_texture_sufficient = ExtResource("67_48p26")
-fraction_texture_sufficient_modulate = Color(0.6345549, 1, 0.61431986, 1)
-fraction_texture_insufficient = ExtResource("68_anp34")
-fraction_texture_insufficient_modulate = Color(1, 0.62, 0.62, 1)
+fraction_texture_sufficient = ExtResource("67_jdjat")
+fraction_texture_sufficient_modulate = Color(0.23346883, 0.9999996, 0.25140026, 1)
+fraction_texture_insufficient = ExtResource("68_j420s")
+fraction_texture_insufficient_modulate = Color(1, 0.24000001, 0.24000001, 1)
 fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
 icon_rect = NodePath("HBoxContainer/TextureRect")
 label = NodePath("HBoxContainer/VBoxContainer/Label")
@@ -4939,10 +4941,10 @@ hide_when_empty = true
 auto_set_index_enabled = true
 fraction_is_flipped = true
 fraction_texture_rect = NodePath("HBoxContainer/Indicator")
-fraction_texture_sufficient = ExtResource("67_48p26")
-fraction_texture_sufficient_modulate = Color(0.6345549, 1, 0.61431986, 1)
-fraction_texture_insufficient = ExtResource("68_anp34")
-fraction_texture_insufficient_modulate = Color(1, 0.62, 0.62, 1)
+fraction_texture_sufficient = ExtResource("67_jdjat")
+fraction_texture_sufficient_modulate = Color(0.23346883, 0.9999996, 0.25140026, 1)
+fraction_texture_insufficient = ExtResource("68_j420s")
+fraction_texture_insufficient_modulate = Color(1, 0.24000001, 0.24000001, 1)
 fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
 icon_rect = NodePath("HBoxContainer/TextureRect")
 label = NodePath("HBoxContainer/VBoxContainer/Label")
@@ -5009,10 +5011,10 @@ hide_when_empty = true
 auto_set_index_enabled = true
 fraction_is_flipped = true
 fraction_texture_rect = NodePath("HBoxContainer/Indicator")
-fraction_texture_sufficient = ExtResource("67_48p26")
-fraction_texture_sufficient_modulate = Color(0.6345549, 1, 0.61431986, 1)
-fraction_texture_insufficient = ExtResource("68_anp34")
-fraction_texture_insufficient_modulate = Color(1, 0.62, 0.62, 1)
+fraction_texture_sufficient = ExtResource("67_jdjat")
+fraction_texture_sufficient_modulate = Color(0.23346883, 0.9999996, 0.25140026, 1)
+fraction_texture_insufficient = ExtResource("68_j420s")
+fraction_texture_insufficient_modulate = Color(1, 0.24000001, 0.24000001, 1)
 fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
 icon_rect = NodePath("HBoxContainer/TextureRect")
 label = NodePath("HBoxContainer/VBoxContainer/Label")
@@ -5079,10 +5081,10 @@ hide_when_empty = true
 auto_set_index_enabled = true
 fraction_is_flipped = true
 fraction_texture_rect = NodePath("HBoxContainer/Indicator")
-fraction_texture_sufficient = ExtResource("67_48p26")
-fraction_texture_sufficient_modulate = Color(0.6345549, 1, 0.61431986, 1)
-fraction_texture_insufficient = ExtResource("68_anp34")
-fraction_texture_insufficient_modulate = Color(1, 0.62, 0.62, 1)
+fraction_texture_sufficient = ExtResource("67_jdjat")
+fraction_texture_sufficient_modulate = Color(0.23346883, 0.9999996, 0.25140026, 1)
+fraction_texture_insufficient = ExtResource("68_j420s")
+fraction_texture_insufficient_modulate = Color(1, 0.24000001, 0.24000001, 1)
 fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
 icon_rect = NodePath("HBoxContainer/TextureRect")
 label = NodePath("HBoxContainer/VBoxContainer/Label")
@@ -5149,10 +5151,10 @@ hide_when_empty = true
 auto_set_index_enabled = true
 fraction_is_flipped = true
 fraction_texture_rect = NodePath("HBoxContainer/Indicator")
-fraction_texture_sufficient = ExtResource("67_48p26")
-fraction_texture_sufficient_modulate = Color(0.6345549, 1, 0.61431986, 1)
-fraction_texture_insufficient = ExtResource("68_anp34")
-fraction_texture_insufficient_modulate = Color(1, 0.62, 0.62, 1)
+fraction_texture_sufficient = ExtResource("67_jdjat")
+fraction_texture_sufficient_modulate = Color(0.23346883, 0.9999996, 0.25140026, 1)
+fraction_texture_insufficient = ExtResource("68_j420s")
+fraction_texture_insufficient_modulate = Color(1, 0.24000001, 0.24000001, 1)
 fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
 icon_rect = NodePath("HBoxContainer/TextureRect")
 label = NodePath("HBoxContainer/VBoxContainer/Label")
@@ -5219,10 +5221,10 @@ hide_when_empty = true
 auto_set_index_enabled = true
 fraction_is_flipped = true
 fraction_texture_rect = NodePath("HBoxContainer/Indicator")
-fraction_texture_sufficient = ExtResource("67_48p26")
-fraction_texture_sufficient_modulate = Color(0.6345549, 1, 0.61431986, 1)
-fraction_texture_insufficient = ExtResource("68_anp34")
-fraction_texture_insufficient_modulate = Color(1, 0.62, 0.62, 1)
+fraction_texture_sufficient = ExtResource("67_jdjat")
+fraction_texture_sufficient_modulate = Color(0.23346883, 0.9999996, 0.25140026, 1)
+fraction_texture_insufficient = ExtResource("68_j420s")
+fraction_texture_insufficient_modulate = Color(1, 0.24000001, 0.24000001, 1)
 fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
 icon_rect = NodePath("HBoxContainer/TextureRect")
 label = NodePath("HBoxContainer/VBoxContainer/Label")
@@ -5289,10 +5291,10 @@ hide_when_empty = true
 auto_set_index_enabled = true
 fraction_is_flipped = true
 fraction_texture_rect = NodePath("HBoxContainer/Indicator")
-fraction_texture_sufficient = ExtResource("67_48p26")
-fraction_texture_sufficient_modulate = Color(0.6345549, 1, 0.61431986, 1)
-fraction_texture_insufficient = ExtResource("68_anp34")
-fraction_texture_insufficient_modulate = Color(1, 0.62, 0.62, 1)
+fraction_texture_sufficient = ExtResource("67_jdjat")
+fraction_texture_sufficient_modulate = Color(0.23346883, 0.9999996, 0.25140026, 1)
+fraction_texture_insufficient = ExtResource("68_j420s")
+fraction_texture_insufficient_modulate = Color(1, 0.24000001, 0.24000001, 1)
 fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
 icon_rect = NodePath("HBoxContainer/TextureRect")
 label = NodePath("HBoxContainer/VBoxContainer/Label")
@@ -5359,10 +5361,10 @@ hide_when_empty = true
 auto_set_index_enabled = true
 fraction_is_flipped = true
 fraction_texture_rect = NodePath("HBoxContainer/Indicator")
-fraction_texture_sufficient = ExtResource("67_48p26")
-fraction_texture_sufficient_modulate = Color(0.6345549, 1, 0.61431986, 1)
-fraction_texture_insufficient = ExtResource("68_anp34")
-fraction_texture_insufficient_modulate = Color(1, 0.62, 0.62, 1)
+fraction_texture_sufficient = ExtResource("67_jdjat")
+fraction_texture_sufficient_modulate = Color(0.23346883, 0.9999996, 0.25140026, 1)
+fraction_texture_insufficient = ExtResource("68_j420s")
+fraction_texture_insufficient_modulate = Color(1, 0.24000001, 0.24000001, 1)
 fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
 icon_rect = NodePath("HBoxContainer/TextureRect")
 label = NodePath("HBoxContainer/VBoxContainer/Label")
@@ -5442,8 +5444,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="SailButton" type="Button" parent="BoatInterface/BottomOptions/HBoxContainer/Control" unique_id=1632329268]
-custom_minimum_size = Vector2(100, 50)
+custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
+theme_override_font_sizes/font_size = 33
 disabled = true
 text = "Set Sail"
 
@@ -5479,7 +5482,7 @@ size_flags_vertical = 3
 offset_transform_enabled = true
 offset_transform_rotation = -0.08726646
 offset_transform_pivot_ratio = Vector2(0.5, 1)
-texture = ExtResource("64_utr5e")
+texture = ExtResource("71_anp34")
 expand_mode = 1
 stretch_mode = 5
 
@@ -5520,7 +5523,7 @@ size_flags_vertical = 3
 offset_transform_enabled = true
 offset_transform_rotation = -0.08726646
 offset_transform_pivot_ratio = Vector2(0.5, 1)
-texture = ExtResource("64_utr5e")
+texture = ExtResource("71_anp34")
 expand_mode = 1
 stretch_mode = 5
 
@@ -5561,7 +5564,7 @@ size_flags_vertical = 3
 offset_transform_enabled = true
 offset_transform_rotation = -0.08726646
 offset_transform_pivot_ratio = Vector2(0.5, 1)
-texture = ExtResource("64_utr5e")
+texture = ExtResource("71_anp34")
 expand_mode = 1
 stretch_mode = 5
 
@@ -5602,7 +5605,7 @@ size_flags_vertical = 3
 offset_transform_enabled = true
 offset_transform_rotation = -0.08726646
 offset_transform_pivot_ratio = Vector2(0.5, 1)
-texture = ExtResource("64_utr5e")
+texture = ExtResource("71_anp34")
 expand_mode = 1
 stretch_mode = 5
 

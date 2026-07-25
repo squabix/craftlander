@@ -273,6 +273,7 @@ material_override = ExtResource("10_jcypt")
 mesh = SubResource("ArrayMesh_hbewo")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Trunk" unique_id=643273777]
+visible = false
 shape = SubResource("ConvexPolygonShape3D_efdsh")
 
 [node name="Spawner3D" type="Node3D" parent="Trunk" unique_id=737068488 node_paths=PackedStringArray("inventory")]
@@ -291,6 +292,7 @@ surface_material_override/1 = ExtResource("15_j4jsq")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="Trunk" unique_id=1009868672]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.7516966, 0)
+visible = false
 shape = SubResource("ConvexPolygonShape3D_pu6jt")
 
 [node name="Center" type="Node3D" parent="Trunk" unique_id=1356517366]
@@ -315,6 +317,7 @@ mesh = SubResource("ArrayMesh_rh3ft")
 surface_material_override/0 = ExtResource("10_jcypt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stump" unique_id=894602809]
+visible = false
 shape = SubResource("ConvexPolygonShape3D_jcypt")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=199521748]
@@ -330,10 +333,12 @@ size = 2
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 
 [node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=23111598]
+visible = false
 occluder = ExtResource("19_uemo8")
 
 [node name="MeshNavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=374949707]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25854647, 0)
+visible = false
 radius = 0.8540511
 height = 0.5611
 vertices = PackedVector3Array(-0.83865, 0, 0, -0.6039053, 0, -0.6039053, 0, 0, -0.83865, 0.6039053, 0, -0.6039053, 0.83865, 0, 0, 0.6039053, 0, 0.6039053, 0, 0, 0.83865, -0.6039053, 0, 0.6039053, -0.83865, 0, 0)
