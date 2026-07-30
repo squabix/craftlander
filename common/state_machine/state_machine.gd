@@ -4,38 +4,47 @@ extends State
 signal entered_state(state: State)
 signal exited_state(state: State)
 
-@export var initial_state: State
+@export var initial_state: State:
+	get:
+		if not is_instance_valid(initial_state):
+			for state in get_children_states():
+				initial_state = state # Default to first child that is a state
+				break
+		return initial_state
 
 var current: State
 var states: Dictionary[StringName, State]
 
 
 func _ready() -> void:
-	if initial_state == null:
-		default_initial_state()
-
 	if not get_parent() is StateMachine:
 		process_update = true
 		physics_process_update = true
 		do_handle_input = true
 
-	for child in get_children():
-		if child is State:
-			child.enter_callable = enter_state
-			child.root = root
-			states[child.name] = child
-	enter_state(initial_state.name)
+	for state in get_children_states():
+		state.enter_callable = enter_state
+		state.root = root
+		states[state.name] = state
+	
+	if is_instance_valid(current):
+		reload()
+	else:
+		enter_state(initial_state.name)
+
+
+func get_children_states() -> Array[State]:
+	var children_states: Array[State]
+	children_states.assign(get_children().filter(Util.is_object_class.bind(&"State")))
+	return children_states
+
+
+func reload() -> void:
+	enter_state(current.name)
 
 
 func _to_string() -> String:
 	return name
-
-
-func default_initial_state() -> void:
-	for child in get_children():
-		if child is State:
-			initial_state = child
-			return
 
 
 func update_root(to: Node) -> void:
