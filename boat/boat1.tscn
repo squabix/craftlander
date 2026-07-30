@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://8bgokntpuh33" path="res://boat/boat_docked_state.gd" id="6_c4lax"]
 [ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="6_wbjwq"]
 [ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="7_e44pp"]
-[ext_resource type="Script" uid="uid://bcwgfvcnnjoac" path="res://boat/boat_piloting_state.gd" id="10_0q3wp"]
 [ext_resource type="Script" uid="uid://favgu1tbe1tq" path="res://common3d/interactions/interactable3d.gd" id="13_e44pp"]
 [ext_resource type="Material" uid="uid://burxmpv8yk2pd" path="res://assets/shaders/boat_interaction.tres" id="14_oojic"]
 
@@ -135,10 +134,6 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 script = ExtResource("6_c4lax")
 driver_seat = NodePath("../../DriverSeat")
 interactable = NodePath("../../Interactable3D")
-metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
-
-[node name="Piloting" type="Node" parent="StateMachine" unique_id=1893954928]
-script = ExtResource("10_0q3wp")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1985380001]
