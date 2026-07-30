@@ -37,7 +37,7 @@ static func disassociate_mesh_instance(instance: MeshInstance3D) -> void:
 	aggregator.instance_registry.erase(instance)
 	aggregated_mesh_instances.erase(instance)
 
-	if aggregator.invert_instance_visibility:
+	if aggregator.invert_instance_visibility and is_instance_valid(instance):
 		instance.show()
 
 
@@ -125,6 +125,11 @@ func generate_multi_mesh(mesh: Mesh, instances: Array[MeshInstance3D], multi_ins
 
 		connect_visibility_inversion(instance)
 
+		# Connect tree_exited to detect when instance or any ancestor is freed/removed from tree
+		var exit_callable := _on_instance_tree_exited.bind(instance)
+		if not instance.tree_exited.is_connected(exit_callable):
+			instance.tree_exited.connect(exit_callable)
+
 	return multimesh
 
 
@@ -168,14 +173,16 @@ func disconnect_visibility_inversion(instance: MeshInstance3D) -> void:
 		return
 
 	var callable := _on_instance_visibility_changed.bind(instance)
-	if not instance.visibility_changed.is_connected(callable):
-		return
+	if instance.visibility_changed.is_connected(callable):
+		instance.visibility_changed.disconnect(callable)
 
-	instance.visibility_changed.disconnect(callable)
+	var exit_callable := _on_instance_tree_exited.bind(instance)
+	if instance.tree_exited.is_connected(exit_callable):
+		instance.tree_exited.disconnect(exit_callable)
 
 
 func reset() -> void:
-	# Disconnect all bound visibility signals to prevent leaks
+	# Disconnect all bound signals to prevent leaks
 	for instance in instance_registry.keys():
 		if not is_instance_valid(instance):
 			continue
@@ -233,6 +240,17 @@ func _on_instance_visibility_changed(instance: MeshInstance3D) -> void:
 
 	# If the source mesh is shown, then hide the multimesh element (and vice versa)
 	set_instance_visibility(instance, not instance.is_visible_in_tree())
+
+
+func _on_instance_tree_exited(instance: MeshInstance3D) -> void:
+	# Hide the MultiMesh instance when the MeshInstance3D (or any parent) exits the tree
+	if instance_registry.has(instance):
+		var data: MultiMeshData = instance_registry[instance]
+		data.hide()
+		instance_registry.erase(instance)
+
+	if aggregated_mesh_instances.has(instance):
+		aggregated_mesh_instances.erase(instance)
 
 
 class MultiMeshData:
