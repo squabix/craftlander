@@ -1,3 +1,4 @@
+@tool
 class_name NodeSaver
 extends Node
 
@@ -20,7 +21,7 @@ static var all: Dictionary[Node, NodeSaver] = { }
 @export var saver_id: StringName:
 	get:
 		if saver_id.is_empty():
-			return StringName(target.name if is_instance_valid(target) else name)
+			default_saver_id()
 		return saver_id
 @export var saved_properties: Dictionary[StringName, bool]
 @export var load_methods: Array[StringName]
@@ -36,7 +37,11 @@ static var all: Dictionary[Node, NodeSaver] = { }
 @export var offload_mode: OffloadMode = OffloadMode.FREE
 @export var offload_on_free := true
 
-var target: Node
+var target: Node:
+	get:
+		if not is_instance_valid(target) and not Engine.is_editor_hint():
+			return get_parent()
+		return target
 var dynamic_uuid := &""
 
 
@@ -94,6 +99,17 @@ func offload() -> void:
 
 func onload() -> void:
 	offloaded = false
+
+
+func default_saver_id() -> void:
+	var names := PackedStringArray()
+	var current: Node = get_parent()
+	while is_instance_valid(current):
+		names.insert(0, current.name)
+		if not current.scene_file_path.is_empty():
+			break
+		current = current.get_parent()
+	saver_id = "".join(names).to_snake_case()
 
 
 func get_dynamic_ancestor() -> NodeSaver:
@@ -294,7 +310,7 @@ func find_index() -> int:
 
 
 func _free_offload() -> bool:
-	if not offload_on_free or not offload_on_free_enabled:
+	if not offload_on_free or not offload_on_free_enabled or Engine.is_editor_hint():
 		return false
 
 	if not is_instance_valid(scene_root):
