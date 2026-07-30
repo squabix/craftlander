@@ -1,13 +1,16 @@
 extends Node3D
 class_name DestructableResource
 
+@export_group("Health")
 @export var min_hp: int = 3
 @export var max_hp: int = 5
 
+@export_group("Components")
 @export var hurtbox: Hurtbox3D
 @export var inventory: Inventory
 @export var health: Health
-@export var wait_for_island_population := true
+@export var state_machine: StateMachine
+
 
 var damage_source_inventories: Dictionary[Node, Inventory] = {}
 
@@ -34,11 +37,4 @@ func _ready() -> void:
 	if not Util.are_instances_valid([inventory, hurtbox]):
 		return
 	
-	if wait_for_island_population:
-		EventBus.subscribe(
-			&"island_populated",
-			connect_hurtbox_damage,
-			tree_exiting
-		)
-	else:
-		connect_hurtbox_damage()
+	connect_hurtbox_damage()
