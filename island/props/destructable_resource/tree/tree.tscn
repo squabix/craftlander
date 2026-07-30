@@ -332,9 +332,8 @@ anim_name = "hurt"
 signal_name = &"was_hurt"
 metadata/_custom_type_script = "uid://dapeyi3eetek1"
 
-[node name="StateMachine" type="Node" parent="." unique_id=70877034 node_paths=PackedStringArray("initial_state", "root")]
+[node name="StateMachine" type="Node" parent="." unique_id=70877034 node_paths=PackedStringArray("root")]
 script = ExtResource("5_s0q6f")
-initial_state = NodePath("Standing")
 root = NodePath("..")
 metadata/_custom_type_script = "uid://bqonxtntgndfr"
 
@@ -357,6 +356,15 @@ script = ExtResource("8_agfax")
 trunk = NodePath("../../Trunk")
 chop_particles = NodePath("../../ChopParticles")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="NodeSaver" type="Node" parent="StateMachine" unique_id=1160380434]
+script = ExtResource("23_0tytk")
+saver_id = &"tree_state_machine"
+saved_properties = Dictionary[StringName, bool]({
+&"current": true
+})
+load_methods = Array[StringName]([&"reload"])
+metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 
 [node name="Trunk" type="StaticBody3D" parent="." unique_id=1771553810]
 collision_layer = 5

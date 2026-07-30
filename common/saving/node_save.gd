@@ -55,9 +55,11 @@ func make_dynamic(uuid: StringName, target: Node) -> void:
 		parent_path = NodeSaver.get_root_path(parent)
 
 
-func make_static_scene(root_relative_path: NodePath) -> void:
+func make_static_scene(root_relative_path: NodePath, save_parent_type: ParentType = ParentType.RELATIVE, save_parent_uuid: StringName = &"") -> void:
 	mode = Mode.STATIC_SCENE
 	relative_path = root_relative_path
+	parent_type = save_parent_type
+	parent_uuid = save_parent_uuid
 
 
 func make_global() -> void:

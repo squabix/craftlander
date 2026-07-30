@@ -96,6 +96,20 @@ func onload() -> void:
 	offloaded = false
 
 
+func get_dynamic_ancestor() -> NodeSaver:
+	if not is_instance_valid(target):
+		return null
+		
+	var check_node := target.get_parent()
+	while is_instance_valid(check_node):
+		var saver: NodeSaver = NodeSaver.all.get(check_node, null)
+		if is_instance_valid(saver) and saver.save_mode == NodeSave.Mode.DYNAMIC:
+			return saver
+		check_node = check_node.get_parent()
+	
+	return null
+
+
 func get_property_data() -> Dictionary[StringName, Variant]:
 	if not is_instance_valid(target):
 		printerr("%s cannot get property data from invalid target: %s" % target)
@@ -158,7 +172,13 @@ func save_properties() -> void:
 		NodeSave.Mode.DYNAMIC:
 			node_save.make_dynamic(dynamic_uuid, target)
 		NodeSave.Mode.STATIC_SCENE:
-			node_save.make_static_scene(get_root_path(self))
+			var ancestor := get_dynamic_ancestor()
+			if is_instance_valid(ancestor):
+				# Inside dynamic scene; save relative to dynamic parent
+				node_save.make_static_scene(ancestor.get_path_to(self), NodeSave.ParentType.DYNAMIC, ancestor.dynamic_uuid)
+			else:
+				# Not inside dynaimc scene; save relative to scene root
+				node_save.make_static_scene(get_root_path(self), NodeSave.ParentType.RELATIVE)
 		NodeSave.Mode.GLOBAL:
 			node_save.make_global()
 
@@ -223,24 +243,46 @@ func find_index() -> int:
 		return -1
 	
 	var current_scene := get_scene_context()
+	var dynamic_ancestor := get_dynamic_ancestor()
 
 	for i in range(save.node_properties.size()):
 		var node_save := save.node_properties[i]
 		if node_save.mode != save_mode or node_save.mode == NodeSave.Mode.NONE:
 			continue
-
+		
 		if (
+				# Dynamic
 				(
 						save_mode == NodeSave.Mode.DYNAMIC
 						and node_save.dynamic_uuid == dynamic_uuid
 						and not dynamic_uuid.is_empty()
 				)
+				
+				# Static scene
 				or (
 						save_mode == NodeSave.Mode.STATIC_SCENE
 						and node_save.saver_id == saver_id
 						and node_save.scene_context == current_scene
-						and node_save.relative_path == get_root_path(self)
+						and (
+							
+							# Dynamic ancestor
+							(
+								is_instance_valid(dynamic_ancestor)
+								and node_save.parent_type == NodeSave.ParentType.DYNAMIC
+								and node_save.relative_path == dynamic_ancestor.get_path_to(self)
+								and node_save.parent_uuid == dynamic_ancestor.dynamic_uuid
+							)
+							
+							# Non-dynamic ancestor
+							or (
+								not is_instance_valid(dynamic_ancestor)
+								and node_save.parent_type == NodeSave.ParentType.RELATIVE
+								and node_save.relative_path == get_root_path(self)
+							)
+						)
 				)
+				
+				# Global
 				or (
 						save_mode == NodeSave.Mode.GLOBAL
 						and node_save.saver_id == saver_id
