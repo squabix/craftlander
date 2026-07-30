@@ -123,9 +123,11 @@ func play_continue() -> void:
 
 
 func play_end() -> void:
-	play_state(end_use_state)
 	if end_anim.is_empty():
 		disable_item_blend()
+		return
+	enable_item_blend()
+	play_state(end_use_state)
 
 
 func play_state(state: StringName) -> void:
@@ -168,7 +170,11 @@ func update_tree_animations() -> void:
 			printerr("State machine node '%s' is invalid in %s" % [state_node_name, self])
 			continue
 
-		anim_node.animation = state_anim_map[state_node_name]
+		var anim_name: StringName = state_anim_map[state_node_name]
+		
+		# Only assign if animation is valid and exists
+		if not anim_name.is_empty() and has_animation(anim_name):
+			anim_node.animation = anim_name
 
 
 func _on_state_finished(state_name: StringName) -> void:
