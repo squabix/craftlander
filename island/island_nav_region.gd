@@ -1,6 +1,8 @@
 class_name IslandNavRegion
 extends NavigationRegion3D
 
+signal baked_props
+
 static var current: IslandNavRegion
 
 @export var island_generator: HeightMapTerrainGenerator
@@ -30,7 +32,6 @@ static func transform_to_region_space(vertices: PackedFloat32Array, relative_tra
 
 func _ready() -> void:
 	current = self
-	EventBus.subscribe(&"island_populated", reset)
 
 
 func reset() -> void:
@@ -130,6 +131,7 @@ func remove_prop(prop: Node) -> void:
 func _complete_baking() -> void:
 	navigation_mesh = navigation_mesh
 	is_region_baking = false
+	baked_props.emit()
 
 	# Rebake if queued
 	if is_bake_queued:

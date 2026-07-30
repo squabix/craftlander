@@ -39,9 +39,15 @@ static func trigger(event: StringName, etc: Variant = null) -> bool:
 	# Event is not subscribed to
 	if not event in subscribed_events:
 		return false
-
-	for subscriber in subscribed_events[event]:
+	
+	var subscribers: Array[Callable]
+	subscribers.assign(subscribed_events[event])
+	for subscriber in subscribers:
 		if not subscriber.is_valid():
+			continue
+		
+		var object := subscriber.get_object()
+		if object != null and not is_instance_valid(object):
 			continue
 
 		# Call with or without etc

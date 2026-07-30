@@ -7,9 +7,11 @@ const FLOOR_MARGIN: float = 0.05
 
 @export var item: Item
 @export var auto_generate_collision := true
-@export var collision_scale: float = 1.0
 @export var generate_floor_raycast := true
-@export var unformatted_tooltip := "Pick up %s?"
+
+@export_group("Tooltip")
+@export var tooltip_format := "Pick up %s?"
+@export var invalid_tooltip := "Pick up?"
 
 @export_group("Visibility Fading")
 @export var visibility_fading_enabled := false
@@ -30,22 +32,29 @@ func _ready() -> void:
 	
 	if visibility_fading_enabled:
 		var geometry_instances: Array[GeometryInstance3D]
-		geometry_instances.assign(Util.find_children_of_class(visuals, &"GeometryInstance3D"))
+		geometry_instances.assign(Util.find_children_of_class(visuals, &"GeometryInstance3D").filter(is_instance_valid))
 		for instance in geometry_instances:
 			instance.visibility_range_fade_mode = GeometryInstance3D.VISIBILITY_RANGE_FADE_SELF
 			instance.visibility_range_end = visibility_fading_distance
 			instance.visibility_range_end_margin = visibility_fading_margin
-
-	tooltip_enabled = unformatted_tooltip % item.name
-
+	
 	if generate_floor_raycast:
 		Util.snap_to_floor(self, FLOOR_MARGIN)
+	
+	update_tooltip()
 
 	if auto_generate_collision:
 		generate_all_collision(self)
 
 
+func update_tooltip() -> void:
+	tooltip_enabled = tooltip_format % item.name if is_instance_valid(item) else invalid_tooltip
+
+
 func update_visuals() -> void:
+	if item == null:
+		printerr("%s cannot update visuals with null item" % self)
+		return
 	visuals = item.duplicate_visuals()
 	add_child(visuals)
 	visuals.global_position = self.global_position
@@ -53,6 +62,10 @@ func update_visuals() -> void:
 
 
 func generate_all_collision(target_parent: Node3D = self) -> Array[CollisionShape3D]:
+	if not is_instance_valid(target_parent):
+		printerr("%s cannot add generated collision to invalid parent (%s)" % [self, target_parent])
+		return []
+	
 	var collision_shapes: Array[CollisionShape3D] = []
 	var mesh_instances := Util.find_children_of_class(visuals, &"MeshInstance3D")
 
@@ -63,11 +76,14 @@ func generate_all_collision(target_parent: Node3D = self) -> Array[CollisionShap
 
 
 func add_collision_shape(mesh_instance: MeshInstance3D, parent: Node) -> CollisionShape3D:
-	if mesh_instance == null:
-		return null
-	if parent == null:
+	if not is_instance_valid(mesh_instance):
+		printerr("%s cannot create collision shape from invalid mesh instance (%s)" % [self, mesh_instance])
 		return null
 	if mesh_instance.mesh == null:
+		printerr("%s cannot create collision shape from null mesh of %s" % [self, mesh_instance])
+		return null
+	if not is_instance_valid(parent):
+		printerr("%s cannot add collision shape to invalid parent (%s)" % [self, parent])
 		return null
 
 	var collision_shape := CollisionShape3D.new()
@@ -78,8 +94,18 @@ func add_collision_shape(mesh_instance: MeshInstance3D, parent: Node) -> Collisi
 	return collision_shape
 
 
-func interact(_source: Node, _etc: Dictionary = { }) -> void:
-	var inventory: Inventory = Util.find_child_of_class(_source, &"Inventory")
-	inventory.add_item(item, 1)
-	Util.safe_free(self)
+func interact(source: Node, _etc: Dictionary = { }) -> void:
+	if not is_instance_valid(source):
+		printerr("%s cannot be picked up by invalid interaction source (%s)" % [self, source])
+		return
+	
+	var inventory: Inventory = Util.find_child_of_class(source, &"Inventory", true)
+	if not is_instance_valid(inventory):
+		printerr("%s cannot be added to invalid inventory (%s) from %s" % [self, inventory, source])
+		return
+	
+	if inventory.add_item(item, 1) == 1:
+		return # Inventory was too full to pick up
+	
+	queue_free()
 	picked_up.emit()

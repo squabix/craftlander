@@ -2,6 +2,8 @@
 class_name PropPopulator
 extends Node3D
 
+signal populated
+
 const PLACEMENT_STEP := Vector2i(2, 2)
 const JITTER_AMOUNT := Vector2i(1, 1)
 
@@ -16,10 +18,6 @@ var clear_tool_button := clear
 
 var props: Dictionary[Vector3, Node3D] = { }
 var prop_resources: Dictionary[Vector3, IslandProp] = { }
-
-
-func _ready() -> void:
-	EventBus.subscribe(&"island_terrain_generated", populate if populate_on_ready else EventBus.trigger.bind(&"island_populated"))
 
 
 func clear() -> void:
@@ -52,9 +50,17 @@ func add_prop(prop: IslandProp, point: Vector2i, spawn_position: Vector3) -> Nod
 	add_child.call_deferred(instance)
 
 	# Place/transform instance
-	island_generator.place_node(instance, point.x, point.y, prop.normal_conformity)
-	instance.rotation_degrees.y = randf() * 360.0
-	instance.scale = Vector3.ONE * randf_range(prop.min_scale, prop.max_scale)
+	island_generator.place_node(
+		instance,
+		point.x,
+		point.y,
+		prop.normal_conformity, 
+		func():
+			# Finish transforming instance after island generator placement
+			instance.rotation_degrees.y = randf() * 360.0
+			instance.scale = Vector3.ONE * randf_range(prop.min_scale, prop.max_scale)
+	)
+	
 	
 	# If running inside the editor, set the owner to the current scene root
 	if Engine.is_editor_hint():
@@ -122,6 +128,7 @@ func populate() -> void:
 
 	await get_tree().process_frame
 	EventBus.trigger(&"island_populated")
+	populated.emit()
 
 
 func jitter_point(point: Vector2i) -> Vector2i:

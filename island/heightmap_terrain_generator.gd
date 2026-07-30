@@ -2,6 +2,8 @@
 class_name HeightMapTerrainGenerator
 extends Node3D
 
+signal generated
+
 @export_tool_button("Generate", "Noise") var generate_action: Callable = generate
 
 @export var mesh_instance: MeshInstance3D
@@ -13,7 +15,11 @@ extends Node3D
 @export_custom(PROPERTY_HINT_NONE, "suffix:px") var map_resolution := Vector2i(1, 1)
 
 var mesh: PlaneMesh
-var heightmap_sampler: Callable
+var heightmap_sampler: Callable:
+	get:
+		if not heightmap_sampler.is_valid():
+			heightmap_sampler = get_heightmap_sampler((shader_get(&"heightmap") as ImageTexture).get_image())
+		return heightmap_sampler
 
 
 func _ready() -> void:
@@ -138,9 +144,11 @@ func align_node_to_normal(node: Node3D, px: int, py: int, conformity := 1.0) -> 
 	node.global_transform.basis = target_basis.orthonormalized().scaled(current_basis.get_scale())
 
 
-func place_node(node: Node3D, px: int, py: int, normal_conformity := 1.0) -> void:
+func place_node(node: Node3D, px: int, py: int, normal_conformity := 1.0, callback := Callable()) -> void:
 	node.global_position = get_pixel_position(px, py)
 	align_node_to_normal.call_deferred(node, px, py, normal_conformity)
+	if callback.is_valid():
+		callback.call()
 
 
 func resize_to_resolution(image: Image) -> Image:
@@ -150,10 +158,6 @@ func resize_to_resolution(image: Image) -> Image:
 
 func get_heightmap_sampler(image: Image) -> Callable:
 	return func(x: int, y: int) -> float: return image.get_pixel(x, y).r
-
-
-func default_heightmap_sampler() -> void:
-	heightmap_sampler = get_heightmap_sampler((shader_get(&"heightmap") as ImageTexture).get_image())
 
 
 func get_pixel_position(x: int, y: int) -> Vector3:
@@ -176,3 +180,4 @@ func _finalize_generation(output_image: Image) -> void:
 	heightmap_sampler = get_heightmap_sampler(output_image)
 	var image_texture := update_shader_texture(output_image)
 	update_collision_shape(image_texture)
+	generated.emit()

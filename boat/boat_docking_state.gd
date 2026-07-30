@@ -2,10 +2,13 @@ extends State
 
 const SUCCESS_DISTANCE := 0.2
 
+@export var interactable: Interactable3D
+
 var dock_speed: float
 
 
 func enter() -> void:
+	interactable.disable()
 	root.driver_seat.is_driver = false
 	dock_speed = root.move_mode.max_speed.x
 

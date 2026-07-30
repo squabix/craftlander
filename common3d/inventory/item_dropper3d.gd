@@ -5,6 +5,9 @@ enum DeathDropMode { EVERYTHING, RANDOM, NEXT, NONE }
 
 static var rigid_item_pickup_scene := load("res://defaults/default_rigid_item_pickup.tscn")
 static var all_dropped_pickups: Array[Node]
+static var default_pickup_parent: Node:
+	get:
+		return default_pickup_parent if is_instance_valid(default_pickup_parent) else (Engine.get_main_loop() as SceneTree).root
 
 @export var inventory: Inventory
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var position_offset: Vector3
@@ -19,7 +22,9 @@ static var all_dropped_pickups: Array[Node]
 @export var death_drop_mode: DeathDropMode
 @export var death_drop_quantity := 1
 
-@onready var parent := get_tree().root
+@onready var pickup_parent: Node:
+	get:
+		return pickup_parent if is_instance_valid(pickup_parent) else default_pickup_parent
 
 
 static func _transform_pickup(pickup: RigidItemPickup3D, dropper: InventoryDropper3D) -> void:
@@ -57,7 +62,7 @@ func add_pickup(item: Item) -> RigidItemPickup3D:
 		printerr("%s cannot add null pickup" % self)
 		return
 
-	parent.add_child(pickup)
+	pickup_parent.add_child(pickup)
 	InventoryDropper3D.all_dropped_pickups.append(pickup)
 	InventoryDropper3D._transform_pickup(pickup, self)
 	return pickup

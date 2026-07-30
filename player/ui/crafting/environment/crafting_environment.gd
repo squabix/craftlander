@@ -393,6 +393,8 @@ func craft() -> void:
 	)
 	
 	update_selection_visuals()
+	
+	grid_changed.emit()
 
 func _input(event: InputEvent) -> void:
 	if not is_crafting or is_tweening_craft_result:

@@ -1,14 +1,14 @@
 extends Control
 
-@onready var respawn_button: Button = $OptionsContainer/RespawnButton
-@onready var quit_button: Button = $OptionsContainer/QuitButton
+@export var respawn_button: Button
+@export var quit_button: Button
+@export var health: Health
 
 func _ready() -> void:
 	hide()
-	%Health.died.connect(show)
-	%Health.revived.connect(hide)
+	health.died.connect(show)
+	health.revived.connect(hide)
 	
-	var trigger_quit := EventBus.trigger.bind(&"quit_to_title")
-	if quit_button.pressed.is_connected(trigger_quit):
+	if quit_button.pressed.is_connected(Main.root.quit_to_title):
 		return
-	quit_button.pressed.connect(EventBus.trigger.bind(&"quit_to_title"))
+	quit_button.pressed.connect(Main.root.quit_to_title)

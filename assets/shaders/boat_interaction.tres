@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://burxmpv8yk2pd"]
+
+[ext_resource type="Shader" uid="uid://rnggagu1i5kt" path="res://assets/shaders/interactable_ring.gdshader" id="1_0tjdo"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_0tjdo")
+shader_parameter/base_color = Color(1, 0.87, 0.22, 0.9)
+shader_parameter/accent_color = Color(0.9999997, 0.9014224, 0.4542904, 0.9019608)
+shader_parameter/emission_strength = 5.5
+shader_parameter/stripe_count = 12.28
+shader_parameter/stripe_speed = 0.01
+shader_parameter/stripe_softness = 0.58
+shader_parameter/ring_radius = 0.7
+shader_parameter/ring_width = 0.28
+shader_parameter/edge_softness = 0.06
+shader_parameter/pulse_speed = 1.5
+shader_parameter/pulse_amount = 0.18
+shader_parameter/vertical_fade = 2.865

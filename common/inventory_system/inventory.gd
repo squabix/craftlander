@@ -29,8 +29,37 @@ func get_item(index: int) -> Item:
 	return item_instances[index].item if is_occupied(index) else null
 
 
+func is_inside(other: Inventory) -> bool:
+	if not is_instance_valid(other):
+		return false
+
+	var self_quantities := get_item_quantities()
+	for item in self_quantities:
+		var required_quantity := self_quantities[item]
+		if other.get_item_quantity(item) < required_quantity:
+			return false
+
+	return true
+
+
+func subtract_inventory(inventory: Inventory) -> void:
+	if not is_instance_valid(inventory) or constant:
+		return
+
+	var required_quantities := inventory.get_item_quantities()
+	for item in required_quantities:
+		var quantity := required_quantities[item]
+		remove_item(item, quantity)
+
+
 func get_instance(index: int) -> ItemInstance:
 	return item_instances[index] if is_occupied(index) else null
+
+
+func get_total_instance(item: Item) -> ItemInstance:
+	if item == null:
+		return null
+	return item.instantiate(get_item_quantity(item))
 
 
 func has_index(index: int) -> bool:
@@ -92,6 +121,9 @@ func get_item_quantity(item: Item) -> int:
 		return 0
 
 	var quantities := get_item_quantities()
+	for i in quantities:
+		if item.equals(i):
+			return quantities[i]
 	return quantities.get(item, 0)
 
 

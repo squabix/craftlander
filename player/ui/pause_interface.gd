@@ -1,3 +1,4 @@
+class_name PauseInterface
 extends Control
 
 signal updated_pause(to: bool)
@@ -12,6 +13,7 @@ const ACTION_PAUSE := &"ui_cancel"
 
 @export_group("Options Buttons")
 @export var resume_button: Button
+@export var save_button: Button
 @export var settings_button: Button
 @export var quit_button: Button
 
@@ -25,8 +27,9 @@ func _ready() -> void:
 	
 	# Connect options buttons
 	resume_button.pressed.connect(toggle_pause)
+	save_button.pressed.connect(Main.root.save_current_game)
 	settings_button.pressed.connect(open_settings)
-	quit_button.pressed.connect(EventBus.trigger.bind(&"quit_to_title"))
+	quit_button.pressed.connect(Main.root.quit_to_title)
 
 func open_settings() -> void:
 	crafting_menu.hide()

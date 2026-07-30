@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="5_ncujj"]
 [ext_resource type="Script" uid="uid://bp5ab438ufrus" path="res://common3d/culling_controller3d.gd" id="6_qvpsa"]
 [ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="7_4u05t"]
+[ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="8_4u05t"]
 
 [sub_resource type="Resource" id="Resource_nmw4j"]
 script = ExtResource("5_ncujj")
@@ -29,9 +30,19 @@ metadata/_custom_type_script = "uid://oexynjvr31bs"
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("2_d36xw")
+auto_generate_collision = false
 visibility_fading_enabled = true
 visibility_fading_distance = 35.0
 metadata/_custom_type_script = "uid://c00hsywtiwt6w"
+
+[node name="NodeSaver" type="Node" parent="ItemPickup3D" unique_id=1667891472]
+script = ExtResource("8_4u05t")
+save_mode = 2
+saver_id = &"pickup_interactable"
+saved_properties = Dictionary[StringName, bool]({
+&"item": true
+})
+metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 
 [node name="Hurtbox3D" type="Area3D" parent="." unique_id=953956432 node_paths=PackedStringArray("rigid_body")]
 collision_layer = 8
@@ -65,3 +76,14 @@ NodePath(".."): &"evaluate_culling"
 }
 initial_time_left = 3.0
 metadata/_custom_type_script = "uid://73ya7jxulyl4"
+
+[node name="NodeSaver" type="Node" parent="." unique_id=671650205]
+script = ExtResource("8_4u05t")
+save_mode = 2
+saver_id = &"rigid_pickup"
+saved_properties = Dictionary[StringName, bool]({
+&"global_transform": true,
+&"saved_item": true
+})
+load_methods = Array[StringName]([&"_ready"])
+metadata/_custom_type_script = "uid://b7jfh6p1qykgr"

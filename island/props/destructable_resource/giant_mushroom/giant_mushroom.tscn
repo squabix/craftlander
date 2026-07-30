@@ -22,6 +22,7 @@
 [ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="17_wdv32"]
 [ext_resource type="ArrayOccluder3D" uid="uid://t5b0oo38rw5o" path="res://island/props/destructable_resource/giant_mushroom/giant_mushroom.occ" id="19_uemo8"]
 [ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="20_efdsh"]
+[ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="23_j4jsq"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_r4p3j"]
 height = 10.25
@@ -214,9 +215,8 @@ anim_name = "hurt"
 signal_name = &"was_hurt"
 metadata/_custom_type_script = "uid://dapeyi3eetek1"
 
-[node name="StateMachine" type="Node" parent="." unique_id=70877034 node_paths=PackedStringArray("initial_state", "root")]
+[node name="StateMachine" type="Node" parent="." unique_id=70877034 node_paths=PackedStringArray("root")]
 script = ExtResource("5_hla6y")
-initial_state = NodePath("Standing")
 root = NodePath("..")
 metadata/_custom_type_script = "uid://bqonxtntgndfr"
 
@@ -240,7 +240,16 @@ trunk = NodePath("../../Trunk")
 chop_particles = NodePath("../../ChopParticles")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Trunk" type="AnimatableBody3D" parent="." unique_id=202807730]
+[node name="NodeSaver" type="Node" parent="StateMachine" unique_id=318580598]
+script = ExtResource("23_j4jsq")
+saver_id = &"giant_mushroom_state_machine"
+saved_properties = Dictionary[StringName, bool]({
+&"current": true
+})
+load_methods = Array[StringName]([&"reload"])
+metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
+
+[node name="Trunk" type="StaticBody3D" parent="." unique_id=1354433689]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.24145353, 0)
 collision_layer = 5
 
@@ -272,6 +281,7 @@ material_override = ExtResource("10_jcypt")
 mesh = SubResource("ArrayMesh_hbewo")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Trunk" unique_id=643273777]
+visible = false
 shape = SubResource("ConvexPolygonShape3D_efdsh")
 
 [node name="Spawner3D" type="Node3D" parent="Trunk" unique_id=737068488 node_paths=PackedStringArray("inventory")]
@@ -290,6 +300,7 @@ surface_material_override/1 = ExtResource("15_j4jsq")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="Trunk" unique_id=1009868672]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.7516966, 0)
+visible = false
 shape = SubResource("ConvexPolygonShape3D_pu6jt")
 
 [node name="Center" type="Node3D" parent="Trunk" unique_id=1356517366]
@@ -306,7 +317,7 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_hah18")
 draw_pass_1 = SubResource("SphereMesh_kblrq")
 
-[node name="Stump" type="AnimatableBody3D" parent="." unique_id=235156396]
+[node name="Stump" type="StaticBody3D" parent="." unique_id=1251095654]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.24145353, 0)
 
 [node name="StumpMesh" type="MeshInstance3D" parent="Stump" unique_id=1593970293]
@@ -314,6 +325,7 @@ mesh = SubResource("ArrayMesh_rh3ft")
 surface_material_override/0 = ExtResource("10_jcypt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stump" unique_id=894602809]
+visible = false
 shape = SubResource("ConvexPolygonShape3D_jcypt")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=199521748]
@@ -329,13 +341,24 @@ size = 2
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 
 [node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=23111598]
+visible = false
 occluder = ExtResource("19_uemo8")
 
 [node name="MeshNavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=374949707]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25854647, 0)
+visible = false
 radius = 0.8540511
 height = 0.5611
 vertices = PackedVector3Array(-0.83865, 0, 0, -0.6039053, 0, -0.6039053, 0, 0, -0.83865, 0.6039053, 0, -0.6039053, 0.83865, 0, 0, 0.6039053, 0, 0.6039053, 0, 0, 0.83865, -0.6039053, 0, 0.6039053, -0.83865, 0, 0)
 script = ExtResource("20_efdsh")
 generate_on_ready = true
 metadata/_custom_type_script = "uid://bf4816o00o0s5"
+
+[node name="NodeSaver" type="Node" parent="." unique_id=2086510735]
+script = ExtResource("23_j4jsq")
+save_mode = 2
+saver_id = &"giant_mushroom"
+saved_properties = Dictionary[StringName, bool]({
+&"global_transform": true
+})
+metadata/_custom_type_script = "uid://b7jfh6p1qykgr"

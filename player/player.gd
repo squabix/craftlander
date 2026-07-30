@@ -6,10 +6,16 @@ const CROUCHED_HEAD_HEIGHT := 0.7
 const SWIMMING_HEAD_HEIGHT := 0.85
 const HEAD_SPEED := 0.1
 
-@export var head: Node3D
+@export_group("Components")
 @export var movement_state_machine: StateMachine
+
+@export_subgroup("3D")
+@export var head: Node3D
 @export var interactors: Array[Interactor3D]
+
+@export_subgroup("Control")
 @export var respawn_button: Button
+@export var boat_interface: BoatInterface
 @export var docking_hidden_interfaces: Array[Control] = []
 
 @export_group("Inventory")
@@ -18,7 +24,9 @@ const HEAD_SPEED := 0.1
 
 @export_group("Stats")
 @export var health: Health
+@export var health_saver: NodeSaver
 @export var hunger: Hunger
+@export var hunger_saver: NodeSaver
 @export var stamina: Stamina
 
 @export_group("External Dependencies")
@@ -36,6 +44,18 @@ func _ready() -> void:
 	)
 	respawn_button.pressed.connect(respawn)
 	health.died.connect(die)
+	health_saver.finished_load.connect(_on_health_loaded, CONNECT_ONE_SHOT)
+	hunger_saver.finished_load.connect(_on_hunger_loaded, CONNECT_ONE_SHOT)
+
+
+func _on_health_loaded() -> void:
+	if health.hp <= 0.0:
+		health.hp = health.max_hp
+
+
+func _on_hunger_loaded() -> void:
+	if hunger.value <= 0.0:
+		hunger.value = hunger.initial_value
 
 
 func _process(_delta: float) -> void:

@@ -240,9 +240,8 @@ script = SubResource("GDScript_exvl0")
 initial_entity = NodePath("..")
 metadata/_custom_type_script = "uid://ccwod33h53a5s"
 
-[node name="Default" type="Node" parent="Controller3D" unique_id=1574117420 node_paths=PackedStringArray("initial_state", "root")]
+[node name="Default" type="Node" parent="Controller3D" unique_id=1574117420 node_paths=PackedStringArray("root")]
 script = ExtResource("5_4vry0")
-initial_state = NodePath("Wandering")
 root = NodePath("../..")
 process_update = true
 physics_process_update = true
