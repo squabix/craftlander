@@ -3,7 +3,7 @@ extends Node
 
 const MAX_SLOT := 5
 const ISLAND_SCENE_PATH_FORMAT := "res://levels/island_%s.tscn"
-const SAVE_PATH_FORMAT := "user://save_slot_%s.tres"
+const SAVE_PATH_FORMAT := "user://save_slot_%s.res"
 
 static var root: Main:
 	get:
