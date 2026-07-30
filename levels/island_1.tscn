@@ -262,8 +262,9 @@ island_generator = NodePath("../IslandGenerator")
 prop_populator = NodePath("../PropGenerator")
 terrain = NodePath("../IslandGenerator")
 
-[node name="MeshInstanceAggregator3D" type="Node3D" parent="." unique_id=1137447549]
+[node name="MeshInstanceAggregator3D" type="Node3D" parent="." unique_id=1137447549 node_paths=PackedStringArray("mesh_source")]
 script = ExtResource("20_n8idc")
+mesh_source = NodePath("../PropGenerator")
 metadata/_custom_type_script = "uid://dpyn65ul3fu6v"
 
 [node name="HeightMapOccluderInstance" type="OccluderInstance3D" parent="." unique_id=1185798945 node_paths=PackedStringArray("terrain_generator")]
