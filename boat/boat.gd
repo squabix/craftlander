@@ -53,7 +53,7 @@ func open_boat_interface(interact_source: Node) -> void:
 func get_current_state() -> State:
 	if state_machine == null:
 		return null
-	return state_machine.current
+	return state_machine.get_state(state_machine.current)
 
 
 func make_current() -> Boat:
