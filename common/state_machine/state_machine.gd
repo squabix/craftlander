@@ -4,13 +4,13 @@ extends State
 signal entered_state(state: State)
 signal exited_state(state: State)
 
-@export var initial_state_name: StringName:
+@export var initial_state: State:
 	get:
-		if initial_state_name.is_empty():
-			var children = get_children_states()
+		if not is_instance_valid(initial_state):
+			var children = get_child_states()
 			if not children.is_empty():
-				initial_state_name = children[0].name # Default to first child state name
-		return initial_state_name
+				initial_state = children[0] # Default to first child state name
+		return initial_state
 
 var current: StringName = &""
 var states: Dictionary[StringName, State]
@@ -22,7 +22,7 @@ func _ready() -> void:
 		physics_process_update = true
 		do_handle_input = true
 
-	for state in get_children_states():
+	for state in get_child_states():
 		state.enter_callable = enter_state
 		state.root = root
 		states[state.name] = state
@@ -30,10 +30,10 @@ func _ready() -> void:
 	if is_valid():
 		reload()
 	else:
-		enter_state(initial_state_name)
+		enter_state(initial_state)
 
 
-func get_children_states() -> Array[State]:
+func get_child_states() -> Array[State]:
 	var children_states: Array[State]
 	children_states.assign(get_children().filter(Util.is_object_class.bind(&"State")))
 	return children_states
@@ -74,7 +74,7 @@ func update_root(to: Node) -> void:
 
 
 func enter() -> void:
-	enter_state(initial_state_name)
+	enter_state(initial_state)
 
 
 func exit() -> void:
@@ -92,8 +92,6 @@ func is_currently(state_name: StringName) -> bool:
 
 
 func update(delta: float) -> void:
-	if is_currently(&"Chopped"):
-		Util.iprint(0.5, current)
 	if is_valid():
 		states[current].update(delta)
 
@@ -124,12 +122,12 @@ func get_state(state_name: StringName) -> State:
 	return states.get(state_name)
 
 
-func enter_state(state_name: StringName, force_ancestors := false) -> bool:
-	var state := states.get(state_name) as State
+func enter_state(state_variant: Variant, force_ancestors := false) -> bool:
+	var state: State = state_variant if state_variant is State else get_state(state_variant) if state_variant is StringName else null
 	if not is_instance_valid(state):
-		printerr("Cannot enter invalid state: %s" % state_name)
+		printerr("Cannot enter invalid state: %s" % state)
 		return false
-	if state_name == current:
+	if state.name == current:
 		return true
 
 	if is_valid():
@@ -141,7 +139,7 @@ func enter_state(state_name: StringName, force_ancestors := false) -> bool:
 	if force_ancestors and get_parent() is StateMachine:
 		get_parent().enter_state(name, true)
 
-	current = state_name
+	current = state.name
 
 	state.is_active = true
 	state.enter()
