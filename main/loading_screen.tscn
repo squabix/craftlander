@@ -157,7 +157,7 @@ value = 16.38
 show_percentage = false
 script = ExtResource("2_i0ak1")
 mode = 1
-lerp_weight = 0.006
+lerp_weight = 0.008
 metadata/_custom_type_script = "uid://c3xfbb8ay0ghk"
 
 [node name="StepLabel" type="Label" parent="ProgressBar" unique_id=1402013776]
