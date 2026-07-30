@@ -39,8 +39,23 @@ func get_children_states() -> Array[State]:
 	return children_states
 
 
-func reload() -> void:
-	enter_state(current)
+func reload(force_ancestors := false) -> bool:
+	var state := get_state(current)
+	if not is_instance_valid(state):
+		printerr("Cannot reload invalid current state: %s" % current)
+		return false
+
+	exit_current()
+
+	if force_ancestors and get_parent() is StateMachine:
+		get_parent().reload(true)
+
+	state.is_active = true
+	state.enter()
+	state.entered.emit()
+	entered_state.emit(state)
+
+	return true
 
 
 func _to_string() -> String:
@@ -77,7 +92,7 @@ func is_currently(state_name: StringName) -> bool:
 
 
 func update(delta: float) -> void:
-	if current == &"Chopped":
+	if is_currently(&"Chopped"):
 		Util.iprint(0.5, current)
 	if is_valid():
 		states[current].update(delta)

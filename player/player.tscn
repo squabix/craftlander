@@ -890,7 +890,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("CapsuleShape3D_yw30f")
 
-[node name="Controller3D" type="Node" parent="." unique_id=632344104 node_paths=PackedStringArray("initial_entity", "initial_state", "root")]
+[node name="Controller3D" type="Node" parent="." unique_id=632344104 node_paths=PackedStringArray("initial_entity", "root")]
 unique_name_in_owner = true
 script = ExtResource("4_qjkh3")
 entity_type_state_map = Dictionary[StringName, StringName]({
@@ -898,15 +898,13 @@ entity_type_state_map = Dictionary[StringName, StringName]({
 &"Player": &"Default"
 })
 initial_entity = NodePath("..")
-initial_state = NodePath("Default")
 root = NodePath("..")
 process_update = true
 physics_process_update = true
 do_handle_input = true
 
-[node name="Default" type="Node" parent="Controller3D" unique_id=1922812879 node_paths=PackedStringArray("initial_state", "root")]
+[node name="Default" type="Node" parent="Controller3D" unique_id=1922812879 node_paths=PackedStringArray("root")]
 script = ExtResource("11_art4l")
-initial_state = NodePath("Walking")
 root = NodePath("../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
