@@ -10,7 +10,7 @@ extends RigidBody3D
 		if not has_interactable():
 			return
 		item_pickup_interactable.item = value
-		item_pickup_interactable.update_visuals()
+		item_pickup_interactable.update_visuals.call_deferred()
 
 
 static func from_item(item: Item, scene: PackedScene) -> RigidItemPickup3D:

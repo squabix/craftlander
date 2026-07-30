@@ -50,7 +50,7 @@ func add_prop(prop: IslandProp, point: Vector2i, spawn_position: Vector3) -> Nod
 	add_child.call_deferred(instance)
 
 	# Place/transform instance
-	island_generator.place_node(
+	island_generator.place_node.call_deferred(
 		instance,
 		point.x,
 		point.y,
