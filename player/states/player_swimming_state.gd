@@ -1,5 +1,6 @@
 extends State
 
+const ACTION_INTERACT := &"interact"
 const STAMINA_COST := 0.12
 
 @export var stamina: Stamina
@@ -8,6 +9,11 @@ const STAMINA_COST := 0.12
 
 func enter() -> void:
 	root.move_mode = move_mode
+
+func handle_input(event: InputEvent) -> void:
+	super(event)
+	if event.is_action_pressed(ACTION_INTERACT):
+		root.interact()
 
 func physics_update(_delta: float) -> void:
 	stamina.spend(STAMINA_COST)
