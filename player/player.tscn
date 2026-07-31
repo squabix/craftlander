@@ -920,11 +920,6 @@ stamina = NodePath("../../../Stamina")
 standing_collision = NodePath("../../../StandingCollisionShape")
 crouched_collision = NodePath("../../../CrouchedCollisionShape")
 root = NodePath("../../..")
-priority = null
-locked = null
-process_update = null
-physics_process_update = null
-do_handle_input = null
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Sprinting" type="Node" parent="Controller3D/Default" unique_id=900263776 node_paths=PackedStringArray("stamina", "root")]
