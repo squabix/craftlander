@@ -61,6 +61,14 @@ static func load_all() -> void:
 		saver.load_properties()
 
 
+static func offload_node(node: Node) -> bool:
+	var saver: NodeSaver = all.get(node)
+	if is_instance_valid(saver):
+		saver.offload()
+		return true
+	return false
+
+
 static func filter_all() -> void:
 	var filtered: Dictionary[Node, NodeSaver] = { }
 	for node in all:
