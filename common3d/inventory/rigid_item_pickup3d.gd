@@ -13,6 +13,9 @@ extends RigidBody3D
 		item_pickup_interactable.update_visuals.call_deferred()
 
 
+var is_set_up := false
+
+
 static func from_item(item: Item, scene: PackedScene) -> RigidItemPickup3D:
 	if item == null:
 		return
@@ -45,6 +48,8 @@ func _ready() -> void:
 
 	await get_tree().physics_frame
 	freeze = false
+	await get_tree().physics_frame
+	is_set_up = true
 
 
 func has_interactable() -> bool:
