@@ -230,7 +230,6 @@ group_whitelist = Array[StringName]([&"player"])
 [node name="StartChaseTrigger" type="Node" parent="Sight3D" unique_id=1196415362 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("3_rq2ym")
 state_machine = NodePath("../../Controller3D/Default")
-state_name = "Chasing"
 from_state_whitelist = Array[StringName]([&"Wandering"])
 signal_name = &"found_target"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"

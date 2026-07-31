@@ -16,7 +16,7 @@ func _ready() -> void:
 
 func generate() -> void:
 	if not is_instance_valid(terrain_generator):
-		printerr("%s cannot generate occluder with invalid terrain generator %s" % [self, terrain_generator])
+		push_error("%s cannot generate occluder with invalid terrain generator %s" % [self, terrain_generator])
 		return
 
 	WorkerThreadPool.add_task(

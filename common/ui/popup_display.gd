@@ -18,7 +18,7 @@ static func display(body: String, title: String = "", display_id: int = 0) -> Po
 	var popup_display: PopupDisplay = identification.fetch(display_id)
 
 	if not is_instance_valid(popup_display):
-		printerr("Invalid display")
+		push_error("Invalid display")
 		return null
 
 	popup_display.process_mode = Node.PROCESS_MODE_ALWAYS

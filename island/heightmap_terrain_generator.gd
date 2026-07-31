@@ -100,7 +100,7 @@ func get_pixel_normal(x: int, y: int, radius: int = 2) -> Vector3:
 
 func update_collision_shape(image_texture: ImageTexture = null) -> void:
 	if not is_instance_valid(collision_shape):
-		printerr("%s cannot update invalid collision shape")
+		push_error("%s cannot update invalid collision shape")
 		return
 
 	if image_texture == null:

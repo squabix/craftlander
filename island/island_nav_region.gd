@@ -50,7 +50,7 @@ func reset() -> void:
 func update_map_cell_dimensions() -> void:
 	var map := get_navigation_map()
 	if not map.is_valid():
-		printerr("%s cannot update cell dimensions for invalid map: %s " % [self, map])
+		push_error("%s cannot update cell dimensions for invalid map: %s " % [self, map])
 		return
 	NavigationServer3D.map_set_cell_size(map, navigation_mesh.cell_size)
 	NavigationServer3D.map_set_cell_height(map, navigation_mesh.cell_height)

@@ -57,7 +57,7 @@ func generate() -> void:
 
 	var mesh_vertices := mesh_instance.mesh.get_faces()
 	if mesh_vertices.is_empty():
-		printerr("%s has no vertices, so %s cannot generate" % [mesh_instance, self])
+		push_error("%s has no vertices, so %s cannot generate" % [mesh_instance, self])
 		return
 
 	var min_pos := Vector3(INF, INF, INF)

@@ -84,7 +84,7 @@ func get_distance_to_target() -> float:
 
 func get_nav_velocity() -> Vector3:
 	if not has_entity():
-		printerr("%s has no nav velocity without entity" % self)
+		push_error("%s has no nav velocity without entity" % self)
 		return Vector3.ZERO
 	var speed := entity.move_mode.max_speed.x
 	var direction := entity.global_position.direction_to(
@@ -95,7 +95,7 @@ func get_nav_velocity() -> Vector3:
 
 func move_forward() -> void:
 	if not has_entity():
-		printerr("%s cannot move forward without entity" % self)
+		push_error("%s cannot move forward without entity" % self)
 		return
 
 	nav.velocity = get_nav_velocity()
@@ -110,7 +110,7 @@ func move_forward() -> void:
 
 func get_annulus_point(inner_radius: float, outer_radius: float) -> Vector3:
 	if not has_entity():
-		printerr("%s cannot get annulus point without entity" % self)
+		push_error("%s cannot get annulus point without entity" % self)
 		return Vector3.ZERO
 
 	var angle := randf() * TAU
@@ -120,7 +120,7 @@ func get_annulus_point(inner_radius: float, outer_radius: float) -> Vector3:
 
 func get_nearby_navigable_position(inner_radius: float, outer_radius: float, attempts: int = 16) -> Vector3:
 	if not has_entity():
-		printerr("%s cannot find navigable position without entity" % self)
+		push_error("%s cannot find navigable position without entity" % self)
 		return Vector3.ZERO
 
 	var nav_map := nav.get_navigation_map()
@@ -183,10 +183,10 @@ func _is_within_intersect_radius(position: Vector3, end: Vector3) -> bool:
 
 func _get_move_directly_ray_result(start: Vector3, end: Vector3) -> Dictionary:
 	if not has_entity():
-		printerr("%s cannot get move directly ray result without entity" % self)
+		push_error("%s cannot get move directly ray result without entity" % self)
 		return { }
 	if start == end:
-		printerr("%s cannot get move directly ray result between two equal points: %s and %s" % [self, start, end])
+		push_error("%s cannot get move directly ray result between two equal points: %s and %s" % [self, start, end])
 		return { }
 	var query := PhysicsRayQueryParameters3D.create(start, end, 0xFFFFFFFF, [entity.get_rid()])
 	return entity.get_world_3d().direct_space_state.intersect_ray(query)

@@ -57,7 +57,7 @@ func add_recipe_entry(recipe: ItemRecipe) -> Control:
 	var item := recipe.result.item
 	
 	if not recipe_groups.has(item.type):
-		printerr("%s cannot find recipe group of type %s and cannot add entry for %s" % [self, item.type, recipe])
+		push_error("%s cannot find recipe group of type %s and cannot add entry for %s" % [self, item.type, recipe])
 		return
 	
 	var entry := add_empty_entry()

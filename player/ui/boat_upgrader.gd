@@ -22,7 +22,7 @@ func _ready() -> void:
 
 func update() -> void:
 	if not is_instance_valid(boat):
-		printerr("%s cannot display requirements for invalid boat")
+		push_error("%s cannot display requirements for invalid boat")
 		return
 	
 	current_upgrade_level = boat.level + 1

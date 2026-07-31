@@ -63,7 +63,7 @@ func add_check(target: State, callable: Callable) -> void:
 
 func transition_to(state_name: StringName) -> void:
 	if not enter_callable.is_valid():
-		printerr("%s has invalid enter callable")
+		push_error("%s has invalid enter callable")
 		return
 	await get_tree().process_frame
 	enter_callable.call(state_name)

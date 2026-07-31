@@ -37,7 +37,7 @@ func _init(save_saver_id: StringName = &"", save_mode: Mode = Mode.NONE, save_sc
 
 func make_dynamic(uuid: StringName, target: Node) -> void:
 	if not is_instance_valid(target):
-		printerr("Cannot make %s dynamic with invalid target: %s" % [self, target])
+		push_error("Cannot make %s dynamic with invalid target: %s" % [self, target])
 		return
 	
 	mode = Mode.DYNAMIC

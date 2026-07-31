@@ -151,7 +151,7 @@ func count_empty() -> int:
 
 func get_stackable_room(item: Item) -> int:
 	if item == null:
-		printerr("%s cannot find stackable room for null item" % self)
+		push_error("%s cannot find stackable room for null item" % self)
 		return 0
 	
 	if item.max_quantity <= 1:
@@ -175,7 +175,7 @@ func add_item(item: Item, quantity: int = 1, must_reach_quantity: bool = false) 
 		return quantity
 
 	if quantity <= 0:
-		printerr("%s cannot add %s with quantity of %s" % [self, item, quantity])
+		push_error("%s cannot add %s with quantity of %s" % [self, item, quantity])
 		return 0
 
 	var original_quantity := quantity
@@ -196,7 +196,7 @@ func add_item(item: Item, quantity: int = 1, must_reach_quantity: bool = false) 
 
 func fill_existing_stacks(new_item: Item, quantity: int) -> int:
 	if quantity <= 0:
-		printerr("%s cannot fill existing stacks of %s with quantity of %s" % [self, new_item, quantity])
+		push_error("%s cannot fill existing stacks of %s with quantity of %s" % [self, new_item, quantity])
 		return 0
 
 	if new_item == null:
@@ -223,10 +223,10 @@ func fill_existing_stacks(new_item: Item, quantity: int) -> int:
 
 func create_instance(index: int, item: Item, quantity: int, overwrite_occupied := true) -> ItemInstance:
 	if item == null:
-		printerr("%s cannot create instance at %s with null item" % [self, index])
+		push_error("%s cannot create instance at %s with null item" % [self, index])
 		return null
 	if quantity <= 0:
-		printerr("%s cannot create instance at %s with quantity of" % [self, index, quantity])
+		push_error("%s cannot create instance at %s with quantity of" % [self, index, quantity])
 		return null
 
 	if index == -1:
@@ -243,7 +243,7 @@ func create_instance(index: int, item: Item, quantity: int, overwrite_occupied :
 
 func create_new_stacks(item: Item, quantity: int) -> int:
 	if item == null:
-		printerr("%s cannot create stacks of null item")
+		push_error("%s cannot create stacks of null item")
 		return quantity
 	
 	while quantity > 0:
@@ -315,7 +315,7 @@ func empty_instance(index: int) -> ItemInstance:
 
 func give_item(item: Item, quantity: int, to: Inventory) -> int:
 	if not is_instance_valid(to):
-		printerr("%s cannot give %s to invalid inventory %s" % [self, item, to])
+		push_error("%s cannot give %s to invalid inventory %s" % [self, item, to])
 		return quantity
 	if item == null:
 		return quantity
@@ -351,7 +351,7 @@ func swap(index1: int, index2: int) -> bool:
 
 func give_everything(to: Inventory) -> void:
 	if not is_instance_valid(to):
-		printerr("%s cannot give everything to invalid inventory: %s" % [self, to])
+		push_error("%s cannot give everything to invalid inventory: %s" % [self, to])
 		return
 	
 	for index in get_occupied_indicies():

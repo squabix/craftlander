@@ -29,7 +29,7 @@ func _ready() -> void:
 	default_move_blend_space = tree_root.get_node(DEFAULT_MOVE_BLEND_SPACE_PATH) as AnimationNodeBlendSpace1D
 
 	if default_move_blend_space == null:
-		printerr("%s could not find default move blend space in the tree root" % self)
+		push_error("%s could not find default move blend space in the tree root" % self)
 		return
 
 	var blend_positions := get_anim_blend_positions()

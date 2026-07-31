@@ -8,11 +8,11 @@ extends SignalTrigger
 
 func _ready() -> void:
 	if not is_instance_valid(state_machine):
-		printerr("%s has no state machine" % self)
+		push_error("%s has no state machine" % self)
 		return
 
 	if state_name.is_empty():
-		printerr("%s has no state to transition to" % self)
+		push_error("%s has no state to transition to" % self)
 		return
 
 	super()

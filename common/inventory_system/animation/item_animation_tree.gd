@@ -39,7 +39,7 @@ func _ready() -> void:
 func initialize_playback() -> void:
 	playback = get(playback_path) as AnimationNodeStateMachinePlayback
 	if playback == null:
-		printerr("%s found null playback at path: %s" %[self, playback_path])
+		push_error("%s found null playback at path: %s" %[self, playback_path])
 		return
 
 	playback.state_finished.connect(_on_state_finished)
@@ -132,7 +132,7 @@ func play_end() -> void:
 
 func play_state(state: StringName) -> void:
 	if playback == null:
-		printerr("%s's null playback cannot travel to state: %s" % [self, state])
+		push_error("%s's null playback cannot travel to state: %s" % [self, state])
 		return
 	playback.start(state)
 
@@ -151,23 +151,23 @@ func get_state_anim_map() -> Dictionary[StringName, StringName]:
 
 func update_tree_animations() -> void:
 	if tree_root == null:
-		printerr("%s's tree root is null" % self)
+		push_error("%s's tree root is null" % self)
 		return
 
 	if animation_state_machine == null:
-		printerr("%s's state machine is null" % self)
+		push_error("%s's state machine is null" % self)
 		return
 
 	var state_anim_map := get_state_anim_map()
 
 	for state_node_name in state_anim_map:
 		if not animation_state_machine.has_node(state_node_name):
-			printerr("%s's state machine does not contain a node named: %s" % [self, state_node_name])
+			push_error("%s's state machine does not contain a node named: %s" % [self, state_node_name])
 			continue
 
 		var anim_node := animation_state_machine.get_node(state_node_name) as AnimationNodeAnimation
 		if anim_node == null:
-			printerr("State machine node '%s' is invalid in %s" % [state_node_name, self])
+			push_error("State machine node '%s' is invalid in %s" % [state_node_name, self])
 			continue
 
 		var anim_name: StringName = state_anim_map[state_node_name]

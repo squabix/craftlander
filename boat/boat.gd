@@ -16,17 +16,17 @@ var dock_position: Vector3
 static func instantiate(boat_level: int) -> Boat:
 	var path := BOAT_SCENE_PATH_FORMAT % boat_level
 	if not ResourceLoader.exists(path):
-		printerr("Cannot load nonexistant next boat level %s" % [path])
+		push_error("Cannot load nonexistant next boat level %s" % [path])
 		return null
 	
 	var resource := load(path)
 	if not resource is PackedScene:
-		printerr("Cannot instantiate non-scene path %s" % path)
+		push_error("Cannot instantiate non-scene path %s" % path)
 		return null
 	
 	var instance := (resource as PackedScene).instantiate()
 	if not instance is Boat:
-		printerr("Cannot instantiate non-boat node %s at %s" % [instance, path])
+		push_error("Cannot instantiate non-boat node %s at %s" % [instance, path])
 		return null
 	
 	return instance
@@ -39,12 +39,12 @@ func _ready() -> void:
 
 func open_boat_interface(interact_source: Node) -> void:
 	if not interact_source is Player:
-		printerr("Invalid interact source %s cannot open boat interface" % interact_source)
+		push_error("Invalid interact source %s cannot open boat interface" % interact_source)
 		return
 
 	var boat_interface: BoatInterface = interact_source.boat_interface
 	if not is_instance_valid(boat_interface):
-		printerr("%s cannot load invalid boat interface %s" % [interact_source, boat_interface])
+		push_error("%s cannot load invalid boat interface %s" % [interact_source, boat_interface])
 		return
 
 	boat_interface.open(self)
@@ -59,7 +59,7 @@ func get_current_state() -> State:
 func make_current() -> Boat:
 	var next_boat := instantiate(Main.loaded_save.boat_level)
 	if not is_instance_valid(next_boat):
-		printerr("%s cannot become current without valid next boat")
+		push_error("%s cannot become current without valid next boat")
 		return null
 	get_parent().add_child(next_boat)
 	next_boat.global_transform = self.global_transform

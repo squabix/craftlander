@@ -31,7 +31,7 @@ func is_in_water() -> bool:
 
 func physics_update(_delta: float) -> void:
 	if not is_instance_valid(guide):
-		printerr("Chasing state of %s has no guide" % root)
+		push_error("Chasing state of %s has no guide" % root)
 		return
 
 	guide.face_target()

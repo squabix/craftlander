@@ -27,7 +27,7 @@ func is_stackable_with(other_item: Item) -> bool:
 
 func add(amount: int) -> int:
 	if amount < 0:
-		printerr("Cannot add negative amount to item - use subtract instead")
+		push_error("Cannot add negative amount to item - use subtract instead")
 		breakpoint
 		return amount
 	var raw_quantity := quantity + amount
@@ -38,7 +38,7 @@ func add(amount: int) -> int:
 
 func subtract(amount: int) -> int:
 	if amount < 0:
-		printerr("Cannot subtract negative amount from item - use add instead")
+		push_error("Cannot subtract negative amount from item - use add instead")
 		breakpoint
 		return amount
 

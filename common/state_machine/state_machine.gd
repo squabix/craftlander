@@ -42,7 +42,7 @@ func get_child_states() -> Array[State]:
 func reload(force_ancestors := false) -> bool:
 	var state := get_state(current)
 	if not is_instance_valid(state):
-		printerr("Cannot reload invalid current state: %s" % current)
+		push_error("Cannot reload invalid current state: %s" % current)
 		return false
 
 	exit_current()
@@ -125,7 +125,7 @@ func get_state(state_name: StringName) -> State:
 func enter_state(state_variant: Variant, force_ancestors := false) -> bool:
 	var state: State = state_variant if state_variant is State else get_state(state_variant) if state_variant is StringName else null
 	if not is_instance_valid(state):
-		printerr("Cannot enter invalid state: %s" % state)
+		push_error("Cannot enter invalid state: %s" % state)
 		return false
 	if state.name == current:
 		return true

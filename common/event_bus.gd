@@ -9,7 +9,7 @@ static func subscribe(to: StringName, subscriber: Callable, unsubscribe_signal: 
 		return false
 	
 	if not subscriber.is_valid():
-		printerr("Invalid Callable %s cannot subscribe to EventBus" % subscriber)
+		push_error("Invalid Callable %s cannot subscribe to EventBus" % subscriber)
 		return false
 
 	# Initialize the array for this event if it doesn't exist
