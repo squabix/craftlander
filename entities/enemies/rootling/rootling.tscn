@@ -630,7 +630,7 @@ shape = SubResource("CapsuleShape3D_3emv6")
 [node name="StartChaseTrigger" type="Node" parent="Hurtbox3D" unique_id=1954498291 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("8_7mn0t")
 state_machine = NodePath("../../Controller3D/Default")
-state_name = "Chasing"
+state_name = &"Chasing"
 from_state_whitelist = Array[StringName]([&"Wandering"])
 signal_name = &"was_hurt"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
@@ -653,7 +653,7 @@ group_whitelist = Array[StringName]([&"player"])
 [node name="StartChaseTrigger" type="Node" parent="Sight3D" unique_id=1196415362 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("8_7mn0t")
 state_machine = NodePath("../../Controller3D/Default")
-state_name = "Chasing"
+state_name = &"Chasing"
 from_state_whitelist = Array[StringName]([&"Wandering"])
 signal_name = &"found_target"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
@@ -684,7 +684,6 @@ item_holder = NodePath("../../../ItemHolder3D")
 guide = NodePath("../../NavEntityGuide3D")
 sight = NodePath("../../../Sight3D")
 interval_staggerer = NodePath("IntervalStaggerer")
-lose_target_state = "Wandering"
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
