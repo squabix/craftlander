@@ -29,6 +29,8 @@ func _ready() -> void:
 	MouseModeController.show()
 	get_tree().paused = true
 	
+	Util.nodestr_root = self
+	
 	var is_reloading: bool = Main.is_save_loaded and Main.loaded_save.is_current_level_generated()
 	
 	if Main.root.loading_screen != null:

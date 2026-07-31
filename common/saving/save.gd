@@ -40,12 +40,12 @@ func get_node_saves(scene_root: Node, mode: NodeSave.Mode) -> Array[NodeSave]:
 
 func add_dynamic_nodes(scene_root: Node) -> void:
 	if not is_instance_valid(scene_root):
-		push_error("%s cannot add dynamic nodes to invalid scene root: %s" % [self, scene_root])
+		Util.node_error("%s cannot add dynamic nodes to invalid scene root %s", self, scene_root)
 		return
 
 	var tree := scene_root.get_tree()
 	if not is_instance_valid(tree):
-		push_error("%s cannot add dynamic nodes to invalid tree: %s" % [self, tree])
+		Util.node_error("%s cannot add dynamic nodes to invalid tree: %s", self, tree)
 		return
 
 	# Gather all unspawned dynamic nodes belonging to this level
@@ -91,7 +91,7 @@ func add_dynamic_nodes(scene_root: Node) -> void:
 
 func get_parent_node(node_save: NodeSave, spawned_nodes: Dictionary[StringName, Node], non_dynamic_parents: Array[Node]) -> Node:
 	if node_save == null:
-		push_error("%s cannot get parent node from null node save: %s" % [self, node_save])
+		Util.node_error("%s cannot get parent node from null node save: %s", self, node_save)
 		return null
 
 	if node_save.parent_type == NodeSave.ParentType.DYNAMIC:

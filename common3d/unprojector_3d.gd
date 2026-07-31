@@ -22,7 +22,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if not is_instance_valid(camera):
-		push_error("%s cannot unproject with invalid camera" % self)
+		Util.node_error("%s cannot unproject with invalid camera", self)
 		set_process(false)
 		return
 

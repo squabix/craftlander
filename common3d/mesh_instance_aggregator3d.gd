@@ -24,12 +24,12 @@ static func disassociate_mesh_instance(instance: MeshInstance3D) -> void:
 	var aggregator: MeshInstanceAggregator3D = aggregated_mesh_instances.get(instance, null)
 	if not is_instance_valid(aggregator):
 		if is_instance_valid(instance):
-			push_error("Could not find aggregator for %s" % instance)
+			Util.node_error("Could not find aggregator for %s", instance)
 		return
 
 	var data: MultiMeshData = aggregator.instance_registry.get(instance, null)
 	if data == null:
-		push_error("%s could not find data for %s in instance registry" % [aggregator, instance])
+		Util.node_error("%s could not find data for %s in instance registry", aggregator, instance)
 		return
 
 	aggregator.disconnect_visibility_inversion(instance)

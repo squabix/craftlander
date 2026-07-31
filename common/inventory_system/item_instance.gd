@@ -28,7 +28,6 @@ func is_stackable_with(other_item: Item) -> bool:
 func add(amount: int) -> int:
 	if amount < 0:
 		push_error("Cannot add negative amount to item - use subtract instead")
-		breakpoint
 		return amount
 	var raw_quantity := quantity + amount
 	var remainder: int = max(raw_quantity - item.max_quantity, 0)
@@ -39,7 +38,6 @@ func add(amount: int) -> int:
 func subtract(amount: int) -> int:
 	if amount < 0:
 		push_error("Cannot subtract negative amount from item - use add instead")
-		breakpoint
 		return amount
 
 	if quantity == 0:

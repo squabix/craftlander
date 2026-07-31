@@ -80,7 +80,7 @@ func _process(_delta: float) -> void:
 					advance_step()
 					return
 			ResourceLoader.THREAD_LOAD_FAILED, ResourceLoader.THREAD_LOAD_INVALID_RESOURCE:
-				push_error("%s failed to load resource at %s" % [self, resource_path])
+				Util.node_error("%s failed to load resource at %s", self, resource_path)
 				active = false
 				return
 
@@ -100,11 +100,11 @@ func request_load(path: String) -> bool:
 		return false
 
 	if path.is_empty():
-		push_error("%s cannot request load for empty path" % self)
+		Util.node_error("%s cannot request load for empty path", self)
 		return false
 
 	if not ResourceLoader.exists(path):
-		push_error("%s cannot request load for nonexistant path (%s)" % [self, path])
+		Util.node_error("%s cannot request load for nonexistant path (%s)", self, path)
 		return false
 
 	ResourceLoader.load_threaded_request(path)
@@ -115,11 +115,11 @@ func request_load(path: String) -> bool:
 
 func load_resource(path: String) -> Resource:
 	if path.is_empty():
-		push_error("%s cannot load empty path" % self)
+		Util.node_error("%s cannot load empty path", self)
 		return null
 
 	if not ResourceLoader.exists(path):
-		push_error("%s cannot load nonexistant path (%s)" % [self, path])
+		Util.node_error("%s cannot load nonexistant path (%s)", self, path)
 		return null
 	
 	if transition_in_before_load:
@@ -132,7 +132,7 @@ func load_resource(path: String) -> Resource:
 	resource_path = path
 
 	if not request_load(path):
-		push_error("%s failed to load resource at %s" % [self, path])
+		Util.node_error("%s failed to load resource at %s", self, path)
 
 	return await loaded_resource
 
@@ -150,7 +150,7 @@ func reset() -> void:
 
 func advance_step() -> String:
 	if not is_resource_loaded:
-		push_error("%s cannot advance step before resource is loaded")
+		Util.node_error("%s cannot advance step before resource is loaded", self)
 		return resource_load_step
 	current_step_index += 1
 	return get_step(current_step_index)
@@ -192,7 +192,7 @@ func transition_in() -> void:
 	if not is_instance_valid(transition_player):
 		return
 	if not transition_player.has_animation(transition_in_anim):
-		push_error("%s cannot play nonexistant transition in animation '%s'" % [transition_player, transition_in_anim])
+		Util.node_error("%s cannot play nonexistant transition in animation '%s'", transition_player, transition_in_anim)
 		return
 	transition_player.play(transition_in_anim)
 	
@@ -203,7 +203,7 @@ func transition_out(force_free := false) -> void:
 	if not is_instance_valid(transition_player):
 		return
 	if not transition_player.has_animation(transition_out_anim):
-		push_error("%s cannot play nonexistant transition out animation '%s'" % [transition_player, transition_out_anim])
+		Util.node_error("%s cannot play nonexistant transition out animation '%s'", transition_player, transition_out_anim)
 		return
 	transition_player.play(transition_out_anim)
 	if force_free or free_mode == FreeMode.TRANSITION_OUT:

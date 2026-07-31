@@ -15,6 +15,6 @@ func _ready() -> void:
 
 func update_to_selection() -> void:
 	if not is_instance_valid(inventory_selector):
-		push_error("%s cannot update to selection with invalid inventory selector")
+		Util.node_error("%s cannot update to selection with invalid inventory selector", self)
 		return
 	update_item(inventory_selector.get_current_item())

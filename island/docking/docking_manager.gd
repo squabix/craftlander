@@ -18,7 +18,7 @@ func initialize() -> void:
 
 func add_boat() -> void:
 	if not is_instance_valid(boat_adder):
-		push_error("%s cannot add boat with invalid boat adder (%s)" % [self, boat_adder])
+		Util.node_error("%s cannot add boat with invalid boat adder (%s)", self, boat_adder)
 		return
 	boat_adder.dock_position = boat_dock_point.global_position
 	boat = boat_adder.add()

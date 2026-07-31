@@ -44,17 +44,17 @@ func get_random_point(rid: RID) -> Vector3:
 func get_spawnpoint(min_height: float, max_height: float, allow_in_frustum: bool) -> Vector3:
 	var rid := IslandNavRegion.current.get_rid()
 	if not rid.is_valid():
-		push_error("%s cannot get spawnpoint with invalid RID: %s" % [self, rid])
+		Util.node_error("%s cannot get spawnpoint with invalid RID: %s", self, rid)
 		return Vector3.ZERO
 	
 	var viewport := get_viewport()
 	if not is_instance_valid(viewport):
-		push_error("%s cannot get spawnpoint with invalid viewport: %s" % [self, viewport])
+		Util.node_error("%s cannot get spawnpoint with invalid viewport: %s", self, viewport)
 		return Vector3.ZERO
 	
 	var camera := viewport.get_camera_3d()
 	if not is_instance_valid(camera):
-		push_error("%s cannot get spawnpoint with invalid camera: %s" % [self, camera])
+		Util.node_error("%s cannot get spawnpoint with invalid camera: %s", self, camera)
 		return Vector3.ZERO
 	
 	var point: Vector3

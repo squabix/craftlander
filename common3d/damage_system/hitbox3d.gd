@@ -56,7 +56,7 @@ func hit(area: Area3D) -> bool:
 
 	# ERROR if area does not exist
 	if not is_instance_valid(area):
-		push_error("%s cannot hit invalid area %s" % [self, area])
+		Util.node_error("%s cannot hit invalid area %s", self, area)
 		return false
 
 	# BAIL if area has already been hit & can only be hit once

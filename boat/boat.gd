@@ -26,7 +26,7 @@ static func instantiate(boat_level: int) -> Boat:
 	
 	var instance := (resource as PackedScene).instantiate()
 	if not instance is Boat:
-		push_error("Cannot instantiate non-boat node %s at %s" % [instance, path])
+		Util.node_error("Cannot instantiate non-boat node %s at %s", instance, path)
 		return null
 	
 	return instance
@@ -39,12 +39,12 @@ func _ready() -> void:
 
 func open_boat_interface(interact_source: Node) -> void:
 	if not interact_source is Player:
-		push_error("Invalid interact source %s cannot open boat interface" % interact_source)
+		Util.node_error("Invalid interact source %s cannot open boat interface", interact_source)
 		return
 
 	var boat_interface: BoatInterface = interact_source.boat_interface
 	if not is_instance_valid(boat_interface):
-		push_error("%s cannot load invalid boat interface %s" % [interact_source, boat_interface])
+		Util.node_error("%s cannot load invalid boat interface %s", interact_source, boat_interface)
 		return
 
 	boat_interface.open(self)
@@ -59,7 +59,7 @@ func get_current_state() -> State:
 func make_current() -> Boat:
 	var next_boat := instantiate(Main.loaded_save.boat_level)
 	if not is_instance_valid(next_boat):
-		push_error("%s cannot become current without valid next boat")
+		Util.node_error("%s cannot become current without valid next boat", self)
 		return null
 	get_parent().add_child(next_boat)
 	next_boat.global_transform = self.global_transform

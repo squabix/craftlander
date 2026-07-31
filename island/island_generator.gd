@@ -65,11 +65,11 @@ func seed_noise_textures() -> void:
 	for i in noise_textures.size():
 		var texture = noise_textures[i]
 		if not texture is NoiseTexture2D:
-			push_error("%s cannot seed invalid noise texture (%s) at index %s" % [self, texture, i])
+			Util.node_error("%s cannot seed invalid noise texture (%s) at index %s", self, texture, i)
 			continue
 
 		if not texture.noise is FastNoiseLite:
-			push_error("%s cannot seed invalid noise (%s) at index %s" % [self, texture.noise, i])
+			Util.node_error("%s cannot seed invalid noise (%s) at index %s", self, texture.noise, i)
 			continue
 
 		var noise: FastNoiseLite = texture.noise.duplicate()
@@ -82,7 +82,7 @@ func seed_noise_textures() -> void:
 
 func generate() -> void:
 	if is_missing_textures():
-		push_error("%s is missing required textures to generate" % self)
+		Util.node_error("%s is missing required textures to generate", self)
 		_finalize_generation.call_deferred(create_empty_image())
 		return
 	texture_images = load_image_textures()

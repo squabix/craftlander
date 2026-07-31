@@ -36,7 +36,7 @@ var scene_instance: Node
 var visuals: Node:
 	get:
 		if not is_instance_valid(visuals) and not is_scene_set_up:
-			push_error("%s has no visuals without setting up scene" % self)
+			Util.node_error("%s has no visuals without setting up scene", self)
 			return null
 		return visuals
 var current_use_state: UseState = UseState.END_USE
@@ -182,7 +182,7 @@ func set_up_scene() -> void:
 
 func duplicate_visuals() -> Node:
 	if scene == null:
-		push_error("%s cannot get visuals duplicate from null scene" % self)
+		Util.node_error("%s cannot get visuals duplicate from null scene", self)
 		return null
 
 	var temp_instance := scene.instantiate()
@@ -192,7 +192,7 @@ func duplicate_visuals() -> Node:
 	if is_instance_valid(target_node):
 		duplicate_node = target_node.duplicate()
 	else:
-		push_error("%s failed to find visuals path for duplication: %s", [self, visuals_scene_path])
+		Util.node_error("%s failed to find visuals path for duplication: %s", self, visuals_scene_path)
 
 	temp_instance.queue_free()
 	return duplicate_node
@@ -200,7 +200,7 @@ func duplicate_visuals() -> Node:
 
 func add_scene(parent: Node) -> Node:
 	if scene == null:
-		push_error("%s cannot instantiate null scene", self)
+		Util.node_error("%s cannot instantiate null scene", self)
 		return
 
 	if not is_scene_set_up or scene_instance == null:

@@ -28,7 +28,7 @@ func _process(_delta: float) -> void:
 
 func open(boat: Boat) -> void:
 	if not is_instance_valid(boat):
-		push_error("%s cannot open with invalid boat: " % [self, boat])
+		Util.node_error("%s cannot open with invalid boat: ", self, boat)
 		return
 	sail_button.disabled = true
 	set_pause(true)
@@ -39,7 +39,7 @@ func open(boat: Boat) -> void:
 
 func reload_options() -> void:
 	if not is_instance_valid(island_option_container):
-		push_error("%s cannot reload options inside invalid container: %s" % [self, island_option_container])
+		Util.node_error("%s cannot reload options inside invalid container: %s", self, island_option_container)
 		return
 	
 	for i in min(current_boat.level + 1, island_option_container.get_child_count()):

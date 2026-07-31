@@ -59,7 +59,7 @@ func _ready() -> void:
 func add_pickup(item: Item) -> RigidItemPickup3D:
 	var pickup := RigidItemPickup3D.from_item(item, rigid_item_pickup_scene)
 	if pickup == null:
-		push_error("%s cannot add null pickup" % self)
+		Util.node_error("%s cannot add null pickup", self)
 		return
 
 	pickup_parent.add_child(pickup)
@@ -76,7 +76,7 @@ func drop(index: int = -1) -> Node3D:
 
 	# Failed to remove item (doesn't exist)
 	if inventory.remove_instance(index, 1) > 0:
-		push_error("%s cannot remove nonexistant item %s from %s" % [self, instance.item, inventory])
+		Util.node_error("%s cannot remove nonexistant item %s from %s", self, instance.item, inventory)
 		return null
 
 	return add_pickup(instance.item)

@@ -75,7 +75,7 @@ static func filter_all() -> void:
 
 static func get_root_path(node: Node) -> NodePath:
 	if not is_instance_valid(node):
-		push_error("Cannot get root path from invalid node: %s" % node)
+		Util.node_error("Cannot get root path from invalid node: %s", node)
 		return NodePath()
 	return (
 			node.get_path() if not is_instance_valid(scene_root) or scene_root == node
@@ -128,7 +128,7 @@ func get_dynamic_ancestor() -> NodeSaver:
 
 func get_property_data() -> Dictionary[StringName, Variant]:
 	if not is_instance_valid(target):
-		push_error("%s cannot get property data from invalid target: %s" % target)
+		Util.node_error("%s cannot get property data from invalid target: %s", target)
 		return { }
 
 	var property_data: Dictionary[StringName, Variant] = { }
@@ -136,7 +136,7 @@ func get_property_data() -> Dictionary[StringName, Variant]:
 		if saved_properties[property] == false:
 			continue # Property is disabled
 		if not property in target:
-			push_error("%s cannot get nonexistant property '%s' from %s" % [self, property, target])
+			Util.node_error("%s cannot get nonexistant property '%s' from %s", self, property, target)
 			continue
 		property_data[property] = target.get(property)
 	return property_data
@@ -144,17 +144,17 @@ func get_property_data() -> Dictionary[StringName, Variant]:
 
 func set_property_data(property_data: Dictionary[StringName, Variant]) -> void:
 	if not is_instance_valid(target):
-		push_error("%s cannot set property data to invalid target: %s" % target)
+		Util.node_error("%s cannot set property data to invalid target: %s", target)
 		return
 	for property: StringName in property_data:
 		var value: Variant = property_data[property]
 		if not property in saved_properties:
-			push_error("%s cannot set unsaved property '%s' to '%s' in %s" % [self, property, value, target])
+			Util.node_error("%s cannot set unsaved property '%s' to '%s' in %s", self, property, value, target)
 			continue
 		if saved_properties[property] == false:
 			continue # Property is disabled
 		if not property in target:
-			push_error("%s cannot set nonexistant property '%s' to '%s' in %s" % [self, property, property_data[property], target])
+			Util.node_error("%s cannot set nonexistant property '%s' to %s in %s", self, property, property_data[property], target)
 			continue
 		target.set(property, value)
 		set_property.emit(property, value)
@@ -166,7 +166,7 @@ func save_properties() -> void:
 		return
 
 	if save == null:
-		push_error("%s cannot save properties with null save")
+		Util.node_error("%s cannot save properties with null save" % self)
 		return
 
 	if save_mode == NodeSave.Mode.DYNAMIC and dynamic_uuid.is_empty():
@@ -211,7 +211,7 @@ func load_properties() -> void:
 		return
 
 	if save == null:
-		push_error("%s cannot load properties with null save")
+		Util.node_error("%s cannot load properties with null save", self)
 		return
 
 	var index := find_index()
@@ -241,11 +241,11 @@ func load_properties() -> void:
 
 func call_load_callables() -> void:
 	if not is_instance_valid(target):
-		push_error("%s cannot call load methods (%s) on invalid target: %s" % [self, load_methods, target])
+		Util.node_error("%s cannot call load methods (%s) on invalid target: %s", self, load_methods, target)
 		return
 	for method_name in load_methods:
 		if not target.has_method(method_name):
-			push_error("%s cannot call nonexistant method (%s) on %s" % [self, method_name, target])
+			Util.node_error("%s cannot call nonexistant method (%s) on %s", self, method_name, target)
 			return
 		target.call(method_name)
 
@@ -314,7 +314,7 @@ func _free_offload() -> bool:
 		return false
 
 	if not is_instance_valid(scene_root):
-		push_error("%s cannot free offload with invalid scene root: %s" % [self, scene_root])
+		Util.node_error("%s cannot free offload with invalid scene root: %s", self, scene_root)
 		return false
 
 	if not (is_instance_valid(target) and target.is_queued_for_deletion()):

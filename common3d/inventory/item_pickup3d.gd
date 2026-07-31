@@ -53,7 +53,7 @@ func update_tooltip() -> void:
 
 func update_visuals() -> void:
 	if item == null:
-		push_error("%s cannot update visuals with null item" % self)
+		Util.node_error("%s cannot update visuals with null item", self)
 		return
 	visuals = item.duplicate_visuals()
 	add_child(visuals)
@@ -63,7 +63,7 @@ func update_visuals() -> void:
 
 func generate_all_collision(target_parent: Node3D = self) -> Array[CollisionShape3D]:
 	if not is_instance_valid(target_parent):
-		push_error("%s cannot add generated collision to invalid parent (%s)" % [self, target_parent])
+		Util.node_error("%s cannot add generated collision to invalid parent (%s)", self, target_parent)
 		return []
 	
 	var collision_shapes: Array[CollisionShape3D] = []
@@ -77,13 +77,13 @@ func generate_all_collision(target_parent: Node3D = self) -> Array[CollisionShap
 
 func add_collision_shape(mesh_instance: MeshInstance3D, parent: Node) -> CollisionShape3D:
 	if not is_instance_valid(mesh_instance):
-		push_error("%s cannot create collision shape from invalid mesh instance (%s)" % [self, mesh_instance])
+		Util.node_error("%s cannot create collision shape from invalid mesh instance (%s)", self, mesh_instance)
 		return null
 	if mesh_instance.mesh == null:
-		push_error("%s cannot create collision shape from null mesh of %s" % [self, mesh_instance])
+		Util.node_error("%s cannot create collision shape from null mesh of %s", self, mesh_instance)
 		return null
 	if not is_instance_valid(parent):
-		push_error("%s cannot add collision shape to invalid parent (%s)" % [self, parent])
+		Util.node_error("%s cannot add collision shape to invalid parent (%s)" % [self, parent])
 		return null
 
 	var collision_shape := CollisionShape3D.new()
@@ -96,12 +96,12 @@ func add_collision_shape(mesh_instance: MeshInstance3D, parent: Node) -> Collisi
 
 func interact(source: Node, _etc: Dictionary = { }) -> void:
 	if not is_instance_valid(source):
-		push_error("%s cannot be picked up by invalid interaction source (%s)" % [self, source])
+		Util.node_error("%s cannot be picked up by invalid interaction source (%s)", self, source)
 		return
 	
 	var inventory: Inventory = Util.find_child_of_class(source, &"Inventory", true)
 	if not is_instance_valid(inventory):
-		push_error("%s cannot be added to invalid inventory (%s) from %s" % [self, inventory, source])
+		Util.node_error("%s cannot be added to invalid inventory (%s) from %s", self, inventory, source)
 		return
 	
 	if inventory.add_item(item, 1) == 1:

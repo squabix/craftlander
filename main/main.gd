@@ -53,25 +53,24 @@ func _ready() -> void:
 
 func advance_loading_step() -> String:
 	if not is_instance_valid(loading_screen):
-		push_error("Cannot advance loading step of invalid loading screen (%s)" % loading_screen)
+		Util.node_error("Cannot advance loading step of invalid loading screen (%s)", loading_screen)
 		return ""
 	var step := loading_screen.advance_step()
 	await get_tree().process_frame
 	return step
 
 
-# In main.gd
 func load_level(index: int) -> void:
 	var path := ISLAND_SCENE_PATH_FORMAT % index
 	if not ResourceLoader.exists(path):
-		push_error("Cannot load nonexistant level %s from %s" % index)
+		Util.node_error("Cannot load nonexistant level %s from %s", index, path)
 		return
 
 	current_level_index = index
 	
 	var loaded_level := await load_scene(path)
 	if loaded_level == null:
-		push_error("Loaded null level")
+		push_error("Cannot load null level")
 		return
 	
 	clear()
@@ -97,7 +96,7 @@ func new_save() -> Save:
 
 func start_new_game(slot: int) -> void:
 	if slot < 0 or slot >= MAX_SLOT:
-		push_error("Cannot start new game in invalid slot number: %s" % slot)
+		Util.node_error("Cannot start new game in invalid slot number: %s", slot)
 		return
 	loaded_save = new_save()
 	loaded_save.base_seed = randi() # Give the new game a random seed
@@ -114,7 +113,7 @@ func save_current_game() -> void:
 
 func save_game(slot: int) -> void:
 	if slot < 0 or slot >= MAX_SLOT:
-		push_error("%s cannot save game to invalid slot number: %s" % slot)
+		Util.node_error("%s cannot save game to invalid slot number: %s", slot)
 		return
 
 	if loaded_save == null:
@@ -130,19 +129,19 @@ func save_game(slot: int) -> void:
 	if err == OK:
 		print("Successfully saved game to slot %s" % slot)
 	else:
-		push_error("Failed to save game to slot %s. Error: %s" % [slot, err])
+		Util.node_error("Failed to save game to slot %s. Error: %s", slot, err)
 
 
 func load_game(slot: int) -> void:
 	if slot < 0 or slot >= MAX_SLOT:
-		push_error("%s cannot load game from invalid slot number: %s" % [self, slot])
+		Util.node_error("%s cannot load game from invalid slot number: %s", self, slot)
 		return
 
 	var path := get_slot_path(slot)
 	var res := Save.load_from_disk(path)
 
 	if res == null:
-		push_error("Failed to load game: No save file found at %s" % path)
+		Util.node_error("Failed to load game: No save file found at %s", path)
 		return
 
 	loaded_save = res

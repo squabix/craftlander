@@ -19,7 +19,7 @@ func interact() -> Interactable3D:
 func get_current_interactable() -> Interactable3D:
 	var parent := get_parent() as Node3D
 	if not is_instance_valid(parent):
-		push_error("%s cannot interact with invalid parent")
+		Util.node_error("%s cannot interact with invalid parent", self)
 		return null
 
 	var interactable: Interactable3D

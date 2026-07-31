@@ -29,7 +29,7 @@ func display(recipe: ItemRecipe) -> void:
 	recipe_label.text = recipe_text % recipe.result.item.name
 	for item_position in recipe.layout:
 		if recipe.layout[item_position] == null:
-			push_error(self, " cannot display ingredient in ", recipe, " with null at ", item_position)
+			Util.node_error("%s cannot display ingredient in %s with null at %s", self, recipe, item_position)
 			continue
 		get_grid_item_texture_rect(item_position).texture = recipe.layout[item_position].icon
 

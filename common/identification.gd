@@ -8,16 +8,16 @@ var _pool: Dictionary
 
 func auto_register(node: Node) -> bool:
 	if not is_instance_valid(node):
-		push_error("Cannot auto register invalid node %s" % node)
+		Util.node_error("Cannot auto register invalid node %s", node)
 		return false
 
 	if not DEFAULT_ID_PROPERTY in node:
-		push_error("Cannot auto register %s without default id property" % node)
+		Util.node_error("Cannot auto register %s without default id property", node)
 		return false
 
 	var id: Variant = node[DEFAULT_ID_PROPERTY]
 	if not id is int:
-		push_error("Cannot auto register %s with noninteger id property" % node)
+		Util.node_error("Cannot auto register %s with noninteger id property", node)
 		return false
 
 	register(node, id)

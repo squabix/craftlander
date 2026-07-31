@@ -91,6 +91,9 @@ const BUILT_IN_INPUT_ACTIONS: Array[StringName] = [
 ]
 
 
+static var nodestr_root: Node
+
+
 static func iprint(interval_seconds: float, ...args: Array) -> void:
 	if interval_seconds <= 0.0:
 		print.callv(args)
@@ -236,6 +239,34 @@ static func find_children_of_class(parent: Node, class_string: StringName, inclu
 		children.append_array(grandchildren)
 		
 	return children
+
+
+static func node_error(error: String, ...injections: Array) -> void:
+	for i in injections:
+		var element: Variant = injections[i]
+		if not element is Node:
+			continue
+		injections[i] = nodestr(element)
+	push_error(error % injections)
+
+
+static func nodestr(node: Node) -> String:
+	if not is_instance_valid(node) or not is_instance_valid(node.get_tree().root):
+		return "Invalid Node (%s)" % node
+	
+	var root: Node
+	if not is_instance_valid(nodestr_root):
+		if not is_instance_valid(node.get_tree().root):
+			Util.node_error("Cannot find root for %s", node)
+			return "Invalid Node (%s)" % node
+		root = node.get_tree().root
+	elif nodestr_root.get_path_to(node).is_empty():
+		Util.node_error("Cannot find root for %s", node)
+		return "Invalid Node (%s)" % node
+	else:
+		root = nodestr_root
+	
+	return "%s (%s)" % [node.name, root.get_path_to(node)]
 
 
 static func get_ancestor(of: Node, level: int) -> Node:

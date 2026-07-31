@@ -11,10 +11,10 @@ var raw_text: String = ""
 func _ready() -> void:
 	raw_text = text
 	if target_property_name == "":
-		push_error("Property name for %s has not been set" % self)
+		Util.node_error("Property name for %s has not been set", self)
 		return
 	if insertion_character == "":
-		push_error("Insertion character for %s has not been set" % self)
+		Util.node_error("Insertion character for %s has not been set", self)
 		return
 	update_text()
 
