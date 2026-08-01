@@ -22,7 +22,6 @@
 [ext_resource type="Script" uid="uid://b6gq5g1xvdnsu" path="res://player/states/player_swimming_state.gd" id="16_art4l"]
 [ext_resource type="Script" uid="uid://b1eix6p0204fp" path="res://common/inventory_system/displays/item_display.gd" id="16_e7oew"]
 [ext_resource type="Script" uid="uid://c3r6ofqamuc13" path="res://common/state_machine/mirror_state_machine.gd" id="16_mmwog"]
-[ext_resource type="Texture2D" uid="uid://c4jkghkqifcm7" path="res://assets/ui/crosshair.tres" id="17_tqiix"]
 [ext_resource type="Script" uid="uid://b7pvp0pnngnem" path="res://common/ui/fps_label.gd" id="19_bjvpn"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="19_c35mf"]
 [ext_resource type="Script" uid="uid://7vqcc56mnyjs" path="res://common/ui/tooltip_label.gd" id="19_knn7v"]
@@ -49,6 +48,8 @@
 [ext_resource type="Script" uid="uid://cf1x38wu72w8n" path="res://player/ui/crafting/recipes/recipe_display.gd" id="41_7crtr"]
 [ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/tools/shoddy_mace/shoddy_mace_item.tres" id="41_a2xo5"]
 [ext_resource type="Resource" uid="uid://w52cknmpa167" path="res://items/tools/shoddy_pickaxe/shoddy_pickaxe_item.tres" id="41_art4l"]
+[ext_resource type="Script" uid="uid://ddiytppqbuop1" path="res://common/inventory_system/item_cooldown_radial.gd" id="41_j420s"]
+[ext_resource type="Shader" uid="uid://clux7d66a4hbi" path="res://common/ui/radial.gdshader" id="41_kcq4v"]
 [ext_resource type="Texture2D" uid="uid://1xbns4oq6pfw" path="res://player/ui/crafting/crafting_slot.tres" id="42_7crtr"]
 [ext_resource type="Script" uid="uid://s6yjbusuc0uo" path="res://player/ui/inventory/current_item_label.gd" id="43_8pxes"]
 [ext_resource type="Script" uid="uid://hdyfq5riitj7" path="res://player/ui/crafting/complete_crafting_panel.gd" id="43_n0b8q"]
@@ -237,6 +238,30 @@ corner_radius_bottom_left = 1
 font_size = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_uw77l"]
+
+[sub_resource type="Gradient" id="Gradient_kcq4v"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5601266)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qavcc"]
+gradient = SubResource("Gradient_kcq4v")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j420s"]
+shader = ExtResource("41_kcq4v")
+shader_parameter/radius = 0.218000010355
+shader_parameter/thickness = 0.0490000023275
+shader_parameter/angle_offset = -90.0
+shader_parameter/fill_amount = 1.0
+
+[sub_resource type="Gradient" id="Gradient_j420s"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hjjmf"]
+gradient = SubResource("Gradient_j420s")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_48p26"]
 shader = ExtResource("28_ge24q")
@@ -1117,24 +1142,6 @@ reset_selection_on_disable = true
 inventory = NodePath("../../Inventory")
 metadata/_custom_type_script = "uid://ioo6s3m7wbha"
 
-[node name="Cursor" type="TextureRect" parent="HUD" unique_id=92395798]
-unique_name_in_owner = true
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -10.0
-offset_right = 10.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("17_tqiix")
-expand_mode = 1
-
 [node name="TooltipLabel" type="Label" parent="HUD" unique_id=189793984 node_paths=PackedStringArray("interactors")]
 layout_mode = 1
 anchors_preset = 8
@@ -1285,6 +1292,42 @@ visible = false
 custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 text = "Continue"
+
+[node name="Cursor2" type="TextureRect" parent="HUD" unique_id=832055728]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_qavcc")
+expand_mode = 1
+
+[node name="Cursor" type="TextureRect" parent="HUD" unique_id=1087802238 node_paths=PackedStringArray("item_holder")]
+material = SubResource("ShaderMaterial_j420s")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_hjjmf")
+expand_mode = 1
+script = ExtResource("41_j420s")
+item_holder = NodePath("../../Head/Camera3D/ItemHolder")
+metadata/_custom_type_script = "uid://ddiytppqbuop1"
 
 [node name="PauseInterface" type="Control" parent="." unique_id=1163003515 node_paths=PackedStringArray("crafting_menu", "crafting_environment", "recipe_panel", "settings_menu", "health", "resume_button", "save_button", "settings_button", "quit_button")]
 unique_name_in_owner = true
@@ -4707,6 +4750,7 @@ flat = true
 
 [node name="BoatInterface" type="Control" parent="." unique_id=520927744 node_paths=PackedStringArray("island_option_container", "pause_interface", "boat_upgrader", "sail_button")]
 process_mode = 2
+visible = false
 z_index = 1
 layout_mode = 3
 anchors_preset = 15

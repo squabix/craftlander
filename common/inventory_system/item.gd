@@ -232,6 +232,14 @@ func is_on_cooldown() -> bool:
 	return Time.get_ticks_msec() < cooldown_start_time + cooldown_length * 1000.0
 
 
+func get_cooldown_completion() -> float:
+	if cooldown_length <= 0.0:
+		print("No cooldown length")
+		return 1.0
+	var elapsed_time := (Time.get_ticks_msec() - cooldown_start_time) / 1000.0
+	return clampf(elapsed_time / cooldown_length, 0.0, 1.0)
+
+
 func start_use() -> bool:
 	return false
 
