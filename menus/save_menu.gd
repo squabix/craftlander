@@ -1,7 +1,7 @@
 extends Menu
 class_name SaveMenu
 
-const SAVED_TEXT_FORMAT := "SAVE %s"
+const SAVED_TEXT_FORMAT := "SAVE %s - %s"
 const UNSAVED_TEXT := "EMPTY"
 const UNSAVED_ALPHA := 0.75
 
@@ -24,9 +24,15 @@ func _ready() -> void:
 func update_button_visuals() -> void:
 	for slot in len(save_buttons):
 		var button := save_buttons[slot]
-		var is_saved := Main.is_saved(slot)
-		button.text = SAVED_TEXT_FORMAT % (slot + 1) if is_saved else UNSAVED_TEXT
-		button.modulate.a = 1.0 if is_saved else UNSAVED_ALPHA
+		
+		if Main.is_saved(slot):
+			var slot_number := slot + 1
+			var datetime_string := Time.get_datetime_string_from_datetime_dict(Save.load_from_disk(Main.get_slot_path(slot)).write_datetime, false).split("T")[0]
+			button.text = SAVED_TEXT_FORMAT % [slot_number, datetime_string]
+			button.modulate.a = 1.0
+		else:
+			button.text = UNSAVED_TEXT
+			button.modulate.a = UNSAVED_ALPHA
 
 func select_save(slot: int) -> void:
 	match current_select_mode:

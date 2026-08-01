@@ -4,6 +4,10 @@ extends Resource
 @export var tags: Array[StringName]
 @export var node_properties: Array[NodeSave] = []
 
+@export_group("Dates")
+@export var creation_datetime: Dictionary
+@export var write_datetime: Dictionary
+
 
 static func load_from_disk(path: String) -> Save:
 	if not ResourceLoader.exists(path):
@@ -15,6 +19,9 @@ static func load_from_disk(path: String) -> Save:
 
 
 func write_to_disk(path: String) -> Error:
+	write_datetime = Time.get_datetime_dict_from_system()
+	if not ResourceLoader.exists(path):
+		creation_datetime = write_datetime
 	return ResourceSaver.save(self, path)
 
 
