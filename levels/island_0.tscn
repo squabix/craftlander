@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cyj4kbcybeaby" path="res://main/island.gd" id="1_1lm7x"]
 [ext_resource type="Environment" uid="uid://cibxuhtgknost" path="res://assets/default_environment.tres" id="2_f11vp"]
+[ext_resource type="Resource" uid="uid://bkvo3ik5y1yom" path="res://island/island_resources/lush_isle.tres" id="2_mngd6"]
 [ext_resource type="Script" uid="uid://c7gxodoedjemm" path="res://island/island_nav_region.gd" id="3_2rfdt"]
 [ext_resource type="Script" uid="uid://wcijrouade5d" path="res://island/island_generator.gd" id="4_laodj"]
 [ext_resource type="Texture2D" uid="uid://cy7t71mibkd8k" path="res://island/island_taper_texture.tres" id="5_mngd6"]
@@ -27,6 +28,50 @@
 [ext_resource type="Script" uid="uid://6poppt70f3rp" path="res://island/island_water.gd" id="24_fb2aq"]
 [ext_resource type="Script" uid="uid://dpyn65ul3fu6v" path="res://common3d/mesh_instance_aggregator3d.gd" id="29_b35xs"]
 [ext_resource type="Script" uid="uid://dm2twxr0f7ne" path="res://common3d/heightmap_occluder_instance.gd" id="34_xj1bv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hjjmf"]
+font_size = 70
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.37254903)
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="Animation" id="Animation_mngd6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_b35xs"]
+resource_name = "show"
+length = 8.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 5, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6o2sf"]
+_data = {
+&"RESET": SubResource("Animation_mngd6"),
+&"show": SubResource("Animation_b35xs")
+}
 
 [sub_resource type="Gradient" id="Gradient_eo3xd"]
 
@@ -88,8 +133,9 @@ size = Vector2(1500, 1500)
 subdivide_width = 1000
 subdivide_depth = 1000
 
-[node name="Island0" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "boat_adder", "docking_manager", "pickup_container")]
+[node name="Island0" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "boat_adder", "docking_manager", "name_label", "name_anim_player", "pickup_container")]
 script = ExtResource("1_1lm7x")
+resource = ExtResource("2_mngd6")
 player = NodePath("DockingManager/Player")
 island_generator = NodePath("IslandGenerator")
 nav_region = NodePath("NavigationRegion3D")
@@ -98,7 +144,23 @@ prop_populator = NodePath("PropGenerator")
 mesh_aggregator = NodePath("MeshInstanceAggregator3D")
 boat_adder = NodePath("DockingManager/BoatAdder")
 docking_manager = NodePath("DockingManager")
+name_label = NodePath("NameLabel")
+name_anim_player = NodePath("NameLabel/AnimationPlayer")
 pickup_container = NodePath("PickupContainer")
+
+[node name="NameLabel" type="Label" parent="." unique_id=1346364616]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 145.0
+grow_horizontal = 2
+text = "
+Lush Isle"
+label_settings = SubResource("LabelSettings_hjjmf")
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NameLabel" unique_id=727042222]
+libraries/ = SubResource("AnimationLibrary_6o2sf")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2120940629]
 environment = ExtResource("2_f11vp")

@@ -78,7 +78,11 @@
 [ext_resource type="Texture2D" uid="uid://dejgw2p87pi2y" path="res://assets/materials/cross.png" id="68_anp34"]
 [ext_resource type="Texture2D" uid="uid://cfkuouoibr014" path="res://assets/ui/cross.png" id="68_j420s"]
 [ext_resource type="Texture2D" uid="uid://beudtbsirofjr" path="res://assets/ui/island0.png" id="71_anp34"]
+[ext_resource type="Resource" uid="uid://bkvo3ik5y1yom" path="res://island/island_resources/lush_isle.tres" id="73_kcq4v"]
 [ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="74_2h6tc"]
+[ext_resource type="Resource" uid="uid://bbo58dytvrrts" path="res://island/island_resources/skelly_sandbar.tres" id="75_lufic"]
+[ext_resource type="Script" uid="uid://7dsenmmyrsaw" path="res://island/island_resource.gd" id="75_qavcc"]
+[ext_resource type="Resource" uid="uid://cccntbp1un6ey" path="res://island/island_resources/frost_holm.tres" id="76_nxclr"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -436,6 +440,13 @@ _data = {
 &"RESET": SubResource("Animation_2h6tc"),
 &"float": SubResource("Animation_8rogd")
 }
+
+[sub_resource type="Resource" id="Resource_onxu2"]
+script = ExtResource("75_qavcc")
+name = "Undead Atoll"
+icon = ExtResource("71_anp34")
+index = 3
+metadata/_custom_type_script = "uid://7dsenmmyrsaw"
 
 [sub_resource type="Gradient" id="Gradient_fjxoa"]
 colors = PackedColorArray(0.09627376, 0.108222656, 0.12931883, 1, 0, 0, 0, 1)
@@ -5502,7 +5513,7 @@ anchor_bottom = 0.8585352
 offset_left = 1.5258789e-05
 script = ExtResource("64_kewli")
 current_alpha = 0.7
-island_name = "Lush Isle"
+island_resource = ExtResource("73_kcq4v")
 name_label = NodePath("NameLabel")
 texture_rect = NodePath("TextureRect")
 select_button = NodePath("SelectButton")
@@ -5542,8 +5553,7 @@ anchor_right = 0.3862717
 anchor_bottom = 0.50616264
 script = ExtResource("64_kewli")
 current_alpha = 0.7
-island_name = "Skelly Sandbar"
-island_index = 1
+island_resource = ExtResource("75_lufic")
 name_label = NodePath("NameLabel")
 texture_rect = NodePath("TextureRect")
 select_button = NodePath("SelectButton")
@@ -5583,8 +5593,7 @@ anchor_right = 0.6015625
 anchor_bottom = 0.71502304
 script = ExtResource("64_kewli")
 current_alpha = 0.7
-island_name = "Skelly Sandbar"
-island_index = 1
+island_resource = ExtResource("76_nxclr")
 name_label = NodePath("NameLabel")
 texture_rect = NodePath("TextureRect")
 select_button = NodePath("SelectButton")
@@ -5624,8 +5633,7 @@ anchor_right = 0.8428819
 anchor_bottom = 0.5545416
 script = ExtResource("64_kewli")
 current_alpha = 0.7
-island_name = "Skelly Sandbar"
-island_index = 1
+island_resource = SubResource("Resource_onxu2")
 name_label = NodePath("NameLabel")
 texture_rect = NodePath("TextureRect")
 select_button = NodePath("SelectButton")

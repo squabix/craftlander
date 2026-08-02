@@ -4,6 +4,8 @@ const ISLAND_CENTER_SPAWN_HEIGHT := 55.0
 
 enum PlayerSpawnMode {BOAT, ISLAND_CENTER}
 
+@export var resource: IslandResource
+
 @export_group("Player")
 @export var player: Player
 @export var player_spawn_mode := PlayerSpawnMode.BOAT
@@ -20,6 +22,11 @@ enum PlayerSpawnMode {BOAT, ISLAND_CENTER}
 @export_group("Boat")
 @export var boat_adder: BoatAdder
 @export var docking_manager: DockingManager
+
+@export_group("Name", "name")
+@export_multiline() var name_format := "\n%s"
+@export var name_label: Label
+@export var name_anim_player: AnimationPlayer
 
 @export_group("Misc")
 @export var pickup_container: Node3D
@@ -65,6 +72,12 @@ func _ready() -> void:
 	advance_step()
 	NodeSaver.offload_on_free_enabled = true
 	print()
+	show_name()
+
+
+func show_name() -> void:
+	name_label.text = name_format % resource.name
+	name_anim_player.play(&"show")
 
 
 func advance_step() -> void:

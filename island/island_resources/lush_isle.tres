@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IslandResource" format=3 uid="uid://bkvo3ik5y1yom"]
+
+[ext_resource type="Script" uid="uid://7dsenmmyrsaw" path="res://island/island_resource.gd" id="1_hqncd"]
+[ext_resource type="Texture2D" uid="uid://beudtbsirofjr" path="res://assets/ui/island0.png" id="1_q54vh"]
+
+[resource]
+script = ExtResource("1_hqncd")
+name = "Lush Isle"
+icon = ExtResource("1_q54vh")
+metadata/_custom_type_script = "uid://7dsenmmyrsaw"

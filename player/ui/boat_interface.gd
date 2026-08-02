@@ -64,7 +64,7 @@ func set_pause(to: bool) -> void:
 func load_selected_island() -> void:
 	if not is_instance_valid(selected_option):
 		return
-	Main.root.load_level(selected_option.island_index)
+	Main.root.load_level(selected_option.island_resource.index)
 
 
 func _on_option_toggled(to: bool, option: IslandOption) -> void:
