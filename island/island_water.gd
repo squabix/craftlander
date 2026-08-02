@@ -30,6 +30,7 @@ func _on_body_entered_water(body: PhysicsBody3D) -> void:
 		body.is_in_water = true
 	elif body is RigidItemPickup3D and body.is_set_up:
 		sink(body)
+		body.get_node(^"SinkPlayer").play()
 
 
 func _on_body_exited_water(body: PhysicsBody3D) -> void:
