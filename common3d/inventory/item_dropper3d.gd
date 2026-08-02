@@ -10,6 +10,8 @@ static var default_pickup_parent: Node:
 		return default_pickup_parent if is_instance_valid(default_pickup_parent) else (Engine.get_main_loop() as SceneTree).root
 
 @export var inventory: Inventory
+
+@export_group("Offset")
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var position_offset: Vector3
 @export_custom(PROPERTY_HINT_NONE, "suffix:°") var rotation_offset: Vector3
 

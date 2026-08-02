@@ -85,5 +85,4 @@ saved_properties = Dictionary[StringName, bool]({
 &"global_transform": true,
 &"saved_item": true
 })
-load_methods = Array[StringName]([&"_ready"])
 metadata/_custom_type_script = "uid://b7jfh6p1qykgr"

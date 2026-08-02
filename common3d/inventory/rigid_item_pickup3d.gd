@@ -4,13 +4,10 @@ extends RigidBody3D
 @export var item_pickup_interactable: ItemPickup3D
 @export var hurtbox: Hurtbox3D
 @export var saved_item: Item:
-	get:
-		return item_pickup_interactable.item if has_interactable() else saved_item
 	set(value):
-		if not has_interactable():
-			return
-		item_pickup_interactable.item = value
-		item_pickup_interactable.update_visuals.call_deferred()
+		saved_item = value
+		if has_interactable():
+			item_pickup_interactable.item = value
 
 
 var is_set_up := false
@@ -31,11 +28,16 @@ func _ready() -> void:
 	if not is_instance_valid(item_pickup_interactable):
 		return
 
+	if saved_item != null:
+		item_pickup_interactable.item = saved_item
+
 	item_pickup_interactable.auto_generate_collision = false
 	item_pickup_interactable.picked_up.connect(Util.safe_free.bind(self))
-
-	item_pickup_interactable.generate_all_collision(item_pickup_interactable)
-	item_pickup_interactable.update_tooltip()
+	
+	if item_pickup_interactable.item != null:
+		item_pickup_interactable.update_visuals()
+		item_pickup_interactable.generate_all_collision(item_pickup_interactable)
+		item_pickup_interactable.update_tooltip()
 
 	var collision_shapes := item_pickup_interactable.generate_all_collision(self)
 	

@@ -28,8 +28,6 @@ static func from_item(_item: Item) -> ItemPickup3D:
 
 
 func _ready() -> void:
-	update_visuals()
-	
 	if visibility_fading_enabled:
 		var geometry_instances: Array[GeometryInstance3D]
 		geometry_instances.assign(Util.find_children_of_class(visuals, &"GeometryInstance3D").filter(is_instance_valid))
