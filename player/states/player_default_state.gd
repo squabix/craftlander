@@ -6,6 +6,7 @@ const ACTION_USE_PRIMARY := &"use_primary"
 const ACTION_DROP := &"drop"
 
 func enter() -> void:
+	root.set_character_stream_player(root.steps_player)
 	super()
 	%ItemVisualsContainer3D.show()
 	for control in root.docking_hidden_interfaces:

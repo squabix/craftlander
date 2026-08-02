@@ -1,6 +1,10 @@
 class_name BoatUpgrader
 extends VBoxContainer
 
+signal upgraded(level: int)
+signal started_upgrade(level: int)
+signal failed_upgrade
+
 @export var requirements: Dictionary[int, Inventory]
 @export var requirement_display_container: Node
 @export var default_requirement: Inventory
@@ -36,10 +40,13 @@ func update() -> void:
 
 func upgrade() -> void:
 	if not current_requirement.is_inside(player_inventory):
+		failed_upgrade.emit()
 		return
+	started_upgrade.emit(current_upgrade_level)
 	player_inventory.subtract_inventory(current_requirement)
 	Main.loaded_save.boat_level = current_upgrade_level
 	boat_interface.current_boat = boat_interface.current_boat.make_current()
 	Main.root.save_current_game()
 	boat_interface.close()
 	print("Upgraded boat to %s" % current_upgrade_level)
+	upgraded.emit(current_upgrade_level)

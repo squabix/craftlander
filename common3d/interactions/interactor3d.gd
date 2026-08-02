@@ -2,6 +2,7 @@ class_name Interactor3D
 extends Node
 
 signal interacted_with(interactable: Interactable3D)
+signal interaction_failed
 
 @export var root: Node
 @export var channel := 0
@@ -10,6 +11,7 @@ signal interacted_with(interactable: Interactable3D)
 func interact() -> Interactable3D:
 	var interactable: Interactable3D = get_current_interactable()
 	if interactable == null:
+		interaction_failed.emit()
 		return null
 	interactable.interact(root)
 	interacted_with.emit(interactable)

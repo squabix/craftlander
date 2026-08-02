@@ -14,4 +14,5 @@ func _ready() -> void:
 			Util.node_error("%s cannot play audio for signal '%s' with invalid AudioStreamPlayer")
 			continue
 		
-		get_parent().connect(signal_name, player.play)
+		get_parent().get_signal_list()
+		Util.connect_custom(player.play, Signal(get_parent(), signal_name))

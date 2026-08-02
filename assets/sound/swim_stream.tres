@@ -1,0 +1,8 @@
+[gd_resource type="AudioStreamRandomizer" format=3 uid="uid://bngsjojub1sjy"]
+
+[ext_resource type="AudioStream" uid="uid://deonmhnar666w" path="res://assets/sound/swim.mp3" id="1_ec256"]
+
+[resource]
+random_pitch = 1.1031789
+streams_count = 1
+stream_0/stream = ExtResource("1_ec256")
