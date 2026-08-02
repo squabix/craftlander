@@ -20,6 +20,10 @@ boot_splash/bg_color=Color(0.036900003, 0.060795017, 0.09, 1)
 boot_splash/image="uid://6rsobsln1x1t"
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://dfnaxtxyuayj3"
+
 [autoload]
 
 SoundManager="*res://common/sound/sound_manager.gd"
