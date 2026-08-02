@@ -242,7 +242,7 @@ static func find_children_of_class(parent: Node, class_string: StringName, inclu
 
 
 static func node_error(error: String, ...injections: Array) -> void:
-	for i in injections:
+	for i in len(injections):
 		var element: Variant = injections[i]
 		if not element is Node:
 			continue
