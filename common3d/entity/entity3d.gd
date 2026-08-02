@@ -3,6 +3,7 @@ extends CharacterBody3D
 
 signal landed
 signal left_ground
+signal jumped
 
 @export var type := &"Entity"
 @export var move_mode: MoveMode
@@ -150,6 +151,7 @@ func move_down(amount: float = 1.0) -> void:
 func jump() -> void:
 	if is_on_floor():
 		move_up()
+		jumped.emit()
 
 
 func rotate_targets() -> void:
