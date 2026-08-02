@@ -11,4 +11,3 @@ func update_value() -> void:
 		value = 1.0
 		return
 	value = item_holder.held_item_instance.item.get_cooldown_completion()
-	Util.iprint(0.05, item_holder.held_item_instance.item.get_cooldown_completion())
