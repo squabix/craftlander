@@ -1,21 +1,26 @@
 class_name CharacterAudioStreamPlayer3D
 extends AudioStreamPlayer3D
 
+@export var disabled := false
 @export var character: CharacterBody3D
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var min_speed := 0.1
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var max_speed := 10.0
 @export var only_on_floor := true
 @export var vertical := false
 
-@export_group("Interval")
+@export_group("Interval", "interval")
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var interval_default_length := 0.4
 @export var interval_curve: Curve
-@export_custom(PROPERTY_HINT_NONE, "suffix:s") var default_interval := 0.4
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var interval_variation := 0.0
 
 var _time_since_last_play := 0.0
 
 func _physics_process(delta: float) -> void:
 	if not is_instance_valid(character):
 		set_physics_process(false)
+		return
+	
+	if disabled:
 		return
 	
 	if only_on_floor and not character.is_on_floor():
@@ -27,7 +32,7 @@ func _physics_process(delta: float) -> void:
 	var speed := velocity.length()
 	
 	if speed < min_speed:
-		_time_since_last_play = 0.0
+		_time_since_last_play = -randf_range(0.0, interval_variation)
 		return
 
 	_time_since_last_play += delta
@@ -47,7 +52,7 @@ func get_velocity() -> Vector3:
 
 func get_interval(speed: float) -> float:
 	if interval_curve == null:
-		return default_interval
+		return interval_default_length
 		
 	# Normalize speed between 0.0 and 1.0 based on min_speed and max_speed
 	return interval_curve.sample(clampf(remap(speed, min_speed, max_speed, 0.0, 1.0), 0.0, 1.0))

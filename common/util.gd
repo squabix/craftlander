@@ -241,6 +241,13 @@ static func find_children_of_class(parent: Node, class_string: StringName, inclu
 	return children
 
 
+static func connect_custom(callable: Callable, connecting_signal: Signal, one_shot := false, ...custom_args: Array) -> void:
+	await connecting_signal
+	callable.callv(custom_args)
+	if not one_shot:
+		connect_custom.callv([callable, connecting_signal, one_shot] + custom_args)
+
+
 static func node_error(error: String, ...injections: Array) -> void:
 	for i in len(injections):
 		var element: Variant = injections[i]

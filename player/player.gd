@@ -29,6 +29,10 @@ const HEAD_SPEED := 0.1
 @export var hunger_saver: NodeSaver
 @export var stamina: Stamina
 
+@export_group("Character Audio Stream Players")
+@export var steps_player: CharacterAudioStreamPlayer3D
+@export var swim_player: CharacterAudioStreamPlayer3D
+
 @export_group("External Dependencies")
 @export var respawn_point_node: Node3D
 
@@ -64,6 +68,11 @@ func _process(_delta: float) -> void:
 	# Drown if swimming when out of stamina
 	if is_in_water and not stamina.is_usable():
 		health.hurt(INF)
+
+
+func set_character_stream_player(to: CharacterAudioStreamPlayer3D) -> void:
+	steps_player.disabled = steps_player != to
+	swim_player.disabled = swim_player != to
 
 
 func get_target_head_height() -> float:

@@ -1,6 +1,9 @@
 class_name BoatInterface
 extends Control
 
+signal opened
+signal closed
+
 @export var island_option_container: Control
 @export var pause_interface: PauseInterface
 @export var boat_upgrader: BoatUpgrader
@@ -35,6 +38,7 @@ func open(boat: Boat) -> void:
 	current_boat = boat
 	boat_upgrader.boat = boat
 	reload_options()
+	opened.emit()
 
 
 func reload_options() -> void:
@@ -52,6 +56,7 @@ func close() -> void:
 		for option in island_option_container.get_children():
 			option.hide()
 	current_boat = null
+	closed.emit()
 
 
 func set_pause(to: bool) -> void:

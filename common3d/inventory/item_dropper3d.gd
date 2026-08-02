@@ -1,6 +1,9 @@
 class_name InventoryDropper3D
 extends Node3D
 
+signal dropped
+signal added_pickup(pickup: RigidItemPickup3D)
+
 enum DeathDropMode { EVERYTHING, RANDOM, NEXT, NONE }
 
 static var rigid_item_pickup_scene := load("res://defaults/default_rigid_item_pickup.tscn")
@@ -67,6 +70,7 @@ func add_pickup(item: Item) -> RigidItemPickup3D:
 	pickup_parent.add_child(pickup)
 	InventoryDropper3D.all_dropped_pickups.append(pickup)
 	InventoryDropper3D._transform_pickup(pickup, self)
+	added_pickup.emit(pickup)
 	return pickup
 
 
@@ -80,8 +84,10 @@ func drop(index: int = -1) -> Node3D:
 	if inventory.remove_instance(index, 1) > 0:
 		Util.node_error("%s cannot remove nonexistant item %s from %s", self, instance.item, inventory)
 		return null
-
-	return add_pickup(instance.item)
+	
+	var pickup := add_pickup(instance.item)
+	dropped.emit()
+	return pickup
 
 
 func get_instance(index) -> ItemInstance:

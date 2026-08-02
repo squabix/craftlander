@@ -2,6 +2,15 @@ extends SubViewportContainer
 class_name CraftingEnvironment
 
 signal grid_changed
+signal placed
+signal emptied
+
+signal crafted(item: Item)
+signal craft_failed
+
+signal started_craft_tweening
+signal tweened_craft_merge
+signal tweened_craft_showcase
 
 const MAX_DRAG_DISTANCE := 1.0
 const MAX_SLOT_DISTANCE := 1.0
@@ -182,6 +191,7 @@ func place(slot_index: int) -> void:
 	slots_contents[slot_index] = visuals_to_place
 	move_item_to_grid_inventory(visuals_to_place.get_item())
 	update_selection_visuals.call_deferred()
+	placed.emit()
 
 func clear() -> void:
 	grid_inventory.give_everything(inventory_selector.inventory)
@@ -252,6 +262,7 @@ func empty(slot_index: int) -> void:
 	remove_item_from_grid_inventory(item_to_remove)
 	
 	tween_empty(old_visuals)
+	emptied.emit()
 
 func tween_empty(visuals: ItemVisualsContainer3D) -> void:
 	var drop_tween := create_tween().set_parallel(true).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
@@ -303,6 +314,7 @@ func emit_craft_particles(spawn_position: Vector3) -> void:
 	craft_particles.emitting = true
 
 func tween_craft_success(item: Item) -> void:
+	started_craft_tweening.emit()
 	is_tweening_craft_result = true
 	
 	var visuals_to_animate: Array[ItemVisualsContainer3D] = slots_contents.filter(is_instance_valid)
@@ -336,6 +348,7 @@ func tween_craft_success(item: Item) -> void:
 	# Wait until the last staggered item completes its slide
 	merge_tween.tween_interval(max_delay + success_merge_duration)
 	await merge_tween.finished
+	tweened_craft_merge.emit()
 	
 	# Free visual resources once compressed completely
 	for visual in visuals_to_animate:
@@ -368,6 +381,7 @@ func tween_craft_success(item: Item) -> void:
 	showcase_tween.parallel().tween_property(crafted_visuals, "scale", Vector3.ZERO, success_drop_duration)
 	
 	await showcase_tween.finished
+	tweened_craft_showcase.emit()
 	
 	Util.safe_free(crafted_visuals)
 	is_tweening_craft_result = false
@@ -376,10 +390,12 @@ func craft() -> void:
 	var recipe := RecipeBook.get_recipe(get_recipe_layout())
 	if recipe == null:
 		tween_craft_fail()
+		craft_failed.emit()
 		return
 	
 	if not inventory_selector.inventory.has_room(recipe.result.item, recipe.result.quantity):
 		tween_craft_fail()
+		craft_failed.emit()
 		return 
 	
 	# Begin animation sequence & lock user viewport interaction inputs
@@ -395,6 +411,7 @@ func craft() -> void:
 	update_selection_visuals()
 	
 	grid_changed.emit()
+	crafted.emit(recipe.result.item)
 
 func _input(event: InputEvent) -> void:
 	if not is_crafting or is_tweening_craft_result:
