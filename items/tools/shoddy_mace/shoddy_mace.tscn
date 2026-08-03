@@ -2,9 +2,16 @@
 
 [ext_resource type="Script" uid="uid://dd8qskwv1nlqx" path="res://common3d/damage_system/hit_ray3d.gd" id="1_550cs"]
 [ext_resource type="Resource" uid="uid://nv3owcu3xvi8" path="res://items/tools/shoddy_mace/shoddy_mace_damage.tres" id="2_550cs"]
+[ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="3_6eh4n"]
 [ext_resource type="PackedScene" uid="uid://7qerylnupfr3" path="res://items/tools/shoddy_mace/shoddy_mace.blend" id="3_550cs"]
+[ext_resource type="AudioStream" uid="uid://d1te8os5tp3ww" path="res://assets/sound/hit.mp3" id="4_7mmnk"]
 [ext_resource type="Material" uid="uid://bh8sv2icydggs" path="res://assets/materials/stone.tres" id="4_w4m4n"]
 [ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="5_w4m4n"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0732m"]
+random_pitch = 1.2599211
+streams_count = 1
+stream_0/stream = ExtResource("4_7mmnk")
 
 [node name="ShoddyMace" type="Node3D" unique_id=1538443592]
 
@@ -16,6 +23,19 @@ collide_with_bodies = false
 script = ExtResource("1_550cs")
 damage = ExtResource("2_550cs")
 metadata/_custom_type_script = "uid://dd8qskwv1nlqx"
+
+[node name="SignalAudioManager3D" type="Node3D" parent="HarvestRay" unique_id=839825680 node_paths=PackedStringArray("signal_3d_players")]
+top_level = true
+script = ExtResource("3_6eh4n")
+signal_3d_players = {
+&"hit_position": NodePath("AudioStreamPlayer3D")
+}
+metadata/_custom_type_script = "uid://43bqjaemfda5"
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="HarvestRay/SignalAudioManager3D" unique_id=1732194397]
+stream = SubResource("AudioStreamRandomizer_0732m")
+volume_db = -8.0
+pitch_scale = 1.5
 
 [node name="Visuals" type="Node3D" parent="." unique_id=253996080]
 

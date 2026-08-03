@@ -2,6 +2,7 @@ class_name HitRay3D
 extends RayCast3D
 
 signal hit_node
+signal hit_position(position: Vector3)
 
 @export var damage: Damage
 @export var one_shot := false
@@ -40,5 +41,6 @@ func hit() -> Area3D:
 	area.hurt(damage, Hitbox3D.get_knock_direction(global_rotation.y, damage))
 	hit_nodes.append(area)
 	hit_node.emit()
+	hit_position.emit(get_collision_point())
 
 	return area
