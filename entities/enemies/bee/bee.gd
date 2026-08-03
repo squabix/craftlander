@@ -1,5 +1,7 @@
 extends Entity3D
 
+signal attacked
+
 const DAMAGE_AMOUNT := 5.0
 
 const MIN_ATTACK_TIME := 0.3
@@ -9,6 +11,7 @@ const BASE_HEIGHT := 1.3
 const HEIGHT_RANDOM_OFFSET := 0.3
 
 const ATTACK_RANGE := 1.0
+const ATTACK_DP := 1.0
 
 var target_healths: Dictionary[Node3D, Health] = {}
 
@@ -39,7 +42,8 @@ func attack() -> void:
 	if global_position.distance_to(sight.target_position) > ATTACK_RANGE:
 		return
 	
-	get_target_health().hurt(1.0)
+	get_target_health().hurt(ATTACK_DP)
+	attacked.emit()
 
 func _on_hit_timer_timeout() -> void:
 	attack()
