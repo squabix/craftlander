@@ -19,6 +19,7 @@
 [ext_resource type="Shape3D" uid="uid://1ks4j4c8paiv" path="res://island/props/destructable_resource/tree/stump_collision.tres" id="12_18auj"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="12_jeogd"]
 [ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="13_mw2c8"]
+[ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="13_snq0j"]
 [ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="16_cs0vr"]
 [ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="16_k7n08"]
 [ext_resource type="AudioStream" uid="uid://f50l344faomv" path="res://assets/sound/tree_fall.mp3" id="17_h1qf7"]
@@ -357,8 +358,7 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 [node name="SignalAudioManager" type="Node3D" parent="StateMachine/Falling" unique_id=707435236 node_paths=PackedStringArray("signal_players")]
 script = ExtResource("8_uyxsq")
 signal_players = {
-&"entered": NodePath("../../../Trunk/FallPlayer"),
-&"exited": NodePath("../../../DestroyPlayer")
+&"entered": NodePath("../../../Trunk/FallPlayer")
 }
 metadata/_custom_type_script = "uid://43bqjaemfda5"
 
@@ -400,8 +400,13 @@ collision_layer = 0
 collision_mask = 4
 monitorable = false
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Trunk/ContinueFallArea" unique_id=766471601]
-remote_path = NodePath("../../../DestroyPlayer")
+[node name="AudioSpawner3D" type="Node3D" parent="Trunk/ContinueFallArea" unique_id=1487704848]
+script = ExtResource("13_snq0j")
+override_stream = ExtResource("26_h1qf7")
+override_volume_db = 5.0
+override_pitch_scale = 0.78
+spawn_on_exit_tree = true
+metadata/_custom_type_script = "uid://bv2ss5hjacgd3"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Trunk/ContinueFallArea" unique_id=1416076246]
 shape = SubResource("SphereShape3D_8mlu7")
@@ -483,9 +488,3 @@ saved_properties = Dictionary[StringName, bool]({
 &"global_transform": true
 })
 metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
-
-[node name="DestroyPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1167267533]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, 0)
-stream = ExtResource("26_h1qf7")
-volume_db = 5.0
-pitch_scale = 0.78
