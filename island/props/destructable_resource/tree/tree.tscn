@@ -403,6 +403,7 @@ monitorable = false
 [node name="AudioSpawner3D" type="Node3D" parent="Trunk/ContinueFallArea" unique_id=1487704848]
 script = ExtResource("13_snq0j")
 override_stream = ExtResource("26_h1qf7")
+override_bus = &"SFX"
 override_volume_db = 5.0
 override_pitch_scale = 0.78
 spawn_on_exit_tree = true
@@ -436,6 +437,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 [node name="FallPlayer" type="AudioStreamPlayer3D" parent="Trunk" unique_id=1595950413]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = ExtResource("17_h1qf7")
+bus = &"SFX"
 
 [node name="ChopParticles" type="GPUParticles3D" parent="." unique_id=931223418]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)

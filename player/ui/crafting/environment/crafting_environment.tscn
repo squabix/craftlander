@@ -420,18 +420,23 @@ metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 
 [node name="EmptyPlayer" type="AudioStreamPlayer" parent="SignalAudioManager" unique_id=2098331337]
 stream = SubResource("AudioStreamRandomizer_1mrey")
+bus = &"UI"
 
 [node name="PlacePlayer" type="AudioStreamPlayer" parent="SignalAudioManager" unique_id=409928241]
 stream = SubResource("AudioStreamRandomizer_xw6tw")
 volume_db = -5.0
+bus = &"UI"
 
 [node name="CraftFailPlayer" type="AudioStreamPlayer" parent="SignalAudioManager" unique_id=354785515]
 stream = ExtResource("8_1mrey")
+bus = &"UI"
 
 [node name="StartCraftPlayer" type="AudioStreamPlayer" parent="SignalAudioManager" unique_id=998938901]
 stream = ExtResource("9_xw6tw")
 volume_db = 5.0
+bus = &"UI"
 
 [node name="ShowcaseCraftPlayer" type="AudioStreamPlayer" parent="SignalAudioManager" unique_id=904723519]
 stream = ExtResource("10_tnjey")
 volume_db = -2.0
+bus = &"UI"

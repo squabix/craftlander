@@ -374,6 +374,7 @@ metadata/_custom_type_script = "uid://43bqjaemfda5"
 [node name="HurtPlayer" type="AudioStreamPlayer3D" parent="Hurtbox3D/SignalAudioManager3D" unique_id=2024957280]
 stream = SubResource("AudioStreamRandomizer_hjjmf")
 volume_db = -5.0
+bus = &"SFX"
 
 [node name="CullingController3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=844525548 node_paths=PackedStringArray("root", "visibility_control_list")]
 aabb = AABB(-0.2, 0.75, -0.2, 0.4, 1.2, 0.4)
@@ -402,6 +403,7 @@ unit_size = 20.0
 max_db = -2.0
 autoplay = true
 max_distance = 10.0
+bus = &"SFX"
 parameters/looping = true
 
 [node name="DeathAudioSpawner3D" type="Node3D" parent="." unique_id=1770541199]
