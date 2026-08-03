@@ -35,6 +35,7 @@ metadata/_custom_type_script = "uid://43bqjaemfda5"
 stream = SubResource("AudioStreamRandomizer_lqsor")
 volume_db = -8.0
 pitch_scale = 1.5
+bus = &"SFX"
 
 [node name="Visuals" type="Node3D" parent="." unique_id=551632359]
 

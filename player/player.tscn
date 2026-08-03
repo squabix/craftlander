@@ -99,7 +99,6 @@
 [ext_resource type="AudioStream" uid="uid://deix0ahce6g3i" path="res://assets/sound/open_drop-02.mp3" id="77_2s0vo"]
 [ext_resource type="AudioStream" uid="uid://dwoi11pb7rbsy" path="res://assets/sound/open_drop-03.mp3" id="78_hgm8h"]
 [ext_resource type="Script" uid="uid://b3snj0gi7akf8" path="res://common/signal_audio_manager.gd" id="84_onxu2"]
-[ext_resource type="AudioStream" uid="uid://bm74nxyfvdym5" path="res://assets/sound/jump_woosh.wav" id="85_gci7n"]
 [ext_resource type="AudioStream" uid="uid://dj216lq0cge4b" path="res://assets/sound/land.wav" id="87_tcwf7"]
 [ext_resource type="AudioStream" uid="uid://dbru8s4g7r8l4" path="res://assets/sound/upgrade1.mp3" id="87_ycggl"]
 [ext_resource type="AudioStream" uid="uid://c03ir843xs060" path="res://assets/sound/error1.wav" id="88_5ntu2"]
@@ -930,13 +929,8 @@ metadata/_custom_type_script = "uid://c622jer80j3sk"
 height = 0.3
 radius = 0.3
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_onxu2"]
-random_pitch = 1.005793
-streams_count = 1
-stream_0/stream = ExtResource("85_gci7n")
-
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hjjmf"]
-random_volume_offset_db = 0.1
+random_pitch = 1.122462
 streams_count = 1
 stream_0/stream = ExtResource("87_tcwf7")
 
@@ -1141,6 +1135,7 @@ metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 [node name="SelectPlayer" type="AudioStreamPlayer" parent="Head/Camera3D/ItemHolder/HoldSelector/SignalAudioManager" unique_id=484586780]
 stream = SubResource("AudioStreamRandomizer_rnncm")
 volume_db = -10.0
+bus = &"UI"
 
 [node name="InteratorRay" type="RayCast3D" parent="Head/Camera3D" unique_id=1551921047]
 visible = false
@@ -1171,6 +1166,7 @@ stream = SubResource("AudioStreamRandomizer_o385s")
 stream = ExtResource("30_d0gtc")
 volume_db = -23.0
 pitch_scale = 0.5
+bus = &"UI"
 
 [node name="DropperRayCast" type="RayCast3D" parent="Head/Camera3D" unique_id=690174372]
 visible = false
@@ -1328,6 +1324,7 @@ metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 [node name="SelectPlayer" type="AudioStreamPlayer" parent="HUD/PrimaryInventorySelector/SignalAudioManager" unique_id=256799826]
 stream = SubResource("AudioStreamRandomizer_rnncm")
 volume_db = -10.0
+bus = &"UI"
 
 [node name="SecondaryInventorySelector" type="Node" parent="HUD" unique_id=486779293 node_paths=PackedStringArray("inventory")]
 script = ExtResource("9_bjvpn")
@@ -1346,6 +1343,7 @@ metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 [node name="SelectPlayer" type="AudioStreamPlayer" parent="HUD/SecondaryInventorySelector/SignalAudioManager" unique_id=1428930165]
 stream = SubResource("AudioStreamRandomizer_rnncm")
 volume_db = -10.0
+bus = &"UI"
 
 [node name="TooltipLabel" type="Label" parent="HUD" unique_id=189793984 node_paths=PackedStringArray("interactors")]
 layout_mode = 1
@@ -4237,6 +4235,7 @@ metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 
 [node name="PausePlayer" type="AudioStreamPlayer" parent="PauseInterface/SignalAudioManager" unique_id=1328479173]
 stream = SubResource("AudioStreamRandomizer_6ct4f")
+bus = &"UI"
 
 [node name="HotbarInterface" type="Control" parent="." unique_id=858532635]
 unique_name_in_owner = true
@@ -5702,9 +5701,11 @@ metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 
 [node name="UpgradePlayer" type="AudioStreamPlayer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/SignalAudioManager" unique_id=1309138978]
 stream = ExtResource("87_ycggl")
+bus = &"UI"
 
 [node name="FailPlayer" type="AudioStreamPlayer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/SignalAudioManager" unique_id=1821943430]
 stream = ExtResource("88_5ntu2")
+bus = &"UI"
 
 [node name="Control" type="CenterContainer" parent="BoatInterface/BottomOptions/HBoxContainer" unique_id=1579388308]
 layout_mode = 2
@@ -5962,6 +5963,7 @@ playback_default_blend_time = 0.2
 [node name="SwooshPlayer" type="AudioStreamPlayer" parent="AnimationPlayer" unique_id=664386645]
 stream = SubResource("AudioStreamRandomizer_568ps")
 volume_db = -8.0
+bus = &"SFX"
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1076057530 node_paths=PackedStringArray("player", "inventory_selector")]
 active = false
@@ -6005,17 +6007,18 @@ signal_players = {
 metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 
 [node name="JumpPlayer" type="AudioStreamPlayer" parent="SignalAudioManager" unique_id=1230564003]
-stream = SubResource("AudioStreamRandomizer_onxu2")
+stream = SubResource("AudioStreamRandomizer_hjjmf")
+volume_db = -10.0
 bus = &"SFX"
 
 [node name="LandPlayer" type="AudioStreamPlayer" parent="SignalAudioManager" unique_id=1862458611]
-stream = SubResource("AudioStreamRandomizer_hjjmf")
-volume_db = -7.5
+stream = ExtResource("94_qm6yy")
+volume_db = 1.0
+pitch_scale = 0.86
 bus = &"SFX"
 
-[node name="StepsPlayer" type="AudioStreamPlayer3D" parent="." unique_id=925404072 node_paths=PackedStringArray("character")]
+[node name="StepsPlayer" type="AudioStreamPlayer3D" parent="." unique_id=2007241949 node_paths=PackedStringArray("character")]
 stream = ExtResource("94_qm6yy")
-volume_db = -1.495
 bus = &"SFX"
 script = ExtResource("89_jfgxe")
 character = NodePath("..")

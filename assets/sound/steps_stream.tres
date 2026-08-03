@@ -1,6 +1,6 @@
 [gd_resource type="AudioStreamRandomizer" format=3 uid="uid://cwqa0rroqx0ww"]
 
-[ext_resource type="AudioStream" uid="uid://dff48j30lb646" path="res://assets/sound/step.wav" id="1_e38nm"]
+[ext_resource type="AudioStream" uid="uid://bus7hgef3h35c" path="res://assets/sound/step.mp3" id="1_e38nm"]
 
 [resource]
 random_pitch = 1.122462
