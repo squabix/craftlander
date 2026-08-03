@@ -15,7 +15,11 @@
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="15_7niy0"]
 [ext_resource type="Script" uid="uid://bp5ab438ufrus" path="res://common3d/culling_controller3d.gd" id="15_nj0qj"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="16_0hiqi"]
+[ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="16_4hd4j"]
 [ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="16_t5evv"]
+[ext_resource type="AudioStream" uid="uid://c2dpvg8ontimn" path="res://assets/sound/bee_hurt.mp3" id="17_wnfpe"]
+[ext_resource type="AudioStream" uid="uid://c3yyhxgab6684" path="res://assets/sound/bee_fly.mp3" id="19_wnfpe"]
+[ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="20_rq2ym"]
 
 [sub_resource type="GDScript" id="GDScript_exvl0"]
 script/source = "extends EntityController3D
@@ -199,6 +203,11 @@ height = 1.44
 [sub_resource type="SphereShape3D" id="SphereShape3D_nw5ty"]
 radius = 0.15
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hjjmf"]
+random_pitch = 1.122462
+streams_count = 1
+stream_0/stream = ExtResource("17_wnfpe")
+
 [node name="Bee" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("sight", "hit_timer", "form_nodes")]
 collision_mask = 17
 wall_min_slide_angle = 3.1415927
@@ -355,6 +364,17 @@ metadata/_custom_type_script = "uid://4dfurtssrp4f"
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1632674445]
 shape = SubResource("SphereShape3D_nw5ty")
 
+[node name="SignalAudioManager3D" type="Node3D" parent="Hurtbox3D" unique_id=471843834 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("16_4hd4j")
+signal_players = {
+&"was_hurt": NodePath("HurtPlayer")
+}
+metadata/_custom_type_script = "uid://43bqjaemfda5"
+
+[node name="HurtPlayer" type="AudioStreamPlayer3D" parent="Hurtbox3D/SignalAudioManager3D" unique_id=2024957280]
+stream = SubResource("AudioStreamRandomizer_hjjmf")
+volume_db = -5.0
+
 [node name="CullingController3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=844525548 node_paths=PackedStringArray("root", "visibility_control_list")]
 aabb = AABB(-0.2, 0.75, -0.2, 0.4, 1.2, 0.4)
 script = ExtResource("15_nj0qj")
@@ -374,5 +394,23 @@ NodePath(".."): &"evaluate_culling"
 }
 initial_time_left = 3.0
 metadata/_custom_type_script = "uid://73ya7jxulyl4"
+
+[node name="BuzzPlayer" type="AudioStreamPlayer3D" parent="." unique_id=202495578]
+stream = ExtResource("19_wnfpe")
+volume_db = -9.215
+unit_size = 20.0
+max_db = -2.0
+autoplay = true
+max_distance = 10.0
+parameters/looping = true
+
+[node name="DeathAudioSpawner3D" type="Node3D" parent="." unique_id=1770541199]
+script = ExtResource("20_rq2ym")
+override_stream = ExtResource("17_wnfpe")
+override_bus = &"SFX"
+override_volume_db = 4.0
+ignore_pausing = true
+spawn_on_exit_tree = true
+metadata/_custom_type_script = "uid://bv2ss5hjacgd3"
 
 [editable path="BlenderVisuals/Visuals"]
