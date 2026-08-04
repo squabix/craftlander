@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://d0uoopq8psjqc"]
+
+[ext_resource type="Script" uid="uid://b3snj0gi7akf8" path="res://common/signal_audio_manager.gd" id="1_3rb4b"]
+[ext_resource type="AudioStream" uid="uid://k4ldqgj2la57" path="res://assets/sound/click1.mp3" id="2_6ivnu"]
+[ext_resource type="AudioStream" uid="uid://fydlo6y1vb1s" path="res://assets/sound/click2.mp3" id="3_ofiln"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hjjmf"]
+random_pitch = 1.1892071
+streams_count = 1
+stream_0/stream = ExtResource("2_6ivnu")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_b4mjk"]
+random_pitch = 1.1892071
+streams_count = 1
+stream_0/stream = ExtResource("3_ofiln")
+
+[node name="ButtonAudioManager" type="Node" unique_id=2144126531 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("1_3rb4b")
+signal_players = {
+&"focus_entered": NodePath("HoverPlayer"),
+&"mouse_entered": NodePath("HoverPlayer"),
+&"pressed": NodePath("PressPlayer")
+}
+metadata/_custom_type_script = "uid://b3snj0gi7akf8"
+
+[node name="HoverPlayer" type="AudioStreamPlayer" parent="." unique_id=553096653]
+stream = SubResource("AudioStreamRandomizer_hjjmf")
+volume_db = -10.0
+bus = &"UI"
+
+[node name="PressPlayer" type="AudioStreamPlayer" parent="." unique_id=1599022215]
+stream = SubResource("AudioStreamRandomizer_b4mjk")
+volume_db = -10.0
+bus = &"UI"

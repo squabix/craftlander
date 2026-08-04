@@ -79,6 +79,7 @@
 [ext_resource type="Resource" uid="uid://6a5notvdv1ei" path="res://items/tools/shoddy_mace/shoddy_mace_recipe.tres" id="53_hggc2"]
 [ext_resource type="Script" uid="uid://bubfjagdkgrlq" path="res://player/ui/inventory/inventory_organizer.gd" id="55_jbx34"]
 [ext_resource type="Script" uid="uid://uwx6xnt2vr38" path="res://player/ui/inventory/item_inspector.gd" id="59_b2j0d"]
+[ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://defaults/button_audio_manager.tscn" id="63_0iv1a"]
 [ext_resource type="Script" uid="uid://rroukmbv64vv" path="res://player/ui/boat_interface.gd" id="64_2h6tc"]
 [ext_resource type="Script" uid="uid://b6r50f8akgpp7" path="res://player/ui/island_option.gd" id="64_kewli"]
 [ext_resource type="Texture2D" uid="uid://dvu8avo8cfq2c" path="res://icon.svg" id="64_utr5e"]
@@ -1631,6 +1632,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Item"
 
+[node name="ButtonAudioManager" parent="PauseInterface/CraftingMenu/RecipePanel/RecipeList/EntryContainer/Entry/Button" unique_id=2144126531 node_paths=PackedStringArray("signal_players") instance=ExtResource("63_0iv1a")]
+signal_players = {
+&"focus_entered": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
 [node name="BackEntry" type="CenterContainer" parent="PauseInterface/CraftingMenu/RecipePanel/RecipeList/EntryContainer" unique_id=626121332]
 layout_mode = 2
 
@@ -1638,6 +1646,13 @@ layout_mode = 2
 custom_minimum_size = Vector2(64, 24)
 layout_mode = 2
 text = "Back"
+
+[node name="ButtonAudioManager" parent="PauseInterface/CraftingMenu/RecipePanel/RecipeList/EntryContainer/BackEntry/Button" unique_id=1837032648 node_paths=PackedStringArray("signal_players") instance=ExtResource("63_0iv1a")]
+signal_players = {
+&"focus_entered": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
 
 [node name="CenterContainer" type="CenterContainer" parent="PauseInterface/CraftingMenu/RecipePanel" unique_id=1737049201]
 layout_mode = 2
@@ -2047,6 +2062,13 @@ offset_top = -19.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "CRAFT"
+
+[node name="ButtonAudioManager" parent="PauseInterface/CraftingMenu/CompletePanel/CraftButton" unique_id=583215524 node_paths=PackedStringArray("signal_players") instance=ExtResource("63_0iv1a")]
+signal_players = {
+&"focus_entered": NodePath("HoverPlayer"),
+&"mouse_entered": NodePath("HoverPlayer"),
+&"pressed": NodePath("PressPlayer")
+}
 
 [node name="Preview" type="Control" parent="PauseInterface/CraftingMenu/CompletePanel" unique_id=32465888]
 layout_mode = 1
@@ -4164,20 +4186,48 @@ custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 text = "BACK TO GAME"
 
+[node name="ButtonAudioManager" parent="PauseInterface/CraftingMenu/OptionsContainer/ResumeButton" unique_id=132595468 node_paths=PackedStringArray("signal_players") instance=ExtResource("63_0iv1a")]
+signal_players = {
+&"focus_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
 [node name="SaveButton" type="Button" parent="PauseInterface/CraftingMenu/OptionsContainer" unique_id=2070345147]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 text = "SAVE"
+
+[node name="ButtonAudioManager" parent="PauseInterface/CraftingMenu/OptionsContainer/SaveButton" unique_id=523312117 node_paths=PackedStringArray("signal_players") instance=ExtResource("63_0iv1a")]
+signal_players = {
+&"focus_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
 
 [node name="SettingsButton" type="Button" parent="PauseInterface/CraftingMenu/OptionsContainer" unique_id=1494540130]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 text = "SETTINGS"
 
+[node name="ButtonAudioManager" parent="PauseInterface/CraftingMenu/OptionsContainer/SettingsButton" unique_id=1372150768 node_paths=PackedStringArray("signal_players") instance=ExtResource("63_0iv1a")]
+signal_players = {
+&"focus_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
 [node name="QuitButton" type="Button" parent="PauseInterface/CraftingMenu/OptionsContainer" unique_id=729008343]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 text = "SAVE AND QUIT TO TITLE"
+
+[node name="ButtonAudioManager" parent="PauseInterface/CraftingMenu/OptionsContainer/QuitButton" unique_id=636152287 node_paths=PackedStringArray("signal_players") instance=ExtResource("63_0iv1a")]
+signal_players = {
+&"focus_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
 
 [node name="InventoryOrganizer" type="Node" parent="PauseInterface/CraftingMenu" unique_id=1412121172 node_paths=PackedStringArray("inventory", "inventory_display_rows", "held_item_label", "pause_interface", "primary_inventory_selector", "secondary_inventory_selector", "hold_inventory_selector")]
 script = ExtResource("55_jbx34")
@@ -5683,6 +5733,13 @@ custom_minimum_size = Vector2(150, 30)
 layout_mode = 2
 text = "Upgrade"
 
+[node name="ButtonAudioManager" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/UpgradeButtonContainer/UpgradeButton" unique_id=1941231385 node_paths=PackedStringArray("signal_players") instance=ExtResource("63_0iv1a")]
+signal_players = {
+&"focus_entered": NodePath("../../../../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
 [node name="UpgradeRequirement1" type="Node" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader" unique_id=1136310646]
 script = ExtResource("19_c35mf")
 item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_8rogd"), SubResource("Resource_48p26")])
@@ -5717,6 +5774,13 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 33
 disabled = true
 text = "Set Sail"
+
+[node name="ButtonAudioManager" parent="BoatInterface/BottomOptions/HBoxContainer/Control/SailButton" unique_id=1159382491 node_paths=PackedStringArray("signal_players") instance=ExtResource("63_0iv1a")]
+signal_players = {
+&"focus_entered": NodePath("../../../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
 
 [node name="IslandOptionContainer" type="Control" parent="BoatInterface" unique_id=288135614]
 anchors_preset = 0
@@ -5760,6 +5824,13 @@ toggle_mode = true
 text = "Select
 "
 
+[node name="ButtonAudioManager" parent="BoatInterface/IslandOptionContainer/IslandOption0/SelectButton" unique_id=513675797 node_paths=PackedStringArray("signal_players") instance=ExtResource("63_0iv1a")]
+signal_players = {
+&"focus_entered": NodePath("../../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BoatInterface/IslandOptionContainer/IslandOption0" unique_id=1649012698]
 libraries/ = SubResource("AnimationLibrary_48p26")
 autoplay = &"float"
@@ -5799,6 +5870,13 @@ layout_mode = 2
 toggle_mode = true
 text = "Select
 "
+
+[node name="ButtonAudioManager" parent="BoatInterface/IslandOptionContainer/IslandOption1/SelectButton" unique_id=1488544473 node_paths=PackedStringArray("signal_players") instance=ExtResource("63_0iv1a")]
+signal_players = {
+&"focus_entered": NodePath("../../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BoatInterface/IslandOptionContainer/IslandOption1" unique_id=1337352907]
 libraries/ = SubResource("AnimationLibrary_48p26")
@@ -5840,6 +5918,13 @@ toggle_mode = true
 text = "Select
 "
 
+[node name="ButtonAudioManager" parent="BoatInterface/IslandOptionContainer/IslandOption2/SelectButton" unique_id=1436596817 node_paths=PackedStringArray("signal_players") instance=ExtResource("63_0iv1a")]
+signal_players = {
+&"focus_entered": NodePath("../../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BoatInterface/IslandOptionContainer/IslandOption2" unique_id=93032834]
 libraries/ = SubResource("AnimationLibrary_48p26")
 autoplay = &"float"
@@ -5879,6 +5964,13 @@ layout_mode = 2
 toggle_mode = true
 text = "Select
 "
+
+[node name="ButtonAudioManager" parent="BoatInterface/IslandOptionContainer/IslandOption3/SelectButton" unique_id=2133439628 node_paths=PackedStringArray("signal_players") instance=ExtResource("63_0iv1a")]
+signal_players = {
+&"focus_entered": NodePath("../../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BoatInterface/IslandOptionContainer/IslandOption3" unique_id=2038206447]
 libraries/ = SubResource("AnimationLibrary_48p26")
@@ -5950,10 +6042,24 @@ layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.65697014, 0.65697014, 0.65697014, 1)
 text = "Respawn"
 
+[node name="ButtonAudioManager" parent="DeathScreen/OptionsContainer/RespawnButton" unique_id=1873573606 node_paths=PackedStringArray("signal_players") instance=ExtResource("63_0iv1a")]
+signal_players = {
+&"focus_entered": NodePath("../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
 [node name="QuitButton" type="Button" parent="DeathScreen/OptionsContainer" unique_id=394106598]
 layout_mode = 2
 theme_override_colors/font_hover_color = Color(0.65697014, 0.65697014, 0.65697014, 1)
 text = "Quit to Title Screen"
+
+[node name="ButtonAudioManager" parent="DeathScreen/OptionsContainer/QuitButton" unique_id=1703455280 node_paths=PackedStringArray("signal_players") instance=ExtResource("63_0iv1a")]
+signal_players = {
+&"focus_entered": NodePath("../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1780880928]
 libraries/ = SubResource("AnimationLibrary_tqiix")
