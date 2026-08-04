@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://byosfqwobl3sl"]
 
 [ext_resource type="Script" uid="uid://c54p7ksaku8o0" path="res://menus/settings_menu.gd" id="1_83qjl"]
+[ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://defaults/button_audio_manager.tscn" id="2_v0bl3"]
 
 [sub_resource type="Gradient" id="Gradient_83qjl"]
 offsets = PackedFloat32Array(0.99756944)
@@ -74,6 +75,13 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="ButtonAudioManager" parent="SettingsContainer/FullScreen/CenterContainer/FullScreenToggle" unique_id=2144126531 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_v0bl3")]
+signal_players = {
+&"focus_entered": NodePath("HoverPlayer"),
+&"mouse_entered": NodePath("HoverPlayer"),
+&"pressed": NodePath("PressPlayer")
+}
+
 [node name="VSync" type="HBoxContainer" parent="SettingsContainer" unique_id=1355440551]
 layout_mode = 2
 
@@ -92,6 +100,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 button_pressed = true
 
+[node name="ButtonAudioManager" parent="SettingsContainer/VSync/CenterContainer/VSyncToggle" unique_id=1351290583 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_v0bl3")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+}
+
 [node name="InvertY" type="HBoxContainer" parent="SettingsContainer" unique_id=573359744]
 layout_mode = 2
 
@@ -109,6 +124,13 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
+
+[node name="ButtonAudioManager" parent="SettingsContainer/InvertY/CenterContainer/InvertYToggle" unique_id=1079694290 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_v0bl3")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+}
 
 [node name="AntiAliasing" type="HBoxContainer" parent="SettingsContainer" unique_id=289704489]
 layout_mode = 2
@@ -134,6 +156,13 @@ popup/item_2/id = 2
 popup/item_3/text = "8x"
 popup/item_3/id = 3
 
+[node name="ButtonAudioManager" parent="SettingsContainer/AntiAliasing/AAOption" unique_id=875959311 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_v0bl3")]
+signal_players = {
+&"focus_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+}
+
 [node name="ShadowQuality" type="HBoxContainer" parent="SettingsContainer" unique_id=1126559339]
 layout_mode = 2
 
@@ -157,6 +186,13 @@ popup/item_2/text = "High"
 popup/item_2/id = 2
 popup/item_3/text = "Ultra"
 popup/item_3/id = 3
+
+[node name="ButtonAudioManager" parent="SettingsContainer/ShadowQuality/ShadowOption" unique_id=1882629603 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_v0bl3")]
+signal_players = {
+&"focus_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+}
 
 [node name="MusicVolume" type="HBoxContainer" parent="SettingsContainer" unique_id=1049655463]
 layout_mode = 2
@@ -197,6 +233,13 @@ ticks_on_borders = true
 [node name="BackButton" type="Button" parent="SettingsContainer" unique_id=1546788436]
 layout_mode = 2
 text = "BACK"
+
+[node name="ButtonAudioManager" parent="SettingsContainer/BackButton" unique_id=1198217718 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_v0bl3")]
+signal_players = {
+&"focus_entered": NodePath("../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+}
 
 [connection signal="toggled" from="SettingsContainer/FullScreen/CenterContainer/FullScreenToggle" to="." method="_on_full_screen_toggled"]
 [connection signal="toggled" from="SettingsContainer/VSync/CenterContainer/VSyncToggle" to="." method="_on_vsync_toggled"]
