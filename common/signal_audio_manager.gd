@@ -11,7 +11,7 @@ func _ready() -> void:
 		
 		var player := signal_players[signal_name]
 		if not is_instance_valid(player):
-			Util.node_error("%s cannot play audio for signal '%s' with invalid AudioStreamPlayer")
+			Util.node_error("%s cannot play audio for signal '%s' with invalid AudioStreamPlayer", self, signal_name)
 			continue
 		
 		get_parent().get_signal_list()
