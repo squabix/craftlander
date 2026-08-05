@@ -1,5 +1,8 @@
 extends State
 
+signal started
+signal stopped
+
 @export var nav_guide: NavEntityGuide3D
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var inner_wander_radius := 4.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var outter_wander_radius := 12.0
@@ -38,6 +41,7 @@ func restart() -> void:
 	is_moving = false
 	if enable_idling:
 		start_idle_timer()
+		stopped.emit()
 	else:
 		start_moving()
 
@@ -64,3 +68,4 @@ func start_moving() -> void:
 		),
 	)
 	is_moving = true
+	started.emit()
