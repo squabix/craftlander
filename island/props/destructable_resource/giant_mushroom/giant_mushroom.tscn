@@ -8,11 +8,14 @@
 [ext_resource type="Script" uid="uid://dmd1q78n1xm4s" path="res://common/state_machine/state.gd" id="6_pu6jt"]
 [ext_resource type="Script" uid="uid://bwsaqjbx2ith8" path="res://island/props/destructable_resource/tree/tree_falling_state.gd" id="7_gswg4"]
 [ext_resource type="Script" uid="uid://ihbhsm4c4qtv" path="res://island/props/destructable_resource/tree/chopped_state.gd" id="8_e6e5w"]
+[ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="8_lebk8"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="9_0sf1c"]
 [ext_resource type="Material" uid="uid://drfxxufa84pj2" path="res://assets/materials/white_mushroom.tres" id="10_jcypt"]
 [ext_resource type="Resource" uid="uid://bwurefwkj4gjj" path="res://common/damage_system/single_damage.tres" id="10_ve6jj"]
 [ext_resource type="ArrayMesh" uid="uid://cxtofsxxgyuua" path="res://island/props/destructable_resource/giant_mushroom/giant_mushroom_top.tres" id="11_thgfp"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="12_e47mg"]
+[ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="12_g0uie"]
+[ext_resource type="AudioStream" uid="uid://cwmtj7gouxh3c" path="res://assets/sound/tree_destroy.mp3" id="13_m41rd"]
 [ext_resource type="Material" uid="uid://bntpptj6c08nu" path="res://assets/materials/red_mushroom.tres" id="14_7kk6m"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="14_hjpsa"]
 [ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="14_pu6jt"]
@@ -22,6 +25,7 @@
 [ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="17_wdv32"]
 [ext_resource type="ArrayOccluder3D" uid="uid://t5b0oo38rw5o" path="res://island/props/destructable_resource/giant_mushroom/giant_mushroom.occ" id="19_uemo8"]
 [ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="20_efdsh"]
+[ext_resource type="AudioStream" uid="uid://f50l344faomv" path="res://assets/sound/tree_fall.mp3" id="20_vlhpj"]
 [ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="23_j4jsq"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_r4p3j"]
@@ -234,6 +238,13 @@ occluder_instance = NodePath("../../OccluderInstance3D")
 falling_mesh_instances = [NodePath("../../Trunk/StemMesh"), NodePath("../../Trunk/TopMesh")]
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
+[node name="SignalAudioManager" type="Node3D" parent="StateMachine/Falling" unique_id=1455389183 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("8_lebk8")
+signal_players = {
+&"entered": NodePath("../../../Trunk/FallPlayer")
+}
+metadata/_custom_type_script = "uid://43bqjaemfda5"
+
 [node name="Chopped" type="Node" parent="StateMachine" unique_id=1969503386 node_paths=PackedStringArray("trunk", "chop_particles")]
 script = ExtResource("8_e6e5w")
 trunk = NodePath("../../Trunk")
@@ -276,6 +287,18 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Trunk/ContinueFallArea" unique_id=1416076246]
 shape = SubResource("SphereShape3D_8mlu7")
 
+[node name="AudioSpawner3D" type="Node3D" parent="Trunk/ContinueFallArea" unique_id=1351790135 node_paths=PackedStringArray("templates")]
+script = ExtResource("12_g0uie")
+templates = [NodePath("DestroyPlayer")]
+spawn_on_exit_tree = true
+metadata/_custom_type_script = "uid://bv2ss5hjacgd3"
+
+[node name="DestroyPlayer" type="AudioStreamPlayer3D" parent="Trunk/ContinueFallArea/AudioSpawner3D" unique_id=1783889492]
+stream = ExtResource("13_m41rd")
+volume_db = 20.0
+unit_size = 20.0
+pitch_scale = 1.2
+
 [node name="StemMesh" type="MeshInstance3D" parent="Trunk" unique_id=600598852]
 material_override = ExtResource("10_jcypt")
 mesh = SubResource("ArrayMesh_hbewo")
@@ -305,6 +328,11 @@ shape = SubResource("ConvexPolygonShape3D_pu6jt")
 
 [node name="Center" type="Node3D" parent="Trunk" unique_id=1356517366]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="FallPlayer" type="AudioStreamPlayer3D" parent="Trunk" unique_id=1292558114]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+stream = ExtResource("20_vlhpj")
+bus = &"SFX"
 
 [node name="ChopParticles" type="GPUParticles3D" parent="." unique_id=931223418]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
