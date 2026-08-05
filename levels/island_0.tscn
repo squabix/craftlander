@@ -26,6 +26,8 @@
 [ext_resource type="PackedScene" uid="uid://dxwqj0o18t8o2" path="res://island/docking/dock.tscn" id="22_yjw2i"]
 [ext_resource type="Resource" uid="uid://cruqoikfgerld" path="res://entities/enemies/bee/bee_island_resource.tres" id="24_6o2sf"]
 [ext_resource type="Script" uid="uid://6poppt70f3rp" path="res://island/island_water.gd" id="24_fb2aq"]
+[ext_resource type="Script" uid="uid://bvnl07wfykf0p" path="res://common3d/audio_stream_curver3d.gd" id="29_6o2sf"]
+[ext_resource type="AudioStream" uid="uid://bcj8kf1cl1icf" path="res://assets/sound/ocean.mp3" id="29_25b7h"]
 [ext_resource type="Script" uid="uid://dpyn65ul3fu6v" path="res://common3d/mesh_instance_aggregator3d.gd" id="29_b35xs"]
 [ext_resource type="Script" uid="uid://dm2twxr0f7ne" path="res://common3d/heightmap_occluder_instance.gd" id="34_xj1bv"]
 
@@ -132,6 +134,10 @@ material = ExtResource("8_25b7h")
 size = Vector2(1500, 1500)
 subdivide_width = 1000
 subdivide_depth = 1000
+
+[sub_resource type="Curve" id="Curve_25b7h"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), -0.015610588, 0.0, 0, 0]
+point_count = 2
 
 [node name="Island0" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "boat_adder", "docking_manager", "name_label", "name_anim_player", "spawn_container")]
 script = ExtResource("1_1lm7x")
@@ -276,16 +282,6 @@ ExtResource("14_d7qjn"): 5,
 ExtResource("15_1lm7x"): 20
 })
 populate_on_ready = false
-ignore_pausing = null
-spawn_on_exit_tree = null
-default_parent_mode = null
-position_mode = null
-rotation_mode = null
-default_position = null
-default_rotation_degrees = null
-spawn_frequency = null
-spawn_time_variation = null
-autostart_timer = null
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1438379176 node_paths=PackedStringArray("island_generator", "prop_populator", "terrain")]
 navigation_mesh = SubResource("NavigationMesh_25b7h")
@@ -333,6 +329,16 @@ skeleton = NodePath("../..")
 [node name="PickupContainer" type="Node3D" parent="." unique_id=944627734]
 
 [node name="SpawnContainer" type="Node3D" parent="." unique_id=520656401]
+
+[node name="OceanPlayer" type="AudioStreamPlayer" parent="." unique_id=594332690]
+stream = ExtResource("29_25b7h")
+autoplay = true
+parameters/looping = true
+script = ExtResource("29_6o2sf")
+max_db = 0.0
+max_distance = 187.0
+attenuation_curve = SubResource("Curve_25b7h")
+metadata/_custom_type_script = "uid://bvnl07wfykf0p"
 
 [editable path="DockingManager/Dock"]
 [editable path="DockingManager/Dock/BlenderMeshes"]
