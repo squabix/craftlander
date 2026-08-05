@@ -1,20 +1,18 @@
 @tool
 class_name PropPopulator
-extends Node3D
+extends Spawner3D
 
 signal populated
 
 const PLACEMENT_STEP := Vector2i(2, 2)
 const JITTER_AMOUNT := Vector2i(1, 1)
 
-@export_tool_button("Populate", "TileMapDock")
-var populate_tool_button := populate
-@export_tool_button("Clear", "Reload")
-var clear_tool_button := clear
-
+@export_tool_button("Populate", "TileMapDock") var populate_tool_button := populate
+@export_tool_button("Clear", "Reload") var clear_tool_button := clear
 @export var island_generator: HeightMapTerrainGenerator
 @export var prop_quantities: Dictionary[IslandProp, int]
 @export var populate_on_ready := true
+
 
 var props: Dictionary[Vector3, Node3D] = { }
 var prop_resources: Dictionary[Vector3, IslandProp] = { }
@@ -26,7 +24,7 @@ func clear() -> void:
 		if not is_instance_valid(prop):
 			continue
 		prop.free()
-	
+
 	for child in get_children():
 		if not is_instance_valid(child):
 			continue
@@ -44,27 +42,30 @@ func get_random_point() -> Vector2i:
 	)
 
 
+func initialize_instance(instance: Node3D) -> void:
+
+	# If running inside the editor, set the owner to the current scene root
+	if Engine.is_editor_hint():
+		instance.set.call_deferred(&"owner", get_tree().edited_scene_root)
+
+
 func add_prop(prop: IslandProp, point: Vector2i, spawn_position: Vector3) -> Node3D:
-	# Add instance
-	var instance: Node3D = prop.scene.instantiate()
-	add_child.call_deferred(instance)
+	if prop.scene == null or not prop.scene.can_instantiate():
+		return null
+
+	var instance := spawn(prop.scene.instantiate(), self)
 
 	# Place/transform instance
 	island_generator.place_node.call_deferred(
 		instance,
 		point.x,
 		point.y,
-		prop.normal_conformity, 
+		prop.normal_conformity,
 		func():
 			# Finish transforming instance after island generator placement
 			instance.rotation_degrees.y = randf() * 360.0
 			instance.scale = Vector3.ONE * randf_range(prop.min_scale, prop.max_scale)
 	)
-	
-	
-	# If running inside the editor, set the owner to the current scene root
-	if Engine.is_editor_hint():
-		instance.set.call_deferred("owner", get_tree().edited_scene_root)
 	
 	# Assign prop instance in dictionaries
 	props[spawn_position] = instance
