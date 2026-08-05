@@ -31,7 +31,7 @@ func get_missing_quantity(entity_resource: IslandEntityResource) -> int:
 	return max(0, intended_quantity - get_current_quantity(entity_resource))
 
 
-func get_current_quantity(entity_resource: IslandEntityResource):
+func get_current_quantity(entity_resource: IslandEntityResource) -> int:
 	if entity_resource == null or not entity_resource in entities:
 		return 0
 	return entities[entity_resource].size()
@@ -89,10 +89,14 @@ func get_spawnpoint(min_height: float, max_height: float, allow_in_frustum: bool
 
 
 func add_entity(entity_resource: IslandEntityResource, spawnpoint := Vector3.ZERO, allow_in_frustum := false) -> Entity3D:
+	if entity_resource.scene == null or not entity_resource.scene.can_instantiate():
+		return null
+
 	if spawnpoint == Vector3.ZERO:
 		spawnpoint = await get_spawnpoint(entity_resource.min_height, entity_resource.max_height, allow_in_frustum)
 	
-	var entity: Entity3D = entity_resource.scene.instantiate()
+	var entity := entity_resource.scene.instantiate() as Entity3D
+	
 	add_child(entity)
 	entity.global_position = spawnpoint
 	
