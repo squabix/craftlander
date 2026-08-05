@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://b4sqb68mc8p5f"]
 
+[ext_resource type="AudioStream" uid="uid://cqoy6h3iwh206" path="res://assets/sound/puff.mp3" id="1_fbxt7"]
+
 [sub_resource type="Curve" id="Curve_w3oie"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.75779045, 0.8774637), -0.5111994, -0.5111994, 0, 0, Vector2(1, 0.2536419), -3.0296543, 0.0, 0, 0]
 point_count = 3
@@ -30,6 +32,11 @@ material = SubResource("StandardMaterial3D_18auj")
 radial_segments = 16
 rings = 8
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1f2jk"]
+random_pitch = 1.1892071
+streams_count = 1
+stream_0/stream = ExtResource("1_fbxt7")
+
 [node name="PuffParticles" type="GPUParticles3D" unique_id=456102786]
 cast_shadow = 0
 emitting = false
@@ -38,3 +45,8 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_1f2jk")
 draw_pass_1 = SubResource("SphereMesh_kblrq")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=332836626]
+stream = SubResource("AudioStreamRandomizer_1f2jk")
+autoplay = true
+bus = &"SFX"
