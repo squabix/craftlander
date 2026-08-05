@@ -5,6 +5,7 @@ extends SceneSpawner3D
 
 
 func initialize_instance(instance: Node3D) -> void:
+	super(instance)
 	emit_particles(instance, free_on_finish)
 
 
