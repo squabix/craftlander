@@ -29,9 +29,10 @@ const HEAD_SPEED := 0.1
 @export var hunger_saver: NodeSaver
 @export var stamina: Stamina
 
-@export_group("Character Audio Stream Players")
+@export_group("Audio")
 @export var steps_player: CharacterAudioStreamPlayer3D
 @export var swim_player: CharacterAudioStreamPlayer3D
+@export var eat_player: AudioStreamPlayer
 
 @export_group("External Dependencies")
 @export var respawn_point_node: Node3D
@@ -45,6 +46,7 @@ func _ready() -> void:
 			if event is Food.AteFoodEvent:
 				health.hp += event.health_restoration
 				hunger.value += event.hunger_restoration
+				eat_player.play()
 	)
 	respawn_button.pressed.connect(respawn)
 	health.died.connect(die)

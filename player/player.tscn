@@ -16,6 +16,7 @@
 [ext_resource type="Resource" uid="uid://b37h3pr83pcu4" path="res://items/materials/rock/rock_item.tres" id="10_s3g0c"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="11_2ieo8"]
 [ext_resource type="Script" uid="uid://0ys7hbc4clgc" path="res://player/states/player_default_state.gd" id="11_art4l"]
+[ext_resource type="Resource" uid="uid://j8xwx023phbg" path="res://items/food/honeycomb/honeycomb_item.tres" id="11_oevg7"]
 [ext_resource type="Script" uid="uid://pnxdwk3pye0h" path="res://common3d/pointer_raycast3d.gd" id="11_rptt4"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="12_ebec5"]
 [ext_resource type="Script" uid="uid://idhcfku7c3tn" path="res://player/states/player_docking_boat_state.gd" id="12_fjxoa"]
@@ -110,6 +111,7 @@
 [ext_resource type="AudioStream" uid="uid://cwqa0rroqx0ww" path="res://assets/sound/steps_stream.tres" id="94_qm6yy"]
 [ext_resource type="AudioStream" uid="uid://bngsjojub1sjy" path="res://assets/sound/swim_stream.tres" id="95_gcmgo"]
 [ext_resource type="AudioStream" uid="uid://bctut8ply616f" path="res://assets/sound/swoosh1.mp3" id="100_0iv1a"]
+[ext_resource type="AudioStream" uid="uid://fc5gio4s8yl" path="res://assets/sound/eat.mp3" id="112_teerl"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -149,6 +151,12 @@ metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 script = ExtResource("6_hggc2")
 item = ExtResource("9_jbx34")
 quantity = 30
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_qkr8n"]
+script = ExtResource("6_hggc2")
+item = ExtResource("11_oevg7")
+quantity = 10
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Curve" id="Curve_2uvqg"]
@@ -940,7 +948,12 @@ _limits = [0.0, 3.0, 0.0, 1.0]
 _data = [Vector2(0, 0.9229622), 0.0, 0.0, 0, 0, Vector2(0.666, 0.6), 0.0, 0.0, 0, 0, Vector2(1, 0.3), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("movement_state_machine", "head", "interactors", "respawn_button", "boat_interface", "item_holder", "dropper", "health", "health_saver", "hunger", "hunger_saver", "stamina", "steps_player", "swim_player", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_g1goj"]
+random_pitch = 1.122462
+streams_count = 1
+stream_0/stream = ExtResource("112_teerl")
+
+[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("movement_state_machine", "head", "interactors", "respawn_button", "boat_interface", "item_holder", "dropper", "health", "health_saver", "hunger", "hunger_saver", "stamina", "steps_player", "swim_player", "eat_player", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
 collision_layer = 17
 floor_constant_speed = true
 floor_block_on_wall = false
@@ -961,6 +974,7 @@ hunger_saver = NodePath("Hunger/NodeSaver")
 stamina = NodePath("Stamina")
 steps_player = NodePath("StepsPlayer")
 swim_player = NodePath("SwimPlayer")
+eat_player = NodePath("EatPlayer")
 type = &"Player"
 horizontal_rotation_target = NodePath(".")
 vertical_rotation_target = NodePath("Head/Camera3D")
@@ -969,7 +983,7 @@ metadata/_custom_type_script = "uid://bki5ij8task16"
 
 [node name="Inventory" type="Node" parent="." unique_id=710458340]
 script = ExtResource("19_c35mf")
-item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_j3r50"), SubResource("Resource_hggc2"), SubResource("Resource_utr5e"), SubResource("Resource_k7n08"), SubResource("Resource_2h6tc")])
+item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_j3r50"), SubResource("Resource_hggc2"), SubResource("Resource_utr5e"), SubResource("Resource_k7n08"), SubResource("Resource_2h6tc"), SubResource("Resource_qkr8n")])
 size = 40
 
 [node name="NodeSaver" type="Node" parent="Inventory" unique_id=137251970]
@@ -6146,6 +6160,11 @@ min_speed = 0.001
 max_speed = 6.0
 interval_default_length = 1.2
 interval_variation = 0.87
+
+[node name="EatPlayer" type="AudioStreamPlayer" parent="." unique_id=244602533]
+stream = SubResource("AudioStreamRandomizer_g1goj")
+pitch_scale = 1.2
+max_polyphony = 3
 
 [connection signal="updated_instance" from="Head/Camera3D/ItemHolder" to="HUD" method="_on_item_holder_updated_instance"]
 [connection signal="updated_pause" from="PauseInterface" to="." method="_on_pause_interface_updated_pause"]
