@@ -1,5 +1,5 @@
 class_name ParticleSpawner3D
-extends Spawner3D
+extends SceneSpawner3D
 
 @export var free_on_finish := true
 

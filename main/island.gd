@@ -29,7 +29,7 @@ enum PlayerSpawnMode {BOAT, ISLAND_CENTER}
 @export var name_anim_player: AnimationPlayer
 
 @export_group("Misc")
-@export var pickup_container: Node3D
+@export var spawn_container: Node3D
 
 
 func _ready() -> void:
@@ -50,7 +50,7 @@ func _ready() -> void:
 	
 	NodeSaver.scene_root = self
 	NodeSaver.offload_on_free_enabled = false
-	InventoryDropper3D.default_pickup_parent = pickup_container
+	Spawner3D.root = spawn_container
 	
 	seed(Main.base_seed)
 	island_generator.generate()

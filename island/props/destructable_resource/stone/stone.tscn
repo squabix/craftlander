@@ -138,7 +138,7 @@ metadata/_custom_type_script = "uid://c1bce1sw2dgnf"
 
 [node name="ParticleSpawner3D" type="Node3D" parent="." unique_id=1579406573]
 script = ExtResource("10_pwnbr")
-default_scene = ExtResource("11_yqmf4")
+scenes = Array[PackedScene]([ExtResource("11_yqmf4")])
 spawn_on_exit_tree = true
 metadata/_custom_type_script = "uid://bhjxscxhtg2se"
 
@@ -163,12 +163,16 @@ saved_properties = Dictionary[StringName, bool]({
 })
 metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 
-[node name="AudioSpawner3D" type="Node3D" parent="." unique_id=2130276450]
+[node name="AudioSpawner3D" type="Node3D" parent="." unique_id=2130276450 node_paths=PackedStringArray("templates")]
 script = ExtResource("17_uef38")
-override_stream = ExtResource("18_fq6f2")
-override_bus = &"SFX"
-override_volume_db = 15.0
+templates = [NodePath("DestroyPlayer")]
 spawn_on_exit_tree = true
 metadata/_custom_type_script = "uid://bv2ss5hjacgd3"
+
+[node name="DestroyPlayer" type="AudioStreamPlayer3D" parent="AudioSpawner3D" unique_id=120290710]
+stream = ExtResource("18_fq6f2")
+volume_db = 20.0
+unit_size = 20.0
+pitch_scale = 1.2
 
 [editable path="BlenderMeshes"]

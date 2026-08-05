@@ -765,7 +765,7 @@ item_animations = Array[ExtResource("22_sqkxx")]([SubResource("Resource_0uawy")]
 [node name="ParticleSpawner3D" type="Node3D" parent="." unique_id=1876124391]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("23_qk6mp")
-default_scene = ExtResource("24_vy7b5")
+scenes = Array[PackedScene]([ExtResource("24_vy7b5")])
 spawn_on_exit_tree = true
 metadata/_custom_type_script = "uid://bhjxscxhtg2se"
 

@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://b1en432erfol4"]
 
-[ext_resource type="Script" uid="uid://ct8rchocdlqb" path="res://island/props/destructable_resource/bee_nest/bee_nest.gd" id="1_8mibs"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="2_rb30n"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="3_1pjnc"]
 [ext_resource type="Resource" uid="uid://bwurefwkj4gjj" path="res://common/damage_system/single_damage.tres" id="3_b7v27"]
@@ -10,9 +9,9 @@
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="7_yyl5a"]
 [ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="9_b7s5p"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="10_085ko"]
+[ext_resource type="Script" uid="uid://272x4sefrmx" path="res://common/spawner/scene_spawner3d.gd" id="11_b7s5p"]
 [ext_resource type="PackedScene" uid="uid://bkber348p7jtw" path="res://island/props/destructable_resource/bee_nest/bee_nest.blend" id="11_b76o0"]
 [ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="11_stmp3"]
-[ext_resource type="Script" uid="uid://iyqixpr4un6s" path="res://common/spawner/spawner3d.gd" id="12_8mibs"]
 [ext_resource type="PackedScene" uid="uid://d0a4ydiqu4jj6" path="res://entities/enemies/bee/bee.tscn" id="13_ioeyq"]
 [ext_resource type="ArrayOccluder3D" uid="uid://beajm3t1eu0nc" path="res://island/props/destructable_resource/bee_nest/bee_nest.occ" id="16_m5g4y"]
 [ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="16_yb7pf"]
@@ -71,13 +70,7 @@ roughness = 0.6
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
 
-[node name="BeeNest" type="Node3D" unique_id=51772479 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
-script = ExtResource("1_8mibs")
-min_hp = 4
-max_hp = 9
-hurtbox = NodePath("Hurtbox3D")
-inventory = NodePath("Inventory")
-health = NodePath("Health")
+[node name="BeeNest" type="Node3D" unique_id=51772479]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1012779916]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39999998, 0)
@@ -126,7 +119,7 @@ metadata/_custom_type_script = "uid://c1bce1sw2dgnf"
 
 [node name="ParticleSpawner3D" type="Node3D" parent="." unique_id=1579406573]
 script = ExtResource("10_085ko")
-default_scene = ExtResource("11_stmp3")
+scenes = Array[PackedScene]([ExtResource("11_stmp3")])
 spawn_on_exit_tree = true
 metadata/_custom_type_script = "uid://bhjxscxhtg2se"
 
@@ -136,35 +129,40 @@ metadata/_custom_type_script = "uid://bhjxscxhtg2se"
 surface_material_override/0 = SubResource("StandardMaterial3D_5xftv")
 surface_material_override/1 = SubResource("StandardMaterial3D_ioeyq")
 
-[node name="BeeSpawner1" type="Node3D" parent="." unique_id=694305899]
+[node name="BeeSpawner1" type="Node3D" parent="." unique_id=1407841692]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.34595376, 1, 0.24480975)
-script = ExtResource("12_8mibs")
-default_scene = ExtResource("13_ioeyq")
-metadata/_custom_type_script = "uid://iyqixpr4un6s"
+script = ExtResource("11_b7s5p")
+scenes = Array[PackedScene]([ExtResource("13_ioeyq")])
+spawn_on_exit_tree = true
+metadata/_custom_type_script = "uid://272x4sefrmx"
 
-[node name="BeeSpawner2" type="Node3D" parent="." unique_id=1959693925]
+[node name="BeeSpawner2" type="Node3D" parent="." unique_id=1516158673]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18280369, 1, 0.31336135)
-script = ExtResource("12_8mibs")
-default_scene = ExtResource("13_ioeyq")
-metadata/_custom_type_script = "uid://iyqixpr4un6s"
+script = ExtResource("11_b7s5p")
+scenes = Array[PackedScene]([ExtResource("13_ioeyq")])
+spawn_on_exit_tree = true
+metadata/_custom_type_script = "uid://272x4sefrmx"
 
-[node name="BeeSpawner3" type="Node3D" parent="." unique_id=1845188797]
+[node name="BeeSpawner3" type="Node3D" parent="." unique_id=1574576412]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2745326, 1, -0.36986166)
-script = ExtResource("12_8mibs")
-default_scene = ExtResource("13_ioeyq")
-metadata/_custom_type_script = "uid://iyqixpr4un6s"
+script = ExtResource("11_b7s5p")
+scenes = Array[PackedScene]([ExtResource("13_ioeyq")])
+spawn_on_exit_tree = true
+metadata/_custom_type_script = "uid://272x4sefrmx"
 
-[node name="BeeSpawner4" type="Node3D" parent="." unique_id=1551754788]
+[node name="BeeSpawner4" type="Node3D" parent="." unique_id=3579381]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27488637, 1, -0.42348504)
-script = ExtResource("12_8mibs")
-default_scene = ExtResource("13_ioeyq")
-metadata/_custom_type_script = "uid://iyqixpr4un6s"
+script = ExtResource("11_b7s5p")
+scenes = Array[PackedScene]([ExtResource("13_ioeyq")])
+spawn_on_exit_tree = true
+metadata/_custom_type_script = "uid://272x4sefrmx"
 
-[node name="BeeSpawner5" type="Node3D" parent="." unique_id=1085354651]
+[node name="BeeSpawner5" type="Node3D" parent="." unique_id=706483137]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02033177, 1, -0.07410443)
-script = ExtResource("12_8mibs")
-default_scene = ExtResource("13_ioeyq")
-metadata/_custom_type_script = "uid://iyqixpr4un6s"
+script = ExtResource("11_b7s5p")
+scenes = Array[PackedScene]([ExtResource("13_ioeyq")])
+spawn_on_exit_tree = true
+metadata/_custom_type_script = "uid://272x4sefrmx"
 
 [node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=1012315334]
 occluder = ExtResource("16_m5g4y")

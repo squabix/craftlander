@@ -133,7 +133,7 @@ size = Vector2(1500, 1500)
 subdivide_width = 1000
 subdivide_depth = 1000
 
-[node name="Island0" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "boat_adder", "docking_manager", "name_label", "name_anim_player", "pickup_container")]
+[node name="Island0" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "boat_adder", "docking_manager", "name_label", "name_anim_player", "spawn_container")]
 script = ExtResource("1_1lm7x")
 resource = ExtResource("2_mngd6")
 player = NodePath("DockingManager/Player")
@@ -146,7 +146,7 @@ boat_adder = NodePath("DockingManager/BoatAdder")
 docking_manager = NodePath("DockingManager")
 name_label = NodePath("NameLabel")
 name_anim_player = NodePath("NameLabel/AnimationPlayer")
-pickup_container = NodePath("PickupContainer")
+spawn_container = NodePath("SpawnContainer")
 
 [node name="NameLabel" type="Label" parent="." unique_id=1346364616]
 modulate = Color(1, 1, 1, 0)
@@ -276,6 +276,16 @@ ExtResource("14_d7qjn"): 5,
 ExtResource("15_1lm7x"): 20
 })
 populate_on_ready = false
+ignore_pausing = null
+spawn_on_exit_tree = null
+default_parent_mode = null
+position_mode = null
+rotation_mode = null
+default_position = null
+default_rotation_degrees = null
+spawn_frequency = null
+spawn_time_variation = null
+autostart_timer = null
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1438379176 node_paths=PackedStringArray("island_generator", "prop_populator", "terrain")]
 navigation_mesh = SubResource("NavigationMesh_25b7h")
@@ -321,6 +331,8 @@ mesh = SubResource("PlaneMesh_i8ckm")
 skeleton = NodePath("../..")
 
 [node name="PickupContainer" type="Node3D" parent="." unique_id=944627734]
+
+[node name="SpawnContainer" type="Node3D" parent="." unique_id=520656401]
 
 [editable path="DockingManager/Dock"]
 [editable path="DockingManager/Dock/BlenderMeshes"]
