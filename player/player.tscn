@@ -6117,7 +6117,7 @@ metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 
 [node name="JumpPlayer" type="AudioStreamPlayer" parent="SignalAudioManager" unique_id=1230564003]
 stream = SubResource("AudioStreamRandomizer_hjjmf")
-volume_db = -10.0
+volume_db = -15.0
 bus = &"SFX"
 
 [node name="LandPlayer" type="AudioStreamPlayer" parent="SignalAudioManager" unique_id=1862458611]
@@ -6128,6 +6128,7 @@ bus = &"SFX"
 
 [node name="StepsPlayer" type="AudioStreamPlayer3D" parent="." unique_id=2007241949 node_paths=PackedStringArray("character")]
 stream = ExtResource("94_qm6yy")
+max_db = 0.0
 bus = &"SFX"
 script = ExtResource("89_jfgxe")
 character = NodePath("..")

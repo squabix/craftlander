@@ -3,6 +3,6 @@
 [ext_resource type="AudioStream" uid="uid://bus7hgef3h35c" path="res://assets/sound/step.mp3" id="1_e38nm"]
 
 [resource]
-random_pitch = 1.122462
+random_pitch = 1.2968395
 streams_count = 1
 stream_0/stream = ExtResource("1_e38nm")
