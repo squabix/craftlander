@@ -33,7 +33,7 @@ radial_segments = 16
 rings = 8
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1f2jk"]
-random_pitch = 1.1892071
+random_pitch = 1.0594631
 streams_count = 1
 stream_0/stream = ExtResource("1_fbxt7")
 
@@ -48,5 +48,6 @@ draw_pass_1 = SubResource("SphereMesh_kblrq")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=332836626]
 stream = SubResource("AudioStreamRandomizer_1f2jk")
+max_db = 4.5
 autoplay = true
 bus = &"SFX"
