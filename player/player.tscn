@@ -1135,7 +1135,8 @@ metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 
 [node name="SelectPlayer" type="AudioStreamPlayer" parent="Head/Camera3D/ItemHolder/HoldSelector/SignalAudioManager" unique_id=484586780]
 stream = SubResource("AudioStreamRandomizer_rnncm")
-volume_db = -10.0
+volume_db = -20.0
+max_polyphony = 6
 bus = &"UI"
 
 [node name="InteratorRay" type="RayCast3D" parent="Head/Camera3D" unique_id=1551921047]
