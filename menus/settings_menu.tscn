@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c54p7ksaku8o0" path="res://menus/settings_menu.gd" id="1_83qjl"]
 [ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://defaults/button_audio_manager.tscn" id="2_v0bl3"]
+[ext_resource type="Script" uid="uid://c36fqcfs66yhx" path="res://common/ui/volume_slider.gd" id="3_n4a8d"]
 
 [sub_resource type="Gradient" id="Gradient_83qjl"]
 offsets = PackedFloat32Array(0.99756944)
@@ -12,7 +13,7 @@ gradient = SubResource("Gradient_83qjl")
 fill = 2
 fill_from = Vector2(0.5, 0.5)
 
-[node name="SettingsMenu" type="Control" unique_id=788547277 node_paths=PackedStringArray("music_slider", "sfx_slider", "vsync_toggle", "full_screen_toggle", "aa_option", "invert_y_toggle")]
+[node name="SettingsMenu" type="Control" unique_id=788547277 node_paths=PackedStringArray("music_slider", "vsync_toggle", "full_screen_toggle", "aa_option", "invert_y_toggle")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,8 +21,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_83qjl")
-music_slider = NodePath("SettingsContainer/MusicVolume/MusicSlider")
-sfx_slider = NodePath("SettingsContainer/SFXVolume/SFXSlider")
+music_slider = NodePath("SettingsContainer/MusicVolume/Slider")
 vsync_toggle = NodePath("SettingsContainer/VSync/CenterContainer/VSyncToggle")
 full_screen_toggle = NodePath("SettingsContainer/FullScreen/CenterContainer/FullScreenToggle")
 aa_option = NodePath("SettingsContainer/AntiAliasing/AAOption")
@@ -194,24 +194,6 @@ signal_players = {
 &"pressed": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
 }
 
-[node name="MusicVolume" type="HBoxContainer" parent="SettingsContainer" unique_id=1049655463]
-layout_mode = 2
-
-[node name="Title" type="Label" parent="SettingsContainer/MusicVolume" unique_id=1880123562]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-text = "Music Volume"
-
-[node name="MusicSlider" type="HSlider" parent="SettingsContainer/MusicVolume" unique_id=1082336741]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.05
-value = 1.0
-tick_count = 10
-ticks_on_borders = true
-
 [node name="SFXVolume" type="HBoxContainer" parent="SettingsContainer" unique_id=1097559491]
 layout_mode = 2
 
@@ -220,15 +202,71 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "SFX Volume"
 
-[node name="SFXSlider" type="HSlider" parent="SettingsContainer/SFXVolume" unique_id=699787212]
-unique_name_in_owner = true
+[node name="Slider" type="HSlider" parent="SettingsContainer/SFXVolume" unique_id=685924986]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.05
-value = 1.0
 tick_count = 10
 ticks_on_borders = true
+script = ExtResource("3_n4a8d")
+metadata/_custom_type_script = "uid://c36fqcfs66yhx"
+
+[node name="MusicVolume" type="HBoxContainer" parent="SettingsContainer" unique_id=1049655463]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="SettingsContainer/MusicVolume" unique_id=1880123562]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Music Volume"
+
+[node name="Slider" type="HSlider" parent="SettingsContainer/MusicVolume" unique_id=1082336741]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+tick_count = 10
+ticks_on_borders = true
+script = ExtResource("3_n4a8d")
+bus = &"Music"
+
+[node name="AmbientVolume" type="HBoxContainer" parent="SettingsContainer" unique_id=370282828]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="SettingsContainer/AmbientVolume" unique_id=659581374]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Ambient Volume"
+
+[node name="Slider" type="HSlider" parent="SettingsContainer/AmbientVolume" unique_id=235919823]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+tick_count = 10
+ticks_on_borders = true
+script = ExtResource("3_n4a8d")
+bus = &"Ambient"
+metadata/_custom_type_script = "uid://c36fqcfs66yhx"
+
+[node name="UIVolume" type="HBoxContainer" parent="SettingsContainer" unique_id=275714447]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="SettingsContainer/UIVolume" unique_id=702563996]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "UI Volume"
+
+[node name="Slider" type="HSlider" parent="SettingsContainer/UIVolume" unique_id=253556157]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+tick_count = 10
+ticks_on_borders = true
+script = ExtResource("3_n4a8d")
+bus = &"UI"
+metadata/_custom_type_script = "uid://c36fqcfs66yhx"
 
 [node name="BackButton" type="Button" parent="SettingsContainer" unique_id=1546788436]
 layout_mode = 2
@@ -246,6 +284,8 @@ signal_players = {
 [connection signal="toggled" from="SettingsContainer/InvertY/CenterContainer/InvertYToggle" to="." method="_on_invert_y_toggled"]
 [connection signal="item_selected" from="SettingsContainer/AntiAliasing/AAOption" to="." method="_on_anti_aliasing_selected"]
 [connection signal="item_selected" from="SettingsContainer/ShadowQuality/ShadowOption" to="." method="_on_shadow_quality_selected"]
-[connection signal="value_changed" from="SettingsContainer/MusicVolume/MusicSlider" to="." method="_on_music_volume_changed"]
-[connection signal="value_changed" from="SettingsContainer/SFXVolume/SFXSlider" to="." method="_on_sfx_volume_changed"]
+[connection signal="value_changed" from="SettingsContainer/SFXVolume/Slider" to="." method="_on_sfx_volume_changed"]
+[connection signal="value_changed" from="SettingsContainer/MusicVolume/Slider" to="." method="_on_music_volume_changed"]
+[connection signal="value_changed" from="SettingsContainer/AmbientVolume/Slider" to="." method="_on_sfx_volume_changed"]
+[connection signal="value_changed" from="SettingsContainer/UIVolume/Slider" to="." method="_on_sfx_volume_changed"]
 [connection signal="pressed" from="SettingsContainer/BackButton" to="." method="_on_back_button_pressed"]
