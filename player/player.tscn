@@ -1163,12 +1163,13 @@ metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 
 [node name="InteractPlayer" type="AudioStreamPlayer" parent="Head/Camera3D/InteratorRay/Interactor/SignalAudioManager" unique_id=824399806]
 stream = SubResource("AudioStreamRandomizer_o385s")
+bus = &"SFX"
 
 [node name="FailPlayer" type="AudioStreamPlayer" parent="Head/Camera3D/InteratorRay/Interactor/SignalAudioManager" unique_id=1331336006]
 stream = ExtResource("30_d0gtc")
 volume_db = -23.0
 pitch_scale = 0.5
-bus = &"UI"
+bus = &"SFX"
 
 [node name="DropperRayCast" type="RayCast3D" parent="Head/Camera3D" unique_id=690174372]
 visible = false
@@ -1193,6 +1194,7 @@ metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 [node name="DroppedPlayer" type="AudioStreamPlayer" parent="Head/Camera3D/DropperRayCast/InventoryDropper3D/SignalAudioManager" unique_id=1344998343]
 stream = SubResource("AudioStreamRandomizer_nj2w7")
 volume_db = -5.0
+bus = &"SFX"
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Head/Camera3D" unique_id=212379624]
 remote_path = NodePath("../../SubViewportContainer/SubViewport/Camera3D")
