@@ -26,9 +26,11 @@ metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 [node name="HoverPlayer" type="AudioStreamPlayer" parent="." unique_id=553096653]
 stream = SubResource("AudioStreamRandomizer_hjjmf")
 volume_db = -10.0
+max_polyphony = 4
 bus = &"UI"
 
 [node name="PressPlayer" type="AudioStreamPlayer" parent="." unique_id=1599022215]
 stream = SubResource("AudioStreamRandomizer_b4mjk")
 volume_db = -10.0
+max_polyphony = 4
 bus = &"UI"
