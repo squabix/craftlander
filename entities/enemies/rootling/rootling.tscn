@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="7_kg2m4"]
 [ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/signal_triggrs/signal_state_trigger.gd" id="8_7mn0t"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="8_8jseq"]
+[ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="10_21a2r"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="10_v4fp6"]
 [ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="10_v53xr"]
 [ext_resource type="Script" uid="uid://cf04j3voj4xyc" path="res://entities/npc_states/wandering_state.gd" id="11_7mn0t"]
@@ -33,6 +34,14 @@
 [ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/tools/shoddy_mace/shoddy_mace_item.tres" id="29_5b15m"]
 [ext_resource type="PackedScene" uid="uid://h3veu2e18ij1" path="res://entities/entity_health_bar.tscn" id="33_c3uxn"]
 [ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="34_hswny"]
+[ext_resource type="AudioStream" uid="uid://cwqa0rroqx0ww" path="res://assets/sound/steps_stream.tres" id="35_6ogb6"]
+[ext_resource type="AudioStream" uid="uid://iqev25rq7fbq" path="res://assets/sound/rootling-07.mp3" id="36_nkh2f"]
+[ext_resource type="AudioStream" uid="uid://b3c73cbq1ut7n" path="res://assets/sound/rootling-09.mp3" id="37_jfwek"]
+[ext_resource type="AudioStream" uid="uid://cb3edy6gssben" path="res://assets/sound/rootling-08.mp3" id="38_i6t70"]
+[ext_resource type="AudioStream" uid="uid://ck0q8lhyrv4xy" path="res://assets/sound/rootling-10.mp3" id="39_jfwek"]
+[ext_resource type="AudioStream" uid="uid://chvu761wd8xc2" path="res://assets/sound/rootling-11.mp3" id="40_i6t70"]
+[ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="40_pqd7v"]
+[ext_resource type="AudioStream" uid="uid://c4438fvpcmcld" path="res://assets/sound/rootling-12.mp3" id="41_pqd7v"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
 script = ExtResource("3_wtogd")
@@ -438,6 +447,23 @@ tracks/11/path = NodePath("Visuals/Armature/Skeleton3D:Bone.012")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = PackedFloat32Array(0, 1, 0, 0, -0.07041718, 0.99751765)
+tracks/12/type = "method"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("StepPlayer")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_wtogd"]
 resource_name = "walk"
@@ -559,7 +585,7 @@ blend_point_1/pos = 0.8
 blend_point_1/name = &"1"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_p5gg5"]
-graph_offset = Vector2(-1130.5316, -137.93541)
+graph_offset = Vector2(-606.2101, -48.971813)
 nodes/output/position = Vector2(160, 26.666666)
 nodes/RunBlendSpace/node = SubResource("AnimationNodeBlendSpace1D_7mn0t")
 nodes/RunBlendSpace/position = Vector2(-306.66666, -66.666664)
@@ -579,6 +605,20 @@ metadata/_custom_type_script = "uid://c622jer80j3sk"
 script = ExtResource("8_8jseq")
 item = ExtResource("29_5b15m")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hjjmf"]
+random_pitch = 1.122462
+streams_count = 3
+stream_0/stream = ExtResource("36_nkh2f")
+stream_1/stream = ExtResource("37_jfwek")
+stream_2/stream = ExtResource("38_i6t70")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yocth"]
+random_pitch = 1.0594631
+streams_count = 3
+stream_0/stream = ExtResource("39_jfwek")
+stream_1/stream = ExtResource("40_i6t70")
+stream_2/stream = ExtResource("41_pqd7v")
 
 [node name="Rootling" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "item_holder", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
@@ -640,6 +680,13 @@ script = ExtResource("4_nauqg")
 hp = 100.0
 free_parent_on_death = true
 metadata/_custom_type_script = "uid://cbb5o5ykqwxfp"
+
+[node name="SignalAudioManager3D" type="Node3D" parent="Health" unique_id=1371947431 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("10_21a2r")
+signal_players = {
+&"was_hurt": NodePath("../../HurtPlayer")
+}
+metadata/_custom_type_script = "uid://43bqjaemfda5"
 
 [node name="Sight3D" type="Node3D" parent="." unique_id=713539717]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -782,5 +829,30 @@ metadata/_custom_type_script = "uid://bwd4jx8u5uct2"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
 entity = NodePath("..")
 health = NodePath("../Health")
+
+[node name="StepPlayer" type="AudioStreamPlayer3D" parent="." unique_id=119782908]
+stream = ExtResource("35_6ogb6")
+bus = &"SFX"
+
+[node name="HurtPlayer" type="AudioStreamPlayer3D" parent="." unique_id=502692699]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+stream = SubResource("AudioStreamRandomizer_hjjmf")
+max_db = 0.0
+bus = &"SFX"
+
+[node name="IdlePlayer" type="AudioStreamPlayer3D" parent="." unique_id=1969972911]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+bus = &"SFX"
+
+[node name="AudioSpawner3D" type="Node3D" parent="." unique_id=813638048 node_paths=PackedStringArray("templates")]
+script = ExtResource("40_pqd7v")
+templates = [NodePath("DeathPlayer")]
+spawn_on_exit_tree = true
+metadata/_custom_type_script = "uid://bv2ss5hjacgd3"
+
+[node name="DeathPlayer" type="AudioStreamPlayer3D" parent="AudioSpawner3D" unique_id=1602006759]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+stream = SubResource("AudioStreamRandomizer_yocth")
+bus = &"SFX"
 
 [editable path="Visuals"]
