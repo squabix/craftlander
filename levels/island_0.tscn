@@ -333,6 +333,7 @@ skeleton = NodePath("../..")
 [node name="OceanPlayer" type="AudioStreamPlayer" parent="." unique_id=594332690]
 stream = ExtResource("29_25b7h")
 autoplay = true
+bus = &"Ambient"
 parameters/looping = true
 script = ExtResource("29_6o2sf")
 max_db = 0.0
