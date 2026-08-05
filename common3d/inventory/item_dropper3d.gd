@@ -40,8 +40,7 @@ func _ready() -> void:
 
 
 func initialize_instance(instance: Node3D) -> void:
-	super.initialize_instance(instance)
-	instance.global_transform = global_transform
+	super(instance)
 	instance.global_position += position_offset
 	instance.global_rotation_degrees += rotation_offset
 	InventoryDropper3D.all_dropped_pickups.append(instance)

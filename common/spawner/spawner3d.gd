@@ -20,8 +20,8 @@ static var root: Node:
 @export var custom_default_parent: Node
 
 @export_group("Transform")
-@export var position_mode: TransformMode = TransformMode.PARENT
-@export var rotation_mode: TransformMode = TransformMode.PARENT
+@export var position_mode := TransformMode.SELF
+@export var rotation_mode := TransformMode.SELF
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var default_position: Vector3
 @export_custom(PROPERTY_HINT_NONE, "suffix:°") var default_rotation_degrees: Vector3
 
