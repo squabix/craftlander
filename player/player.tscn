@@ -102,9 +102,9 @@
 [ext_resource type="AudioStream" uid="uid://dwoi11pb7rbsy" path="res://assets/sound/open_drop-03.mp3" id="78_hgm8h"]
 [ext_resource type="Script" uid="uid://b3snj0gi7akf8" path="res://common/signal_audio_manager.gd" id="84_onxu2"]
 [ext_resource type="AudioStream" uid="uid://dj216lq0cge4b" path="res://assets/sound/land.wav" id="87_tcwf7"]
-[ext_resource type="AudioStream" uid="uid://dbru8s4g7r8l4" path="res://assets/sound/upgrade1.mp3" id="87_ycggl"]
 [ext_resource type="AudioStream" uid="uid://c03ir843xs060" path="res://assets/sound/error1.wav" id="88_5ntu2"]
 [ext_resource type="Script" uid="uid://cr3lcia8efb3c" path="res://common3d/character_audio_stream_player3d.gd" id="89_jfgxe"]
+[ext_resource type="AudioStream" uid="uid://bosk8bvvlwxak" path="res://assets/sound/upgrade_boat.mp3" id="90_teerl"]
 [ext_resource type="AudioStream" uid="uid://by0xp4m3kjtsm" path="res://assets/sound/open_drop-04.mp3" id="92_ig2t1"]
 [ext_resource type="AudioStream" uid="uid://daku7up5e3io8" path="res://assets/sound/open_drop-05.mp3" id="93_7xdiq"]
 [ext_resource type="AudioStream" uid="uid://cly6uplw8i3a8" path="res://assets/sound/open_drop-06.mp3" id="94_d0gtc"]
@@ -5774,7 +5774,7 @@ signal_players = {
 metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 
 [node name="UpgradePlayer" type="AudioStreamPlayer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/SignalAudioManager" unique_id=1309138978]
-stream = ExtResource("87_ycggl")
+stream = ExtResource("90_teerl")
 bus = &"UI"
 
 [node name="FailPlayer" type="AudioStreamPlayer" parent="BoatInterface/BottomOptions/HBoxContainer/BoatUpgrader/SignalAudioManager" unique_id=1821943430]
