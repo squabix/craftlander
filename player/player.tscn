@@ -102,6 +102,7 @@
 [ext_resource type="AudioStream" uid="uid://dwoi11pb7rbsy" path="res://assets/sound/open_drop-03.mp3" id="78_hgm8h"]
 [ext_resource type="Script" uid="uid://b3snj0gi7akf8" path="res://common/signal_audio_manager.gd" id="84_onxu2"]
 [ext_resource type="AudioStream" uid="uid://dj216lq0cge4b" path="res://assets/sound/land.wav" id="87_tcwf7"]
+[ext_resource type="AudioStream" uid="uid://dnichdtdyktgu" path="res://assets/sound/save.mp3" id="87_ycggl"]
 [ext_resource type="AudioStream" uid="uid://c03ir843xs060" path="res://assets/sound/error1.wav" id="88_5ntu2"]
 [ext_resource type="Script" uid="uid://cr3lcia8efb3c" path="res://common3d/character_audio_stream_player3d.gd" id="89_jfgxe"]
 [ext_resource type="AudioStream" uid="uid://bosk8bvvlwxak" path="res://assets/sound/upgrade_boat.mp3" id="90_teerl"]
@@ -4221,6 +4222,17 @@ signal_players = {
 &"mouse_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
 &"pressed": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
 }
+
+[node name="SignalAudioManager" type="Node" parent="PauseInterface/CraftingMenu/OptionsContainer/SaveButton" unique_id=1772322339 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("84_onxu2")
+signal_players = {
+&"pressed": NodePath("SavePlayer")
+}
+metadata/_custom_type_script = "uid://b3snj0gi7akf8"
+
+[node name="SavePlayer" type="AudioStreamPlayer" parent="PauseInterface/CraftingMenu/OptionsContainer/SaveButton/SignalAudioManager" unique_id=334512352]
+stream = ExtResource("87_ycggl")
+bus = &"UI"
 
 [node name="SettingsButton" type="Button" parent="PauseInterface/CraftingMenu/OptionsContainer" unique_id=1494540130]
 custom_minimum_size = Vector2(0, 30)

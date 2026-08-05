@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://defaults/button_audio_manager.tscn" id="3_823ok"]
 [ext_resource type="Script" uid="uid://dlutjgdrcstqh" path="res://menus/save_menu.gd" id="3_eujrm"]
 [ext_resource type="Environment" uid="uid://cibxuhtgknost" path="res://assets/default_environment.tres" id="4_cqggn"]
+[ext_resource type="AudioStream" uid="uid://dnichdtdyktgu" path="res://assets/sound/save.mp3" id="5_76gmy"]
+[ext_resource type="Script" uid="uid://b3snj0gi7akf8" path="res://common/signal_audio_manager.gd" id="5_dbvjn"]
 [ext_resource type="Shader" uid="uid://bv7qqp8qrt8qt" path="res://island/heightmap_shader.gdshader" id="5_kc2cy"]
 [ext_resource type="AudioStream" uid="uid://bcj8kf1cl1icf" path="res://assets/sound/ocean.mp3" id="8_vppps"]
 [ext_resource type="Material" uid="uid://d06u1efqiqr8e" path="res://assets/shaders/water_shader_material.tres" id="10_ctf6r"]
@@ -247,6 +249,17 @@ signal_players = {
 &"pressed": NodePath("PressPlayer")
 }
 
+[node name="SignalAudioManager" type="Node" parent="SaveMenu/SaveButtonContainer/SaveButton1" unique_id=732075702 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("5_dbvjn")
+signal_players = {
+&"pressed": NodePath("SavePlayer")
+}
+metadata/_custom_type_script = "uid://b3snj0gi7akf8"
+
+[node name="SavePlayer" type="AudioStreamPlayer" parent="SaveMenu/SaveButtonContainer/SaveButton1/SignalAudioManager" unique_id=1131010914]
+stream = ExtResource("5_76gmy")
+bus = &"UI"
+
 [node name="SaveButton2" type="Button" parent="SaveMenu/SaveButtonContainer" unique_id=1267240113]
 layout_mode = 2
 text = "SAVE"
@@ -257,6 +270,17 @@ signal_players = {
 &"mouse_entered": NodePath("../../SaveButton1/ButtonAudioManager/HoverPlayer"),
 &"pressed": NodePath("../../SaveButton1/ButtonAudioManager/PressPlayer")
 }
+
+[node name="SignalAudioManager" type="Node" parent="SaveMenu/SaveButtonContainer/SaveButton2" unique_id=731308997 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("5_dbvjn")
+signal_players = {
+&"pressed": NodePath("../../SaveButton1/SignalAudioManager/SavePlayer")
+}
+metadata/_custom_type_script = "uid://b3snj0gi7akf8"
+
+[node name="SavePlayer" type="AudioStreamPlayer" parent="SaveMenu/SaveButtonContainer/SaveButton2/SignalAudioManager" unique_id=995962572]
+stream = ExtResource("5_76gmy")
+bus = &"UI"
 
 [node name="SaveButton3" type="Button" parent="SaveMenu/SaveButtonContainer" unique_id=1627002612]
 layout_mode = 2
@@ -269,6 +293,17 @@ signal_players = {
 &"pressed": NodePath("../../SaveButton1/ButtonAudioManager/PressPlayer")
 }
 
+[node name="SignalAudioManager" type="Node" parent="SaveMenu/SaveButtonContainer/SaveButton3" unique_id=928095239 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("5_dbvjn")
+signal_players = {
+&"pressed": NodePath("../../SaveButton1/SignalAudioManager/SavePlayer")
+}
+metadata/_custom_type_script = "uid://b3snj0gi7akf8"
+
+[node name="SavePlayer" type="AudioStreamPlayer" parent="SaveMenu/SaveButtonContainer/SaveButton3/SignalAudioManager" unique_id=2088769834]
+stream = ExtResource("5_76gmy")
+bus = &"UI"
+
 [node name="SaveButton4" type="Button" parent="SaveMenu/SaveButtonContainer" unique_id=135203483]
 layout_mode = 2
 text = "SAVE"
@@ -280,6 +315,17 @@ signal_players = {
 &"pressed": NodePath("../../SaveButton1/ButtonAudioManager/PressPlayer")
 }
 
+[node name="SignalAudioManager" type="Node" parent="SaveMenu/SaveButtonContainer/SaveButton4" unique_id=479555831 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("5_dbvjn")
+signal_players = {
+&"pressed": NodePath("../../SaveButton1/SignalAudioManager/SavePlayer")
+}
+metadata/_custom_type_script = "uid://b3snj0gi7akf8"
+
+[node name="SavePlayer" type="AudioStreamPlayer" parent="SaveMenu/SaveButtonContainer/SaveButton4/SignalAudioManager" unique_id=961271232]
+stream = ExtResource("5_76gmy")
+bus = &"UI"
+
 [node name="SaveButton5" type="Button" parent="SaveMenu/SaveButtonContainer" unique_id=1729324462]
 layout_mode = 2
 text = "SAVE"
@@ -290,6 +336,17 @@ signal_players = {
 &"mouse_entered": NodePath("../../SaveButton1/ButtonAudioManager/HoverPlayer"),
 &"pressed": NodePath("../../SaveButton1/ButtonAudioManager/PressPlayer")
 }
+
+[node name="SignalAudioManager" type="Node" parent="SaveMenu/SaveButtonContainer/SaveButton5" unique_id=46699067 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("5_dbvjn")
+signal_players = {
+&"pressed": NodePath("../../SaveButton1/SignalAudioManager/SavePlayer")
+}
+metadata/_custom_type_script = "uid://b3snj0gi7akf8"
+
+[node name="SavePlayer" type="AudioStreamPlayer" parent="SaveMenu/SaveButtonContainer/SaveButton5/SignalAudioManager" unique_id=904532420]
+stream = ExtResource("5_76gmy")
+bus = &"UI"
 
 [node name="BackButton" type="Button" parent="SaveMenu/SaveButtonContainer" unique_id=1162609949]
 layout_mode = 2
