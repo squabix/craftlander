@@ -39,9 +39,15 @@
 [ext_resource type="AudioStream" uid="uid://b3c73cbq1ut7n" path="res://assets/sound/rootling-09.mp3" id="37_jfwek"]
 [ext_resource type="AudioStream" uid="uid://cb3edy6gssben" path="res://assets/sound/rootling-08.mp3" id="38_i6t70"]
 [ext_resource type="AudioStream" uid="uid://ck0q8lhyrv4xy" path="res://assets/sound/rootling-10.mp3" id="39_jfwek"]
+[ext_resource type="AudioStream" uid="uid://vb4hdoc5mtfs" path="res://assets/sound/rootling-01.mp3" id="39_n14r2"]
+[ext_resource type="AudioStream" uid="uid://dv7i8slvjjvqf" path="res://assets/sound/rootling-02.mp3" id="40_g7svr"]
 [ext_resource type="AudioStream" uid="uid://chvu761wd8xc2" path="res://assets/sound/rootling-11.mp3" id="40_i6t70"]
 [ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="40_pqd7v"]
 [ext_resource type="AudioStream" uid="uid://c4438fvpcmcld" path="res://assets/sound/rootling-12.mp3" id="41_pqd7v"]
+[ext_resource type="AudioStream" uid="uid://by44iwpc4os7a" path="res://assets/sound/rootling-03.mp3" id="41_u6pq5"]
+[ext_resource type="AudioStream" uid="uid://dmpw7i1okaklk" path="res://assets/sound/rootling-04.mp3" id="42_ai86q"]
+[ext_resource type="AudioStream" uid="uid://cxppt2efnqk4e" path="res://assets/sound/rootling-05.mp3" id="43_d3brl"]
+[ext_resource type="AudioStream" uid="uid://sl2wj5r6v4jx" path="res://assets/sound/rootling-06.mp3" id="44_ve4h5"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
 script = ExtResource("3_wtogd")
@@ -613,6 +619,16 @@ stream_0/stream = ExtResource("36_nkh2f")
 stream_1/stream = ExtResource("37_jfwek")
 stream_2/stream = ExtResource("38_i6t70")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_i6t70"]
+random_pitch = 1.1892071
+streams_count = 6
+stream_0/stream = ExtResource("39_n14r2")
+stream_1/stream = ExtResource("40_g7svr")
+stream_2/stream = ExtResource("41_u6pq5")
+stream_3/stream = ExtResource("42_ai86q")
+stream_4/stream = ExtResource("43_d3brl")
+stream_5/stream = ExtResource("44_ve4h5")
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yocth"]
 random_pitch = 1.0594631
 streams_count = 3
@@ -725,6 +741,16 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Timer" type="Timer" parent="Controller3D/Default/Wandering" unique_id=1600727395]
 
+[node name="SignalAudioManager3D" type="Node3D" parent="Controller3D/Default/Wandering" unique_id=1121028117 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("10_21a2r")
+signal_players = {
+&"entered": NodePath("../../../../TalkPlayer"),
+&"exited": NodePath("../../../../TalkPlayer"),
+&"started": NodePath("../../../../TalkPlayer"),
+&"stopped": NodePath("../../../../TalkPlayer")
+}
+metadata/_custom_type_script = "uid://43bqjaemfda5"
+
 [node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=1883496829 node_paths=PackedStringArray("item_holder", "guide", "sight", "interval_staggerer", "root")]
 script = ExtResource("13_7mn0t")
 item_holder = NodePath("../../../ItemHolder3D")
@@ -832,6 +858,7 @@ health = NodePath("../Health")
 
 [node name="StepPlayer" type="AudioStreamPlayer3D" parent="." unique_id=119782908]
 stream = ExtResource("35_6ogb6")
+max_db = 0.0
 bus = &"SFX"
 
 [node name="HurtPlayer" type="AudioStreamPlayer3D" parent="." unique_id=502692699]
@@ -839,8 +866,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 stream = SubResource("AudioStreamRandomizer_hjjmf")
 bus = &"SFX"
 
-[node name="IdlePlayer" type="AudioStreamPlayer3D" parent="." unique_id=1969972911]
+[node name="TalkPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1969972911]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+stream = SubResource("AudioStreamRandomizer_i6t70")
+unit_size = 7.0
 bus = &"SFX"
 
 [node name="AudioSpawner3D" type="Node3D" parent="." unique_id=813638048 node_paths=PackedStringArray("templates")]
@@ -852,6 +881,7 @@ metadata/_custom_type_script = "uid://bv2ss5hjacgd3"
 [node name="DeathPlayer" type="AudioStreamPlayer3D" parent="AudioSpawner3D" unique_id=1602006759]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 stream = SubResource("AudioStreamRandomizer_yocth")
+max_db = 5.0
 bus = &"SFX"
 
 [editable path="Visuals"]
