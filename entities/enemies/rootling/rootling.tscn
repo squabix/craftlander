@@ -837,7 +837,6 @@ bus = &"SFX"
 [node name="HurtPlayer" type="AudioStreamPlayer3D" parent="." unique_id=502692699]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 stream = SubResource("AudioStreamRandomizer_hjjmf")
-max_db = 0.0
 bus = &"SFX"
 
 [node name="IdlePlayer" type="AudioStreamPlayer3D" parent="." unique_id=1969972911]
