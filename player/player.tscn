@@ -108,6 +108,7 @@
 [ext_resource type="AudioStream" uid="uid://bosk8bvvlwxak" path="res://assets/sound/upgrade_boat.mp3" id="90_teerl"]
 [ext_resource type="AudioStream" uid="uid://by0xp4m3kjtsm" path="res://assets/sound/open_drop-04.mp3" id="92_ig2t1"]
 [ext_resource type="AudioStream" uid="uid://daku7up5e3io8" path="res://assets/sound/open_drop-05.mp3" id="93_7xdiq"]
+[ext_resource type="AudioStream" uid="uid://cer4nkd7fukes" path="res://assets/sound/set_sail.mp3" id="93_w10ni"]
 [ext_resource type="AudioStream" uid="uid://cly6uplw8i3a8" path="res://assets/sound/open_drop-06.mp3" id="94_d0gtc"]
 [ext_resource type="AudioStream" uid="uid://cwqa0rroqx0ww" path="res://assets/sound/steps_stream.tres" id="94_qm6yy"]
 [ext_resource type="AudioStream" uid="uid://bngsjojub1sjy" path="res://assets/sound/swim_stream.tres" id="95_gcmgo"]
@@ -5810,6 +5811,16 @@ signal_players = {
 &"mouse_entered": NodePath("../../../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
 &"pressed": NodePath("../../../../../../PauseInterface/CraftingMenu/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
 }
+
+[node name="SignalAudioManager" type="Node" parent="BoatInterface/BottomOptions/HBoxContainer/Control/SailButton" unique_id=1827454759 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("84_onxu2")
+signal_players = {
+&"pressed": NodePath("AudioStreamPlayer")
+}
+metadata/_custom_type_script = "uid://b3snj0gi7akf8"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BoatInterface/BottomOptions/HBoxContainer/Control/SailButton/SignalAudioManager" unique_id=660162609]
+stream = ExtResource("93_w10ni")
 
 [node name="IslandOptionContainer" type="Control" parent="BoatInterface" unique_id=288135614]
 anchors_preset = 0
