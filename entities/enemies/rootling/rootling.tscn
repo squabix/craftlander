@@ -869,7 +869,7 @@ bus = &"SFX"
 [node name="TalkPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1969972911]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 stream = SubResource("AudioStreamRandomizer_i6t70")
-unit_size = 7.0
+unit_size = 4.0
 bus = &"SFX"
 
 [node name="AudioSpawner3D" type="Node3D" parent="." unique_id=813638048 node_paths=PackedStringArray("templates")]

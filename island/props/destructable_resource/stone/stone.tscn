@@ -171,8 +171,8 @@ metadata/_custom_type_script = "uid://bv2ss5hjacgd3"
 
 [node name="DestroyPlayer" type="AudioStreamPlayer3D" parent="AudioSpawner3D" unique_id=120290710]
 stream = ExtResource("18_fq6f2")
-volume_db = 20.0
-unit_size = 20.0
+volume_db = -10.0
+max_db = -5.0
 pitch_scale = 1.2
 
 [editable path="BlenderMeshes"]

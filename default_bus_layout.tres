@@ -1,5 +1,15 @@
 [gd_resource type="AudioBusLayout" format=3 uid="uid://dfnaxtxyuayj3"]
 
+[sub_resource type="AudioEffectHighPassFilter" id="AudioEffectHighPassFilter_j3pel"]
+resource_name = "HighPassFilter"
+cutoff_hz = 30.0
+
+[sub_resource type="AudioEffectLimiter" id="AudioEffectLimiter_g28q7"]
+resource_name = "Limiter"
+ceiling_db = -0.3
+threshold_db = -1.0
+soft_clip_db = 1.5
+
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_j3pel"]
 resource_name = "Compressor"
 threshold = -14.0
@@ -27,6 +37,10 @@ threshold_db = -0.1
 soft_clip_db = 1.8
 
 [resource]
+bus/0/effect/0/effect = SubResource("AudioEffectHighPassFilter_j3pel")
+bus/0/effect/0/enabled = true
+bus/0/effect/1/effect = SubResource("AudioEffectLimiter_g28q7")
+bus/0/effect/1/enabled = true
 bus/1/name = &"SFX"
 bus/1/solo = false
 bus/1/mute = false
