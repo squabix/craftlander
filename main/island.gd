@@ -39,7 +39,8 @@ func _ready() -> void:
 	Util.nodestr_root = self
 	
 	var is_reloading: bool = Main.is_save_loaded and Main.loaded_save.is_current_level_generated()
-	
+	var master_bus_index := AudioServer.get_bus_index(&"Master")
+	AudioServer.set_bus_mute(master_bus_index, true)
 	if Main.root.loading_screen != null:
 		Main.root.loading_screen.add_steps(
 				"Generating terrain",
@@ -73,6 +74,8 @@ func _ready() -> void:
 	NodeSaver.offload_on_free_enabled = true
 	print()
 	show_name()
+	await get_tree().process_frame
+	AudioServer.set_bus_mute(master_bus_index, false)
 
 
 func show_name() -> void:
