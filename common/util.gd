@@ -497,14 +497,18 @@ static func turn_off_all_particles(parent: Node) -> void:
 
 		turn_off_all_particles(child)
 
-		var cpu2d := child is CPUParticles2D
-		var cpu3d := child is CPUParticles3D
-		var gpu2d := child is GPUParticles2D
-		var gpu3d := child is GPUParticles3D
-
-		if cpu2d or cpu3d or gpu2d or gpu3d:
+		if is_particles(child):
 			child.one_shot = true
 			child.emitting = false
+
+
+static func is_particles(node: Node) -> bool:
+	return (
+		node is CPUParticles3D
+		or node is CPUParticles3D
+		or node is GPUParticles2D
+		or node is GPUParticles3D
+	)
 
 
 static func freeze(node: Node) -> void:
