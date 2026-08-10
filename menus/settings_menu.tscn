@@ -194,15 +194,15 @@ signal_players = {
 &"pressed": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
 }
 
-[node name="SFXVolume" type="HBoxContainer" parent="SettingsContainer" unique_id=1097559491]
+[node name="SFXVolume" type="HBoxContainer" parent="SettingsContainer" unique_id=622585311]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="SettingsContainer/SFXVolume" unique_id=556711064]
+[node name="Title" type="Label" parent="SettingsContainer/SFXVolume" unique_id=914158031]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "SFX Volume"
 
-[node name="Slider" type="HSlider" parent="SettingsContainer/SFXVolume" unique_id=685924986]
+[node name="Slider" type="HSlider" parent="SettingsContainer/SFXVolume" unique_id=453858999]
 layout_mode = 2
 size_flags_horizontal = 3
 max_value = 1.0
@@ -210,7 +210,7 @@ step = 0.05
 tick_count = 10
 ticks_on_borders = true
 script = ExtResource("3_n4a8d")
-metadata/_custom_type_script = "uid://c36fqcfs66yhx"
+bus = &"SFX"
 
 [node name="MusicVolume" type="HBoxContainer" parent="SettingsContainer" unique_id=1049655463]
 layout_mode = 2
@@ -284,8 +284,4 @@ signal_players = {
 [connection signal="toggled" from="SettingsContainer/InvertY/CenterContainer/InvertYToggle" to="." method="_on_invert_y_toggled"]
 [connection signal="item_selected" from="SettingsContainer/AntiAliasing/AAOption" to="." method="_on_anti_aliasing_selected"]
 [connection signal="item_selected" from="SettingsContainer/ShadowQuality/ShadowOption" to="." method="_on_shadow_quality_selected"]
-[connection signal="value_changed" from="SettingsContainer/SFXVolume/Slider" to="." method="_on_sfx_volume_changed"]
-[connection signal="value_changed" from="SettingsContainer/MusicVolume/Slider" to="." method="_on_music_volume_changed"]
-[connection signal="value_changed" from="SettingsContainer/AmbientVolume/Slider" to="." method="_on_sfx_volume_changed"]
-[connection signal="value_changed" from="SettingsContainer/UIVolume/Slider" to="." method="_on_sfx_volume_changed"]
 [connection signal="pressed" from="SettingsContainer/BackButton" to="." method="_on_back_button_pressed"]
