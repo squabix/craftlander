@@ -87,6 +87,9 @@ func initialize_instance(_instance: Node3D) -> void:
 
 
 func spawn(instance: Node3D=null, parent: Node = null) -> Node3D:
+	if is_queued_for_deletion():
+		return null
+	
 	if instance == null:
 		instance = create_instance()
 		if instance == null:
@@ -98,7 +101,11 @@ func spawn(instance: Node3D=null, parent: Node = null) -> Node3D:
 		if not is_instance_valid(parent):
 			instance.queue_free()
 			return null
-
+	
+	if parent.is_queued_for_deletion():
+		instance.queue_free()
+		return null
+	
 	parent.add_child(instance)
 	instance.global_position = get_spawn_position(parent)
 	instance.global_rotation_degrees = get_spawn_rotation_degrees(parent)
