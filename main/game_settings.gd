@@ -1,9 +1,12 @@
 extends Node
 
+signal config_loaded
+
 const SECTION_AUDIO := "audio"
 
 const SAVE_PATH := "user://settings.cfg"
 var config := ConfigFile.new()
+var is_config_loaded := false
 
 
 func _ready() -> void:
@@ -14,9 +17,12 @@ func save_settings() -> void:
 
 func load_settings() -> void:
 	var err = config.load(SAVE_PATH)
-	if err != OK: return
-
-	apply_video_settings()
+	if err != OK:
+		Util.node_error("%s failed to load config", self)
+		return
+	is_config_loaded = true
+	config_loaded.emit()
+	print("%s loaded config" % self)
 
 func set_volume(bus_name: StringName, value: float) -> void:
 	var bus_index = AudioServer.get_bus_index(bus_name)
@@ -39,7 +45,6 @@ func set_value(section: String, key: String, value: Variant) -> void:
 func set_msaa(index: int) -> void:
 	get_viewport().msaa_3d = index as Viewport.MSAA
 	set_value("video", "msaa", index)
-	save_settings()
 
 func apply_video_settings() -> void:
 	var mode = config.get_value("video", "mode", DisplayServer.WINDOW_MODE_WINDOWED)
