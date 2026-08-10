@@ -298,6 +298,7 @@ stream = ExtResource("13_m41rd")
 volume_db = 20.0
 unit_size = 20.0
 pitch_scale = 1.2
+bus = &"SFX"
 
 [node name="StemMesh" type="MeshInstance3D" parent="Trunk" unique_id=600598852]
 material_override = ExtResource("10_jcypt")
