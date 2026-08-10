@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cs4ulhbpklb14"]
+
+[ext_resource type="Shader" uid="uid://d0g1tx71qh1wb" path="res://assets/shaders/tree_wind_shader.gdshader" id="1_sli0o"]
+
+[sub_resource type="Gradient" id="Gradient_rngja"]
+interpolation_mode = 1
+colors = PackedColorArray(0.32854924, 0.5710891, 0.29677588, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_55jnn"]
+gradient = SubResource("Gradient_rngja")
+fill_to = Vector2(0, 0)
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_sli0o")
+shader_parameter/debug_mode = false
+shader_parameter/wind_direction = 90.0
+shader_parameter/wind_strenth = 2.0
+shader_parameter/sway_speed = 2.0
+shader_parameter/bendieness_multiplier = 0.0
+shader_parameter/albedo_texture = SubResource("GradientTexture2D_55jnn")
