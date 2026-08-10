@@ -79,10 +79,11 @@ func has_item() -> bool:
 func use_item() -> void:
 	if held_item_instance == null or held_item_instance.item == null:
 		return
-	used_item.emit(held_item_instance.item)
-	var consumed := held_item_instance.item.use()
-	if consumed and held_item_instance.item.consumable:
-		consume_item()
+	var success := held_item_instance.item.use()
+	if success:
+		used_item.emit(held_item_instance.item)
+		if held_item_instance.item.consumable:
+			consume_item()
 
 
 func consume_item() -> void:
