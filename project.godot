@@ -32,6 +32,7 @@ GameSettings="*uid://dybhrs6lws1mr"
 
 [debug]
 
+file_logging/log_path="user://logs/craftlander.log"
 gdscript/warnings/integer_division=0
 
 [display]
