@@ -4306,6 +4306,48 @@ text = "Item Namef"
 visible = false
 layout_mode = 1
 
+[node name="ButtonAudioManager" parent="PauseInterface/SettingsMenu/SettingsContainer/FullScreen/CenterContainer/FullScreenToggle" parent_id_path=PackedInt32Array(788547277, 2049426436) index="0" unique_id=2144126531 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("HoverPlayer"),
+&"mouse_entered": NodePath("HoverPlayer"),
+&"pressed": NodePath("PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="PauseInterface/SettingsMenu/SettingsContainer/VSync/CenterContainer/VSyncToggle" parent_id_path=PackedInt32Array(788547277, 1518537055) index="0" unique_id=1351290583 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="PauseInterface/SettingsMenu/SettingsContainer/InvertY/CenterContainer/InvertYToggle" parent_id_path=PackedInt32Array(788547277, 1517878780) index="0" unique_id=1079694290 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="PauseInterface/SettingsMenu/SettingsContainer/AntiAliasing/AAOption" parent_id_path=PackedInt32Array(788547277, 630181348) index="1" unique_id=875959311 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="PauseInterface/SettingsMenu/SettingsContainer/ShadowQuality/ShadowOption" parent_id_path=PackedInt32Array(788547277, 1710798274) index="1" unique_id=1882629603 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="PauseInterface/SettingsMenu/SettingsContainer/BackButton" parent_id_path=PackedInt32Array(788547277, 1546788436) index="0" unique_id=1198217718 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+}
+
 [node name="SignalAudioManager" type="Node" parent="PauseInterface" unique_id=1037296529 node_paths=PackedStringArray("signal_players")]
 script = ExtResource("84_onxu2")
 signal_players = {
@@ -5821,6 +5863,7 @@ metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BoatInterface/BottomOptions/HBoxContainer/Control/SailButton/SignalAudioManager" unique_id=660162609]
 stream = ExtResource("93_w10ni")
+bus = &"SFX"
 
 [node name="IslandOptionContainer" type="Control" parent="BoatInterface" unique_id=288135614]
 anchors_preset = 0
@@ -6026,6 +6069,7 @@ metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 
 [node name="BoatPlayer" type="AudioStreamPlayer" parent="BoatInterface/SignalAudioManager" unique_id=1052471230]
 stream = SubResource("AudioStreamRandomizer_vyxke")
+bus = &"SFX"
 
 [node name="DeathScreen" type="Control" parent="." unique_id=1492309495 node_paths=PackedStringArray("respawn_button", "quit_button", "health")]
 process_mode = 2
@@ -6191,3 +6235,5 @@ max_polyphony = 3
 
 [connection signal="updated_instance" from="Head/Camera3D/ItemHolder" to="HUD" method="_on_item_holder_updated_instance"]
 [connection signal="updated_pause" from="PauseInterface" to="." method="_on_pause_interface_updated_pause"]
+
+[editable path="PauseInterface/SettingsMenu"]
