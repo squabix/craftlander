@@ -105,6 +105,7 @@ metadata/_custom_type_script = "uid://43bqjaemfda5"
 
 [node name="HurtPlayer" type="AudioStreamPlayer3D" parent="Hurtbox3D/SignalAudioManager3D" unique_id=1449022161]
 volume_db = -18.0
+bus = &"SFX"
 
 [node name="Health" type="Node" parent="." unique_id=256948540]
 script = ExtResource("3_qeat1")
@@ -174,5 +175,6 @@ stream = ExtResource("18_fq6f2")
 volume_db = -10.0
 max_db = -5.0
 pitch_scale = 1.2
+bus = &"SFX"
 
 [editable path="BlenderMeshes"]

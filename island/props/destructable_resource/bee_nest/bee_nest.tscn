@@ -216,5 +216,6 @@ stream = ExtResource("18_tvk51")
 volume_db = 20.0
 unit_size = 20.0
 pitch_scale = 1.2
+bus = &"SFX"
 
 [editable path="BlenderMeshes"]
