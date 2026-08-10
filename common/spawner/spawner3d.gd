@@ -12,6 +12,7 @@ static var root: Node:
 			root = (Engine.get_main_loop() as SceneTree).root
 		return root
 
+@export var defer := true
 @export var ignore_pausing: bool
 @export var spawn_on_exit_tree := false
 
@@ -31,6 +32,15 @@ static var root: Node:
 @export var autostart_timer: bool
 
 var has_started_timer: bool
+
+
+static func _transform(node: Node3D, node_position: Vector3, node_rotation_degrees: Vector3) -> void:
+	await Util.get_tree().process_frame
+	if not is_instance_valid(node):
+		push_error("Cannot spawn transform invalid node")
+		return
+	node.global_position = node_position
+	node.global_rotation_degrees = node_rotation_degrees
 
 
 func _ready() -> void:
@@ -77,7 +87,6 @@ func get_spawn_rotation_degrees(parent: Node) -> Vector3:
 	return global_rotation_degrees
 
 
-
 func create_instance() -> Node3D:
 	return null
 
@@ -86,10 +95,10 @@ func initialize_instance(_instance: Node3D) -> void:
 	pass
 
 
-func spawn(instance: Node3D=null, parent: Node = null) -> Node3D:
+func spawn(instance: Node3D = null, parent: Node = null) -> Node3D:
 	if is_queued_for_deletion() or not is_inside_tree():
 		return null
-	
+
 	if instance == null:
 		instance = create_instance()
 		if instance == null:
@@ -101,15 +110,28 @@ func spawn(instance: Node3D=null, parent: Node = null) -> Node3D:
 		if not is_instance_valid(parent):
 			instance.queue_free()
 			return null
-	
+
 	if parent.is_queued_for_deletion() or not parent.is_inside_tree():
 		instance.queue_free()
 		return null
-	
-	parent.add_child(instance)
-	instance.global_position = get_spawn_position(parent)
-	instance.global_rotation_degrees = get_spawn_rotation_degrees(parent)
+	var instance_position := get_spawn_position(parent)
+	var instance_rotation_degrees := get_spawn_rotation_degrees(parent)
 
-	initialize_instance(instance)
+	if defer:
+		parent.add_child.call_deferred(instance)
+		_transform(instance, instance_position, instance_rotation_degrees)
+	else:
+		parent.add_child(instance)
+		instance.global_position = instance_position
+		instance.global_rotation_degrees = instance_rotation_degrees
+
+	_call_initializer(instance)
 	spawned.emit(instance)
 	return instance
+
+
+func _call_initializer(instance: Node3D) -> void:
+	if defer:
+		initialize_instance.call_deferred(instance)
+	else:
+		initialize_instance(instance)
