@@ -7,7 +7,6 @@ extends Unprojector3D
 @export var health: Health
 
 func _ready() -> void:
-	super()
 	health_bar.health = health
 	if is_instance_valid(entity) and is_instance_valid(type_label):
 		type_label.text = entity.type
