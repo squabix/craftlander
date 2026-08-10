@@ -9,6 +9,7 @@ static var aggregated_mesh_instances: Dictionary[MeshInstance3D, MeshInstanceAgg
 
 @export var mesh_source: Node
 @export var aggregate_on_ready := false
+@export var aggregate_hidden_meshes := false
 @export var use_material_override := true
 @export var multi_instance_name_format := "MultiMesh_%s"
 
@@ -54,9 +55,20 @@ func _ready() -> void:
 
 
 func get_all_mesh_instances() -> Array[MeshInstance3D]:
-	var instances: Array[MeshInstance3D]
-	instances.assign(Util.find_children_of_class(mesh_source, &"MeshInstance3D"))
+	var instances: Array[MeshInstance3D] = []
+	if not is_instance_valid(mesh_source):
+		return instances
+
+	_collect_mesh_instances_recursive(mesh_source, instances)
 	return instances
+
+
+func _collect_mesh_instances_recursive(node: Node, instances: Array[MeshInstance3D]) -> void:
+	if node is MeshInstance3D:
+		instances.append(node)
+
+	for child in node.get_children():
+		_collect_mesh_instances_recursive(child, instances)
 
 
 func get_mesh_groups() -> Dictionary[Mesh, Array]:
@@ -66,6 +78,10 @@ func get_mesh_groups() -> Dictionary[Mesh, Array]:
 	# Group instances by their unique combination of mesh + overrides
 	for instance in all_mesh_instances:
 		if not instance.mesh:
+			continue
+
+		# Skip hidden meshes if aggregate_hidden_meshes is false
+		if not aggregate_hidden_meshes and not instance.is_visible_in_tree():
 			continue
 
 		var key := _get_instance_group_key(instance)
