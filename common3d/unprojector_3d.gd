@@ -16,14 +16,9 @@ extends Marker3D
 var camera: Camera3D
 
 
-func _ready() -> void:
-	camera = get_viewport().get_camera_3d()
-
-
 func _process(_delta: float) -> void:
 	if not is_instance_valid(camera):
-		Util.node_error("%s cannot unproject with invalid camera", self)
-		set_process(false)
+		camera = get_viewport().get_camera_3d()
 		return
 
 	if not is_instance_valid(target):
