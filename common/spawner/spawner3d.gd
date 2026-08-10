@@ -12,7 +12,7 @@ static var root: Node:
 			root = Util.get_tree().root
 		return root
 
-@export var defer := true
+@export var defer := false
 @export var ignore_pausing: bool
 @export var spawn_on_exit_tree := false
 
