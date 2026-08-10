@@ -87,7 +87,7 @@ func initialize_instance(_instance: Node3D) -> void:
 
 
 func spawn(instance: Node3D=null, parent: Node = null) -> Node3D:
-	if is_queued_for_deletion():
+	if is_queued_for_deletion() or not is_inside_tree():
 		return null
 	
 	if instance == null:
@@ -102,7 +102,7 @@ func spawn(instance: Node3D=null, parent: Node = null) -> Node3D:
 			instance.queue_free()
 			return null
 	
-	if parent.is_queued_for_deletion():
+	if parent.is_queued_for_deletion() or not parent.is_inside_tree():
 		instance.queue_free()
 		return null
 	
