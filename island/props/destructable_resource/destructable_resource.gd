@@ -9,7 +9,6 @@ class_name DestructableResource
 @export var hurtbox: Hurtbox3D
 @export var inventory: Inventory
 @export var health: Health
-@export var state_machine: StateMachine
 
 
 var damage_source_inventories: Dictionary[Node, Inventory] = {}
