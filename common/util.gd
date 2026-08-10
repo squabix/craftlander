@@ -104,7 +104,7 @@ static func iprint(interval_seconds: float, ...args: Array) -> void:
 	var interval_msec := int(interval_seconds * 1000.0)
 
 	# Get the main loop's last frame time in milliseconds
-	var delta_msec := int(Engine.get_main_loop().root.get_process_delta_time() * 1000.0)
+	var delta_msec := int(Util.get_tree().root.get_process_delta_time() * 1000.0)
 
 	var current_window := current_time_msec / interval_msec
 	var previous_window := (current_time_msec - delta_msec) / interval_msec
@@ -255,6 +255,14 @@ static func node_error(error: String, ...injections: Array) -> void:
 			continue
 		injections[i] = nodestr(element)
 	push_error(error % injections)
+
+
+static func get_tree() -> SceneTree:
+	var main_loop := Engine.get_main_loop()
+	if main_loop == null:
+		push_error("Cannot get tree root without main loop")
+		return null
+	return main_loop as SceneTree
 
 
 static func nodestr(node: Node) -> String:

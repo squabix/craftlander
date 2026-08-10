@@ -9,7 +9,7 @@ enum DefaultParentMode { ROOT, SELF, CUSTOM }
 static var root: Node:
 	get:
 		if not is_instance_valid(root):
-			root = (Engine.get_main_loop() as SceneTree).root
+			root = Util.get_tree().root
 		return root
 
 @export var defer := true
