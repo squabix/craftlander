@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="IslandProp" format=3 uid="uid://beieg36rghbqo"]
+
+[ext_resource type="PackedScene" uid="uid://bcr3840jq1t5e" path="res://island/props/destructable_resource/bush/bush.tscn" id="1_0ag2e"]
+[ext_resource type="Script" uid="uid://csprfavexgrle" path="res://island/props/island_prop.gd" id="2_mpd5p"]
+
+[resource]
+script = ExtResource("2_mpd5p")
+scene = ExtResource("1_0ag2e")
+radius = 0.5
+min_height = 3.0
+min_scale = 0.9
+max_scale = 1.1
+metadata/_custom_type_script = "uid://csprfavexgrle"
