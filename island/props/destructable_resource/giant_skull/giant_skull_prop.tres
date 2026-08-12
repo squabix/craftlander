@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="IslandProp" format=3 uid="uid://bluftalwqtjng"]
+
+[ext_resource type="Script" uid="uid://csprfavexgrle" path="res://island/props/island_prop.gd" id="1_eg1k5"]
+[ext_resource type="PackedScene" uid="uid://cg0algjrb8tco" path="res://island/props/destructable_resource/giant_skull/giant_skull.tscn" id="1_j6f7v"]
+
+[resource]
+script = ExtResource("1_eg1k5")
+scene = ExtResource("1_j6f7v")
+radius = 2.5
+min_height = 0.5
+max_scale = 2.0
+metadata/_custom_type_script = "uid://csprfavexgrle"
