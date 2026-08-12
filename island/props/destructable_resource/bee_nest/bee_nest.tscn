@@ -73,7 +73,7 @@ _data = {
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5xftv"]
-albedo_color = Color(0.73, 0.625975, 0.40150002, 1)
+albedo_color = Color(0.91, 0.67946666, 0.182, 1)
 roughness = 0.6
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ioeyq"]
