@@ -474,6 +474,7 @@ surface_material_override/0 = ExtResource("18_kjjyj")
 
 [node name="Cube101" parent="cactus1" index="1" unique_id=1282510499]
 visible = false
+mesh = null
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1509073811]
 
