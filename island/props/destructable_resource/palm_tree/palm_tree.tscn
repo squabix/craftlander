@@ -263,6 +263,7 @@ shape = SubResource("CylinderShape3D_erttl")
 
 [node name="Wood" parent="Trunk/BlenderMeshes" index="0" unique_id=1896427998]
 visible = false
+mesh = null
 
 [node name="Leaf_003" parent="Trunk/BlenderMeshes" index="1" unique_id=1632141906]
 surface_material_override/0 = ExtResource("36_whjq2")
@@ -310,6 +311,7 @@ shape = SubResource("CylinderShape3D_t4kw7")
 
 [node name="Wood" parent="Stump/BlenderMeshes" index="0" unique_id=1896427998]
 visible = false
+mesh = null
 
 [node name="Leaf_003" parent="Stump/BlenderMeshes" index="1" unique_id=1632141906]
 visible = false
@@ -337,6 +339,10 @@ surface_material_override/0 = ExtResource("36_whjq2")
 
 [node name="Trunk" parent="Stump/BlenderMeshes" index="7" unique_id=551418162]
 visible = false
+surface_material_override/0 = ExtResource("18_knru2")
+surface_material_override/1 = ExtResource("19_0rjp4")
+
+[node name="Stump" parent="Stump/BlenderMeshes" index="8" unique_id=884117624]
 surface_material_override/0 = ExtResource("18_knru2")
 surface_material_override/1 = ExtResource("19_0rjp4")
 
