@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IslandProp" format=3 uid="uid://dw2vdjgdaj5xu"]
+
+[ext_resource type="PackedScene" uid="uid://cb5iwf6yqvn20" path="res://island/props/destructable_resource/dead_skeleton/dead_skeleton.tscn" id="1_7hx8f"]
+[ext_resource type="Script" uid="uid://csprfavexgrle" path="res://island/props/island_prop.gd" id="1_cybud"]
+
+[resource]
+script = ExtResource("1_cybud")
+scene = ExtResource("1_7hx8f")
+min_height = 1.0
+metadata/_custom_type_script = "uid://csprfavexgrle"
