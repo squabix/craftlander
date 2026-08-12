@@ -35,6 +35,7 @@ enum PlayerSpawnMode {BOAT, ISLAND_CENTER}
 func _ready() -> void:
 	MouseModeController.show()
 	get_tree().paused = true
+	Spawner3D.spawning_enabled = false
 	
 	Util.nodestr_root = self
 	
@@ -93,6 +94,9 @@ func initial_save_load() -> void:
 	
 	boat_adder.added_boat.connect(position_player_at_spawn)
 	docking_manager.initialize()
+	
+	prop_populator.clear()
+	Spawner3D.spawning_enabled = true
 	prop_populator.populate()
 	
 	advance_step()
@@ -104,6 +108,7 @@ func initial_save_load() -> void:
 func reload_save() -> void:
 	docking_manager.boat_adder.added_boat.connect(position_player_at_spawn)
 	prop_populator.clear()
+	Spawner3D.spawning_enabled = true
 	advance_step()
 	
 	await island_generator.generated

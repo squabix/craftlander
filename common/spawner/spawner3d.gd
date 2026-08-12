@@ -11,6 +11,7 @@ static var root: Node:
 		if not is_instance_valid(root):
 			root = Util.get_tree().root
 		return root
+static var spawning_enabled := true
 
 @export var defer := false
 @export var ignore_pausing: bool
@@ -100,10 +101,15 @@ func spawn(instance: Node3D = null, parent: Node = null) -> Node3D:
 		return null
 
 	if instance == null:
+		if not spawning_enabled:
+			return
 		instance = create_instance()
 		if instance == null:
 			Util.node_error("%s cannot spawn null instance", self)
 			return null
+	elif is_instance_valid(instance) and not spawning_enabled:
+		instance.queue_free()
+		return
 
 	if not is_instance_valid(parent):
 		parent = get_default_parent()
