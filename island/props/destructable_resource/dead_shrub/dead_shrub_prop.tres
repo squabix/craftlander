@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="IslandProp" format=3 uid="uid://cjar2mtvun61t"]
+
+[ext_resource type="PackedScene" uid="uid://07efrsy03vgw" path="res://island/props/destructable_resource/dead_shrub/dead_shrub.tscn" id="1_iqcwy"]
+[ext_resource type="Script" uid="uid://csprfavexgrle" path="res://island/props/island_prop.gd" id="2_iwsll"]
+
+[resource]
+script = ExtResource("2_iwsll")
+scene = ExtResource("1_iqcwy")
+radius = 0.5
+min_height = 1.0
+min_scale = 0.8
+max_scale = 1.2
+metadata/_custom_type_script = "uid://csprfavexgrle"

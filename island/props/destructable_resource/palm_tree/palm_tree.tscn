@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://f50l344faomv" path="res://assets/sound/tree_fall.mp3" id="16_qhgoe"]
 [ext_resource type="Material" uid="uid://g7eorwmb40wm" path="res://assets/materials/palm_bark.tres" id="18_knru2"]
 [ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="19_0rjp4"]
+[ext_resource type="Material" uid="uid://c6muf6sqewvq7" path="res://assets/materials/dead_wood.tres" id="21_x88xr"]
 [ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="28_cfe7b"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="29_0dkka"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="30_okiyi"]
@@ -339,7 +340,7 @@ surface_material_override/0 = ExtResource("36_whjq2")
 
 [node name="Trunk" parent="Stump/BlenderMeshes" index="7" unique_id=551418162]
 visible = false
-surface_material_override/0 = ExtResource("18_knru2")
+surface_material_override/0 = ExtResource("21_x88xr")
 surface_material_override/1 = ExtResource("19_0rjp4")
 
 [node name="Stump" parent="Stump/BlenderMeshes" index="8" unique_id=884117624]
