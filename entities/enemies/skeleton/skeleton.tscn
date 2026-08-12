@@ -1,63 +1,64 @@
-[gd_scene format=3 uid="uid://mwsmthp4sn6c"]
+[gd_scene format=4 uid="uid://2qh1cil1du0g"]
 
-[ext_resource type="Script" uid="uid://doai6uyyht5am" path="res://entities/enemies/rootling/rootling.gd" id="1_wtogd"]
-[ext_resource type="Resource" uid="uid://o4s4d0gqgsng" path="res://entities/enemies/rootling/rootling_move_mode.tres" id="2_f0qrw"]
-[ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="3_ihgra"]
-[ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="3_wtogd"]
-[ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="4_nauqg"]
-[ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_w8hfy"]
-[ext_resource type="Script" uid="uid://v1m6kagbghjv" path="res://common3d/radial_sight_3d.gd" id="5_nauqg"]
-[ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="7_kg2m4"]
-[ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/signal_triggrs/signal_state_trigger.gd" id="8_7mn0t"]
-[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="8_8jseq"]
-[ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="10_21a2r"]
-[ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="10_v4fp6"]
-[ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="10_v53xr"]
-[ext_resource type="Script" uid="uid://cf04j3voj4xyc" path="res://entities/npc_states/wandering_state.gd" id="11_7mn0t"]
-[ext_resource type="Script" uid="uid://c5asagc5dswqt" path="res://common3d/entity/entity_guide/nav_entity_guide3d.gd" id="11_8jseq"]
-[ext_resource type="Script" uid="uid://ccwod33h53a5s" path="res://common3d/controller/entity_controller3d.gd" id="11_hswny"]
-[ext_resource type="Script" uid="uid://pdvlr6l3n04n" path="res://entities/npc_states/chasing_state.gd" id="13_7mn0t"]
-[ext_resource type="PackedScene" uid="uid://bl745esge18tq" path="res://entities/enemies/rootling/rootling.blend" id="13_v4fp6"]
-[ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="16_f0qrw"]
-[ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="17_rvntx"]
-[ext_resource type="Script" uid="uid://ljihr86cv3xk" path="res://common3d/item_visuals_container_3d.gd" id="20_geuk7"]
-[ext_resource type="Script" uid="uid://bp5ab438ufrus" path="res://common3d/culling_controller3d.gd" id="20_hswny"]
-[ext_resource type="AnimationNodeStateMachine" uid="uid://clw23t4rpt3rl" path="res://common/inventory_system/animation/item_anim_tree_state_machine.tres" id="21_5b15m"]
-[ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="21_40hqq"]
-[ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="21_uefcv"]
-[ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="22_c3uxn"]
-[ext_resource type="Script" uid="uid://c622jer80j3sk" path="res://common/inventory_system/animation/item_animation.gd" id="22_sqkxx"]
-[ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="23_qk6mp"]
-[ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="24_vy7b5"]
-[ext_resource type="Material" uid="uid://m5807bchpbmp" path="res://assets/materials/glowing_eye.tres" id="25_g7svr"]
-[ext_resource type="Script" uid="uid://bi8ev1kcq2ayf" path="res://common/inventory_system/animation/item_animation_tree.gd" id="26_f0qrw"]
-[ext_resource type="Material" uid="uid://ct3rueaspkpix" path="res://assets/materials/darkness.tres" id="26_u6pq5"]
-[ext_resource type="Script" uid="uid://bwd4jx8u5uct2" path="res://common/inventory_system/item_holder3d.gd" id="27_7307j"]
-[ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/tools/shoddy_mace/shoddy_mace_item.tres" id="29_5b15m"]
-[ext_resource type="PackedScene" uid="uid://h3veu2e18ij1" path="res://entities/entity_health_bar.tscn" id="33_c3uxn"]
-[ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="34_hswny"]
-[ext_resource type="AudioStream" uid="uid://cwqa0rroqx0ww" path="res://assets/sound/steps_stream.tres" id="35_6ogb6"]
-[ext_resource type="AudioStream" uid="uid://iqev25rq7fbq" path="res://assets/sound/rootling-07.mp3" id="36_nkh2f"]
-[ext_resource type="AudioStream" uid="uid://b3c73cbq1ut7n" path="res://assets/sound/rootling-09.mp3" id="37_jfwek"]
-[ext_resource type="AudioStream" uid="uid://cb3edy6gssben" path="res://assets/sound/rootling-08.mp3" id="38_i6t70"]
-[ext_resource type="AudioStream" uid="uid://ck0q8lhyrv4xy" path="res://assets/sound/rootling-10.mp3" id="39_jfwek"]
-[ext_resource type="AudioStream" uid="uid://vb4hdoc5mtfs" path="res://assets/sound/rootling-01.mp3" id="39_n14r2"]
-[ext_resource type="AudioStream" uid="uid://dv7i8slvjjvqf" path="res://assets/sound/rootling-02.mp3" id="40_g7svr"]
-[ext_resource type="AudioStream" uid="uid://chvu761wd8xc2" path="res://assets/sound/rootling-11.mp3" id="40_i6t70"]
-[ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="40_pqd7v"]
-[ext_resource type="AudioStream" uid="uid://c4438fvpcmcld" path="res://assets/sound/rootling-12.mp3" id="41_pqd7v"]
-[ext_resource type="AudioStream" uid="uid://by44iwpc4os7a" path="res://assets/sound/rootling-03.mp3" id="41_u6pq5"]
-[ext_resource type="AudioStream" uid="uid://dmpw7i1okaklk" path="res://assets/sound/rootling-04.mp3" id="42_ai86q"]
-[ext_resource type="AudioStream" uid="uid://cxppt2efnqk4e" path="res://assets/sound/rootling-05.mp3" id="43_d3brl"]
-[ext_resource type="AudioStream" uid="uid://sl2wj5r6v4jx" path="res://assets/sound/rootling-06.mp3" id="44_ve4h5"]
+[ext_resource type="Script" uid="uid://doai6uyyht5am" path="res://entities/enemies/rootling/rootling.gd" id="1_1dvk3"]
+[ext_resource type="Resource" uid="uid://o4s4d0gqgsng" path="res://entities/enemies/rootling/rootling_move_mode.tres" id="2_3rmgh"]
+[ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="3_6kq1n"]
+[ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_lklid"]
+[ext_resource type="Script" uid="uid://bp5ab438ufrus" path="res://common3d/culling_controller3d.gd" id="5_veark"]
+[ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="6_50asm"]
+[ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="7_dwg3o"]
+[ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/signal_triggrs/signal_state_trigger.gd" id="8_vx64r"]
+[ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="9_ir2xu"]
+[ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="10_awqw8"]
+[ext_resource type="Script" uid="uid://v1m6kagbghjv" path="res://common3d/radial_sight_3d.gd" id="11_aeusl"]
+[ext_resource type="Script" uid="uid://ccwod33h53a5s" path="res://common3d/controller/entity_controller3d.gd" id="12_yrkha"]
+[ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="13_aapfe"]
+[ext_resource type="Script" uid="uid://cf04j3voj4xyc" path="res://entities/npc_states/wandering_state.gd" id="14_b7q8g"]
+[ext_resource type="Script" uid="uid://pdvlr6l3n04n" path="res://entities/npc_states/chasing_state.gd" id="15_ww28j"]
+[ext_resource type="Script" uid="uid://c5asagc5dswqt" path="res://common3d/entity/entity_guide/nav_entity_guide3d.gd" id="16_icrdh"]
+[ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="17_orkyh"]
+[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="18_48lup"]
+[ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="19_huyes"]
+[ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="20_xos1k"]
+[ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="21_bskhr"]
+[ext_resource type="Script" uid="uid://ljihr86cv3xk" path="res://common3d/item_visuals_container_3d.gd" id="25_d14c5"]
+[ext_resource type="AnimationNodeStateMachine" uid="uid://clw23t4rpt3rl" path="res://common/inventory_system/animation/item_anim_tree_state_machine.tres" id="26_pkakd"]
+[ext_resource type="Resource" uid="uid://w52cknmpa167" path="res://items/tools/shoddy_pickaxe/shoddy_pickaxe_item.tres" id="27_dg8e3"]
+[ext_resource type="Script" uid="uid://bi8ev1kcq2ayf" path="res://common/inventory_system/animation/item_animation_tree.gd" id="27_gqxm1"]
+[ext_resource type="Script" uid="uid://c622jer80j3sk" path="res://common/inventory_system/animation/item_animation.gd" id="28_bfpnq"]
+[ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="29_kttsx"]
+[ext_resource type="Resource" uid="uid://bah3rou15fcfh" path="res://items/tools/shoddy_axe/shoddy_axe_item.tres" id="30_4huls"]
+[ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/tools/shoddy_mace/shoddy_mace_item.tres" id="30_jfrea"]
+[ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="31_4ubbw"]
+[ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="32_257n1"]
+[ext_resource type="Script" uid="uid://bwd4jx8u5uct2" path="res://common/inventory_system/item_holder3d.gd" id="33_o01hw"]
+[ext_resource type="PackedScene" uid="uid://h3veu2e18ij1" path="res://entities/entity_health_bar.tscn" id="34_vmwow"]
+[ext_resource type="AudioStream" uid="uid://cwqa0rroqx0ww" path="res://assets/sound/steps_stream.tres" id="35_ujid8"]
+[ext_resource type="AudioStream" uid="uid://iqev25rq7fbq" path="res://assets/sound/rootling-07.mp3" id="36_fti4h"]
+[ext_resource type="AudioStream" uid="uid://b3c73cbq1ut7n" path="res://assets/sound/rootling-09.mp3" id="37_88114"]
+[ext_resource type="AudioStream" uid="uid://cb3edy6gssben" path="res://assets/sound/rootling-08.mp3" id="38_vmqmh"]
+[ext_resource type="AudioStream" uid="uid://vb4hdoc5mtfs" path="res://assets/sound/rootling-01.mp3" id="39_1r2is"]
+[ext_resource type="AudioStream" uid="uid://dv7i8slvjjvqf" path="res://assets/sound/rootling-02.mp3" id="40_p44nf"]
+[ext_resource type="AudioStream" uid="uid://by44iwpc4os7a" path="res://assets/sound/rootling-03.mp3" id="41_28sqd"]
+[ext_resource type="AudioStream" uid="uid://dmpw7i1okaklk" path="res://assets/sound/rootling-04.mp3" id="42_ourk4"]
+[ext_resource type="AudioStream" uid="uid://cxppt2efnqk4e" path="res://assets/sound/rootling-05.mp3" id="43_36le5"]
+[ext_resource type="AudioStream" uid="uid://sl2wj5r6v4jx" path="res://assets/sound/rootling-06.mp3" id="44_63qdp"]
+[ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="45_gap2n"]
+[ext_resource type="Material" uid="uid://brsw8xc5rh2lv" path="res://assets/materials/bone.tres" id="46_3p1xh"]
+[ext_resource type="AudioStream" uid="uid://ck0q8lhyrv4xy" path="res://assets/sound/rootling-10.mp3" id="46_bv1wd"]
+[ext_resource type="Material" uid="uid://m5807bchpbmp" path="res://assets/materials/glowing_eye.tres" id="47_e3glw"]
+[ext_resource type="AudioStream" uid="uid://chvu761wd8xc2" path="res://assets/sound/rootling-11.mp3" id="47_jmkrk"]
+[ext_resource type="Material" uid="uid://ct3rueaspkpix" path="res://assets/materials/darkness.tres" id="48_eph8r"]
+[ext_resource type="AudioStream" uid="uid://c4438fvpcmcld" path="res://assets/sound/rootling-12.mp3" id="48_t8qc2"]
+[ext_resource type="PackedScene" uid="uid://6t3jpflaiiij" path="res://entities/enemies/skeleton/skeleton.blend" id="49_4huls"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
-script = ExtResource("3_wtogd")
+script = ExtResource("3_6kq1n")
 y = false
 metadata/_custom_type_script = "uid://bh8pcyeueeoey"
 
 [sub_resource type="Resource" id="Resource_0dji4"]
-script = ExtResource("4_w8hfy")
+script = ExtResource("4_lklid")
 bool_vector = SubResource("Resource_v53xr")
 metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
 
@@ -65,14 +66,14 @@ metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
 radius = 0.65
 
 [sub_resource type="Resource" id="Resource_aoox1"]
-script = ExtResource("8_8jseq")
-item = ExtResource("16_f0qrw")
+script = ExtResource("18_48lup")
+item = ExtResource("19_huyes")
 quantity = 3
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Resource" id="Resource_uefcv"]
-script = ExtResource("8_8jseq")
-item = ExtResource("17_rvntx")
+script = ExtResource("18_48lup")
+item = ExtResource("20_xos1k")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Animation" id="Animation_3emv6"]
@@ -161,6 +162,30 @@ tracks/11/path = NodePath("Visuals/Armature/Skeleton3D:Bone.012")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = PackedFloat32Array(0, 1, 0, 0, -0.07041718, 0.99751765)
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Visuals/Armature/Skeleton3D/JawAttachment/Jaw:rotation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.4713204, 0, 0)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Visuals/Armature/Skeleton3D/JawAttachment/Jaw:position")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.14195013, 0.19839726)]
+}
 
 [sub_resource type="Animation" id="Animation_aoox1"]
 resource_name = "attack"
@@ -270,6 +295,30 @@ tracks/11/path = NodePath("Visuals/Armature/Skeleton3D:Bone.012")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = PackedFloat32Array(0, 1, 0, 0, -0.07041718, 0.99751765)
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Visuals/Armature/Skeleton3D/JawAttachment/Jaw:position")
+tracks/12/interp = 2
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.14195013, 0.19839726), Vector3(3.0160106e-08, 0.14195013, 0.07189661)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Visuals/Armature/Skeleton3D/JawAttachment/Jaw:rotation")
+tracks/13/interp = 2
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.4713204, 0, 0), Vector3(1.1896882, -1.7475988e-07, -1.7814855e-07)]
+}
 
 [sub_resource type="Animation" id="Animation_0uawy"]
 resource_name = "jab"
@@ -466,6 +515,30 @@ tracks/12/keys = {
 "method": &"play"
 }]
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Visuals/Armature/Skeleton3D/JawAttachment/Jaw:rotation")
+tracks/13/interp = 2
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.4713204, 0, 0), Vector3(1.209521, -1.7143138e-07, -1.7457695e-07)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Visuals/Armature/Skeleton3D/JawAttachment/Jaw:position")
+tracks/14/interp = 2
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0.14195013, 0.19839726), Vector3(2.7792655e-08, 0.1698283, 0.08182642)]
+}
 
 [sub_resource type="Animation" id="Animation_wtogd"]
 resource_name = "walk"
@@ -557,7 +630,7 @@ tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = PackedFloat32Array(0, 1, 0, 0, -0.07041718, 0.99751765)
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_wtogd"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vi485"]
 _data = {
 &"RESET": SubResource("Animation_3emv6"),
 &"attack": SubResource("Animation_aoox1"),
@@ -587,59 +660,97 @@ blend_point_1/pos = 0.8
 blend_point_1/name = &"1"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_p5gg5"]
-graph_offset = Vector2(-606.2101, -48.971813)
+graph_offset = Vector2(-531.1591, -10.477916)
 nodes/output/position = Vector2(160, 26.666666)
 nodes/RunBlendSpace/node = SubResource("AnimationNodeBlendSpace1D_7mn0t")
 nodes/RunBlendSpace/position = Vector2(-306.66666, -66.666664)
 nodes/ItemBlend/node = SubResource("AnimationNodeBlend2_0uawy")
 nodes/ItemBlend/position = Vector2(-66.666664, 40)
-nodes/ItemStateMachine/node = ExtResource("21_5b15m")
+nodes/ItemStateMachine/node = ExtResource("26_pkakd")
 nodes/ItemStateMachine/position = Vector2(-600, 173.33333)
 node_connections = [&"output", 0, &"ItemBlend", &"ItemBlend", 0, &"RunBlendSpace", &"ItemBlend", 1, &"ItemStateMachine"]
 
 [sub_resource type="Resource" id="Resource_0uawy"]
-script = ExtResource("22_sqkxx")
-items = Array[ExtResource("21_40hqq")]([ExtResource("29_5b15m")])
+script = ExtResource("28_bfpnq")
+items = Array[ExtResource("29_kttsx")]([ExtResource("30_jfrea"), ExtResource("27_dg8e3"), ExtResource("30_4huls")])
 start_anim = "attack"
 metadata/_custom_type_script = "uid://c622jer80j3sk"
 
-[sub_resource type="Resource" id="Resource_7307j"]
-script = ExtResource("8_8jseq")
-item = ExtResource("29_5b15m")
+[sub_resource type="Resource" id="Resource_eph8r"]
+script = ExtResource("18_48lup")
+item = ExtResource("30_4huls")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hjjmf"]
 random_pitch = 1.122462
 streams_count = 3
-stream_0/stream = ExtResource("36_nkh2f")
-stream_1/stream = ExtResource("37_jfwek")
-stream_2/stream = ExtResource("38_i6t70")
+stream_0/stream = ExtResource("36_fti4h")
+stream_1/stream = ExtResource("37_88114")
+stream_2/stream = ExtResource("38_vmqmh")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_i6t70"]
 random_pitch = 1.1892071
 streams_count = 6
-stream_0/stream = ExtResource("39_n14r2")
-stream_1/stream = ExtResource("40_g7svr")
-stream_2/stream = ExtResource("41_u6pq5")
-stream_3/stream = ExtResource("42_ai86q")
-stream_4/stream = ExtResource("43_d3brl")
-stream_5/stream = ExtResource("44_ve4h5")
+stream_0/stream = ExtResource("39_1r2is")
+stream_1/stream = ExtResource("40_p44nf")
+stream_2/stream = ExtResource("41_28sqd")
+stream_3/stream = ExtResource("42_ourk4")
+stream_4/stream = ExtResource("43_36le5")
+stream_5/stream = ExtResource("44_63qdp")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yocth"]
 random_pitch = 1.0594631
 streams_count = 3
-stream_0/stream = ExtResource("39_jfwek")
-stream_1/stream = ExtResource("40_i6t70")
-stream_2/stream = ExtResource("41_pqd7v")
+stream_0/stream = ExtResource("46_bv1wd")
+stream_1/stream = ExtResource("47_jmkrk")
+stream_2/stream = ExtResource("48_t8qc2")
 
-[node name="Rootling" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "item_holder", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v4jqo"]
+resource_name = "Material.010"
+cull_mode = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_xpk0a"]
+_surfaces = [{
+"aabb": AABB(-0.3484353, -0.5137523, -0.07933398, 0.70858175, 0.5391587, 0.120041266),
+"format": 34359742465,
+"index_count": 468,
+"index_data": PackedByteArray("OwA8AD0ACgA9ADwAOwASADwAEgAKADwAPgA7AD0AOwATABIAPgA9AD8ACgA/AD0APgAVADsAOwAVABMAQAA+AD8AQAA/AEEAPwAfAEEACgAfAD8AHQBAAEEAHQBBAB8AQAAcAD4APgAcABUAHQAeAEAAQAAeABwAQgAdAB8AQgAfAEMAQgA1AB0AHQA1AB4AHwBEAEMACgBEAB8ARQBCAEMARQBDAEQARQAzAEIAQgAzADUARgBFAEQANQA4AB4ARgAjAEUARQAjADMARgBEAEcARAABAEcARAAKAAEAIQBGAEcAIQBHACAARwABACAAIQAmAEYARgAmACMAIgAhACAAIgAgAAEAIgAlACEAIQAlACYAAAAiAAEAAAABAAIAAAAkACIAIgAkACUAAQAEAAIAAQAKAAQAAwAAAAIAAwACAAQAAAAFACQAAwAFAAAABAAKAAkABgADAAQABgAEAAkACwAJAAoACwAGAAkAEgALAAoABgAHAAMAAwAHAAUACwAMAAYABgAMAAcAEgAQAAsACwAQAAwAEgATABAABwAIAAUAEAAPAAwADAANAAcABwANAAgADAAPAA0ABQAIAA4ADQAOAAgABQAOACQAEQANAA8AEAARAA8AEwARABAAEQAOAA0AEwAUABEAFQAUABMAFgARABQAFQAWABQAFQAVABYAFQAWABYAFwARABYAFwAOABEAFgAWABcAFgAXABcAFgAZABcAFgAYABkAFQAYABYAGwAZABgAFwAZABsAGwAYABoAFQAaABgAHAAbABoAHAAaABUAHAAVABUAHAAcABUAFwAbABwAFwAcABwAFwAXABwAHgAXABwAHgA2ABcAHgA5ADYAHgA4ADkANgA5ADcAOgA5ADgAOgA3ADkANQA6ADgANgA3ADQANAA3ADoANAA6ADUANAAXADYAMwA0ADUALgAXADQAMwAuADQALgAOABcAMwAzAC4AMwAuAC4ADgAuAC0ALgAuAC0ALgAtAC0ALgAwAC0ALgAyADAAMwAyAC4ALwAwADIALQAwAC8ALwAyADEAMwAxADIAIwAvADEAIwAxADMALQAvACMAIwAzADMAIwAjADMALQAjACMALQAtACMAJgAtACMADgAtACwAJgAsAC0ADgAsACcAJAAOACcAJAAnACUALAArACcAJQAoACYAJgAqACwALAAqACsAJgAoACoAJwArACkAJwApACUAKQArACoAJQApACgAKQAqACgA"),
+"lods": [0.041842345, PackedByteArray("AAABAAIAAwAAAAIAAQAEAAIAAwACAAQAAwAFAAAABgADAAQAAwAHAAUABgAHAAMABwAIAAUABgAEAAkABAAKAAkAAQAKAAQACwAGAAkACwAJAAoABgAMAAcACwAMAAYABwANAAgADAANAAcADQAOAAgABQAIAA4ADAAPAA0ACwAQAAwAEAAPAAwAEQANAA8AEAARAA8AEQAOAA0AEgAQAAsAEgALAAoAEwARABAAEgATABAAEwAUABEAFQAUABMAEgAVABMAFgARABQAFQAWABQAFwARABYAFwAOABEAFQAYABYAFgAYABkAFgAZABcAFQAaABgAGwAZABgAGwAYABoAFwAZABsAHAAaABUAHAAbABoAEgAcABUAFwAbABwAHQAcABIAHgAXABwAHQAeABwAHQASAB8AEgAKAB8AHwAKAAEAHwABACAAIQAfACAAIQAdAB8AIgAgAAEAIgAhACAAAAAiAAEAIQAjAB0AAAAkACIAAAAFACQAIgAlACEAIgAkACUABQAOACQAIQAlACYAIQAmACMAJAAnACUAJAAOACcAJQAoACYAJQApACgAJwApACUAJgAoACoAKQAqACgAJwArACkAKQArACoALAArACcALAAqACsADgAsACcAJgAqACwAJgAsAC0ADgAtACwAJgAtACMADgAuAC0ALgAOABcALQAvACMALQAwAC8ALgAwAC0AIwAvADEALwAwADIALgAyADAALwAyADEAIwAxADMAMwAxADIAMwAyAC4AHQAjADMALgAXADQAMwAuADQAHQAzADUAMwA0ADUAHQA1AB4ANAAXADYAHgA2ABcANgA3ADQANQA4AB4AHgA5ADYANgA5ADcAHgA4ADkANAA3ADoANAA6ADUAOgA3ADkANQA6ADgAOgA5ADgA")],
+"name": "Material.010",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 72,
+"vertex_data": PackedByteArray("VBCAvmTUur2wdyE84Rx5vmt8ar6dvCY91Gc+vm9lAb6dvCY96N+/O+DKIDxwdyE86N+/O1h+T72OvCY9mqeIvth1qL3KTfC8VA+GPmTUur2wdyE86N+/OxAh0DzqTfC8iEdLvuAj9b28BGg70WVKPm9lAb6dvCY9cY2CPmt8ar6dvCY9czytPr+rab6udyE8mqaOPth1qL3KTfC86N+/O+jcH728A2g72+qEvmGMar64BGg7hkVXPuAj9b28BGg7HWW4Pgeuab7LTfC83OmKPmGMar64BGg7DMqEPrnKub6udyE8/0uNPvtQvr7LTfC8ID5VPvNTrL60BGg7vnFVPl9/0L7LTfC8V24hPlrzub60BGg7Hj3bPcCSx760BGg7V24hPlrzub6GTD69Hj3bPcCSx76GTD69vnFVPl9/0L7beaK9fUsQPsSt4r7beaK9fUsQPsSt4r7LTfC86N+/OwIL/r7sdyE8fUqWPSjc9L7MTfC86N+/O3QM3L6tvCY9YYA8vvroqL6dvCY9F5Z9vrnKub6udyE8cj2nvr+rab6udyE8gE0EvsSt4r7LTfC8HWayvgeuab7LTfC8/0yHvvtQvr7LTfC8v3NJvl9/0L7LTfC8IUBJvvNTrL60BGg7v3NJvl9/0L7beaK9/0yHvvtQvr7beaK9WnAVvlrzub6GTD69IUBJvvNTrL6GTD69WnAVvlrzub60BGg7IkHDvcCSx760BGg7IkM3vScy1b6wBWg7gE0EvsSt4r7beaK9IkHDvcCSx76GTD69/px8vSjc9L7beaK9IkM3vScy1b52TD69/px8vSjc9L7MTfC86N+/O47R4r6wBWg76N+/O0WFA7+sTfC8HjtnPScy1b6wBWg76N+/O47R4r52TD69fUqWPSjc9L7beaK9HjtnPScy1b52TD696N+/O0WFA7/TeaK90K5IPsvayr6udyE8Xn5IPvroqL6dvCY9ht4XPtmxtb6dvCY9iskHPt3q276udyE8XH3OPbd6wr6dvCY9i8iNPfD67L7udyE8XHtaPZZDz76dvCY9GplrvfD67L7udyE8YYMqvZZDz76dvCY9YIG2vbd6wr6dvCY9Gpf3vd3q276udyE807A8vsvayr6udyE8ieALvtmxtb6dvCY9")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_n1j7j"]
+resource_name = "skeleton_Cylinder_006"
+_surfaces = [{
+"aabb": AABB(-0.3484353, -0.5137523, -0.07933398, 0.70858175, 0.5391587, 0.120041266),
+"attribute_data": PackedByteArray("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"),
+"format": 34359742487,
+"index_count": 468,
+"index_data": PackedByteArray("zgDPANAAzgAEAM8A0QDOANAA0QDQANIA0wDRANIA0wDSANQACADTANQACADUAAcAAAABAAIAAAADAAEA1QAGANYA1QAFAAYACQAKAAsACQAMAAoADQAOAA8ADQAQAA4AEQASABMAEQAUABIA1wAaANgA1wAbABoA2QDXANgA2QDYANoA2wDZANoA2wDaANwAGQDbANwAGQDcABYAFQDdABcAFQAYAN0A3gAdAB4A3wAdAN4AHQAgACIAHQAfACAA3wAfAB0AIAAfACEAHwDfABwAHADfAOAAHwAcAOEA4QAcAOIAHwDhAOMAHwDjAOQAIwAkACUAIwAmACQAKgArACwAKgAtACsA5QAoACkA5QAnACgALgAvADAALgAxAC8AMgAzADQAMgA1ADMANgA3ADgANgA5ADcAOgA7ADwAOgA9ADsAPgA/AEAAPgBBAD8AQgBDAEQAQgBFAEMAQgBGAEUARgBCAEcARgBHAEgASABHAEkARwBCAEoARwBKAEsASwBKAEwASgBCAE0ATQBCAE4ASgBNAE8AUABRAFIAUABTAFEAVABVAFYAVABXAFUAWABZAFoAWABbAFkAXABdAF4AXABfAF0AYABhAGIAYABjAGEA5gBmAGQA5gBlAGYA5wBlAOYA5wBnAGUA6ABnAOcA6ABpAGcAaABpAOgAaABqAGkAawBsAG0AawBuAGwA6QBxAG8A6QBwAHEA6gBwAOkA6gByAHAA6wByAOoA6wB0AHIAcwB0AOsAcwB1AHQAdgB3AHgAdgB5AHcAegB7AHwAegB9AHsA7ADtAO4A7gDtAO8A7ADwAO0A7gDvAPEA8gDwAOwA8QDvAPMA8gDzAPAA8QDzAPIAfgB/AIAAfgCBAH8AggCDAIQAggCFAIMA9AD1APYA9gD1APcA9AD4APUA9gD3APkA+gD4APQA+QD3APsA+gD7APgA+QD7APoAhgCHAIgAhgCJAIcAigCLAIwAigCNAIsAjgCPAJAAjgCRAI8AkgCTAJQAkgCVAJMAlgCXAJgAlgCZAJcAmgCbAJwAmgCdAJsAngCfAKAAngChAJ8AogCjAKQAogClAKMApgCnAKgApgCpAKcAqgCrAKwAqgCtAKsArgCvALAArgCxAK8AsgCzALQAsgC1ALMAtgC3ALgAtgC5ALcAugC7ALwAugC9ALsAvgC/AMAAvgDBAL8AwgDDAMQAwgDFAMMAxgDHAMgAxgDJAMcAygDLAMwAygDNAMsA"),
+"lods": [0.041842345, PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAGAAcACAAEAAcACQAKAAsACQAMAAoADQAOAA8ADQAQAA4AEQASABMAEQAUABIAFQAWABcAFQAYABYAGQAaABYAGQAbABoAHAAdAB4AHAAfAB0AHQAfACAAIAAfACEAHQAgACIAIwAkACUAIwAmACQAJQAnACgAJQAoACkAKgArACwAKgAtACsALgAvADAALgAxAC8AMgAzADQAMgA1ADMANgA3ADgANgA5ADcAOgA7ADwAOgA9ADsAPgA/AEAAPgBBAD8AQgBDAEQAQgBFAEMAQgBGAEUARgBCAEcARgBHAEgASABHAEkARwBCAEoARwBKAEsASwBKAEwASgBCAE0ATQBCAE4ASgBNAE8AUABRAFIAUABTAFEAVABVAFYAVABXAFUAWABZAFoAWABbAFkAXABdAF4AXABfAF0AYABhAGIAYABjAGEAZABlAGYAZABnAGUAaABnAGQAaABpAGcAaABqAGkAawBsAG0AawBuAGwAbwBwAHEAbwByAHAAcwByAG8AcwB0AHIAcwB1AHQAdgB3AHgAdgB5AHcAegB7AHwAegB9AHsAfgB/AIAAfgCBAH8AggCDAIQAggCFAIMAhgCHAIgAhgCJAIcAigCLAIwAigCNAIsAjgCPAJAAjgCRAI8AkgCTAJQAkgCVAJMAlgCXAJgAlgCZAJcAmgCbAJwAmgCdAJsAngCfAKAAngChAJ8AogCjAKQAogClAKMApgCnAKgApgCpAKcAqgCrAKwAqgCtAKsArgCvALAArgCxAK8AsgCzALQAsgC1ALMAtgC3ALgAtgC5ALcAugC7ALwAugC9ALsAvgC/AMAAvgDBAL8AwgDDAMQAwgDFAMMAxgDHAMgAxgDJAMcAygDLAMwAygDNAMsA")],
+"material": SubResource("StandardMaterial3D_v4jqo"),
+"name": "Material.010",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 252,
+"vertex_data": PackedByteArray("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XH3OPbd6wr6dvCY9XHtaPZZDz76dvCY9ht4XPtmxtb6dvCY9Xn5IPvroqL6dvCY9/0uNPvtQvr7LTfC80K5IPsvayr6udyE8iskHPt3q276udyE8i8iNPfD67L7udyE8GplrvfD67L7udyE8Gpf3vd3q276udyE807A8vsvayr6udyE8vnFVPl9/0L7LTfC8V24hPlrzub60BGg7V24hPlrzub60BGg7Hj3bPcCSx760BGg7vnFVPl9/0L7LTfC8Hj3bPcCSx760BGg7fUsQPsSt4r7LTfC8fUsQPsSt4r7LTfC8IkHDvcCSx760BGg7gE0EvsSt4r7LTfC8gE0EvsSt4r7LTfC8/px8vSjc9L7MTfC8IkHDvcCSx760BGg7/px8vSjc9L7MTfC8IkM3vScy1b6wBWg7IkM3vScy1b6wBWg7RO/wHf///79E7/Ad////v0Tv8B3///+/RO/wHf///7/NIrLt////v5ARC+L///+/kBEL4v///7/NIrLt////v80isu3///+/2NkQD////7/Y2RAP////v9jZEA////+/2NkQD////7+6EPAd////v7oQ8B3///+/uhDwHf///7+6EPAd////vyYmEA////+/JiYQD////78mJhAP////vyYmEA////+/bu4L4v///78x3bLt////v27uC+L///+/bu4L4v///78x3bLt1QaWUDHdsu3///+/Md2y7f///7//////////v//////tOQij/////////7//////////v//////tOQij/////8bCm17/////7TkIo0uSMl3i0w3WS5IyXeLTDdZLkjJd////P0uSMl3i0w3W8p1ubv///z/ynW5u////P/Kdbm7///8/DmK5kP///z8OYrmQ////Pw5iuZD///8/DmK5kP///z/vcCam////P+9wJqb///8/73Ampv///z/vcCam////P/CduZD///8/8J25kP///z/wnbmQ////P/CduZD///8/D48mpv///z8Pjyam////Pw+PJqb///8/D48mpv///z+zbTJdHCwN1rNtMl0cLA3Ws20yXf///z+zbTJdHCwN1gxibm7///8/DGJubv///z8MYm5u////Pwxibm7///8//3//f04/pt//f/9/Tj+m3/9//3+tUKkX/3//f04/pt//f/9/////P/9//3////8//3//f////z//f/9/////P/9//3/GwmOh/3//f////z//f/9/////P/9//3/GwmOh/3//f+059lz/f/9/xsJjofTcQ8T///+/9NxDxP///7/03EPE////v/TcQ8T///+/zyGHPP///7/PIYc8////v88hhzz///+/zyGHPP///79nRy4c////v2dHLhz///+/Z0cuHP///79nRy4c////vy/ehzz///+/L96HPP///78v3oc8////vy/ehzz///+/l7guHP///7+XuC4c////v5e4Lhz///+/l7guHP///7/VQOfd////v9VA593K4Eom1UDn3S3qoiPVQOfd4tPxKdVA593///+/1UDn3XXehoTVQOfd////vwojQ8T///+/CiNDxP///78KI0PE////vwojQ8T///+/Kb/n3f///78pv+fdg5HrzSm/590jS8UqKb/n3YOR680pv+fdhk8b1Sm/593yPZPVKb/n3f///7/jU+LT////v+NT4tP///+/41Pi0////7/jU+LT////v0uSMl3Mm4XkS5IyXcybheRLkjJdzJuF5EuSMl3///8/41McLP///7/jUxws////v+NTHCz///+/41McLP///7+zbTJdtQ44VbNtMl21DjhVs20yXf///z+zbTJdtQ44VUuSMl3///8/S5IyXf///z9LkjJd////P0uSMl3///8/////f////7////9/////v////3////+/////f////78brBws////vxusHCz///+/G6wcLP///78brBws////v4Mbe2T///+/gxt7ZP///7+DG3tk////v4Mbe2T///+/EM7tsf///78Qzu2x////vxDO7bH///+/EM7tsf///79LkjJd4tMN1kuSMl3i0w3WS5IyXeLTDdZLkjJd4tMN1uNT4tP///+/41Pi0////7/jU+LT////v+NT4tP///+/jkRwO////7+ORHA7////v45EcDv///+/jkRwO////78brBws////vxusHCz///+/G6wcLP///78brBws////vxDOEU7///+/EM4RTv///78QzhFO////vxDOEU7///+/s20yXXYXn6WzbTJddhefpbNtMl12F5+ls20yXf///z8brOLT////vxus4tP///+/G6zi0////78brOLT////v4Mbg5v///+/gxuDm////7+DG4Ob////v4Mbg5v///+/41McLP///7/jUxws////v+NTHCz///+/41McLP///7+zbTJdHCzxKbNtMl0cLPEps20yXRws8SmzbTJd////P7eruCv///+/t6u4K////7+3q7gr////v7eruCv///+/G6zi0////78brOLT////vxus4tP///+/G6zi0////7+ORI7E////v45EjsT///+/jkSOxP///7+ORI7E////v80isu3///+/zSKy7f///7/NIrLt////v80isu3///+/zSKy7f///7/NIrLt////v80isu3///+/kBEL4v///7+QEQvi////vzHdsu3///+/Md2y7f///78x3bLtN6SwIzHdsu1yatwZMd2y7b4dCS0x3bLtuCBlLG7uC+L///+//////////7//////////v/////////+//////////7//////////v/////////+//////////7/ynW5u////P9VA592g3Hgn1UDn3eLT8SnVQOfddd6GhCm/592KOU0qKb/n3YOR680pv+fdsUF51f9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_xpk0a")
+
+[node name="Skeleton" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "item_holder", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
-script = ExtResource("1_wtogd")
+script = ExtResource("1_1dvk3")
 anim_tree = NodePath("AnimationTree")
 item_holder = NodePath("ItemHolder3D")
 culling_controller = NodePath("CullingController3D")
-type = "Rootling"
-move_mode = ExtResource("2_f0qrw")
+type = &"Skeleton"
+move_mode = ExtResource("2_3rmgh")
 horizontal_rotation_target = NodePath(".")
 vertical_rotation_target = NodePath(".")
 rotation_range = SubResource("Resource_0dji4")
@@ -651,16 +762,16 @@ shape = SubResource("CapsuleShape3D_3emv6")
 
 [node name="CullingController3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=1066206516 node_paths=PackedStringArray("root", "visibility_control_list")]
 aabb = AABB(-1, 0, -1, 2, 2, 2)
-script = ExtResource("20_hswny")
+script = ExtResource("5_veark")
 root = NodePath("..")
 on_screen_process_radius = 110.0
 off_screen_process_radius = 24.0
 on_screen_visible_radius = 110.0
-visibility_control_list = [NodePath("../Visuals")]
+visibility_control_list = [null]
 visibility_range_fade_margin = 10.0
 
 [node name="IntervalStaggerer" type="Node" parent="CullingController3D" unique_id=171446592 node_paths=PackedStringArray("target_methods")]
-script = ExtResource("34_hswny")
+script = ExtResource("6_50asm")
 base_interval = 0.3
 target_methods = {
 NodePath(".."): &"evaluate_culling"
@@ -671,7 +782,7 @@ metadata/_custom_type_script = "uid://73ya7jxulyl4"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 8
 collision_mask = 0
-script = ExtResource("3_ihgra")
+script = ExtResource("7_dwg3o")
 health = NodePath("../Health")
 knockback_entity = NodePath("..")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
@@ -680,7 +791,7 @@ metadata/_custom_type_script = "uid://4dfurtssrp4f"
 shape = SubResource("CapsuleShape3D_3emv6")
 
 [node name="StartChaseTrigger" type="Node" parent="Hurtbox3D" unique_id=1954498291 node_paths=PackedStringArray("state_machine")]
-script = ExtResource("8_7mn0t")
+script = ExtResource("8_vx64r")
 state_machine = NodePath("../../Controller3D/Default")
 state_name = &"Chasing"
 from_state_whitelist = Array[StringName]([&"Wandering"])
@@ -688,13 +799,13 @@ signal_name = &"was_hurt"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 
 [node name="Health" type="Node" parent="." unique_id=780116179]
-script = ExtResource("4_nauqg")
+script = ExtResource("9_ir2xu")
 hp = 100.0
 free_parent_on_death = true
 metadata/_custom_type_script = "uid://cbb5o5ykqwxfp"
 
 [node name="SignalAudioManager3D" type="Node3D" parent="Health" unique_id=1371947431 node_paths=PackedStringArray("signal_players")]
-script = ExtResource("10_21a2r")
+script = ExtResource("10_awqw8")
 signal_players = {
 &"was_hurt": NodePath("../../HurtPlayer")
 }
@@ -702,7 +813,7 @@ metadata/_custom_type_script = "uid://43bqjaemfda5"
 
 [node name="Sight3D" type="Node3D" parent="." unique_id=713539717]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-script = ExtResource("5_nauqg")
+script = ExtResource("11_aeusl")
 radius = 15.0
 lose_distance = 23.0
 target_collision_mask = 16
@@ -710,7 +821,7 @@ ray_collision_mask = 21
 group_whitelist = Array[StringName]([&"player"])
 
 [node name="StartChaseTrigger" type="Node" parent="Sight3D" unique_id=1196415362 node_paths=PackedStringArray("state_machine")]
-script = ExtResource("8_7mn0t")
+script = ExtResource("8_vx64r")
 state_machine = NodePath("../../Controller3D/Default")
 state_name = &"Chasing"
 from_state_whitelist = Array[StringName]([&"Wandering"])
@@ -718,18 +829,18 @@ signal_name = &"found_target"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 
 [node name="Controller3D" type="Node" parent="." unique_id=1315753818]
-script = ExtResource("11_hswny")
+script = ExtResource("12_yrkha")
 metadata/_custom_type_script = "uid://ccwod33h53a5s"
 
 [node name="Default" type="Node" parent="Controller3D" unique_id=1574117420 node_paths=PackedStringArray("root")]
-script = ExtResource("10_v53xr")
+script = ExtResource("13_aapfe")
 root = NodePath("../..")
 process_update = true
 physics_process_update = true
 metadata/_custom_type_script = "uid://bqonxtntgndfr"
 
 [node name="Wandering" type="Node" parent="Controller3D/Default" unique_id=1882444428 node_paths=PackedStringArray("nav_guide", "idle_timer", "root")]
-script = ExtResource("11_7mn0t")
+script = ExtResource("14_b7q8g")
 nav_guide = NodePath("../../NavEntityGuide3D")
 idle_timer = NodePath("Timer")
 root = NodePath("../../..")
@@ -738,7 +849,7 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 [node name="Timer" type="Timer" parent="Controller3D/Default/Wandering" unique_id=1600727395]
 
 [node name="SignalAudioManager3D" type="Node3D" parent="Controller3D/Default/Wandering" unique_id=1121028117 node_paths=PackedStringArray("signal_players")]
-script = ExtResource("10_21a2r")
+script = ExtResource("10_awqw8")
 signal_players = {
 &"entered": NodePath("../../../../TalkPlayer"),
 &"exited": NodePath("../../../../TalkPlayer"),
@@ -748,7 +859,7 @@ signal_players = {
 metadata/_custom_type_script = "uid://43bqjaemfda5"
 
 [node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=1883496829 node_paths=PackedStringArray("item_holder", "guide", "sight", "interval_staggerer", "root")]
-script = ExtResource("13_7mn0t")
+script = ExtResource("15_ww28j")
 item_holder = NodePath("../../../ItemHolder3D")
 guide = NodePath("../../NavEntityGuide3D")
 sight = NodePath("../../../Sight3D")
@@ -757,7 +868,7 @@ root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="IntervalStaggerer" type="Node" parent="Controller3D/Default/Chasing" unique_id=1668925528 node_paths=PackedStringArray("target_methods")]
-script = ExtResource("34_hswny")
+script = ExtResource("6_50asm")
 base_interval = 0.25
 target_methods = {
 NodePath(".."): &"update_path"
@@ -766,7 +877,7 @@ initial_time_left = 5.0
 metadata/_custom_type_script = "uid://73ya7jxulyl4"
 
 [node name="NavEntityGuide3D" type="Node" parent="Controller3D" unique_id=377578045 node_paths=PackedStringArray("nav", "entity")]
-script = ExtResource("11_8jseq")
+script = ExtResource("16_icrdh")
 nav = NodePath("../../NavigationAgent3D")
 entity = NodePath("../..")
 face_interpolation = 0.1
@@ -774,15 +885,15 @@ metadata/_custom_type_script = "uid://c5asagc5dswqt"
 
 [node name="Inventory" type="Node" parent="." unique_id=2020826484]
 unique_name_in_owner = true
-script = ExtResource("7_kg2m4")
-item_instances = Array[ExtResource("8_8jseq")]([SubResource("Resource_aoox1"), SubResource("Resource_uefcv")])
+script = ExtResource("17_orkyh")
+item_instances = Array[ExtResource("18_48lup")]([SubResource("Resource_aoox1"), SubResource("Resource_uefcv")])
 constant = true
 size = 2
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 
 [node name="InventoryDropper3D" type="Node3D" parent="." unique_id=709626360 node_paths=PackedStringArray("inventory", "health")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-script = ExtResource("10_v4fp6")
+script = ExtResource("21_bskhr")
 inventory = NodePath("../Inventory")
 health = NodePath("../Health")
 death_drop_mode = 1
@@ -795,32 +906,8 @@ avoidance_enabled = true
 height = 2.0
 radius = 1.0
 
-[node name="Visuals" parent="." unique_id=1269952913 instance=ExtResource("13_v4fp6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
-
-[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1269952913, 981011866) index="0" unique_id=1388828898]
-bones/7/rotation = Quaternion(-0.35355338, 0.14644662, -0.35355335, 0.8535534)
-bones/10/rotation = Quaternion(-0.35355338, -0.14644662, 0.35355335, 0.8535534)
-
-[node name="Woodling" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=491800460]
-surface_material_override/0 = ExtResource("21_uefcv")
-surface_material_override/1 = ExtResource("22_c3uxn")
-surface_material_override/2 = ExtResource("25_g7svr")
-surface_material_override/3 = ExtResource("26_u6pq5")
-
-[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Visuals/Armature/Skeleton3D" index="1" unique_id=319653899]
-transform = Transform3D(0.6298519, 0.59437907, 0.5, 0.09933779, -0.7000942, 0.7071068, 0.7703367, -0.39570355, -0.5, 0.54142135, 0.32332414, -0.14142136)
-bone_name = "Bone.012"
-bone_idx = 11
-
-[node name="ItemVisualsContainer3D" type="Node3D" parent="Visuals/Armature/Skeleton3D/BoneAttachment3D" unique_id=1901805734 node_paths=PackedStringArray("item_holder")]
-transform = Transform3D(0.8660254, -0.5, 2.1855694e-08, 0, -4.371139e-08, -1, 0.5, 0.8660254, -3.7855173e-08, 0, 0.25, 0)
-script = ExtResource("20_geuk7")
-item_holder = NodePath("../../../../../ItemHolder3D")
-metadata/_custom_type_script = "uid://ljihr86cv3xk"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1635551601]
-libraries/ = SubResource("AnimationLibrary_wtogd")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=292229273]
+libraries/ = SubResource("AnimationLibrary_vi485")
 autoplay = &"walk"
 playback_default_blend_time = 0.3
 
@@ -828,33 +915,33 @@ playback_default_blend_time = 0.3
 tree_root = SubResource("AnimationNodeBlendTree_p5gg5")
 anim_player = NodePath("../AnimationPlayer")
 parameters/RunBlendSpace/blend_position = 0.0
-parameters/ItemBlend/blend_amount = 0.0
-script = ExtResource("26_f0qrw")
-item_animations = Array[ExtResource("22_sqkxx")]([SubResource("Resource_0uawy")])
+parameters/ItemBlend/blend_amount = 1.0
+script = ExtResource("27_gqxm1")
+item_animations = Array[ExtResource("28_bfpnq")]([SubResource("Resource_0uawy")])
 
 [node name="ParticleSpawner3D" type="Node3D" parent="." unique_id=1876124391]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-script = ExtResource("23_qk6mp")
-scenes = Array[PackedScene]([ExtResource("24_vy7b5")])
+script = ExtResource("31_4ubbw")
+scenes = Array[PackedScene]([ExtResource("32_257n1")])
 spawn_on_exit_tree = true
 metadata/_custom_type_script = "uid://bhjxscxhtg2se"
 
 [node name="ItemHolder3D" type="Node3D" parent="." unique_id=936376664 node_paths=PackedStringArray("root", "anim_tree")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.5)
-script = ExtResource("27_7307j")
-initial_item_instance = SubResource("Resource_7307j")
+script = ExtResource("33_o01hw")
+initial_item_instance = SubResource("Resource_eph8r")
 root = NodePath("..")
 anim_tree = NodePath("../AnimationTree")
 metadata/_custom_type_script = "uid://bwd4jx8u5uct2"
 
-[node name="HealthBar3D" parent="." unique_id=1387087405 node_paths=PackedStringArray("entity", "health") instance=ExtResource("33_c3uxn")]
+[node name="HealthBar3D" parent="." unique_id=1387087405 node_paths=PackedStringArray("entity", "health") instance=ExtResource("34_vmwow")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0)
 entity = NodePath("..")
 health = NodePath("../Health")
 
 [node name="StepPlayer" type="AudioStreamPlayer3D" parent="." unique_id=119782908]
-stream = ExtResource("35_6ogb6")
+stream = ExtResource("35_ujid8")
 max_db = -6.0
 bus = &"SFX"
 
@@ -871,7 +958,7 @@ max_db = 0.0
 bus = &"SFX"
 
 [node name="AudioSpawner3D" type="Node3D" parent="." unique_id=813638048 node_paths=PackedStringArray("templates")]
-script = ExtResource("40_pqd7v")
+script = ExtResource("45_gap2n")
 templates = [NodePath("DeathPlayer")]
 spawn_on_exit_tree = true
 metadata/_custom_type_script = "uid://bv2ss5hjacgd3"
@@ -881,5 +968,85 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 stream = SubResource("AudioStreamRandomizer_yocth")
 max_db = 5.0
 bus = &"SFX"
+
+[node name="Visuals" parent="." unique_id=1253549106 instance=ExtResource("49_4huls")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+
+[node name="Bone" parent="Visuals" index="0" unique_id=1711783203]
+visible = false
+
+[node name="Ribcage" parent="Visuals" index="1" unique_id=719489881]
+visible = false
+
+[node name="Bone_001" parent="Visuals" index="2" unique_id=1647062119]
+visible = false
+
+[node name="Bone_002" parent="Visuals" index="3" unique_id=1391973978]
+visible = false
+
+[node name="Bone_003" parent="Visuals" index="4" unique_id=299770876]
+visible = false
+
+[node name="RightFoot" parent="Visuals" index="5" unique_id=279198666]
+visible = false
+
+[node name="LeftFoot" parent="Visuals" index="6" unique_id=2103695416]
+visible = false
+
+[node name="Bone_004" parent="Visuals" index="7" unique_id=29919354]
+visible = false
+
+[node name="Bone_005" parent="Visuals" index="8" unique_id=1916847321]
+visible = false
+
+[node name="Bone_006" parent="Visuals" index="9" unique_id=654825544]
+visible = false
+
+[node name="Bone_007" parent="Visuals" index="10" unique_id=998771990]
+visible = false
+
+[node name="Bone_008" parent="Visuals" index="11" unique_id=317677333]
+visible = false
+
+[node name="Jaw" parent="Visuals" index="12" unique_id=1721463329]
+visible = false
+
+[node name="Skull" parent="Visuals" index="13" unique_id=1779498821]
+visible = false
+
+[node name="Jaw_001" parent="Visuals" index="14" unique_id=633175433]
+visible = false
+surface_material_override/0 = ExtResource("46_3p1xh")
+
+[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1253549106, 269998915) index="0" unique_id=944744972]
+bones/7/rotation = Quaternion(-0.35355338, 0.14644662, -0.35355335, 0.8535534)
+bones/10/rotation = Quaternion(-0.35355338, -0.14644662, 0.35355335, 0.8535534)
+
+[node name="Body" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=509539000]
+surface_material_override/0 = ExtResource("46_3p1xh")
+surface_material_override/1 = ExtResource("47_e3glw")
+surface_material_override/2 = ExtResource("48_eph8r")
+surface_material_override/3 = ExtResource("46_3p1xh")
+
+[node name="JawAttachment" type="BoneAttachment3D" parent="Visuals/Armature/Skeleton3D" index="1" unique_id=1326739886]
+transform = Transform3D(1, 0, 2.3841858e-07, 0, 1, 0, -2.3841858e-07, 0, 1, 0, 0.5233242, 0)
+bone_name = "Bone_2"
+bone_idx = 0
+
+[node name="Jaw" type="MeshInstance3D" parent="Visuals/Armature/Skeleton3D/JawAttachment" unique_id=1015021458]
+transform = Transform3D(1, 0, 0, 0, 0.09931197, -0.99505645, 0, 0.99505645, 0.09931197, 0, 0.14195013, 0.19839726)
+mesh = SubResource("ArrayMesh_n1j7j")
+surface_material_override/0 = ExtResource("46_3p1xh")
+
+[node name="ItemAttachment" type="BoneAttachment3D" parent="Visuals/Armature/Skeleton3D" index="2" unique_id=569524712]
+transform = Transform3D(0.6298519, 0.59437907, 0.5, 0.09933779, -0.7000942, 0.7071068, 0.7703367, -0.39570355, -0.5, 0.54142135, 0.32332414, -0.14142136)
+bone_name = "Bone.012"
+bone_idx = 11
+
+[node name="ItemVisualsContainer3D2" type="Node3D" parent="Visuals/Armature/Skeleton3D/ItemAttachment" unique_id=814556901 node_paths=PackedStringArray("item_holder")]
+transform = Transform3D(0.86602545, -0.50000006, 5.9604645e-08, 2.9802322e-08, -2.9802322e-08, -0.99999994, 0.5, 0.8660253, -4.4703484e-08, -2.9802322e-08, 0.24999997, 0)
+script = ExtResource("25_d14c5")
+item_holder = NodePath("../../../../../ItemHolder3D")
+metadata/_custom_type_script = "uid://ljihr86cv3xk"
 
 [editable path="Visuals"]

@@ -30,8 +30,6 @@
 [ext_resource type="Script" uid="uid://b0gc85inin6ad" path="res://island/island_entity_resource.gd" id="23_8k1eh"]
 [ext_resource type="PackedScene" uid="uid://4btyohag13y3" path="res://island/props/destructable_resource/gold_ore/gold_ore.tscn" id="23_gonea"]
 [ext_resource type="Script" uid="uid://b1b8bmd3gmvvk" path="res://island/props/item_dropper_props/item_dropper_prop.gd" id="24_44mph"]
-[ext_resource type="Resource" uid="uid://5qlscmspqjay" path="res://entities/enemies/rootling/rootling_island_resource.tres" id="24_vkwaw"]
-[ext_resource type="Resource" uid="uid://cruqoikfgerld" path="res://entities/enemies/bee/bee_island_resource.tres" id="25_1vbko"]
 [ext_resource type="Script" uid="uid://bm2wgrxee7bdu" path="res://island/docking/docking_manager.gd" id="26_dy2l4"]
 [ext_resource type="PackedScene" uid="uid://dmbp0klxo0b0c" path="res://player/player.tscn" id="27_grcxs"]
 [ext_resource type="AudioStream" uid="uid://bcj8kf1cl1icf" path="res://assets/sound/ocean.mp3" id="27_qkr8n"]
@@ -40,6 +38,7 @@
 [ext_resource type="PackedScene" uid="uid://07efrsy03vgw" path="res://island/props/destructable_resource/dead_shrub/dead_shrub.tscn" id="29_5ueo8"]
 [ext_resource type="Script" uid="uid://6poppt70f3rp" path="res://island/island_water.gd" id="30_np47g"]
 [ext_resource type="Material" uid="uid://d06u1efqiqr8e" path="res://assets/shaders/water_shader_material.tres" id="31_qbj1t"]
+[ext_resource type="Resource" uid="uid://dora54e1oq756" path="res://entities/enemies/skeleton/skeleton_island_resource.tres" id="35_k7qss"]
 
 [sub_resource type="Gradient" id="Gradient_eo3xd"]
 
@@ -5287,12 +5286,12 @@ bake_mask = 4294967291
 script = ExtResource("21_ofw55")
 terrain_generator = NodePath("../IslandGenerator")
 
-[node name="EntityPopulator" type="Node3D" parent="." unique_id=1532427289]
+[node name="EntityPopulator" type="Node3D" parent="." unique_id=1532427289 node_paths=PackedStringArray("repopulate_timer")]
 script = ExtResource("22_2pl76")
 entity_quantities = Dictionary[ExtResource("23_8k1eh"), int]({
-ExtResource("24_vkwaw"): 30,
-ExtResource("25_1vbko"): 12
+ExtResource("35_k7qss"): 30
 })
+repopulate_timer = NodePath("../EntityRepopulateTimer")
 
 [node name="EntityRepopulateTimer" type="Timer" parent="." unique_id=934557699]
 wait_time = 10.0

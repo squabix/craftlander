@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IslandEntityResource" format=3 uid="uid://dora54e1oq756"]
+
+[ext_resource type="PackedScene" uid="uid://2qh1cil1du0g" path="res://entities/enemies/skeleton/skeleton.tscn" id="1_pnf43"]
+[ext_resource type="Script" uid="uid://b0gc85inin6ad" path="res://island/island_entity_resource.gd" id="2_auj0c"]
+
+[resource]
+script = ExtResource("2_auj0c")
+scene = ExtResource("1_pnf43")
+min_height = 2.0
+metadata/_custom_type_script = "uid://b0gc85inin6ad"
