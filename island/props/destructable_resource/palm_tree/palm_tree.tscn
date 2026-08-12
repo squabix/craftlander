@@ -1,0 +1,379 @@
+[gd_scene format=3 uid="uid://c71l58gvgy41n"]
+
+[ext_resource type="Script" uid="uid://cmlllb7wq80s" path="res://island/props/destructable_resource/destructable_resource.gd" id="1_jiqyg"]
+[ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="2_whjq2"]
+[ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/signal_triggrs/signal_state_trigger.gd" id="3_te0j3"]
+[ext_resource type="Script" uid="uid://dapeyi3eetek1" path="res://common/signal_triggrs/signal_animation_trigger.gd" id="4_3tpyl"]
+[ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="5_diu11"]
+[ext_resource type="Script" uid="uid://dmd1q78n1xm4s" path="res://common/state_machine/state.gd" id="6_jutjg"]
+[ext_resource type="Script" uid="uid://bwsaqjbx2ith8" path="res://island/props/destructable_resource/tree/tree_falling_state.gd" id="7_ynnrr"]
+[ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="8_3mfbu"]
+[ext_resource type="Script" uid="uid://ihbhsm4c4qtv" path="res://island/props/destructable_resource/tree/chopped_state.gd" id="9_nm4jn"]
+[ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="10_h465b"]
+[ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="11_l7gvo"]
+[ext_resource type="Resource" uid="uid://bwurefwkj4gjj" path="res://common/damage_system/single_damage.tres" id="12_f35uo"]
+[ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="13_egf3e"]
+[ext_resource type="AudioStream" uid="uid://cwmtj7gouxh3c" path="res://assets/sound/tree_destroy.mp3" id="14_dvyty"]
+[ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="15_fpe86"]
+[ext_resource type="AudioStream" uid="uid://f50l344faomv" path="res://assets/sound/tree_fall.mp3" id="16_qhgoe"]
+[ext_resource type="Material" uid="uid://g7eorwmb40wm" path="res://assets/materials/palm_bark.tres" id="18_knru2"]
+[ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="19_0rjp4"]
+[ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="28_cfe7b"]
+[ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="29_0dkka"]
+[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="30_okiyi"]
+[ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="31_8g2cu"]
+[ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="32_wobw7"]
+[ext_resource type="ArrayOccluder3D" uid="uid://dxvs6e1pbvl0h" path="res://island/props/destructable_resource/tree/tree.occ" id="33_1444u"]
+[ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="34_q3s4q"]
+[ext_resource type="PackedScene" uid="uid://72lfyk3a5w1s" path="res://island/props/destructable_resource/palm_tree/palm_tree1.blend" id="35_jiqyg"]
+[ext_resource type="Material" uid="uid://cxxp5ww380hsd" path="res://assets/materials/palm_leaves.tres" id="36_whjq2"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hjjmf"]
+height = 4.3061523
+radius = 0.896
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8mlu7"]
+radius = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2dqu6"]
+height = 4.3061523
+radius = 0.545
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_erttl"]
+height = 4.3061523
+radius = 0.429
+
+[sub_resource type="Curve" id="Curve_ndo4n"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.75779045, 0.8774637), -0.5111994, -0.5111994, 0, 0, Vector2(1, 0.2536419), -3.0296543, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_hxqcj"]
+curve = SubResource("Curve_ndo4n")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hah18"]
+emission_shape = 3
+emission_box_extents = Vector3(0, 5, 0)
+direction = Vector3(-1, 0, 0)
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+damping_min = 10.0
+damping_max = 10.0
+scale_min = 0.5
+scale_max = 0.79999995
+scale_curve = SubResource("CurveTexture_hxqcj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_18auj"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.1
+normal_enabled = true
+proximity_fade_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_kblrq"]
+material = SubResource("StandardMaterial3D_18auj")
+radial_segments = 16
+rings = 8
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_t4kw7"]
+height = 1.5112478
+radius = 1.043457
+
+[sub_resource type="Animation" id="Animation_4ojav"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Trunk/BlenderMeshes:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_agfax"]
+resource_name = "hurt"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Trunk/BlenderMeshes:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ojav"]
+_data = {
+&"RESET": SubResource("Animation_4ojav"),
+&"hurt": SubResource("Animation_agfax")
+}
+
+[sub_resource type="Resource" id="Resource_xgieu"]
+script = ExtResource("30_okiyi")
+item = ExtResource("31_8g2cu")
+quantity = 3
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_rngja"]
+script = ExtResource("30_okiyi")
+item = ExtResource("32_wobw7")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[node name="PalmTree" type="Node3D" unique_id=1544571203 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
+script = ExtResource("1_jiqyg")
+max_hp = 3
+hurtbox = NodePath("Trunk/Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="Health" type="Node" parent="." unique_id=95922495]
+script = ExtResource("2_whjq2")
+
+[node name="FallTrigger" type="Node" parent="Health" unique_id=1612475271 node_paths=PackedStringArray("state_machine")]
+script = ExtResource("3_te0j3")
+state_machine = NodePath("../../StateMachine")
+state_name = "Falling"
+signal_name = &"died"
+metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
+
+[node name="HitAnimTrigger" type="Node" parent="Health" unique_id=1856893660 node_paths=PackedStringArray("anim_player")]
+script = ExtResource("4_3tpyl")
+anim_player = NodePath("../../AnimationPlayer")
+anim_name = "hurt"
+signal_name = &"was_hurt"
+metadata/_custom_type_script = "uid://dapeyi3eetek1"
+
+[node name="StateMachine" type="Node" parent="." unique_id=70877034 node_paths=PackedStringArray("root")]
+script = ExtResource("5_diu11")
+root = NodePath("..")
+metadata/_custom_type_script = "uid://bqonxtntgndfr"
+
+[node name="Standing" type="Node" parent="StateMachine" unique_id=1333531181]
+script = ExtResource("6_jutjg")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="Falling" type="Node" parent="StateMachine" unique_id=490514813 node_paths=PackedStringArray("hurtbox_collision", "continue_fall_area", "trunk", "animation_player", "occluder_instance", "falling_mesh_instances")]
+script = ExtResource("7_ynnrr")
+hurtbox_collision = NodePath("../../Trunk/Hurtbox3D/CollisionShape3D5")
+continue_fall_area = NodePath("../../Trunk/ContinueFallArea")
+trunk = NodePath("../../Trunk")
+animation_player = NodePath("../../AnimationPlayer")
+occluder_instance = NodePath("../../OccluderInstance3D")
+falling_mesh_instances = [null, null]
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="SignalAudioManager" type="Node3D" parent="StateMachine/Falling" unique_id=707435236 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("8_3mfbu")
+signal_players = {
+&"entered": NodePath("../../../Trunk/FallPlayer")
+}
+metadata/_custom_type_script = "uid://43bqjaemfda5"
+
+[node name="Chopped" type="Node" parent="StateMachine" unique_id=1969503386 node_paths=PackedStringArray("trunk", "chop_particles")]
+script = ExtResource("9_nm4jn")
+trunk = NodePath("../../Trunk")
+chop_particles = NodePath("../../ChopParticles")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="NodeSaver" type="Node" parent="StateMachine" unique_id=1160380434]
+script = ExtResource("10_h465b")
+saver_id = &"tree_state_machine"
+saved_properties = Dictionary[StringName, bool]({
+&"current": true
+})
+load_methods = Array[StringName]([&"reload"])
+metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
+
+[node name="Trunk" type="StaticBody3D" parent="." unique_id=1771553810]
+collision_layer = 5
+
+[node name="Hurtbox3D" type="Area3D" parent="Trunk" unique_id=1330554951 node_paths=PackedStringArray("health")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.078, 2.5, 0)
+collision_layer = 8
+monitoring = false
+script = ExtResource("11_l7gvo")
+health = NodePath("../../Health")
+type_whitelist = Array[StringName]([&"axe"])
+damage_override = ExtResource("12_f35uo")
+metadata/_custom_type_script = "uid://4dfurtssrp4f"
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="Trunk/Hurtbox3D" unique_id=728060112]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.117046, 0.31030273, 0)
+shape = SubResource("CylinderShape3D_hjjmf")
+
+[node name="ContinueFallArea" type="Area3D" parent="Trunk" unique_id=167287806]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49212652, 13.018707, 0)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="AudioSpawner3D" type="Node3D" parent="Trunk/ContinueFallArea" unique_id=1487704848 node_paths=PackedStringArray("templates")]
+script = ExtResource("13_egf3e")
+templates = [NodePath("DestroyPlayer")]
+spawn_on_exit_tree = true
+metadata/_custom_type_script = "uid://bv2ss5hjacgd3"
+
+[node name="DestroyPlayer" type="AudioStreamPlayer3D" parent="Trunk/ContinueFallArea/AudioSpawner3D" unique_id=1585990896]
+stream = ExtResource("14_dvyty")
+volume_db = 20.0
+unit_size = 20.0
+pitch_scale = 1.2
+bus = &"SFX"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trunk/ContinueFallArea" unique_id=1416076246]
+shape = SubResource("SphereShape3D_8mlu7")
+
+[node name="Spawner3D" type="Node3D" parent="Trunk" unique_id=737068488 node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+script = ExtResource("15_fpe86")
+inventory = NodePath("../../Inventory")
+position_offset = Vector3(0, 0.5, 0)
+rotation_offset = Vector3(0, 90, 90)
+metadata/_custom_type_script = "uid://iyqixpr4un6s"
+
+[node name="Center" type="Node3D" parent="Trunk" unique_id=1356517366]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+
+[node name="FallPlayer" type="AudioStreamPlayer3D" parent="Trunk" unique_id=1595950413]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+stream = ExtResource("16_qhgoe")
+bus = &"SFX"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trunk" unique_id=545021539]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.048695058, 2.8103027, 0)
+shape = SubResource("CylinderShape3D_hjjmf")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Trunk" unique_id=1715236798]
+transform = Transform3D(0.9993711, 0.03541162, 0.001849993, -0.035457052, 0.9985918, 0.03946328, -0.0004499302, -0.03950403, 0.9992193, 0.2455425, 7.006363, -0.06227395)
+shape = SubResource("CylinderShape3D_2dqu6")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Trunk" unique_id=1026083196]
+transform = Transform3D(0.9998557, 0.0056859488, -0.016009063, -0.0066212295, 0.99823695, -0.058986686, 0.015645435, 0.05908423, 0.99813056, 0.42093027, 11.19011, -0.16978091)
+shape = SubResource("CylinderShape3D_erttl")
+
+[node name="BlenderMeshes" parent="Trunk" unique_id=646844012 instance=ExtResource("35_jiqyg")]
+
+[node name="Wood" parent="Trunk/BlenderMeshes" index="0" unique_id=1896427998]
+visible = false
+
+[node name="Leaf_003" parent="Trunk/BlenderMeshes" index="1" unique_id=1632141906]
+surface_material_override/0 = ExtResource("36_whjq2")
+
+[node name="Leaf_001" parent="Trunk/BlenderMeshes" index="2" unique_id=1101142538]
+surface_material_override/0 = ExtResource("36_whjq2")
+
+[node name="Leaf_002" parent="Trunk/BlenderMeshes" index="3" unique_id=1279837784]
+surface_material_override/0 = ExtResource("36_whjq2")
+
+[node name="Leaf_004" parent="Trunk/BlenderMeshes" index="4" unique_id=1305204800]
+surface_material_override/0 = ExtResource("36_whjq2")
+
+[node name="Leaf_006" parent="Trunk/BlenderMeshes" index="5" unique_id=828267623]
+surface_material_override/0 = ExtResource("36_whjq2")
+
+[node name="Leaf_007" parent="Trunk/BlenderMeshes" index="6" unique_id=1717278033]
+surface_material_override/0 = ExtResource("36_whjq2")
+
+[node name="Trunk" parent="Trunk/BlenderMeshes" index="7" unique_id=551418162]
+surface_material_override/0 = ExtResource("18_knru2")
+surface_material_override/1 = ExtResource("19_0rjp4")
+
+[node name="Stump" parent="Trunk/BlenderMeshes" index="8" unique_id=884117624]
+visible = false
+
+[node name="ChopParticles" type="GPUParticles3D" parent="." unique_id=931223418]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
+visible = false
+cast_shadow = 0
+emitting = false
+amount = 32
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_hah18")
+draw_pass_1 = SubResource("SphereMesh_kblrq")
+
+[node name="Stump" type="StaticBody3D" parent="." unique_id=935938505]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stump" unique_id=1519144985]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.09049909, 0)
+shape = SubResource("CylinderShape3D_t4kw7")
+
+[node name="BlenderMeshes" parent="Stump" unique_id=323672885 instance=ExtResource("35_jiqyg")]
+
+[node name="Wood" parent="Stump/BlenderMeshes" index="0" unique_id=1896427998]
+visible = false
+
+[node name="Leaf_003" parent="Stump/BlenderMeshes" index="1" unique_id=1632141906]
+visible = false
+surface_material_override/0 = ExtResource("36_whjq2")
+
+[node name="Leaf_001" parent="Stump/BlenderMeshes" index="2" unique_id=1101142538]
+visible = false
+surface_material_override/0 = ExtResource("36_whjq2")
+
+[node name="Leaf_002" parent="Stump/BlenderMeshes" index="3" unique_id=1279837784]
+visible = false
+surface_material_override/0 = ExtResource("36_whjq2")
+
+[node name="Leaf_004" parent="Stump/BlenderMeshes" index="4" unique_id=1305204800]
+visible = false
+surface_material_override/0 = ExtResource("36_whjq2")
+
+[node name="Leaf_006" parent="Stump/BlenderMeshes" index="5" unique_id=828267623]
+visible = false
+surface_material_override/0 = ExtResource("36_whjq2")
+
+[node name="Leaf_007" parent="Stump/BlenderMeshes" index="6" unique_id=1717278033]
+visible = false
+surface_material_override/0 = ExtResource("36_whjq2")
+
+[node name="Trunk" parent="Stump/BlenderMeshes" index="7" unique_id=551418162]
+visible = false
+surface_material_override/0 = ExtResource("18_knru2")
+surface_material_override/1 = ExtResource("19_0rjp4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1286181219]
+libraries/ = SubResource("AnimationLibrary_4ojav")
+script = ExtResource("28_cfe7b")
+metadata/_custom_type_script = "uid://c1bce1sw2dgnf"
+
+[node name="Inventory" type="Node" parent="." unique_id=997929093]
+script = ExtResource("29_0dkka")
+item_instances = Array[ExtResource("30_okiyi")]([SubResource("Resource_xgieu"), SubResource("Resource_rngja")])
+constant = true
+size = 2
+metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
+
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=186356672]
+visible = false
+occluder = ExtResource("33_1444u")
+
+[node name="MeshNavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=534165458]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -0.09550002)
+visible = false
+radius = 1.1287163
+height = 2.0
+vertices = PackedVector3Array(-0.9998859, 0, -0.22445127, 0, 0, -0.9545, 0.9998859, 0, -0.22445127, 0.6150453, 0, 0.94642484, -0.6150453, 0, 0.94642484, -0.9998859, 0, -0.22445127)
+script = ExtResource("34_q3s4q")
+generate_on_ready = true
+metadata/_custom_type_script = "uid://bf4816o00o0s5"
+
+[node name="NodeSaver" type="Node" parent="." unique_id=172222562]
+script = ExtResource("10_h465b")
+save_mode = 2
+saver_id = &"tree"
+saved_properties = Dictionary[StringName, bool]({
+&"global_transform": true
+})
+metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
+
+[editable path="Trunk/BlenderMeshes"]
+[editable path="Stump/BlenderMeshes"]
