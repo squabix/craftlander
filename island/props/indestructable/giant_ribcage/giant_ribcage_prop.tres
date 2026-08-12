@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="IslandProp" format=3 uid="uid://5wvfp1kg6eli"]
+
+[ext_resource type="Script" uid="uid://csprfavexgrle" path="res://island/props/island_prop.gd" id="1_608f1"]
+[ext_resource type="PackedScene" uid="uid://d4cc1bccfdgd5" path="res://island/props/indestructable/giant_ribcage/giant_ribcage.tscn" id="1_wvh83"]
+
+[resource]
+script = ExtResource("1_608f1")
+scene = ExtResource("1_wvh83")
+min_height = 2.0
+max_scale = 1.5
+metadata/_custom_type_script = "uid://csprfavexgrle"
