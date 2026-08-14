@@ -18,7 +18,7 @@ config/custom_user_dir_name="CRAFTLANDER"
 config/features=PackedStringArray("4.7", "Mobile")
 boot_splash/bg_color=Color(0.036900003, 0.060795017, 0.09, 1)
 boot_splash/image="uid://6rsobsln1x1t"
-config/icon="res://icon.svg"
+config/icon="uid://cvnfk2w1gki1v"
 
 [audio]
 
