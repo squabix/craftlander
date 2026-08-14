@@ -1,6 +1,6 @@
-[gd_resource type="ShaderMaterial" format=3 uid="uid://bj4h10fa2yqqg"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://d2pyqo2jir8rp"]
 
-[ext_resource type="Shader" uid="uid://bkbty48k6awb1" path="res://assets/shaders/sky_shader1.gdshader" id="1_yxbb3"]
+[ext_resource type="Shader" uid="uid://bkbty48k6awb1" path="res://assets/shaders/sky_shader1.gdshader" id="1_ho62i"]
 
 [sub_resource type="Gradient" id="Gradient_fh26t"]
 offsets = PackedFloat32Array(0.04595828, 0.08767927, 0.10202086, 0.2363103, 0.48011735)
@@ -41,7 +41,7 @@ color_ramp = SubResource("Gradient_q07lh")
 seamless = true
 
 [resource]
-shader = ExtResource("1_yxbb3")
+shader = ExtResource("1_ho62i")
 shader_parameter/cloud_shape_sampler = SubResource("NoiseTexture2D_epvbt")
 shader_parameter/cloud_noise_sampler = SubResource("NoiseTexture2D_ikxt8")
 shader_parameter/cloud_curves = SubResource("GradientTexture2D_7t3mh")
@@ -50,14 +50,14 @@ shader_parameter/shadow_sample = 4
 shader_parameter/clouds_density = 0.40000000596048
 shader_parameter/clouds_scale = 1.0
 shader_parameter/clouds_smoothness = 0.08999999798832001
-shader_parameter/clouds_light_color = Color(1, 1, 1, 1)
+shader_parameter/clouds_light_color = Color(0.94, 0.73930997, 0.36659998, 1)
 shader_parameter/clouds_shadow_intensity = 1.0
 shader_parameter/high_clouds_density = 0.0
-shader_parameter/top_color = Color(0.35000002, 0.46916658, 1, 1)
+shader_parameter/top_color = Color(0.61299, 0.1197, 0.63, 1)
 shader_parameter/bottom_color = Color(0, 0, 0, 1)
-shader_parameter/ground_color = Color(0.32941177, 0.83137256, 1, 1)
-shader_parameter/sun_scatter = Color(0.32941177, 0.83137256, 1, 1)
-shader_parameter/astro_tint = Color(1, 1, 1, 1)
+shader_parameter/ground_color = Color(0.8, 0.58431375, 0.15294118, 1)
+shader_parameter/sun_scatter = Color(0.8, 0.58400005, 0.152, 1)
+shader_parameter/astro_tint = Color(0.9814852, 0.9059676, 0.75723374, 1)
 shader_parameter/astro_sampler = SubResource("GradientTexture2D_q07lh")
 shader_parameter/astro_scale = 1.0
 shader_parameter/astro_intensity = 1.0
