@@ -83,7 +83,7 @@
 [ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://defaults/button_audio_manager.tscn" id="63_0iv1a"]
 [ext_resource type="Script" uid="uid://rroukmbv64vv" path="res://player/ui/boat_interface.gd" id="64_2h6tc"]
 [ext_resource type="Script" uid="uid://b6r50f8akgpp7" path="res://player/ui/island_option.gd" id="64_kewli"]
-[ext_resource type="Texture2D" uid="uid://dvu8avo8cfq2c" path="res://icon.svg" id="64_utr5e"]
+[ext_resource type="Texture2D" uid="uid://cvnfk2w1gki1v" path="res://icon.png" id="64_utr5e"]
 [ext_resource type="Script" uid="uid://xu4t7vci1g06" path="res://player/player_animation_tree.gd" id="65_7l6ig"]
 [ext_resource type="Script" uid="uid://blknest0w8djr" path="res://player/ui/boat_upgrader.gd" id="66_2h6tc"]
 [ext_resource type="Resource" uid="uid://mx3f8ldvvndd" path="res://player/states/player_walking_move_mode.tres" id="66_utr5e"]
