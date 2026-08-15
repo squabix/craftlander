@@ -37,8 +37,10 @@ func _ready() -> void:
 func reset() -> void:
 	if navigation_mesh == null:
 		navigation_mesh = NavigationMesh.new()
-	else:
-		update_map_cell_dimensions()
+	
+	navigation_mesh.geometry_parsed_geometry_type = NavigationMesh.PARSED_GEOMETRY_STATIC_COLLIDERS
+	
+	update_map_cell_dimensions()
 
 	base_geometry = NavigationMeshSourceGeometryData3D.new()
 	parse_geometry_data(base_geometry, terrain)
