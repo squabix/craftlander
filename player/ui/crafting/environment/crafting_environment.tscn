@@ -17,6 +17,7 @@ size = Vector3(30, 1, 30)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pwhj0"]
 transparency = 1
 no_depth_test = true
+shading_mode = 0
 albedo_texture = ExtResource("2_snws6")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_xy7ao"]
@@ -73,7 +74,7 @@ success_showcase_hang_duration = 0.95
 [node name="SubViewport" type="SubViewport" parent="." unique_id=635865808]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(2304, 1296)
+size = Vector2i(3200, 1800)
 render_target_update_mode = 4
 
 [node name="Space" type="Node3D" parent="SubViewport" unique_id=440212288]

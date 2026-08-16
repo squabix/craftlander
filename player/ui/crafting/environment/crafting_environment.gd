@@ -14,7 +14,7 @@ signal tweened_craft_showcase
 
 const MAX_DRAG_DISTANCE := 1.0
 const MAX_SLOT_DISTANCE := 1.0
-const DRAG_SPEED := 0.2
+const DRAG_SPEED := 1.0
 const VISUALS_SCALE := 0.5
 const SNAP_SPEED := 0.3
 const SPACE_POSITION := -Vector3.ONE * 1000.0
