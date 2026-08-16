@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://c5uhmmmlb6tko"]
+
+[ext_resource type="Texture2D" uid="uid://nupykfjogt27" path="res://items/materials/minerals/copper_chunk/copper_chunk.png" id="1_a8sm7"]
+[ext_resource type="PackedScene" uid="uid://bxjgsyhdadcvo" path="res://items/materials/minerals/copper_chunk/copper_chunk.tscn" id="2_3gbkn"]
+[ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="3_cj82w"]
+
+[resource]
+script = ExtResource("3_cj82w")
+name = &"Copper Chunk"
+max_quantity = 99
+icon = ExtResource("1_a8sm7")
+type = &"Material"
+scene = ExtResource("2_3gbkn")
+metadata/_custom_type_script = "uid://bfstlagsbeqe2"
