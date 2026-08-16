@@ -33,7 +33,7 @@
 [ext_resource type="Script" uid="uid://bi8ev1kcq2ayf" path="res://common/inventory_system/animation/item_animation_tree.gd" id="26_f0qrw"]
 [ext_resource type="Material" uid="uid://ct3rueaspkpix" path="res://assets/materials/darkness.tres" id="26_u6pq5"]
 [ext_resource type="Script" uid="uid://bwd4jx8u5uct2" path="res://common/inventory_system/item_holder3d.gd" id="27_7307j"]
-[ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/tools/shoddy_mace/shoddy_mace_item.tres" id="29_5b15m"]
+[ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/tools/shoddy/shoddy_mace/shoddy_mace_item.tres" id="29_5b15m"]
 [ext_resource type="PackedScene" uid="uid://h3veu2e18ij1" path="res://entities/entity_health_bar.tscn" id="33_c3uxn"]
 [ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="34_hswny"]
 [ext_resource type="AudioStream" uid="uid://cwqa0rroqx0ww" path="res://assets/sound/steps_stream.tres" id="35_6ogb6"]
@@ -689,7 +689,7 @@ metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 
 [node name="Health" type="Node" parent="." unique_id=780116179]
 script = ExtResource("4_nauqg")
-hp = 100.0
+hp = 60.0
 free_parent_on_death = true
 metadata/_custom_type_script = "uid://cbb5o5ykqwxfp"
 
@@ -809,7 +809,7 @@ surface_material_override/2 = ExtResource("25_g7svr")
 surface_material_override/3 = ExtResource("26_u6pq5")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Visuals/Armature/Skeleton3D" index="1" unique_id=319653899]
-transform = Transform3D(0.6298519, 0.59437907, 0.5, 0.09933779, -0.7000942, 0.7071068, 0.7703367, -0.39570355, -0.5, 0.54142135, 0.32332414, -0.14142136)
+transform = Transform3D(0.62028205, 0.6618232, 0.42099893, 0.08364214, -0.5894777, 0.80344254, 0.7799065, -0.46314767, -0.42099884, 0.56068856, 0.35492462, -0.16068852)
 bone_name = "Bone.012"
 bone_idx = 11
 
