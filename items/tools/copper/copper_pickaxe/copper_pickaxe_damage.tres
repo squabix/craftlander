@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Damage" format=3 uid="uid://bjp5lmg014evo"]
+
+[ext_resource type="Script" uid="uid://bl5x717nsijmk" path="res://common/damage_system/damage.gd" id="1_osrsj"]
+
+[resource]
+script = ExtResource("1_osrsj")
+base_amount = 8.0
+type = &"pickaxe"
+knockback_angle = 5.0
+metadata/_custom_type_script = "uid://bl5x717nsijmk"

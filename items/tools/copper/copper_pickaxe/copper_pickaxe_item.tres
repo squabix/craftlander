@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="HarvestingTool" format=3 uid="uid://d1ytk70f3t86d"]
+
+[ext_resource type="Resource" uid="uid://bjp5lmg014evo" path="res://items/tools/copper/copper_pickaxe/copper_pickaxe_damage.tres" id="1_7xs2h"]
+[ext_resource type="Texture2D" uid="uid://ftgjvw30qjet" path="res://items/tools/copper/copper_pickaxe/copper_pickaxe.png" id="2_lbtfc"]
+[ext_resource type="PackedScene" uid="uid://b1o0mf7giudpp" path="res://items/tools/copper/copper_pickaxe/copper_pickaxe.tscn" id="3_seaqc"]
+[ext_resource type="Script" uid="uid://6x786nnhteca" path="res://items/tools/harvesting_tool.gd" id="4_f8853"]
+
+[resource]
+script = ExtResource("4_f8853")
+damage = ExtResource("1_7xs2h")
+name = "Shoddy Pickaxe"
+icon = ExtResource("2_lbtfc")
+type = "Tool"
+scene = ExtResource("3_seaqc")
+cooldown_mode = 1
+default_cooldown_length = 0.3
+metadata/_custom_type_script = "uid://6x786nnhteca"

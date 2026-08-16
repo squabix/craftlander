@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="HarvestingTool" format=3 uid="uid://b10txfbikrljt"]
+
+[ext_resource type="Script" uid="uid://6x786nnhteca" path="res://items/tools/harvesting_tool.gd" id="1_diou4"]
+[ext_resource type="Resource" uid="uid://fl23rhdfaa4r" path="res://items/tools/copper/copper_sword/copper_sword_damage.tres" id="1_f0omh"]
+[ext_resource type="PackedScene" uid="uid://dousutso0retv" path="res://items/tools/copper/copper_sword/copper_sword.tscn" id="2_7bec3"]
+[ext_resource type="Texture2D" uid="uid://1ysw5k3nfh4u" path="res://items/tools/copper/copper_sword/copper_sword.png" id="2_ebwqk"]
+
+[resource]
+script = ExtResource("1_diou4")
+damage = ExtResource("1_f0omh")
+name = &"Copper Sword"
+icon = ExtResource("2_ebwqk")
+type = &"Weapon"
+scene = ExtResource("2_7bec3")
+cooldown_mode = 1
+default_cooldown_length = 0.3
+metadata/_custom_type_script = "uid://6x786nnhteca"
