@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="HarvestingTool" format=3 uid="uid://vulwxanblunx"]
+
+[ext_resource type="Resource" uid="uid://chr1ulaymhg88" path="res://items/tools/copper/copper_axe/copper_axe_damage.tres" id="1_hr632"]
+[ext_resource type="Texture2D" uid="uid://bahvnlg6gwb2b" path="res://items/tools/copper/copper_axe/copper_axe.png" id="2_rftlj"]
+[ext_resource type="PackedScene" uid="uid://5gfxb3vmux1k" path="res://items/tools/copper/copper_axe/copper_axe.tscn" id="3_cngu5"]
+[ext_resource type="Script" uid="uid://6x786nnhteca" path="res://items/tools/harvesting_tool.gd" id="4_3ahsk"]
+
+[resource]
+script = ExtResource("4_3ahsk")
+damage = ExtResource("1_hr632")
+name = &"Copper Axe"
+icon = ExtResource("2_rftlj")
+type = "Tool"
+scene = ExtResource("3_cngu5")
+cooldown_mode = 1
+default_cooldown_length = 0.3
+metadata/_custom_type_script = "uid://6x786nnhteca"

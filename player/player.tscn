@@ -20,6 +20,7 @@
 [ext_resource type="Script" uid="uid://pnxdwk3pye0h" path="res://common3d/pointer_raycast3d.gd" id="11_rptt4"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="12_ebec5"]
 [ext_resource type="Script" uid="uid://idhcfku7c3tn" path="res://player/states/player_docking_boat_state.gd" id="12_fjxoa"]
+[ext_resource type="Resource" uid="uid://c5uhmmmlb6tko" path="res://items/materials/minerals/copper_chunk/copper_chunk_item.tres" id="12_v0nfp"]
 [ext_resource type="Script" uid="uid://b6gq5g1xvdnsu" path="res://player/states/player_swimming_state.gd" id="16_art4l"]
 [ext_resource type="Script" uid="uid://b1eix6p0204fp" path="res://common/inventory_system/displays/item_display.gd" id="16_e7oew"]
 [ext_resource type="Script" uid="uid://c3r6ofqamuc13" path="res://common/state_machine/mirror_state_machine.gd" id="16_mmwog"]
@@ -29,7 +30,7 @@
 [ext_resource type="Script" uid="uid://dk37mcui4c45e" path="res://common/inventory_system/inventory_holder3d.gd" id="20_mmwog"]
 [ext_resource type="Script" uid="uid://bghx5ubltmjf7" path="res://common/inventory_system/input_inventory_selector.gd" id="21_fmu53"]
 [ext_resource type="AudioStream" uid="uid://dknlikmamjcra" path="res://assets/sound/splash.wav" id="21_gci7n"]
-[ext_resource type="Resource" uid="uid://bah3rou15fcfh" path="res://items/tools/shoddy_axe/shoddy_axe_item.tres" id="22_bjvpn"]
+[ext_resource type="Resource" uid="uid://bah3rou15fcfh" path="res://items/tools/shoddy/shoddy_axe/shoddy_axe_item.tres" id="22_bjvpn"]
 [ext_resource type="Script" uid="uid://c07qmsd7epd0h" path="res://common/ui/popup_display.gd" id="23_7pqkx"]
 [ext_resource type="Script" uid="uid://dapeyi3eetek1" path="res://common/signal_triggrs/signal_animation_trigger.gd" id="25_j55il"]
 [ext_resource type="Script" uid="uid://q5lh058bmpum" path="res://common/damage_system/health_bar.gd" id="26_r7pn3"]
@@ -58,8 +59,8 @@
 [ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="40_a2xo5"]
 [ext_resource type="Script" uid="uid://dfo0te3udism4" path="res://player/ui/player_death_screen.gd" id="40_gswnw"]
 [ext_resource type="Script" uid="uid://cf1x38wu72w8n" path="res://player/ui/crafting/recipes/recipe_display.gd" id="41_7crtr"]
-[ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/tools/shoddy_mace/shoddy_mace_item.tres" id="41_a2xo5"]
-[ext_resource type="Resource" uid="uid://w52cknmpa167" path="res://items/tools/shoddy_pickaxe/shoddy_pickaxe_item.tres" id="41_art4l"]
+[ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/tools/shoddy/shoddy_mace/shoddy_mace_item.tres" id="41_a2xo5"]
+[ext_resource type="Resource" uid="uid://w52cknmpa167" path="res://items/tools/shoddy/shoddy_pickaxe/shoddy_pickaxe_item.tres" id="41_art4l"]
 [ext_resource type="Script" uid="uid://ddiytppqbuop1" path="res://common/inventory_system/item_cooldown_radial.gd" id="41_j420s"]
 [ext_resource type="Shader" uid="uid://clux7d66a4hbi" path="res://common/ui/radial.gdshader" id="41_kcq4v"]
 [ext_resource type="Texture2D" uid="uid://1xbns4oq6pfw" path="res://player/ui/crafting/crafting_slot.tres" id="42_7crtr"]
@@ -67,17 +68,17 @@
 [ext_resource type="Script" uid="uid://s6yjbusuc0uo" path="res://player/ui/inventory/current_item_label.gd" id="43_8pxes"]
 [ext_resource type="Script" uid="uid://hdyfq5riitj7" path="res://player/ui/crafting/complete_crafting_panel.gd" id="43_n0b8q"]
 [ext_resource type="Script" uid="uid://bwcomtie8q510" path="res://player/ui/crafting/recipes/recipe_panel_group.gd" id="44_a1u5o"]
-[ext_resource type="Texture2D" uid="uid://c3o13o5vrivr" path="res://items/tools/shoddy_pickaxe/shoddy_pickaxe.png" id="44_jfgyi"]
+[ext_resource type="Texture2D" uid="uid://c3o13o5vrivr" path="res://items/tools/shoddy/shoddy_pickaxe/shoddy_pickaxe.png" id="44_jfgyi"]
 [ext_resource type="Texture2D" uid="uid://b02s8vle3kjwk" path="res://items/food/raw_meat/raw_meat.png" id="44_vgvch"]
 [ext_resource type="Texture2D" uid="uid://douq42dkvsywk" path="res://player/ui/inventory/inventory_slot.tres" id="48_vgvch"]
 [ext_resource type="Script" uid="uid://bs8sryrpq1j3b" path="res://player/ui/crafting/recipes/recipe_learner.gd" id="49_jbx34"]
 [ext_resource type="Texture2D" uid="uid://dst7iet4aksej" path="res://items/materials/rock/rock.png" id="50_jbx34"]
 [ext_resource type="Script" uid="uid://cpv5s708r1wvo" path="res://items/crafting/recipe_discovery.gd" id="50_or4qq"]
 [ext_resource type="Script" uid="uid://c5ntwgpouf24m" path="res://items/crafting/item_recipe.gd" id="50_pjwc4"]
-[ext_resource type="Resource" uid="uid://c2ysy7ee3bxr6" path="res://items/tools/shoddy_axe/shoddy_axe_recipe.tres" id="51_or4qq"]
-[ext_resource type="Resource" uid="uid://b3nw0sd58a2j" path="res://items/tools/shoddy_pickaxe/shoddy_pickaxe_recipe.tres" id="52_hggc2"]
+[ext_resource type="Resource" uid="uid://c2ysy7ee3bxr6" path="res://items/tools/shoddy/shoddy_axe/shoddy_axe_recipe.tres" id="51_or4qq"]
+[ext_resource type="Resource" uid="uid://b3nw0sd58a2j" path="res://items/tools/shoddy/shoddy_pickaxe/shoddy_pickaxe_recipe.tres" id="52_hggc2"]
 [ext_resource type="LabelSettings" uid="uid://b4f3g1d2cp3py" path="res://player/ui/quantity_label_settings.tres" id="52_p5tca"]
-[ext_resource type="Resource" uid="uid://6a5notvdv1ei" path="res://items/tools/shoddy_mace/shoddy_mace_recipe.tres" id="53_hggc2"]
+[ext_resource type="Resource" uid="uid://6a5notvdv1ei" path="res://items/tools/shoddy/shoddy_mace/shoddy_mace_recipe.tres" id="53_hggc2"]
 [ext_resource type="Script" uid="uid://bubfjagdkgrlq" path="res://player/ui/inventory/inventory_organizer.gd" id="55_jbx34"]
 [ext_resource type="Script" uid="uid://uwx6xnt2vr38" path="res://player/ui/inventory/item_inspector.gd" id="59_b2j0d"]
 [ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://defaults/button_audio_manager.tscn" id="63_0iv1a"]
@@ -115,6 +116,9 @@
 [ext_resource type="AudioStream" uid="uid://bngsjojub1sjy" path="res://assets/sound/swim_stream.tres" id="95_gcmgo"]
 [ext_resource type="AudioStream" uid="uid://bctut8ply616f" path="res://assets/sound/swoosh1.mp3" id="100_0iv1a"]
 [ext_resource type="AudioStream" uid="uid://fc5gio4s8yl" path="res://assets/sound/eat.mp3" id="112_teerl"]
+[ext_resource type="Resource" uid="uid://vulwxanblunx" path="res://items/tools/copper/copper_axe/copper_axe_item.tres" id="112_wh3n5"]
+[ext_resource type="Resource" uid="uid://b10txfbikrljt" path="res://items/tools/copper/copper_sword/copper_sword_item.tres" id="113_vuyvy"]
+[ext_resource type="Resource" uid="uid://d1ytk70f3t86d" path="res://items/tools/copper/copper_pickaxe/copper_pickaxe_item.tres" id="114_0yt84"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -131,7 +135,7 @@ metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
 
 [sub_resource type="Resource" id="Resource_j3r50"]
 script = ExtResource("6_hggc2")
-item = ExtResource("41_a2xo5")
+item = ExtResource("113_vuyvy")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Resource" id="Resource_hggc2"]
@@ -142,12 +146,12 @@ metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Resource" id="Resource_utr5e"]
 script = ExtResource("6_hggc2")
-item = ExtResource("41_art4l")
+item = ExtResource("114_0yt84")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Resource" id="Resource_k7n08"]
 script = ExtResource("6_hggc2")
-item = ExtResource("22_bjvpn")
+item = ExtResource("112_wh3n5")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Resource" id="Resource_2h6tc"]
@@ -160,6 +164,12 @@ metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 script = ExtResource("6_hggc2")
 item = ExtResource("11_oevg7")
 quantity = 10
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_bq5ya"]
+script = ExtResource("6_hggc2")
+item = ExtResource("12_v0nfp")
+quantity = 30
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Curve" id="Curve_2uvqg"]
@@ -935,7 +945,7 @@ node_connections = [&"output", 0, &"ItemBlend", &"ItemBlend", 0, &"MoveTransitio
 
 [sub_resource type="Resource" id="Resource_art4l"]
 script = ExtResource("39_dx5ib")
-items = Array[ExtResource("40_a2xo5")]([ExtResource("41_a2xo5"), ExtResource("22_bjvpn"), ExtResource("41_art4l")])
+items = Array[ExtResource("40_a2xo5")]([ExtResource("41_a2xo5"), ExtResource("22_bjvpn"), ExtResource("41_art4l"), ExtResource("112_wh3n5"), ExtResource("113_vuyvy"), ExtResource("114_0yt84")])
 start_anim = "swing_tool"
 metadata/_custom_type_script = "uid://c622jer80j3sk"
 
@@ -988,7 +998,7 @@ metadata/_custom_type_script = "uid://bki5ij8task16"
 
 [node name="Inventory" type="Node" parent="." unique_id=710458340]
 script = ExtResource("19_c35mf")
-item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_j3r50"), SubResource("Resource_hggc2"), SubResource("Resource_utr5e"), SubResource("Resource_k7n08"), SubResource("Resource_2h6tc"), SubResource("Resource_qkr8n")])
+item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_j3r50"), SubResource("Resource_hggc2"), SubResource("Resource_utr5e"), SubResource("Resource_k7n08"), SubResource("Resource_2h6tc"), SubResource("Resource_qkr8n"), SubResource("Resource_bq5ya")])
 size = 40
 
 [node name="NodeSaver" type="Node" parent="Inventory" unique_id=137251970]

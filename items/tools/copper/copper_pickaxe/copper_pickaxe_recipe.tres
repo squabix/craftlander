@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="ItemRecipe" format=3 uid="uid://bpugfcvnce1ec"]
+
+[ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="1_li4o6"]
+[ext_resource type="Resource" uid="uid://c5uhmmmlb6tko" path="res://items/materials/minerals/copper_chunk/copper_chunk_item.tres" id="2_vi6cd"]
+[ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="3_allgy"]
+[ext_resource type="Resource" uid="uid://d1ytk70f3t86d" path="res://items/tools/copper/copper_pickaxe/copper_pickaxe_item.tres" id="4_ybixa"]
+[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="5_4unpp"]
+[ext_resource type="Script" uid="uid://c5ntwgpouf24m" path="res://items/crafting/item_recipe.gd" id="6_811ug"]
+
+[sub_resource type="Resource" id="Resource_5efbi"]
+script = ExtResource("5_4unpp")
+item = ExtResource("4_ybixa")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[resource]
+script = ExtResource("6_811ug")
+result = SubResource("Resource_5efbi")
+layout = Dictionary[Vector2i, ExtResource("1_li4o6")]({
+Vector2i(-2, 1): ExtResource("2_vi6cd"),
+Vector2i(-1, 1): ExtResource("2_vi6cd"),
+Vector2i(-1, 2): ExtResource("2_vi6cd"),
+Vector2i(0, -2): ExtResource("3_allgy"),
+Vector2i(0, -1): ExtResource("3_allgy"),
+Vector2i(0, 0): ExtResource("3_allgy"),
+Vector2i(0, 1): ExtResource("3_allgy"),
+Vector2i(0, 2): ExtResource("2_vi6cd"),
+Vector2i(1, 1): ExtResource("2_vi6cd"),
+Vector2i(1, 2): ExtResource("2_vi6cd"),
+Vector2i(2, 1): ExtResource("2_vi6cd")
+})
+metadata/_custom_type_script = "uid://c5ntwgpouf24m"

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemRecipe" format=3 uid="uid://c2sbskrq16mrn"]
+
+[ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="1_yxgtp"]
+[ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="2_g1rle"]
+[ext_resource type="Script" uid="uid://c5ntwgpouf24m" path="res://items/crafting/item_recipe.gd" id="2_xf227"]
+[ext_resource type="Resource" uid="uid://c5uhmmmlb6tko" path="res://items/materials/minerals/copper_chunk/copper_chunk_item.tres" id="3_1ykia"]
+[ext_resource type="Resource" uid="uid://b10txfbikrljt" path="res://items/tools/copper/copper_sword/copper_sword_item.tres" id="4_thvk6"]
+[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="5_q3nh7"]
+
+[sub_resource type="Resource" id="Resource_6n5lm"]
+script = ExtResource("5_q3nh7")
+item = ExtResource("4_thvk6")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[resource]
+script = ExtResource("2_xf227")
+result = SubResource("Resource_6n5lm")
+layout = Dictionary[Vector2i, ExtResource("1_yxgtp")]({
+Vector2i(-1, -1): ExtResource("3_1ykia"),
+Vector2i(0, -2): ExtResource("2_g1rle"),
+Vector2i(0, -1): ExtResource("3_1ykia"),
+Vector2i(0, 0): ExtResource("3_1ykia"),
+Vector2i(0, 1): ExtResource("3_1ykia"),
+Vector2i(0, 2): ExtResource("3_1ykia"),
+Vector2i(1, -1): ExtResource("3_1ykia")
+})
+metadata/_custom_type_script = "uid://c5ntwgpouf24m"

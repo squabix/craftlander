@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="HarvestingTool" format=3 uid="uid://w52cknmpa167"]
+
+[ext_resource type="Resource" uid="uid://boheablqansj2" path="res://items/tools/shoddy/shoddy_pickaxe/shoddy_pickaxe_damage.tres" id="1_w4q8p"]
+[ext_resource type="Texture2D" uid="uid://c3o13o5vrivr" path="res://items/tools/shoddy/shoddy_pickaxe/shoddy_pickaxe.png" id="2_la5sn"]
+[ext_resource type="PackedScene" uid="uid://dbj2o38nc5idd" path="res://items/tools/shoddy/shoddy_pickaxe/shoddy_pickaxe.tscn" id="3_f7now"]
+[ext_resource type="Script" uid="uid://6x786nnhteca" path="res://items/tools/harvesting_tool.gd" id="4_qvvv1"]
+
+[resource]
+script = ExtResource("4_qvvv1")
+damage = ExtResource("1_w4q8p")
+name = "Shoddy Pickaxe"
+icon = ExtResource("2_la5sn")
+type = "Tool"
+scene = ExtResource("3_f7now")
+cooldown_mode = 1
+default_cooldown_length = 0.3
+metadata/_custom_type_script = "uid://6x786nnhteca"
