@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="IslandProp" format=3 uid="uid://bitmn7eagu0e6"]
+
+[ext_resource type="Script" uid="uid://csprfavexgrle" path="res://island/props/island_prop.gd" id="1_cgsfl"]
+[ext_resource type="PackedScene" uid="uid://cxbfwy8aapt0k" path="res://island/props/destructable_resource/copper_ore/copper_ore.tscn" id="1_qtjxv"]
+
+[resource]
+script = ExtResource("1_cgsfl")
+scene = ExtResource("1_qtjxv")
+radius = 4.0
+min_height = 2.0
+min_scale = 0.4
+max_scale = 0.8
+metadata/_custom_type_script = "uid://csprfavexgrle"

@@ -1,0 +1,245 @@
+[gd_scene format=3 uid="uid://cxbfwy8aapt0k"]
+
+[ext_resource type="Script" uid="uid://cmlllb7wq80s" path="res://island/props/destructable_resource/destructable_resource.gd" id="1_m4sg5"]
+[ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="2_isgjd"]
+[ext_resource type="Resource" uid="uid://bwurefwkj4gjj" path="res://common/damage_system/single_damage.tres" id="3_mh2mx"]
+[ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="4_yma3f"]
+[ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="5_fcf0r"]
+[ext_resource type="Script" uid="uid://dapeyi3eetek1" path="res://common/signal_triggrs/signal_animation_trigger.gd" id="6_j6nsi"]
+[ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="7_2mgy2"]
+[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="8_bk6af"]
+[ext_resource type="Resource" uid="uid://b37h3pr83pcu4" path="res://items/materials/rock/rock_item.tres" id="9_cbvhc"]
+[ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="10_3c2rs"]
+[ext_resource type="Resource" uid="uid://c5uhmmmlb6tko" path="res://items/materials/minerals/copper_chunk/copper_chunk_item.tres" id="10_m4sg5"]
+[ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="11_5gjap"]
+[ext_resource type="ArrayOccluder3D" uid="uid://dgw7tnv1hw2xk" path="res://island/props/destructable_resource/copper_ore/copper_ore1.occ" id="12_3a3vt"]
+[ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="12_8fk6l"]
+[ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="14_yr0jb"]
+[ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="15_jevi7"]
+[ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="16_4erc8"]
+[ext_resource type="AudioStream" uid="uid://b6f6x800jxpvb" path="res://assets/sound/rock_destroy.mp3" id="17_3o24l"]
+[ext_resource type="PackedScene" uid="uid://jnjabsrqkyyq" path="res://island/props/destructable_resource/copper_ore/copper_ore1.blend" id="17_cdcgx"]
+[ext_resource type="Material" uid="uid://2lvxncgxfhjd" path="res://assets/materials/copper.tres" id="18_cdcgx"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cokie"]
+points = PackedVector3Array(0.34774315, 0.70833397, -1.4873003, 0.47166932, 1.0824239, -0.36040342, 1.3275012, 0.6678771, -0.79161394, 1.0708221, -0.22979379, -1.2052379, -1.1792669, -0.11187017, -1.3861772, -1.0415713, 0.23228538, -1.3503275, -0.2980144, 0.9554293, -1.0909247, -0.75876546, 1.0904064, -0.080708385, 0.40246832, 0.80321705, 0.6569153, 0.7364687, 0.624336, 0.7766396, 1.2078117, 0.68801475, -0.5839565, 1.380108, 0.040886223, 1.2037917, 1.8387405, -0.13146365, -0.45340955, 1.1011859, -0.62184453, -0.89578086, 0.8339149, -0.65885437, -1.0817933, -0.73440397, -0.6018882, -0.77199805, -1.0549878, -0.6013439, -0.62893766, -1.4182926, -0.16629648, -0.7043572, -1.4670157, 0.2018066, -1.005359, -1.0355692, 0.92803466, -0.70672464, -1.768181, 0.63304424, 0.21217656, -0.89363664, 0.5924059, 1.073583, 0.43212593, 0.4264058, 1.5240713, 0.42788923, 0.60165846, 1.1124765, 1.0499913, 0.24081218, 1.2501258, 0.9998559, -0.080847204, 1.5727726, 0.92429984, -0.76299, 0.93559563, -0.91729206, -0.7040282, 1.2396413, -1.1672628, -0.3292125, 1.353278, -1.3321445, 0.02165562, 1.1834995, -1.136193, -0.09517944, 1.5294825, -0.1716168, -0.7335998, 1.9677953, -1.0800555, -0.41212186, 1.4841632)
+
+[sub_resource type="Resource" id="Resource_5d4n1"]
+script = ExtResource("8_bk6af")
+item = ExtResource("9_cbvhc")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_jvvkc"]
+script = ExtResource("8_bk6af")
+item = ExtResource("10_m4sg5")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Animation" id="Animation_5v37a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlenderMeshes/Stone:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ir3ee"]
+resource_name = "hurt"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlenderMeshes/Stone:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.98, 0.98, 0.98), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5d4n1"]
+_data = {
+&"RESET": SubResource("Animation_5v37a"),
+&"hurt": SubResource("Animation_ir3ee")
+}
+
+[node name="CopperOre" type="Node3D" unique_id=51772479 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
+script = ExtResource("1_m4sg5")
+min_hp = 6
+max_hp = 10
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1012779916]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39999998, 0)
+collision_layer = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1937793454]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.32276815, 0)
+shape = SubResource("ConvexPolygonShape3D_cokie")
+
+[node name="Hurtbox3D" type="Area3D" parent="." unique_id=671691308 node_paths=PackedStringArray("health")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39999998, 0)
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("2_isgjd")
+health = NodePath("../Health")
+type_whitelist = Array[StringName]([&"pickaxe"])
+damage_override = ExtResource("3_mh2mx")
+metadata/_custom_type_script = "uid://4dfurtssrp4f"
+
+[node name="SignalAudioManager3D" type="Node3D" parent="Hurtbox3D" unique_id=650928888 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("4_yma3f")
+signal_players = {
+&"was_hurt": NodePath("HurtPlayer")
+}
+metadata/_custom_type_script = "uid://43bqjaemfda5"
+
+[node name="HurtPlayer" type="AudioStreamPlayer3D" parent="Hurtbox3D/SignalAudioManager3D" unique_id=1449022161]
+volume_db = -18.0
+bus = &"SFX"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1286643573]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.32276815, 0)
+shape = SubResource("ConvexPolygonShape3D_cokie")
+
+[node name="Health" type="Node" parent="." unique_id=256948540]
+script = ExtResource("5_fcf0r")
+free_parent_on_death = true
+
+[node name="HurtAnimTrigger" type="Node" parent="Health" unique_id=1514929013 node_paths=PackedStringArray("anim_player")]
+script = ExtResource("6_j6nsi")
+anim_player = NodePath("../../AnimationPlayer")
+anim_name = "hurt"
+signal_name = &"was_hurt"
+metadata/_custom_type_script = "uid://dapeyi3eetek1"
+
+[node name="Inventory" type="Node" parent="." unique_id=836906820]
+script = ExtResource("7_2mgy2")
+item_instances = Array[ExtResource("8_bk6af")]([SubResource("Resource_5d4n1"), SubResource("Resource_jvvkc")])
+constant = true
+size = 2
+metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
+
+[node name="ParticleSpawner3D" type="Node3D" parent="." unique_id=1579406573]
+script = ExtResource("11_5gjap")
+scenes = Array[PackedScene]([ExtResource("12_8fk6l")])
+spawn_on_exit_tree = true
+metadata/_custom_type_script = "uid://bhjxscxhtg2se"
+
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=374514710]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5692959, 0, 0.67521065)
+occluder = ExtResource("12_3a3vt")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=415438826]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.070500016, -0.8032318, 0.48049998)
+visible = false
+radius = 4.1093893
+height = 3.7067997
+vertices = PackedVector3Array(-3.6568937, 0, -0.05626927, -3.0423875, 0, -2.5230172, -2.4586146, 0, -3.2927637, 0.63440704, 0, -3.5043, 2.1004212, 0, -2.931544, 3.6535685, 0, -1.4048448, 2.7305427, 0, 1.9566233, 1.9592255, 0, 2.705597, -0.41944152, 0, 3.5047455, -2.37632, 0, 2.6159093, -2.775652, 0, 1.9154992, -3.6568937, 0, -0.05626927)
+script = ExtResource("14_yr0jb")
+generate_on_ready = true
+
+[node name="NodeSaver" type="Node" parent="." unique_id=1812045563]
+script = ExtResource("15_jevi7")
+save_mode = 2
+saver_id = &"stone"
+saved_properties = Dictionary[StringName, bool]({
+&"global_transform": true
+})
+metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
+
+[node name="AudioSpawner3D" type="Node3D" parent="." unique_id=2130276450 node_paths=PackedStringArray("templates")]
+script = ExtResource("16_4erc8")
+templates = [NodePath("DestroyPlayer")]
+spawn_on_exit_tree = true
+metadata/_custom_type_script = "uid://bv2ss5hjacgd3"
+
+[node name="DestroyPlayer" type="AudioStreamPlayer3D" parent="AudioSpawner3D" unique_id=120290710]
+stream = ExtResource("17_3o24l")
+unit_size = 100.0
+bus = &"SFX"
+
+[node name="BlenderMeshes" parent="." unique_id=1281855261 instance=ExtResource("17_cdcgx")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="Ore" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="0" unique_id=2050898420]
+surface_material_override/0 = ExtResource("18_cdcgx")
+
+[node name="Ore2" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="1" unique_id=1034610145]
+surface_material_override/0 = ExtResource("18_cdcgx")
+
+[node name="Ore3" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="2" unique_id=2009296137]
+surface_material_override/0 = ExtResource("18_cdcgx")
+
+[node name="Ore4" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="3" unique_id=1298800261]
+surface_material_override/0 = ExtResource("18_cdcgx")
+
+[node name="Ore5" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="4" unique_id=250216875]
+surface_material_override/0 = ExtResource("18_cdcgx")
+
+[node name="Ore6" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="5" unique_id=1165855919]
+surface_material_override/0 = ExtResource("18_cdcgx")
+
+[node name="Ore7" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="6" unique_id=563529434]
+surface_material_override/0 = ExtResource("18_cdcgx")
+
+[node name="Ore8" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="7" unique_id=614460456]
+surface_material_override/0 = ExtResource("18_cdcgx")
+
+[node name="Ore9" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="8" unique_id=1102921247]
+surface_material_override/0 = ExtResource("18_cdcgx")
+
+[node name="Ore10" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="9" unique_id=1184723638]
+surface_material_override/0 = ExtResource("18_cdcgx")
+
+[node name="Ore11" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="10" unique_id=328520046]
+surface_material_override/0 = ExtResource("18_cdcgx")
+
+[node name="Ore12" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="11" unique_id=862144907]
+surface_material_override/0 = ExtResource("18_cdcgx")
+
+[node name="Ore13" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="12" unique_id=2121111336]
+surface_material_override/0 = ExtResource("18_cdcgx")
+
+[node name="Ore14" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="13" unique_id=370265437]
+surface_material_override/0 = ExtResource("18_cdcgx")
+
+[node name="Ore15" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="14" unique_id=1145343769]
+surface_material_override/0 = ExtResource("18_cdcgx")
+
+[node name="Ore16" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="15" unique_id=908922814]
+surface_material_override/0 = ExtResource("18_cdcgx")
+
+[node name="Ore17" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="16" unique_id=807289491]
+surface_material_override/0 = ExtResource("18_cdcgx")
+
+[node name="Ore18" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="17" unique_id=2052610256]
+surface_material_override/0 = ExtResource("18_cdcgx")
+
+[node name="Ore19" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="18" unique_id=491988823]
+surface_material_override/0 = ExtResource("18_cdcgx")
+
+[node name="Ore20" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="19" unique_id=264649690]
+surface_material_override/0 = ExtResource("18_cdcgx")
+
+[node name="Ore21" parent="BlenderMeshes" index="1" unique_id=1222184572]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3724699, 0.41831893, -0.094890535)
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=362063859]
+libraries/ = SubResource("AnimationLibrary_5d4n1")
+script = ExtResource("10_3c2rs")
+metadata/_custom_type_script = "uid://c1bce1sw2dgnf"
+
+[editable path="BlenderMeshes"]
