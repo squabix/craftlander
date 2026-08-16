@@ -1,11 +1,10 @@
-class_name BoatInterface
-extends Control
+class_name BoatMenu
+extends Menu
 
 signal opened
-signal closed
 
 @export var island_option_container: Control
-@export var pause_interface: PauseInterface
+@export var pause_menu: PauseMenu
 @export var boat_upgrader: BoatUpgrader
 @export var sail_button: Button
 
@@ -24,12 +23,7 @@ func _ready() -> void:
 	sail_button.pressed.connect(load_selected_island)
 
 
-func _process(_delta: float) -> void:
-	if is_instance_valid(current_boat) and pause_interface.pressed_pause():
-		close()
-
-
-func open(boat: Boat) -> void:
+func open_boat(boat: Boat) -> void:
 	if not is_instance_valid(boat):
 		Util.node_error("%s cannot open with invalid boat: ", self, boat)
 		return
@@ -50,19 +44,23 @@ func reload_options() -> void:
 		island_option_container.get_child(i).reload()
 
 
-func close() -> void:
+func back() -> void:
+	if Menu.lock_frame():
+		return
+	if not is_instance_valid(current_boat):
+		return
 	set_pause(false)
 	if is_instance_valid(island_option_container):
 		for option in island_option_container.get_children():
 			option.hide()
 	current_boat = null
-	closed.emit()
+	backed_out.emit()
 
 
 func set_pause(to: bool) -> void:
 	visible = to
 	get_tree().paused = to
-	pause_interface.can_update_pause = not to
+	pause_menu.can_update_pause = not to
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if to else Input.MOUSE_MODE_CAPTURED
 
 

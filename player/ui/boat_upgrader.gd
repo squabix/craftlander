@@ -10,7 +10,7 @@ signal failed_upgrade
 @export var default_requirement: Inventory
 @export var upgrade_button: Button
 @export var player_inventory: Inventory
-@export var boat_interface: BoatInterface
+@export var boat_menu: BoatMenu
 
 var boat: Boat:
 	set(to):
@@ -45,8 +45,8 @@ func upgrade() -> void:
 	started_upgrade.emit(current_upgrade_level)
 	player_inventory.subtract_inventory(current_requirement)
 	Main.loaded_save.boat_level = current_upgrade_level
-	boat_interface.current_boat = boat_interface.current_boat.make_current()
+	boat_menu.current_boat = boat_menu.current_boat.make_current()
 	Main.root.save_current_game()
-	boat_interface.close()
+	boat_menu.close()
 	print("Upgraded boat to %s" % current_upgrade_level)
 	upgraded.emit(current_upgrade_level)
