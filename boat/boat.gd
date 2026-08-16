@@ -33,21 +33,21 @@ static func instantiate(boat_level: int) -> Boat:
 
 
 func _ready() -> void:
-	interactable.interacted_with.connect(open_boat_interface)
+	interactable.interacted_with.connect(open_boat_menu)
 	set_physics_process(false)
 
 
-func open_boat_interface(interact_source: Node) -> void:
+func open_boat_menu(interact_source: Node) -> void:
 	if not interact_source is Player:
 		Util.node_error("Invalid interact source %s cannot open boat interface", interact_source)
 		return
 
-	var boat_interface: BoatInterface = interact_source.boat_interface
-	if not is_instance_valid(boat_interface):
-		Util.node_error("%s cannot load invalid boat interface %s", interact_source, boat_interface)
+	var boat_menu: BoatMenu = interact_source.boat_menu
+	if not is_instance_valid(boat_menu):
+		Util.node_error("%s cannot load invalid boat interface %s", interact_source, boat_menu)
 		return
 
-	boat_interface.open(self)
+	boat_menu.open_boat(self)
 
 
 func get_current_state() -> State:
