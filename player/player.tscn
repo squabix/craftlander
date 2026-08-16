@@ -101,6 +101,7 @@
 [ext_resource type="AudioStream" uid="uid://deix0ahce6g3i" path="res://assets/sound/open_drop-02.mp3" id="77_2s0vo"]
 [ext_resource type="AudioStream" uid="uid://dwoi11pb7rbsy" path="res://assets/sound/open_drop-03.mp3" id="78_hgm8h"]
 [ext_resource type="Script" uid="uid://b3snj0gi7akf8" path="res://common/signal_audio_manager.gd" id="84_onxu2"]
+[ext_resource type="Script" uid="uid://7t0qde2fdjb8" path="res://common/virtual_cursor.gd" id="84_wyvah"]
 [ext_resource type="AudioStream" uid="uid://dj216lq0cge4b" path="res://assets/sound/land.wav" id="87_tcwf7"]
 [ext_resource type="AudioStream" uid="uid://dnichdtdyktgu" path="res://assets/sound/save.mp3" id="87_ycggl"]
 [ext_resource type="AudioStream" uid="uid://c03ir843xs060" path="res://assets/sound/error1.wav" id="88_5ntu2"]
@@ -4390,6 +4391,17 @@ metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 [node name="PausePlayer" type="AudioStreamPlayer" parent="PauseMenu/SignalAudioManager" unique_id=1328479173]
 stream = SubResource("AudioStreamRandomizer_6ct4f")
 bus = &"UI"
+
+[node name="VirtualCursor" type="CanvasLayer" parent="PauseMenu" unique_id=487277741]
+script = ExtResource("84_wyvah")
+min_speed = 70.0
+max_speed = 800.0
+acceleration = 1200.0
+action_up = &"look_up"
+action_down = &"look_down"
+action_left = &"look_left"
+action_right = &"look_right"
+metadata/_custom_type_script = "uid://7t0qde2fdjb8"
 
 [node name="HotbarInterface" type="Control" parent="." unique_id=858532635]
 unique_name_in_owner = true
