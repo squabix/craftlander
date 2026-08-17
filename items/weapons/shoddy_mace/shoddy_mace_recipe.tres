@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="1_vscv1"]
 [ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="2_g0k35"]
 [ext_resource type="Resource" uid="uid://b37h3pr83pcu4" path="res://items/materials/rock/rock_item.tres" id="3_3o0hv"]
-[ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/tools/shoddy/shoddy_mace/shoddy_mace_item.tres" id="4_6vi5s"]
+[ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/weapons/shoddy_mace/shoddy_mace_item.tres" id="4_6vi5s"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="5_pkk4i"]
 [ext_resource type="Script" uid="uid://c5ntwgpouf24m" path="res://items/crafting/item_recipe.gd" id="6_ul8sw"]
 

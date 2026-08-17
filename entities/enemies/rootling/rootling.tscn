@@ -33,7 +33,7 @@
 [ext_resource type="Script" uid="uid://bi8ev1kcq2ayf" path="res://common/inventory_system/animation/item_animation_tree.gd" id="26_f0qrw"]
 [ext_resource type="Material" uid="uid://ct3rueaspkpix" path="res://assets/materials/darkness.tres" id="26_u6pq5"]
 [ext_resource type="Script" uid="uid://bwd4jx8u5uct2" path="res://common/inventory_system/item_holder3d.gd" id="27_7307j"]
-[ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/tools/shoddy/shoddy_mace/shoddy_mace_item.tres" id="29_5b15m"]
+[ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/weapons/shoddy_mace/shoddy_mace_item.tres" id="29_5b15m"]
 [ext_resource type="PackedScene" uid="uid://h3veu2e18ij1" path="res://entities/entity_health_bar.tscn" id="33_c3uxn"]
 [ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="34_hswny"]
 [ext_resource type="AudioStream" uid="uid://cwqa0rroqx0ww" path="res://assets/sound/steps_stream.tres" id="35_6ogb6"]
@@ -656,7 +656,7 @@ root = NodePath("..")
 on_screen_process_radius = 110.0
 off_screen_process_radius = 24.0
 on_screen_visible_radius = 110.0
-visibility_control_list = [NodePath("")]
+visibility_control_list = [null]
 visibility_range_fade_margin = 10.0
 
 [node name="IntervalStaggerer" type="Node" parent="CullingController3D" unique_id=171446592 node_paths=PackedStringArray("target_methods")]
@@ -798,11 +798,11 @@ radius = 1.0
 [node name="Visuals" parent="." unique_id=1269952913 instance=ExtResource("13_v4fp6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
-[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1269952913, 2548015) index="0" unique_id=927656510]
+[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1269952913, 1677697918) index="0" unique_id=134658688]
 bones/7/rotation = Quaternion(-0.35355338, 0.14644662, -0.35355335, 0.8535534)
 bones/10/rotation = Quaternion(-0.35355338, -0.14644662, 0.35355335, 0.8535534)
 
-[node name="Woodling" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=158329737]
+[node name="Woodling" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=1080303323]
 surface_material_override/0 = ExtResource("21_uefcv")
 surface_material_override/1 = ExtResource("22_c3uxn")
 surface_material_override/2 = ExtResource("25_g7svr")

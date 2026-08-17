@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="2_g1rle"]
 [ext_resource type="Script" uid="uid://c5ntwgpouf24m" path="res://items/crafting/item_recipe.gd" id="2_xf227"]
 [ext_resource type="Resource" uid="uid://c5uhmmmlb6tko" path="res://items/materials/minerals/copper_chunk/copper_chunk_item.tres" id="3_1ykia"]
-[ext_resource type="Resource" uid="uid://b10txfbikrljt" path="res://items/tools/copper/copper_sword/copper_sword_item.tres" id="4_thvk6"]
+[ext_resource type="Resource" uid="uid://b10txfbikrljt" path="res://items/weapons/copper_sword/copper_sword_item.tres" id="4_thvk6"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="5_q3nh7"]
 
 [sub_resource type="Resource" id="Resource_6n5lm"]

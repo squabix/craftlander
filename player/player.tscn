@@ -59,7 +59,7 @@
 [ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="40_a2xo5"]
 [ext_resource type="Script" uid="uid://dfo0te3udism4" path="res://player/ui/player_death_screen.gd" id="40_gswnw"]
 [ext_resource type="Script" uid="uid://cf1x38wu72w8n" path="res://player/ui/crafting/recipes/recipe_display.gd" id="41_7crtr"]
-[ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/tools/shoddy/shoddy_mace/shoddy_mace_item.tres" id="41_a2xo5"]
+[ext_resource type="Resource" uid="uid://dihffpg2md6ng" path="res://items/weapons/shoddy_mace/shoddy_mace_item.tres" id="41_a2xo5"]
 [ext_resource type="Resource" uid="uid://w52cknmpa167" path="res://items/tools/shoddy/shoddy_pickaxe/shoddy_pickaxe_item.tres" id="41_art4l"]
 [ext_resource type="Script" uid="uid://ddiytppqbuop1" path="res://common/inventory_system/item_cooldown_radial.gd" id="41_j420s"]
 [ext_resource type="Shader" uid="uid://clux7d66a4hbi" path="res://common/ui/radial.gdshader" id="41_kcq4v"]
@@ -78,13 +78,14 @@
 [ext_resource type="Resource" uid="uid://c2ysy7ee3bxr6" path="res://items/tools/shoddy/shoddy_axe/shoddy_axe_recipe.tres" id="51_or4qq"]
 [ext_resource type="Resource" uid="uid://b3nw0sd58a2j" path="res://items/tools/shoddy/shoddy_pickaxe/shoddy_pickaxe_recipe.tres" id="52_hggc2"]
 [ext_resource type="LabelSettings" uid="uid://b4f3g1d2cp3py" path="res://player/ui/quantity_label_settings.tres" id="52_p5tca"]
-[ext_resource type="Resource" uid="uid://6a5notvdv1ei" path="res://items/tools/shoddy/shoddy_mace/shoddy_mace_recipe.tres" id="53_hggc2"]
+[ext_resource type="Resource" uid="uid://6a5notvdv1ei" path="res://items/weapons/shoddy_mace/shoddy_mace_recipe.tres" id="53_hggc2"]
 [ext_resource type="Script" uid="uid://bubfjagdkgrlq" path="res://player/ui/inventory/inventory_organizer.gd" id="55_jbx34"]
 [ext_resource type="Script" uid="uid://uwx6xnt2vr38" path="res://player/ui/inventory/item_inspector.gd" id="59_b2j0d"]
 [ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://defaults/button_audio_manager.tscn" id="63_0iv1a"]
 [ext_resource type="Script" uid="uid://rroukmbv64vv" path="res://player/ui/boat_menu.gd" id="64_2h6tc"]
 [ext_resource type="Script" uid="uid://b6r50f8akgpp7" path="res://player/ui/island_option.gd" id="64_kewli"]
 [ext_resource type="Texture2D" uid="uid://cvnfk2w1gki1v" path="res://icon.png" id="64_utr5e"]
+[ext_resource type="Texture2D" uid="uid://1ysw5k3nfh4u" path="res://items/weapons/copper_sword/copper_sword.png" id="64_vuyvy"]
 [ext_resource type="Script" uid="uid://xu4t7vci1g06" path="res://player/player_animation_tree.gd" id="65_7l6ig"]
 [ext_resource type="Script" uid="uid://blknest0w8djr" path="res://player/ui/boat_upgrader.gd" id="66_2h6tc"]
 [ext_resource type="Resource" uid="uid://mx3f8ldvvndd" path="res://player/states/player_walking_move_mode.tres" id="66_utr5e"]
@@ -117,7 +118,7 @@
 [ext_resource type="AudioStream" uid="uid://bctut8ply616f" path="res://assets/sound/swoosh1.mp3" id="100_0iv1a"]
 [ext_resource type="AudioStream" uid="uid://fc5gio4s8yl" path="res://assets/sound/eat.mp3" id="112_teerl"]
 [ext_resource type="Resource" uid="uid://vulwxanblunx" path="res://items/tools/copper/copper_axe/copper_axe_item.tres" id="112_wh3n5"]
-[ext_resource type="Resource" uid="uid://b10txfbikrljt" path="res://items/tools/copper/copper_sword/copper_sword_item.tres" id="113_vuyvy"]
+[ext_resource type="Resource" uid="uid://b10txfbikrljt" path="res://items/weapons/copper_sword/copper_sword_item.tres" id="113_vuyvy"]
 [ext_resource type="Resource" uid="uid://d1ytk70f3t86d" path="res://items/tools/copper/copper_pickaxe/copper_pickaxe_item.tres" id="114_0yt84"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
@@ -361,6 +362,12 @@ metadata/_custom_type_script = "uid://bwcomtie8q510"
 script = ExtResource("44_a1u5o")
 name = "Tools"
 icon = ExtResource("44_jfgyi")
+metadata/_custom_type_script = "uid://bwcomtie8q510"
+
+[sub_resource type="Resource" id="Resource_gkao2"]
+script = ExtResource("44_a1u5o")
+name = &"Weapons"
+icon = ExtResource("64_vuyvy")
 metadata/_custom_type_script = "uid://bwcomtie8q510"
 
 [sub_resource type="LabelSettings" id="LabelSettings_jbx34"]
@@ -1625,7 +1632,8 @@ recipe_learner = NodePath("RecipeLearner")
 back_entry = NodePath("RecipeList/EntryContainer/BackEntry")
 recipe_groups = Dictionary[StringName, ExtResource("44_a1u5o")]({
 &"Food": SubResource("Resource_3dxkp"),
-&"Tool": SubResource("Resource_6wior")
+&"Tool": SubResource("Resource_6wior"),
+&"Weapon": SubResource("Resource_gkao2")
 })
 
 [node name="Label" type="Label" parent="PauseMenu/CraftingInterface/RecipePanel" unique_id=2068748904]
