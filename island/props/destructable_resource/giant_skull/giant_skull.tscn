@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="14_w6i3c"]
 [ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="16_88wgr"]
 [ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="17_4du77"]
-[ext_resource type="PackedScene" uid="uid://c7j7tc5qmashc" path="res://island/props/destructable_resource/giant_skull/giant_skull.blend" id="18_ejtqu"]
+[ext_resource type="PackedScene" uid="uid://c7j7tc5qmashc" path="res://assets/models/props/giant_skull.blend" id="18_ejtqu"]
 [ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="18_tjyh4"]
 [ext_resource type="Material" uid="uid://brsw8xc5rh2lv" path="res://assets/materials/bone.tres" id="19_d6jhr"]
 [ext_resource type="AudioStream" uid="uid://b6f6x800jxpvb" path="res://assets/sound/rock_destroy.mp3" id="19_fqqey"]
@@ -149,14 +149,13 @@ metadata/_custom_type_script = "uid://bhjxscxhtg2se"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5692959, 0, 0.67521065)
 occluder = ExtResource("13_0s5q4")
 
-[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=415438826 node_paths=PackedStringArray("mesh_instance")]
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=415438826]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.006700039, 0.14821583, 0.25959998)
 visible = false
 radius = 2.7771814
 height = 3.0111997
 vertices = PackedVector3Array(-2.7658968, 0, 0.2501028, -2.1177359, 0, -0.76355904, -1.7087862, 0, -1.3631811, -0.27003485, 0, -2.048371, 0.27023983, 0, -2.0483706, 1.7087864, 0, -1.3631811, 2.1179366, 0, -0.76355755, 2.7658968, 0, 0.2501028, 2.133977, 0, 1.2801208, 0.000102541424, 0, 2.0488, -2.133776, 0, 1.2801226, -2.7658968, 0, 0.2501028)
 script = ExtResource("16_88wgr")
-mesh_instance = NodePath("../BlenderMeshes/Skull")
 generate_on_ready = true
 
 [node name="NodeSaver" type="Node" parent="." unique_id=1812045563]
@@ -182,10 +181,10 @@ bus = &"SFX"
 [node name="BlenderMeshes" parent="." unique_id=38551079 instance=ExtResource("18_ejtqu")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
-[node name="Jaw" parent="BlenderMeshes" index="0" unique_id=1620209169]
+[node name="Jaw" parent="BlenderMeshes" index="0" unique_id=1649496186]
 surface_material_override/0 = ExtResource("19_d6jhr")
 
-[node name="Skull" parent="BlenderMeshes" index="1" unique_id=693430804]
+[node name="Skull" parent="BlenderMeshes" index="1" unique_id=1839219668]
 surface_material_override/0 = ExtResource("19_d6jhr")
 surface_material_override/1 = ExtResource("20_ejtqu")
 

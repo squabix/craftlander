@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://bjp5lmg014evo" path="res://items/tools/copper/copper_pickaxe/copper_pickaxe_damage.tres" id="2_2wpdf"]
 [ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="3_qrgtr"]
 [ext_resource type="AudioStream" uid="uid://d1te8os5tp3ww" path="res://assets/sound/hit.mp3" id="4_0lbb5"]
-[ext_resource type="PackedScene" uid="uid://cqymwf6n4fukj" path="res://items/tools/copper/copper_pickaxe/copper_pickaxe.blend" id="5_gxiec"]
+[ext_resource type="PackedScene" uid="uid://cqymwf6n4fukj" path="res://assets/models/items/tools/pickaxe2.blend" id="5_gxiec"]
 [ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="6_4hlil"]
 [ext_resource type="Material" uid="uid://2lvxncgxfhjd" path="res://assets/materials/copper.tres" id="7_uw2lw"]
 
@@ -42,13 +42,13 @@ bus = &"SFX"
 
 [node name="BlenderMeshes" parent="Visuals" unique_id=595334990 instance=ExtResource("5_gxiec")]
 
-[node name="Head2" parent="Visuals/BlenderMeshes" index="0" unique_id=2023171527]
+[node name="Head2" parent="Visuals/BlenderMeshes" index="0" unique_id=239467563]
 visible = false
 
-[node name="Handle" parent="Visuals/BlenderMeshes" index="1" unique_id=1367749476]
+[node name="Handle" parent="Visuals/BlenderMeshes" index="1" unique_id=2093681799]
 surface_material_override/0 = ExtResource("6_4hlil")
 
-[node name="Cube" parent="Visuals/BlenderMeshes" index="2" unique_id=1293250790]
+[node name="Cube" parent="Visuals/BlenderMeshes" index="2" unique_id=626746734]
 surface_material_override/0 = ExtResource("7_uw2lw")
 
 [editable path="Visuals/BlenderMeshes"]

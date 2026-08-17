@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dxwqj0o18t8o2"]
 
-[ext_resource type="PackedScene" uid="uid://ni2bhtdnrjaj" path="res://island/docking/dock.blend" id="1_r7o7e"]
+[ext_resource type="PackedScene" uid="uid://ni2bhtdnrjaj" path="res://assets/models/dock.blend" id="1_r7o7e"]
 [ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="2_jqbpu"]
 [ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="3_g2y3g"]
 

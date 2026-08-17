@@ -18,7 +18,7 @@
 [ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="15_jevi7"]
 [ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="16_4erc8"]
 [ext_resource type="AudioStream" uid="uid://b6f6x800jxpvb" path="res://assets/sound/rock_destroy.mp3" id="17_3o24l"]
-[ext_resource type="PackedScene" uid="uid://jnjabsrqkyyq" path="res://island/props/destructable_resource/copper_ore/copper_ore1.blend" id="17_cdcgx"]
+[ext_resource type="PackedScene" uid="uid://jnjabsrqkyyq" path="res://assets/models/props/ore1.blend" id="17_cdcgx"]
 [ext_resource type="Material" uid="uid://2lvxncgxfhjd" path="res://assets/materials/copper.tres" id="18_cdcgx"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cokie"]
@@ -173,67 +173,67 @@ bus = &"SFX"
 [node name="BlenderMeshes" parent="." unique_id=1281855261 instance=ExtResource("17_cdcgx")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
-[node name="Ore" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="0" unique_id=2050898420]
+[node name="Ore" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 1919022755) index="0" unique_id=1437699727]
 surface_material_override/0 = ExtResource("18_cdcgx")
 
-[node name="Ore2" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="1" unique_id=1034610145]
+[node name="Ore2" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 1919022755) index="1" unique_id=1948287849]
 surface_material_override/0 = ExtResource("18_cdcgx")
 
-[node name="Ore3" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="2" unique_id=2009296137]
+[node name="Ore3" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 1919022755) index="2" unique_id=365071755]
 surface_material_override/0 = ExtResource("18_cdcgx")
 
-[node name="Ore4" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="3" unique_id=1298800261]
+[node name="Ore4" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 1919022755) index="3" unique_id=1431324676]
 surface_material_override/0 = ExtResource("18_cdcgx")
 
-[node name="Ore5" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="4" unique_id=250216875]
+[node name="Ore5" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 1919022755) index="4" unique_id=841556707]
 surface_material_override/0 = ExtResource("18_cdcgx")
 
-[node name="Ore6" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="5" unique_id=1165855919]
+[node name="Ore6" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 1919022755) index="5" unique_id=1199263247]
 surface_material_override/0 = ExtResource("18_cdcgx")
 
-[node name="Ore7" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="6" unique_id=563529434]
+[node name="Ore7" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 1919022755) index="6" unique_id=129828809]
 surface_material_override/0 = ExtResource("18_cdcgx")
 
-[node name="Ore8" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="7" unique_id=614460456]
+[node name="Ore8" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 1919022755) index="7" unique_id=1903657632]
 surface_material_override/0 = ExtResource("18_cdcgx")
 
-[node name="Ore9" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="8" unique_id=1102921247]
+[node name="Ore9" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 1919022755) index="8" unique_id=1281948104]
 surface_material_override/0 = ExtResource("18_cdcgx")
 
-[node name="Ore10" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="9" unique_id=1184723638]
+[node name="Ore10" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 1919022755) index="9" unique_id=1254917314]
 surface_material_override/0 = ExtResource("18_cdcgx")
 
-[node name="Ore11" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="10" unique_id=328520046]
+[node name="Ore11" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 1919022755) index="10" unique_id=1228418223]
 surface_material_override/0 = ExtResource("18_cdcgx")
 
-[node name="Ore12" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="11" unique_id=862144907]
+[node name="Ore12" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 1919022755) index="11" unique_id=497364989]
 surface_material_override/0 = ExtResource("18_cdcgx")
 
-[node name="Ore13" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="12" unique_id=2121111336]
+[node name="Ore13" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 1919022755) index="12" unique_id=557713985]
 surface_material_override/0 = ExtResource("18_cdcgx")
 
-[node name="Ore14" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="13" unique_id=370265437]
+[node name="Ore14" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 1919022755) index="13" unique_id=318948903]
 surface_material_override/0 = ExtResource("18_cdcgx")
 
-[node name="Ore15" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="14" unique_id=1145343769]
+[node name="Ore15" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 1919022755) index="14" unique_id=1933126459]
 surface_material_override/0 = ExtResource("18_cdcgx")
 
-[node name="Ore16" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="15" unique_id=908922814]
+[node name="Ore16" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 1919022755) index="15" unique_id=1759397617]
 surface_material_override/0 = ExtResource("18_cdcgx")
 
-[node name="Ore17" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="16" unique_id=807289491]
+[node name="Ore17" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 1919022755) index="16" unique_id=242719687]
 surface_material_override/0 = ExtResource("18_cdcgx")
 
-[node name="Ore18" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="17" unique_id=2052610256]
+[node name="Ore18" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 1919022755) index="17" unique_id=753515788]
 surface_material_override/0 = ExtResource("18_cdcgx")
 
-[node name="Ore19" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="18" unique_id=491988823]
+[node name="Ore19" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 1919022755) index="18" unique_id=709668835]
 surface_material_override/0 = ExtResource("18_cdcgx")
 
-[node name="Ore20" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 64325607) index="19" unique_id=264649690]
+[node name="Ore20" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(1281855261, 1919022755) index="19" unique_id=1156556189]
 surface_material_override/0 = ExtResource("18_cdcgx")
 
-[node name="Ore21" parent="BlenderMeshes" index="1" unique_id=1222184572]
+[node name="Ore21" parent="BlenderMeshes" index="1" unique_id=302686364]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3724699, 0.41831893, -0.094890535)
 visible = false
 

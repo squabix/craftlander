@@ -15,7 +15,7 @@
 [ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="13_pvmbj"]
 [ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="14_you5f"]
 [ext_resource type="AudioStream" uid="uid://cwmtj7gouxh3c" path="res://assets/sound/tree_destroy.mp3" id="15_5373p"]
-[ext_resource type="PackedScene" uid="uid://dsafdn7bsbfv7" path="res://island/props/destructable_resource/cactus/cactus1.blend" id="16_5373p"]
+[ext_resource type="PackedScene" uid="uid://dsafdn7bsbfv7" path="res://assets/models/props/cactus1.blend" id="16_5373p"]
 [ext_resource type="Material" uid="uid://c7uysx7frg14r" path="res://assets/materials/cactus.tres" id="17_vk70i"]
 [ext_resource type="Material" uid="uid://cedafem77nnp5" path="res://assets/materials/thorn.tres" id="18_kjjyj"]
 
@@ -169,310 +169,310 @@ bus = &"SFX"
 [node name="cactus1" parent="." unique_id=1559244307 instance=ExtResource("16_5373p")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
-[node name="Cactus" parent="cactus1" index="0" unique_id=484015894]
+[node name="Cactus" parent="cactus1" index="0" unique_id=102677402]
 surface_material_override/0 = ExtResource("17_vk70i")
 
-[node name="Cube" parent="cactus1/Cactus" index="0" unique_id=744640839]
+[node name="Cube" parent="cactus1/Cactus" index="0" unique_id=1242260195]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube2" parent="cactus1/Cactus" index="1" unique_id=509493714]
+[node name="Cube2" parent="cactus1/Cactus" index="1" unique_id=141513024]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube3" parent="cactus1/Cactus" index="2" unique_id=819786620]
+[node name="Cube3" parent="cactus1/Cactus" index="2" unique_id=897364192]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube4" parent="cactus1/Cactus" index="3" unique_id=882588905]
+[node name="Cube4" parent="cactus1/Cactus" index="3" unique_id=907842108]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube5" parent="cactus1/Cactus" index="4" unique_id=548785019]
+[node name="Cube5" parent="cactus1/Cactus" index="4" unique_id=2081381289]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube6" parent="cactus1/Cactus" index="5" unique_id=305640099]
+[node name="Cube6" parent="cactus1/Cactus" index="5" unique_id=906392576]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube7" parent="cactus1/Cactus" index="6" unique_id=1278435053]
+[node name="Cube7" parent="cactus1/Cactus" index="6" unique_id=373206791]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube8" parent="cactus1/Cactus" index="7" unique_id=1150539541]
+[node name="Cube8" parent="cactus1/Cactus" index="7" unique_id=1606189984]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube9" parent="cactus1/Cactus" index="8" unique_id=1392375093]
+[node name="Cube9" parent="cactus1/Cactus" index="8" unique_id=1872256919]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube10" parent="cactus1/Cactus" index="9" unique_id=106243966]
+[node name="Cube10" parent="cactus1/Cactus" index="9" unique_id=934729061]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube11" parent="cactus1/Cactus" index="10" unique_id=1079214638]
+[node name="Cube11" parent="cactus1/Cactus" index="10" unique_id=740773448]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube12" parent="cactus1/Cactus" index="11" unique_id=155009954]
+[node name="Cube12" parent="cactus1/Cactus" index="11" unique_id=2133175295]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube13" parent="cactus1/Cactus" index="12" unique_id=909147548]
+[node name="Cube13" parent="cactus1/Cactus" index="12" unique_id=1532879613]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube14" parent="cactus1/Cactus" index="13" unique_id=1221668446]
+[node name="Cube14" parent="cactus1/Cactus" index="13" unique_id=1005580174]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube15" parent="cactus1/Cactus" index="14" unique_id=1434362121]
+[node name="Cube15" parent="cactus1/Cactus" index="14" unique_id=770852807]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube16" parent="cactus1/Cactus" index="15" unique_id=2050529145]
+[node name="Cube16" parent="cactus1/Cactus" index="15" unique_id=789609092]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube17" parent="cactus1/Cactus" index="16" unique_id=189735999]
+[node name="Cube17" parent="cactus1/Cactus" index="16" unique_id=829086368]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube18" parent="cactus1/Cactus" index="17" unique_id=266285621]
+[node name="Cube18" parent="cactus1/Cactus" index="17" unique_id=493603963]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube19" parent="cactus1/Cactus" index="18" unique_id=698417540]
+[node name="Cube19" parent="cactus1/Cactus" index="18" unique_id=750656215]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube20" parent="cactus1/Cactus" index="19" unique_id=661330146]
+[node name="Cube20" parent="cactus1/Cactus" index="19" unique_id=413108413]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube21" parent="cactus1/Cactus" index="20" unique_id=1948507793]
+[node name="Cube21" parent="cactus1/Cactus" index="20" unique_id=1490751922]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube22" parent="cactus1/Cactus" index="21" unique_id=169980840]
+[node name="Cube22" parent="cactus1/Cactus" index="21" unique_id=841087705]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube23" parent="cactus1/Cactus" index="22" unique_id=124404217]
+[node name="Cube23" parent="cactus1/Cactus" index="22" unique_id=34087986]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube24" parent="cactus1/Cactus" index="23" unique_id=184522789]
+[node name="Cube24" parent="cactus1/Cactus" index="23" unique_id=298806781]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube25" parent="cactus1/Cactus" index="24" unique_id=213769454]
+[node name="Cube25" parent="cactus1/Cactus" index="24" unique_id=45379371]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube26" parent="cactus1/Cactus" index="25" unique_id=1882302748]
+[node name="Cube26" parent="cactus1/Cactus" index="25" unique_id=1388348005]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube27" parent="cactus1/Cactus" index="26" unique_id=299746339]
+[node name="Cube27" parent="cactus1/Cactus" index="26" unique_id=881866839]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube28" parent="cactus1/Cactus" index="27" unique_id=1023426085]
+[node name="Cube28" parent="cactus1/Cactus" index="27" unique_id=1541064447]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube29" parent="cactus1/Cactus" index="28" unique_id=679774229]
+[node name="Cube29" parent="cactus1/Cactus" index="28" unique_id=539173637]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube30" parent="cactus1/Cactus" index="29" unique_id=1866601022]
+[node name="Cube30" parent="cactus1/Cactus" index="29" unique_id=899805423]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube31" parent="cactus1/Cactus" index="30" unique_id=1950345546]
+[node name="Cube31" parent="cactus1/Cactus" index="30" unique_id=1593068939]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube32" parent="cactus1/Cactus" index="31" unique_id=1526184555]
+[node name="Cube32" parent="cactus1/Cactus" index="31" unique_id=1584662830]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube33" parent="cactus1/Cactus" index="32" unique_id=286523997]
+[node name="Cube33" parent="cactus1/Cactus" index="32" unique_id=856260978]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube34" parent="cactus1/Cactus" index="33" unique_id=2110702113]
+[node name="Cube34" parent="cactus1/Cactus" index="33" unique_id=1240612304]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube35" parent="cactus1/Cactus" index="34" unique_id=602297434]
+[node name="Cube35" parent="cactus1/Cactus" index="34" unique_id=995253433]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube36" parent="cactus1/Cactus" index="35" unique_id=1784910608]
+[node name="Cube36" parent="cactus1/Cactus" index="35" unique_id=1090272029]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube37" parent="cactus1/Cactus" index="36" unique_id=1528342932]
+[node name="Cube37" parent="cactus1/Cactus" index="36" unique_id=1944378360]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube38" parent="cactus1/Cactus" index="37" unique_id=1328225446]
+[node name="Cube38" parent="cactus1/Cactus" index="37" unique_id=2102504377]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube39" parent="cactus1/Cactus" index="38" unique_id=532155386]
+[node name="Cube39" parent="cactus1/Cactus" index="38" unique_id=132071263]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube40" parent="cactus1/Cactus" index="39" unique_id=1441537671]
+[node name="Cube40" parent="cactus1/Cactus" index="39" unique_id=247436]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube41" parent="cactus1/Cactus" index="40" unique_id=198280614]
+[node name="Cube41" parent="cactus1/Cactus" index="40" unique_id=1545017273]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube42" parent="cactus1/Cactus" index="41" unique_id=447105349]
+[node name="Cube42" parent="cactus1/Cactus" index="41" unique_id=883677508]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube43" parent="cactus1/Cactus" index="42" unique_id=1866345466]
+[node name="Cube43" parent="cactus1/Cactus" index="42" unique_id=744276337]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube44" parent="cactus1/Cactus" index="43" unique_id=1287449109]
+[node name="Cube44" parent="cactus1/Cactus" index="43" unique_id=852339579]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube45" parent="cactus1/Cactus" index="44" unique_id=357197271]
+[node name="Cube45" parent="cactus1/Cactus" index="44" unique_id=363199180]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube46" parent="cactus1/Cactus" index="45" unique_id=194819633]
+[node name="Cube46" parent="cactus1/Cactus" index="45" unique_id=1287207454]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube47" parent="cactus1/Cactus" index="46" unique_id=1545769904]
+[node name="Cube47" parent="cactus1/Cactus" index="46" unique_id=1613843972]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube48" parent="cactus1/Cactus" index="47" unique_id=1817159122]
+[node name="Cube48" parent="cactus1/Cactus" index="47" unique_id=826096349]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube49" parent="cactus1/Cactus" index="48" unique_id=1673674871]
+[node name="Cube49" parent="cactus1/Cactus" index="48" unique_id=2090904562]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube50" parent="cactus1/Cactus" index="49" unique_id=691836169]
+[node name="Cube50" parent="cactus1/Cactus" index="49" unique_id=2138860560]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube51" parent="cactus1/Cactus" index="50" unique_id=688160106]
+[node name="Cube51" parent="cactus1/Cactus" index="50" unique_id=1576442531]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube52" parent="cactus1/Cactus" index="51" unique_id=383086397]
+[node name="Cube52" parent="cactus1/Cactus" index="51" unique_id=1602196736]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube53" parent="cactus1/Cactus" index="52" unique_id=2131206161]
+[node name="Cube53" parent="cactus1/Cactus" index="52" unique_id=730811686]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube54" parent="cactus1/Cactus" index="53" unique_id=1728963834]
+[node name="Cube54" parent="cactus1/Cactus" index="53" unique_id=1152533146]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube55" parent="cactus1/Cactus" index="54" unique_id=1928454208]
+[node name="Cube55" parent="cactus1/Cactus" index="54" unique_id=2034584726]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube56" parent="cactus1/Cactus" index="55" unique_id=932140107]
+[node name="Cube56" parent="cactus1/Cactus" index="55" unique_id=1209992714]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube57" parent="cactus1/Cactus" index="56" unique_id=925623763]
+[node name="Cube57" parent="cactus1/Cactus" index="56" unique_id=315710834]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube58" parent="cactus1/Cactus" index="57" unique_id=201172704]
+[node name="Cube58" parent="cactus1/Cactus" index="57" unique_id=959953590]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube59" parent="cactus1/Cactus" index="58" unique_id=102508089]
+[node name="Cube59" parent="cactus1/Cactus" index="58" unique_id=1126009844]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube60" parent="cactus1/Cactus" index="59" unique_id=968984140]
+[node name="Cube60" parent="cactus1/Cactus" index="59" unique_id=1606873930]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube61" parent="cactus1/Cactus" index="60" unique_id=933798252]
+[node name="Cube61" parent="cactus1/Cactus" index="60" unique_id=2058405092]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube62" parent="cactus1/Cactus" index="61" unique_id=2091930733]
+[node name="Cube62" parent="cactus1/Cactus" index="61" unique_id=1500687694]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube63" parent="cactus1/Cactus" index="62" unique_id=1121719859]
+[node name="Cube63" parent="cactus1/Cactus" index="62" unique_id=1501131489]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube64" parent="cactus1/Cactus" index="63" unique_id=1521162433]
+[node name="Cube64" parent="cactus1/Cactus" index="63" unique_id=1737266398]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube65" parent="cactus1/Cactus" index="64" unique_id=699395214]
+[node name="Cube65" parent="cactus1/Cactus" index="64" unique_id=1817914401]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube66" parent="cactus1/Cactus" index="65" unique_id=275287908]
+[node name="Cube66" parent="cactus1/Cactus" index="65" unique_id=1915566527]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube67" parent="cactus1/Cactus" index="66" unique_id=1608722362]
+[node name="Cube67" parent="cactus1/Cactus" index="66" unique_id=1313805865]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube68" parent="cactus1/Cactus" index="67" unique_id=2060399345]
+[node name="Cube68" parent="cactus1/Cactus" index="67" unique_id=546687101]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube69" parent="cactus1/Cactus" index="68" unique_id=23503030]
+[node name="Cube69" parent="cactus1/Cactus" index="68" unique_id=2115626060]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube70" parent="cactus1/Cactus" index="69" unique_id=65395919]
+[node name="Cube70" parent="cactus1/Cactus" index="69" unique_id=528266758]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube71" parent="cactus1/Cactus" index="70" unique_id=1040744311]
+[node name="Cube71" parent="cactus1/Cactus" index="70" unique_id=1533405381]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube72" parent="cactus1/Cactus" index="71" unique_id=264020026]
+[node name="Cube72" parent="cactus1/Cactus" index="71" unique_id=2027326959]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube73" parent="cactus1/Cactus" index="72" unique_id=1068625218]
+[node name="Cube73" parent="cactus1/Cactus" index="72" unique_id=504963891]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube74" parent="cactus1/Cactus" index="73" unique_id=1057957700]
+[node name="Cube74" parent="cactus1/Cactus" index="73" unique_id=1979421570]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube75" parent="cactus1/Cactus" index="74" unique_id=1520675187]
+[node name="Cube75" parent="cactus1/Cactus" index="74" unique_id=2114014395]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube76" parent="cactus1/Cactus" index="75" unique_id=656671190]
+[node name="Cube76" parent="cactus1/Cactus" index="75" unique_id=1273928552]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube77" parent="cactus1/Cactus" index="76" unique_id=973947206]
+[node name="Cube77" parent="cactus1/Cactus" index="76" unique_id=1405655281]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube78" parent="cactus1/Cactus" index="77" unique_id=934990432]
+[node name="Cube78" parent="cactus1/Cactus" index="77" unique_id=1514595424]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube79" parent="cactus1/Cactus" index="78" unique_id=1705150973]
+[node name="Cube79" parent="cactus1/Cactus" index="78" unique_id=2141293413]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube80" parent="cactus1/Cactus" index="79" unique_id=188426856]
+[node name="Cube80" parent="cactus1/Cactus" index="79" unique_id=1812163927]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube81" parent="cactus1/Cactus" index="80" unique_id=1294474317]
+[node name="Cube81" parent="cactus1/Cactus" index="80" unique_id=870352277]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube82" parent="cactus1/Cactus" index="81" unique_id=87599298]
+[node name="Cube82" parent="cactus1/Cactus" index="81" unique_id=1269201222]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube83" parent="cactus1/Cactus" index="82" unique_id=1445193312]
+[node name="Cube83" parent="cactus1/Cactus" index="82" unique_id=2016916010]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube84" parent="cactus1/Cactus" index="83" unique_id=2131204861]
+[node name="Cube84" parent="cactus1/Cactus" index="83" unique_id=51234235]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube85" parent="cactus1/Cactus" index="84" unique_id=390859206]
+[node name="Cube85" parent="cactus1/Cactus" index="84" unique_id=460052773]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube86" parent="cactus1/Cactus" index="85" unique_id=1994240460]
+[node name="Cube86" parent="cactus1/Cactus" index="85" unique_id=1460577003]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube87" parent="cactus1/Cactus" index="86" unique_id=604310829]
+[node name="Cube87" parent="cactus1/Cactus" index="86" unique_id=867882093]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube88" parent="cactus1/Cactus" index="87" unique_id=902446183]
+[node name="Cube88" parent="cactus1/Cactus" index="87" unique_id=2017976686]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube89" parent="cactus1/Cactus" index="88" unique_id=2048471597]
+[node name="Cube89" parent="cactus1/Cactus" index="88" unique_id=1033587553]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube90" parent="cactus1/Cactus" index="89" unique_id=1345865820]
+[node name="Cube90" parent="cactus1/Cactus" index="89" unique_id=1958044443]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube91" parent="cactus1/Cactus" index="90" unique_id=1301035785]
+[node name="Cube91" parent="cactus1/Cactus" index="90" unique_id=401197999]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube92" parent="cactus1/Cactus" index="91" unique_id=1878274279]
+[node name="Cube92" parent="cactus1/Cactus" index="91" unique_id=308659176]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube93" parent="cactus1/Cactus" index="92" unique_id=93967270]
+[node name="Cube93" parent="cactus1/Cactus" index="92" unique_id=1797639068]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube94" parent="cactus1/Cactus" index="93" unique_id=184918569]
+[node name="Cube94" parent="cactus1/Cactus" index="93" unique_id=1672917974]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube95" parent="cactus1/Cactus" index="94" unique_id=1859104100]
+[node name="Cube95" parent="cactus1/Cactus" index="94" unique_id=49189924]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube96" parent="cactus1/Cactus" index="95" unique_id=108317542]
+[node name="Cube96" parent="cactus1/Cactus" index="95" unique_id=1069455310]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube97" parent="cactus1/Cactus" index="96" unique_id=2008539222]
+[node name="Cube97" parent="cactus1/Cactus" index="96" unique_id=1003645333]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube98" parent="cactus1/Cactus" index="97" unique_id=50777111]
+[node name="Cube98" parent="cactus1/Cactus" index="97" unique_id=1676922825]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube99" parent="cactus1/Cactus" index="98" unique_id=680697952]
+[node name="Cube99" parent="cactus1/Cactus" index="98" unique_id=878270157]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube100" parent="cactus1/Cactus" index="99" unique_id=282712085]
+[node name="Cube100" parent="cactus1/Cactus" index="99" unique_id=1199390089]
 surface_material_override/0 = ExtResource("18_kjjyj")
 
-[node name="Cube101" parent="cactus1" index="1" unique_id=1282510499]
+[node name="Cube101" parent="cactus1" index="1" unique_id=1064822181]
 visible = false
 mesh = null
 

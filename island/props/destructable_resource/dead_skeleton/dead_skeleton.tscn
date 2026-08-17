@@ -15,7 +15,7 @@
 [ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="13_0ek66"]
 [ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="14_7e2uf"]
 [ext_resource type="AudioStream" uid="uid://bus7hgef3h35c" path="res://assets/sound/step.mp3" id="15_lnyj5"]
-[ext_resource type="PackedScene" uid="uid://dcwjoiv4psjwc" path="res://island/props/destructable_resource/dead_skeleton/dead_skeleton.blend" id="16_ibdu0"]
+[ext_resource type="PackedScene" uid="uid://dcwjoiv4psjwc" path="res://assets/models/props/dead_skeleton.blend" id="16_ibdu0"]
 [ext_resource type="Material" uid="uid://brsw8xc5rh2lv" path="res://assets/materials/bone.tres" id="17_rx1cw"]
 [ext_resource type="Material" uid="uid://ct3rueaspkpix" path="res://assets/materials/darkness.tres" id="18_ran2n"]
 

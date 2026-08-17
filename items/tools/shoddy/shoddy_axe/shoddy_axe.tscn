@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://jlwffnpxmq3x"]
 
-[ext_resource type="PackedScene" uid="uid://b7myf2btlifky" path="res://items/tools/shoddy/shoddy_axe/shoddy_axe.blend" id="1_pr832"]
+[ext_resource type="PackedScene" uid="uid://b7myf2btlifky" path="res://assets/models/items/tools/axe1.blend" id="1_pr832"]
 [ext_resource type="Script" uid="uid://dd8qskwv1nlqx" path="res://common3d/damage_system/hit_ray3d.gd" id="2_5vnfi"]
 [ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="2_r2b4l"]
 [ext_resource type="AudioStream" uid="uid://d1te8os5tp3ww" path="res://assets/sound/hit.mp3" id="3_4to71"]

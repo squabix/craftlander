@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://fl23rhdfaa4r" path="res://items/tools/copper/copper_sword/copper_sword_damage.tres" id="2_ogdlr"]
 [ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="3_oavr0"]
 [ext_resource type="AudioStream" uid="uid://d1te8os5tp3ww" path="res://assets/sound/hit.mp3" id="4_u8jip"]
-[ext_resource type="PackedScene" uid="uid://dubfkmgg38psa" path="res://items/tools/copper/copper_sword/copper_sword.blend" id="5_ogdlr"]
+[ext_resource type="PackedScene" uid="uid://dubfkmgg38psa" path="res://assets/models/items/weapons/sword1.blend" id="5_ogdlr"]
 [ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="6_ij0wg"]
 [ext_resource type="Material" uid="uid://2lvxncgxfhjd" path="res://assets/materials/copper.tres" id="7_x6yvu"]
 
@@ -41,13 +41,13 @@ bus = &"SFX"
 [node name="Visuals" parent="." unique_id=1348752184 instance=ExtResource("5_ogdlr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0971342, 0)
 
-[node name="Handle" parent="Visuals" index="0" unique_id=2066052724]
+[node name="Handle" parent="Visuals" index="0" unique_id=645403512]
 surface_material_override/0 = ExtResource("6_ij0wg")
 
-[node name="Hilt" parent="Visuals" index="1" unique_id=719334238]
+[node name="Hilt" parent="Visuals" index="1" unique_id=604948395]
 surface_material_override/0 = ExtResource("7_x6yvu")
 
-[node name="Blade" parent="Visuals" index="2" unique_id=1833394665]
+[node name="Blade" parent="Visuals" index="2" unique_id=90444806]
 surface_material_override/0 = ExtResource("7_x6yvu")
 
 [editable path="Visuals"]
