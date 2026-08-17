@@ -11,9 +11,14 @@ signal was_dealt_damage(amount)
 signal was_given_hp(amount)
 
 @export var hp := 5.0
-@export var hurt_multiplier := 1.0
-@export var immortal := false
+
+@export_group("Hurt")
 @export var invulnerable := false
+@export var hurt_threshold := 0.0
+@export var hurt_multiplier := 1.0
+
+@export_group("Death")
+@export var immortal := false
 @export var one_shot := false
 @export var free_parent_on_death := false
 
@@ -95,7 +100,7 @@ func empty() -> void:
 
 
 func hurt(amount: float) -> void:
-	if amount <= 0.0 or invulnerable:
+	if amount <= hurt_threshold or invulnerable:
 		return
 
 	amount *= hurt_multiplier
