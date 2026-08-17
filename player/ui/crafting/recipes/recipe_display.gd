@@ -1,5 +1,5 @@
-extends Control
 class_name RecipeDisplay
+extends Control
 
 const TEXTURE_SIZE := Vector2i(30, 30)
 const DEFAULT_LABEL_TEXT := "Select a Recipe from Recipe Book"
@@ -18,20 +18,25 @@ func _ready() -> void:
 			rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	clear()
 
+
 func clear() -> void:
 	recipe_label.text = DEFAULT_LABEL_TEXT
 	for row in grid_container.get_children():
 		for container in row.get_children():
 			container.get_child(0).texture = null
 
+
 func display(recipe: ItemRecipe) -> void:
 	clear()
 	recipe_label.text = recipe_text % recipe.result.item.name
-	for item_position in recipe.layout:
-		if recipe.layout[item_position] == null:
+	
+	var layout := recipe.resolve_layout()
+	for item_position in layout:
+		if layout[item_position] == null:
 			Util.node_error("%s cannot display ingredient in %s with null at %s", self, recipe, item_position)
 			continue
-		get_grid_item_texture_rect(item_position).texture = recipe.layout[item_position].icon
+		get_grid_item_texture_rect(item_position).texture = layout[item_position].icon
+
 
 func get_grid_item_texture_rect(rect_position: Vector2i) -> TextureRect:
 	var row := grid_container.get_child(-rect_position.y + LAYOUT_OFFSET.y)

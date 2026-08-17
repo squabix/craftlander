@@ -3,13 +3,14 @@ extends Node
 var all_recipes: Array
 var recipe_types: Dictionary[StringName, Array]
 
+
 func _ready() -> void:
 	all_recipes = Util.find_all_resources(&"ItemRecipe", "res://items/")
 	all_recipes.sort_custom(
 		func(a: ItemRecipe, b: ItemRecipe) -> bool:
 			return a.result.item.name < b.result.item.name
 	)
-	
+
 	for recipe in all_recipes:
 		var item: Item = recipe.result.item
 		if item.type in recipe_types:
@@ -17,25 +18,28 @@ func _ready() -> void:
 			continue
 		recipe_types[item.type] = [item]
 
+
 func get_recipe(layout: Dictionary[Vector2i, Item]) -> ItemRecipe:
 	for recipe in all_recipes:
-		if verify_layout(layout, recipe.layout):
+		if verify_layout(layout, recipe.resolve_layout()):
 			return recipe
 	return null
+
 
 func verify_layout(layout: Dictionary[Vector2i, Item], correct_layout: Dictionary[Vector2i, Item]) -> bool:
 	if layout.size() != correct_layout.size():
 		return false
-	
+
 	layout = normalize_layout(layout)
 	correct_layout = normalize_layout(correct_layout)
-	
+
 	for position in correct_layout:
 		if not position in layout:
 			return false
 		if not correct_layout[position].equals(layout[position]):
 			return false
 	return true
+
 
 func normalize_layout(layout: Dictionary[Vector2i, Item]) -> Dictionary[Vector2i, Item]:
 	var min_x: int = layout.keys()[0].x

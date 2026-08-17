@@ -15,15 +15,16 @@ metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 [resource]
 script = ExtResource("6_212b3")
 result = SubResource("Resource_rbmbb")
-layout = Dictionary[Vector2i, ExtResource("1_1iaxq")]({
-Vector2i(-1, -2): ExtResource("2_1jgrk"),
-Vector2i(-1, -1): ExtResource("2_1jgrk"),
-Vector2i(-1, 0): ExtResource("2_1jgrk"),
-Vector2i(-1, 1): ExtResource("2_1jgrk"),
-Vector2i(-1, 2): ExtResource("3_if3d6"),
-Vector2i(0, 1): ExtResource("3_if3d6"),
-Vector2i(0, 2): ExtResource("3_if3d6"),
-Vector2i(1, 1): ExtResource("3_if3d6"),
-Vector2i(1, 2): ExtResource("3_if3d6")
+indexed_layout = Dictionary[Vector2i, int]({
+Vector2i(-1, -2): 0,
+Vector2i(-1, -1): 0,
+Vector2i(-1, 0): 0,
+Vector2i(-1, 1): 0,
+Vector2i(-1, 2): 1,
+Vector2i(0, 1): 1,
+Vector2i(0, 2): 1,
+Vector2i(1, 1): 1,
+Vector2i(1, 2): 1
 })
+items = Array[ExtResource("1_1iaxq")]([ExtResource("2_1jgrk"), ExtResource("3_if3d6")])
 metadata/_custom_type_script = "uid://c5ntwgpouf24m"
