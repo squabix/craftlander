@@ -6,8 +6,11 @@ signal picked_up
 const FLOOR_MARGIN: float = 0.05
 
 @export var item: Item
-@export var auto_generate_collision := true
 @export var generate_floor_raycast := true
+
+@export_group("Collision")
+@export var auto_generate_collision := true
+@export var generate_invisible_collision := false
 
 @export_group("Tooltip")
 @export var tooltip_format := "Pick up %s?"
@@ -68,7 +71,10 @@ func generate_all_collision(target_parent: Node3D = self) -> Array[CollisionShap
 	var mesh_instances := Util.find_children_of_class(visuals, &"MeshInstance3D")
 
 	for mesh_instance: MeshInstance3D in mesh_instances:
-		collision_shapes.append(add_collision_shape(mesh_instance, target_parent))
+		var shape := add_collision_shape(mesh_instance, target_parent)
+		if shape == null:
+			continue
+		collision_shapes.append(shape)
 
 	return collision_shapes
 
@@ -82,6 +88,10 @@ func add_collision_shape(mesh_instance: MeshInstance3D, parent: Node) -> Collisi
 		return null
 	if not is_instance_valid(parent):
 		Util.node_error("%s cannot add collision shape to invalid parent (%s)" % [self, parent])
+		return null
+	
+	# Do not add collision shapes to 
+	if mesh_instance.visible == false and not generate_invisible_collision:
 		return null
 
 	var collision_shape := CollisionShape3D.new()
