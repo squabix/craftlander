@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="HarvestingTool" format=3 uid="uid://br8x8o2qqedfv"]
+
+[ext_resource type="Resource" uid="uid://filb3lfqg1yf" path="res://items/weapons/golden_sword/golden_sword_damage.tres" id="1_itjf7"]
+[ext_resource type="Texture2D" uid="uid://botory3byny4g" path="res://items/weapons/golden_sword/golden_sword.png" id="2_gbttv"]
+[ext_resource type="PackedScene" uid="uid://psq32t4o2cly" path="res://items/weapons/golden_sword/golden_sword.tscn" id="3_lovdi"]
+[ext_resource type="Script" uid="uid://6x786nnhteca" path="res://items/tools/harvesting_tool.gd" id="4_lx47x"]
+
+[resource]
+script = ExtResource("4_lx47x")
+damage = ExtResource("1_itjf7")
+name = &"Golden Sword"
+icon = ExtResource("2_gbttv")
+type = &"Weapon"
+scene = ExtResource("3_lovdi")
+cooldown_mode = 1
+default_cooldown_length = 0.3
+metadata/_custom_type_script = "uid://6x786nnhteca"
