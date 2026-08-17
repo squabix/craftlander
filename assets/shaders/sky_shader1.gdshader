@@ -215,4 +215,13 @@ void sky() {
 	} else {
 		COLOR.rgb = mix(sky_color, HALF_RES_COLOR.rgb, HALF_RES_COLOR.a);
 	}
+	
+	if (AT_CUBEMAP_PASS) {
+        // Calculate brightness (luminance)
+        float lum = dot(COLOR.rgb, vec3(0.2126, 0.7152, 0.0722));
+        
+        // Blend between the original blue color and a neutral/desaturated color
+        // 0.0 = original sky, 1.0 = fully grayscale reflection
+        COLOR.rgb = mix(COLOR.rgb, vec3(lum), 0.5); 
+    }
 }
