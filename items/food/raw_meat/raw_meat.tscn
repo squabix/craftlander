@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://chhe4l502hgss"]
 
-[ext_resource type="PackedScene" uid="uid://d3nw6sqipfx2f" path="res://items/food/raw_meat/raw_meat.blend" id="1_x8gma"]
+[ext_resource type="PackedScene" uid="uid://d3nw6sqipfx2f" path="res://assets/models/items/food/raw_meat.blend" id="1_x8gma"]
 
 [node name="RawMeat" type="Node3D" unique_id=282752753]
 

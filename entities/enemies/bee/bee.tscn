@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://c5asagc5dswqt" path="res://common3d/entity/entity_guide/nav_entity_guide3d.gd" id="8_elujw"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="9_xkejc"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="12_0rn6u"]
-[ext_resource type="PackedScene" uid="uid://btvdb6drbsbg6" path="res://entities/enemies/bee/bee.blend" id="14_0lxgi"]
+[ext_resource type="PackedScene" uid="uid://btvdb6drbsbg6" path="res://assets/models/entities/bee.blend" id="14_0lxgi"]
 [ext_resource type="PackedScene" uid="uid://h3veu2e18ij1" path="res://entities/entity_health_bar.tscn" id="14_nj0qj"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="15_7niy0"]
 [ext_resource type="Script" uid="uid://bp5ab438ufrus" path="res://common3d/culling_controller3d.gd" id="15_nj0qj"]
@@ -317,11 +317,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 [node name="Visuals" parent="BlenderVisuals" unique_id=2002060618 instance=ExtResource("14_0lxgi")]
 transform = Transform3D(0.225, 0, 0, 0, 0.22158168, -0.03907083, 0, 0.03907083, 0.22158168, 0, 0.05, 0)
 
-[node name="Body" parent="BlenderVisuals/Visuals" index="0" unique_id=298979506]
+[node name="Body" parent="BlenderVisuals/Visuals" index="0" unique_id=267914198]
 surface_material_override/0 = SubResource("StandardMaterial3D_jwu52")
 surface_material_override/1 = SubResource("StandardMaterial3D_c6ibj")
 
-[node name="Wings" parent="BlenderVisuals/Visuals" index="1" unique_id=430225119]
+[node name="Wings" parent="BlenderVisuals/Visuals" index="1" unique_id=1826491633]
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0)
 
 [node name="Wings2" type="MeshInstance3D" parent="BlenderVisuals/Visuals" unique_id=1431738844]
@@ -384,7 +384,7 @@ root = NodePath("..")
 on_screen_process_radius = 85.0
 off_screen_process_radius = 18.0
 on_screen_visible_radius = 85.0
-visibility_control_list = [NodePath("../BlenderVisuals/Visuals/Body"), NodePath("../BlenderVisuals/Visuals/Wings"), NodePath("../BlenderVisuals/Visuals/Stinger"), NodePath("../BlenderVisuals/Visuals/Wings2")]
+visibility_control_list = [NodePath(""), NodePath(""), NodePath(""), NodePath("../BlenderVisuals/Visuals/Wings2")]
 control_visibility_deep = false
 visibility_range_fade_margin = 10.0
 

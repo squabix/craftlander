@@ -15,7 +15,7 @@
 [ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="13_5rp5g"]
 [ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="14_aaygl"]
 [ext_resource type="AudioStream" uid="uid://bus7hgef3h35c" path="res://assets/sound/step.mp3" id="15_dcakd"]
-[ext_resource type="PackedScene" uid="uid://dwthx0c5m81il" path="res://island/props/destructable_resource/dead_shrub/dead_shrub1.blend" id="16_beyq1"]
+[ext_resource type="PackedScene" uid="uid://dwthx0c5m81il" path="res://assets/models/props/dead_shrub1.blend" id="16_beyq1"]
 [ext_resource type="Material" uid="uid://qbk54giebf0" path="res://assets/materials/dead_shrub.tres" id="17_dpgh7"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_beyq1"]

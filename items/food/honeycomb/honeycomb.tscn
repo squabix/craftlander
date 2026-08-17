@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dhy8e5mh2ovvm"]
 
-[ext_resource type="PackedScene" uid="uid://cxyo02n5xogja" path="res://items/food/honeycomb/honeycomb.blend" id="1_2uevs"]
+[ext_resource type="PackedScene" uid="uid://cxyo02n5xogja" path="res://assets/models/items/food/honeycomb.blend" id="1_2uevs"]
 [ext_resource type="Material" uid="uid://dxf25ivnceuua" path="res://assets/materials/honey.tres" id="2_uif06"]
 
 [node name="Honeycomb" type="Node3D" unique_id=282752753]
@@ -8,13 +8,13 @@
 [node name="Visuals" parent="." unique_id=1564862642 instance=ExtResource("1_2uevs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.27)
 
-[node name="Circle1" parent="Visuals" index="0" unique_id=646685698]
+[node name="Circle1" parent="Visuals" index="0" unique_id=1202639588]
 visible = false
 
-[node name="Circle2" parent="Visuals" index="1" unique_id=427720074]
+[node name="Circle2" parent="Visuals" index="1" unique_id=234144538]
 visible = false
 
-[node name="Honeycomb" parent="Visuals" index="2" unique_id=1272539852]
+[node name="Honeycomb" parent="Visuals" index="2" unique_id=1653509297]
 transform = Transform3D(0.099999994, 0, 0.17320509, 0, 0.2, 0, -0.17320509, 0, 0.099999994, 0, 0, 0.89256847)
 surface_material_override/0 = ExtResource("2_uif06")
 

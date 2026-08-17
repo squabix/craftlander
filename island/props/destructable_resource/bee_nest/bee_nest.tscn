@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="9_b7s5p"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="10_085ko"]
 [ext_resource type="Script" uid="uid://272x4sefrmx" path="res://common/spawner/scene_spawner3d.gd" id="11_b7s5p"]
-[ext_resource type="PackedScene" uid="uid://bkber348p7jtw" path="res://island/props/destructable_resource/bee_nest/bee_nest.blend" id="11_b76o0"]
+[ext_resource type="PackedScene" uid="uid://bkber348p7jtw" path="res://assets/models/props/bee_nest.blend" id="11_b76o0"]
 [ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="11_stmp3"]
 [ext_resource type="PackedScene" uid="uid://d0a4ydiqu4jj6" path="res://entities/enemies/bee/bee.tscn" id="13_ioeyq"]
 [ext_resource type="ArrayOccluder3D" uid="uid://beajm3t1eu0nc" path="res://island/props/destructable_resource/bee_nest/bee_nest.occ" id="16_m5g4y"]
@@ -148,7 +148,7 @@ metadata/_custom_type_script = "uid://bhjxscxhtg2se"
 
 [node name="BlenderMeshes" parent="." unique_id=340605420 instance=ExtResource("11_b76o0")]
 
-[node name="Nest" parent="BlenderMeshes" index="0" unique_id=1506203539]
+[node name="Nest" parent="BlenderMeshes" index="0" unique_id=1792401997]
 surface_material_override/0 = SubResource("StandardMaterial3D_5xftv")
 surface_material_override/1 = SubResource("StandardMaterial3D_ioeyq")
 

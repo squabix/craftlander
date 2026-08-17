@@ -6,7 +6,7 @@
 [ext_resource type="Resource" uid="uid://bwurefwkj4gjj" path="res://common/damage_system/single_damage.tres" id="3_yqmf4"]
 [ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="4_2o6t4"]
 [ext_resource type="Script" uid="uid://dapeyi3eetek1" path="res://common/signal_triggrs/signal_animation_trigger.gd" id="4_5v37a"]
-[ext_resource type="PackedScene" uid="uid://bo0n5cj4oc8wo" path="res://island/props/destructable_resource/stone/stone1.blend" id="4_a54gr"]
+[ext_resource type="PackedScene" uid="uid://bo0n5cj4oc8wo" path="res://assets/models/props/stone1.blend" id="4_a54gr"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="5_isl6o"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="6_5v37a"]
 [ext_resource type="Material" uid="uid://bh8sv2icydggs" path="res://assets/materials/stone.tres" id="6_pwnbr"]

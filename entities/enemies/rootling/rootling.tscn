@@ -17,7 +17,7 @@
 [ext_resource type="Script" uid="uid://c5asagc5dswqt" path="res://common3d/entity/entity_guide/nav_entity_guide3d.gd" id="11_8jseq"]
 [ext_resource type="Script" uid="uid://ccwod33h53a5s" path="res://common3d/controller/entity_controller3d.gd" id="11_hswny"]
 [ext_resource type="Script" uid="uid://pdvlr6l3n04n" path="res://entities/npc_states/chasing_state.gd" id="13_7mn0t"]
-[ext_resource type="PackedScene" uid="uid://bl745esge18tq" path="res://entities/enemies/rootling/rootling.blend" id="13_v4fp6"]
+[ext_resource type="PackedScene" uid="uid://bl745esge18tq" path="res://assets/models/entities/rootling.blend" id="13_v4fp6"]
 [ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="16_f0qrw"]
 [ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="17_rvntx"]
 [ext_resource type="Script" uid="uid://ljihr86cv3xk" path="res://common3d/item_visuals_container_3d.gd" id="20_geuk7"]
@@ -656,7 +656,7 @@ root = NodePath("..")
 on_screen_process_radius = 110.0
 off_screen_process_radius = 24.0
 on_screen_visible_radius = 110.0
-visibility_control_list = [NodePath("../Visuals")]
+visibility_control_list = [NodePath("")]
 visibility_range_fade_margin = 10.0
 
 [node name="IntervalStaggerer" type="Node" parent="CullingController3D" unique_id=171446592 node_paths=PackedStringArray("target_methods")]
@@ -798,11 +798,11 @@ radius = 1.0
 [node name="Visuals" parent="." unique_id=1269952913 instance=ExtResource("13_v4fp6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
-[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1269952913, 981011866) index="0" unique_id=1388828898]
+[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1269952913, 2548015) index="0" unique_id=927656510]
 bones/7/rotation = Quaternion(-0.35355338, 0.14644662, -0.35355335, 0.8535534)
 bones/10/rotation = Quaternion(-0.35355338, -0.14644662, 0.35355335, 0.8535534)
 
-[node name="Woodling" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=491800460]
+[node name="Woodling" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=158329737]
 surface_material_override/0 = ExtResource("21_uefcv")
 surface_material_override/1 = ExtResource("22_c3uxn")
 surface_material_override/2 = ExtResource("25_g7svr")

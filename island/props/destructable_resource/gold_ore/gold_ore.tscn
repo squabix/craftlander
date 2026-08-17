@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="14_m0fy0"]
 [ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="16_tyq2d"]
 [ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="17_4jy40"]
-[ext_resource type="PackedScene" uid="uid://c04ip1y1ylfw8" path="res://island/props/destructable_resource/gold_ore/gold_ore1.blend" id="18_65ggh"]
+[ext_resource type="PackedScene" uid="uid://c04ip1y1ylfw8" path="res://assets/models/props/ore2.blend" id="18_65ggh"]
 [ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="18_ya8ro"]
 [ext_resource type="AudioStream" uid="uid://b6f6x800jxpvb" path="res://assets/sound/rock_destroy.mp3" id="19_2rmbx"]
 [ext_resource type="Material" uid="uid://br2pw1ks1jy7f" path="res://assets/materials/sandstone.tres" id="19_xbmh8"]

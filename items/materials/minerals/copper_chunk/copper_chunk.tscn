@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bxjgsyhdadcvo"]
 
-[ext_resource type="PackedScene" uid="uid://c3xsx6kskbxh2" path="res://items/materials/minerals/copper_chunk/copper_chunk.blend" id="1_udjh4"]
+[ext_resource type="PackedScene" uid="uid://c3xsx6kskbxh2" path="res://assets/models/items/materials/mineral_chunk1.blend" id="1_udjh4"]
 
 [node name="CopperChunk" type="Node3D" unique_id=249716213]
 

@@ -26,7 +26,7 @@
 [ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="32_wobw7"]
 [ext_resource type="ArrayOccluder3D" uid="uid://dxvs6e1pbvl0h" path="res://island/props/destructable_resource/tree/tree.occ" id="33_1444u"]
 [ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="34_q3s4q"]
-[ext_resource type="PackedScene" uid="uid://72lfyk3a5w1s" path="res://island/props/destructable_resource/palm_tree/palm_tree1.blend" id="35_jiqyg"]
+[ext_resource type="PackedScene" uid="uid://72lfyk3a5w1s" path="res://assets/models/props/palm_tree1.blend" id="35_jiqyg"]
 [ext_resource type="Material" uid="uid://cxxp5ww380hsd" path="res://assets/materials/palm_leaves.tres" id="36_whjq2"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hjjmf"]

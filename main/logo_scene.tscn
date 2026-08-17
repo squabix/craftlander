@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://cbvgkkxg5h6h7"]
 
-[ext_resource type="PackedScene" uid="uid://kqtvsnhnrbww" path="res://island/props/destructable_resource/tree/tree2.blend" id="2_gf75g"]
+[ext_resource type="PackedScene" uid="uid://kqtvsnhnrbww" path="res://assets/models/props/tree2.blend" id="2_gf75g"]
 [ext_resource type="Environment" uid="uid://cibxuhtgknost" path="res://assets/default_environment.tres" id="3_1gkyk"]
 [ext_resource type="Material" uid="uid://cs4ulhbpklb14" path="res://assets/materials/leaves.tres" id="4_migq8"]
 [ext_resource type="PackedScene" uid="uid://dxwqj0o18t8o2" path="res://island/docking/dock.tscn" id="6_bnoi3"]
@@ -13,9 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://b1en432erfol4" path="res://island/props/destructable_resource/bee_nest/bee_nest.tscn" id="12_ehg1u"]
 [ext_resource type="Material" uid="uid://drm8bdv4es6et" path="res://island/mat1.tres" id="12_wfxrs"]
 [ext_resource type="PackedScene" uid="uid://c42tdr6p0dmkk" path="res://island/props/destructable_resource/stone/stone.tscn" id="13_2m65j"]
-[ext_resource type="PackedScene" uid="uid://btvdb6drbsbg6" path="res://entities/enemies/bee/bee.blend" id="14_gqjpq"]
+[ext_resource type="PackedScene" uid="uid://btvdb6drbsbg6" path="res://assets/models/entities/bee.blend" id="14_gqjpq"]
 [ext_resource type="PackedScene" uid="uid://h3veu2e18ij1" path="res://entities/entity_health_bar.tscn" id="15_axeyt"]
-[ext_resource type="PackedScene" uid="uid://bl745esge18tq" path="res://entities/enemies/rootling/rootling.blend" id="16_gf75g"]
+[ext_resource type="PackedScene" uid="uid://bl745esge18tq" path="res://assets/models/entities/rootling.blend" id="16_gf75g"]
 [ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="17_migq8"]
 [ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="18_b6him"]
 [ext_resource type="Script" uid="uid://ljihr86cv3xk" path="res://common3d/item_visuals_container_3d.gd" id="19_cfrat"]
@@ -140,33 +140,29 @@ shadow_blur = 2.0
 
 [node name="tree2" parent="." unique_id=1240395999 instance=ExtResource("2_gf75g")]
 transform = Transform3D(1.480212, -0.015410685, -0.24235256, 0.010469593, 1.4996345, -0.03141363, 0.24261625, 0.02930767, 1.4799589, 6.016377, 1.5744152, -2.9779053)
-metadata/_edit_group_ = true
 
-[node name="Wood" parent="tree2" index="0" unique_id=104796484]
+[node name="Wood" parent="tree2" index="0" unique_id=1630349726]
 surface_material_override/0 = ExtResource("17_migq8")
 
-[node name="Leaf" parent="tree2" index="1" unique_id=1229484842]
+[node name="Leaf" parent="tree2" index="1" unique_id=1330416431]
 surface_material_override/0 = ExtResource("4_migq8")
 
-[node name="Leaf_001" parent="tree2" index="2" unique_id=1405652038]
+[node name="Leaf_001" parent="tree2" index="2" unique_id=780294170]
 surface_material_override/0 = ExtResource("4_migq8")
 
-[node name="Leaf_002" parent="tree2" index="3" unique_id=2035163911]
+[node name="Leaf_002" parent="tree2" index="3" unique_id=836089856]
 surface_material_override/0 = ExtResource("4_migq8")
 
-[node name="Leaf_003" parent="tree2" index="4" unique_id=1592763822]
+[node name="Leaf_003" parent="tree2" index="4" unique_id=566605768]
 surface_material_override/0 = ExtResource("4_migq8")
 
-[node name="Leaf_004" parent="tree2" index="5" unique_id=781723901]
+[node name="Leaf_004" parent="tree2" index="5" unique_id=348941257]
 surface_material_override/0 = ExtResource("4_migq8")
 
-[node name="Leaf_005" parent="tree2" index="6" unique_id=1285630958]
+[node name="Leaf_005" parent="tree2" index="6" unique_id=989648005]
 surface_material_override/0 = ExtResource("4_migq8")
 
-[node name="Trunk" parent="tree2" index="7" unique_id=574317592]
-visible = false
-
-[node name="Stem" parent="tree2" index="8" unique_id=1492983587]
+[node name="Trunk" parent="tree2" index="7" unique_id=124962605]
 visible = false
 
 [node name="Dock" parent="." unique_id=1417096960 instance=ExtResource("6_bnoi3")]
@@ -246,11 +242,11 @@ transform = Transform3D(-1.7523137, 0, -2.4350357, 0, 3, 0, 2.4350357, 0, -1.752
 [node name="Visuals" parent="Bee" unique_id=2002060618 instance=ExtResource("14_gqjpq")]
 transform = Transform3D(0.225, 0, 0, 0, 0.22158168, -0.03907083, 0, 0.03907083, 0.22158168, 0, 0.05, 0)
 
-[node name="Body" parent="Bee/Visuals" index="0" unique_id=298979506]
+[node name="Body" parent="Bee/Visuals" index="0" unique_id=358157295]
 surface_material_override/0 = SubResource("StandardMaterial3D_jwu52")
 surface_material_override/1 = SubResource("StandardMaterial3D_c6ibj")
 
-[node name="Wings" parent="Bee/Visuals" index="1" unique_id=430225119]
+[node name="Wings" parent="Bee/Visuals" index="1" unique_id=1744401307]
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0)
 
 [node name="Wings2" type="MeshInstance3D" parent="Bee/Visuals" unique_id=1431738844]
@@ -266,11 +262,11 @@ transform = Transform3D(0.55193776, -1.0217334, -2.7661211, 0, 2.8141584, -1.039
 [node name="Visuals" parent="Bee2" unique_id=247670851 instance=ExtResource("14_gqjpq")]
 transform = Transform3D(0.225, 0, 0, 0, 0.22158168, -0.03907083, 0, 0.03907083, 0.22158168, 0, 0.05, 0)
 
-[node name="Body" parent="Bee2/Visuals" index="0" unique_id=298979506]
+[node name="Body" parent="Bee2/Visuals" index="0" unique_id=358157295]
 surface_material_override/0 = SubResource("StandardMaterial3D_jwu52")
 surface_material_override/1 = SubResource("StandardMaterial3D_c6ibj")
 
-[node name="Wings" parent="Bee2/Visuals" index="1" unique_id=430225119]
+[node name="Wings" parent="Bee2/Visuals" index="1" unique_id=1744401307]
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0)
 
 [node name="Wings2" type="MeshInstance3D" parent="Bee2/Visuals" unique_id=448561379]
@@ -286,11 +282,11 @@ transform = Transform3D(-2.3503788, 0.6111614, -1.761307, 1.0755044, 2.7595527, 
 [node name="Visuals" parent="Bee3" unique_id=500542058 instance=ExtResource("14_gqjpq")]
 transform = Transform3D(0.225, 0, 0, 0, 0.22158168, -0.03907083, 0, 0.03907083, 0.22158168, 0, 0.05, 0)
 
-[node name="Body" parent="Bee3/Visuals" index="0" unique_id=298979506]
+[node name="Body" parent="Bee3/Visuals" index="0" unique_id=358157295]
 surface_material_override/0 = SubResource("StandardMaterial3D_jwu52")
 surface_material_override/1 = SubResource("StandardMaterial3D_c6ibj")
 
-[node name="Wings" parent="Bee3/Visuals" index="1" unique_id=430225119]
+[node name="Wings" parent="Bee3/Visuals" index="1" unique_id=1744401307]
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0)
 
 [node name="Wings2" type="MeshInstance3D" parent="Bee3/Visuals" unique_id=1802551578]
@@ -303,12 +299,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
 [node name="Visuals" parent="." unique_id=1269952913 instance=ExtResource("16_gf75g")]
 transform = Transform3D(-0.29822308, -0.049905427, -0.9531907, -0.1650476, 0.9862856, 0, 0.94011825, 0.15732184, -0.3023699, -3.723, 5.373, 3.032)
 
-[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1269952913, 981011866) index="0" unique_id=1388828898]
+[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1269952913, 1677697918) index="0" unique_id=134658688]
 bones/0/rotation = Quaternion(0.15688813, 1.1773305e-07, -1.8702522e-08, 0.9876164)
 bones/7/rotation = Quaternion(-0.21526277, 0.089164756, -0.37215084, 0.8984517)
 bones/10/rotation = Quaternion(-0.21526277, -0.089164786, 0.3721508, 0.8984517)
 
-[node name="Woodling" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=491800460]
+[node name="Woodling" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=1080303323]
 transform = Transform3D(1.4729949, -0.28311038, -0.01162231, 0.27031302, 1.3855985, 0.5069986, -0.084955096, -0.49996528, 1.411672, 0.759583, -1.2975821, 0.5823281)
 surface_material_override/0 = ExtResource("17_migq8")
 surface_material_override/1 = ExtResource("18_b6him")
@@ -327,15 +323,15 @@ metadata/_custom_type_script = "uid://ljihr86cv3xk"
 [node name="Visuals2" parent="." unique_id=1893339605 instance=ExtResource("16_gf75g")]
 transform = Transform3D(-0.9819981, -0.07020208, 0.17536007, -0.069753796, 0.9975262, 0.008726534, -0.17553882, -0.0036625913, -0.9844658, 6.63, 5.489, -3.42)
 
-[node name="Armature" parent="Visuals2" index="0" unique_id=981011866]
+[node name="Armature" parent="Visuals2" index="0" unique_id=1677697918]
 transform = Transform3D(0.7443116, 0, 0.66783255, 0, 1, 0, -0.66783255, 0, 0.7443116, 0, 0, 0)
 
-[node name="Skeleton3D" parent="Visuals2/Armature" index="0" unique_id=1388828898]
+[node name="Skeleton3D" parent="Visuals2/Armature" index="0" unique_id=134658688]
 bones/0/rotation = Quaternion(0.15688813, 1.1773305e-07, -1.8702522e-08, 0.9876164)
 bones/7/rotation = Quaternion(-0.21526277, 0.089164756, -0.37215084, 0.8984517)
 bones/10/rotation = Quaternion(-0.21526277, -0.089164786, 0.3721508, 0.8984517)
 
-[node name="Woodling" parent="Visuals2/Armature/Skeleton3D" index="0" unique_id=491800460]
+[node name="Woodling" parent="Visuals2/Armature/Skeleton3D" index="0" unique_id=1080303323]
 transform = Transform3D(1.4955602, 0.006060236, -0.11516403, 0.027567128, 1.4357146, 0.43354777, 0.11198001, -0.43438095, 1.4313542, 3.775, -3.241, -2.71)
 surface_material_override/0 = ExtResource("17_migq8")
 surface_material_override/1 = ExtResource("18_b6him")

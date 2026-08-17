@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d4cc1bccfdgd5"]
 
 [ext_resource type="Script" uid="uid://cmlllb7wq80s" path="res://island/props/destructable_resource/destructable_resource.gd" id="1_skm2a"]
-[ext_resource type="PackedScene" uid="uid://cfuscb22fbm0k" path="res://island/props/indestructable/giant_ribcage/giant_ribcage.blend" id="3_68onp"]
+[ext_resource type="PackedScene" uid="uid://cfuscb22fbm0k" path="res://assets/models/props/giant_ribcage.blend" id="3_68onp"]
 [ext_resource type="Material" uid="uid://brsw8xc5rh2lv" path="res://assets/materials/bone.tres" id="4_68onp"]
 [ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="17_daugc"]
 
