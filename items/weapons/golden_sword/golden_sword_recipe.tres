@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="1_hpqdu"]
 [ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="2_d3ln5"]
-[ext_resource type="Resource" uid="uid://cgr4031ngjynl" path="res://items/materials/minerals/gold_ingot/gold_ingot_item.tres" id="3_pgnpe"]
+[ext_resource type="Resource" uid="uid://cgr4031ngjynl" path="res://items/materials/minerals/gold_ingot/golden_ingot_item.tres" id="3_pgnpe"]
 [ext_resource type="Resource" uid="uid://br8x8o2qqedfv" path="res://items/weapons/golden_sword/golden_sword_item.tres" id="4_i1nkd"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="5_m1iv0"]
 [ext_resource type="Script" uid="uid://c5ntwgpouf24m" path="res://items/crafting/item_recipe.gd" id="6_cxfcp"]

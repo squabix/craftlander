@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://b5k4u8lslgo2n"]
+
+[ext_resource type="PackedScene" uid="uid://dvdqw51x633ni" path="res://assets/models/items/materials/ingot1.blend" id="1_10cug"]
+
+[node name="GoldIngot" type="Node3D" unique_id=249716213]
+
+[node name="Visuals" parent="." unique_id=1849137229 instance=ExtResource("1_10cug")]
+
+[node name="Cube" parent="Visuals" index="0" unique_id=472952602]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+
+[editable path="Visuals"]
