@@ -96,12 +96,19 @@
 [ext_resource type="Texture2D" uid="uid://beudtbsirofjr" path="res://assets/ui/island0.png" id="71_anp34"]
 [ext_resource type="Resource" uid="uid://bkvo3ik5y1yom" path="res://island/island_resources/lush_isle.tres" id="73_kcq4v"]
 [ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="74_2h6tc"]
+[ext_resource type="Resource" uid="uid://dafba7ua6hmlh" path="res://items/tools/gold/golden_axe/golden_axe_recipe.tres" id="75_ckf88"]
 [ext_resource type="Resource" uid="uid://bbo58dytvrrts" path="res://island/island_resources/skelly_sandbar.tres" id="75_lufic"]
 [ext_resource type="Script" uid="uid://7dsenmmyrsaw" path="res://island/island_resource.gd" id="75_qavcc"]
+[ext_resource type="Resource" uid="uid://bjm2iw71djl4g" path="res://items/weapons/golden_sword/golden_sword_recipe.tres" id="76_ciyjg"]
 [ext_resource type="Resource" uid="uid://cccntbp1un6ey" path="res://island/island_resources/frost_holm.tres" id="76_nxclr"]
 [ext_resource type="AudioStream" uid="uid://bsc6k70aubcfq" path="res://assets/sound/open_drop-01.mp3" id="76_wsa1w"]
 [ext_resource type="AudioStream" uid="uid://deix0ahce6g3i" path="res://assets/sound/open_drop-02.mp3" id="77_2s0vo"]
+[ext_resource type="Resource" uid="uid://dv1wmurn53f1d" path="res://items/tools/gold/golden_pickaxe/golden_pickaxe_recipe.tres" id="77_3xi0n"]
 [ext_resource type="AudioStream" uid="uid://dwoi11pb7rbsy" path="res://assets/sound/open_drop-03.mp3" id="78_hgm8h"]
+[ext_resource type="Resource" uid="uid://c2sbskrq16mrn" path="res://items/weapons/copper_sword/copper_sword_recipe.tres" id="78_hioli"]
+[ext_resource type="Resource" uid="uid://btg6kdime6yya" path="res://items/tools/copper/copper_axe/copper_axe_recipe.tres" id="79_e5mnx"]
+[ext_resource type="Resource" uid="uid://bpugfcvnce1ec" path="res://items/tools/copper/copper_pickaxe/copper_pickaxe_recipe.tres" id="80_dt0ky"]
+[ext_resource type="Resource" uid="uid://c5uhmmmlb6tko" path="res://items/materials/minerals/copper_chunk/copper_chunk_item.tres" id="81_mhw2q"]
 [ext_resource type="Script" uid="uid://b3snj0gi7akf8" path="res://common/signal_audio_manager.gd" id="84_onxu2"]
 [ext_resource type="Script" uid="uid://7t0qde2fdjb8" path="res://common/virtual_cursor.gd" id="84_wyvah"]
 [ext_resource type="AudioStream" uid="uid://dj216lq0cge4b" path="res://assets/sound/land.wav" id="87_tcwf7"]
@@ -388,6 +395,18 @@ metadata/_custom_type_script = "uid://cpv5s708r1wvo"
 script = ExtResource("50_or4qq")
 item = ExtResource("10_s3g0c")
 discovered_recipes = Array[ExtResource("50_pjwc4")]([ExtResource("51_or4qq"), ExtResource("53_hggc2"), ExtResource("52_hggc2")])
+metadata/_custom_type_script = "uid://cpv5s708r1wvo"
+
+[sub_resource type="Resource" id="Resource_g3ghg"]
+script = ExtResource("50_or4qq")
+item = ExtResource("12_vuyvy")
+discovered_recipes = Array[ExtResource("50_pjwc4")]([ExtResource("75_ckf88"), ExtResource("76_ciyjg"), ExtResource("77_3xi0n")])
+metadata/_custom_type_script = "uid://cpv5s708r1wvo"
+
+[sub_resource type="Resource" id="Resource_d2adv"]
+script = ExtResource("50_or4qq")
+item = ExtResource("81_mhw2q")
+discovered_recipes = Array[ExtResource("50_pjwc4")]([ExtResource("78_hioli"), ExtResource("79_e5mnx"), ExtResource("80_dt0ky")])
 metadata/_custom_type_script = "uid://cpv5s708r1wvo"
 
 [sub_resource type="LabelSettings" id="LabelSettings_s3g0c"]
@@ -2068,7 +2087,7 @@ expand_mode = 1
 [node name="RecipeLearner" type="Node" parent="PauseMenu/CraftingInterface/RecipePanel" unique_id=489266171 node_paths=PackedStringArray("inventory")]
 script = ExtResource("49_jbx34")
 inventory = NodePath("../../../../Inventory")
-all_recipe_discoveries = Array[ExtResource("50_or4qq")]([SubResource("Resource_b2j0d"), SubResource("Resource_7l6ig")])
+all_recipe_discoveries = Array[ExtResource("50_or4qq")]([SubResource("Resource_b2j0d"), SubResource("Resource_7l6ig"), SubResource("Resource_g3ghg"), SubResource("Resource_d2adv")])
 known_recipes = Array[ExtResource("50_pjwc4")]([ExtResource("51_or4qq")])
 
 [node name="CompletePanel" type="Control" parent="PauseMenu/CraftingInterface" unique_id=54349966 node_paths=PackedStringArray("crafting_environment", "craft_button", "preview_rect", "preview_label", "icon_rect", "label")]
