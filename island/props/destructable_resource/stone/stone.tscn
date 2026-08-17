@@ -33,7 +33,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("BlenderMeshes/Cube:scale")
+tracks/0/path = NodePath("BlenderMeshes/Stone:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -49,7 +49,7 @@ length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("BlenderMeshes/Cube:scale")
+tracks/0/path = NodePath("BlenderMeshes/Stone:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -121,7 +121,7 @@ metadata/_custom_type_script = "uid://dapeyi3eetek1"
 [node name="BlenderMeshes" parent="." unique_id=1560999619 instance=ExtResource("4_a54gr")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.39999998, 0)
 
-[node name="Stone" parent="BlenderMeshes" index="0" unique_id=238858560]
+[node name="Stone" parent="BlenderMeshes" index="0" unique_id=188948635]
 surface_material_override/0 = ExtResource("6_pwnbr")
 
 [node name="Inventory" type="Node" parent="." unique_id=836906820]
@@ -146,14 +146,13 @@ metadata/_custom_type_script = "uid://bhjxscxhtg2se"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5692959, 0, 0.67521065)
 occluder = ExtResource("15_t7rk0")
 
-[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=415438826 node_paths=PackedStringArray("mesh_instance")]
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=415438826]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22970009, -0.40263176, 0.16500008)
 visible = false
 radius = 3.9646354
 height = 3.7062
 vertices = PackedVector3Array(-3.2360556, 0, 0.67196554, -3.1784978, 0, -2.1859326, -2.620954, 0, -2.9747157, 1.9237355, 0, -2.7823267, 3.2310307, 0, -1.7560766, 3.002141, 0, 1.8065802, 1.9941096, 0, 2.7703805, -2.448267, 0, 2.975812, -2.887521, 0, 2.2226985, -3.2360556, 0, 0.67196554)
 script = ExtResource("15_ugyle")
-mesh_instance = NodePath("../BlenderMeshes/Stone")
 generate_on_ready = true
 
 [node name="NodeSaver" type="Node" parent="." unique_id=1812045563]
