@@ -116,6 +116,7 @@ shape = SubResource("ConvexPolygonShape3D_cokie")
 
 [node name="Health" type="Node" parent="." unique_id=256948540]
 script = ExtResource("5_npxjp")
+hurt_threshold = 8.0
 free_parent_on_death = true
 
 [node name="HurtAnimTrigger" type="Node" parent="Health" unique_id=1514929013 node_paths=PackedStringArray("anim_player")]
@@ -179,130 +180,130 @@ bus = &"SFX"
 [node name="BlenderMeshes" parent="." unique_id=287566602 instance=ExtResource("18_65ggh")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
-[node name="Stone" parent="BlenderMeshes" index="0" unique_id=1539154983]
+[node name="Stone" parent="BlenderMeshes" index="0" unique_id=1070345765]
 surface_material_override/0 = ExtResource("19_xbmh8")
 
-[node name="Ore" parent="BlenderMeshes/Stone" index="0" unique_id=81922735]
+[node name="Ore" parent="BlenderMeshes/Stone" index="0" unique_id=1357082601]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore2" parent="BlenderMeshes/Stone" index="1" unique_id=204094024]
+[node name="Ore2" parent="BlenderMeshes/Stone" index="1" unique_id=2054966662]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore3" parent="BlenderMeshes/Stone" index="2" unique_id=1923770441]
+[node name="Ore3" parent="BlenderMeshes/Stone" index="2" unique_id=432519907]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore4" parent="BlenderMeshes/Stone" index="3" unique_id=208307721]
+[node name="Ore4" parent="BlenderMeshes/Stone" index="3" unique_id=465442931]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore5" parent="BlenderMeshes/Stone" index="4" unique_id=45070978]
+[node name="Ore5" parent="BlenderMeshes/Stone" index="4" unique_id=1591873791]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore6" parent="BlenderMeshes/Stone" index="5" unique_id=1235291505]
+[node name="Ore6" parent="BlenderMeshes/Stone" index="5" unique_id=450975114]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore7" parent="BlenderMeshes/Stone" index="6" unique_id=1165832476]
+[node name="Ore7" parent="BlenderMeshes/Stone" index="6" unique_id=170118173]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore8" parent="BlenderMeshes/Stone" index="7" unique_id=1762522688]
+[node name="Ore8" parent="BlenderMeshes/Stone" index="7" unique_id=233404951]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore9" parent="BlenderMeshes/Stone" index="8" unique_id=861603559]
+[node name="Ore9" parent="BlenderMeshes/Stone" index="8" unique_id=754333738]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore10" parent="BlenderMeshes/Stone" index="9" unique_id=1490491071]
+[node name="Ore10" parent="BlenderMeshes/Stone" index="9" unique_id=1580726628]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore11" parent="BlenderMeshes/Stone" index="10" unique_id=2053007606]
+[node name="Ore11" parent="BlenderMeshes/Stone" index="10" unique_id=311323762]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore12" parent="BlenderMeshes/Stone" index="11" unique_id=1093651376]
+[node name="Ore12" parent="BlenderMeshes/Stone" index="11" unique_id=655733687]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore13" parent="BlenderMeshes/Stone" index="12" unique_id=186608092]
+[node name="Ore13" parent="BlenderMeshes/Stone" index="12" unique_id=1385402480]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore14" parent="BlenderMeshes/Stone" index="13" unique_id=1151060440]
+[node name="Ore14" parent="BlenderMeshes/Stone" index="13" unique_id=1983309863]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore15" parent="BlenderMeshes/Stone" index="14" unique_id=539792250]
+[node name="Ore15" parent="BlenderMeshes/Stone" index="14" unique_id=1143928714]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore16" parent="BlenderMeshes/Stone" index="15" unique_id=780815417]
+[node name="Ore16" parent="BlenderMeshes/Stone" index="15" unique_id=873580250]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore17" parent="BlenderMeshes/Stone" index="16" unique_id=1636616389]
+[node name="Ore17" parent="BlenderMeshes/Stone" index="16" unique_id=269032908]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore18" parent="BlenderMeshes/Stone" index="17" unique_id=46897170]
+[node name="Ore18" parent="BlenderMeshes/Stone" index="17" unique_id=209434311]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore19" parent="BlenderMeshes/Stone" index="18" unique_id=1763363654]
+[node name="Ore19" parent="BlenderMeshes/Stone" index="18" unique_id=391734845]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore20" parent="BlenderMeshes/Stone" index="19" unique_id=1598893455]
+[node name="Ore20" parent="BlenderMeshes/Stone" index="19" unique_id=358537943]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore21" parent="BlenderMeshes/Stone" index="20" unique_id=1476102094]
+[node name="Ore21" parent="BlenderMeshes/Stone" index="20" unique_id=1368355746]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore22" parent="BlenderMeshes/Stone" index="21" unique_id=1615085603]
+[node name="Ore22" parent="BlenderMeshes/Stone" index="21" unique_id=1583135952]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore23" parent="BlenderMeshes/Stone" index="22" unique_id=1478998366]
+[node name="Ore23" parent="BlenderMeshes/Stone" index="22" unique_id=1138700453]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore24" parent="BlenderMeshes/Stone" index="23" unique_id=421275107]
+[node name="Ore24" parent="BlenderMeshes/Stone" index="23" unique_id=1822213855]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore25" parent="BlenderMeshes/Stone" index="24" unique_id=2031898547]
+[node name="Ore25" parent="BlenderMeshes/Stone" index="24" unique_id=1588308112]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore26" parent="BlenderMeshes/Stone" index="25" unique_id=170221390]
+[node name="Ore26" parent="BlenderMeshes/Stone" index="25" unique_id=1933006448]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore27" parent="BlenderMeshes/Stone" index="26" unique_id=302738465]
+[node name="Ore27" parent="BlenderMeshes/Stone" index="26" unique_id=1962737158]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore28" parent="BlenderMeshes/Stone" index="27" unique_id=1694762359]
+[node name="Ore28" parent="BlenderMeshes/Stone" index="27" unique_id=1080360509]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore29" parent="BlenderMeshes/Stone" index="28" unique_id=1181662261]
+[node name="Ore29" parent="BlenderMeshes/Stone" index="28" unique_id=531626852]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore30" parent="BlenderMeshes/Stone" index="29" unique_id=963166044]
+[node name="Ore30" parent="BlenderMeshes/Stone" index="29" unique_id=1193898464]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore31" parent="BlenderMeshes/Stone" index="30" unique_id=2091964931]
+[node name="Ore31" parent="BlenderMeshes/Stone" index="30" unique_id=1884947789]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore32" parent="BlenderMeshes/Stone" index="31" unique_id=318395612]
+[node name="Ore32" parent="BlenderMeshes/Stone" index="31" unique_id=1089645066]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore33" parent="BlenderMeshes/Stone" index="32" unique_id=1367619905]
+[node name="Ore33" parent="BlenderMeshes/Stone" index="32" unique_id=1403111209]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore34" parent="BlenderMeshes/Stone" index="33" unique_id=320270910]
+[node name="Ore34" parent="BlenderMeshes/Stone" index="33" unique_id=1424541490]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore35" parent="BlenderMeshes/Stone" index="34" unique_id=919438533]
+[node name="Ore35" parent="BlenderMeshes/Stone" index="34" unique_id=267867140]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore36" parent="BlenderMeshes/Stone" index="35" unique_id=1703063615]
+[node name="Ore36" parent="BlenderMeshes/Stone" index="35" unique_id=166775259]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore37" parent="BlenderMeshes/Stone" index="36" unique_id=626359786]
+[node name="Ore37" parent="BlenderMeshes/Stone" index="36" unique_id=975158615]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore38" parent="BlenderMeshes/Stone" index="37" unique_id=1575502188]
+[node name="Ore38" parent="BlenderMeshes/Stone" index="37" unique_id=109006101]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore39" parent="BlenderMeshes/Stone" index="38" unique_id=920968163]
+[node name="Ore39" parent="BlenderMeshes/Stone" index="38" unique_id=1705734076]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore40" parent="BlenderMeshes/Stone" index="39" unique_id=1632063355]
+[node name="Ore40" parent="BlenderMeshes/Stone" index="39" unique_id=1409263537]
 surface_material_override/0 = ExtResource("20_65ggh")
 
-[node name="Ore41" parent="BlenderMeshes" index="1" unique_id=200226362]
+[node name="Ore41" parent="BlenderMeshes" index="1" unique_id=392290048]
 visible = false
 mesh = null
 
