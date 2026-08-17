@@ -6,16 +6,15 @@
 [node name="Honeycomb" type="Node3D" unique_id=282752753]
 
 [node name="Visuals" parent="." unique_id=1564862642 instance=ExtResource("1_2uevs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.27)
 
-[node name="Circle1" parent="Visuals" index="0" unique_id=1202639588]
+[node name="Circle1" parent="Visuals" index="0" unique_id=1036767032]
 visible = false
 
-[node name="Circle2" parent="Visuals" index="1" unique_id=234144538]
+[node name="Circle2" parent="Visuals" index="1" unique_id=1421700690]
 visible = false
 
-[node name="Honeycomb" parent="Visuals" index="2" unique_id=1653509297]
-transform = Transform3D(0.099999994, 0, 0.17320509, 0, 0.2, 0, -0.17320509, 0, 0.099999994, 0, 0, 0.89256847)
+[node name="Honeycomb" parent="Visuals" index="2" unique_id=266089514]
+transform = Transform3D(0.4962165, 0, 0.8681988, 0, 1, 0, -0.8681988, 0, 0.4962165, 0, 0, 0)
 surface_material_override/0 = ExtResource("2_uif06")
 
 [editable path="Visuals"]
