@@ -23,9 +23,11 @@ static var all: Dictionary[Node, NodeSaver] = { }
 		if saver_id.is_empty():
 			default_saver_id()
 		return saver_id
+@export var custom_target: Node
+
+@export_group("Members")
 @export var saved_properties: Dictionary[StringName, bool]
 @export var load_methods: Array[StringName]
-@export var custom_target: Node
 
 @export_group("Loading")
 @export var loaded := false
