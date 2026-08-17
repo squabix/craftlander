@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://cgr4031ngjynl"]
+
+[ext_resource type="Texture2D" uid="uid://ultr2e1gg5ty" path="res://items/materials/minerals/gold_ingot/golden_ingot.png" id="1_fieko"]
+[ext_resource type="PackedScene" uid="uid://b5k4u8lslgo2n" path="res://items/materials/minerals/gold_ingot/golden_ingot.tscn" id="2_68hyh"]
+[ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="3_3uogn"]
+
+[resource]
+script = ExtResource("3_3uogn")
+name = &"Golden Ingot"
+max_quantity = 99
+icon = ExtResource("1_fieko")
+type = &"Material"
+scene = ExtResource("2_68hyh")
+metadata/_custom_type_script = "uid://bfstlagsbeqe2"

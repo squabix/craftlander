@@ -1,7 +1,0 @@
-[gd_scene format=3 uid="uid://b5k4u8lslgo2n"]
-
-[ext_resource type="PackedScene" uid="uid://dvdqw51x633ni" path="res://assets/models/items/materials/ingot1.blend" id="1_pxxo5"]
-
-[node name="GoldIngot" type="Node3D" unique_id=249716213]
-
-[node name="Visuals" parent="." unique_id=1849137229 instance=ExtResource("1_pxxo5")]
