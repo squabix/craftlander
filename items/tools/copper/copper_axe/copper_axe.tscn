@@ -12,7 +12,7 @@ random_pitch = 1.2599211
 streams_count = 1
 stream_0/stream = ExtResource("3_055xf")
 
-[node name="ShoddyAxe" type="Node3D" unique_id=1232378476]
+[node name="CopperAxe" type="Node3D" unique_id=1232378476]
 
 [node name="HarvestRay" type="RayCast3D" parent="." unique_id=754705084]
 target_position = Vector3(0, 0, -1.5)
@@ -40,10 +40,10 @@ bus = &"SFX"
 
 [node name="BlenderMeshes" parent="Visuals" unique_id=239118429 instance=ExtResource("4_diorx")]
 
-[node name="Head" parent="Visuals/BlenderMeshes" index="0" unique_id=1690817984]
+[node name="Head" parent="Visuals/BlenderMeshes" index="0" unique_id=1490790155]
 surface_material_override/0 = ExtResource("5_l7qvu")
 
-[node name="Handle" parent="Visuals/BlenderMeshes" index="1" unique_id=1186962101]
+[node name="Handle" parent="Visuals/BlenderMeshes" index="1" unique_id=1513442918]
 surface_material_override/0 = ExtResource("6_0oox4")
 
 [editable path="Visuals/BlenderMeshes"]
