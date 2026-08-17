@@ -1,8 +1,8 @@
 class_name Damage
 extends Resource
 
-@export var base_amount := 1.0
-@export var variation := 0.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:dp") var base_amount := 1.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:dp") var variation := 0.0
 @export var type: StringName
 
 @export_group("Knockback", "knockback")

@@ -14,7 +14,7 @@ signal was_given_hp(amount)
 
 @export_group("Hurt")
 @export var invulnerable := false
-@export var hurt_threshold := 0.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:dp") var hurt_threshold := 0.0
 @export var hurt_multiplier := 1.0
 
 @export_group("Death")
