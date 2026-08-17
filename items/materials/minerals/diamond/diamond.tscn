@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://chxwe0cvn7qdn"]
+
+[ext_resource type="PackedScene" uid="uid://bdqokoejywm4w" path="res://assets/models/items/materials/gem.blend" id="1_6s5w2"]
+[ext_resource type="Material" uid="uid://bd2wsdvcuat4q" path="res://assets/materials/diamond.tres" id="2_8euv8"]
+
+[node name="Diamond" type="Node3D" unique_id=249716213]
+
+[node name="Visuals" parent="." unique_id=1875331498 instance=ExtResource("1_6s5w2")]
+
+[node name="Cylinder" parent="Visuals" index="0" unique_id=286335748]
+surface_material_override/0 = ExtResource("2_8euv8")
+
+[editable path="Visuals"]

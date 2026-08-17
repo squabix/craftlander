@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://kf1haxayj2yo"]
+
+[ext_resource type="Texture2D" uid="uid://cxiy3n50lbnpo" path="res://items/materials/minerals/diamond/diamond.png" id="1_ygynl"]
+[ext_resource type="PackedScene" uid="uid://chxwe0cvn7qdn" path="res://items/materials/minerals/diamond/diamond.tscn" id="2_kgvqt"]
+[ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="3_twddp"]
+
+[resource]
+script = ExtResource("3_twddp")
+name = &"Diamond"
+max_quantity = 99
+icon = ExtResource("1_ygynl")
+type = &"Material"
+scene = ExtResource("2_kgvqt")
+metadata/_custom_type_script = "uid://bfstlagsbeqe2"
