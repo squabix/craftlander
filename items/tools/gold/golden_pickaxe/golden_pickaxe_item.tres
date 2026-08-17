@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="HarvestingTool" format=3 uid="uid://15kkf14ddukd"]
+
+[ext_resource type="Resource" uid="uid://4jqrmals3e7o" path="res://items/tools/gold/golden_pickaxe/golden_pickaxe_damage.tres" id="1_kvo74"]
+[ext_resource type="Texture2D" uid="uid://bxs7u283tn2qi" path="res://items/tools/gold/golden_pickaxe/golden_pickaxe.png" id="2_r4756"]
+[ext_resource type="PackedScene" uid="uid://c20b8byw6l44c" path="res://items/tools/gold/golden_pickaxe/golden_pickaxe.tscn" id="3_v8qck"]
+[ext_resource type="Script" uid="uid://6x786nnhteca" path="res://items/tools/harvesting_tool.gd" id="4_h4cwc"]
+
+[resource]
+script = ExtResource("4_h4cwc")
+damage = ExtResource("1_kvo74")
+name = &"Golden Pickaxe"
+icon = ExtResource("2_r4756")
+type = "Tool"
+scene = ExtResource("3_v8qck")
+cooldown_mode = 1
+default_cooldown_length = 0.3
+metadata/_custom_type_script = "uid://6x786nnhteca"

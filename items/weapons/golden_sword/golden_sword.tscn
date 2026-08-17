@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://psq32t4o2cly"]
+
+[ext_resource type="Script" uid="uid://dd8qskwv1nlqx" path="res://common3d/damage_system/hit_ray3d.gd" id="1_nq1k8"]
+[ext_resource type="Resource" uid="uid://filb3lfqg1yf" path="res://items/weapons/golden_sword/golden_sword_damage.tres" id="2_bhfj7"]
+[ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="3_htlst"]
+[ext_resource type="AudioStream" uid="uid://d1te8os5tp3ww" path="res://assets/sound/hit.mp3" id="4_xf0i4"]
+[ext_resource type="PackedScene" uid="uid://dubfkmgg38psa" path="res://assets/models/items/weapons/sword1.blend" id="5_mn5qv"]
+[ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="6_3wxnd"]
+[ext_resource type="Material" uid="uid://c33644pxuf2ds" path="res://assets/materials/gold.tres" id="7_co54i"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_lqsor"]
+random_pitch = 1.2599211
+streams_count = 1
+stream_0/stream = ExtResource("4_xf0i4")
+
+[node name="GoldenSword" type="Node3D" unique_id=1232378476]
+
+[node name="HarvestRay" type="RayCast3D" parent="." unique_id=754705084]
+target_position = Vector3(0, 0, -2.5)
+collision_mask = 8
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("1_nq1k8")
+damage = ExtResource("2_bhfj7")
+metadata/_custom_type_script = "uid://dd8qskwv1nlqx"
+
+[node name="SignalAudioManager3D" type="Node3D" parent="HarvestRay" unique_id=544678924 node_paths=PackedStringArray("signal_3d_players")]
+top_level = true
+script = ExtResource("3_htlst")
+signal_3d_players = {
+&"hit_position": NodePath("AudioStreamPlayer3D")
+}
+metadata/_custom_type_script = "uid://43bqjaemfda5"
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="HarvestRay/SignalAudioManager3D" unique_id=1293498929]
+stream = SubResource("AudioStreamRandomizer_lqsor")
+volume_db = -8.0
+pitch_scale = 1.5
+bus = &"SFX"
+
+[node name="Visuals" parent="." unique_id=1348752184 instance=ExtResource("5_mn5qv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0971342, 0)
+
+[node name="Handle" parent="Visuals" index="0" unique_id=280986603]
+surface_material_override/0 = ExtResource("6_3wxnd")
+
+[node name="Hilt" parent="Visuals" index="1" unique_id=1448126109]
+surface_material_override/0 = ExtResource("7_co54i")
+
+[node name="Blade" parent="Visuals" index="2" unique_id=1538287251]
+surface_material_override/0 = ExtResource("7_co54i")
+
+[editable path="Visuals"]

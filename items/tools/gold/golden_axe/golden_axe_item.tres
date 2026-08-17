@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="HarvestingTool" format=3 uid="uid://c8f1dnnf2038y"]
+
+[ext_resource type="Resource" uid="uid://pqve8frqyw3h" path="res://items/tools/gold/golden_axe/golden_axe_damage.tres" id="1_41iyg"]
+[ext_resource type="Texture2D" uid="uid://cyv3418x42peg" path="res://items/tools/gold/golden_axe/golden_axe.png" id="2_6p83x"]
+[ext_resource type="PackedScene" uid="uid://cdf6kosik2mc7" path="res://items/tools/gold/golden_axe/golden_axe.tscn" id="3_mkn26"]
+[ext_resource type="Script" uid="uid://6x786nnhteca" path="res://items/tools/harvesting_tool.gd" id="4_62gta"]
+
+[resource]
+script = ExtResource("4_62gta")
+damage = ExtResource("1_41iyg")
+name = &"Golden Axe"
+icon = ExtResource("2_6p83x")
+type = "Tool"
+scene = ExtResource("3_mkn26")
+cooldown_mode = 1
+default_cooldown_length = 0.3
+metadata/_custom_type_script = "uid://6x786nnhteca"
