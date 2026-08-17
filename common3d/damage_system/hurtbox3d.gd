@@ -24,6 +24,7 @@ signal was_dealt_damage(damage: Damage)
 @export var auto_hurt_bodies_enabled := false
 @export var auto_hurt_areas_enabled := false
 
+var last_hurt_source: Node
 var last_hurt_direction := Vector3.ZERO
 var total_damage_taken := 0.0
 
@@ -45,14 +46,8 @@ func is_type_whitelisted(type: StringName) -> bool:
 	return type_whitelist.is_empty() or type in type_whitelist
 
 
-func apply_damage_amount(base_amount: float) -> float:
-	var damage_amount := base_amount * damage_multiplier
-	total_damage_taken += damage_amount
-
-	if is_instance_valid(health):
-		health.hurt(damage_amount)
-
-	return damage_amount
+func scale_damage(base_amount: float) -> float:
+	return base_amount * damage_multiplier
 
 
 func hurt(damage: Damage, direction: Vector3 = Vector3.ZERO) -> float:
@@ -68,17 +63,24 @@ func hurt(damage: Damage, direction: Vector3 = Vector3.ZERO) -> float:
 	if not is_type_whitelisted(damage.type):
 		return 0.0
 
-	var damage_amount := apply_damage_amount(damage.sample())
-
+	var dp := scale_damage(damage.sample())
+	
+	var success := health.hurt(dp) or not is_instance_valid(health)
+	if not success:
+		print("Fail!")
+		return 0.0
+	
+	total_damage_taken += dp
 	knock(direction, damage.knockback_force)
 
 	was_hurt.emit()
 	was_dealt_damage.emit(damage)
+	last_hurt_source = damage.source
 
 	if free_parent_on_hurt:
 		Util.safe_free(get_parent())
 
-	return damage_amount
+	return dp
 
 
 func knock(direction: Vector3, base_force: float) -> void:

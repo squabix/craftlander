@@ -96,7 +96,6 @@ monitoring = false
 script = ExtResource("2_65ggh")
 health = NodePath("../Health")
 type_whitelist = Array[StringName]([&"pickaxe"])
-damage_override = ExtResource("3_xbmh8")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="SignalAudioManager3D" type="Node3D" parent="Hurtbox3D" unique_id=650928888 node_paths=PackedStringArray("signal_players")]
@@ -117,6 +116,7 @@ shape = SubResource("ConvexPolygonShape3D_cokie")
 [node name="Health" type="Node" parent="." unique_id=256948540]
 script = ExtResource("5_npxjp")
 hurt_threshold = 8.0
+damage_override = ExtResource("3_xbmh8")
 free_parent_on_death = true
 
 [node name="HurtAnimTrigger" type="Node" parent="Health" unique_id=1514929013 node_paths=PackedStringArray("anim_player")]

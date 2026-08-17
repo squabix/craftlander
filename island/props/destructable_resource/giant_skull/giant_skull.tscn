@@ -97,7 +97,6 @@ monitoring = false
 script = ExtResource("2_ejtqu")
 health = NodePath("../Health")
 type_whitelist = Array[StringName]([&"pickaxe"])
-damage_override = ExtResource("3_d6jhr")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="SignalAudioManager3D" type="Node3D" parent="Hurtbox3D" unique_id=650928888 node_paths=PackedStringArray("signal_players")]
@@ -117,6 +116,7 @@ shape = SubResource("ConvexPolygonShape3D_0s5q4")
 
 [node name="Health" type="Node" parent="." unique_id=256948540]
 script = ExtResource("5_0ckxx")
+damage_override = ExtResource("3_d6jhr")
 free_parent_on_death = true
 
 [node name="HurtAnimTrigger" type="Node" parent="Health" unique_id=1514929013 node_paths=PackedStringArray("anim_player")]
@@ -181,10 +181,10 @@ bus = &"SFX"
 [node name="BlenderMeshes" parent="." unique_id=38551079 instance=ExtResource("18_ejtqu")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
-[node name="Jaw" parent="BlenderMeshes" index="0" unique_id=1649496186]
+[node name="Jaw" parent="BlenderMeshes" index="0" unique_id=1615341633]
 surface_material_override/0 = ExtResource("19_d6jhr")
 
-[node name="Skull" parent="BlenderMeshes" index="1" unique_id=1839219668]
+[node name="Skull" parent="BlenderMeshes" index="1" unique_id=480460847]
 surface_material_override/0 = ExtResource("19_d6jhr")
 surface_material_override/1 = ExtResource("20_ejtqu")
 

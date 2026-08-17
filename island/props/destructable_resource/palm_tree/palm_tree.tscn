@@ -137,6 +137,7 @@ health = NodePath("Health")
 
 [node name="Health" type="Node" parent="." unique_id=95922495]
 script = ExtResource("2_whjq2")
+damage_override = ExtResource("12_f35uo")
 
 [node name="FallTrigger" type="Node" parent="Health" unique_id=1612475271 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("3_te0j3")
@@ -203,7 +204,6 @@ monitoring = false
 script = ExtResource("11_l7gvo")
 health = NodePath("../../Health")
 type_whitelist = Array[StringName]([&"axe"])
-damage_override = ExtResource("12_f35uo")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="Trunk/Hurtbox3D" unique_id=728060112]
@@ -262,33 +262,33 @@ shape = SubResource("CylinderShape3D_erttl")
 
 [node name="BlenderMeshes" parent="Trunk" unique_id=646844012 instance=ExtResource("35_jiqyg")]
 
-[node name="Wood" parent="Trunk/BlenderMeshes" index="0" unique_id=1896427998]
+[node name="Wood" parent="Trunk/BlenderMeshes" index="0" unique_id=1267708203]
 visible = false
 mesh = null
 
-[node name="Leaf_003" parent="Trunk/BlenderMeshes" index="1" unique_id=1632141906]
+[node name="Leaf_003" parent="Trunk/BlenderMeshes" index="1" unique_id=261395903]
 surface_material_override/0 = ExtResource("36_whjq2")
 
-[node name="Leaf_001" parent="Trunk/BlenderMeshes" index="2" unique_id=1101142538]
+[node name="Leaf_001" parent="Trunk/BlenderMeshes" index="2" unique_id=2127868043]
 surface_material_override/0 = ExtResource("36_whjq2")
 
-[node name="Leaf_002" parent="Trunk/BlenderMeshes" index="3" unique_id=1279837784]
+[node name="Leaf_002" parent="Trunk/BlenderMeshes" index="3" unique_id=843170984]
 surface_material_override/0 = ExtResource("36_whjq2")
 
-[node name="Leaf_004" parent="Trunk/BlenderMeshes" index="4" unique_id=1305204800]
+[node name="Leaf_004" parent="Trunk/BlenderMeshes" index="4" unique_id=2072721463]
 surface_material_override/0 = ExtResource("36_whjq2")
 
-[node name="Leaf_006" parent="Trunk/BlenderMeshes" index="5" unique_id=828267623]
+[node name="Leaf_006" parent="Trunk/BlenderMeshes" index="5" unique_id=1679518028]
 surface_material_override/0 = ExtResource("36_whjq2")
 
-[node name="Leaf_007" parent="Trunk/BlenderMeshes" index="6" unique_id=1717278033]
+[node name="Leaf_007" parent="Trunk/BlenderMeshes" index="6" unique_id=427160072]
 surface_material_override/0 = ExtResource("36_whjq2")
 
-[node name="Trunk" parent="Trunk/BlenderMeshes" index="7" unique_id=551418162]
+[node name="Trunk" parent="Trunk/BlenderMeshes" index="7" unique_id=386912730]
 surface_material_override/0 = ExtResource("18_knru2")
 surface_material_override/1 = ExtResource("19_0rjp4")
 
-[node name="Stump" parent="Trunk/BlenderMeshes" index="8" unique_id=884117624]
+[node name="Stump" parent="Trunk/BlenderMeshes" index="8" unique_id=934986723]
 visible = false
 
 [node name="ChopParticles" type="GPUParticles3D" parent="." unique_id=931223418]
@@ -310,40 +310,40 @@ shape = SubResource("CylinderShape3D_t4kw7")
 
 [node name="BlenderMeshes" parent="Stump" unique_id=323672885 instance=ExtResource("35_jiqyg")]
 
-[node name="Wood" parent="Stump/BlenderMeshes" index="0" unique_id=1896427998]
+[node name="Wood" parent="Stump/BlenderMeshes" index="0" unique_id=1267708203]
 visible = false
 mesh = null
 
-[node name="Leaf_003" parent="Stump/BlenderMeshes" index="1" unique_id=1632141906]
+[node name="Leaf_003" parent="Stump/BlenderMeshes" index="1" unique_id=261395903]
 visible = false
 surface_material_override/0 = ExtResource("36_whjq2")
 
-[node name="Leaf_001" parent="Stump/BlenderMeshes" index="2" unique_id=1101142538]
+[node name="Leaf_001" parent="Stump/BlenderMeshes" index="2" unique_id=2127868043]
 visible = false
 surface_material_override/0 = ExtResource("36_whjq2")
 
-[node name="Leaf_002" parent="Stump/BlenderMeshes" index="3" unique_id=1279837784]
+[node name="Leaf_002" parent="Stump/BlenderMeshes" index="3" unique_id=843170984]
 visible = false
 surface_material_override/0 = ExtResource("36_whjq2")
 
-[node name="Leaf_004" parent="Stump/BlenderMeshes" index="4" unique_id=1305204800]
+[node name="Leaf_004" parent="Stump/BlenderMeshes" index="4" unique_id=2072721463]
 visible = false
 surface_material_override/0 = ExtResource("36_whjq2")
 
-[node name="Leaf_006" parent="Stump/BlenderMeshes" index="5" unique_id=828267623]
+[node name="Leaf_006" parent="Stump/BlenderMeshes" index="5" unique_id=1679518028]
 visible = false
 surface_material_override/0 = ExtResource("36_whjq2")
 
-[node name="Leaf_007" parent="Stump/BlenderMeshes" index="6" unique_id=1717278033]
+[node name="Leaf_007" parent="Stump/BlenderMeshes" index="6" unique_id=427160072]
 visible = false
 surface_material_override/0 = ExtResource("36_whjq2")
 
-[node name="Trunk" parent="Stump/BlenderMeshes" index="7" unique_id=551418162]
+[node name="Trunk" parent="Stump/BlenderMeshes" index="7" unique_id=386912730]
 visible = false
 surface_material_override/0 = ExtResource("21_x88xr")
 surface_material_override/1 = ExtResource("19_0rjp4")
 
-[node name="Stump" parent="Stump/BlenderMeshes" index="8" unique_id=884117624]
+[node name="Stump" parent="Stump/BlenderMeshes" index="8" unique_id=934986723]
 surface_material_override/0 = ExtResource("18_knru2")
 surface_material_override/1 = ExtResource("19_0rjp4")
 

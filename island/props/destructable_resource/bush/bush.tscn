@@ -247,7 +247,6 @@ collision_mask = 0
 monitoring = false
 script = ExtResource("2_j2qlb")
 health = NodePath("../Health")
-damage_override = ExtResource("3_f1rr7")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D" unique_id=388016066]
@@ -257,6 +256,7 @@ shape = SubResource("SphereShape3D_lx2ta")
 [node name="Health" type="Node" parent="." unique_id=256948540]
 script = ExtResource("5_inqls")
 hp = 3.0
+damage_override = ExtResource("3_f1rr7")
 free_parent_on_death = true
 
 [node name="HurtAnimTrigger" type="Node" parent="Health" unique_id=1514929013 node_paths=PackedStringArray("anim_player")]
@@ -284,13 +284,12 @@ scenes = Array[PackedScene]([ExtResource("14_5he4v")])
 spawn_on_exit_tree = true
 metadata/_custom_type_script = "uid://bhjxscxhtg2se"
 
-[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=415438826 node_paths=PackedStringArray("mesh_instance")]
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=415438826]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08755, -0.1899, 0.0029000007)
 radius = 0.17741217
 height = 0.5336
 vertices = PackedVector3Array(-0.17690787, 0, 0.013367299, -0.013171878, 0, -0.17646128, 0.17690787, 0, -0.013367302, 0.17444684, 0, 0.001962438, 0.059489876, 0, 0.14715533, 0.042955708, 0, 0.15815184, 0.0130327055, 0, 0.1764642, -0.17690787, 0, 0.013367299)
 script = ExtResource("16_cp4ka")
-mesh_instance = NodePath("../BlenderMeshes/Trunk")
 generate_on_ready = true
 
 [node name="NodeSaver" type="Node" parent="." unique_id=1812045563]
