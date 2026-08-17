@@ -2090,6 +2090,15 @@ inventory = NodePath("../../../../Inventory")
 all_recipe_discoveries = Array[ExtResource("50_or4qq")]([SubResource("Resource_b2j0d"), SubResource("Resource_7l6ig"), SubResource("Resource_g3ghg"), SubResource("Resource_d2adv")])
 known_recipes = Array[ExtResource("50_pjwc4")]([ExtResource("51_or4qq")])
 
+[node name="NodeSaver" type="Node" parent="PauseMenu/CraftingInterface/RecipePanel/RecipeLearner" unique_id=287037968]
+script = ExtResource("74_2h6tc")
+save_mode = 1
+saver_id = &"recipe_learner"
+saved_properties = Dictionary[StringName, bool]({
+&"known_recipes": true
+})
+metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
+
 [node name="CompletePanel" type="Control" parent="PauseMenu/CraftingInterface" unique_id=54349966 node_paths=PackedStringArray("crafting_environment", "craft_button", "preview_rect", "preview_label", "icon_rect", "label")]
 layout_mode = 1
 anchors_preset = 6
