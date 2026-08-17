@@ -7,8 +7,8 @@ signal was_hurt
 signal was_healed
 signal died
 signal revived
-signal was_dealt_damage(amount)
-signal was_given_hp(amount)
+signal took_dp(amount: float)
+signal given_hp(amount: float)
 
 @export var hp := 5.0
 
@@ -16,11 +16,13 @@ signal was_given_hp(amount)
 @export var invulnerable := false
 @export_custom(PROPERTY_HINT_NONE, "suffix:dp") var hurt_threshold := 0.0
 @export var hurt_multiplier := 1.0
+@export var damage_override: Damage
 
 @export_group("Death")
 @export var immortal := false
 @export var one_shot := false
 @export var free_parent_on_death := false
+
 
 var dead := false
 
@@ -66,7 +68,7 @@ func heal(amount: float, can_revive: bool = false) -> void:
 		return
 	hp = min(max_hp, hp + abs(amount))
 	was_healed.emit()
-	was_given_hp.emit(amount)
+	given_hp.emit(amount)
 
 
 func revive(revived_hp: float = max_hp) -> void:
@@ -99,15 +101,18 @@ func empty() -> void:
 		hurt(hp)
 
 
-func hurt(amount: float) -> void:
-	if amount <= hurt_threshold or invulnerable:
-		return
+func hurt(amount: float) -> bool:
+	if amount <= 0.0 or amount < hurt_threshold or invulnerable:
+		return false
+	
+	if damage_override != null:
+		amount = damage_override.sample()
 
 	amount *= hurt_multiplier
-	was_dealt_damage.emit(amount)
+	took_dp.emit(amount)
 
 	if dead:
-		return
+		return false
 
 	hp = 0.0 if one_shot else max(0, hp - abs(amount))
 
@@ -119,6 +124,8 @@ func hurt(amount: float) -> void:
 		die()
 	else:
 		survive()
+	
+	return true
 
 
 func should_die() -> bool:

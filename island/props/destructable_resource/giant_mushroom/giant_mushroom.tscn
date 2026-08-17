@@ -204,6 +204,7 @@ health = NodePath("Health")
 
 [node name="Health" type="Node" parent="." unique_id=95922495]
 script = ExtResource("2_0artm")
+damage_override = ExtResource("10_ve6jj")
 
 [node name="FallTrigger" type="Node" parent="Health" unique_id=1612475271 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("3_lmxt4")
@@ -271,7 +272,6 @@ monitoring = false
 script = ExtResource("9_0sf1c")
 health = NodePath("../../Health")
 type_whitelist = Array[StringName]([&"axe"])
-damage_override = ExtResource("10_ve6jj")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="HurtboxCollision" type="CollisionShape3D" parent="Trunk/Hurtbox3D" unique_id=29216433]

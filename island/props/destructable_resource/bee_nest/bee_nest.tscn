@@ -97,7 +97,6 @@ collision_mask = 0
 monitoring = false
 script = ExtResource("2_rb30n")
 health = NodePath("../Health")
-damage_override = ExtResource("3_b7v27")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1653561489]
@@ -119,6 +118,7 @@ bus = &"SFX"
 
 [node name="Health" type="Node" parent="." unique_id=256948540]
 script = ExtResource("3_1pjnc")
+damage_override = ExtResource("3_b7v27")
 free_parent_on_death = true
 
 [node name="HurtAnimTrigger" type="Node" parent="Health" unique_id=1514929013 node_paths=PackedStringArray("anim_player")]
@@ -148,7 +148,7 @@ metadata/_custom_type_script = "uid://bhjxscxhtg2se"
 
 [node name="BlenderMeshes" parent="." unique_id=340605420 instance=ExtResource("11_b76o0")]
 
-[node name="Nest" parent="BlenderMeshes" index="0" unique_id=1792401997]
+[node name="Nest" parent="BlenderMeshes" index="0" unique_id=1008846497]
 surface_material_override/0 = SubResource("StandardMaterial3D_5xftv")
 surface_material_override/1 = SubResource("StandardMaterial3D_ioeyq")
 

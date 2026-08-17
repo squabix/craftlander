@@ -80,7 +80,6 @@ collision_mask = 0
 monitoring = false
 script = ExtResource("2_rx1cw")
 health = NodePath("../Health")
-damage_override = ExtResource("3_ran2n")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D" unique_id=388016066]
@@ -106,6 +105,7 @@ shape = SubResource("BoxShape3D_rx1cw")
 [node name="Health" type="Node" parent="." unique_id=256948540]
 script = ExtResource("4_joy77")
 hp = 3.0
+damage_override = ExtResource("3_ran2n")
 free_parent_on_death = true
 
 [node name="HurtAnimTrigger" type="Node" parent="Health" unique_id=1514929013 node_paths=PackedStringArray("anim_player")]
@@ -166,51 +166,51 @@ bus = &"SFX"
 
 [node name="dead_skeleton" parent="BlenderMeshes" unique_id=819169871 instance=ExtResource("16_ibdu0")]
 
-[node name="Bone" parent="BlenderMeshes/dead_skeleton" index="0" unique_id=1828654276]
+[node name="Bone" parent="BlenderMeshes/dead_skeleton" index="0" unique_id=378487704]
 surface_material_override/0 = ExtResource("17_rx1cw")
 
-[node name="Ribcage" parent="BlenderMeshes/dead_skeleton" index="1" unique_id=1963760536]
+[node name="Ribcage" parent="BlenderMeshes/dead_skeleton" index="1" unique_id=1016515323]
 surface_material_override/0 = ExtResource("17_rx1cw")
 
-[node name="Bone_001" parent="BlenderMeshes/dead_skeleton" index="2" unique_id=1961794768]
+[node name="Bone_001" parent="BlenderMeshes/dead_skeleton" index="2" unique_id=1946242948]
 surface_material_override/0 = ExtResource("17_rx1cw")
 
-[node name="Bone_002" parent="BlenderMeshes/dead_skeleton" index="3" unique_id=728235803]
+[node name="Bone_002" parent="BlenderMeshes/dead_skeleton" index="3" unique_id=1521785103]
 surface_material_override/0 = ExtResource("17_rx1cw")
 
-[node name="Bone_003" parent="BlenderMeshes/dead_skeleton" index="4" unique_id=13343675]
+[node name="Bone_003" parent="BlenderMeshes/dead_skeleton" index="4" unique_id=179019697]
 surface_material_override/0 = ExtResource("17_rx1cw")
 
-[node name="RightFoot" parent="BlenderMeshes/dead_skeleton" index="5" unique_id=2106103551]
+[node name="RightFoot" parent="BlenderMeshes/dead_skeleton" index="5" unique_id=30857818]
 surface_material_override/0 = ExtResource("17_rx1cw")
 
-[node name="LeftFoot" parent="BlenderMeshes/dead_skeleton" index="6" unique_id=205685659]
+[node name="LeftFoot" parent="BlenderMeshes/dead_skeleton" index="6" unique_id=387472598]
 surface_material_override/0 = ExtResource("17_rx1cw")
 
-[node name="Bone_004" parent="BlenderMeshes/dead_skeleton" index="7" unique_id=181192781]
+[node name="Bone_004" parent="BlenderMeshes/dead_skeleton" index="7" unique_id=2107844122]
 surface_material_override/0 = ExtResource("17_rx1cw")
 
-[node name="Bone_005" parent="BlenderMeshes/dead_skeleton" index="8" unique_id=580038904]
+[node name="Bone_005" parent="BlenderMeshes/dead_skeleton" index="8" unique_id=933387706]
 surface_material_override/0 = ExtResource("17_rx1cw")
 
-[node name="Bone_006" parent="BlenderMeshes/dead_skeleton" index="9" unique_id=206707661]
+[node name="Bone_006" parent="BlenderMeshes/dead_skeleton" index="9" unique_id=1087781344]
 surface_material_override/0 = ExtResource("17_rx1cw")
 
-[node name="Bone_007" parent="BlenderMeshes/dead_skeleton" index="10" unique_id=1601282236]
+[node name="Bone_007" parent="BlenderMeshes/dead_skeleton" index="10" unique_id=195884016]
 surface_material_override/0 = ExtResource("17_rx1cw")
 
-[node name="Jaw" parent="BlenderMeshes/dead_skeleton" index="11" unique_id=1502274049]
+[node name="Jaw" parent="BlenderMeshes/dead_skeleton" index="11" unique_id=1395894720]
 surface_material_override/0 = ExtResource("17_rx1cw")
 
-[node name="Skull" parent="BlenderMeshes/dead_skeleton" index="12" unique_id=1684539331]
+[node name="Skull" parent="BlenderMeshes/dead_skeleton" index="12" unique_id=1719460470]
 surface_material_override/0 = ExtResource("17_rx1cw")
 surface_material_override/1 = ExtResource("17_rx1cw")
 surface_material_override/2 = ExtResource("18_ran2n")
 
-[node name="Ribcage_001" parent="BlenderMeshes/dead_skeleton" index="13" unique_id=141484795]
+[node name="Ribcage_001" parent="BlenderMeshes/dead_skeleton" index="13" unique_id=759450154]
 surface_material_override/0 = ExtResource("17_rx1cw")
 
-[node name="Ribcage_002" parent="BlenderMeshes/dead_skeleton" index="14" unique_id=1563262269]
+[node name="Ribcage_002" parent="BlenderMeshes/dead_skeleton" index="14" unique_id=1091435838]
 surface_material_override/0 = ExtResource("17_rx1cw")
 
 [editable path="BlenderMeshes/dead_skeleton"]

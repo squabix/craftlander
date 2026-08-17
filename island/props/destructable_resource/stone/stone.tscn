@@ -89,7 +89,6 @@ monitoring = false
 script = ExtResource("2_sq77v")
 health = NodePath("../Health")
 type_whitelist = Array[StringName]([&"pickaxe"])
-damage_override = ExtResource("3_yqmf4")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1342616063]
@@ -109,6 +108,7 @@ bus = &"SFX"
 
 [node name="Health" type="Node" parent="." unique_id=256948540]
 script = ExtResource("3_qeat1")
+damage_override = ExtResource("3_yqmf4")
 free_parent_on_death = true
 
 [node name="HurtAnimTrigger" type="Node" parent="Health" unique_id=1514929013 node_paths=PackedStringArray("anim_player")]
