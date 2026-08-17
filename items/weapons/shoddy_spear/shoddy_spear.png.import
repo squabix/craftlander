@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgbuk7j54yb0v"
-path="res://.godot/imported/shoddy_mace.png-eb2e0662281af7f1e1b7c18920c906ba.ctex"
+uid="uid://b2my7s87xk85k"
+path="res://.godot/imported/shoddy_spear.png-5e741348424680a8c29b12bdf3cadf1c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://items/tools/shoddy/shoddy_mace/shoddy_mace.png"
-dest_files=["res://.godot/imported/shoddy_mace.png-eb2e0662281af7f1e1b7c18920c906ba.ctex"]
+source_file="res://items/weapons/shoddy_spear/shoddy_spear.png"
+dest_files=["res://.godot/imported/shoddy_spear.png-5e741348424680a8c29b12bdf3cadf1c.ctex"]
 
 [params]
 

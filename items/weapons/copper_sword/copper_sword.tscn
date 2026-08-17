@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dousutso0retv"]
 
 [ext_resource type="Script" uid="uid://dd8qskwv1nlqx" path="res://common3d/damage_system/hit_ray3d.gd" id="1_4wnqj"]
-[ext_resource type="Resource" uid="uid://fl23rhdfaa4r" path="res://items/tools/copper/copper_sword/copper_sword_damage.tres" id="2_ogdlr"]
+[ext_resource type="Resource" uid="uid://fl23rhdfaa4r" path="res://items/weapons/copper_sword/copper_sword_damage.tres" id="2_ogdlr"]
 [ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="3_oavr0"]
 [ext_resource type="AudioStream" uid="uid://d1te8os5tp3ww" path="res://assets/sound/hit.mp3" id="4_u8jip"]
 [ext_resource type="PackedScene" uid="uid://dubfkmgg38psa" path="res://assets/models/items/weapons/sword1.blend" id="5_ogdlr"]

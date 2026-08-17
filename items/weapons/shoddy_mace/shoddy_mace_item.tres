@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="HarvestingTool" format=3 uid="uid://dihffpg2md6ng"]
+
+[ext_resource type="Resource" uid="uid://nv3owcu3xvi8" path="res://items/weapons/shoddy_mace/shoddy_mace_damage.tres" id="1_7l754"]
+[ext_resource type="Texture2D" uid="uid://bgbuk7j54yb0v" path="res://items/weapons/shoddy_mace/shoddy_mace.png" id="2_0e7iq"]
+[ext_resource type="PackedScene" uid="uid://1b3xwsw4p1gp" path="res://items/weapons/shoddy_mace/shoddy_mace.tscn" id="3_scaaa"]
+[ext_resource type="Script" uid="uid://6x786nnhteca" path="res://items/tools/harvesting_tool.gd" id="4_3tk2a"]
+
+[resource]
+script = ExtResource("4_3tk2a")
+damage = ExtResource("1_7l754")
+name = "Shoddy Mace"
+icon = ExtResource("2_0e7iq")
+type = &"Weapon"
+scene = ExtResource("3_scaaa")
+cooldown_mode = 1
+default_cooldown_length = 0.5
+metadata/_custom_type_script = "uid://6x786nnhteca"
