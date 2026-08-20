@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ItemRecipe" format=3 uid="uid://cbraceyfpgwoj"]
+
+[ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="1_x6nse"]
+[ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="2_aadb7"]
+[ext_resource type="Resource" uid="uid://kf1haxayj2yo" path="res://items/materials/minerals/diamond/diamond_item.tres" id="3_7dudx"]
+[ext_resource type="Resource" uid="uid://qu7qtupf3uee" path="res://items/weapons/diamond_sword/diamond_sword_item.tres" id="4_0ssqm"]
+[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="5_bwutl"]
+[ext_resource type="Script" uid="uid://c5ntwgpouf24m" path="res://items/crafting/item_recipe.gd" id="6_1dhq6"]
+
+[sub_resource type="Resource" id="Resource_6n5lm"]
+script = ExtResource("5_bwutl")
+item = ExtResource("4_0ssqm")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[resource]
+script = ExtResource("6_1dhq6")
+result = SubResource("Resource_6n5lm")
+indexed_layout = Dictionary[Vector2i, int]({
+Vector2i(-1, -1): 1,
+Vector2i(0, -2): 0,
+Vector2i(0, -1): 1,
+Vector2i(0, 0): 1,
+Vector2i(0, 1): 1,
+Vector2i(0, 2): 1,
+Vector2i(1, -1): 1
+})
+items = Array[ExtResource("1_x6nse")]([ExtResource("2_aadb7"), ExtResource("3_7dudx")])
+metadata/_custom_type_script = "uid://c5ntwgpouf24m"

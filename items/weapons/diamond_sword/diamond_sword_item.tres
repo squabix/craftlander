@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="HarvestingTool" format=3 uid="uid://qu7qtupf3uee"]
+
+[ext_resource type="Resource" uid="uid://b85ltw1i3pdu7" path="res://items/weapons/diamond_sword/diamond_sword_damage.tres" id="1_6ko5w"]
+[ext_resource type="Texture2D" uid="uid://cwluvdrcmhqqg" path="res://items/weapons/diamond_sword/diamond_sword.png" id="2_kr2dc"]
+[ext_resource type="PackedScene" uid="uid://lmgmpbykpcjn" path="res://items/weapons/diamond_sword/diamond_sword.tscn" id="3_sw5xj"]
+[ext_resource type="Script" uid="uid://6x786nnhteca" path="res://items/tools/harvesting_tool.gd" id="4_kid3l"]
+
+[resource]
+script = ExtResource("4_kid3l")
+damage = ExtResource("1_6ko5w")
+name = &"Diamond Sword"
+icon = ExtResource("2_kr2dc")
+type = &"Weapon"
+scene = ExtResource("3_sw5xj")
+cooldown_mode = 1
+default_cooldown_length = 0.3
+metadata/_custom_type_script = "uid://6x786nnhteca"

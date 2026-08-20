@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="HarvestingTool" format=3 uid="uid://cq7uj11i026we"]
+
+[ext_resource type="Resource" uid="uid://cahhye5ohq0tn" path="res://items/tools/diamond/diamond_axe/diamond_axe_damage.tres" id="1_8algh"]
+[ext_resource type="Texture2D" uid="uid://clmsj143yfi75" path="res://items/tools/diamond/diamond_axe/diamond_axe.png" id="2_0qvbi"]
+[ext_resource type="PackedScene" uid="uid://0hdogsshaadp" path="res://items/tools/diamond/diamond_axe/diamond_axe.tscn" id="3_yybd1"]
+[ext_resource type="Script" uid="uid://6x786nnhteca" path="res://items/tools/harvesting_tool.gd" id="4_hjow2"]
+
+
+[resource]
+script = ExtResource("4_hjow2")
+damage = ExtResource("1_8algh")
+name = &"Diamond Axe"
+icon = ExtResource("2_0qvbi")
+type = "Tool"
+scene = ExtResource("3_yybd1")
+cooldown_mode = 1
+default_cooldown_length = 0.3
+metadata/_custom_type_script = "uid://6x786nnhteca"
