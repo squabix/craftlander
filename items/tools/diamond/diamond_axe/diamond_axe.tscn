@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://0hdogsshaadp"]
+
+[ext_resource type="Script" uid="uid://dd8qskwv1nlqx" path="res://common3d/damage_system/hit_ray3d.gd" id="1_vuy6a"]
+[ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="2_54ibh"]
+[ext_resource type="AudioStream" uid="uid://d1te8os5tp3ww" path="res://assets/sound/hit.mp3" id="3_m23av"]
+[ext_resource type="PackedScene" uid="uid://cylp13pbkn4ln" path="res://assets/models/items/tools/axe2.blend" id="4_5cnvo"]
+[ext_resource type="Material" uid="uid://bd2wsdvcuat4q" path="res://assets/materials/diamond.tres" id="5_vjbwr"]
+[ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="6_5owpt"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hjjmf"]
+random_pitch = 1.2599211
+streams_count = 1
+stream_0/stream = ExtResource("3_m23av")
+
+[node name="DiamondAxe" type="Node3D" unique_id=1232378476]
+
+[node name="HarvestRay" type="RayCast3D" parent="." unique_id=754705084]
+target_position = Vector3(0, 0, -1.5)
+collision_mask = 8
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("1_vuy6a")
+metadata/_custom_type_script = "uid://dd8qskwv1nlqx"
+
+[node name="SignalAudioManager3D" type="Node3D" parent="HarvestRay" unique_id=212516829 node_paths=PackedStringArray("signal_3d_players")]
+top_level = true
+script = ExtResource("2_54ibh")
+signal_3d_players = {
+&"hit_position": NodePath("AudioStreamPlayer3D")
+}
+metadata/_custom_type_script = "uid://43bqjaemfda5"
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="HarvestRay/SignalAudioManager3D" unique_id=1878868535]
+stream = SubResource("AudioStreamRandomizer_hjjmf")
+volume_db = -8.0
+pitch_scale = 1.5
+bus = &"SFX"
+
+[node name="Visuals" type="Node3D" parent="." unique_id=551632359]
+
+[node name="BlenderMeshes" parent="Visuals" unique_id=239118429 instance=ExtResource("4_5cnvo")]
+
+[node name="Head" parent="Visuals/BlenderMeshes" index="0" unique_id=1490790155]
+surface_material_override/0 = ExtResource("5_vjbwr")
+
+[node name="Handle" parent="Visuals/BlenderMeshes" index="1" unique_id=1513442918]
+surface_material_override/0 = ExtResource("6_5owpt")
+
+[editable path="Visuals/BlenderMeshes"]

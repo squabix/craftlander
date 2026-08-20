@@ -131,6 +131,9 @@
 [ext_resource type="Resource" uid="uid://c8f1dnnf2038y" path="res://items/tools/gold/golden_axe/golden_axe_item.tres" id="116_kosww"]
 [ext_resource type="Resource" uid="uid://15kkf14ddukd" path="res://items/tools/gold/golden_pickaxe/golden_pickaxe_item.tres" id="117_s15n6"]
 [ext_resource type="Resource" uid="uid://br8x8o2qqedfv" path="res://items/weapons/golden_sword/golden_sword_item.tres" id="118_es2j2"]
+[ext_resource type="Resource" uid="uid://cq7uj11i026we" path="res://items/tools/diamond/diamond_axe/diamond_axe_item.tres" id="127_e5mnx"]
+[ext_resource type="Resource" uid="uid://b8eby8tmkueau" path="res://items/tools/diamond/diamond_pickaxe/diamond_pickaxe_item.tres" id="128_dt0ky"]
+[ext_resource type="Resource" uid="uid://qu7qtupf3uee" path="res://items/weapons/diamond_sword/diamond_sword_item.tres" id="129_mhw2q"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -975,7 +978,7 @@ node_connections = [&"output", 0, &"ItemBlend", &"ItemBlend", 0, &"MoveTransitio
 
 [sub_resource type="Resource" id="Resource_art4l"]
 script = ExtResource("39_dx5ib")
-items = Array[ExtResource("40_a2xo5")]([ExtResource("41_a2xo5"), ExtResource("22_bjvpn"), ExtResource("41_art4l"), ExtResource("112_wh3n5"), ExtResource("113_vuyvy"), ExtResource("114_0yt84"), ExtResource("116_kosww"), ExtResource("117_s15n6"), ExtResource("118_es2j2")])
+items = Array[ExtResource("40_a2xo5")]([ExtResource("41_a2xo5"), ExtResource("22_bjvpn"), ExtResource("41_art4l"), ExtResource("112_wh3n5"), ExtResource("113_vuyvy"), ExtResource("114_0yt84"), ExtResource("116_kosww"), ExtResource("117_s15n6"), ExtResource("118_es2j2"), ExtResource("127_e5mnx"), ExtResource("128_dt0ky"), ExtResource("129_mhw2q")])
 start_anim = "swing_tool"
 metadata/_custom_type_script = "uid://c622jer80j3sk"
 
