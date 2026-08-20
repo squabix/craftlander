@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="IslandResource" format=3 uid="uid://b0gw02djkff0d"]
+
+[ext_resource type="Texture2D" uid="uid://beudtbsirofjr" path="res://assets/ui/island0.png" id="1_1dans"]
+[ext_resource type="Script" uid="uid://7dsenmmyrsaw" path="res://island/island_resource.gd" id="2_6or2c"]
+
+[resource]
+script = ExtResource("2_6or2c")
+name = "Undead Atoll"
+icon = ExtResource("1_1dans")
+index = 3
+metadata/_custom_type_script = "uid://7dsenmmyrsaw"

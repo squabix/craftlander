@@ -1,0 +1,169 @@
+[gd_scene format=3 uid="uid://dj8e43d6k7j4"]
+
+[ext_resource type="Script" uid="uid://bj8pokcrjdf2c" path="res://boat/boat.gd" id="1_ltnc8"]
+[ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common/move_mode.gd" id="2_bg2qv"]
+[ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="3_fqixs"]
+[ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_qtdl7"]
+[ext_resource type="PackedScene" uid="uid://j53nm0t5m7rf" path="res://boat/boat1.blend" id="5_aovv1"]
+[ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="6_bs3h0"]
+[ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="7_sn1oa"]
+[ext_resource type="Script" uid="uid://dukhrkatonywt" path="res://common3d/entity/vehicle/entity_vehicle_seat3d.gd" id="8_5gbqv"]
+[ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="9_k1r8v"]
+[ext_resource type="Script" uid="uid://dacuhxdpe6083" path="res://boat/boat_docking_state.gd" id="10_2je65"]
+[ext_resource type="Script" uid="uid://8bgokntpuh33" path="res://boat/boat_docked_state.gd" id="11_xb7nd"]
+[ext_resource type="Script" uid="uid://favgu1tbe1tq" path="res://common3d/interactions/interactable3d.gd" id="12_qgqng"]
+[ext_resource type="Material" uid="uid://burxmpv8yk2pd" path="res://assets/shaders/boat_interaction.tres" id="13_2s03i"]
+
+[sub_resource type="Resource" id="Resource_thr0k"]
+script = ExtResource("2_bg2qv")
+max_speed = Vector2(40, 0)
+metadata/_custom_type_script = "uid://edbvsbdtvgtj"
+
+[sub_resource type="Resource" id="Resource_1blct"]
+script = ExtResource("3_fqixs")
+metadata/_custom_type_script = "uid://bh8pcyeueeoey"
+
+[sub_resource type="Resource" id="Resource_wbjwq"]
+script = ExtResource("4_qtdl7")
+bool_vector = SubResource("Resource_1blct")
+metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_enlnh"]
+size = Vector3(4.5, 0.5, 5.5)
+
+[sub_resource type="Animation" id="Animation_0q3wp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlenderMeshes1:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.017453292, 0, 0.017453292)]
+}
+
+[sub_resource type="Animation" id="Animation_1blct"]
+resource_name = "rock"
+length = 4.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlenderMeshes1:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.017453292, 0, 0.017453292), Vector3(-0.017453292, 0, -0.017453292), Vector3(0.017453292, 0, 0.017453292)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wbjwq"]
+_data = {
+&"RESET": SubResource("Animation_0q3wp"),
+&"rock": SubResource("Animation_1blct")
+}
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5wiqi"]
+material = ExtResource("13_2s03i")
+top_radius = 0.7
+bottom_radius = 0.7
+height = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0rdsp"]
+height = 1.0
+radius = 0.7
+
+[sub_resource type="BoxMesh" id="BoxMesh_hjjmf"]
+size = Vector3(5.3583984, 0.5961914, 6.1746826)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8tukb"]
+albedo_color = Color(0.5628713, 0.49427313, 1, 1)
+
+[node name="Boat3" type="CharacterBody3D" unique_id=782602740 node_paths=PackedStringArray("state_machine", "driver_seat", "interactable", "seats")]
+collision_layer = 5
+motion_mode = 1
+script = ExtResource("1_ltnc8")
+level = 3
+state_machine = NodePath("StateMachine")
+driver_seat = NodePath("DriverSeat")
+interactable = NodePath("Interactable3D")
+seats = [NodePath("DriverSeat")]
+type = &"Boat"
+move_mode = SubResource("Resource_thr0k")
+move_up_as_jump = false
+gravity_multiplier = 0.0
+rotation_range = SubResource("Resource_wbjwq")
+metadata/_custom_type_script = "uid://sw1ikf32qnw0"
+
+[node name="BlenderMeshes1" parent="." unique_id=562094623 instance=ExtResource("5_aovv1")]
+transform = Transform3D(0.9998477, -0.017452406, 0, 0.017449748, 0.9996954, -0.017452406, 0.00030458646, 0.017449748, 0.9998477, 0, 0.2, 2.78762)
+
+[node name="Walkway" parent="BlenderMeshes1" index="0" unique_id=2054301187]
+surface_material_override/0 = ExtResource("6_bs3h0")
+surface_material_override/1 = ExtResource("7_sn1oa")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=653007229]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 2.78762)
+shape = SubResource("BoxShape3D_enlnh")
+
+[node name="DriverSeat" type="Node3D" parent="." unique_id=238917161 node_paths=PackedStringArray("vehicle")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 2.788)
+script = ExtResource("8_5gbqv")
+vehicle = NodePath("..")
+metadata/_custom_type_script = "uid://dukhrkatonywt"
+
+[node name="StateMachine" type="Node" parent="." unique_id=266798118 node_paths=PackedStringArray("initial_state", "root")]
+script = ExtResource("9_k1r8v")
+initial_state = NodePath("Docking")
+root = NodePath("..")
+process_update = true
+physics_process_update = true
+metadata/_custom_type_script = "uid://bqonxtntgndfr"
+
+[node name="Docking" type="Node" parent="StateMachine" unique_id=1793866003 node_paths=PackedStringArray("interactable")]
+script = ExtResource("10_2je65")
+interactable = NodePath("../../Interactable3D")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="Docked" type="Node" parent="StateMachine" unique_id=1637149440 node_paths=PackedStringArray("driver_seat", "interactable")]
+script = ExtResource("11_xb7nd")
+driver_seat = NodePath("../../DriverSeat")
+interactable = NodePath("../../Interactable3D")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1985380001]
+libraries/ = SubResource("AnimationLibrary_wbjwq")
+autoplay = &"rock"
+
+[node name="Interactable3D" type="Area3D" parent="." unique_id=380494276]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 3)
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("12_qgqng")
+channel = 1
+visible_as_enabled = true
+tooltip_enabled = "Interact with your boat?"
+metadata/_custom_type_script = "uid://favgu1tbe1tq"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Interactable3D" unique_id=1970934138]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.27437466, 0)
+mesh = SubResource("CylinderMesh_5wiqi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable3D" unique_id=1111912395]
+shape = SubResource("CylinderShape3D_0rdsp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=713837168]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.50146484, 0.2019043, 3.0271976)
+mesh = SubResource("BoxMesh_hjjmf")
+surface_material_override/0 = SubResource("StandardMaterial3D_8tukb")
+
+[editable path="BlenderMeshes1"]
