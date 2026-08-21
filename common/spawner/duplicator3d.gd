@@ -18,9 +18,16 @@ func pack_templates() -> void:
 	for template in templates:
 		if not is_instance_valid(template):
 			continue
-
-		var packed_scene := PackedScene.new()
-		var result := packed_scene.pack(template)
+		
+		var packed_scene: PackedScene
+		var result: Error
+		
+		if template.scene_file_path.is_empty():
+			packed_scene = PackedScene.new()
+			result = packed_scene.pack(template)
+		else:
+			packed_scene = load(template.scene_file_path)
+			result = OK
 
 		if result == OK:
 			packed_templates.append(packed_scene)
