@@ -142,7 +142,7 @@ subdivide_depth = 1000
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), -0.015610588, 0.0, 0, 0]
 point_count = 2
 
-[node name="Island0" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "boat_adder", "docking_manager", "name_label", "name_anim_player", "spawn_container")]
+[node name="Island0" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "boat_adder", "docking_managers", "name_label", "name_anim_player", "spawn_container")]
 script = ExtResource("1_1lm7x")
 resource = ExtResource("2_mngd6")
 player = NodePath("DockingManager/Player")
@@ -152,7 +152,7 @@ occluder_instance = NodePath("HeightMapOccluderInstance")
 prop_populator = NodePath("PropGenerator")
 mesh_aggregator = NodePath("MeshInstanceAggregator3D")
 boat_adder = NodePath("DockingManager/BoatAdder")
-docking_manager = NodePath("DockingManager")
+docking_managers = [NodePath("DockingManager")]
 name_label = NodePath("NameLabel")
 name_anim_player = NodePath("NameLabel/AnimationPlayer")
 spawn_container = NodePath("SpawnContainer")
@@ -180,12 +180,12 @@ layers = 3
 shadow_enabled = true
 shadow_blur = 2.0
 
-[node name="DockingManager" type="Node3D" parent="." unique_id=493778674 node_paths=PackedStringArray("dock_place_ray_container", "boat_dock_point", "dock", "boat_adder")]
+[node name="DockingManager" type="Node3D" parent="." unique_id=493778674 node_paths=PackedStringArray("dock", "boat_adder", "boat_dock_point", "dock_place_ray_container")]
 script = ExtResource("20_gk71k")
-dock_place_ray_container = NodePath("DockPlaceRayContainer")
-boat_dock_point = NodePath("Dock/BoatDockPoint")
 dock = NodePath("Dock")
 boat_adder = NodePath("BoatAdder")
+boat_dock_point = NodePath("Dock/BoatDockPoint")
+dock_place_ray_container = NodePath("DockPlaceRayContainer")
 
 [node name="Player" parent="DockingManager" unique_id=30929158 instance=ExtResource("21_kn3q4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4989454, 403.02567)

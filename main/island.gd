@@ -19,9 +19,9 @@ enum PlayerSpawnMode {BOAT, ISLAND_CENTER}
 @export var prop_populator: PropPopulator
 @export var mesh_aggregator: MeshInstanceAggregator3D
 
-@export_group("Boat")
+@export_group("Docking")
 @export var boat_adder: BoatAdder
-@export var docking_manager: DockingManager
+@export var docking_managers: Array[DockingManager]
 
 @export_group("Name", "name")
 @export_multiline() var name_format := "\n%s"
@@ -93,7 +93,8 @@ func initial_save_load() -> void:
 	await island_generator.generated
 	
 	boat_adder.added_boat.connect(position_player_at_spawn)
-	docking_manager.initialize()
+	for manager in docking_managers:
+		manager.initialize()
 	
 	prop_populator.clear()
 	Spawner3D.spawning_enabled = true
@@ -106,7 +107,8 @@ func initial_save_load() -> void:
 
 
 func reload_save() -> void:
-	docking_manager.boat_adder.added_boat.connect(position_player_at_spawn)
+	for manager in docking_managers:
+		manager.boat_adder.added_boat.connect(position_player_at_spawn)
 	prop_populator.clear()
 	Spawner3D.spawning_enabled = true
 	advance_step()
