@@ -55,6 +55,10 @@ func hold_instance(new_instance: ItemInstance) -> void:
 	connect_triggered_event(held_item_instance)
 
 
+func get_held_item() -> Item:
+	return null if held_item_instance == null else held_item_instance.item
+
+
 func connect_triggered_event(instance: ItemInstance) -> void:
 	if instance == null or instance.item == null:
 		return

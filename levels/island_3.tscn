@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://csprfavexgrle" path="res://island/props/island_prop.gd" id="13_babke"]
 [ext_resource type="Resource" uid="uid://cb30upq44sjbu" path="res://island/props/destructable_resource/stone/stone_prop.tres" id="14_8y6y8"]
 [ext_resource type="Resource" uid="uid://cjar2mtvun61t" path="res://island/props/destructable_resource/dead_shrub/dead_shrub_prop.tres" id="16_3exlf"]
+[ext_resource type="Resource" uid="uid://tfgt81gsmko4" path="res://island/props/indestructable/treasure_chest/treasure_chest_prop.tres" id="16_xnw05"]
 [ext_resource type="Script" uid="uid://c7gxodoedjemm" path="res://island/island_nav_region.gd" id="18_i1s1v"]
 [ext_resource type="Script" uid="uid://dpyn65ul3fu6v" path="res://common3d/mesh_instance_aggregator3d.gd" id="19_6qly1"]
 [ext_resource type="Script" uid="uid://dm2twxr0f7ne" path="res://common3d/heightmap_occluder_instance.gd" id="20_iiued"]
@@ -475,7 +476,8 @@ script = ExtResource("12_rl17t")
 island_generator = NodePath("../IslandGenerator")
 prop_quantities = Dictionary[ExtResource("13_babke"), int]({
 ExtResource("14_8y6y8"): 80,
-ExtResource("16_3exlf"): 50
+ExtResource("16_3exlf"): 50,
+ExtResource("16_xnw05"): 1
 })
 populate_on_ready = false
 
