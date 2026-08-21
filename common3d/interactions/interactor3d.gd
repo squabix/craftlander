@@ -6,6 +6,7 @@ signal interaction_failed
 
 @export var root: Node
 @export var channel := 0
+@export var override_disabled := false
 
 
 func interact() -> Interactable3D:
@@ -13,6 +14,10 @@ func interact() -> Interactable3D:
 	if interactable == null:
 		interaction_failed.emit()
 		return null
+	
+	if interactable.enabled == false and not override_disabled:
+		return null
+	
 	interactable.interact(root)
 	interacted_with.emit(interactable)
 	return interactable
