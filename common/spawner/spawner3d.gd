@@ -33,6 +33,7 @@ static var spawning_enabled := true
 @export var autostart_timer: bool
 
 var has_started_timer: bool
+var spawned_instances: Array[Node]
 
 
 static func _transform(node: Node3D, node_position: Vector3, node_rotation_degrees: Vector3) -> void:
@@ -74,6 +75,12 @@ func get_spawn_position(parent: Node) -> Vector3:
 			return global_position
 
 	return global_position
+
+
+func clear() -> void:
+	for instance in spawned_instances:
+		Util.safe_free(instance)
+	spawned_instances = []
 
 
 func get_spawn_rotation_degrees(parent: Node) -> Vector3:
@@ -133,6 +140,7 @@ func spawn(instance: Node3D = null, parent: Node = null) -> Node3D:
 
 	_call_initializer(instance)
 	spawned.emit(instance)
+	spawned_instances.append(instance)
 	return instance
 
 
