@@ -20,7 +20,7 @@ enum PlayerSpawnMode {BOAT, ISLAND_CENTER}
 @export var mesh_aggregator: MeshInstanceAggregator3D
 
 @export_group("Docking")
-@export var boat_adder: BoatAdder
+@export var player_boat_adder: BoatAdder
 @export var docking_managers: Array[DockingManager]
 
 @export_group("Name", "name")
@@ -98,7 +98,7 @@ func initial_save_load() -> void:
 	advance_step()
 	await island_generator.generated
 	
-	boat_adder.added_boat.connect(position_player_at_spawn)
+	connect_player_boat_adder()
 	for manager in docking_managers:
 		manager.initialize()
 	
@@ -112,6 +112,10 @@ func initial_save_load() -> void:
 	Main.loaded_save.mark_current_level_as_generated()
 
 
+func connect_player_boat_adder() -> void:
+	player_boat_adder.spawned.connect(position_player_at_spawn.unbind(1))
+
+
 func update_sky_setting() -> void:
 	Main.loaded_save.sky_setting = SkySetting.latest(Main.loaded_save.sky_setting, resource.arrival_setting)
 	Main.loaded_save.sky_setting.update_sun(sun)
@@ -119,8 +123,7 @@ func update_sky_setting() -> void:
 
 
 func reload_save() -> void:
-	for manager in docking_managers:
-		manager.boat_adder.added_boat.connect(position_player_at_spawn)
+	connect_player_boat_adder()
 	prop_populator.clear()
 	Spawner3D.spawning_enabled = true
 	advance_step()
@@ -135,6 +138,6 @@ func reload_save() -> void:
 func position_player_at_spawn() -> void:
 	match player_spawn_mode:
 		PlayerSpawnMode.BOAT:
-			boat_adder.boat.driver_seat.mount(player)
+			player_boat_adder.boat.driver_seat.mount(player)
 		PlayerSpawnMode.ISLAND_CENTER:
 			player.global_position = Vector3(0.0, ISLAND_CENTER_SPAWN_HEIGHT, 0.0)

@@ -222,7 +222,7 @@ _data = {
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), -0.015610588, 0.0, 0, 0]
 point_count = 2
 
-[node name="Island2" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "boat_adder", "docking_managers", "name_label", "name_anim_player", "world_environment", "sun", "spawn_container")]
+[node name="Island2" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "player_boat_adder", "docking_managers", "name_label", "name_anim_player", "world_environment", "sun", "spawn_container")]
 script = ExtResource("1_pu37u")
 resource = ExtResource("2_a72t2")
 player = NodePath("DockingManager/Player")
@@ -231,7 +231,7 @@ nav_region = NodePath("NavigationRegion3D")
 occluder_instance = NodePath("HeightMapOccluderInstance")
 prop_populator = NodePath("PropGenerator")
 mesh_aggregator = NodePath("MeshInstanceAggregator3D")
-boat_adder = NodePath("DockingManager/BoatAdder")
+player_boat_adder = NodePath("DockingManager/BoatAdder")
 docking_managers = [NodePath("DockingManager")]
 name_label = NodePath("NameLabel")
 name_anim_player = NodePath("NameLabel/AnimationPlayer")
@@ -302,6 +302,8 @@ metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 [node name="BoatAdder" type="Node3D" parent="DockingManager" unique_id=1997322117]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 400)
 script = ExtResource("8_wanbp")
+default_parent_mode = 2
+ignore_disabling = true
 metadata/_custom_type_script = "uid://ckgs8ho78e8eq"
 
 [node name="NodeSaver" type="Node" parent="DockingManager/BoatAdder" unique_id=1696469404]
@@ -353,6 +355,10 @@ ExtResource("20_nxi38"): 50,
 ExtResource("17_vmqyq"): 50
 })
 populate_on_ready = false
+ancestor_level = null
+transform_mode_position = null
+transform_mode_rotation = null
+ignore_disabling = null
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1167048051 node_paths=PackedStringArray("island_generator", "prop_populator", "terrain")]
 navigation_mesh = SubResource("NavigationMesh_heikx")

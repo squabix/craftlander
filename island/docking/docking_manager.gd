@@ -34,8 +34,7 @@ func add_boat() -> void:
 		Util.node_error("%s cannot add boat with invalid boat adder (%s)", self, boat_adder)
 		return
 	boat_adder.dock_position = boat_dock_point.global_position
-	boat = boat_adder.add()
-	boat.look_at(boat.dock_position)
+	boat = boat_adder.spawn()
 
 
 func extend_dock_place_rays() -> void:
