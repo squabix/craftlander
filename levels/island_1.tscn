@@ -43,6 +43,7 @@
 [ext_resource type="Material" uid="uid://d06u1efqiqr8e" path="res://assets/shaders/water_shader_material.tres" id="31_qbj1t"]
 [ext_resource type="PackedScene" uid="uid://d4cc1bccfdgd5" path="res://island/props/indestructable/giant_ribcage/giant_ribcage.tscn" id="32_2utcq"]
 [ext_resource type="Resource" uid="uid://dora54e1oq756" path="res://entities/enemies/skeleton/skeleton_island_resource.tres" id="35_k7qss"]
+[ext_resource type="Shader" uid="uid://bjt5jcslbt2k1" path="res://assets/shaders/water.gdshader" id="42_2utcq"]
 
 [sub_resource type="Gradient" id="Gradient_eo3xd"]
 
@@ -157,6 +158,41 @@ size = Vector2(1500, 1500)
 subdivide_width = 1000
 subdivide_depth = 1000
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fh26t"]
+noise_type = 2
+frequency = 0.05
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_q07lh"]
+width = 720
+height = 720
+noise = SubResource("FastNoiseLite_fh26t")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_epvbt"]
+noise_type = 2
+frequency = 0.05
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wyq6a"]
+width = 720
+height = 720
+noise = SubResource("FastNoiseLite_epvbt")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cpr0p"]
+render_priority = -1
+shader = ExtResource("42_2utcq")
+shader_parameter/noise_tex_1 = SubResource("NoiseTexture2D_q07lh")
+shader_parameter/noise_tex_2 = SubResource("NoiseTexture2D_wyq6a")
+shader_parameter/deep_color = Color(0.2736, 0.59352005, 0.72, 1)
+shader_parameter/shallow_color = Color(0.25839996, 0.76, 0.72656, 1)
+shader_parameter/wave_speed = 0.003
+shader_parameter/wave_scale = 4.0
+shader_parameter/wave_height = 1.0
+shader_parameter/roughness = 0.0
+shader_parameter/metallic = 0.0
+shader_parameter/fade_radius = 500.0
+shader_parameter/fade_max = 850.0
+
 [sub_resource type="LabelSettings" id="LabelSettings_qkr8n"]
 font_size = 70
 
@@ -202,7 +238,7 @@ _data = {
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), -0.015610588, 0.0, 0, 0]
 point_count = 2
 
-[node name="Island1" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "boat_adder", "docking_managers", "name_label", "name_anim_player", "spawn_container")]
+[node name="Island1" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "boat_adder", "docking_managers", "name_label", "name_anim_player", "world_environment", "sun", "spawn_container")]
 script = ExtResource("1_0eh6l")
 resource = ExtResource("2_ygej4")
 player = NodePath("DockingManager/Player")
@@ -215,6 +251,8 @@ boat_adder = NodePath("DockingManager/BoatAdder")
 docking_managers = [NodePath("DockingManager")]
 name_label = NodePath("NameLabel")
 name_anim_player = NodePath("NameLabel/AnimationPlayer")
+world_environment = NodePath("WorldEnvironment")
+sun = NodePath("DirectionalLight3D")
 spawn_container = NodePath("SpawnContainer")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2120940629]
@@ -226,8 +264,9 @@ layers = 3
 shadow_enabled = true
 shadow_blur = 2.0
 
-[node name="DockingManager" type="Node3D" parent="." unique_id=1574393077 node_paths=PackedStringArray("boat_adder", "boat_dock_point", "dock_place_ray_container")]
+[node name="DockingManager" type="Node3D" parent="." unique_id=1574393077 node_paths=PackedStringArray("dock", "boat_adder", "boat_dock_point", "dock_place_ray_container")]
 script = ExtResource("26_dy2l4")
+dock = NodePath("Dock")
 boat_adder = NodePath("BoatAdder")
 boat_dock_point = NodePath("Dock/BoatDockPoint")
 dock_place_ray_container = NodePath("DockPlaceRayContainer")
@@ -2461,6 +2500,7 @@ shape = SubResource("WorldBoundaryShape3D_enbwd")
 ignore_occlusion_culling = true
 mesh = SubResource("PlaneMesh_2utcq")
 skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_cpr0p")
 
 [node name="PickupContainer" type="Node3D" parent="." unique_id=1046057175]
 

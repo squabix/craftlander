@@ -1,6 +1,6 @@
 [gd_resource type="Environment" format=3 uid="uid://cibxuhtgknost"]
 
-[ext_resource type="Material" uid="uid://d0vqjxjqqesv3" path="res://island/skies/sky_material2.tres" id="1_0e4fy"]
+[ext_resource type="Material" uid="uid://dia41efen5cu" path="res://island/skies/sky_material0.tres" id="1_0e4fy"]
 
 [sub_resource type="Sky" id="Sky_tsgde"]
 sky_material = ExtResource("1_0e4fy")
@@ -9,8 +9,7 @@ sky_material = ExtResource("1_0e4fy")
 background_mode = 2
 sky = SubResource("Sky_tsgde")
 ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_sky_contribution = 0.3
-ambient_light_energy = 0.5
+ambient_light_sky_contribution = 0.9
 reflected_light_source = 2
 tonemap_mode = 3
 tonemap_exposure = 0.5

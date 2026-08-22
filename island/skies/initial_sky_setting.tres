@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SkySetting" format=3 uid="uid://d1eptumm1b41d"]
+
+[ext_resource type="Script" uid="uid://7s1w1ts4d614" path="res://island/skies/sky_setting.gd" id="1_1cgnu"]
+[ext_resource type="Material" uid="uid://dia41efen5cu" path="res://island/skies/sky_material0.tres" id="2_baun5"]
+
+[resource]
+script = ExtResource("1_1cgnu")
+sun_rotation_degrees = Vector3(-40, 0, 0)
+sky_material = ExtResource("2_baun5")
+metadata/_custom_type_script = "uid://7s1w1ts4d614"
