@@ -8,8 +8,8 @@
 [sub_resource type="Resource" id="Resource_bp4kh"]
 script = ExtResource("1_iviav")
 time_index = 1
-sun_rotation_degrees = Vector3(-25, 0, 0)
 sky_material = ExtResource("2_h1gtv")
+sun_rotation_degrees = Vector3(-25, 0, 0)
 metadata/_custom_type_script = "uid://7s1w1ts4d614"
 
 [resource]
