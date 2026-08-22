@@ -4,7 +4,7 @@ extends Node3D
 signal spawned(node3d: Node3D)
 
 enum TransformMode { SELF, PARENT, DEFAULT }
-enum DefaultParentMode { ROOT, SELF, CUSTOM }
+enum DefaultParentMode { ROOT, SELF, ANCESTOR, CUSTOM }
 
 static var root: Node:
 	get:
@@ -20,6 +20,7 @@ static var spawning_enabled := true
 @export_group("Default Parent")
 @export var default_parent_mode := DefaultParentMode.ROOT
 @export var custom_default_parent: Node
+@export var ancestor_level := 1
 
 @export_group("Transform")
 @export var position_mode := TransformMode.SELF
@@ -59,6 +60,8 @@ func get_default_parent() -> Node:
 			return root
 		DefaultParentMode.SELF:
 			return self
+		DefaultParentMode.ANCESTOR:
+			return Util.get_ancestor(self, ancestor_level)
 		DefaultParentMode.CUSTOM:
 			return custom_default_parent
 	return null
