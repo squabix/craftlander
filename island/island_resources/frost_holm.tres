@@ -1,11 +1,23 @@
 [gd_resource type="Resource" script_class="IslandResource" format=3 uid="uid://cccntbp1un6ey"]
 
 [ext_resource type="Texture2D" uid="uid://beudtbsirofjr" path="res://assets/ui/island0.png" id="1_a1rp5"]
+[ext_resource type="Script" uid="uid://7s1w1ts4d614" path="res://island/skies/sky_setting.gd" id="1_qpb2j"]
+[ext_resource type="Material" uid="uid://d2pyqo2jir8rp" path="res://island/skies/sky_material1.tres" id="2_078im"]
 [ext_resource type="Script" uid="uid://7dsenmmyrsaw" path="res://island/island_resource.gd" id="2_qpb2j"]
+
+[sub_resource type="Resource" id="Resource_qki68"]
+script = ExtResource("1_qpb2j")
+time_index = 2
+sky_material = ExtResource("2_078im")
+sun_rotation_degrees = Vector3(-6, 0, 0)
+sun_color = Color(1, 0.66400003, 0.44, 1)
+sun_energy = 0.8
+metadata/_custom_type_script = "uid://7s1w1ts4d614"
 
 [resource]
 script = ExtResource("2_qpb2j")
 name = "Frost Holm"
 icon = ExtResource("1_a1rp5")
 index = 2
+arrival_setting = SubResource("Resource_qki68")
 metadata/_custom_type_script = "uid://7dsenmmyrsaw"

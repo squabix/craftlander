@@ -28,6 +28,10 @@ enum PlayerSpawnMode {BOAT, ISLAND_CENTER}
 @export var name_label: Label
 @export var name_anim_player: AnimationPlayer
 
+@export_group("Sky Setting")
+@export var world_environment: WorldEnvironment
+@export var sun: DirectionalLight3D
+
 @export_group("Misc")
 @export var spawn_container: Node3D
 
@@ -61,6 +65,8 @@ func _ready() -> void:
 	
 	advance_step()
 	NodeSaver.load_all()
+	
+	update_sky_setting()
 	
 	advance_step()
 	mesh_aggregator.aggregate()
@@ -104,6 +110,12 @@ func initial_save_load() -> void:
 	await prop_populator.populated
 	
 	Main.loaded_save.mark_current_level_as_generated()
+
+
+func update_sky_setting() -> void:
+	Main.loaded_save.sky_setting = SkySetting.latest(Main.loaded_save.sky_setting, resource.arrival_setting)
+	Main.loaded_save.sky_setting.update_sun(sun)
+	Main.loaded_save.sky_setting.update_environment(world_environment)
 
 
 func reload_save() -> void:
