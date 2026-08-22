@@ -4,7 +4,7 @@ extends Node3D
 signal spawned(node3d: Node3D)
 
 enum TransformMode { SELF, PARENT, DEFAULT }
-enum DefaultParentMode { ROOT, SELF, ANCESTOR, CUSTOM }
+enum DefaultParentMode { ROOT, SELF, ANCESTOR }
 
 static var root: Node:
 	get:
@@ -14,17 +14,20 @@ static var root: Node:
 static var spawning_enabled := true
 
 @export var defer := false
-@export var ignore_pausing: bool
 @export var spawn_on_exit_tree := false
 
 @export_group("Default Parent")
 @export var default_parent_mode := DefaultParentMode.ROOT
-@export var custom_default_parent: Node
+@export var default_parent_override: Node
 @export var ancestor_level := 1
 
 @export_group("Transform")
-@export var position_mode := TransformMode.SELF
-@export var rotation_mode := TransformMode.SELF
+
+@export_subgroup("Modes", "transform_mode")
+@export var transform_mode_position := TransformMode.SELF
+@export var transform_mode_rotation := TransformMode.SELF
+
+@export_subgroup("Defaults", "default")
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var default_position: Vector3
 @export_custom(PROPERTY_HINT_NONE, "suffix:°") var default_rotation_degrees: Vector3
 
@@ -32,6 +35,10 @@ static var spawning_enabled := true
 @export var spawn_frequency: float
 @export var spawn_time_variation: float
 @export var autostart_timer: bool
+
+@export_group("Ignore", "ignore")
+@export var ignore_pausing := false
+@export var ignore_disabling := false
 
 var has_started_timer: bool
 var spawned_instances: Array[Node]
@@ -55,6 +62,8 @@ func _ready() -> void:
 
 
 func get_default_parent() -> Node:
+	if is_instance_valid(default_parent_override):
+		return default_parent_override
 	match default_parent_mode:
 		DefaultParentMode.ROOT:
 			return root
@@ -62,13 +71,11 @@ func get_default_parent() -> Node:
 			return self
 		DefaultParentMode.ANCESTOR:
 			return Util.get_ancestor(self, ancestor_level)
-		DefaultParentMode.CUSTOM:
-			return custom_default_parent
 	return null
 
 
 func get_spawn_position(parent: Node) -> Vector3:
-	match position_mode:
+	match transform_mode_position:
 		TransformMode.PARENT:
 			if is_instance_valid(parent) and parent is Node3D:
 				return parent.global_position
@@ -87,7 +94,7 @@ func clear() -> void:
 
 
 func get_spawn_rotation_degrees(parent: Node) -> Vector3:
-	match rotation_mode:
+	match transform_mode_rotation:
 		TransformMode.PARENT:
 			if is_instance_valid(parent) and parent is Node3D:
 				return parent.global_rotation_degrees
@@ -109,15 +116,15 @@ func initialize_instance(_instance: Node3D) -> void:
 func spawn(instance: Node3D = null, parent: Node = null) -> Node3D:
 	if is_queued_for_deletion() or not is_inside_tree():
 		return null
-
+	
 	if instance == null:
-		if not spawning_enabled:
+		if not spawning_enabled and not ignore_disabling:
 			return
 		instance = create_instance()
 		if instance == null:
 			Util.node_error("%s cannot spawn null instance", self)
 			return null
-	elif is_instance_valid(instance) and not spawning_enabled:
+	elif is_instance_valid(instance) and not spawning_enabled and not ignore_disabling:
 		instance.queue_free()
 		return
 
