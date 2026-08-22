@@ -10,7 +10,6 @@
 [ext_resource type="Material" uid="uid://dia41efen5cu" path="res://island/skies/sky_material0.tres" id="7_dbvjn"]
 [ext_resource type="AudioStream" uid="uid://bcj8kf1cl1icf" path="res://assets/sound/ocean.mp3" id="8_vppps"]
 [ext_resource type="Material" uid="uid://d06u1efqiqr8e" path="res://assets/shaders/water_shader_material.tres" id="10_ctf6r"]
-[ext_resource type="Texture2D" uid="uid://chh6o0ggvj8jo" path="res://items/materials/wood/wood.png" id="12_cqggn"]
 
 [sub_resource type="Animation" id="Animation_ctf6r"]
 length = 0.001
@@ -406,10 +405,3 @@ stream = ExtResource("8_vppps")
 volume_db = -5.0
 autoplay = true
 bus = &"Ambient"
-
-[node name="Icon" type="TextureRect" parent="." unique_id=1849345375]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("12_cqggn")
-expand_mode = 1
