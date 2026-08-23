@@ -9,4 +9,6 @@ func enter() -> void:
 		return
 
 	dismounted_player.respawn_point_node = driver_seat
-	interactable.enable()
+	if is_instance_valid(interactable):
+		interactable.enable()
+	

@@ -6,7 +6,7 @@ var boat: Boat
 
 
 func create_instance() -> Node3D:
-	return Boat.instantiate(Main.loaded_save.boat_level if &"boat_level" in Main.loaded_save else 0)
+	return PlayerBoat.instantiate(Main.loaded_save.boat_level if &"boat_level" in Main.loaded_save else 0)
 
 
 func initialize_instance(instance: Node3D) -> void:

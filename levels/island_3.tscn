@@ -482,10 +482,6 @@ ExtResource("16_3exlf"): 50,
 ExtResource("16_xnw05"): 1
 })
 populate_on_ready = false
-ancestor_level = null
-transform_mode_position = null
-transform_mode_rotation = null
-ignore_disabling = null
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1167048051 node_paths=PackedStringArray("island_generator", "prop_populator", "terrain")]
 navigation_mesh = SubResource("NavigationMesh_heikx")
