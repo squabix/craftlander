@@ -141,8 +141,12 @@ func _process_wave(wave: WaveSpawnerWave) -> void:
 		# Execute spawn and receive count spawned
 		var spawned_count := _spawn_scene_with_distribution(scene_to_spawn, wave)
 
+		if spawned_count == 0:
+			await get_tree().process_frame
+			continue
+
 		# Wait for delay before next spawn tick
-		if not remaining_pool.is_empty() and spawned_count > 0:
+		if not remaining_pool.is_empty():
 			await get_tree().create_timer(wave.pause_length_between_spawns, false).timeout
 
 	if current_state != WavesState.IDLE:
