@@ -1,6 +1,8 @@
 class_name Boat
 extends EntityVehicle3D
 
+signal docked
+
 @export var driver_seat: Seat3D
 @export var state_machine: StateMachine
 

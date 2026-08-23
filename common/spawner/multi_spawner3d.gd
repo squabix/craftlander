@@ -59,6 +59,14 @@ func get_default_parent() -> Node:
 	return null
 
 
+func enable_spawner(spawner: Spawner3D) -> void:
+	sub_spawners[spawner] = true
+
+
+func disable_spawner(spawner: Spawner3D) -> void:
+	sub_spawners[spawner] = false
+
+
 func spawn(instance: Node3D = null, parent: Node = null) -> Array[Node3D]:
 	var instances: Array[Node3D] = []
 	for spawner in select_spawners():

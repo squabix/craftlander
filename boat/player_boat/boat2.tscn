@@ -86,13 +86,13 @@ size = Vector3(5.3583984, 0.5961914, 6.1746826)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8tukb"]
 albedo_color = Color(1, 0.29000002, 0.29000002, 1)
 
-[node name="Boat2" type="CharacterBody3D" unique_id=782602740 node_paths=PackedStringArray("driver_seat", "interactable", "state_machine", "seats")]
+[node name="Boat2" type="CharacterBody3D" unique_id=782602740 node_paths=PackedStringArray("interactable", "driver_seat", "state_machine", "seats")]
 collision_layer = 5
 motion_mode = 1
 script = ExtResource("1_2c4gv")
 level = 2
-driver_seat = NodePath("DriverSeat")
 interactable = NodePath("Interactable3D")
+driver_seat = NodePath("DriverSeat")
 state_machine = NodePath("StateMachine")
 seats = [NodePath("DriverSeat")]
 type = &"Boat"
