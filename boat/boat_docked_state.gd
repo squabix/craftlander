@@ -4,6 +4,7 @@ extends State
 @export var interactable: Interactable3D
 
 func enter() -> void:
+	root.docked.emit()
 	var dismounted_player: Player = driver_seat.dismount()
 	if dismounted_player == null:
 		return

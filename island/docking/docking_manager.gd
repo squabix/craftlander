@@ -10,6 +10,7 @@ const DOCK_EXPOSED_LENGTH := 6.0
 @export_group("Boat", "boat")
 @export var boat_adder: BoatAdder
 @export var boat_dock_point: Node3D
+@export var boat_auto_add := true
 
 @export_group("Dock Placement Rays", "dock_place_ray")
 @export var dock_place_ray_container: Node3D
@@ -25,7 +26,7 @@ var boat: Boat
 
 func initialize() -> void:
 	place_dock()
-	if is_instance_valid(boat_adder):
+	if is_instance_valid(boat_adder) and boat_auto_add:
 		add_boat()
 
 

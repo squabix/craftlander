@@ -1,11 +1,15 @@
 class_name BoatAdder
 extends Spawner3D
 
+@export var scene_override: PackedScene
+
 var dock_position: Vector3
 var boat: Boat
 
 
 func create_instance() -> Node3D:
+	if scene_override != null:
+		return scene_override.instantiate()
 	return PlayerBoat.instantiate(Main.loaded_save.boat_level if &"boat_level" in Main.loaded_save else 0)
 
 
