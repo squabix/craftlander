@@ -375,10 +375,6 @@ ExtResource("22_enbwd"): 5,
 ExtResource("23_cpr0p"): 4
 })
 populate_on_ready = false
-ancestor_level = null
-transform_mode_position = null
-transform_mode_rotation = null
-ignore_disabling = null
 
 [node name="GiantRibcage" parent="PropGenerator" unique_id=51772479 instance=ExtResource("32_2utcq")]
 transform = Transform3D(0.590034, -0.1303747, -2.459514, 0.15351409, 2.5261345, -0.09707832, 2.4581783, -0.12646428, 0.5964172, -58.948685, 5.082353, -91.98999)

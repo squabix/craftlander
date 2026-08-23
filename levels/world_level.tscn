@@ -3,7 +3,7 @@
 [ext_resource type="Environment" uid="uid://cibxuhtgknost" path="res://assets/default_environment.tres" id="1_lvwc0"]
 [ext_resource type="PackedScene" uid="uid://dmbp0klxo0b0c" path="res://player/player.tscn" id="2_0dwa0"]
 [ext_resource type="Material" uid="uid://d06u1efqiqr8e" path="res://assets/shaders/water_shader_material.tres" id="3_g266k"]
-[ext_resource type="PackedScene" uid="uid://c2ss32j8grhn8" path="res://boat/boat0.tscn" id="4_ufyu5"]
+[ext_resource type="PackedScene" uid="uid://c2ss32j8grhn8" path="res://boat/player_boat/boat0.tscn" id="4_ufyu5"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_i8ckm"]
 material = ExtResource("3_g266k")

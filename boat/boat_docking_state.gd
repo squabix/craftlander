@@ -8,7 +8,8 @@ var dock_speed: float
 
 
 func enter() -> void:
-	interactable.disable()
+	if is_instance_valid(interactable):
+		interactable.disable()
 	root.driver_seat.is_driver = false
 	dock_speed = root.move_mode.max_speed.x
 

@@ -1,30 +1,30 @@
-[gd_scene format=3 uid="uid://7e05ki6ll213"]
+[gd_scene format=3 uid="uid://bpnhxoo6l4ydp"]
 
-[ext_resource type="Script" uid="uid://bj8pokcrjdf2c" path="res://boat/boat.gd" id="1_1ek77"]
-[ext_resource type="PackedScene" uid="uid://j53nm0t5m7rf" path="res://boat/boat1.blend" id="2_6h0kv"]
-[ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="2_fs7t1"]
-[ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common/move_mode.gd" id="2_wbjwq"]
-[ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="3_0q3wp"]
-[ext_resource type="Script" uid="uid://dukhrkatonywt" path="res://common3d/entity/vehicle/entity_vehicle_seat3d.gd" id="3_qqn3m"]
-[ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="4_qqn3m"]
-[ext_resource type="Script" uid="uid://dacuhxdpe6083" path="res://boat/boat_docking_state.gd" id="5_c4lax"]
-[ext_resource type="Script" uid="uid://8bgokntpuh33" path="res://boat/boat_docked_state.gd" id="6_c4lax"]
-[ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="6_wbjwq"]
-[ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="7_e44pp"]
-[ext_resource type="Script" uid="uid://favgu1tbe1tq" path="res://common3d/interactions/interactable3d.gd" id="13_e44pp"]
-[ext_resource type="Material" uid="uid://burxmpv8yk2pd" path="res://assets/shaders/boat_interaction.tres" id="14_oojic"]
+[ext_resource type="Script" uid="uid://chfgdr4oy23or" path="res://boat/player_boat/player_boat.gd" id="1_2c4gv"]
+[ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common/move_mode.gd" id="2_tcgdv"]
+[ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="3_rs6ae"]
+[ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_5ytbq"]
+[ext_resource type="PackedScene" uid="uid://j53nm0t5m7rf" path="res://boat/player_boat/boat1.blend" id="5_kfmqd"]
+[ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="6_cyada"]
+[ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="7_pqoyq"]
+[ext_resource type="Script" uid="uid://dukhrkatonywt" path="res://common3d/entity/vehicle/entity_vehicle_seat3d.gd" id="8_rdtlh"]
+[ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="9_cduni"]
+[ext_resource type="Script" uid="uid://dacuhxdpe6083" path="res://boat/boat_docking_state.gd" id="10_57lby"]
+[ext_resource type="Script" uid="uid://8bgokntpuh33" path="res://boat/boat_docked_state.gd" id="11_xablq"]
+[ext_resource type="Script" uid="uid://favgu1tbe1tq" path="res://common3d/interactions/interactable3d.gd" id="12_jense"]
+[ext_resource type="Material" uid="uid://burxmpv8yk2pd" path="res://assets/shaders/boat_interaction.tres" id="13_oqrfv"]
 
 [sub_resource type="Resource" id="Resource_thr0k"]
-script = ExtResource("2_wbjwq")
+script = ExtResource("2_tcgdv")
 max_speed = Vector2(40, 0)
 metadata/_custom_type_script = "uid://edbvsbdtvgtj"
 
 [sub_resource type="Resource" id="Resource_1blct"]
-script = ExtResource("2_fs7t1")
+script = ExtResource("3_rs6ae")
 metadata/_custom_type_script = "uid://bh8pcyeueeoey"
 
 [sub_resource type="Resource" id="Resource_wbjwq"]
-script = ExtResource("3_0q3wp")
+script = ExtResource("4_5ytbq")
 bool_vector = SubResource("Resource_1blct")
 metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
 
@@ -71,7 +71,7 @@ _data = {
 }
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_5wiqi"]
-material = ExtResource("14_oojic")
+material = ExtResource("13_oqrfv")
 top_radius = 0.7
 bottom_radius = 0.7
 height = 1.0
@@ -83,14 +83,17 @@ radius = 0.7
 [sub_resource type="BoxMesh" id="BoxMesh_hjjmf"]
 size = Vector3(5.3583984, 0.5961914, 6.1746826)
 
-[node name="Boat1" type="CharacterBody3D" unique_id=782602740 node_paths=PackedStringArray("state_machine", "driver_seat", "interactable", "seats")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8tukb"]
+albedo_color = Color(1, 0.29000002, 0.29000002, 1)
+
+[node name="Boat2" type="CharacterBody3D" unique_id=782602740 node_paths=PackedStringArray("driver_seat", "interactable", "state_machine", "seats")]
 collision_layer = 5
 motion_mode = 1
-script = ExtResource("1_1ek77")
-level = 1
-state_machine = NodePath("StateMachine")
+script = ExtResource("1_2c4gv")
+level = 2
 driver_seat = NodePath("DriverSeat")
 interactable = NodePath("Interactable3D")
+state_machine = NodePath("StateMachine")
 seats = [NodePath("DriverSeat")]
 type = &"Boat"
 move_mode = SubResource("Resource_thr0k")
@@ -99,12 +102,12 @@ gravity_multiplier = 0.0
 rotation_range = SubResource("Resource_wbjwq")
 metadata/_custom_type_script = "uid://sw1ikf32qnw0"
 
-[node name="BlenderMeshes1" parent="." unique_id=562094623 instance=ExtResource("2_6h0kv")]
+[node name="BlenderMeshes1" parent="." unique_id=562094623 instance=ExtResource("5_kfmqd")]
 transform = Transform3D(0.9998477, -0.017452406, 0, 0.017449748, 0.9996954, -0.017452406, 0.00030458646, 0.017449748, 0.9998477, 0, 0.2, 2.78762)
 
-[node name="Walkway" parent="BlenderMeshes1" index="0" unique_id=2054301187]
-surface_material_override/0 = ExtResource("6_wbjwq")
-surface_material_override/1 = ExtResource("7_e44pp")
+[node name="Walkway" parent="BlenderMeshes1" index="0" unique_id=392888807]
+surface_material_override/0 = ExtResource("6_cyada")
+surface_material_override/1 = ExtResource("7_pqoyq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=653007229]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 2.78762)
@@ -113,12 +116,12 @@ shape = SubResource("BoxShape3D_enlnh")
 [node name="DriverSeat" type="Node3D" parent="." unique_id=238917161 node_paths=PackedStringArray("vehicle")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 2.788)
-script = ExtResource("3_qqn3m")
+script = ExtResource("8_rdtlh")
 vehicle = NodePath("..")
 metadata/_custom_type_script = "uid://dukhrkatonywt"
 
 [node name="StateMachine" type="Node" parent="." unique_id=266798118 node_paths=PackedStringArray("initial_state", "root")]
-script = ExtResource("4_qqn3m")
+script = ExtResource("9_cduni")
 initial_state = NodePath("Docking")
 root = NodePath("..")
 process_update = true
@@ -126,12 +129,12 @@ physics_process_update = true
 metadata/_custom_type_script = "uid://bqonxtntgndfr"
 
 [node name="Docking" type="Node" parent="StateMachine" unique_id=1793866003 node_paths=PackedStringArray("interactable")]
-script = ExtResource("5_c4lax")
+script = ExtResource("10_57lby")
 interactable = NodePath("../../Interactable3D")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Docked" type="Node" parent="StateMachine" unique_id=1637149440 node_paths=PackedStringArray("driver_seat", "interactable")]
-script = ExtResource("6_c4lax")
+script = ExtResource("11_xablq")
 driver_seat = NodePath("../../DriverSeat")
 interactable = NodePath("../../Interactable3D")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
@@ -145,7 +148,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 3)
 collision_layer = 2
 collision_mask = 0
 monitoring = false
-script = ExtResource("13_e44pp")
+script = ExtResource("12_jense")
 channel = 1
 visible_as_enabled = true
 tooltip_enabled = "Interact with your boat?"
@@ -161,5 +164,6 @@ shape = SubResource("CylinderShape3D_0rdsp")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=713837168]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.50146484, 0.2019043, 3.0271976)
 mesh = SubResource("BoxMesh_hjjmf")
+surface_material_override/0 = SubResource("StandardMaterial3D_8tukb")
 
 [editable path="BlenderMeshes1"]
