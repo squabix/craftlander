@@ -4,6 +4,7 @@ extends VisibleOnScreenNotifier3D
 @export var root: Node3D
 
 @export_group("Process")
+@export var do_handle_process := true
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var on_screen_process_radius := INF
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var off_screen_process_radius := INF
 
@@ -80,6 +81,8 @@ func set_visibility(to: bool) -> void:
 
 
 func disable_process() -> void:
+	if not do_handle_process:
+		return
 	if not is_instance_valid(root):
 		return
 	if root.process_mode == Node.PROCESS_MODE_DISABLED:
@@ -89,6 +92,8 @@ func disable_process() -> void:
 
 
 func enable_process() -> void:
+	if not do_handle_process:
+		return
 	if not is_instance_valid(root):
 		return
 	if root.process_mode == Node.PROCESS_MODE_INHERIT:
@@ -116,6 +121,9 @@ func set_up_visibility_range(instance: GeometryInstance3D) -> void:
 
 
 func update_radius_process(distance_sq: float, process_radius: float) -> void:
+	if not do_handle_process:
+		return
+	
 	if process_radius == INF:
 		enable_process()
 		return
