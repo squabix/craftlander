@@ -180,23 +180,21 @@ func _spawn_scene_with_distribution(scene: PackedScene, wave: WaveSpawnerWave) -
 			target_spawners.append(selected_spawners.pick_random())
 
 	var spawned_count := 0
-	var template_instance := scene.instantiate()
 
 	for spawner in target_spawners:
+		var instance := scene.instantiate()
+		
 		var spawned_node := spawner.spawn(
-			get_passable_instance(template_instance),
+			instance,
 			get_default_parent()
 		)
 
 		if not is_instance_valid(spawned_node):
+			instance.queue_free()
 			continue
 		
-		_track_instance(spawned_node)
+		_initialize_instance(spawned_node)
 		spawned_count += 1
-
-	# Free template if duplicated or unused
-	if do_duplicate_passed_instance or spawned_count == 0:
-		Util.safe_free(template_instance)
 
 	# Exact deduction from pool based on successful spawns
 	pool_subtract(scene, spawned_count)
@@ -238,7 +236,7 @@ func _pick_next_scene(mode: WaveSpawnerWave.SceneSelectMode) -> PackedScene:
 	return available_scenes[0]
 
 
-func _track_instance(node: Node3D) -> void:
+func _initialize_instance(node: Node3D) -> void:
 	active_instances.append(node)
 	entity_spawned.emit(node)
 	node.tree_exiting.connect(_on_instance_tree_exiting.bind(node), CONNECT_ONE_SHOT)
