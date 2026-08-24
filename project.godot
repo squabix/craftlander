@@ -58,6 +58,7 @@ folder_colors={
 "res://common3d/": "red",
 "res://defaults/": "blue",
 "res://entities/": "green",
+"res://entities/enemies/ghosts/": "purple",
 "res://island/": "yellow",
 "res://island/props/destructable_resource/": "pink",
 "res://island/props/indestructable/": "blue",
@@ -247,6 +248,7 @@ pause={
 3d_physics/layer_4="damage_box"
 3d_physics/layer_5="entity"
 3d_physics/layer_6="item_pickup"
+3d_physics/layer_7="ghost_floor"
 
 [physics]
 
