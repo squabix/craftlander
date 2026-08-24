@@ -59,7 +59,7 @@ func physics_update(_delta: float) -> void:
 
 
 func start_moving() -> void:
-	if not is_active:
+	if not is_active or not is_instance_valid(nav_guide):
 		return
 	nav_guide.set_target(
 		nav_guide.get_nearby_navigable_position(

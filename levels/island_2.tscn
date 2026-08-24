@@ -339,7 +339,7 @@ mesh = SubResource("PlaneMesh_vmqyq")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="IslandGenerator" unique_id=868759997 groups=["navigation_mesh_source_group"]]
 visible = false
-collision_layer = 5
+collision_layer = 69
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="IslandGenerator/StaticBody3D" unique_id=1273593528]
 transform = Transform3D(0.75, 0, 0, 0, 1, 0, 0, 0, 0.75, 0, 0, 0)
