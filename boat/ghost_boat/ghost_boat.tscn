@@ -7,6 +7,7 @@
 [ext_resource type="Material" uid="uid://m5807bchpbmp" path="res://assets/materials/glowing_eye.tres" id="4_evqqt"]
 [ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_w6ehl"]
 [ext_resource type="PackedScene" uid="uid://j53nm0t5m7rf" path="res://boat/player_boat/boat1.blend" id="5_uaf7s"]
+[ext_resource type="Shader" uid="uid://b4owsaj4sd2fg" path="res://assets/shaders/ghost.gdshader" id="6_w6ehl"]
 [ext_resource type="Script" uid="uid://dukhrkatonywt" path="res://common3d/entity/vehicle/entity_vehicle_seat3d.gd" id="8_5xlxr"]
 [ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="9_4mpps"]
 [ext_resource type="Script" uid="uid://dacuhxdpe6083" path="res://boat/boat_docking_state.gd" id="10_u7y0l"]
@@ -26,6 +27,35 @@ metadata/_custom_type_script = "uid://bh8pcyeueeoey"
 script = ExtResource("4_w6ehl")
 bool_vector = SubResource("Resource_1blct")
 metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
+
+[sub_resource type="Gradient" id="Gradient_f1q4c"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_oen7f"]
+frequency = 0.02
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_oen7f"]
+noise = SubResource("FastNoiseLite_oen7f")
+color_ramp = SubResource("Gradient_f1q4c")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3gr63"]
+render_priority = 0
+shader = ExtResource("6_w6ehl")
+shader_parameter/albedo = Color(0.26999998, 1, 1, 1)
+shader_parameter/emission_color = Color(0.7, 0.8449999, 1, 1)
+shader_parameter/emission_amount = 5.0
+shader_parameter/rim_steepness = 1.30000006175
+shader_parameter/uv_scale = Vector3(0, 0, 0)
+shader_parameter/uv_offset = Vector3(0, 0, 0)
+shader_parameter/model_height = 12.0
+shader_parameter/dissolve_start = 0.0
+shader_parameter/dissolve_length = 0.0
+shader_parameter/gradient_bias = 0.10000000149012
+shader_parameter/wave_speed = 2.0
+shader_parameter/wave_amplitude = 0.08
+shader_parameter/wave_frequency = 3.0
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_oen7f")
+shader_parameter/noise_distortion = 0.05
+shader_parameter/noise_flow_speed = Vector2(0, -0.02)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e44pp"]
 size = Vector3(4.5, 0.5, 5.5)
@@ -87,6 +117,7 @@ metadata/_custom_type_script = "uid://bj8pokcrjdf2c"
 transform = Transform3D(0.9998477, -0.017452406, 0, 0.017449748, 0.9996954, -0.017452406, 0.00030458646, 0.017449748, 0.9998477, 0, 0.2, 2.78762)
 
 [node name="Walkway" parent="BlenderMeshes1" index="0" unique_id=392888807]
+material_override = SubResource("ShaderMaterial_3gr63")
 surface_material_override/0 = ExtResource("3_0yhqq")
 surface_material_override/1 = ExtResource("4_evqqt")
 
