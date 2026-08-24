@@ -13,6 +13,6 @@ enum SpawnerDistribution { SINGLE_ROUND_ROBIN, SINGLE_RANDOM, BATCH_SIMULTANEOUS
 @export var spawner_distribution := SpawnerDistribution.SINGLE_ROUND_ROBIN
 @export var spawner_select_index_override := -1
 
-@export_group("Pause Lengths")
+@export_group("Pause Lengths", "pause_length")
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var pause_length_between_spawns := 1.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var pause_length_begin := 1.0
