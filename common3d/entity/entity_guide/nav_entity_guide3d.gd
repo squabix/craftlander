@@ -1,11 +1,18 @@
 class_name NavEntityGuide3D
 extends EntityGuide3D
 
+signal nav_ready
+
 const SAFE_VELOCITY_MIN_LENGTH_SQ := 0.1
 const DIRECTION_MIN_LENGTH_SQ := 0.05
 
 @export var nav: NavigationAgent3D
 @export_range(0.0, 1.0) var rotation_ratio := 0.25
+
+@export_group("Off Navmesh Settings")
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var off_navmesh_threshold: float = 0.3
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var navmesh_ingress_depth: float = 0.4
+@export var ignore_y_distance := true
 
 @export_group("Move Directly", "move_directly")
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var move_directly_range := 3.6
@@ -15,11 +22,32 @@ const DIRECTION_MIN_LENGTH_SQ := 0.05
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var move_directly_ray_intersect_radius := 0.6
 
 var safe_velocity := Vector3.ZERO # Calculated by the NavigationServer
+var _is_nav_ready := false
 
 
 func _ready() -> void:
 	nav.avoidance_enabled = true
 	nav.velocity_computed.connect(update_computed_velocity) # Update safe velocity whenever computed
+	
+	_setup_nav_map.call_deferred()
+
+
+func _setup_nav_map() -> void:
+	if not is_inside_tree():
+		return
+	
+	# Force explicit world navigation map fallback if agent map isn't assigned yet
+	if not nav.get_navigation_map().is_valid() and has_entity() and entity.get_world_3d():
+		nav.set_navigation_map(entity.get_world_3d().get_navigation_map())
+
+	await get_tree().physics_frame
+	_is_nav_ready = true
+
+	# Re-apply target position once map server is fully synced
+	if target_position != Vector3.ZERO:
+		nav.target_position = target_position
+	
+	nav_ready.emit()
 
 
 func update_computed_velocity(to: Vector3) -> void:
@@ -31,16 +59,84 @@ func set_target(to: Vector3) -> void:
 		return
 
 	target_position = to
+
+	if not is_instance_valid(nav):
+		return
 	nav.target_position = to
 
 
-func get_direction() -> Vector3:
-	return (
-			Vector3.ZERO if not has_entity() # No direction without entity
-			else entity.global_position.direction_to(target_position) if has_direct_shot() # Direct shot direction
-			else safe_velocity.normalized() if safe_velocity.length_squared() > SAFE_VELOCITY_MIN_LENGTH_SQ # Safe velocity if long enough
-			else entity.global_position.direction_to(nav.get_next_path_position()) # Direction to next path position
+func get_nav_map() -> RID:
+	if is_instance_valid(nav):
+		var map := nav.get_navigation_map()
+		if map.is_valid():
+			return map
+
+	if has_entity() and entity.get_world_3d():
+		return entity.get_world_3d().get_navigation_map()
+
+	return RID()
+
+
+func get_closest_navmesh_point(include_ingress: bool = true) -> Vector3:
+	if not has_entity():
+		return Vector3.ZERO
+
+	var nav_map := get_nav_map()
+	if not nav_map.is_valid():
+		return entity.global_position
+
+	var closest := NavigationServer3D.map_get_closest_point(nav_map, entity.global_position)
+
+	# Push target inside the navmesh toward target_position
+	if not include_ingress or navmesh_ingress_depth <= 0.0:
+		return closest
+	
+	var to_target := (target_position - entity.global_position)
+	if ignore_y_distance:
+		to_target.y = 0.0
+	if to_target.length_squared() > 0.001:
+		closest += to_target.normalized() * navmesh_ingress_depth
+
+	return closest
+
+
+func is_outside_navmesh() -> bool:
+	if not has_entity():
+		return false
+
+	var nav_map := get_nav_map()
+	if not nav_map.is_valid():
+		return false
+
+	var closest_point := NavigationServer3D.map_get_closest_point(nav_map, entity.global_position)
+
+	var distance := (
+		Util.vec3to2(entity.global_position - closest_point, Util.VECTOR3Y).length() if ignore_y_distance
+		else entity.global_position.distance_to(closest_point)
 	)
+
+	return distance > off_navmesh_threshold
+
+
+func _get_horizontal_direction_to(from: Vector3, to: Vector3) -> Vector3:
+	var direction := to - from
+	if ignore_y_distance:
+		direction.y = 0.0
+	return direction.normalized()
+
+
+func get_direction() -> Vector3:
+	if not has_entity():
+		return Vector3.ZERO
+	if has_direct_shot():
+		return _get_horizontal_direction_to(entity.global_position, target_position)
+	if is_outside_navmesh():
+		return _get_horizontal_direction_to(entity.global_position, get_closest_navmesh_point(true))
+	if safe_velocity.length_squared() > SAFE_VELOCITY_MIN_LENGTH_SQ:
+		return safe_velocity.normalized()
+	if not _is_nav_ready:
+		return _get_horizontal_direction_to(entity.global_position, get_closest_navmesh_point(true))
+	return _get_horizontal_direction_to(entity.global_position, nav.get_next_path_position())
 
 
 func has_entity() -> bool:
@@ -62,19 +158,24 @@ func face_target() -> void:
 	)
 
 
-func get_face_direction() -> Vector3:
-	var target_direction := entity.global_position.direction_to(
-		target_position if has_direct_shot() else nav.get_next_path_position() if nav.is_target_reachable()
-		else target_position,
-	)
-
+func get_target_direction() -> Vector3:
 	var move_direction := get_direction()
-	var nonzero_move_direction := move_direction.length_squared() > DIRECTION_MIN_LENGTH_SQ
+	if has_direct_shot():
+		return _get_horizontal_direction_to(entity.global_position, target_position)
+	elif is_outside_navmesh():
+		return move_direction # Face steering while off-mesh
+	elif nav.is_target_reachable():
+		return _get_horizontal_direction_to(entity.global_position, nav.get_next_path_position())
+	return _get_horizontal_direction_to(entity.global_position, target_position)
 
-	var blended_direction := (
-			target_direction.lerp(move_direction, rotation_ratio).normalized() if nonzero_move_direction
-			else target_direction
-	)
+
+func get_face_direction() -> Vector3:
+	var move_direction := get_direction()
+
+	var blended_direction := get_target_direction()
+	if move_direction.length_squared() > DIRECTION_MIN_LENGTH_SQ:
+		blended_direction = blended_direction.lerp(move_direction, rotation_ratio).normalized()
+	
 	return (blended_direction * Vector3(Util.VECTOR3XZ)).normalized()
 
 
@@ -87,8 +188,11 @@ func get_nav_velocity() -> Vector3:
 		Util.node_error("%s has no nav velocity without entity", self)
 		return Vector3.ZERO
 	var speed := entity.move_mode.max_speed.x
-	var direction := entity.global_position.direction_to(
-		target_position if has_direct_shot() else nav.get_next_path_position(),
+
+	var direction := (
+		_get_horizontal_direction_to(entity.global_position, target_position) if has_direct_shot()
+		else _get_horizontal_direction_to(entity.global_position, get_closest_navmesh_point(true)) if is_outside_navmesh()
+		else _get_horizontal_direction_to(entity.global_position, nav.get_next_path_position())
 	)
 	return speed * direction
 
@@ -123,7 +227,7 @@ func get_nearby_navigable_position(inner_radius: float, outer_radius: float, att
 		Util.node_error("%s cannot find navigable position without entity", self)
 		return Vector3.ZERO
 
-	var nav_map := nav.get_navigation_map()
+	var nav_map := get_nav_map()
 	var origin := entity.global_position
 
 	if not nav_map.is_valid():
