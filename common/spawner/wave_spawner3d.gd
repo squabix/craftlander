@@ -157,7 +157,6 @@ func _process_wave(wave: WaveSpawnerWave) -> void:
 func _spawn_scene_with_distribution(scene: PackedScene, wave: WaveSpawnerWave) -> int:
 	var selected_spawners := select_spawners()
 	if selected_spawners.is_empty():
-		Util.node_error("%s has no available spawners to process pool", self)
 		return 0
 
 	var pool_count: int = remaining_pool.get(scene, 0)
