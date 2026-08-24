@@ -317,11 +317,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 [node name="Visuals" parent="BlenderVisuals" unique_id=2002060618 instance=ExtResource("14_0lxgi")]
 transform = Transform3D(0.225, 0, 0, 0, 0.22158168, -0.03907083, 0, 0.03907083, 0.22158168, 0, 0.05, 0)
 
-[node name="Body" parent="BlenderVisuals/Visuals" index="0" unique_id=267914198]
+[node name="Body" parent="BlenderVisuals/Visuals" index="0" unique_id=358157295]
 surface_material_override/0 = SubResource("StandardMaterial3D_jwu52")
 surface_material_override/1 = SubResource("StandardMaterial3D_c6ibj")
 
-[node name="Wings" parent="BlenderVisuals/Visuals" index="1" unique_id=1826491633]
+[node name="Wings" parent="BlenderVisuals/Visuals" index="1" unique_id=1744401307]
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0)
 
 [node name="Wings2" type="MeshInstance3D" parent="BlenderVisuals/Visuals" unique_id=1431738844]
@@ -384,7 +384,7 @@ root = NodePath("..")
 on_screen_process_radius = 85.0
 off_screen_process_radius = 18.0
 on_screen_visible_radius = 85.0
-visibility_control_list = [NodePath(""), NodePath(""), NodePath(""), NodePath("../BlenderVisuals/Visuals/Wings2")]
+visibility_control_list = [null, null, null, NodePath("../BlenderVisuals/Visuals/Wings2")]
 control_visibility_deep = false
 visibility_range_fade_margin = 10.0
 
@@ -412,8 +412,8 @@ script = ExtResource("20_rq2ym")
 override_stream = ExtResource("17_wnfpe")
 override_bus = &"SFX"
 override_volume_db = 4.0
-ignore_pausing = true
 spawn_on_exit_tree = true
+ignore_pausing = true
 metadata/_custom_type_script = "uid://bv2ss5hjacgd3"
 
 [editable path="BlenderVisuals/Visuals"]
