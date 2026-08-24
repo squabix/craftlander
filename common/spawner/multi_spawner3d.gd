@@ -70,9 +70,15 @@ func disable_spawner(spawner: Spawner3D) -> void:
 func spawn(instance: Node3D = null, parent: Node = null) -> Array[Node3D]:
 	var instances: Array[Node3D] = []
 	for spawner in select_spawners():
-		instances.append(spawner.spawn(get_passable_instance(instance), parent))
+		var passable_instance := spawner.spawn(get_passable_instance(instance))
+		instances.append(spawner.spawn(passable_instance, parent))
+		_initialize_instance(passable_instance)
 	spawned_instances.append_array(instances.filter(is_instance_valid))
 	return instances
+
+
+func _initialize_instance(_instance: Node3D) -> void:
+	pass
 
 
 func get_passable_instance(base_instance: Node3D) -> Node3D:
