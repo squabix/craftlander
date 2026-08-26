@@ -1,10 +1,10 @@
 class_name WaveSpawner3D
 extends MultiSpawner3D
 
-signal wave_started(index: int, wave: WaveSpawnerWave)
+signal wave_started(index: int)
 signal wave_completed(index: int)
-signal entity_spawned(node: Node3D)
-signal entity_despawned(node: Node3D)
+signal entity_spawned
+signal entity_despawned
 signal finished
 
 enum WavesState { IDLE, SPAWNING, WAITING_FOR_CLEAR, PAUSED }
@@ -17,9 +17,14 @@ enum WavesState { IDLE, SPAWNING, WAITING_FOR_CLEAR, PAUSED }
 var current_state := WavesState.IDLE
 var current_wave_index := -1
 var remaining_pool: Dictionary[PackedScene, int] = { }
+var total_instance_count := 0
 var active_instances: Array[Node3D] = []
 var round_robin_index := 0
 var _stop_requested := false
+
+
+static func count_pool(pool: Dictionary[PackedScene, int]) -> int:
+	return Util.sumi.callv(pool.values())
 
 
 func _ready() -> void:
@@ -79,7 +84,7 @@ func load_wave(index: int) -> void:
 	if waves.is_empty():
 		Util.node_error("%s cannot load wave %s with no waves configured", self, index)
 		return
-	
+
 	if index < 0 or index >= waves.size():
 		if not loop_waves:
 			finish()
@@ -88,7 +93,7 @@ func load_wave(index: int) -> void:
 
 	current_wave_index = index
 	current_state = WavesState.SPAWNING
-	
+
 	var wave := get_current_wave()
 
 	# Apply Wave configuration overrides
@@ -105,15 +110,7 @@ func load_wave(index: int) -> void:
 			continue
 		remaining_pool[scene] = wave.pool[scene]
 
-	wave_started.emit(current_wave_index, wave)
 	_process_wave(wave)
-
-
-func get_remaining_pool_count() -> int:
-	var total := 0
-	for scene in remaining_pool:
-		total += remaining_pool[scene]
-	return total
 
 
 func get_active_instance_count() -> int:
@@ -121,12 +118,30 @@ func get_active_instance_count() -> int:
 
 
 func get_total_remaining_enemies() -> int:
-	return get_remaining_pool_count() + get_active_instance_count()
+	return count_pool(remaining_pool) + get_active_instance_count()
+
+
+func get_wave(index: int) -> WaveSpawnerWave:
+	if abs(index) >= waves.size():
+		return null
+	return waves[index]
+
+
+func pool_subtract(scene: PackedScene, amount: int) -> void:
+	if not remaining_pool.has(scene):
+		return
+	remaining_pool[scene] -= amount
+	if remaining_pool[scene] <= 0:
+		remaining_pool.erase(scene)
 
 
 func _process_wave(wave: WaveSpawnerWave) -> void:
-	if wave.pause_length_begin > 0:
+	if wave.pause_length_begin > 0.0:
 		await get_tree().create_timer(wave.pause_length_begin, false).timeout
+	
+	wave_started.emit(current_wave_index)
+	
+	total_instance_count = 0
 
 	# Spawning loop
 	while not remaining_pool.is_empty() and not _stop_requested:
@@ -169,12 +184,10 @@ func _spawn_scene_with_distribution(scene: PackedScene, wave: WaveSpawnerWave) -
 		WaveSpawnerWave.SpawnerDistribution.BATCH_SIMULTANEOUS:
 			var count_to_spawn := mini(pool_count, selected_spawners.size())
 			target_spawners = selected_spawners.slice(0, count_to_spawn)
-		
 		WaveSpawnerWave.SpawnerDistribution.SINGLE_ROUND_ROBIN:
 			round_robin_index %= selected_spawners.size()
 			target_spawners.append(selected_spawners[round_robin_index])
 			round_robin_index += 1
-		
 		WaveSpawnerWave.SpawnerDistribution.SINGLE_RANDOM:
 			target_spawners.append(selected_spawners.pick_random())
 
@@ -182,30 +195,22 @@ func _spawn_scene_with_distribution(scene: PackedScene, wave: WaveSpawnerWave) -
 
 	for spawner in target_spawners:
 		var instance := scene.instantiate()
-		
+
 		var spawned_node := spawner.spawn(
 			instance,
-			get_default_parent()
+			get_default_parent(),
 		)
 
 		if not is_instance_valid(spawned_node):
 			instance.queue_free()
 			continue
-		
+
 		_initialize_instance(spawned_node)
 		spawned_count += 1
 
 	# Exact deduction from pool based on successful spawns
 	pool_subtract(scene, spawned_count)
 	return spawned_count
-
-
-func pool_subtract(scene: PackedScene, amount: int) -> void:
-	if not remaining_pool.has(scene):
-		return
-	remaining_pool[scene] -= amount
-	if remaining_pool[scene] <= 0:
-		remaining_pool.erase(scene)
 
 
 func _pick_next_scene(mode: WaveSpawnerWave.SceneSelectMode) -> PackedScene:
@@ -237,13 +242,14 @@ func _pick_next_scene(mode: WaveSpawnerWave.SceneSelectMode) -> PackedScene:
 
 func _initialize_instance(node: Node3D) -> void:
 	active_instances.append(node)
-	entity_spawned.emit(node)
+	entity_spawned.emit()
+	total_instance_count += 1
 	node.tree_exiting.connect(_on_instance_tree_exiting.bind(node), CONNECT_ONE_SHOT)
 
 
 func _on_instance_tree_exiting(node: Node3D) -> void:
 	active_instances.erase(node)
-	entity_despawned.emit(node)
+	entity_despawned.emit()
 	_check_wave_completion()
 
 

@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://bm2wgrxee7bdu" path="res://island/docking/docking_manager.gd" id="4_ouqo7"]
 [ext_resource type="PackedScene" uid="uid://dmbp0klxo0b0c" path="res://player/player.tscn" id="5_oen7f"]
 [ext_resource type="PackedScene" uid="uid://dxwqj0o18t8o2" path="res://island/docking/dock.tscn" id="6_f1q4c"]
+[ext_resource type="PackedScene" uid="uid://c6gwl6mnchsqn" path="res://player/player_wave_display.tscn" id="6_ouqo7"]
 [ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="7_ioqp7"]
 [ext_resource type="Script" uid="uid://ckgs8ho78e8eq" path="res://boat/boat_adder.gd" id="8_hqanv"]
 [ext_resource type="Script" uid="uid://iyqixpr4un6s" path="res://common/spawner/spawner3d.gd" id="8_oen7f"]
@@ -232,6 +233,15 @@ ExtResource("30_n7bhn"): 10
 spawner_distribution = 2
 metadata/_custom_type_script = "uid://bprm4lolnfext"
 
+[sub_resource type="Resource" id="Resource_ouqo7"]
+script = ExtResource("30_ioqp7")
+name = &"Boss"
+pool = Dictionary[PackedScene, int]({
+ExtResource("30_n7bhn"): 1
+})
+spawner_distribution = 2
+metadata/_custom_type_script = "uid://bprm4lolnfext"
+
 [node name="Island3" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "player_boat_adder", "docking_managers", "name_label", "name_anim_player", "world_environment", "sun", "spawn_container")]
 script = ExtResource("1_tvyw1")
 resource = ExtResource("2_msgsa")
@@ -271,6 +281,491 @@ rotation_degrees_offset = 15.0
 
 [node name="Player" parent="DockingManager1" unique_id=1858460853 instance=ExtResource("5_oen7f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4989454, 403.02567)
+
+[node name="SignalAudioManager" parent="DockingManager1/Player/Controller3D/Swimming" parent_id_path=PackedInt32Array(1858460853, 708197157) index="0" unique_id=663153781 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"entered": NodePath("SplashPlayer")
+}
+
+[node name="SignalAudioManager" parent="DockingManager1/Player/Head/Camera3D/ItemHolder/HoldSelector" parent_id_path=PackedInt32Array(1858460853, 2089262331) index="0" unique_id=232798006 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"selected_new_index": NodePath("SelectPlayer")
+}
+
+[node name="SignalAudioManager" parent="DockingManager1/Player/Head/Camera3D/InteratorRay/Interactor" parent_id_path=PackedInt32Array(1858460853, 1272942006) index="0" unique_id=97378499 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"interacted_with": NodePath("InteractPlayer"),
+&"interaction_failed": NodePath("FailPlayer")
+}
+
+[node name="SignalAudioManager" parent="DockingManager1/Player/Head/Camera3D/DropperRayCast/InventoryDropper3D" parent_id_path=PackedInt32Array(1858460853, 138206234) index="0" unique_id=470462312 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"dropped": NodePath("DroppedPlayer")
+}
+
+[node name="Camera3D" parent="DockingManager1/Player/Head/SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(1858460853, 1289466890) index="0" unique_id=849292685]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8989453, 403.02567)
+
+[node name="SignalAudioManager" parent="DockingManager1/Player/Health" parent_id_path=PackedInt32Array(1858460853, 1348652794) index="2" unique_id=1198184415 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"died": NodePath("DeathPlayer"),
+&"was_hurt": NodePath("HurtPlayer")
+}
+
+[node name="SignalAudioManager" parent="DockingManager1/Player/HUD/PrimaryInventorySelector" parent_id_path=PackedInt32Array(1858460853, 573150197) index="0" unique_id=1399028685 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"selected_new_index": NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector/SignalAudioManager/SelectPlayer")
+}
+
+[node name="SignalAudioManager" parent="DockingManager1/Player/HUD/SecondaryInventorySelector" parent_id_path=PackedInt32Array(1858460853, 486779293) index="0" unique_id=133390007 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"selected_new_index": NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector/SignalAudioManager/SelectPlayer")
+}
+
+[node name="PlayerWaveDisplay" parent="DockingManager1/Player/HUD" parent_id_path=PackedInt32Array(1858460853, 1406402649) index="7" unique_id=1784845363 node_paths=PackedStringArray("wave_spawner") instance=ExtResource("6_ouqo7")]
+layout_mode = 1
+wave_spawner = NodePath("../../../../WaveSpawner3D")
+
+[node name="PauseMenu" parent="DockingManager1/Player" index="12" unique_id=1163003515]
+visible = false
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/CraftingInterface/RecipePanel/RecipeList/EntryContainer/Entry/Button" parent_id_path=PackedInt32Array(1858460853, 2103479977) index="0" unique_id=2144126531 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/CraftingInterface/RecipePanel/RecipeList/EntryContainer/BackEntry/Button" parent_id_path=PackedInt32Array(1858460853, 519946777) index="0" unique_id=1837032648 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/CraftingInterface/CompletePanel/CraftButton" parent_id_path=PackedInt32Array(1858460853, 1652755923) index="0" unique_id=583215524 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("HoverPlayer"),
+&"mouse_entered": NodePath("HoverPlayer"),
+&"pressed": NodePath("PressPlayer")
+}
+
+[node name="ItemDisplay1" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="0" unique_id=1415722122 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay2" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="1" unique_id=1939377631 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay3" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="2" unique_id=297821000 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay4" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="3" unique_id=1307875736 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay5" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="4" unique_id=1672323268 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay6" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="5" unique_id=638191121 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay7" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="6" unique_id=1597090716 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay8" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="7" unique_id=733254478 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay9" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="8" unique_id=21220049 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay10" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="9" unique_id=1203064439 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay11" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="10" unique_id=1117020034 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay12" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="11" unique_id=91122897 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay13" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="12" unique_id=307274892 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay14" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="13" unique_id=54047539 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay15" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="14" unique_id=1350210029 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay16" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="15" unique_id=502623721 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay17" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="16" unique_id=1823664861 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay18" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="17" unique_id=1236255505 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay19" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="18" unique_id=333045167 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay20" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="19" unique_id=1492452488 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay21" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="20" unique_id=153567164 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay22" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="21" unique_id=1255520953 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay23" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="22" unique_id=1650907097 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay24" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="23" unique_id=247187989 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay25" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="24" unique_id=446389058 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay26" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="25" unique_id=332974293 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay27" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="26" unique_id=304512266 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay28" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="27" unique_id=981272684 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay29" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="28" unique_id=1677969850 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ItemDisplay30" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="29" unique_id=289659285 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/CraftingInterface/OptionsContainer/ResumeButton" parent_id_path=PackedInt32Array(1858460853, 1612901605) index="0" unique_id=132595468 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/CraftingInterface/OptionsContainer/SaveButton" parent_id_path=PackedInt32Array(1858460853, 2070345147) index="0" unique_id=523312117 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
+[node name="SignalAudioManager" parent="DockingManager1/Player/PauseMenu/CraftingInterface/OptionsContainer/SaveButton" parent_id_path=PackedInt32Array(1858460853, 2070345147) index="1" unique_id=1772322339 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"pressed": NodePath("SavePlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/CraftingInterface/OptionsContainer/SettingsButton" parent_id_path=PackedInt32Array(1858460853, 1494540130) index="0" unique_id=1372150768 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/CraftingInterface/OptionsContainer/QuitButton" parent_id_path=PackedInt32Array(1858460853, 729008343) index="0" unique_id=636152287 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
+[node name="InventoryOrganizer" parent="DockingManager1/Player/PauseMenu/CraftingInterface" parent_id_path=PackedInt32Array(1858460853, 1908131253) index="6" unique_id=1412121172 node_paths=PackedStringArray("inventory_display_rows")]
+inventory_display_rows = [NodePath("../../../HotbarInterface/HotbarDisplay"), null, null, null]
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/SettingsContainer/FullScreen/CenterContainer/FullScreenToggle" parent_id_path=PackedInt32Array(1858460853, 1234740637, 2049426436) index="0" unique_id=2144126531 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("HoverPlayer"),
+&"mouse_entered": NodePath("HoverPlayer"),
+&"pressed": NodePath("PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/SettingsContainer/VSync/CenterContainer/VSyncToggle" parent_id_path=PackedInt32Array(1858460853, 1234740637, 1518537055) index="0" unique_id=1351290583 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/SettingsContainer/InvertY/CenterContainer/InvertYToggle" parent_id_path=PackedInt32Array(1858460853, 1234740637, 1517878780) index="0" unique_id=1079694290 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/SettingsContainer/AntiAliasing/AAOption" parent_id_path=PackedInt32Array(1858460853, 1234740637, 630181348) index="1" unique_id=875959311 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/SettingsContainer/ShadowQuality/ShadowOption" parent_id_path=PackedInt32Array(1858460853, 1234740637, 1710798274) index="1" unique_id=1882629603 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/SettingsContainer/BackButton" parent_id_path=PackedInt32Array(1858460853, 1234740637, 1546788436) index="0" unique_id=1198217718 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+}
+
+[node name="SignalAudioManager" parent="DockingManager1/Player/PauseMenu" index="3" unique_id=1037296529 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"updated_pause": NodePath("PausePlayer")
+}
+
+[node name="ItemDisplay1" parent="DockingManager1/Player/HotbarInterface/HotbarDisplay" parent_id_path=PackedInt32Array(1858460853, 1354943621) index="0" unique_id=468719072 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+
+[node name="ItemDisplay2" parent="DockingManager1/Player/HotbarInterface/HotbarDisplay" parent_id_path=PackedInt32Array(1858460853, 1354943621) index="1" unique_id=985434587 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+
+[node name="ItemDisplay3" parent="DockingManager1/Player/HotbarInterface/HotbarDisplay" parent_id_path=PackedInt32Array(1858460853, 1354943621) index="2" unique_id=1259146327 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+
+[node name="ItemDisplay4" parent="DockingManager1/Player/HotbarInterface/HotbarDisplay" parent_id_path=PackedInt32Array(1858460853, 1354943621) index="3" unique_id=670893783 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+
+[node name="ItemDisplay5" parent="DockingManager1/Player/HotbarInterface/HotbarDisplay" parent_id_path=PackedInt32Array(1858460853, 1354943621) index="4" unique_id=1500826809 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+
+[node name="ItemDisplay6" parent="DockingManager1/Player/HotbarInterface/HotbarDisplay" parent_id_path=PackedInt32Array(1858460853, 1354943621) index="5" unique_id=151983203 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+
+[node name="ItemDisplay7" parent="DockingManager1/Player/HotbarInterface/HotbarDisplay" parent_id_path=PackedInt32Array(1858460853, 1354943621) index="6" unique_id=2108656168 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+
+[node name="ItemDisplay8" parent="DockingManager1/Player/HotbarInterface/HotbarDisplay" parent_id_path=PackedInt32Array(1858460853, 1354943621) index="7" unique_id=790300123 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+
+[node name="ItemDisplay9" parent="DockingManager1/Player/HotbarInterface/HotbarDisplay" parent_id_path=PackedInt32Array(1858460853, 1354943621) index="8" unique_id=590478775 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+
+[node name="ItemDisplay10" parent="DockingManager1/Player/HotbarInterface/HotbarDisplay" parent_id_path=PackedInt32Array(1858460853, 1354943621) index="9" unique_id=1585960647 node_paths=PackedStringArray("inventory_selectors")]
+inventory_selectors = {
+NodePath("../../../HUD/PrimaryInventorySelector"): 0,
+NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+
+[node name="BoatUpgrader" parent="DockingManager1/Player/BoatMenu/BottomOptions/HBoxContainer" parent_id_path=PackedInt32Array(1858460853, 1336276305) index="0" unique_id=1389163300 node_paths=PackedStringArray("requirements")]
+requirements = {
+1: NodePath("UpgradeRequirement1")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/BoatMenu/BottomOptions/HBoxContainer/BoatUpgrader/UpgradeButtonContainer/UpgradeButton" parent_id_path=PackedInt32Array(1858460853, 1038887707) index="0" unique_id=1941231385 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
+[node name="SignalAudioManager" parent="DockingManager1/Player/BoatMenu/BottomOptions/HBoxContainer/BoatUpgrader" index="4" unique_id=1165337501 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"failed_upgrade": NodePath("FailPlayer"),
+&"started_upgrade": NodePath("UpgradePlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/BoatMenu/BottomOptions/HBoxContainer/Control/SailButton" parent_id_path=PackedInt32Array(1858460853, 1632329268) index="0" unique_id=1159382491 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
+[node name="SignalAudioManager" parent="DockingManager1/Player/BoatMenu/BottomOptions/HBoxContainer/Control/SailButton" parent_id_path=PackedInt32Array(1858460853, 1632329268) index="1" unique_id=1827454759 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"pressed": NodePath("AudioStreamPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/BoatMenu/IslandOptionContainer/IslandOption0/SelectButton" parent_id_path=PackedInt32Array(1858460853, 2011677331) index="0" unique_id=513675797 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/BoatMenu/IslandOptionContainer/IslandOption1/SelectButton" parent_id_path=PackedInt32Array(1858460853, 291589597) index="0" unique_id=1488544473 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/BoatMenu/IslandOptionContainer/IslandOption2/SelectButton" parent_id_path=PackedInt32Array(1858460853, 1934516890) index="0" unique_id=1436596817 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/BoatMenu/IslandOptionContainer/IslandOption3/SelectButton" parent_id_path=PackedInt32Array(1858460853, 527816358) index="0" unique_id=2133439628 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
+[node name="SignalAudioManager" parent="DockingManager1/Player/BoatMenu" parent_id_path=PackedInt32Array(1858460853, 520927744) index="3" unique_id=226451644 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"backed_out": NodePath("BoatPlayer"),
+&"opened": NodePath("BoatPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/DeathScreen/OptionsContainer/RespawnButton" parent_id_path=PackedInt32Array(1858460853, 361444523) index="0" unique_id=1873573606 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/DeathScreen/OptionsContainer/QuitButton" parent_id_path=PackedInt32Array(1858460853, 394106598) index="0" unique_id=1703455280 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
+[node name="SignalAudioManager" parent="DockingManager1/Player" index="20" unique_id=1654871572 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"jumped": NodePath("JumpPlayer"),
+&"landed": NodePath("LandPlayer")
+}
 
 [node name="DockPlaceRayContainer" type="Node3D" parent="DockingManager1" unique_id=1858651455]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 400)
@@ -581,7 +1076,6 @@ wait_time = 10.0
 autostart = true
 
 [node name="IslandWater" type="Area3D" parent="." unique_id=1367062451]
-visible = false
 collision_mask = 33
 monitorable = false
 script = ExtResource("24_a2gly")
@@ -629,7 +1123,7 @@ metadata/_custom_type_script = "uid://bvnl07wfykf0p"
 script = ExtResource("29_f1q4c")
 player = NodePath("../DockingManager1/Player")
 ghost_docking_managers = [NodePath("../DockingManager2"), NodePath("../DockingManager3"), NodePath("../DockingManager4")]
-waves = Array[ExtResource("30_ioqp7")]([SubResource("Resource_hjjmf")])
+waves = Array[ExtResource("30_ioqp7")]([SubResource("Resource_hjjmf"), SubResource("Resource_ouqo7")])
 auto_start = true
 sub_spawners = {
 null: true
@@ -637,6 +1131,8 @@ null: true
 default_parent_mode = 1
 metadata/_custom_type_script = "uid://bvbqrk13ieyil"
 
+[editable path="DockingManager1/Player"]
+[editable path="DockingManager1/Player/PauseMenu/SettingsMenu"]
 [editable path="DockingManager1/Dock"]
 [editable path="DockingManager1/Dock/BlenderMeshes"]
 [editable path="DockingManager2/Dock"]
