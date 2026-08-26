@@ -265,6 +265,24 @@ static func get_tree() -> SceneTree:
 	return main_loop as SceneTree
 
 
+static func sumf(...args: Array) -> float:
+	var total := 0.0
+	for element in args:
+		if not (element is float or element is int):
+			continue
+		total += float(element)
+	return total
+
+
+static func sumi(...args: Array) -> int:
+	var total := 0
+	for element in args:
+		if not (element is float or element is int):
+			continue
+		total += int(element)
+	return total
+
+
 static func nodestr(node: Node) -> String:
 	if not is_instance_valid(node) or not is_instance_valid(node.get_tree().root):
 		return "Invalid Node (%s)" % node
