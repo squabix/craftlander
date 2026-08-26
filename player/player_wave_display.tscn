@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://c6gwl6mnchsqn"]
+
+[ext_resource type="Script" uid="uid://cenbmufip7don" path="res://common/spawner/wave_display.gd" id="1_0pr0e"]
+[ext_resource type="Script" uid="uid://c3xfbb8ay0ghk" path="res://common/interpolated_bar.gd" id="2_yn14b"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hjjmf"]
+font_size = 41
+
+[node name="PlayerWaveDisplay" type="Control" unique_id=1784845363 node_paths=PackedStringArray("interpolated_bar", "name_label")]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -352.5
+offset_right = 352.5
+offset_bottom = 89.0
+grow_horizontal = 2
+script = ExtResource("1_0pr0e")
+interpolated_bar = NodePath("InterpolatedBar")
+name_label = NodePath("Label")
+metadata/_custom_type_script = "uid://cenbmufip7don"
+
+[node name="InterpolatedBar" type="ProgressBar" parent="." unique_id=1758646848]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+value = 6.8100000000000005
+show_percentage = false
+script = ExtResource("2_yn14b")
+lerp_weight = 0.03
+jump_distance = 0.1
+metadata/_custom_type_script = "uid://c3xfbb8ay0ghk"
+
+[node name="Label" type="Label" parent="." unique_id=552119448]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -68.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Wave #1"
+label_settings = SubResource("LabelSettings_hjjmf")
+horizontal_alignment = 1

@@ -19,7 +19,6 @@ func start(start_index := 0) -> void:
 	if started:
 		return
 	started = true
-	print("Starting Undead Atoll waves")
 	for manager in ghost_docking_managers:
 		manager.add_boat()
 		var boat := manager.boat as GhostBoat
@@ -31,6 +30,5 @@ func start(start_index := 0) -> void:
 
 func _initialize_instance(instance: Node3D) -> void:
 	super(instance)
-	print("Initializing %s" % instance)
 	var sight := Util.find_child_of_class(instance, &"RadialSight3D") as RadialSight3D
 	sight.set_target(player)
