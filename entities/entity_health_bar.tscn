@@ -39,6 +39,5 @@ value = 17.86
 show_percentage = false
 script = ExtResource("4_75a66")
 fade_when_idle = true
-idle_fade_wait_time = 5.0
 fade_target_override = NodePath("..")
 metadata/_custom_type_script = "uid://q5lh058bmpum"
