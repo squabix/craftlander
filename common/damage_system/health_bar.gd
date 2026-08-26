@@ -19,8 +19,6 @@ func _process(_delta: float) -> void:
 	max_value = health.max_hp
 	target_value = health.hp
 
-	super(_delta)
-
 	if is_instance_valid(label):
 		label.text = get_label_text()
 
