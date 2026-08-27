@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://cy7t71mibkd8k" path="res://island/island_taper_texture.tres" id="5_mngd6"]
 [ext_resource type="Texture2D" uid="uid://c4gehucq85wxc" path="res://island/island_absolute_texture.tres" id="6_b35xs"]
 [ext_resource type="Material" uid="uid://drm8bdv4es6et" path="res://island/mat1.tres" id="7_6o2sf"]
-[ext_resource type="Material" uid="uid://d06u1efqiqr8e" path="res://assets/shaders/water_shader_material.tres" id="8_25b7h"]
 [ext_resource type="Script" uid="uid://ckgs8ho78e8eq" path="res://boat/boat_adder.gd" id="8_mngd6"]
 [ext_resource type="Script" uid="uid://bg82eansdlgrc" path="res://island/prop_populator.gd" id="9_d3ct1"]
 [ext_resource type="Script" uid="uid://csprfavexgrle" path="res://island/props/island_prop.gd" id="10_kngna"]
@@ -32,6 +31,7 @@
 [ext_resource type="Script" uid="uid://bvnl07wfykf0p" path="res://common3d/audio_stream_curver3d.gd" id="29_6o2sf"]
 [ext_resource type="AudioStream" uid="uid://bcj8kf1cl1icf" path="res://assets/sound/ocean.mp3" id="29_25b7h"]
 [ext_resource type="Script" uid="uid://dpyn65ul3fu6v" path="res://common3d/mesh_instance_aggregator3d.gd" id="29_b35xs"]
+[ext_resource type="PlaneMesh" uid="uid://ben5kh83ltpe" path="res://main/water_mesh.tres" id="31_kngna"]
 [ext_resource type="Script" uid="uid://dm2twxr0f7ne" path="res://common3d/heightmap_occluder_instance.gd" id="34_xj1bv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_hjjmf"]
@@ -131,12 +131,6 @@ region_min_size = 12.0
 filter_baking_aabb = AABB(-250, 0.3, -250, 500, 40, 500)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_h5spq"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_i8ckm"]
-material = ExtResource("8_25b7h")
-size = Vector2(1500, 1500)
-subdivide_width = 1000
-subdivide_depth = 1000
 
 [sub_resource type="Curve" id="Curve_25b7h"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), -0.015610588, 0.0, 0, 0]
@@ -333,7 +327,7 @@ shape = SubResource("WorldBoundaryShape3D_h5spq")
 
 [node name="WaterMesh" type="MeshInstance3D" parent="IslandWater" unique_id=264507659]
 ignore_occlusion_culling = true
-mesh = SubResource("PlaneMesh_i8ckm")
+mesh = ExtResource("31_kngna")
 skeleton = NodePath("../..")
 
 [node name="PickupContainer" type="Node3D" parent="." unique_id=944627734]
