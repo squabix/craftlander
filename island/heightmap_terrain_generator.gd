@@ -123,6 +123,9 @@ func get_heightmap_shape(image: Image) -> HeightMapShape3D:
 
 
 func align_node_to_normal(node: Node3D, px: int, py: int, conformity := 1.0) -> void:
+	if not is_instance_valid(node):
+		Util.node_error("%s cannot align invalid node to normal at (%s, %s)", self, px, py)
+		return
 	var target_normal := get_pixel_normal(px, py).normalized()
 	var current_basis := node.global_transform.basis
 
@@ -145,6 +148,9 @@ func align_node_to_normal(node: Node3D, px: int, py: int, conformity := 1.0) -> 
 
 
 func place_node(node: Node3D, px: int, py: int, normal_conformity := 1.0, callback := Callable()) -> void:
+	if not is_instance_valid(node):
+		Util.node_error("%s cannot place invalid node at (%s, %s)", self, px, py)
+		return
 	node.global_position = get_pixel_position(px, py)
 	align_node_to_normal.call_deferred(node, px, py, normal_conformity)
 	if callback.is_valid():
