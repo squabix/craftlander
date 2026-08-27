@@ -814,7 +814,7 @@ saver_id = &"boat_adder"
 saved_properties = Dictionary[StringName, bool]({
 &"dock_position": true
 })
-load_methods = Array[StringName]([&"add"])
+load_methods = Array[StringName]([&"spawn"])
 metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 
 [node name="DockingManager2" type="Node3D" parent="." unique_id=1047908219 node_paths=PackedStringArray("dock", "boat_adder", "boat_dock_point", "dock_place_ray_container")]

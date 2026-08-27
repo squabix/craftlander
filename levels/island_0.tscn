@@ -1182,7 +1182,7 @@ saver_id = &"boat_adder"
 saved_properties = Dictionary[StringName, bool]({
 &"dock_position": true
 })
-load_methods = Array[StringName]([&"add"])
+load_methods = Array[StringName]([&"spawn"])
 metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 
 [node name="IslandGenerator" type="Node3D" parent="." unique_id=1195768552 node_paths=PackedStringArray("mesh_instance", "collision_shape")]
