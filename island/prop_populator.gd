@@ -49,11 +49,25 @@ func initialize_instance(instance: Node3D) -> void:
 		instance.set.call_deferred(&"owner", get_tree().edited_scene_root)
 
 
+func spawn(instance: Node3D = null, parent: Node = null) -> Node3D:
+	if not is_instance_valid(instance):
+		return null
+	if not Engine.is_editor_hint():
+		return super(instance, parent)
+	add_child(instance)
+	initialize_instance(instance)
+	return instance
+
+
 func add_prop(prop: IslandProp, point: Vector2i, spawn_position: Vector3) -> Node3D:
 	if prop.scene == null or not prop.scene.can_instantiate():
 		return null
 
-	var instance := spawn(prop.scene.instantiate(), self)
+	var instance := spawn(prop.scene.instantiate() as Node3D, self)
+
+	if not is_instance_valid(instance):
+		instance.queue_free()
+		return null
 
 	# Place/transform instance
 	island_generator.place_node.call_deferred(
@@ -62,6 +76,8 @@ func add_prop(prop: IslandProp, point: Vector2i, spawn_position: Vector3) -> Nod
 		point.y,
 		prop.normal_conformity,
 		func():
+			if not is_instance_valid(instance):
+				return
 			# Finish transforming instance after island generator placement
 			instance.rotation_degrees.y = randf() * 360.0
 			instance.scale = Vector3.ONE * randf_range(prop.min_scale, prop.max_scale)
