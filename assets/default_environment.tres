@@ -21,4 +21,5 @@ glow_bloom = 0.1
 glow_blend_mode = 0
 adjustment_enabled = true
 adjustment_brightness = 1.1
+adjustment_contrast = 1.15
 adjustment_saturation = 1.1
