@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c5x1hn4vi06bh"]
+
+[ext_resource type="Script" uid="uid://c5asagc5dswqt" path="res://common3d/entity/entity_guide/nav_entity_guide3d.gd" id="1"]
+[ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="2_lvw72"]
+
+[node name="NavEntityGuide3D" type="Node" unique_id=1240188709]
+script = ExtResource("1")
+face_interpolation = 0.1
+
+[node name="NavModeStaggerer" type="Node" parent="." unique_id=1232847324 node_paths=PackedStringArray("target_methods")]
+script = ExtResource("2_lvw72")
+unit = 2
+base_interval = 7.0
+stagger_amount = 1.5
+target_methods = {
+NodePath(".."): &"_recompute_nav_states"
+}
+metadata/_custom_type_script = "uid://73ya7jxulyl4"
