@@ -117,7 +117,7 @@ func get_active_instance_count() -> int:
 	return active_instances.size()
 
 
-func get_total_remaining_enemies() -> int:
+func get_total_remaining_count() -> int:
 	return count_pool(remaining_pool) + get_active_instance_count()
 
 
