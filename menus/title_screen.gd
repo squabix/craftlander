@@ -2,7 +2,6 @@ extends Menu
 class_name TitleScreen
 
 @export_group("Submenus")
-@export var main_container: Container
 @export var save_submenu: SaveMenu
 @export var settings_submenu: Menu
 
@@ -12,12 +11,6 @@ class_name TitleScreen
 @export var load_game_button: Button
 @export var settings_button: Button
 @export var quit_button: Button
-
-@onready var all_submenus: Array[Control] = [
-	main_container,
-	save_submenu,
-	settings_submenu
-]
 
 func _ready() -> void:
 	super()

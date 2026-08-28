@@ -94,12 +94,12 @@ func new_save() -> Save:
 	return game_save.new()
 
 
-func start_new_game(slot: int) -> void:
+func start_new_game(slot: int, seed_value: int) -> void:
 	if slot < 0 or slot >= MAX_SLOT:
 		Util.node_error("Cannot start new game in invalid slot number: %s", slot)
 		return
 	loaded_save = new_save()
-	loaded_save.base_seed = randi() # Give the new game a random seed
+	loaded_save.base_seed = seed_value
 	base_seed = loaded_save.base_seed
 
 	current_save_slot = slot
