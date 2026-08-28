@@ -72,6 +72,22 @@ corner_radius_bottom_left = 10
 
 [sub_resource type="Texture2DRD" id="Texture2DRD_2h7nn"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menupanel"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.0622, 0.0718, 0.075, 0.8)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.144, 0.276, 0.32, 0.6)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [resource]
 default_font = ExtResource("1_2h7nn")
 default_font_size = 18
@@ -88,6 +104,8 @@ CheckBox/styles/pressed = SubResource("StyleBoxEmpty_dh8sq")
 HSlider/icons/tick = SubResource("Texture2DRD_2h7nn")
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_2h7nn")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_cdrs1")
+MenuPanel/base_type = &"PanelContainer"
+MenuPanel/styles/panel = SubResource("StyleBoxFlat_menupanel")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_2h7nn")
 PopupMenu/colors/font_disabled_color = Color(0.09493869, 0.09493861, 0.09493861, 1)
 PopupMenu/constants/h_separation = 10

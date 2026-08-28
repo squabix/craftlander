@@ -1,4 +1,5 @@
 extends Save
+class_name GameSave
 
 @export var boat_level: int
 @export var base_seed := 0
