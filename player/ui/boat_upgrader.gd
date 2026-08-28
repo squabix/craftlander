@@ -47,6 +47,6 @@ func upgrade() -> void:
 	Main.loaded_save.boat_level = current_upgrade_level
 	boat_menu.current_boat = boat_menu.current_boat.make_current()
 	Main.root.save_current_game()
-	boat_menu.close()
+	boat_menu.back()
 	print("Upgraded boat to %s" % current_upgrade_level)
 	upgraded.emit(current_upgrade_level)
