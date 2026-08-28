@@ -5,7 +5,7 @@ const SAVED_TEXT_FORMAT := "SAVE %s - %s"
 const UNSAVED_TEXT := "EMPTY"
 const UNSAVED_ALPHA := 0.75
 
-signal started_new_game(save: int, seed_value: int)
+signal started_new_game(save: int, seed_value: int, difficulty: int)
 signal loaded_game(save: int)
 
 enum SelectMode {NONE, NEW, LOAD}
@@ -65,8 +65,8 @@ func open_inspect(slot: int) -> void:
 	open_submenu(inspect_submenu)
 
 
-func _on_new_game_confirmed(slot: int, seed_value: int) -> void:
-	started_new_game.emit(slot, seed_value)
+func _on_new_game_confirmed(slot: int, seed_value: int, difficulty: int) -> void:
+	started_new_game.emit(slot, seed_value, difficulty)
 
 
 func _on_save_deleted(_slot: int) -> void:

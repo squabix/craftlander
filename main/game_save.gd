@@ -3,6 +3,7 @@ class_name GameSave
 
 @export var boat_level: int
 @export var base_seed := 0
+@export var difficulty: int = Difficulty.SETTINGS.default_value
 
 # Levels
 @export var current_level_index := 0

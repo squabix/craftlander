@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bnqpm2lkx2i5v" path="res://menus/save_inspect_menu.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://defaults/button_audio_manager.tscn" id="2"]
 
-[node name="SaveInspectMenu" type="Control" unique_id=1678974554 node_paths=PackedStringArray("created_label", "saved_label", "island_label", "boat_level_label", "islands_explored_label", "seed_label", "seed_button_copy", "delete_button", "delete_row_confirm", "delete_button_confirm", "delete_button_cancel", "back_button")]
+[node name="SaveInspectMenu" type="Control" unique_id=1678974554 node_paths=PackedStringArray("created_label", "saved_label", "island_label", "boat_level_label", "islands_explored_label", "difficulty_label", "seed_label", "seed_button_copy", "delete_button", "delete_row_confirm", "delete_button_confirm", "delete_button_cancel", "back_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,18 +11,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
-created_label = NodePath("PanelContainer/InfoContainer/CreatedLabel")
-saved_label = NodePath("PanelContainer/InfoContainer/SavedLabel")
-island_label = NodePath("PanelContainer/InfoContainer/IslandLabel")
-boat_level_label = NodePath("PanelContainer/InfoContainer/BoatLevelLabel")
-islands_explored_label = NodePath("PanelContainer/InfoContainer/IslandsExploredLabel")
-seed_label = NodePath("PanelContainer/InfoContainer/SeedRow/SeedLabel")
-seed_button_copy = NodePath("PanelContainer/InfoContainer/SeedRow/CopySeedButton")
-delete_button = NodePath("PanelContainer/InfoContainer/DeleteButton")
-delete_row_confirm = NodePath("PanelContainer/InfoContainer/ConfirmDeleteRow")
-delete_button_confirm = NodePath("PanelContainer/InfoContainer/ConfirmDeleteRow/ConfirmDeleteButton")
-delete_button_cancel = NodePath("PanelContainer/InfoContainer/ConfirmDeleteRow/CancelDeleteButton")
-back_button = NodePath("PanelContainer/InfoContainer/BackButton")
+created_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer/InfoContainer/CreatedLabel")
+saved_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer/InfoContainer/SavedLabel")
+island_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer/InfoContainer/IslandLabel")
+boat_level_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/BoatLevelLabel")
+islands_explored_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/IslandsExploredLabel")
+difficulty_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer/DifficultyLabel")
+seed_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer/InfoContainer/SeedRow/SeedLabel")
+seed_button_copy = NodePath("PanelContainer/VBoxContainer/HBoxContainer/InfoContainer/SeedRow/CopySeedButton")
+delete_button = NodePath("PanelContainer/VBoxContainer/DeleteButton")
+delete_row_confirm = NodePath("PanelContainer/VBoxContainer/ConfirmDeleteRow")
+delete_button_confirm = NodePath("PanelContainer/VBoxContainer/ConfirmDeleteRow/ConfirmDeleteButton")
+delete_button_cancel = NodePath("PanelContainer/VBoxContainer/ConfirmDeleteRow/CancelDeleteButton")
+back_button = NodePath("PanelContainer/VBoxContainer/BackButton")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1240827656]
 layout_mode = 1
@@ -31,114 +32,139 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -170.0
-offset_top = -140.0
-offset_right = 170.0
-offset_bottom = 140.0
+offset_left = -222.0
+offset_top = -127.5
+offset_right = 222.0
+offset_bottom = 127.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"MenuPanel"
 
-[node name="InfoContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1983050887]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=405255423]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 16
 
-[node name="TitleLabel" type="Label" parent="PanelContainer/InfoContainer" unique_id=560221528]
+[node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer" unique_id=560221528]
 layout_mode = 2
 text = "SAVE DETAILS"
 horizontal_alignment = 1
 
-[node name="CreatedLabel" type="Label" parent="PanelContainer/InfoContainer" unique_id=736995938]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=412880062]
+layout_mode = 2
+
+[node name="InfoContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1983050887]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="CreatedLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/InfoContainer" unique_id=736995938]
 layout_mode = 2
 text = "Created: "
 
-[node name="SavedLabel" type="Label" parent="PanelContainer/InfoContainer" unique_id=386235327]
+[node name="SavedLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/InfoContainer" unique_id=386235327]
 layout_mode = 2
 text = "Last Saved: "
 
-[node name="SeedRow" type="HBoxContainer" parent="PanelContainer/InfoContainer" unique_id=1073586588]
+[node name="SeedRow" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/InfoContainer" unique_id=1073586588]
 layout_mode = 2
 
-[node name="SeedLabel" type="Label" parent="PanelContainer/InfoContainer/SeedRow" unique_id=1144530856]
+[node name="SeedLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/InfoContainer/SeedRow" unique_id=1144530856]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Seed: "
 
-[node name="CopySeedButton" type="Button" parent="PanelContainer/InfoContainer/SeedRow" unique_id=376291311]
+[node name="CopySeedButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/InfoContainer/SeedRow" unique_id=376291311]
+custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 text = "Copy"
 
-[node name="ButtonAudioManager" parent="PanelContainer/InfoContainer/SeedRow/CopySeedButton" unique_id=1762078675 node_paths=PackedStringArray("signal_players") instance=ExtResource("2")]
+[node name="ButtonAudioManager" parent="PanelContainer/VBoxContainer/HBoxContainer/InfoContainer/SeedRow/CopySeedButton" unique_id=1762078675 node_paths=PackedStringArray("signal_players") instance=ExtResource("2")]
 signal_players = {
 &"focus_entered": NodePath("HoverPlayer"),
 &"mouse_entered": NodePath("HoverPlayer"),
 &"pressed": NodePath("PressPlayer")
 }
 
-[node name="IslandLabel" type="Label" parent="PanelContainer/InfoContainer" unique_id=956589005]
+[node name="IslandLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/InfoContainer" unique_id=956589005]
 layout_mode = 2
 text = "Current Island: "
 
-[node name="BoatLevelLabel" type="Label" parent="PanelContainer/InfoContainer" unique_id=1513564730]
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1552880449]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=649244187]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="BoatLevelLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1513564730]
 layout_mode = 2
 text = "Boat Level: "
 
-[node name="IslandsExploredLabel" type="Label" parent="PanelContainer/InfoContainer" unique_id=1141019329]
+[node name="IslandsExploredLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1141019329]
 layout_mode = 2
 text = "Islands Explored: "
 
-[node name="DeleteButton" type="Button" parent="PanelContainer/InfoContainer" unique_id=290109556]
-self_modulate = Color(1, 0.454902, 0.454902, 1)
+[node name="DifficultyLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1141019330]
 layout_mode = 2
+text = "Difficulty: "
+
+[node name="DeleteButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=290109556]
+self_modulate = Color(1, 0.454902, 0.454902, 1)
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
 text = "DELETE SAVE"
 
-[node name="ButtonAudioManager" parent="PanelContainer/InfoContainer/DeleteButton" unique_id=1115600678 node_paths=PackedStringArray("signal_players") instance=ExtResource("2")]
+[node name="ButtonAudioManager" parent="PanelContainer/VBoxContainer/DeleteButton" unique_id=1115600678 node_paths=PackedStringArray("signal_players") instance=ExtResource("2")]
 signal_players = {
 &"focus_entered": NodePath("HoverPlayer"),
 &"mouse_entered": NodePath("HoverPlayer"),
 &"pressed": NodePath("PressPlayer")
 }
 
-[node name="ConfirmDeleteRow" type="HBoxContainer" parent="PanelContainer/InfoContainer" unique_id=1140434265]
+[node name="ConfirmDeleteRow" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=1140434265]
 visible = false
 layout_mode = 2
 
-[node name="ConfirmDeleteLabel" type="Label" parent="PanelContainer/InfoContainer/ConfirmDeleteRow" unique_id=1175575805]
+[node name="ConfirmDeleteLabel" type="Label" parent="PanelContainer/VBoxContainer/ConfirmDeleteRow" unique_id=1175575805]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Delete this save permanently?"
 autowrap_mode = 2
 
-[node name="ConfirmDeleteButton" type="Button" parent="PanelContainer/InfoContainer/ConfirmDeleteRow" unique_id=1722411555]
+[node name="ConfirmDeleteButton" type="Button" parent="PanelContainer/VBoxContainer/ConfirmDeleteRow" unique_id=1722411555]
 self_modulate = Color(1, 0.454902, 0.454902, 1)
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "YES"
 
-[node name="ButtonAudioManager" parent="PanelContainer/InfoContainer/ConfirmDeleteRow/ConfirmDeleteButton" unique_id=606453988 node_paths=PackedStringArray("signal_players") instance=ExtResource("2")]
+[node name="ButtonAudioManager" parent="PanelContainer/VBoxContainer/ConfirmDeleteRow/ConfirmDeleteButton" unique_id=606453988 node_paths=PackedStringArray("signal_players") instance=ExtResource("2")]
 signal_players = {
 &"focus_entered": NodePath("HoverPlayer"),
 &"mouse_entered": NodePath("HoverPlayer"),
 &"pressed": NodePath("PressPlayer")
 }
 
-[node name="CancelDeleteButton" type="Button" parent="PanelContainer/InfoContainer/ConfirmDeleteRow" unique_id=1333467053]
+[node name="CancelDeleteButton" type="Button" parent="PanelContainer/VBoxContainer/ConfirmDeleteRow" unique_id=1333467053]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 text = "CANCEL"
 
-[node name="ButtonAudioManager" parent="PanelContainer/InfoContainer/ConfirmDeleteRow/CancelDeleteButton" unique_id=458846395 node_paths=PackedStringArray("signal_players") instance=ExtResource("2")]
+[node name="ButtonAudioManager" parent="PanelContainer/VBoxContainer/ConfirmDeleteRow/CancelDeleteButton" unique_id=458846395 node_paths=PackedStringArray("signal_players") instance=ExtResource("2")]
 signal_players = {
 &"focus_entered": NodePath("HoverPlayer"),
 &"mouse_entered": NodePath("HoverPlayer"),
 &"pressed": NodePath("PressPlayer")
 }
 
-[node name="BackButton" type="Button" parent="PanelContainer/InfoContainer" unique_id=1518903277]
+[node name="BackButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1518903277]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 text = "BACK"
 
-[node name="ButtonAudioManager" parent="PanelContainer/InfoContainer/BackButton" unique_id=2009551610 node_paths=PackedStringArray("signal_players") instance=ExtResource("2")]
+[node name="ButtonAudioManager" parent="PanelContainer/VBoxContainer/BackButton" unique_id=2009551610 node_paths=PackedStringArray("signal_players") instance=ExtResource("2")]
 signal_players = {
 &"focus_entered": NodePath("HoverPlayer"),
 &"mouse_entered": NodePath("HoverPlayer"),

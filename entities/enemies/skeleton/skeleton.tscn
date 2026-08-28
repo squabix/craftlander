@@ -802,6 +802,7 @@ metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 script = ExtResource("9_ir2xu")
 hp = 100.0
 free_parent_on_death = true
+difficulty_profile_index = 1
 metadata/_custom_type_script = "uid://cbb5o5ykqwxfp"
 
 [node name="SignalAudioManager3D" type="Node3D" parent="Health" unique_id=1371947431 node_paths=PackedStringArray("signal_players")]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b31xl74j8j11n" path="res://menus/new_game_settings_menu.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://defaults/button_audio_manager.tscn" id="2"]
 
-[node name="NewGameSettingsMenu" type="Control" unique_id=486480884 node_paths=PackedStringArray("slot_label", "seed_field", "overwrite_warning", "start_button", "back_button")]
+[node name="NewGameSettingsMenu" type="Control" unique_id=486480884 node_paths=PackedStringArray("slot_label", "start_button", "seed_field", "overwrite_warning", "difficulty_slider", "difficulty_name_label", "back_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,9 +12,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
 slot_label = NodePath("PanelContainer/SettingsContainer/SlotLabel")
+start_button = NodePath("PanelContainer/SettingsContainer/StartButton")
 seed_field = NodePath("PanelContainer/SettingsContainer/SeedRow/SeedField")
 overwrite_warning = NodePath("PanelContainer/SettingsContainer/OverwriteWarningLabel")
-start_button = NodePath("PanelContainer/SettingsContainer/StartButton")
+difficulty_slider = NodePath("PanelContainer/SettingsContainer/DifficultyRow/VBoxContainer/DifficultySlider")
+difficulty_name_label = NodePath("PanelContainer/SettingsContainer/DifficultyRow/VBoxContainer/DifficultyNameLabel")
 back_button = NodePath("PanelContainer/SettingsContainer/BackButton")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=661647423]
@@ -25,9 +27,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -170.0
-offset_top = -87.5
+offset_top = -116.0
 offset_right = 170.0
-offset_bottom = 87.5
+offset_bottom = 116.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"MenuPanel"
@@ -54,11 +56,36 @@ layout_mode = 2
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 text = "Seed"
+uppercase = true
 
 [node name="SeedField" type="LineEdit" parent="PanelContainer/SettingsContainer/SeedRow" unique_id=1948775178]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Random"
+
+[node name="DifficultyRow" type="HBoxContainer" parent="PanelContainer/SettingsContainer" unique_id=1473105498]
+layout_mode = 2
+
+[node name="DifficultyTitle" type="Label" parent="PanelContainer/SettingsContainer/DifficultyRow" unique_id=1739400816]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+text = "Difficulty"
+uppercase = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/SettingsContainer/DifficultyRow" unique_id=2104776131]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DifficultySlider" type="HSlider" parent="PanelContainer/SettingsContainer/DifficultyRow/VBoxContainer" unique_id=1948775179]
+layout_mode = 2
+size_flags_horizontal = 3
+tick_count = 5
+ticks_on_borders = true
+
+[node name="DifficultyNameLabel" type="Label" parent="PanelContainer/SettingsContainer/DifficultyRow/VBoxContainer" unique_id=1739400817]
+layout_mode = 2
+text = "Medium"
+horizontal_alignment = 1
 
 [node name="StartButton" type="Button" parent="PanelContainer/SettingsContainer" unique_id=508987509]
 layout_mode = 2
@@ -81,3 +108,5 @@ signal_players = {
 &"mouse_entered": NodePath("HoverPlayer"),
 &"pressed": NodePath("PressPlayer")
 }
+
+[connection signal="value_changed" from="PanelContainer/SettingsContainer/DifficultyRow/VBoxContainer/DifficultySlider" to="." method="_on_difficulty_changed"]
