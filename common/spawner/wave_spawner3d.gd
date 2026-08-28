@@ -11,8 +11,12 @@ enum WavesState { IDLE, SPAWNING, WAITING_FOR_CLEAR, PAUSED }
 
 @export var waves: Array[WaveSpawnerWave]
 @export var auto_start := false
+
 @export_group("Looping")
 @export var loop_waves := false
+
+@export_group("Concurrency")
+@export var max_concurrent_instances := 0 # 0 = unlimited
 
 var current_state := WavesState.IDLE
 var current_wave_index := -1
@@ -146,6 +150,10 @@ func _process_wave(wave: WaveSpawnerWave) -> void:
 	# Spawning loop
 	while not remaining_pool.is_empty() and not _stop_requested:
 		if current_state == WavesState.PAUSED:
+			await get_tree().process_frame
+			continue
+
+		if max_concurrent_instances > 0 and active_instances.size() >= max_concurrent_instances:
 			await get_tree().process_frame
 			continue
 
