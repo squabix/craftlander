@@ -42,7 +42,6 @@ func get_child_states() -> Array[State]:
 func reload(force_ancestors := false) -> bool:
 	var state := get_state(current)
 	if not is_instance_valid(state):
-		Util.node_error("%s cannot reload invalid current state: %s", self, current)
 		return false
 
 	exit_current()
