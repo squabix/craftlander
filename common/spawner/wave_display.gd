@@ -26,7 +26,7 @@ func update() -> void:
 	
 	visible = active
 	if is_instance_valid(interpolated_bar):
-		interpolated_bar.target_value = wave_spawner.active_instances.size()
+		interpolated_bar.target_value = wave_spawner.get_total_remaining_count()
 	if is_instance_valid(name_label) and current_wave != null:
 		name_label.text = (
 			String(current_wave.name) if not current_wave.name.is_empty()
