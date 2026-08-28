@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="5_4vry0"]
 [ext_resource type="Script" uid="uid://cf04j3voj4xyc" path="res://entities/npc_states/wandering_state.gd" id="6_wpegq"]
 [ext_resource type="Script" uid="uid://pdvlr6l3n04n" path="res://entities/npc_states/chasing_state.gd" id="7_bfxyu"]
-[ext_resource type="Script" uid="uid://c5asagc5dswqt" path="res://common3d/entity/entity_guide/nav_entity_guide3d.gd" id="8_elujw"]
+[ext_resource type="PackedScene" uid="uid://c5x1hn4vi06bh" path="res://entities/nav_entity_guide3d.tscn" id="9_rq2ym"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="9_xkejc"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="12_0rn6u"]
 [ext_resource type="PackedScene" uid="uid://btvdb6drbsbg6" path="res://assets/models/entities/bee.blend" id="14_0lxgi"]
@@ -233,8 +233,8 @@ script = ExtResource("2_wnfpe")
 radius = 15.0
 lose_distance = 18.0
 target_collision_mask = 16
-ray_collision_mask = 21
 group_whitelist = Array[StringName]([&"player"])
+ray_collision_mask = 21
 
 [node name="StartChaseTrigger" type="Node" parent="Sight3D" unique_id=1196415362 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("3_rq2ym")
@@ -284,12 +284,9 @@ NodePath(".."): &"update_path"
 }
 metadata/_custom_type_script = "uid://73ya7jxulyl4"
 
-[node name="NavEntityGuide3D" type="Node" parent="Controller3D/Default" unique_id=377578045 node_paths=PackedStringArray("nav", "entity")]
-script = ExtResource("8_elujw")
+[node name="NavEntityGuide3D" parent="Controller3D/Default" unique_id=1240188709 node_paths=PackedStringArray("nav", "entity") instance=ExtResource("9_rq2ym")]
 nav = NodePath("../../../NavigationAgent3D")
 entity = NodePath("../../..")
-face_interpolation = 0.1
-metadata/_custom_type_script = "uid://c5asagc5dswqt"
 
 [node name="Inventory" type="Node" parent="." unique_id=2020826484]
 unique_name_in_owner = true

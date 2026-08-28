@@ -15,7 +15,7 @@
 [ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="13_aapfe"]
 [ext_resource type="Script" uid="uid://cf04j3voj4xyc" path="res://entities/npc_states/wandering_state.gd" id="14_b7q8g"]
 [ext_resource type="Script" uid="uid://pdvlr6l3n04n" path="res://entities/npc_states/chasing_state.gd" id="15_ww28j"]
-[ext_resource type="Script" uid="uid://c5asagc5dswqt" path="res://common3d/entity/entity_guide/nav_entity_guide3d.gd" id="16_icrdh"]
+[ext_resource type="PackedScene" uid="uid://c5x1hn4vi06bh" path="res://entities/nav_entity_guide3d.tscn" id="16_dg8e3"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="17_orkyh"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="18_48lup"]
 [ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="19_huyes"]
@@ -817,8 +817,8 @@ script = ExtResource("11_aeusl")
 radius = 15.0
 lose_distance = 23.0
 target_collision_mask = 16
-ray_collision_mask = 21
 group_whitelist = Array[StringName]([&"player"])
+ray_collision_mask = 21
 
 [node name="StartChaseTrigger" type="Node" parent="Sight3D" unique_id=1196415362 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("8_vx64r")
@@ -876,12 +876,9 @@ NodePath(".."): &"update_path"
 initial_time_left = 5.0
 metadata/_custom_type_script = "uid://73ya7jxulyl4"
 
-[node name="NavEntityGuide3D" type="Node" parent="Controller3D" unique_id=377578045 node_paths=PackedStringArray("nav", "entity")]
-script = ExtResource("16_icrdh")
+[node name="NavEntityGuide3D" parent="Controller3D" unique_id=1240188709 node_paths=PackedStringArray("nav", "entity") instance=ExtResource("16_dg8e3")]
 nav = NodePath("../../NavigationAgent3D")
 entity = NodePath("../..")
-face_interpolation = 0.1
-metadata/_custom_type_script = "uid://c5asagc5dswqt"
 
 [node name="Inventory" type="Node" parent="." unique_id=2020826484]
 unique_name_in_owner = true

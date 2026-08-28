@@ -24,12 +24,20 @@ const DIRECTION_MIN_LENGTH_SQ := 0.05
 var safe_velocity := Vector3.ZERO # Calculated by the NavigationServer
 var _is_nav_ready := false
 
+var has_direct_shot := false
+var is_outside_navmesh := false
+
 
 func _ready() -> void:
 	nav.avoidance_enabled = true
 	nav.velocity_computed.connect(update_computed_velocity) # Update safe velocity whenever computed
-	
+
 	_setup_nav_map.call_deferred()
+
+
+func _recompute_nav_states() -> void:
+	has_direct_shot = _compute_has_direct_shot()
+	is_outside_navmesh = _compute_is_outside_navmesh()
 
 
 func _setup_nav_map() -> void:
@@ -100,7 +108,7 @@ func get_closest_navmesh_point(include_ingress: bool = true) -> Vector3:
 	return closest
 
 
-func is_outside_navmesh() -> bool:
+func _compute_is_outside_navmesh() -> bool:
 	if not has_entity():
 		return false
 
@@ -128,9 +136,9 @@ func _get_horizontal_direction_to(from: Vector3, to: Vector3) -> Vector3:
 func get_direction() -> Vector3:
 	if not has_entity():
 		return Vector3.ZERO
-	if has_direct_shot():
+	if has_direct_shot:
 		return _get_horizontal_direction_to(entity.global_position, target_position)
-	if is_outside_navmesh():
+	if is_outside_navmesh:
 		return _get_horizontal_direction_to(entity.global_position, get_closest_navmesh_point(true))
 	if safe_velocity.length_squared() > SAFE_VELOCITY_MIN_LENGTH_SQ:
 		return safe_velocity.normalized()
@@ -160,9 +168,9 @@ func face_target() -> void:
 
 func get_target_direction() -> Vector3:
 	var move_direction := get_direction()
-	if has_direct_shot():
+	if has_direct_shot:
 		return _get_horizontal_direction_to(entity.global_position, target_position)
-	elif is_outside_navmesh():
+	elif is_outside_navmesh:
 		return move_direction # Face steering while off-mesh
 	elif nav.is_target_reachable():
 		return _get_horizontal_direction_to(entity.global_position, nav.get_next_path_position())
@@ -190,8 +198,8 @@ func get_nav_velocity() -> Vector3:
 	var speed := entity.move_mode.max_speed.x
 
 	var direction := (
-		_get_horizontal_direction_to(entity.global_position, target_position) if has_direct_shot()
-		else _get_horizontal_direction_to(entity.global_position, get_closest_navmesh_point(true)) if is_outside_navmesh()
+		_get_horizontal_direction_to(entity.global_position, target_position) if has_direct_shot
+		else _get_horizontal_direction_to(entity.global_position, get_closest_navmesh_point(true)) if is_outside_navmesh
 		else _get_horizontal_direction_to(entity.global_position, nav.get_next_path_position())
 	)
 	return speed * direction
@@ -261,7 +269,7 @@ func within_move_directly_range() -> bool:
 	)
 
 
-func has_direct_shot() -> bool:
+func _compute_has_direct_shot() -> bool:
 	if not within_move_directly_range():
 		return false # Fail if not within direct walk range
 
@@ -290,7 +298,6 @@ func _get_move_directly_ray_result(start: Vector3, end: Vector3) -> Dictionary:
 		Util.node_error("%s cannot get move directly ray result without entity", self)
 		return { }
 	if start == end:
-		Util.node_error("%s cannot get move directly ray result between two equal points: %s and %s", self, start, end)
 		return { }
 	var query := PhysicsRayQueryParameters3D.create(start, end, 0xFFFFFFFF, [entity.get_rid()])
 	return entity.get_world_3d().direct_space_state.intersect_ray(query)

@@ -14,11 +14,11 @@
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="10_v4fp6"]
 [ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="10_v53xr"]
 [ext_resource type="Script" uid="uid://cf04j3voj4xyc" path="res://entities/npc_states/wandering_state.gd" id="11_7mn0t"]
-[ext_resource type="Script" uid="uid://c5asagc5dswqt" path="res://common3d/entity/entity_guide/nav_entity_guide3d.gd" id="11_8jseq"]
 [ext_resource type="Script" uid="uid://ccwod33h53a5s" path="res://common3d/controller/entity_controller3d.gd" id="11_hswny"]
 [ext_resource type="Script" uid="uid://pdvlr6l3n04n" path="res://entities/npc_states/chasing_state.gd" id="13_7mn0t"]
 [ext_resource type="PackedScene" uid="uid://bl745esge18tq" path="res://assets/models/entities/rootling.blend" id="13_v4fp6"]
 [ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="16_f0qrw"]
+[ext_resource type="PackedScene" uid="uid://c5x1hn4vi06bh" path="res://entities/nav_entity_guide3d.tscn" id="16_u6pq5"]
 [ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="17_rvntx"]
 [ext_resource type="Script" uid="uid://ljihr86cv3xk" path="res://common3d/item_visuals_container_3d.gd" id="20_geuk7"]
 [ext_resource type="Script" uid="uid://bp5ab438ufrus" path="res://common3d/culling_controller3d.gd" id="20_hswny"]
@@ -706,8 +706,8 @@ script = ExtResource("5_nauqg")
 radius = 15.0
 lose_distance = 23.0
 target_collision_mask = 16
-ray_collision_mask = 21
 group_whitelist = Array[StringName]([&"player"])
+ray_collision_mask = 21
 
 [node name="StartChaseTrigger" type="Node" parent="Sight3D" unique_id=1196415362 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("8_7mn0t")
@@ -765,12 +765,10 @@ NodePath(".."): &"update_path"
 initial_time_left = 5.0
 metadata/_custom_type_script = "uid://73ya7jxulyl4"
 
-[node name="NavEntityGuide3D" type="Node" parent="Controller3D" unique_id=377578045 node_paths=PackedStringArray("nav", "entity")]
-script = ExtResource("11_8jseq")
+[node name="NavEntityGuide3D" parent="Controller3D" unique_id=1240188709 node_paths=PackedStringArray("nav", "entity") instance=ExtResource("16_u6pq5")]
 nav = NodePath("../../NavigationAgent3D")
 entity = NodePath("../..")
 face_interpolation = 0.1
-metadata/_custom_type_script = "uid://c5asagc5dswqt"
 
 [node name="Inventory" type="Node" parent="." unique_id=2020826484]
 unique_name_in_owner = true
@@ -798,18 +796,18 @@ radius = 1.0
 [node name="Visuals" parent="." unique_id=1269952913 instance=ExtResource("13_v4fp6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
-[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1269952913, 1677697918) index="0" unique_id=134658688]
+[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1269952913, 252965777) index="0" unique_id=30263594]
 bones/7/rotation = Quaternion(-0.35355338, 0.14644662, -0.35355335, 0.8535534)
 bones/10/rotation = Quaternion(-0.35355338, -0.14644662, 0.35355335, 0.8535534)
 
-[node name="Woodling" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=1080303323]
+[node name="Woodling" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=784148125]
 surface_material_override/0 = ExtResource("21_uefcv")
 surface_material_override/1 = ExtResource("22_c3uxn")
 surface_material_override/2 = ExtResource("25_g7svr")
 surface_material_override/3 = ExtResource("26_u6pq5")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Visuals/Armature/Skeleton3D" index="1" unique_id=319653899]
-transform = Transform3D(0.62028205, 0.6618232, 0.42099893, 0.08364214, -0.5894777, 0.80344254, 0.7799065, -0.46314767, -0.42099884, 0.56068856, 0.35492462, -0.16068852)
+transform = Transform3D(0.6298519, 0.59437907, 0.5, 0.09933779, -0.7000942, 0.7071068, 0.7703367, -0.39570355, -0.5, 0.54142135, 0.32332414, -0.14142136)
 bone_name = "Bone.012"
 bone_idx = 11
 
