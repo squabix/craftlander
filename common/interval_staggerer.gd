@@ -3,16 +3,26 @@ extends Node
 
 signal timeout
 
+enum TimeUnit { SECONDS, PROCESS_FRAMES, PHYSICS_FRAMES }
+
+@export var unit := TimeUnit.SECONDS:
+	set(value):
+		unit = value
+		if is_inside_tree():
+			_update_process_callback()
+
 @export var disabled := false
-@export_custom(PROPERTY_HINT_NONE, "suffix:s") var base_interval := 1.0
-@export_custom(PROPERTY_HINT_NONE, "suffix:s") var stagger_amount := 0.003
+@export_custom(PROPERTY_HINT_NONE, "suffix:units") var base_interval := 1.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:units") var stagger_amount := 0.003
 @export var target_methods: Dictionary[Node, StringName]
-@export_custom(PROPERTY_HINT_NONE, "suffix:s") var initial_time_left := 0.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:units") var initial_time_left := 0.0
 
 var time_left := 0.0
 
 
 func _ready() -> void:
+	_update_process_callback()
+
 	if initial_time_left > 0.0:
 		time_left = stagger(initial_time_left)
 		return
@@ -20,11 +30,24 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	time_left -= delta
+	_advance(delta if unit == TimeUnit.SECONDS else 1.0)
+
+
+func _physics_process(_delta: float) -> void:
+	_advance(1.0) # Always whole physics ticks, regardless of substep delta
+
+
+func _advance(amount: float) -> void:
+	time_left -= amount
 	if time_left <= 0.0:
 		reset()
 		call_target_methods()
 		timeout.emit()
+
+
+func _update_process_callback() -> void:
+	set_process(unit != TimeUnit.PHYSICS_FRAMES)
+	set_physics_process(unit == TimeUnit.PHYSICS_FRAMES)
 
 
 func reset() -> void:
