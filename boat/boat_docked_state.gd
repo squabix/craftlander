@@ -5,11 +5,12 @@ extends State
 
 func enter() -> void:
 	root.docked.emit()
+	if is_instance_valid(interactable):
+		interactable.enable()
+
 	var dismounted_player: Player = driver_seat.dismount()
 	if dismounted_player == null:
 		return
 
 	dismounted_player.respawn_point_node = driver_seat
-	if is_instance_valid(interactable):
-		interactable.enable()
 	
