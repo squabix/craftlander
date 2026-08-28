@@ -9,6 +9,7 @@ signal deleted(slot: int)
 @export var island_label: Label
 @export var boat_level_label: Label
 @export var islands_explored_label: Label
+@export var difficulty_label: Label
 
 @export_group("Seed", "seed")
 @export var seed_label: Label
@@ -48,6 +49,7 @@ func show_save(slot: int) -> void:
 	island_label.text = "Current Island: %s" % (save.current_level_index + 1)
 	boat_level_label.text = "Boat Level: %s" % save.boat_level
 	islands_explored_label.text = "Islands Explored: %s" % save.generated_levels.size()
+	difficulty_label.text = "Difficulty: %s" % Difficulty.get_display_name(save.difficulty)
 
 
 func _on_copy_seed_pressed() -> void:

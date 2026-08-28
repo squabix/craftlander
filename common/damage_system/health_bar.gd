@@ -5,6 +5,7 @@ const CURRENT: String = "CURRENT"
 const MAX: String = "MAX"
 
 @export var health: Health
+@export var instant_on_max_hp_change := false
 
 @export_group("Label")
 @export var label: Label
@@ -16,7 +17,13 @@ func _process(_delta: float) -> void:
 	if not is_instance_valid(health):
 		return
 
+	var max_hp_changed := not is_equal_approx(health.max_hp, max_value)
 	max_value = health.max_hp
+
+	if instant_on_max_hp_change and max_hp_changed:
+		if _value_tween and _value_tween.is_valid():
+			_value_tween.kill()
+		value = health.hp
 	target_value = health.hp
 
 	if is_instance_valid(label):

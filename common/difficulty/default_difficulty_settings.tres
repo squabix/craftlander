@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="DifficultySettings" format=3 uid="uid://7pa37qkbatt"]
+
+[ext_resource type="Script" uid="uid://cvtlcbkq20618" path="res://common/difficulty/difficulty_settings.gd" id="1_ebrsa"]
+[ext_resource type="Script" uid="uid://bpjc0ljm65h5d" path="res://common/difficulty/difficulty_profile.gd" id="2_profile"]
+
+[sub_resource type="Resource" id="DifficultyProfile_player"]
+script = ExtResource("2_profile")
+max_hp_multipliers = Dictionary[int, float]({
+0: 1.0,
+1: 1.0,
+2: 1.0,
+3: 1.0,
+4: 1.0
+})
+damage_taken_multipliers = Dictionary[int, float]({
+0: 0.33,
+1: 0.67,
+2: 1.0,
+3: 1.5,
+4: 2.5
+})
+
+[sub_resource type="Resource" id="DifficultyProfile_enemy"]
+script = ExtResource("2_profile")
+max_hp_multipliers = Dictionary[int, float]({
+0: 0.75,
+1: 1.0,
+2: 1.5,
+3: 2.0,
+4: 3.0
+})
+damage_taken_multipliers = Dictionary[int, float]({
+0: 1.0,
+1: 1.0,
+2: 1.0,
+3: 1.0,
+4: 1.0
+})
+
+[resource]
+script = ExtResource("1_ebrsa")
+display_names = Dictionary[int, String]({
+0: "Easy",
+1: "Medium",
+2: "Hard",
+3: "Expert",
+4: "Master"
+})
+profiles = Array[ExtResource("2_profile")]([SubResource("DifficultyProfile_player"), SubResource("DifficultyProfile_enemy")])

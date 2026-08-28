@@ -1300,6 +1300,7 @@ shape = SubResource("BoxShape3D_ebec5")
 unique_name_in_owner = true
 script = ExtResource("12_ebec5")
 hp = 100.0
+difficulty_profile_index = 0
 
 [node name="SignalAnimationTrigger" type="Node" parent="Health" unique_id=1074142864 node_paths=PackedStringArray("anim_player")]
 script = ExtResource("25_j55il")
@@ -1447,7 +1448,7 @@ value = 4.58
 show_percentage = false
 script = ExtResource("26_r7pn3")
 health = NodePath("../../../Health")
-lerp_weight = 0.3
+instant_on_max_hp_change = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/BarContainer" unique_id=1103359367]
 custom_minimum_size = Vector2(0, 8)
@@ -1463,7 +1464,6 @@ max_value = 1.0
 value = 0.41
 show_percentage = false
 script = ExtResource("27_b8hi5")
-lerp_weight = 0.3
 metadata/_custom_type_script = "uid://c3xfbb8ay0ghk"
 
 [node name="StaminaBar" type="ProgressBar" parent="HUD/BarContainer/HBoxContainer" unique_id=609152098]
@@ -1476,7 +1476,6 @@ max_value = 1.0
 value = 0.41
 show_percentage = false
 script = ExtResource("27_b8hi5")
-lerp_weight = 0.3
 fade_when_idle = true
 metadata/_custom_type_script = "uid://c3xfbb8ay0ghk"
 

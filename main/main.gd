@@ -1,6 +1,8 @@
 class_name Main
 extends Node
 
+signal difficulty_changed(value: int)
+
 const MAX_SLOT := 5
 const ISLAND_SCENE_PATH_FORMAT := "res://levels/island_%s.tscn"
 const SAVE_PATH_FORMAT := "user://save_slot_%s.res"
@@ -94,17 +96,23 @@ func new_save() -> Save:
 	return game_save.new()
 
 
-func start_new_game(slot: int, seed_value: int) -> void:
+func start_new_game(slot: int, seed_value: int, difficulty: int) -> void:
 	if slot < 0 or slot >= MAX_SLOT:
 		Util.node_error("Cannot start new game in invalid slot number: %s", slot)
 		return
 	loaded_save = new_save()
 	loaded_save.base_seed = seed_value
 	base_seed = loaded_save.base_seed
+	set_difficulty(difficulty)
 
 	current_save_slot = slot
 	save_game(slot)
 	load_level(0)
+
+
+func set_difficulty(value: int) -> void:
+	loaded_save.difficulty = value
+	difficulty_changed.emit(value)
 
 
 func save_current_game() -> void:

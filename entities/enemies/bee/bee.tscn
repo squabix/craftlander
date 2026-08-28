@@ -338,6 +338,7 @@ autoplay = &"fly"
 script = ExtResource("15_7niy0")
 hp = 15.0
 free_parent_on_death = true
+difficulty_profile_index = 1
 metadata/_custom_type_script = "uid://cbb5o5ykqwxfp"
 
 [node name="FlightAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1652503716]

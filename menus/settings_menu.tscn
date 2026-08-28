@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://defaults/button_audio_manager.tscn" id="2_v0bl3"]
 [ext_resource type="Script" uid="uid://c36fqcfs66yhx" path="res://common/ui/volume_slider.gd" id="3_n4a8d"]
 
-[node name="SettingsMenu" type="Control" unique_id=788547277 node_paths=PackedStringArray("music_slider", "sfx_slider", "vsync_toggle", "full_screen_toggle", "aa_option", "invert_y_toggle", "back_button")]
+[node name="SettingsMenu" type="Control" unique_id=788547277 node_paths=PackedStringArray("music_slider", "sfx_slider", "vsync_toggle", "full_screen_toggle", "aa_option", "invert_y_toggle", "difficulty_row", "difficulty_slider", "difficulty_name_label", "back_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,12 +18,14 @@ vsync_toggle = NodePath("SettingsContainer/VSync/CenterContainer/VSyncToggle")
 full_screen_toggle = NodePath("SettingsContainer/FullScreen/CenterContainer/FullScreenToggle")
 aa_option = NodePath("SettingsContainer/AntiAliasing/AAOption")
 invert_y_toggle = NodePath("SettingsContainer/InvertY/CenterContainer/InvertYToggle")
+difficulty_row = NodePath("SettingsContainer/Difficulty")
+difficulty_slider = NodePath("SettingsContainer/Difficulty/VBoxContainer/DifficultySlider")
+difficulty_name_label = NodePath("SettingsContainer/Difficulty/VBoxContainer/DifficultyNameLabel")
 back_button = NodePath("SettingsContainer/BackButton")
 back_action = &"back"
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1518470332]
-theme_type_variation = &"MenuPanel"
-custom_minimum_size = Vector2(380, 370)
+custom_minimum_size = Vector2(380, 410)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -31,11 +33,12 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -190.0
-offset_top = -185.0
+offset_top = -205.0
 offset_right = 190.0
-offset_bottom = 185.0
+offset_bottom = 205.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_type_variation = &"MenuPanel"
 
 [node name="SettingsContainer" type="VBoxContainer" parent="." unique_id=1534027746]
 layout_mode = 1
@@ -45,9 +48,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -160.0
-offset_top = -155.0
+offset_top = -175.0
 offset_right = 160.0
-offset_bottom = 155.0
+offset_bottom = 175.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 14
@@ -59,6 +62,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Full Screen"
+uppercase = true
 
 [node name="CenterContainer" type="CenterContainer" parent="SettingsContainer/FullScreen" unique_id=547709853]
 custom_minimum_size = Vector2(170, 0)
@@ -83,6 +87,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "VSync"
+uppercase = true
 
 [node name="CenterContainer" type="CenterContainer" parent="SettingsContainer/VSync" unique_id=1022507826]
 custom_minimum_size = Vector2(170, 0)
@@ -108,6 +113,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Invert Y"
+uppercase = true
 
 [node name="CenterContainer" type="CenterContainer" parent="SettingsContainer/InvertY" unique_id=1327443351]
 custom_minimum_size = Vector2(170, 0)
@@ -126,6 +132,31 @@ signal_players = {
 &"pressed": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
 }
 
+[node name="Difficulty" type="HBoxContainer" parent="SettingsContainer" unique_id=2001000001]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="SettingsContainer/Difficulty" unique_id=2001000002]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Difficulty"
+uppercase = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsContainer/Difficulty" unique_id=1904963371]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DifficultySlider" type="HSlider" parent="SettingsContainer/Difficulty/VBoxContainer" unique_id=2001000003]
+layout_mode = 2
+size_flags_horizontal = 3
+tick_count = 5
+ticks_on_borders = true
+
+[node name="DifficultyNameLabel" type="Label" parent="SettingsContainer/Difficulty/VBoxContainer" unique_id=2001000004]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+text = "Medium"
+horizontal_alignment = 1
+
 [node name="AntiAliasing" type="HBoxContainer" parent="SettingsContainer" unique_id=289704489]
 layout_mode = 2
 
@@ -133,6 +164,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Anti Aliasing"
+uppercase = true
 
 [node name="AAOption" type="OptionButton" parent="SettingsContainer/AntiAliasing" unique_id=630181348]
 unique_name_in_owner = true
@@ -164,6 +196,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Shadow Quality"
+uppercase = true
 
 [node name="ShadowOption" type="OptionButton" parent="SettingsContainer/ShadowQuality" unique_id=1710798274]
 unique_name_in_owner = true
@@ -195,6 +228,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "SFX Volume"
+uppercase = true
 
 [node name="Slider" type="HSlider" parent="SettingsContainer/SFXVolume" unique_id=453858999]
 layout_mode = 2
@@ -213,6 +247,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Music Volume"
+uppercase = true
 
 [node name="Slider" type="HSlider" parent="SettingsContainer/MusicVolume" unique_id=1082336741]
 layout_mode = 2
@@ -231,6 +266,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "Ambient Volume"
+uppercase = true
 
 [node name="Slider" type="HSlider" parent="SettingsContainer/AmbientVolume" unique_id=235919823]
 layout_mode = 2
@@ -250,6 +286,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 text = "UI Volume"
+uppercase = true
 
 [node name="Slider" type="HSlider" parent="SettingsContainer/UIVolume" unique_id=253556157]
 layout_mode = 2
@@ -276,6 +313,7 @@ signal_players = {
 [connection signal="toggled" from="SettingsContainer/FullScreen/CenterContainer/FullScreenToggle" to="." method="_on_full_screen_toggled"]
 [connection signal="toggled" from="SettingsContainer/VSync/CenterContainer/VSyncToggle" to="." method="_on_vsync_toggled"]
 [connection signal="toggled" from="SettingsContainer/InvertY/CenterContainer/InvertYToggle" to="." method="_on_invert_y_toggled"]
+[connection signal="value_changed" from="SettingsContainer/Difficulty/VBoxContainer/DifficultySlider" to="." method="_on_difficulty_changed"]
 [connection signal="item_selected" from="SettingsContainer/AntiAliasing/AAOption" to="." method="_on_anti_aliasing_selected"]
 [connection signal="item_selected" from="SettingsContainer/ShadowQuality/ShadowOption" to="." method="_on_shadow_quality_selected"]
 [connection signal="pressed" from="SettingsContainer/BackButton" to="." method="_on_back_button_pressed"]
