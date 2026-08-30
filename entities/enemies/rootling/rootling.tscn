@@ -50,6 +50,7 @@
 [ext_resource type="AudioStream" uid="uid://dmpw7i1okaklk" path="res://assets/sound/rootling-04.mp3" id="42_ai86q"]
 [ext_resource type="AudioStream" uid="uid://cxppt2efnqk4e" path="res://assets/sound/rootling-05.mp3" id="43_d3brl"]
 [ext_resource type="AudioStream" uid="uid://sl2wj5r6v4jx" path="res://assets/sound/rootling-06.mp3" id="44_ve4h5"]
+[ext_resource type="Script" uid="uid://b6yrmkabhfa82" path="res://entities/npc_states/searching_state.gd" id="59_searching"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
 script = ExtResource("3_wtogd")
@@ -718,6 +719,22 @@ from_state_whitelist = Array[StringName]([&"Wandering"])
 signal_name = &"found_target"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 
+[node name="StartSearchTrigger" type="Node" parent="Sight3D" unique_id=1535908806 node_paths=PackedStringArray("state_machine")]
+script = ExtResource("8_7mn0t")
+state_machine = NodePath("../../Controller3D/Default")
+state_name = &"Searching"
+from_state_whitelist = Array[StringName]([&"Chasing"])
+signal_name = &"lost_target"
+metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
+
+[node name="IntervalStaggerer" type="Node" parent="Sight3D" unique_id=970852926 node_paths=PackedStringArray("target_methods")]
+script = ExtResource("34_hswny")
+base_interval = 0.2
+target_methods = {
+NodePath(".."): &"update_target"
+}
+metadata/_custom_type_script = "uid://73ya7jxulyl4"
+
 [node name="Controller3D" type="Node" parent="." unique_id=1315753818]
 script = ExtResource("11_hswny")
 metadata/_custom_type_script = "uid://ccwod33h53a5s"
@@ -754,16 +771,34 @@ item_holder = NodePath("../../../ItemHolder3D")
 guide = NodePath("../../NavEntityGuide3D")
 sight = NodePath("../../../Sight3D")
 interval_staggerer = NodePath("IntervalStaggerer")
+lose_target_state = &"Searching"
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="IntervalStaggerer" type="Node" parent="Controller3D/Default/Chasing" unique_id=1668925528 node_paths=PackedStringArray("target_methods")]
 script = ExtResource("34_hswny")
 base_interval = 0.25
+initial_time_left = 5.0
 target_methods = {
 NodePath(".."): &"update_path"
 }
-initial_time_left = 5.0
+metadata/_custom_type_script = "uid://73ya7jxulyl4"
+
+[node name="Searching" type="Node" parent="Controller3D/Default" unique_id=891851214 node_paths=PackedStringArray("guide", "sight", "interval_staggerer", "root")]
+script = ExtResource("59_searching")
+guide = NodePath("../../NavEntityGuide3D")
+sight = NodePath("../../../Sight3D")
+interval_staggerer = NodePath("IntervalStaggerer")
+found_target_state = &"Chasing"
+give_up_state = &"Wandering"
+root = NodePath("../../..")
+
+[node name="IntervalStaggerer" type="Node" parent="Controller3D/Default/Searching" unique_id=300850495 node_paths=PackedStringArray("target_methods")]
+script = ExtResource("34_hswny")
+base_interval = 0.25
+target_methods = {
+NodePath(".."): &"check_status"
+}
 metadata/_custom_type_script = "uid://73ya7jxulyl4"
 
 [node name="NavEntityGuide3D" parent="Controller3D" unique_id=1240188709 node_paths=PackedStringArray("nav", "entity") instance=ExtResource("16_u6pq5")]

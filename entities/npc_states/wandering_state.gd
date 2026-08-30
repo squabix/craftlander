@@ -1,3 +1,4 @@
+class_name WanderingState
 extends State
 
 signal started
