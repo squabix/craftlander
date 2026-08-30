@@ -25,6 +25,8 @@ var transition_checks: Dictionary = { } # {check: state}
 var enter_callable: Callable
 var is_active := false
 
+var _transition_pending := false
+
 
 func _process(delta: float) -> void:
 	if process_update:
@@ -62,10 +64,14 @@ func add_check(target: State, callable: Callable) -> void:
 
 
 func transition_to(state_name: StringName) -> void:
+	if _transition_pending:
+		return
 	if not enter_callable.is_valid():
 		Util.node_error("%s cannot transition to %s invalid enter callable", self, state_name)
 		return
+	_transition_pending = true
 	await get_tree().process_frame
+	_transition_pending = false
 	enter_callable.call(state_name)
 
 

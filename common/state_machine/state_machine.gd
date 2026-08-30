@@ -124,7 +124,7 @@ func get_state(state_name: StringName) -> State:
 func enter_state(state_variant: Variant, force_ancestors := false) -> bool:
 	var state: State = state_variant if state_variant is State else get_state(state_variant) if state_variant is StringName else null
 	if not is_instance_valid(state):
-		push_error("%s cannot enter invalid state: %s", self, state)
+		Util.node_error("%s cannot enter invalid state: %s", self, state)
 		return false
 	if state.name == current:
 		return true

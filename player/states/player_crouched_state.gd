@@ -1,13 +1,14 @@
-extends State
+class_name PlayerCrouchedState
+extends PlayerMoveState
 
-@onready var move_mode := preload("res://player/states/player_crouched_move_mode.tres")
-
-@export var stamina: Stamina
 @export var standing_collision: CollisionShape3D
 @export var crouched_collision: CollisionShape3D
 
+func _ready() -> void:
+	move_mode = preload("res://player/states/player_crouched_move_mode.tres")
+
 func enter() -> void:
-	root.move_mode = move_mode
+	super()
 	standing_collision.disabled = true
 	crouched_collision.disabled = false
 

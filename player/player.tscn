@@ -1113,11 +1113,11 @@ stamina = NodePath("../../../Stamina")
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Crouching" type="Node" parent="Controller3D/Default" unique_id=761766902 node_paths=PackedStringArray("stamina", "standing_collision", "crouched_collision", "root")]
+[node name="Crouching" type="Node" parent="Controller3D/Default" unique_id=761766902 node_paths=PackedStringArray("standing_collision", "crouched_collision", "stamina", "root")]
 script = ExtResource("9_hg6s5")
-stamina = NodePath("../../../Stamina")
 standing_collision = NodePath("../../../StandingCollisionShape")
 crouched_collision = NodePath("../../../CrouchedCollisionShape")
+stamina = NodePath("../../../Stamina")
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
@@ -1305,7 +1305,6 @@ difficulty_profile_index = 0
 [node name="SignalAnimationTrigger" type="Node" parent="Health" unique_id=1074142864 node_paths=PackedStringArray("anim_player")]
 script = ExtResource("25_j55il")
 anim_player = NodePath("../../ScreenEffectContainer/Hurt/AnimationPlayer")
-anim_name = "hurt"
 force_from_start = false
 signal_name = &"was_hurt"
 metadata/_custom_type_script = "uid://dapeyi3eetek1"

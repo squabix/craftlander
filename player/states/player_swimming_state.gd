@@ -1,15 +1,15 @@
-extends State
+class_name PlayerSwimmingState
+extends PlayerMoveState
 
 const ACTION_INTERACT := &"interact"
 const STAMINA_COST := 0.12
 
-@export var stamina: Stamina
-
-@onready var move_mode: MoveMode = preload("res://player/states/player_swmming_move_mode.tres")
+func _ready() -> void:
+	move_mode = preload("res://player/states/player_swmming_move_mode.tres")
 
 func enter() -> void:
+	super()
 	root.set_character_stream_player(root.swim_player)
-	root.move_mode = move_mode
 
 func handle_input(event: InputEvent) -> void:
 	super(event)
