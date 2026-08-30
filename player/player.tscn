@@ -1003,6 +1003,7 @@ stream_0/stream = ExtResource("112_teerl")
 
 [node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("movement_state_machine", "head", "interactors", "respawn_button", "boat_menu", "item_holder", "dropper", "health", "health_saver", "hunger", "hunger_saver", "stamina", "steps_player", "swim_player", "eat_player", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
 collision_layer = 17
+collision_mask = 4
 floor_constant_speed = true
 floor_block_on_wall = false
 floor_max_angle = 1.0471976
