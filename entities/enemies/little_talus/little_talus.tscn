@@ -1,0 +1,838 @@
+[gd_scene format=3 uid="uid://donyajg6jg0ms"]
+
+[ext_resource type="Script" uid="uid://ddfxl740coqoi" path="res://entities/enemies/little_talus/little_talus.gd" id="1_so7wi"]
+[ext_resource type="Resource" uid="uid://djrww7a4plilm" path="res://entities/enemies/little_talus/little_talus_move_mode.tres" id="2_aighg"]
+[ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="3_vpv56"]
+[ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_tt2u0"]
+[ext_resource type="Script" uid="uid://bp5ab438ufrus" path="res://common3d/culling_controller3d.gd" id="5_qp2xn"]
+[ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="6_7y7ru"]
+[ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="7_2a46w"]
+[ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/signal_triggrs/signal_state_trigger.gd" id="8_ik701"]
+[ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="9_3hery"]
+[ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="10_q8vi4"]
+[ext_resource type="Script" uid="uid://v1m6kagbghjv" path="res://common3d/radial_sight_3d.gd" id="11_rqsx0"]
+[ext_resource type="Script" uid="uid://ccwod33h53a5s" path="res://common3d/controller/entity_controller3d.gd" id="12_bojey"]
+[ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="13_26wst"]
+[ext_resource type="Script" uid="uid://cf04j3voj4xyc" path="res://entities/npc_states/wandering_state.gd" id="14_m1223"]
+[ext_resource type="Script" uid="uid://pdvlr6l3n04n" path="res://entities/npc_states/chasing_state.gd" id="15_g417x"]
+[ext_resource type="PackedScene" uid="uid://c5x1hn4vi06bh" path="res://entities/nav_entity_guide3d.tscn" id="16_rrqrs"]
+[ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="17_bnejs"]
+[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="18_yamgu"]
+[ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="21_q8gfh"]
+[ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="33_apxat"]
+[ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="34_ioiqg"]
+[ext_resource type="PackedScene" uid="uid://h3veu2e18ij1" path="res://entities/entity_health_bar.tscn" id="36_3usk7"]
+[ext_resource type="AudioStream" uid="uid://cwqa0rroqx0ww" path="res://assets/sound/steps_stream.tres" id="37_s6u2m"]
+[ext_resource type="AudioStream" uid="uid://iqev25rq7fbq" path="res://assets/sound/rootling-07.mp3" id="38_ts3qc"]
+[ext_resource type="AudioStream" uid="uid://b3c73cbq1ut7n" path="res://assets/sound/rootling-09.mp3" id="39_eafs2"]
+[ext_resource type="AudioStream" uid="uid://cb3edy6gssben" path="res://assets/sound/rootling-08.mp3" id="40_kmouv"]
+[ext_resource type="AudioStream" uid="uid://vb4hdoc5mtfs" path="res://assets/sound/rootling-01.mp3" id="41_apr2d"]
+[ext_resource type="Material" uid="uid://bh8sv2icydggs" path="res://assets/materials/stone.tres" id="42_37b0g"]
+[ext_resource type="AudioStream" uid="uid://dv7i8slvjjvqf" path="res://assets/sound/rootling-02.mp3" id="42_svf73"]
+[ext_resource type="AudioStream" uid="uid://by44iwpc4os7a" path="res://assets/sound/rootling-03.mp3" id="43_y4r5v"]
+[ext_resource type="AudioStream" uid="uid://dmpw7i1okaklk" path="res://assets/sound/rootling-04.mp3" id="44_yfmoj"]
+[ext_resource type="PackedScene" uid="uid://cwktpe3hn6xos" path="res://assets/models/entities/little_talus.blend" id="45_37b0g"]
+[ext_resource type="AudioStream" uid="uid://cxppt2efnqk4e" path="res://assets/sound/rootling-05.mp3" id="45_niyif"]
+[ext_resource type="AudioStream" uid="uid://sl2wj5r6v4jx" path="res://assets/sound/rootling-06.mp3" id="46_juh4j"]
+[ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="47_33mcr"]
+[ext_resource type="AudioStream" uid="uid://ck0q8lhyrv4xy" path="res://assets/sound/rootling-10.mp3" id="48_js75o"]
+[ext_resource type="AudioStream" uid="uid://chvu761wd8xc2" path="res://assets/sound/rootling-11.mp3" id="49_3wulv"]
+[ext_resource type="AudioStream" uid="uid://c4438fvpcmcld" path="res://assets/sound/rootling-12.mp3" id="50_u6fot"]
+[ext_resource type="Resource" uid="uid://b37h3pr83pcu4" path="res://items/materials/rock/rock_item.tres" id="51_rock"]
+[ext_resource type="Resource" uid="uid://c5uhmmmlb6tko" path="res://items/materials/minerals/copper_chunk/copper_chunk_item.tres" id="52_copper"]
+[ext_resource type="Script" uid="uid://2ow28vm5clst" path="res://common/spawner/projectile_spawner3d.gd" id="53_projspawn"]
+[ext_resource type="PackedScene" uid="uid://ifqgx7y3fyj1" path="res://entities/projectiles/flying_rock/flying_rock.tscn" id="54_flyrock"]
+[ext_resource type="Resource" path="res://entities/projectiles/flying_rock/flying_rock_damage.tres" id="55_flyrockdmg"]
+[ext_resource type="Script" uid="uid://bu5gejc4tee2w" path="res://entities/enemies/little_talus/talus_throwing_state.gd" id="58_talusthrow"]
+[ext_resource type="Script" uid="uid://b6yrmkabhfa82" path="res://entities/npc_states/searching_state.gd" id="59_searching"]
+
+[sub_resource type="Resource" id="Resource_v53xr"]
+script = ExtResource("3_vpv56")
+y = false
+metadata/_custom_type_script = "uid://bh8pcyeueeoey"
+
+[sub_resource type="Resource" id="Resource_0dji4"]
+script = ExtResource("4_tt2u0")
+bool_vector = SubResource("Resource_v53xr")
+metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_37b0g"]
+
+[sub_resource type="Resource" id="Resource_aoox1"]
+script = ExtResource("18_yamgu")
+item = ExtResource("51_rock")
+quantity = 3
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_uefcv"]
+script = ExtResource("18_yamgu")
+item = ExtResource("52_copper")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Animation" id="Animation_3emv6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/ArmLeft:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/ArmRight:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/ArmLeft:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/ArmLeft:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.9, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.5, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Visuals/ArmRight:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.9, 0, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Visuals/ArmRight:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_attackleft"]
+resource_name = "attack_left"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/ArmLeft:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Controller3D/Default/Throwing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_release_left"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/ArmLeft:rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.30000004),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.5235988, 0), Vector3(0, -0.5235988, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/ArmLeft:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.9, 0, 0), Vector3(-0.9, 0, -0.5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.5, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_attackright"]
+resource_name = "attack_right"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/ArmRight:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Controller3D/Default/Throwing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_release_right"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/ArmRight:rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.30000004),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.5235988, 0), Vector3(0, 0.5235988, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/ArmRight:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.9, 0, 0), Vector3(0.9, 0, -0.5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.5, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_v4fp6"]
+resource_name = "idle"
+length = 2.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Head:rotation_degrees")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.2, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(4, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_w8hfy"]
+resource_name = "run"
+length = 0.6
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/LegLeft:rotation_degrees")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-25, 0, 0), Vector3(0, 0, 0), Vector3(25, 0, 0), Vector3(0, 0, 0), Vector3(-25, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/LegRight:rotation_degrees")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(25, 0, 0), Vector3(0, 0, 0), Vector3(-25, 0, 0), Vector3(0, 0, 0), Vector3(25, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/ArmLeft:rotation_degrees")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(15, 0, 0), Vector3(0, 0, 0), Vector3(-15, 0, 0), Vector3(0, 0, 0), Vector3(15, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/ArmRight:rotation_degrees")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-15, 0, 0), Vector3(0, 0, 0), Vector3(15, 0, 0), Vector3(0, 0, 0), Vector3(-15, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.5, 0), Vector3(0, 0.58, 0), Vector3(0, 0.5, 0), Vector3(0, 0.58, 0), Vector3(0, 0.5, 0)]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("StepPlayer")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_wtogd"]
+resource_name = "walk"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/LegLeft:rotation_degrees")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-15, 0, 0), Vector3(0, 0, 0), Vector3(15, 0, 0), Vector3(0, 0, 0), Vector3(-15, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/LegRight:rotation_degrees")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(15, 0, 0), Vector3(0, 0, 0), Vector3(-15, 0, 0), Vector3(0, 0, 0), Vector3(15, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/ArmLeft:rotation_degrees")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(10, 0, 0), Vector3(0, 0, 0), Vector3(-10, 0, 0), Vector3(0, 0, 0), Vector3(10, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/ArmRight:rotation_degrees")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-10, 0, 0), Vector3(0, 0, 0), Vector3(10, 0, 0), Vector3(0, 0, 0), Vector3(-10, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.5, 0), Vector3(0, 0.55, 0), Vector3(0, 0.5, 0), Vector3(0, 0.55, 0), Vector3(0, 0.5, 0)]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("StepPlayer")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wtogd"]
+_data = {
+&"RESET": SubResource("Animation_3emv6"),
+&"attack_left": SubResource("Animation_attackleft"),
+&"attack_right": SubResource("Animation_attackright"),
+&"idle": SubResource("Animation_v4fp6"),
+&"run": SubResource("Animation_w8hfy"),
+&"walk": SubResource("Animation_wtogd")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7mn0t"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p5gg5"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_7mn0t"]
+min_space = 0.0
+blend_point_0/node = SubResource("AnimationNodeAnimation_7mn0t")
+blend_point_0/pos = 0.3
+blend_point_0/name = &"0"
+blend_point_1/node = SubResource("AnimationNodeAnimation_p5gg5")
+blend_point_1/pos = 0.8
+blend_point_1/name = &"1"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_p5gg5"]
+graph_offset = Vector2(-714.21014, -116.97181)
+nodes/output/position = Vector2(160, 26.666666)
+nodes/RunBlendSpace/node = SubResource("AnimationNodeBlendSpace1D_7mn0t")
+nodes/RunBlendSpace/position = Vector2(-306.66666, -66.666664)
+node_connections = [&"output", 0, &"RunBlendSpace"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yocth"]
+random_pitch = 1.0594631
+streams_count = 3
+stream_0/stream = ExtResource("48_js75o")
+stream_1/stream = ExtResource("49_3wulv")
+stream_2/stream = ExtResource("50_u6fot")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hjjmf"]
+random_pitch = 1.122462
+streams_count = 3
+stream_0/stream = ExtResource("38_ts3qc")
+stream_1/stream = ExtResource("39_eafs2")
+stream_2/stream = ExtResource("40_kmouv")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_i6t70"]
+random_pitch = 1.1892071
+streams_count = 6
+stream_0/stream = ExtResource("41_apr2d")
+stream_1/stream = ExtResource("42_svf73")
+stream_2/stream = ExtResource("43_y4r5v")
+stream_3/stream = ExtResource("44_yfmoj")
+stream_4/stream = ExtResource("45_niyif")
+stream_5/stream = ExtResource("46_juh4j")
+
+[node name="LittleTalus" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "anim_player", "health", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
+collision_mask = 17
+script = ExtResource("1_so7wi")
+anim_tree = NodePath("AnimationTree")
+anim_player = NodePath("AnimationPlayer")
+health = NodePath("Health")
+culling_controller = NodePath("CullingController3D")
+type = &"Little Talus"
+move_mode = ExtResource("2_aighg")
+horizontal_rotation_target = NodePath(".")
+vertical_rotation_target = NodePath(".")
+rotation_range = SubResource("Resource_0dji4")
+metadata/_custom_type_script = "uid://bki5ij8task16"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2121250733]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_37b0g")
+
+[node name="CullingController3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=1066206516 node_paths=PackedStringArray("root", "visibility_control_list")]
+aabb = AABB(-1, 0, -1, 2, 2, 2)
+script = ExtResource("5_qp2xn")
+root = NodePath("..")
+on_screen_process_radius = 110.0
+off_screen_process_radius = 24.0
+on_screen_visible_radius = 110.0
+visibility_control_list = [null]
+visibility_range_fade_margin = 10.0
+
+[node name="IntervalStaggerer" type="Node" parent="CullingController3D" unique_id=171446592 node_paths=PackedStringArray("target_methods")]
+script = ExtResource("6_7y7ru")
+base_interval = 0.3
+target_methods = {
+NodePath(".."): &"evaluate_culling"
+}
+metadata/_custom_type_script = "uid://73ya7jxulyl4"
+
+[node name="Hurtbox3D" type="Area3D" parent="." unique_id=884870034 node_paths=PackedStringArray("health", "knockback_entity")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("7_2a46w")
+health = NodePath("../Health")
+knockback_entity = NodePath("..")
+metadata/_custom_type_script = "uid://4dfurtssrp4f"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1941702815]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5593262, 0)
+shape = SubResource("SphereShape3D_37b0g")
+
+[node name="StartChaseTrigger" type="Node" parent="Hurtbox3D" unique_id=1954498291 node_paths=PackedStringArray("state_machine")]
+script = ExtResource("8_ik701")
+state_machine = NodePath("../../Controller3D/Default")
+state_name = &"Chasing"
+from_state_whitelist = Array[StringName]([&"Wandering", &"Searching"])
+signal_name = &"was_hurt"
+metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
+
+[node name="Health" type="Node" parent="." unique_id=780116179]
+script = ExtResource("9_3hery")
+hp = 60.0
+difficulty_profile_index = 1
+metadata/_custom_type_script = "uid://cbb5o5ykqwxfp"
+
+[node name="SignalAudioManager3D" type="Node3D" parent="Health" unique_id=1371947431 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("10_q8vi4")
+signal_players = {
+&"was_hurt": NodePath("../../HurtPlayer")
+}
+metadata/_custom_type_script = "uid://43bqjaemfda5"
+
+[node name="Sight3D" type="Node3D" parent="." unique_id=713539717]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("11_rqsx0")
+radius = 15.0
+lose_distance = 20.0
+target_collision_mask = 16
+group_whitelist = Array[StringName]([&"player"])
+ray_collision_mask = 21
+
+[node name="StartChaseTrigger" type="Node" parent="Sight3D" unique_id=1196415362 node_paths=PackedStringArray("state_machine")]
+script = ExtResource("8_ik701")
+state_machine = NodePath("../../Controller3D/Default")
+state_name = &"Chasing"
+from_state_whitelist = Array[StringName]([&"Wandering", &"Searching"])
+signal_name = &"found_target"
+metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
+
+[node name="StartSearchTrigger" type="Node" parent="Sight3D" unique_id=1394927032 node_paths=PackedStringArray("state_machine")]
+script = ExtResource("8_ik701")
+state_machine = NodePath("../../Controller3D/Default")
+state_name = &"Searching"
+from_state_whitelist = Array[StringName]([&"Chasing", &"Throwing"])
+signal_name = &"lost_target"
+metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
+
+[node name="IntervalStaggerer" type="Node" parent="Sight3D" unique_id=1889967183 node_paths=PackedStringArray("target_methods")]
+script = ExtResource("6_7y7ru")
+base_interval = 0.2
+target_methods = {
+NodePath(".."): &"update_target"
+}
+metadata/_custom_type_script = "uid://73ya7jxulyl4"
+
+[node name="Controller3D" type="Node" parent="." unique_id=1315753818]
+script = ExtResource("12_bojey")
+metadata/_custom_type_script = "uid://ccwod33h53a5s"
+
+[node name="Default" type="Node" parent="Controller3D" unique_id=1574117420 node_paths=PackedStringArray("root")]
+script = ExtResource("13_26wst")
+root = NodePath("../..")
+process_update = true
+physics_process_update = true
+metadata/_custom_type_script = "uid://bqonxtntgndfr"
+
+[node name="Wandering" type="Node" parent="Controller3D/Default" unique_id=1882444428 node_paths=PackedStringArray("nav_guide", "idle_timer", "root")]
+script = ExtResource("14_m1223")
+nav_guide = NodePath("../../NavEntityGuide3D")
+reach_distance = 0.5
+idle_timer = NodePath("Timer")
+root = NodePath("../../..")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="Timer" type="Timer" parent="Controller3D/Default/Wandering" unique_id=1600727395]
+
+[node name="SignalAudioManager3D" type="Node3D" parent="Controller3D/Default/Wandering" unique_id=1121028117 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("10_q8vi4")
+signal_players = {
+&"entered": NodePath("../../../../TalkPlayer"),
+&"exited": NodePath("../../../../TalkPlayer"),
+&"started": NodePath("../../../../TalkPlayer"),
+&"stopped": NodePath("../../../../TalkPlayer")
+}
+metadata/_custom_type_script = "uid://43bqjaemfda5"
+
+[node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=1883496829 node_paths=PackedStringArray("guide", "sight", "interval_staggerer", "root")]
+script = ExtResource("15_g417x")
+guide = NodePath("../../NavEntityGuide3D")
+sight = NodePath("../../../Sight3D")
+interval_staggerer = NodePath("IntervalStaggerer")
+advance_goal_distance = 6.0
+reach_state = &"Throwing"
+lose_target_state = &"Searching"
+root = NodePath("../../..")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="IntervalStaggerer" type="Node" parent="Controller3D/Default/Chasing" unique_id=1668925528 node_paths=PackedStringArray("target_methods")]
+script = ExtResource("6_7y7ru")
+base_interval = 0.25
+target_methods = {
+NodePath(".."): &"update_path"
+}
+metadata/_custom_type_script = "uid://73ya7jxulyl4"
+
+[node name="Searching" type="Node" parent="Controller3D/Default" unique_id=959116065 node_paths=PackedStringArray("guide", "sight", "interval_staggerer", "root")]
+script = ExtResource("59_searching")
+guide = NodePath("../../NavEntityGuide3D")
+sight = NodePath("../../../Sight3D")
+interval_staggerer = NodePath("IntervalStaggerer")
+found_target_state = &"Chasing"
+give_up_state = &"Wandering"
+reach_distance = 0.3
+root = NodePath("../../..")
+
+[node name="IntervalStaggerer" type="Node" parent="Controller3D/Default/Searching" unique_id=981935057 node_paths=PackedStringArray("target_methods")]
+script = ExtResource("6_7y7ru")
+base_interval = 0.25
+target_methods = {
+NodePath(".."): &"check_status"
+}
+metadata/_custom_type_script = "uid://73ya7jxulyl4"
+
+[node name="Throwing" type="Node" parent="Controller3D/Default" unique_id=92875890 node_paths=PackedStringArray("left_arm", "right_arm", "left_spawner", "right_spawner", "guide", "sight", "anim_player", "anim_tree", "health", "root")]
+script = ExtResource("58_talusthrow")
+left_arm = NodePath("../../../Visuals/ArmLeft")
+right_arm = NodePath("../../../Visuals/ArmRight")
+left_spawner = NodePath("../../../Visuals/ArmLeft/LeftHandSpawner/ProjectileSpawner3D")
+right_spawner = NodePath("../../../Visuals/ArmRight/RightHandSpawner/ProjectileSpawner3D")
+guide = NodePath("../../NavEntityGuide3D")
+sight = NodePath("../../../Sight3D")
+anim_player = NodePath("../../../AnimationPlayer")
+anim_tree = NodePath("../../../AnimationTree")
+health = NodePath("../../../Health")
+max_range = 12.0
+return_to_chase_state = &"Chasing"
+root = NodePath("../../..")
+
+[node name="NavEntityGuide3D" parent="Controller3D" unique_id=1240188709 node_paths=PackedStringArray("nav", "entity") instance=ExtResource("16_rrqrs")]
+nav = NodePath("../../NavigationAgent3D")
+entity = NodePath("../..")
+
+[node name="Inventory" type="Node" parent="." unique_id=2020826484]
+unique_name_in_owner = true
+script = ExtResource("17_bnejs")
+item_instances = Array[ExtResource("18_yamgu")]([SubResource("Resource_aoox1"), SubResource("Resource_uefcv")])
+constant = true
+size = 2
+metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1081978445]
+target_desired_distance = 1.5
+path_max_distance = 1.01
+avoidance_enabled = true
+height = 2.0
+radius = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1635551601]
+libraries/ = SubResource("AnimationLibrary_wtogd")
+playback_default_blend_time = 0.3
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=944648514]
+tree_root = SubResource("AnimationNodeBlendTree_p5gg5")
+anim_player = NodePath("../AnimationPlayer")
+parameters/RunBlendSpace/blend_position = 0.0
+
+[node name="HealthBar3D" parent="." unique_id=1387087405 node_paths=PackedStringArray("entity", "health") instance=ExtResource("36_3usk7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+entity = NodePath("..")
+health = NodePath("../Health")
+
+[node name="InventoryDropper3D" type="Node3D" parent="." unique_id=709626360 node_paths=PackedStringArray("inventory", "health")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("21_q8gfh")
+inventory = NodePath("../Inventory")
+health = NodePath("../Health")
+death_drop_mode = 1
+metadata/_custom_type_script = "uid://bpmbg0e28ujs7"
+
+[node name="ParticleSpawner3D" type="Node3D" parent="." unique_id=1876124391]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("33_apxat")
+scenes = Array[PackedScene]([ExtResource("34_ioiqg")])
+spawn_on_exit_tree = true
+metadata/_custom_type_script = "uid://bhjxscxhtg2se"
+
+[node name="AudioSpawner3D" type="Node3D" parent="." unique_id=813638048 node_paths=PackedStringArray("templates")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("47_33mcr")
+templates = [NodePath("DeathPlayer")]
+spawn_on_exit_tree = true
+metadata/_custom_type_script = "uid://bv2ss5hjacgd3"
+
+[node name="DeathPlayer" type="AudioStreamPlayer3D" parent="AudioSpawner3D" unique_id=1602006759]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+stream = SubResource("AudioStreamRandomizer_yocth")
+max_db = 5.0
+bus = &"SFX"
+
+[node name="StepPlayer" type="AudioStreamPlayer3D" parent="." unique_id=119782908]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+stream = ExtResource("37_s6u2m")
+max_db = -6.0
+bus = &"SFX"
+
+[node name="HurtPlayer" type="AudioStreamPlayer3D" parent="." unique_id=502692699]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+stream = SubResource("AudioStreamRandomizer_hjjmf")
+bus = &"SFX"
+
+[node name="TalkPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1969972911]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+stream = SubResource("AudioStreamRandomizer_i6t70")
+unit_size = 1.0
+max_db = 0.0
+bus = &"SFX"
+
+[node name="Visuals" parent="." unique_id=124486934 instance=ExtResource("45_37b0g")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
+
+[node name="Head" parent="Visuals" index="0" unique_id=1312165250]
+transform = Transform3D(1, 0, 0, 0, 0.99980646, -0.019673884, 0, 0.019673884, 0.99980646, 0, 0, 0)
+surface_material_override/0 = ExtResource("42_37b0g")
+
+[node name="LegLeft" parent="Visuals" index="1" unique_id=856653343]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -0.49508578, -0.5002392, 0.05319056)
+surface_material_override/0 = ExtResource("42_37b0g")
+
+[node name="LegRight" parent="Visuals" index="2" unique_id=1900297946]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.524, -0.5, 0.064)
+surface_material_override/0 = ExtResource("42_37b0g")
+
+[node name="ArmRight" parent="Visuals" index="3" unique_id=831163117]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.9, 0, 0)
+surface_material_override/0 = ExtResource("42_37b0g")
+
+[node name="RightHandSpawner" type="Node3D" parent="Visuals/ArmRight" index="0" unique_id=895416736]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+
+[node name="ProjectileSpawner3D" type="Node3D" parent="Visuals/ArmRight/RightHandSpawner" unique_id=1580731255 node_paths=PackedStringArray("source")]
+script = ExtResource("53_projspawn")
+projectile_scene = ExtResource("54_flyrock")
+damage = ExtResource("55_flyrockdmg")
+source = NodePath("../../../..")
+
+[node name="ArmLeft" parent="Visuals" index="4" unique_id=404479199]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 0, 0)
+surface_material_override/0 = ExtResource("42_37b0g")
+
+[node name="LeftHandSpawner" type="Node3D" parent="Visuals/ArmLeft" index="0" unique_id=1412564645]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+
+[node name="ProjectileSpawner3D" type="Node3D" parent="Visuals/ArmLeft/LeftHandSpawner" unique_id=380382493 node_paths=PackedStringArray("source")]
+script = ExtResource("53_projspawn")
+projectile_scene = ExtResource("54_flyrock")
+damage = ExtResource("55_flyrockdmg")
+source = NodePath("../../../..")
+
+[editable path="Visuals"]
