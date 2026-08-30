@@ -7,7 +7,6 @@ signal lost_target
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var radius := 20.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var lose_distance := 40.0
 @export var can_lose_target := true
-@export_custom(PROPERTY_HINT_NONE, "suffix:s") var target_update_period := 0.2
 @export_flags_3d_physics var target_collision_mask := 1
 @export var group_whitelist: Array[StringName] = []
 
@@ -33,7 +32,6 @@ func _ready() -> void:
 	add_area()
 	add_collision()
 	add_ray()
-	add_timer()
 
 
 func add_area() -> void:
@@ -54,15 +52,11 @@ func add_collision() -> void:
 func add_ray() -> void:
 	ray = RayCast3D.new()
 	add_child(ray)
-	ray.target_position = Vector3.FORWARD * radius
+	ray.target_position = Vector3.FORWARD * lose_distance
 
-
-func add_timer() -> void:
-	update_timer = Timer.new()
-	add_child(update_timer)
-	update_timer.wait_time = target_update_period
-	update_timer.start()
-	update_timer.timeout.connect(update_target)
+	var owner_body := get_parent()
+	if owner_body is CollisionObject3D:
+		ray.add_exception(owner_body)
 
 
 func target_is_lost() -> bool:
@@ -111,10 +105,11 @@ func update_target() -> void:
 
 	var sorted_targetable_nodes := Util.distance_sort_3d(get_targetable_nodes(), global_position)
 	for node in sorted_targetable_nodes:
-		if is_ray_reachable(node):
-			set_target(node)
-			return
+		if not is_ray_reachable(node):
+			continue
+		set_target(node)
+		return
 
 
 func does_see_target() -> bool:
-	return is_instance_valid(target) and target != null
+	return is_instance_valid(target) and target != null and is_ray_reachable(target)

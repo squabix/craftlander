@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="5_4vry0"]
 [ext_resource type="Script" uid="uid://cf04j3voj4xyc" path="res://entities/npc_states/wandering_state.gd" id="6_wpegq"]
 [ext_resource type="Script" uid="uid://pdvlr6l3n04n" path="res://entities/npc_states/chasing_state.gd" id="7_bfxyu"]
+[ext_resource type="Script" uid="uid://b6yrmkabhfa82" path="res://entities/npc_states/searching_state.gd" id="8_searching"]
 [ext_resource type="PackedScene" uid="uid://c5x1hn4vi06bh" path="res://entities/nav_entity_guide3d.tscn" id="9_rq2ym"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="9_xkejc"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="12_0rn6u"]
@@ -240,9 +241,25 @@ ray_collision_mask = 21
 script = ExtResource("3_rq2ym")
 state_machine = NodePath("../../Controller3D/Default")
 state_name = &"Chasing"
-from_state_whitelist = Array[StringName]([&"Wandering"])
+from_state_whitelist = Array[StringName]([&"Wandering", &"Searching"])
 signal_name = &"found_target"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
+
+[node name="StartSearchTrigger" type="Node" parent="Sight3D" node_paths=PackedStringArray("state_machine")]
+script = ExtResource("3_rq2ym")
+state_machine = NodePath("../../Controller3D/Default")
+state_name = &"Searching"
+from_state_whitelist = Array[StringName]([&"Chasing"])
+signal_name = &"lost_target"
+metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
+
+[node name="IntervalStaggerer" type="Node" parent="Sight3D" node_paths=PackedStringArray("target_methods")]
+script = ExtResource("16_t5evv")
+base_interval = 0.2
+target_methods = {
+NodePath(".."): &"update_target"
+}
+metadata/_custom_type_script = "uid://73ya7jxulyl4"
 
 [node name="Controller3D" type="Node" parent="." unique_id=1315753818 node_paths=PackedStringArray("initial_entity")]
 script = SubResource("GDScript_exvl0")
@@ -270,9 +287,9 @@ script = ExtResource("7_bfxyu")
 guide = NodePath("../NavEntityGuide3D")
 sight = NodePath("../../../Sight3D")
 interval_staggerer = NodePath("IntervalStaggerer")
-approach_in_water = true
-max_item_use_distance = 0.75
-lose_target_state = &"Wandering"
+advance_in_water = true
+advance_goal_distance = 0.75
+lose_target_state = &"Searching"
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
@@ -281,6 +298,23 @@ script = ExtResource("16_t5evv")
 base_interval = 0.25
 target_methods = {
 NodePath(".."): &"update_path"
+}
+metadata/_custom_type_script = "uid://73ya7jxulyl4"
+
+[node name="Searching" type="Node" parent="Controller3D/Default" node_paths=PackedStringArray("guide", "sight", "interval_staggerer", "root")]
+script = ExtResource("8_searching")
+guide = NodePath("../NavEntityGuide3D")
+sight = NodePath("../../../Sight3D")
+interval_staggerer = NodePath("IntervalStaggerer")
+found_target_state = &"Chasing"
+give_up_state = &"Wandering"
+root = NodePath("../../..")
+
+[node name="IntervalStaggerer" type="Node" parent="Controller3D/Default/Searching" node_paths=PackedStringArray("target_methods")]
+script = ExtResource("16_t5evv")
+base_interval = 0.25
+target_methods = {
+NodePath(".."): &"check_status"
 }
 metadata/_custom_type_script = "uid://73ya7jxulyl4"
 
@@ -361,6 +395,14 @@ metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1632674445]
 shape = SubResource("SphereShape3D_nw5ty")
+
+[node name="StartChaseTrigger" type="Node" parent="Hurtbox3D" node_paths=PackedStringArray("state_machine")]
+script = ExtResource("3_rq2ym")
+state_machine = NodePath("../../Controller3D/Default")
+state_name = &"Chasing"
+from_state_whitelist = Array[StringName]([&"Wandering", &"Searching"])
+signal_name = &"was_hurt"
+metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 
 [node name="SignalAudioManager3D" type="Node3D" parent="Hurtbox3D" unique_id=471843834 node_paths=PackedStringArray("signal_players")]
 script = ExtResource("16_4hd4j")

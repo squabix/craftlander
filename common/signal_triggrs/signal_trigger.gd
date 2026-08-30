@@ -3,6 +3,7 @@ extends Node
 
 @export var custom_target: Node
 @export var signal_name: StringName
+@export var disabled := false
 
 
 func _ready() -> void:
@@ -11,4 +12,5 @@ func _ready() -> void:
 
 
 func trigger(..._args: Array) -> void:
-	pass
+	if disabled:
+		return

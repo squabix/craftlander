@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="13_aapfe"]
 [ext_resource type="Script" uid="uid://cf04j3voj4xyc" path="res://entities/npc_states/wandering_state.gd" id="14_b7q8g"]
 [ext_resource type="Script" uid="uid://pdvlr6l3n04n" path="res://entities/npc_states/chasing_state.gd" id="15_ww28j"]
+[ext_resource type="Script" path="res://entities/npc_states/searching_state.gd" id="59_searching"]
 [ext_resource type="PackedScene" uid="uid://c5x1hn4vi06bh" path="res://entities/nav_entity_guide3d.tscn" id="16_dg8e3"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="17_orkyh"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="18_48lup"]
@@ -825,9 +826,25 @@ ray_collision_mask = 21
 script = ExtResource("8_vx64r")
 state_machine = NodePath("../../Controller3D/Default")
 state_name = &"Chasing"
-from_state_whitelist = Array[StringName]([&"Wandering"])
+from_state_whitelist = Array[StringName]([&"Wandering", &"Searching"])
 signal_name = &"found_target"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
+
+[node name="StartSearchTrigger" type="Node" parent="Sight3D" node_paths=PackedStringArray("state_machine")]
+script = ExtResource("8_vx64r")
+state_machine = NodePath("../../Controller3D/Default")
+state_name = &"Searching"
+from_state_whitelist = Array[StringName]([&"Chasing"])
+signal_name = &"lost_target"
+metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
+
+[node name="IntervalStaggerer" type="Node" parent="Sight3D" node_paths=PackedStringArray("target_methods")]
+script = ExtResource("6_50asm")
+base_interval = 0.2
+target_methods = {
+NodePath(".."): &"update_target"
+}
+metadata/_custom_type_script = "uid://73ya7jxulyl4"
 
 [node name="Controller3D" type="Node" parent="." unique_id=1315753818]
 script = ExtResource("12_yrkha")
@@ -865,6 +882,7 @@ item_holder = NodePath("../../../ItemHolder3D")
 guide = NodePath("../../NavEntityGuide3D")
 sight = NodePath("../../../Sight3D")
 interval_staggerer = NodePath("IntervalStaggerer")
+lose_target_state = &"Searching"
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
@@ -875,6 +893,23 @@ target_methods = {
 NodePath(".."): &"update_path"
 }
 initial_time_left = 5.0
+metadata/_custom_type_script = "uid://73ya7jxulyl4"
+
+[node name="Searching" type="Node" parent="Controller3D/Default" node_paths=PackedStringArray("guide", "sight", "interval_staggerer", "root")]
+script = ExtResource("59_searching")
+guide = NodePath("../../NavEntityGuide3D")
+sight = NodePath("../../../Sight3D")
+interval_staggerer = NodePath("IntervalStaggerer")
+found_target_state = &"Chasing"
+give_up_state = &"Wandering"
+root = NodePath("../../..")
+
+[node name="IntervalStaggerer" type="Node" parent="Controller3D/Default/Searching" node_paths=PackedStringArray("target_methods")]
+script = ExtResource("6_50asm")
+base_interval = 0.25
+target_methods = {
+NodePath(".."): &"check_status"
+}
 metadata/_custom_type_script = "uid://73ya7jxulyl4"
 
 [node name="NavEntityGuide3D" parent="Controller3D" unique_id=1240188709 node_paths=PackedStringArray("nav", "entity") instance=ExtResource("16_dg8e3")]

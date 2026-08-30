@@ -7,10 +7,13 @@ extends SignalTrigger
 
 
 func trigger(..._args: Array) -> void:
+	if disabled:
+		return
 	if not is_instance_valid(anim_player):
 		return
 
 	if force_from_start:
 		anim_player.stop()
 
+	anim_player.active = true
 	anim_player.play(anim_name)
