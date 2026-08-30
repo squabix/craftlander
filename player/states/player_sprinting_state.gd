@@ -1,17 +1,14 @@
-extends State
+class_name PlayerSprintingState
+extends PlayerMoveState
 
 const MIN_FORWARD_MOTION: float = 0.7
 const STAMINA_COST := 0.25
 
-@export var stamina: Stamina
-
-@onready var move_mode: MoveMode = preload("res://player/states/player_sprinting_move_mode.tres")
+func _ready() -> void:
+	move_mode = preload("res://player/states/player_sprinting_move_mode.tres")
 
 func is_walking_forward() -> bool:
 	return root.last_motion_direction.z <= -MIN_FORWARD_MOTION
-
-func enter() -> void:
-	root.move_mode = move_mode
 
 func physics_update(_delta: float) -> void:
 	stamina.spend(STAMINA_COST)
