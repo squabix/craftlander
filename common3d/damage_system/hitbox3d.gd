@@ -66,7 +66,11 @@ func hit(area: Area3D) -> bool:
 	# BAIL if area is not a hurtbox
 	if not (area is Hurtbox3D):
 		return false
-	
+
+	# BAIL if area belongs to this hitbox's own damage source (no friendly/self fire)
+	if is_instance_valid(damage) and is_instance_valid(damage.source) and area.get_parent() == damage.source:
+		return false
+
 	area.hurt(damage, get_knock_direction(global_rotation.y, damage))
 	hit_nodes.append(area)
 	hit_node.emit()

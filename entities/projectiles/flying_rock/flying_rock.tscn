@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://ifqgx7y3fyj1"]
+
+[ext_resource type="Script" uid="uid://b1gh515736ppy" path="res://common3d/damage_system/hit_projectile3d.gd" id="1_proj"]
+[ext_resource type="PackedScene" uid="uid://0omxrkxu1djy" path="res://assets/models/items/materials/rock1.blend" id="2_model"]
+[ext_resource type="Material" uid="uid://bh8sv2icydggs" path="res://assets/materials/stone.tres" id="3_mat"]
+[ext_resource type="Resource" path="res://entities/projectiles/flying_rock/flying_rock_damage.tres" id="4_dmg"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_flyrock"]
+radius = 0.18
+
+[node name="FlyingRock" type="Area3D" unique_id=1910401373]
+collision_layer = 0
+collision_mask = 12
+script = ExtResource("1_proj")
+damage = ExtResource("4_dmg")
+one_shot = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=378857946]
+shape = SubResource("SphereShape3D_flyrock")
+
+[node name="Visuals" parent="." unique_id=745564998 instance=ExtResource("2_model")]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0)
+
+[node name="Cube" parent="Visuals" index="0" unique_id=2052744971]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+surface_material_override/0 = ExtResource("3_mat")
+
+[editable path="Visuals"]

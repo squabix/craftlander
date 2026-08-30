@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IslandEntityResource" format=3 uid="uid://dw1f1v3m0prum"]
+
+[ext_resource type="PackedScene" uid="uid://donyajg6jg0ms" path="res://entities/enemies/little_talus/little_talus.tscn" id="1_1jwmt"]
+[ext_resource type="Script" uid="uid://b0gc85inin6ad" path="res://island/island_entity_resource.gd" id="2_hdiuy"]
+
+[resource]
+script = ExtResource("2_hdiuy")
+scene = ExtResource("1_1jwmt")
+min_height = 2.0
+metadata/_custom_type_script = "uid://b0gc85inin6ad"
