@@ -5,6 +5,8 @@ signal landed
 signal left_ground
 signal jumped
 
+static var active_count := 0
+
 @export var type := &"Entity"
 @export var move_mode: MoveMode
 @export var move_up_as_jump := true
@@ -62,6 +64,14 @@ func _physics_process(delta: float) -> void:
 
 	if do_push_rigid_bodies:
 		push_rigid_bodies()
+
+
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_ENTER_TREE:
+			active_count += 1
+		NOTIFICATION_EXIT_TREE:
+			active_count -= 1
 
 
 func _to_string() -> String:

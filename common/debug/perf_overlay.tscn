@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://dl8bvbsfg22ph"]
+
+[ext_resource type="Script" uid="uid://qhbmij1hube7" path="res://common/debug/perf_overlay.gd" id="1"]
+[ext_resource type="Script" uid="uid://cy8sdlhc3yi58" path="res://common/debug/frame_time_graph.gd" id="2"]
+[ext_resource type="Script" uid="uid://digvvdhbkwjwl" path="res://common/debug/perf_counters_label.gd" id="3"]
+[ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="5"]
+
+[node name="PerfOverlay" type="CanvasLayer" unique_id=249997327 node_paths=PackedStringArray("panels_root")]
+layer = 100
+script = ExtResource("1")
+panels_root = NodePath("PanelsRoot")
+
+[node name="PanelsRoot" type="Control" parent="." unique_id=1561427031]
+visible = false
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 12.0
+offset_top = -90.0
+offset_right = 371.0
+offset_bottom = 90.0
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="PanelsRoot" unique_id=345265444]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Content" type="VBoxContainer" parent="PanelsRoot/Panel" unique_id=176722345]
+layout_mode = 2
+
+[node name="FrameTimeGraph" type="Control" parent="PanelsRoot/Panel/Content" unique_id=2074984643]
+custom_minimum_size = Vector2(260, 70)
+layout_mode = 2
+script = ExtResource("2")
+
+[node name="CountersLabel" type="Label" parent="PanelsRoot/Panel/Content" unique_id=1111818644]
+layout_mode = 2
+text = "Draw calls: -"
+script = ExtResource("3")
+
+[node name="CountersStaggerer" type="Node" parent="PanelsRoot" unique_id=57343881 node_paths=PackedStringArray("target_methods")]
+script = ExtResource("5")
+base_interval = 0.5
+target_methods = {
+NodePath("../Panel/Content/CountersLabel"): &"refresh"
+}

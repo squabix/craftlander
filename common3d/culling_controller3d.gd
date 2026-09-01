@@ -20,15 +20,23 @@ extends VisibleOnScreenNotifier3D
 
 var on_screen := false
 
+static var active_count := 0
+static var culled_count := 0
+
+var _is_culled := false
+
 
 func _ready() -> void:
 	assert(is_instance_valid(root), "%s cannot cull invalid root (%s)" % [self, root])
 
 	update_visibility_range()
-	
+
 	# Set on_screen via signals
 	screen_entered.connect(set.bind(&"on_screen", true))
 	screen_exited.connect(set.bind(&"on_screen", false))
+
+	active_count += 1
+	tree_exiting.connect(_on_tree_exiting, CONNECT_ONE_SHOT)
 
 
 func evaluate_culling() -> void:
@@ -89,6 +97,8 @@ func disable_process() -> void:
 		return
 	root.process_mode = Node.PROCESS_MODE_DISABLED
 	self.process_mode = Node.PROCESS_MODE_ALWAYS
+	_is_culled = true
+	culled_count += 1
 
 
 func enable_process() -> void:
@@ -100,6 +110,8 @@ func enable_process() -> void:
 		return
 	root.process_mode = Node.PROCESS_MODE_INHERIT
 	self.process_mode = Node.PROCESS_MODE_INHERIT
+	_is_culled = false
+	culled_count -= 1
 
 
 func set_up_visibility_range(instance: GeometryInstance3D) -> void:
@@ -157,3 +169,9 @@ func _set_visibility_deep(to: bool) -> void:
 	else:
 		for node in visibility_control_list:
 			Util.set_visibility_deep(node, to, [self])
+
+
+func _on_tree_exiting() -> void:
+	active_count -= 1
+	if _is_culled:
+		culled_count -= 1
