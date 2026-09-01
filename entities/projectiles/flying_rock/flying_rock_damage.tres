@@ -1,11 +1,10 @@
-[gd_resource type="Resource" script_class="Damage" format=3]
+[gd_resource type="Resource" script_class="Damage" format=3 uid="uid://sekma2rr06f1"]
 
-[ext_resource type="Script" path="res://common/damage_system/damage.gd" id="1_dmg"]
+[ext_resource type="Script" uid="uid://bl5x717nsijmk" path="res://common/damage_system/damage.gd" id="1_dmg"]
 
 [resource]
 script = ExtResource("1_dmg")
-base_amount = 8.0
+base_amount = 5.0
 type = &"ranged"
 knockback_force = 6.0
 knockback_angle = 8.0
-metadata/_custom_type_script = "res://common/damage_system/damage.gd"
