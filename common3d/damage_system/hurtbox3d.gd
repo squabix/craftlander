@@ -65,9 +65,8 @@ func hurt(damage: Damage, direction: Vector3 = Vector3.ZERO) -> float:
 
 	var dp := scale_damage(damage.sample())
 	
-	var success := health.hurt(dp) or not is_instance_valid(health)
+	var success := not is_instance_valid(health) or health.hurt(dp) 
 	if not success:
-		print("Fail!")
 		return 0.0
 	
 	total_damage_taken += dp

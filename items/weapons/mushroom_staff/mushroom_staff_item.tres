@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ProjectileWeapon" format=3 uid="uid://cg5u4clq7rpal"]
+
+[ext_resource type="Script" uid="uid://b1jj1b7rvurvy" path="res://items/weapons/projectile_weapon.gd" id="1_weapon"]
+[ext_resource type="Resource" uid="uid://cedw25gaj5tks" path="res://entities/projectiles/mushroom_cloud/mushroom_cloud_damage.tres" id="2_dmg"]
+[ext_resource type="Texture2D" uid="uid://bp3rjr1jcjwdi" path="res://items/weapons/mushroom_staff/mushroom_staff.png" id="2_x0grh"]
+[ext_resource type="PackedScene" uid="uid://chrrr40b6u03d" path="res://items/weapons/mushroom_staff/mushroom_staff.tscn" id="3_scene"]
+
+[resource]
+script = ExtResource("1_weapon")
+damage = ExtResource("2_dmg")
+name = &"Mushroom Staff"
+icon = ExtResource("2_x0grh")
+type = &"Weapon"
+scene = ExtResource("3_scene")
+cooldown_mode = 1
+default_cooldown_length = 1.5
+metadata/_custom_type_script = "uid://b1jj1b7rvurvy"

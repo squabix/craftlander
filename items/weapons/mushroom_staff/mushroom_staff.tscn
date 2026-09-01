@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://chrrr40b6u03d"]
+
+[ext_resource type="Script" uid="uid://2ow28vm5clst" path="res://common/spawner/projectile_spawner3d.gd" id="1_spawner"]
+[ext_resource type="PackedScene" uid="uid://bowhgwoced3jt" path="res://entities/projectiles/mushroom_cloud/mushroom_cloud.tscn" id="2_cloud"]
+[ext_resource type="PackedScene" uid="uid://cc6l5njgklrm1" path="res://assets/models/items/weapons/mushroom_staff.blend" id="3_model"]
+[ext_resource type="Material" uid="uid://bntpptj6c08nu" path="res://assets/materials/red_mushroom.tres" id="4_mnafm"]
+[ext_resource type="Material" uid="uid://fs0rcuantoc5" path="res://assets/materials/mushroom_spot.tres" id="5_xq3bw"]
+[ext_resource type="Material" uid="uid://drfxxufa84pj2" path="res://assets/materials/white_mushroom.tres" id="6_u038k"]
+
+[node name="MushroomStaff" type="Node3D" unique_id=783293386]
+
+[node name="ProjectileSpawner" type="Node3D" parent="." unique_id=1354338987]
+script = ExtResource("1_spawner")
+projectile_scene = ExtResource("2_cloud")
+
+[node name="Visuals" parent="." unique_id=1196540446 instance=ExtResource("3_model")]
+
+[node name="Tip" parent="Visuals" index="0" unique_id=1353795110]
+visible = false
+
+[node name="Handle_001" parent="Visuals" index="1" unique_id=297231419]
+visible = false
+
+[node name="Top" parent="Visuals" index="2" unique_id=528592467]
+surface_material_override/0 = ExtResource("4_mnafm")
+surface_material_override/1 = ExtResource("5_xq3bw")
+
+[node name="Trunk" parent="Visuals" index="3" unique_id=1504542430]
+surface_material_override/0 = ExtResource("6_u038k")
+
+[editable path="Visuals"]

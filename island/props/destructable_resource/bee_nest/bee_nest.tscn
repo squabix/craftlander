@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://b1en432erfol4"]
 
+[ext_resource type="Script" uid="uid://cmlllb7wq80s" path="res://island/props/destructable_resource/destructable_resource.gd" id="1_3jy1h"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="2_rb30n"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="3_1pjnc"]
 [ext_resource type="Resource" uid="uid://bwurefwkj4gjj" path="res://common/damage_system/single_damage.tres" id="3_b7v27"]
@@ -80,7 +81,12 @@ roughness = 0.6
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
 
-[node name="BeeNest" type="Node3D" unique_id=51772479]
+[node name="BeeNest" type="Node3D" unique_id=51772479 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
+script = ExtResource("1_3jy1h")
+max_hp = 8
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1012779916]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39999998, 0)
