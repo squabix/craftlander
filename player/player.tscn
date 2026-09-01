@@ -13,12 +13,11 @@
 [ext_resource type="Script" uid="uid://cody42elqcrek" path="res://player/states/player_sprinting_state.gd" id="10_8t03j"]
 [ext_resource type="Script" uid="uid://bypxgjqugqucx" path="res://common3d/interactions/interactor3d.gd" id="10_32hag"]
 [ext_resource type="Script" uid="uid://b5danpxdbcbqx" path="res://player/stamina.gd" id="10_fjxoa"]
+[ext_resource type="Resource" uid="uid://cg5u4clq7rpal" path="res://items/weapons/mushroom_staff/mushroom_staff_item.tres" id="10_hioli"]
 [ext_resource type="Resource" uid="uid://b37h3pr83pcu4" path="res://items/materials/rock/rock_item.tres" id="10_s3g0c"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="11_2ieo8"]
 [ext_resource type="Script" uid="uid://0ys7hbc4clgc" path="res://player/states/player_default_state.gd" id="11_art4l"]
-[ext_resource type="Resource" uid="uid://j8xwx023phbg" path="res://items/food/honeycomb/honeycomb_item.tres" id="11_oevg7"]
 [ext_resource type="Script" uid="uid://pnxdwk3pye0h" path="res://common3d/pointer_raycast3d.gd" id="11_rptt4"]
-[ext_resource type="Resource" uid="uid://kf1haxayj2yo" path="res://items/materials/minerals/diamond/diamond_item.tres" id="12_ciyjg"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="12_ebec5"]
 [ext_resource type="Script" uid="uid://idhcfku7c3tn" path="res://player/states/player_docking_boat_state.gd" id="12_fjxoa"]
 [ext_resource type="Resource" uid="uid://cgr4031ngjynl" path="res://items/materials/minerals/gold_ingot/golden_ingot_item.tres" id="12_vuyvy"]
@@ -169,22 +168,9 @@ script = ExtResource("6_hggc2")
 item = ExtResource("112_wh3n5")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
-[sub_resource type="Resource" id="Resource_2h6tc"]
+[sub_resource type="Resource" id="Resource_o7udw"]
 script = ExtResource("6_hggc2")
-item = ExtResource("9_jbx34")
-quantity = 30
-metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
-
-[sub_resource type="Resource" id="Resource_qkr8n"]
-script = ExtResource("6_hggc2")
-item = ExtResource("11_oevg7")
-quantity = 10
-metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
-
-[sub_resource type="Resource" id="Resource_bq5ya"]
-script = ExtResource("6_hggc2")
-item = ExtResource("12_ciyjg")
-quantity = 30
+item = ExtResource("10_hioli")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Curve" id="Curve_2uvqg"]
@@ -978,7 +964,7 @@ node_connections = [&"output", 0, &"ItemBlend", &"ItemBlend", 0, &"MoveTransitio
 
 [sub_resource type="Resource" id="Resource_art4l"]
 script = ExtResource("39_dx5ib")
-items = Array[ExtResource("40_a2xo5")]([ExtResource("41_a2xo5"), ExtResource("22_bjvpn"), ExtResource("41_art4l"), ExtResource("112_wh3n5"), ExtResource("113_vuyvy"), ExtResource("114_0yt84"), ExtResource("116_kosww"), ExtResource("117_s15n6"), ExtResource("118_es2j2"), ExtResource("127_e5mnx"), ExtResource("128_dt0ky"), ExtResource("129_mhw2q")])
+items = Array[ExtResource("40_a2xo5")]([ExtResource("41_a2xo5"), ExtResource("22_bjvpn"), ExtResource("41_art4l"), ExtResource("112_wh3n5"), ExtResource("113_vuyvy"), ExtResource("114_0yt84"), ExtResource("116_kosww"), ExtResource("117_s15n6"), ExtResource("118_es2j2"), ExtResource("127_e5mnx"), ExtResource("128_dt0ky"), ExtResource("129_mhw2q"), ExtResource("10_hioli")])
 start_anim = "swing_tool"
 metadata/_custom_type_script = "uid://c622jer80j3sk"
 
@@ -1032,7 +1018,7 @@ metadata/_custom_type_script = "uid://bki5ij8task16"
 
 [node name="Inventory" type="Node" parent="." unique_id=710458340]
 script = ExtResource("19_c35mf")
-item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_j3r50"), SubResource("Resource_hggc2"), SubResource("Resource_utr5e"), SubResource("Resource_k7n08"), SubResource("Resource_2h6tc"), SubResource("Resource_qkr8n"), SubResource("Resource_bq5ya")])
+item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_j3r50"), SubResource("Resource_hggc2"), SubResource("Resource_utr5e"), SubResource("Resource_k7n08"), SubResource("Resource_o7udw")])
 size = 40
 
 [node name="NodeSaver" type="Node" parent="Inventory" unique_id=137251970]
@@ -1306,6 +1292,7 @@ difficulty_profile_index = 0
 [node name="SignalAnimationTrigger" type="Node" parent="Health" unique_id=1074142864 node_paths=PackedStringArray("anim_player")]
 script = ExtResource("25_j55il")
 anim_player = NodePath("../../ScreenEffectContainer/Hurt/AnimationPlayer")
+anim_name = &"hurt"
 force_from_start = false
 signal_name = &"was_hurt"
 metadata/_custom_type_script = "uid://dapeyi3eetek1"
@@ -1480,6 +1467,7 @@ fade_when_idle = true
 metadata/_custom_type_script = "uid://c3xfbb8ay0ghk"
 
 [node name="FPSLabel" type="Label" parent="HUD/BarContainer" unique_id=1610708313]
+visible = false
 layout_mode = 2
 text = "FPS"
 script = ExtResource("19_bjvpn")

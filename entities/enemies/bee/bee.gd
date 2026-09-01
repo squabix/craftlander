@@ -42,6 +42,10 @@ func attack() -> void:
 	if global_position.distance_to(sight.target_position) > ATTACK_RANGE:
 		return
 	
+	var health := get_target_health()
+	if not is_instance_valid(health):
+		return
+	
 	get_target_health().hurt(ATTACK_DP)
 	attacked.emit()
 
