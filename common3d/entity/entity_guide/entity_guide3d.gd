@@ -25,3 +25,7 @@ func get_distance_to_target() -> float:
 
 func move_forward() -> void:
 	entity.move_forward()
+
+
+func move_backward() -> void:
+	entity.move_backward()

@@ -9,6 +9,10 @@ extends TargetingState
 @export_custom(PROPERTY_HINT_NONE, "m") var advance_goal_distance := 1.5
 @export var advance_in_water := false
 
+@export_group("Retreating", "retreat")
+@export var retreat_enabled := false
+@export_custom(PROPERTY_HINT_NONE, "m") var retreat_goal_distance := 3.0
+
 @export_group("Reach", "reach")
 @export var reach_state := &""
 
@@ -40,16 +44,23 @@ func physics_update(_delta: float) -> void:
 
 	guide.face_target()
 
-	# Use item if in range
-	if guide.get_distance_to_target() <= advance_goal_distance and sight.does_see_target():
+	var distance_to_target := guide.get_distance_to_target()
+	var in_attack_range := distance_to_target <= advance_goal_distance and sight.does_see_target()
+
+	# Use item if in range (independent of movement, so retreating doesn't block attacking)
+	if in_attack_range:
 		if reach_state != &"":
 			print("Transition to attacking")
 			transition_to(reach_state)
 		elif item_holder:
 			item_holder.use_item()
 
+	# Retreat if too close
+	if retreat_enabled and distance_to_target <= retreat_goal_distance:
+		guide.move_backward()
+
 	# Move forward to get in range
-	elif advance_enabled and (advance_in_water or not is_in_water()):
+	elif not in_attack_range and advance_enabled and (advance_in_water or not is_in_water()):
 		guide.move_forward()
 
 
