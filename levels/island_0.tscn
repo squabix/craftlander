@@ -40,6 +40,7 @@
 [ext_resource type="Material" uid="uid://bntpptj6c08nu" path="res://assets/materials/red_mushroom.tres" id="39_es1un"]
 [ext_resource type="Resource" uid="uid://dw1f1v3m0prum" path="res://entities/enemies/little_talus/little_talus_island_resource.tres" id="39_gk71k"]
 [ext_resource type="Material" uid="uid://fs0rcuantoc5" path="res://assets/materials/mushroom_spot.tres" id="40_jiisf"]
+[ext_resource type="Resource" uid="uid://bvryg3dsdb6at" path="res://entities/enemies/shroomoid/shroomoid_island_resource.tres" id="40_kn3q4"]
 [ext_resource type="Material" uid="uid://bh8sv2icydggs" path="res://assets/materials/stone.tres" id="41_5ey3f"]
 [ext_resource type="Material" uid="uid://2lvxncgxfhjd" path="res://assets/materials/copper.tres" id="42_02y7v"]
 [ext_resource type="Material" uid="uid://qbk54giebf0" path="res://assets/materials/dead_shrub.tres" id="43_0el0x"]
@@ -1307,9 +1308,10 @@ terrain_generator = NodePath("../IslandGenerator")
 [node name="EntityPopulator" type="Node3D" parent="." unique_id=2086147732 node_paths=PackedStringArray("repopulate_timer")]
 script = ExtResource("16_ai0lq")
 entity_quantities = Dictionary[ExtResource("17_lx06o"), int]({
-ExtResource("17_tks2c"): 20,
-ExtResource("24_6o2sf"): 12,
-ExtResource("39_gk71k"): 16
+ExtResource("17_tks2c"): 12,
+ExtResource("24_6o2sf"): 8,
+ExtResource("39_gk71k"): 8,
+ExtResource("40_kn3q4"): 4
 })
 repopulate_timer = NodePath("../EntityRepopulateTimer")
 
