@@ -409,6 +409,7 @@ func craft() -> void:
 
 	grid_changed.emit()
 	crafted.emit(recipe.result.item)
+	EventBus.trigger(&"item_crafted", recipe.result.item)
 
 
 func _wiggle_selection() -> void:

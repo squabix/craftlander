@@ -50,6 +50,7 @@ func _ready() -> void:
 	)
 	respawn_button.pressed.connect(respawn)
 	health.died.connect(die)
+	health.survived_hurt.connect(_on_survived_hurt)
 	health_saver.finished_load.connect(_on_health_loaded, CONNECT_ONE_SHOT)
 	hunger_saver.finished_load.connect(_on_hunger_loaded, CONNECT_ONE_SHOT)
 
@@ -110,6 +111,11 @@ func interact() -> void:
 func die() -> void:
 	get_tree().paused = true
 	MouseModeController.show()
+	EventBus.trigger(&"player_died", is_in_water)
+
+
+func _on_survived_hurt() -> void:
+	EventBus.trigger(&"player_survived_hurt", health.to_percent_max(health.hp))
 
 
 func respawn() -> void:

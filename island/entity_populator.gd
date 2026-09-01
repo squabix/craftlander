@@ -96,16 +96,23 @@ func add_entity(entity_resource: IslandEntityResource, spawnpoint := Vector3.ZER
 		spawnpoint = await get_spawnpoint(entity_resource.min_height, entity_resource.max_height, allow_in_frustum)
 	
 	var entity := entity_resource.scene.instantiate() as Entity3D
-	
+
 	add_child(entity)
 	entity.global_position = spawnpoint
-	
+	entity.tree_exiting.connect(_on_entity_tree_exiting.bind(entity))
+
 	if entity_resource in entities:
 		entities[entity_resource].append(entity)
 	else:
 		entities[entity_resource] = [entity]
-	
+
 	return entity
+
+
+func _on_entity_tree_exiting(entity: Entity3D) -> void:
+	var health := Health.search(entity)
+	if is_instance_valid(health) and health.dead:
+		EventBus.trigger(&"enemy_died", entity)
 
 
 func initialize_repopulate_timer() -> bool:
