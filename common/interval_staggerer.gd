@@ -10,7 +10,6 @@ enum TimeUnit { SECONDS, PROCESS_FRAMES, PHYSICS_FRAMES }
 		unit = value
 		if is_inside_tree():
 			_update_process_callback()
-
 @export var disabled := false
 @export_custom(PROPERTY_HINT_NONE, "suffix:units") var base_interval := 1.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:units") var stagger_amount := 0.003
@@ -34,20 +33,7 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	_advance(1.0) # Always whole physics ticks, regardless of substep delta
-
-
-func _advance(amount: float) -> void:
-	time_left -= amount
-	if time_left <= 0.0:
-		reset()
-		call_target_methods()
-		timeout.emit()
-
-
-func _update_process_callback() -> void:
-	set_process(unit != TimeUnit.PHYSICS_FRAMES)
-	set_physics_process(unit == TimeUnit.PHYSICS_FRAMES)
+	_advance(1.0) # Always whole physics ticks, regardless of delta
 
 
 func reset() -> void:
@@ -70,3 +56,16 @@ func call_target_methods() -> void:
 		if not node.has_method(method_name):
 			continue
 		node.call(method_name)
+
+
+func _advance(amount: float) -> void:
+	time_left -= amount
+	if time_left <= 0.0:
+		reset()
+		call_target_methods()
+		timeout.emit()
+
+
+func _update_process_callback() -> void:
+	set_process(unit != TimeUnit.PHYSICS_FRAMES)
+	set_physics_process(unit == TimeUnit.PHYSICS_FRAMES)
