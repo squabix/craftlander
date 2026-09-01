@@ -251,7 +251,7 @@ static func connect_custom(callable: Callable, connecting_signal: Signal, one_sh
 static func node_error(error: String, ...injections: Array) -> void:
 	for i in len(injections):
 		var element: Variant = injections[i]
-		if not element is Node:
+		if not is_instance_valid(element) and not element is Node:
 			continue
 		injections[i] = nodestr(element)
 	push_error(error % injections)

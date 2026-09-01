@@ -25,3 +25,8 @@ testing/test_scene1.tscn
 .vscode/
 addons/IgnoreFolders/
 addons/GDQuest_GDScript_formatter/
+
+# Valve
+addons/godotsteam/**/steam_api*.dll
+addons/godotsteam/**/libsteam_api.*
+addons/godotsteam/**/~*

@@ -29,6 +29,7 @@ buses/default_bus_layout="uid://dfnaxtxyuayj3"
 SoundManager="*res://common/sound/sound_manager.gd"
 RecipeBook="*res://items/crafting/recipe_book.gd"
 GameSettings="*uid://dybhrs6lws1mr"
+SteamManager="*res://steam/steam_manager.gd"
 
 [debug]
 
@@ -47,7 +48,7 @@ mouse_cursor/custom_image_hotspot=Vector2(12, 12)
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg", "res://addons/IgnoreFolders/plugin.cfg")
+enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg", "res://addons/IgnoreFolders/plugin.cfg", "res://addons/godotsteam/plugin.cfg")
 
 [file_customization]
 
@@ -69,7 +70,8 @@ folder_colors={
 "res://items/food/": "orange",
 "res://main/": "gray",
 "res://player/": "blue",
-"res://player/ui/": "green"
+"res://player/ui/": "green",
+"res://steam/": "blue"
 }
 
 [global_group]

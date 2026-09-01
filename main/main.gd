@@ -81,6 +81,10 @@ func load_level(index: int) -> void:
 	NodeSaver.scene_root = level
 	add_child(level)
 
+	SteamManager.update_status(
+		"Exploring Island %s (%s)" % [index, Difficulty.get_display_name(loaded_save.difficulty)]
+	)
+
 
 func load_scene(path: String) -> Node:
 	Util.safe_free(loading_screen)
@@ -133,9 +137,11 @@ func save_game(slot: int) -> void:
 	NodeSaver.save = loaded_save
 	NodeSaver.save_all()
 
-	var err := loaded_save.write_to_disk(get_slot_path(slot))
+	var path := get_slot_path(slot)
+	var err := loaded_save.write_to_disk(path)
 	if err == OK:
 		print("Successfully saved game to slot %s" % slot)
+		_push_save_to_cloud(path, slot)
 	else:
 		Util.node_error("Failed to save game to slot %s. Error: %s", slot, err)
 
@@ -146,6 +152,7 @@ func load_game(slot: int) -> void:
 		return
 
 	var path := get_slot_path(slot)
+	_pull_save_from_cloud_if_newer(slot, path)
 	var res := Save.load_from_disk(path)
 
 	if res == null:
@@ -177,6 +184,7 @@ func load_title() -> void:
 	add_child(title_screen)
 	title_screen.save_submenu.started_new_game.connect(start_new_game)
 	title_screen.save_submenu.loaded_game.connect(load_game)
+	SteamManager.update_status("In the Main Menu")
 
 
 func clear() -> void:
@@ -193,3 +201,34 @@ func clear() -> void:
 	level = null
 
 	get_tree().paused = false
+
+
+func _cloud_save_filename(slot: int) -> String:
+	return "save_slot_%s.res" % slot
+
+
+func _push_save_to_cloud(path: String, slot: int) -> void:
+	var file := FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		return
+	SteamManager.cloud_write(_cloud_save_filename(slot), file.get_buffer(file.get_length()))
+
+
+func _pull_save_from_cloud_if_newer(slot: int, local_path: String) -> void:
+	var cloud_name := _cloud_save_filename(slot)
+	if not SteamManager.cloud_file_exists(cloud_name):
+		return
+
+	var cloud_time := SteamManager.cloud_timestamp(cloud_name)
+	var local_time := FileAccess.get_modified_time(local_path) if FileAccess.file_exists(local_path) else 0
+	if cloud_time <= local_time:
+		return
+
+	var data := SteamManager.cloud_read(cloud_name)
+	if data.is_empty():
+		return
+
+	var file := FileAccess.open(local_path, FileAccess.WRITE)
+	if file == null:
+		return
+	file.store_buffer(data)
