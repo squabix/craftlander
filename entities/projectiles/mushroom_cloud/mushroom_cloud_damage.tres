@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Damage" format=3 uid="uid://cedw25gaj5tks"]
+
+[ext_resource type="Script" uid="uid://bl5x717nsijmk" path="res://common/damage_system/damage.gd" id="1_dmg"]
+
+[resource]
+script = ExtResource("1_dmg")
+base_amount = 5.0
+type = &"spore"
+knockback_force = 0.0
+metadata/_custom_type_script = "uid://bl5x717nsijmk"

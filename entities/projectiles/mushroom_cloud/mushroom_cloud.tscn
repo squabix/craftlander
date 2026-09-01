@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://bowhgwoced3jt"]
+
+[ext_resource type="Script" uid="uid://b1gh515736ppy" path="res://common3d/damage_system/hit_projectile3d.gd" id="1_3g5qw"]
+[ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="2_stagger"]
+[ext_resource type="Resource" uid="uid://cedw25gaj5tks" path="res://entities/projectiles/mushroom_cloud/mushroom_cloud_damage.tres" id="3_dmg"]
+[ext_resource type="Texture2D" uid="uid://cox1h2gt8cc53" path="res://assets/spiral.png" id="4_3g5qw"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cloud"]
+radius = 1.2
+
+[sub_resource type="SphereMesh" id="SphereMesh_cloud"]
+radius = 1.2
+height = 2.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cloud"]
+transparency = 1
+cull_mode = 2
+albedo_color = Color(0.304, 0.8, 0.3866666, 0.1764706)
+
+[sub_resource type="Curve" id="Curve_3g5qw"]
+_data = [Vector2(0.12204142, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.8972883, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3g5qw"]
+curve = SubResource("Curve_3g5qw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rkf0y"]
+angle_min = -179.99998
+angle_max = 180.00002
+spread = 180.0
+initial_velocity_min = 1.1999999
+initial_velocity_max = 1.75
+angular_velocity_min = 190.22998
+angular_velocity_max = 190.22998
+gravity = Vector3(0, 0, 0)
+damping_min = 1.0
+damping_max = 1.0
+scale_curve = SubResource("CurveTexture_3g5qw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o385s"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.45908335, 0.7, 0.287, 1)
+albedo_texture = ExtResource("4_3g5qw")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_hjjmf"]
+material = SubResource("StandardMaterial3D_o385s")
+size = Vector2(0.3, 0.3)
+
+[node name="MushroomCloud" type="Area3D" unique_id=285811187]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_3g5qw")
+speed = 5.0
+gravity_scale = 0.0
+damping = 1.2
+damage = ExtResource("3_dmg")
+current_mode = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=253766353]
+shape = SubResource("SphereShape3D_cloud")
+
+[node name="Visuals" type="MeshInstance3D" parent="." unique_id=1539370032]
+visible = false
+mesh = SubResource("SphereMesh_cloud")
+surface_material_override/0 = SubResource("StandardMaterial3D_cloud")
+
+[node name="IntervalStaggerer" type="Node" parent="." unique_id=1474001714 node_paths=PackedStringArray("target_methods")]
+script = ExtResource("2_stagger")
+base_interval = 0.6
+target_methods = {
+NodePath(".."): &"hit_overlap"
+}
+initial_time_left = 0.01
+
+[node name="GreenParticles" type="GPUParticles3D" parent="." unique_id=842780292]
+amount = 40
+lifetime = 4.0
+explosiveness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_rkf0y")
+draw_pass_1 = SubResource("QuadMesh_hjjmf")
