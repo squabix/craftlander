@@ -121,6 +121,7 @@
 [ext_resource type="AudioStream" uid="uid://cly6uplw8i3a8" path="res://assets/sound/open_drop-06.mp3" id="94_d0gtc"]
 [ext_resource type="AudioStream" uid="uid://cwqa0rroqx0ww" path="res://assets/sound/steps_stream.tres" id="94_qm6yy"]
 [ext_resource type="AudioStream" uid="uid://bngsjojub1sjy" path="res://assets/sound/swim_stream.tres" id="95_gcmgo"]
+[ext_resource type="Shader" uid="uid://b26au25x8xvc8" path="res://assets/shaders/water_background.gdshader" id="96_e5mnx"]
 [ext_resource type="AudioStream" uid="uid://bctut8ply616f" path="res://assets/sound/swoosh1.mp3" id="100_0iv1a"]
 [ext_resource type="Resource" uid="uid://b0gw02djkff0d" path="res://island/island_resources/undead_atoll.tres" id="109_hioli"]
 [ext_resource type="AudioStream" uid="uid://fc5gio4s8yl" path="res://assets/sound/eat.mp3" id="112_teerl"]
@@ -455,10 +456,18 @@ _data = {
 &"show": SubResource("Animation_g4c7l")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hjjmf"]
+shader = ExtResource("96_e5mnx")
+shader_parameter/iteration_times = 4
+shader_parameter/speed = 0.30000001425
+shader_parameter/color = Color(0, 0.35, 0.5, 1)
+shader_parameter/intensity = 0.004
+shader_parameter/scale = 1.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pnw6m"]
 shader = ExtResource("28_ge24q")
 shader_parameter/blur_amount = 2.2500002018750003
-shader_parameter/mix_amount = 0.70000003325
+shader_parameter/mix_amount = 0.50000002375
 shader_parameter/color_over = Color(0.035099987, 0.265785, 0.39, 1)
 
 [sub_resource type="Gradient" id="Gradient_do7qw"]
@@ -501,6 +510,8 @@ script = ExtResource("6_hggc2")
 item = ExtResource("10_s3g0c")
 quantity = 3
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_islandopt"]
 
 [sub_resource type="Animation" id="Animation_2h6tc"]
 length = 0.001
@@ -4330,7 +4341,6 @@ secondary_inventory_selector = NodePath("../../../HUD/SecondaryInventorySelector
 hold_inventory_selector = NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector")
 
 [node name="ItemInspector" type="PanelContainer" parent="PauseMenu/CraftingInterface" unique_id=482564874 node_paths=PackedStringArray("inventory_selector", "name_label", "info_label", "container")]
-visible = false
 z_index = 2
 layout_mode = 0
 offset_left = 542.0
@@ -4360,6 +4370,7 @@ layout_mode = 2
 [node name="InfoLabel" type="Label" parent="PauseMenu/CraftingInterface/ItemInspector/VBoxContainer" unique_id=1550717015]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 18
 text = "Item Namef"
 
 [node name="SettingsMenu" parent="PauseMenu" unique_id=1234740637 instance=ExtResource("39_xcnuv")]
@@ -5181,6 +5192,17 @@ pause_menu = NodePath("../PauseMenu")
 boat_upgrader = NodePath("BottomOptions/HBoxContainer/BoatUpgrader")
 sail_button = NodePath("BottomOptions/HBoxContainer/Control/SailButton")
 
+[node name="BlurRect2" type="ColorRect" parent="BoatMenu" unique_id=1799515527]
+modulate = Color(1, 1, 1, 0.39215687)
+material = SubResource("ShaderMaterial_hjjmf")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
 [node name="BlurRect" type="ColorRect" parent="BoatMenu" unique_id=286208560]
 material = SubResource("ShaderMaterial_pnw6m")
 layout_mode = 1
@@ -5197,7 +5219,7 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -180.0
+offset_top = -272.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -5216,7 +5238,6 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -40.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -5951,7 +5972,7 @@ anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 447.0
 
-[node name="IslandOption0" type="VBoxContainer" parent="BoatMenu/IslandOptionContainer" unique_id=1381974933 node_paths=PackedStringArray("name_label", "texture_rect", "select_button")]
+[node name="IslandOption0" type="VBoxContainer" parent="BoatMenu/IslandOptionContainer" unique_id=1381974933 node_paths=PackedStringArray("name_label", "texture_rect", "select_button", "animation_player")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.13717014
@@ -5965,6 +5986,7 @@ island_resource = ExtResource("73_kcq4v")
 name_label = NodePath("NameLabel")
 texture_rect = NodePath("TextureRect")
 select_button = NodePath("SelectButton")
+animation_player = NodePath("AnimationPlayer")
 metadata/_edit_use_anchors_ = true
 
 [node name="NameLabel" type="Label" parent="BoatMenu/IslandOptionContainer/IslandOption0" unique_id=913994242]
@@ -5973,6 +5995,7 @@ text = "Island Name"
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="BoatMenu/IslandOptionContainer/IslandOption0" unique_id=1068335054]
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_vertical = 3
 offset_transform_enabled = true
@@ -5985,6 +6008,7 @@ stretch_mode = 5
 [node name="SelectButton" type="Button" parent="BoatMenu/IslandOptionContainer/IslandOption0" unique_id=2011677331]
 layout_mode = 2
 toggle_mode = true
+button_group = SubResource("ButtonGroup_islandopt")
 text = "Select
 "
 
@@ -5999,20 +6023,24 @@ signal_players = {
 libraries/ = SubResource("AnimationLibrary_48p26")
 autoplay = &"float"
 
-[node name="IslandOption1" type="VBoxContainer" parent="BoatMenu/IslandOptionContainer" unique_id=687684142 node_paths=PackedStringArray("name_label", "texture_rect", "select_button")]
+[node name="IslandOption1" type="VBoxContainer" parent="BoatMenu/IslandOptionContainer" unique_id=687684142 node_paths=PackedStringArray("name_label", "texture_rect", "select_button", "animation_player")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.30293834
 anchor_top = 0.2488926
 anchor_right = 0.3862717
 anchor_bottom = 0.50616264
+offset_left = 207.01501
+offset_top = -2.2549973
+offset_right = 217.01501
+offset_bottom = 66.7453
 script = ExtResource("64_kewli")
 current_alpha = 0.7
 island_resource = ExtResource("75_lufic")
 name_label = NodePath("NameLabel")
 texture_rect = NodePath("TextureRect")
 select_button = NodePath("SelectButton")
-metadata/_edit_use_anchors_ = true
+animation_player = NodePath("AnimationPlayer")
 
 [node name="NameLabel" type="Label" parent="BoatMenu/IslandOptionContainer/IslandOption1" unique_id=1736962781]
 layout_mode = 2
@@ -6020,6 +6048,7 @@ text = "Island Name"
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="BoatMenu/IslandOptionContainer/IslandOption1" unique_id=705747668]
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_vertical = 3
 offset_transform_enabled = true
@@ -6032,6 +6061,7 @@ stretch_mode = 5
 [node name="SelectButton" type="Button" parent="BoatMenu/IslandOptionContainer/IslandOption1" unique_id=291589597]
 layout_mode = 2
 toggle_mode = true
+button_group = SubResource("ButtonGroup_islandopt")
 text = "Select
 "
 
@@ -6046,20 +6076,24 @@ signal_players = {
 libraries/ = SubResource("AnimationLibrary_48p26")
 autoplay = &"float"
 
-[node name="IslandOption2" type="VBoxContainer" parent="BoatMenu/IslandOptionContainer" unique_id=2004637537 node_paths=PackedStringArray("name_label", "texture_rect", "select_button")]
+[node name="IslandOption2" type="VBoxContainer" parent="BoatMenu/IslandOptionContainer" unique_id=2004637537 node_paths=PackedStringArray("name_label", "texture_rect", "select_button", "animation_player")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5182292
 anchor_top = 0.4577517
 anchor_right = 0.6015625
 anchor_bottom = 0.71502304
+offset_left = 325.0
+offset_top = 21.384995
+offset_right = 335.0
+offset_bottom = 90.384705
 script = ExtResource("64_kewli")
 current_alpha = 0.7
 island_resource = ExtResource("76_nxclr")
 name_label = NodePath("NameLabel")
 texture_rect = NodePath("TextureRect")
 select_button = NodePath("SelectButton")
-metadata/_edit_use_anchors_ = true
+animation_player = NodePath("AnimationPlayer")
 
 [node name="NameLabel" type="Label" parent="BoatMenu/IslandOptionContainer/IslandOption2" unique_id=776332412]
 layout_mode = 2
@@ -6067,6 +6101,7 @@ text = "Island Name"
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="BoatMenu/IslandOptionContainer/IslandOption2" unique_id=1826701770]
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_vertical = 3
 offset_transform_enabled = true
@@ -6079,6 +6114,7 @@ stretch_mode = 5
 [node name="SelectButton" type="Button" parent="BoatMenu/IslandOptionContainer/IslandOption2" unique_id=1934516890]
 layout_mode = 2
 toggle_mode = true
+button_group = SubResource("ButtonGroup_islandopt")
 text = "Select
 "
 
@@ -6093,19 +6129,20 @@ signal_players = {
 libraries/ = SubResource("AnimationLibrary_48p26")
 autoplay = &"float"
 
-[node name="IslandOption3" type="VBoxContainer" parent="BoatMenu/IslandOptionContainer" unique_id=1909481650 node_paths=PackedStringArray("name_label", "texture_rect", "select_button")]
+[node name="IslandOption3" type="VBoxContainer" parent="BoatMenu/IslandOptionContainer" unique_id=1909481650 node_paths=PackedStringArray("name_label", "texture_rect", "select_button", "animation_player")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.7595486
-anchor_top = 0.29727072
-anchor_right = 0.8428819
-anchor_bottom = 0.5545416
+anchor_left = 1.1414931
+anchor_top = 0.30425057
+anchor_right = 1.2335069
+anchor_bottom = 0.7158837
 script = ExtResource("64_kewli")
 current_alpha = 0.7
 island_resource = ExtResource("109_hioli")
 name_label = NodePath("NameLabel")
 texture_rect = NodePath("TextureRect")
 select_button = NodePath("SelectButton")
+animation_player = NodePath("AnimationPlayer")
 metadata/_edit_use_anchors_ = true
 
 [node name="NameLabel" type="Label" parent="BoatMenu/IslandOptionContainer/IslandOption3" unique_id=2138815517]
@@ -6114,6 +6151,7 @@ text = "Island Name"
 horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="BoatMenu/IslandOptionContainer/IslandOption3" unique_id=47659230]
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_vertical = 3
 offset_transform_enabled = true
@@ -6126,6 +6164,7 @@ stretch_mode = 5
 [node name="SelectButton" type="Button" parent="BoatMenu/IslandOptionContainer/IslandOption3" unique_id=527816358]
 layout_mode = 2
 toggle_mode = true
+button_group = SubResource("ButtonGroup_islandopt")
 text = "Select
 "
 
