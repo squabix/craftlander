@@ -93,12 +93,11 @@
 [ext_resource type="Resource" uid="uid://c86fer36qsomd" path="res://player/states/player_sprinting_move_mode.tres" id="67_kewli"]
 [ext_resource type="Texture2D" uid="uid://dejgw2p87pi2y" path="res://assets/materials/cross.png" id="68_anp34"]
 [ext_resource type="Texture2D" uid="uid://cfkuouoibr014" path="res://assets/ui/cross.png" id="68_j420s"]
-[ext_resource type="Texture2D" uid="uid://beudtbsirofjr" path="res://assets/ui/island0.png" id="71_anp34"]
+[ext_resource type="Texture2D" uid="uid://beudtbsirofjr" path="res://assets/ui/lush_isle.png" id="71_anp34"]
 [ext_resource type="Resource" uid="uid://bkvo3ik5y1yom" path="res://island/island_resources/lush_isle.tres" id="73_kcq4v"]
 [ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="74_2h6tc"]
 [ext_resource type="Resource" uid="uid://dafba7ua6hmlh" path="res://items/tools/gold/golden_axe/golden_axe_recipe.tres" id="75_ckf88"]
 [ext_resource type="Resource" uid="uid://bbo58dytvrrts" path="res://island/island_resources/skelly_sandbar.tres" id="75_lufic"]
-[ext_resource type="Script" uid="uid://7dsenmmyrsaw" path="res://island/island_resource.gd" id="75_qavcc"]
 [ext_resource type="Resource" uid="uid://bjm2iw71djl4g" path="res://items/weapons/golden_sword/golden_sword_recipe.tres" id="76_ciyjg"]
 [ext_resource type="Resource" uid="uid://cccntbp1un6ey" path="res://island/island_resources/frost_holm.tres" id="76_nxclr"]
 [ext_resource type="AudioStream" uid="uid://bsc6k70aubcfq" path="res://assets/sound/open_drop-01.mp3" id="76_wsa1w"]
@@ -123,6 +122,7 @@
 [ext_resource type="AudioStream" uid="uid://cwqa0rroqx0ww" path="res://assets/sound/steps_stream.tres" id="94_qm6yy"]
 [ext_resource type="AudioStream" uid="uid://bngsjojub1sjy" path="res://assets/sound/swim_stream.tres" id="95_gcmgo"]
 [ext_resource type="AudioStream" uid="uid://bctut8ply616f" path="res://assets/sound/swoosh1.mp3" id="100_0iv1a"]
+[ext_resource type="Resource" uid="uid://b0gw02djkff0d" path="res://island/island_resources/undead_atoll.tres" id="109_hioli"]
 [ext_resource type="AudioStream" uid="uid://fc5gio4s8yl" path="res://assets/sound/eat.mp3" id="112_teerl"]
 [ext_resource type="Resource" uid="uid://vulwxanblunx" path="res://items/tools/copper/copper_axe/copper_axe_item.tres" id="112_wh3n5"]
 [ext_resource type="Resource" uid="uid://b10txfbikrljt" path="res://items/weapons/copper_sword/copper_sword_item.tres" id="113_vuyvy"]
@@ -499,13 +499,7 @@ corner_detail = 6
 [sub_resource type="Resource" id="Resource_8rogd"]
 script = ExtResource("6_hggc2")
 item = ExtResource("10_s3g0c")
-quantity = 5
-metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
-
-[sub_resource type="Resource" id="Resource_48p26"]
-script = ExtResource("6_hggc2")
-item = ExtResource("9_jbx34")
-quantity = 10
+quantity = 3
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Animation" id="Animation_2h6tc"]
@@ -546,13 +540,6 @@ _data = {
 &"RESET": SubResource("Animation_2h6tc"),
 &"float": SubResource("Animation_8rogd")
 }
-
-[sub_resource type="Resource" id="Resource_onxu2"]
-script = ExtResource("75_qavcc")
-name = "Undead Atoll"
-icon = ExtResource("71_anp34")
-index = 3
-metadata/_custom_type_script = "uid://7dsenmmyrsaw"
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vyxke"]
 random_pitch = 1.0594631
@@ -4379,46 +4366,46 @@ text = "Item Namef"
 visible = false
 layout_mode = 1
 
-[node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/SettingsContainer/FullScreen/CenterContainer/FullScreenToggle" parent_id_path=PackedInt32Array(1234740637, 2049426436) index="0" unique_id=2144126531 node_paths=PackedStringArray("signal_players")]
+[node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/VSync/CenterContainer/VSyncToggle" parent_id_path=PackedInt32Array(1234740637, 1518537055) index="0" unique_id=1351290583 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/FullScreen/CenterContainer/FullScreenToggle" parent_id_path=PackedInt32Array(1234740637, 2049426436) index="0" unique_id=2144126531 node_paths=PackedStringArray("signal_players")]
 signal_players = {
 &"focus_entered": NodePath("HoverPlayer"),
 &"mouse_entered": NodePath("HoverPlayer"),
 &"pressed": NodePath("PressPlayer")
 }
 
-[node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/SettingsContainer/VSync/CenterContainer/VSyncToggle" parent_id_path=PackedInt32Array(1234740637, 1518537055) index="0" unique_id=1351290583 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
-}
-
-[node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/SettingsContainer/InvertY/CenterContainer/InvertYToggle" parent_id_path=PackedInt32Array(1234740637, 1517878780) index="0" unique_id=1079694290 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
-}
-
-[node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/SettingsContainer/AntiAliasing/AAOption" parent_id_path=PackedInt32Array(1234740637, 630181348) index="1" unique_id=875959311 node_paths=PackedStringArray("signal_players")]
+[node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/AntiAliasing/AAOption" parent_id_path=PackedInt32Array(1234740637, 630181348) index="1" unique_id=875959311 node_paths=PackedStringArray("signal_players")]
 signal_players = {
 &"focus_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
 &"mouse_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
 &"pressed": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
 }
 
-[node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/SettingsContainer/ShadowQuality/ShadowOption" parent_id_path=PackedInt32Array(1234740637, 1710798274) index="1" unique_id=1882629603 node_paths=PackedStringArray("signal_players")]
+[node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/ShadowQuality/ShadowOption" parent_id_path=PackedInt32Array(1234740637, 1710798274) index="1" unique_id=1882629603 node_paths=PackedStringArray("signal_players")]
 signal_players = {
 &"focus_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
 &"mouse_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
 &"pressed": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
 }
 
-[node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/SettingsContainer/BackButton" parent_id_path=PackedInt32Array(1234740637, 1546788436) index="0" unique_id=1198217718 node_paths=PackedStringArray("signal_players")]
+[node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/InvertY/CenterContainer/InvertYToggle" parent_id_path=PackedInt32Array(1234740637, 1517878780) index="0" unique_id=1079694290 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": NodePath("../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/BackButton" parent_id_path=PackedInt32Array(1234740637, 1546788436) index="0" unique_id=1198217718 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": null,
+&"mouse_entered": null,
+&"pressed": null
 }
 
 [node name="SignalAudioManager" type="Node" parent="PauseMenu" unique_id=1037296529 node_paths=PackedStringArray("signal_players")]
@@ -5908,7 +5895,7 @@ signal_players = {
 
 [node name="UpgradeRequirement1" type="Node" parent="BoatMenu/BottomOptions/HBoxContainer/BoatUpgrader" unique_id=1136310646]
 script = ExtResource("19_c35mf")
-item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_8rogd"), SubResource("Resource_48p26")])
+item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_8rogd")])
 constant = true
 size = 9
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
@@ -6115,7 +6102,7 @@ anchor_right = 0.8428819
 anchor_bottom = 0.5545416
 script = ExtResource("64_kewli")
 current_alpha = 0.7
-island_resource = SubResource("Resource_onxu2")
+island_resource = ExtResource("109_hioli")
 name_label = NodePath("NameLabel")
 texture_rect = NodePath("TextureRect")
 select_button = NodePath("SelectButton")

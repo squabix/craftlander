@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="IslandResource" format=3 uid="uid://b0gw02djkff0d"]
 
-[ext_resource type="Texture2D" uid="uid://beudtbsirofjr" path="res://assets/ui/island0.png" id="1_1dans"]
 [ext_resource type="Script" uid="uid://7s1w1ts4d614" path="res://island/skies/sky_setting.gd" id="1_ms8qj"]
 [ext_resource type="Script" uid="uid://7dsenmmyrsaw" path="res://island/island_resource.gd" id="2_6or2c"]
 [ext_resource type="Material" uid="uid://d0vqjxjqqesv3" path="res://island/skies/sky_material2.tres" id="2_jw0kq"]
+[ext_resource type="Texture2D" uid="uid://ciiwqixcwq7r4" path="res://assets/ui/undead_atoll.png" id="3_ms8qj"]
 
 [sub_resource type="Resource" id="Resource_iviav"]
 script = ExtResource("1_ms8qj")
@@ -17,7 +17,7 @@ metadata/_custom_type_script = "uid://7s1w1ts4d614"
 [resource]
 script = ExtResource("2_6or2c")
 name = "Undead Atoll"
-icon = ExtResource("1_1dans")
+icon = ExtResource("3_ms8qj")
 index = 3
 arrival_setting = SubResource("Resource_iviav")
 metadata/_custom_type_script = "uid://7dsenmmyrsaw"

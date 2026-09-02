@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://7dsenmmyrsaw" path="res://island/island_resource.gd" id="1_hqncd"]
 [ext_resource type="Resource" uid="uid://d1eptumm1b41d" path="res://island/skies/initial_sky_setting.tres" id="1_ln703"]
-[ext_resource type="Texture2D" uid="uid://beudtbsirofjr" path="res://assets/ui/island0.png" id="1_q54vh"]
+[ext_resource type="Texture2D" uid="uid://beudtbsirofjr" path="res://assets/ui/lush_isle.png" id="1_q54vh"]
 
 [resource]
 script = ExtResource("1_hqncd")
