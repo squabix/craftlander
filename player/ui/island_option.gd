@@ -10,9 +10,12 @@ signal selected
 @export var name_label: Label
 @export var texture_rect: TextureRect
 @export var select_button: Button
+@export var animation_player: AnimationPlayer
 
 func _ready() -> void:
 	select_button.pressed.connect(selected.emit)
+	if is_instance_valid(animation_player) and animation_player.has_animation(&"float"):
+		animation_player.seek(randf() * animation_player.get_animation(&"float").length, true)
 	await get_tree().process_frame
 	name_label.text = island_resource.name
 

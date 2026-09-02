@@ -52,7 +52,9 @@ func back() -> void:
 	set_pause(false)
 	if is_instance_valid(island_option_container):
 		for option in island_option_container.get_children():
+			option.select_button.button_pressed = false
 			option.hide()
+	selected_option = null
 	current_boat = null
 	backed_out.emit()
 
