@@ -32,10 +32,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -222.0
-offset_top = -127.5
-offset_right = 222.0
-offset_bottom = 127.5
+offset_left = -386.0
+offset_top = -158.0
+offset_right = 386.0
+offset_bottom = 158.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"MenuPanel"
@@ -46,6 +46,7 @@ theme_override_constants/separation = 16
 
 [node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer" unique_id=560221528]
 layout_mode = 2
+theme_override_font_sizes/font_size = 44
 text = "SAVE DETAILS"
 horizontal_alignment = 1
 
@@ -59,10 +60,12 @@ theme_override_constants/separation = 10
 
 [node name="CreatedLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/InfoContainer" unique_id=736995938]
 layout_mode = 2
+theme_override_font_sizes/font_size = 28
 text = "Created: "
 
 [node name="SavedLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/InfoContainer" unique_id=386235327]
 layout_mode = 2
+theme_override_font_sizes/font_size = 28
 text = "Last Saved: "
 
 [node name="SeedRow" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer/InfoContainer" unique_id=1073586588]
@@ -71,12 +74,14 @@ layout_mode = 2
 [node name="SeedLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/InfoContainer/SeedRow" unique_id=1144530856]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 28
 text = "Seed: "
 
 [node name="CopySeedButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/InfoContainer/SeedRow" unique_id=376291311]
-custom_minimum_size = Vector2(40, 0)
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
-text = "Copy"
+theme_override_font_sizes/font_size = 28
+text = "COPY"
 
 [node name="ButtonAudioManager" parent="PanelContainer/VBoxContainer/HBoxContainer/InfoContainer/SeedRow/CopySeedButton" unique_id=1762078675 node_paths=PackedStringArray("signal_players") instance=ExtResource("2")]
 signal_players = {
@@ -87,6 +92,7 @@ signal_players = {
 
 [node name="IslandLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/InfoContainer" unique_id=956589005]
 layout_mode = 2
+theme_override_font_sizes/font_size = 28
 text = "Current Island: "
 
 [node name="VSeparator" type="VSeparator" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1552880449]
@@ -99,21 +105,25 @@ theme_override_constants/separation = 10
 
 [node name="BoatLevelLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1513564730]
 layout_mode = 2
+theme_override_font_sizes/font_size = 28
 text = "Boat Level: "
 
 [node name="IslandsExploredLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1141019329]
 layout_mode = 2
+theme_override_font_sizes/font_size = 28
 text = "Islands Explored: "
 
 [node name="DifficultyLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1141019330]
 layout_mode = 2
+theme_override_font_sizes/font_size = 28
 text = "Difficulty: "
 
 [node name="DeleteButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=290109556]
 self_modulate = Color(1, 0.454902, 0.454902, 1)
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 28
 text = "DELETE SAVE"
 
 [node name="ButtonAudioManager" parent="PanelContainer/VBoxContainer/DeleteButton" unique_id=1115600678 node_paths=PackedStringArray("signal_players") instance=ExtResource("2")]
@@ -159,9 +169,10 @@ signal_players = {
 }
 
 [node name="BackButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1518903277]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 28
 text = "BACK"
 
 [node name="ButtonAudioManager" parent="PanelContainer/VBoxContainer/BackButton" unique_id=2009551610 node_paths=PackedStringArray("signal_players") instance=ExtResource("2")]
