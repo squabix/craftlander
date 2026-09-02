@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="IslandResource" format=3 uid="uid://bbo58dytvrrts"]
 
-[ext_resource type="Texture2D" uid="uid://beudtbsirofjr" path="res://assets/ui/island0.png" id="1_fe7jo"]
 [ext_resource type="Script" uid="uid://7s1w1ts4d614" path="res://island/skies/sky_setting.gd" id="1_iviav"]
 [ext_resource type="Material" uid="uid://dia41efen5cu" path="res://island/skies/sky_material0.tres" id="2_h1gtv"]
 [ext_resource type="Script" uid="uid://7dsenmmyrsaw" path="res://island/island_resource.gd" id="2_xgdvb"]
+[ext_resource type="Texture2D" uid="uid://rkjrkq1h4i1x" path="res://assets/ui/skelly_sandbar.png" id="3_iviav"]
 
 [sub_resource type="Resource" id="Resource_bp4kh"]
 script = ExtResource("1_iviav")
@@ -15,7 +15,7 @@ metadata/_custom_type_script = "uid://7s1w1ts4d614"
 [resource]
 script = ExtResource("2_xgdvb")
 name = "Skelly Sandbar"
-icon = ExtResource("1_fe7jo")
+icon = ExtResource("3_iviav")
 index = 1
 arrival_setting = SubResource("Resource_bp4kh")
 metadata/_custom_type_script = "uid://7dsenmmyrsaw"

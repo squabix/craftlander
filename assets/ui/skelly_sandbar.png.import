@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://beudtbsirofjr"
-path="res://.godot/imported/island0.png-1d0cedf8dc3d61f9cafcecb8125a5412.ctex"
+uid="uid://rkjrkq1h4i1x"
+path="res://.godot/imported/skelly_sandbar.png-0017498e5a16feeaa504e0a7e6b47649.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/island0.png"
-dest_files=["res://.godot/imported/island0.png-1d0cedf8dc3d61f9cafcecb8125a5412.ctex"]
+source_file="res://assets/ui/skelly_sandbar.png"
+dest_files=["res://.godot/imported/skelly_sandbar.png-0017498e5a16feeaa504e0a7e6b47649.ctex"]
 
 [params]
 
