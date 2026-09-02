@@ -11,13 +11,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
-slot_label = NodePath("PanelContainer/SettingsContainer/SlotLabel")
-start_button = NodePath("PanelContainer/SettingsContainer/StartButton")
-seed_field = NodePath("PanelContainer/SettingsContainer/SeedRow/SeedField")
-overwrite_warning = NodePath("PanelContainer/SettingsContainer/OverwriteWarningLabel")
-difficulty_slider = NodePath("PanelContainer/SettingsContainer/DifficultyRow/VBoxContainer/DifficultySlider")
-difficulty_name_label = NodePath("PanelContainer/SettingsContainer/DifficultyRow/VBoxContainer/DifficultyNameLabel")
-back_button = NodePath("PanelContainer/SettingsContainer/BackButton")
+slot_label = NodePath("PanelContainer/CenterContainer/SettingsContainer/SlotLabel")
+start_button = NodePath("PanelContainer/CenterContainer/SettingsContainer/StartButton")
+seed_field = NodePath("PanelContainer/CenterContainer/SettingsContainer/SeedRow/SeedField")
+overwrite_warning = NodePath("PanelContainer/CenterContainer/SettingsContainer/OverwriteWarningLabel")
+difficulty_slider = NodePath("PanelContainer/CenterContainer/SettingsContainer/DifficultyRow/VBoxContainer/DifficultySlider")
+difficulty_name_label = NodePath("PanelContainer/CenterContainer/SettingsContainer/DifficultyRow/VBoxContainer/DifficultyNameLabel")
+back_button = NodePath("PanelContainer/CenterContainer/SettingsContainer/BackButton")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=661647423]
 layout_mode = 1
@@ -26,87 +26,102 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -170.0
-offset_top = -116.0
-offset_right = 170.0
-offset_bottom = 116.0
+offset_left = -270.0
+offset_top = -147.0
+offset_right = 270.0
+offset_bottom = 147.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_type_variation = &"MenuPanel"
 
-[node name="SettingsContainer" type="VBoxContainer" parent="PanelContainer" unique_id=854032670]
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer" unique_id=1629541604]
+layout_mode = 2
+
+[node name="SettingsContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer" unique_id=854032670]
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="SlotLabel" type="Label" parent="PanelContainer/SettingsContainer" unique_id=223412757]
+[node name="SlotLabel" type="Label" parent="PanelContainer/CenterContainer/SettingsContainer" unique_id=223412757]
 layout_mode = 2
+theme_override_font_sizes/font_size = 44
 text = "NEW GAME"
 horizontal_alignment = 1
 
-[node name="OverwriteWarningLabel" type="Label" parent="PanelContainer/SettingsContainer" unique_id=505738628]
+[node name="OverwriteWarningLabel" type="Label" parent="PanelContainer/CenterContainer/SettingsContainer" unique_id=505738628]
 self_modulate = Color(1, 0.454902, 0.454902, 1)
 layout_mode = 2
+theme_override_font_sizes/font_size = 28
 text = "This will overwrite existing save data!"
 horizontal_alignment = 1
 
-[node name="SeedRow" type="HBoxContainer" parent="PanelContainer/SettingsContainer" unique_id=1473105497]
+[node name="SeedRow" type="HBoxContainer" parent="PanelContainer/CenterContainer/SettingsContainer" unique_id=1473105497]
 layout_mode = 2
 
-[node name="SeedTitle" type="Label" parent="PanelContainer/SettingsContainer/SeedRow" unique_id=1739400815]
+[node name="SeedTitle" type="Label" parent="PanelContainer/CenterContainer/SettingsContainer/SeedRow" unique_id=1739400815]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
-text = "Seed"
+theme_override_font_sizes/font_size = 28
+text = "Seed          "
 uppercase = true
 
-[node name="SeedField" type="LineEdit" parent="PanelContainer/SettingsContainer/SeedRow" unique_id=1948775178]
+[node name="SeedField" type="LineEdit" parent="PanelContainer/CenterContainer/SettingsContainer/SeedRow" unique_id=1948775178]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Random"
 
-[node name="DifficultyRow" type="HBoxContainer" parent="PanelContainer/SettingsContainer" unique_id=1473105498]
+[node name="DifficultyRow" type="HBoxContainer" parent="PanelContainer/CenterContainer/SettingsContainer" unique_id=1473105498]
 layout_mode = 2
 
-[node name="DifficultyTitle" type="Label" parent="PanelContainer/SettingsContainer/DifficultyRow" unique_id=1739400816]
+[node name="DifficultyTitle" type="Label" parent="PanelContainer/CenterContainer/SettingsContainer/DifficultyRow" unique_id=1739400816]
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
-text = "Difficulty"
+theme_override_font_sizes/font_size = 28
+text = "Difficulty  "
 uppercase = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/SettingsContainer/DifficultyRow" unique_id=2104776131]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer/SettingsContainer/DifficultyRow" unique_id=2104776131]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="DifficultySlider" type="HSlider" parent="PanelContainer/SettingsContainer/DifficultyRow/VBoxContainer" unique_id=1948775179]
+[node name="DifficultySlider" type="HSlider" parent="PanelContainer/CenterContainer/SettingsContainer/DifficultyRow/VBoxContainer" unique_id=1948775179]
 layout_mode = 2
 size_flags_horizontal = 3
 tick_count = 5
 ticks_on_borders = true
 
-[node name="DifficultyNameLabel" type="Label" parent="PanelContainer/SettingsContainer/DifficultyRow/VBoxContainer" unique_id=1739400817]
+[node name="DifficultyNameLabel" type="Label" parent="PanelContainer/CenterContainer/SettingsContainer/DifficultyRow/VBoxContainer" unique_id=1739400817]
 layout_mode = 2
+theme_override_font_sizes/font_size = 28
 text = "Medium"
 horizontal_alignment = 1
 
-[node name="StartButton" type="Button" parent="PanelContainer/SettingsContainer" unique_id=508987509]
+[node name="StartButton" type="Button" parent="PanelContainer/CenterContainer/SettingsContainer" unique_id=508987509]
+custom_minimum_size = Vector2(100, 40)
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 28
 text = "START"
 
-[node name="ButtonAudioManager" parent="PanelContainer/SettingsContainer/StartButton" unique_id=271006791 node_paths=PackedStringArray("signal_players") instance=ExtResource("2")]
+[node name="ButtonAudioManager" parent="PanelContainer/CenterContainer/SettingsContainer/StartButton" unique_id=271006791 node_paths=PackedStringArray("signal_players") instance=ExtResource("2")]
 signal_players = {
 &"focus_entered": NodePath("HoverPlayer"),
 &"mouse_entered": NodePath("HoverPlayer"),
 &"pressed": NodePath("PressPlayer")
 }
 
-[node name="BackButton" type="Button" parent="PanelContainer/SettingsContainer" unique_id=1405997460]
+[node name="BackButton" type="Button" parent="PanelContainer/CenterContainer/SettingsContainer" unique_id=1405997460]
+custom_minimum_size = Vector2(100, 40)
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 28
 text = "BACK"
 
-[node name="ButtonAudioManager" parent="PanelContainer/SettingsContainer/BackButton" unique_id=1188816073 node_paths=PackedStringArray("signal_players") instance=ExtResource("2")]
+[node name="ButtonAudioManager" parent="PanelContainer/CenterContainer/SettingsContainer/BackButton" unique_id=1188816073 node_paths=PackedStringArray("signal_players") instance=ExtResource("2")]
 signal_players = {
 &"focus_entered": NodePath("HoverPlayer"),
 &"mouse_entered": NodePath("HoverPlayer"),
 &"pressed": NodePath("PressPlayer")
 }
 
-[connection signal="value_changed" from="PanelContainer/SettingsContainer/DifficultyRow/VBoxContainer/DifficultySlider" to="." method="_on_difficulty_changed"]
+[connection signal="value_changed" from="PanelContainer/CenterContainer/SettingsContainer/DifficultyRow/VBoxContainer/DifficultySlider" to="." method="_on_difficulty_changed"]
