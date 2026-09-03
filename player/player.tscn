@@ -4504,9 +4504,9 @@ signal_players = {
 
 [node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/BackButton" parent_id_path=PackedInt32Array(1234740637, 1546788436) index="0" unique_id=1198217718 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": null,
-&"mouse_entered": null,
-&"pressed": null
+&"focus_entered": NodePath("HoverPlayer"),
+&"mouse_entered": NodePath("HoverPlayer"),
+&"pressed": NodePath("PressPlayer")
 }
 
 [node name="SignalAudioManager" type="Node" parent="PauseMenu" unique_id=1037296529 node_paths=PackedStringArray("signal_players")]
@@ -6447,3 +6447,4 @@ max_polyphony = 3
 [connection signal="updated_pause" from="PauseMenu" to="." method="_on_pause_interface_updated_pause"]
 
 [editable path="PauseMenu/SettingsMenu"]
+[editable path="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/BackButton/ButtonAudioManager"]
