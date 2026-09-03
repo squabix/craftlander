@@ -7,6 +7,7 @@ extends Menu
 @export var full_screen_toggle: Button
 @export var aa_option: OptionButton
 @export var invert_y_toggle: Button
+@export var tutorial_hints_toggle: Button
 
 @export_group("Difficulty", "difficulty")
 @export var difficulty_row: Control
@@ -34,6 +35,7 @@ func sync_ui_with_settings() -> void:
 
 	# Gameplay
 	invert_y_toggle.button_pressed = GameSettings.config.get_value("gameplay", "invert_y", false)
+	tutorial_hints_toggle.button_pressed = GameSettings.config.get_value("gameplay", "tutorial_hints_enabled", true)
 
 	difficulty_row.visible = is_in_game()
 	if is_in_game():
@@ -66,6 +68,11 @@ func _on_shadow_quality_selected(index: int) -> void:
 
 func _on_invert_y_toggled(toggled_on: bool) -> void:
 	GameSettings.config.set_value("gameplay", "invert_y", toggled_on)
+	GameSettings.save_settings()
+
+
+func _on_tutorial_hints_toggled(toggled_on: bool) -> void:
+	GameSettings.config.set_value("gameplay", "tutorial_hints_enabled", toggled_on)
 	GameSettings.save_settings()
 
 

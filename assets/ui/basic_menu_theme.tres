@@ -32,10 +32,10 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.2312145, 0.3610016, 0.40175906, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3lri3"]
 bg_color = Color(0.1813, 0.322825, 0.37, 1)
@@ -81,6 +81,18 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.144, 0.276, 0.32, 0.6)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_12yoa"]
+bg_color = Color(0.27306357, 0.3868744, 0.42012683, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.2312145, 0.3610016, 0.40175906, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
@@ -159,7 +171,7 @@ Label/font_sizes/font_size = 28
 MenuPanel/base_type = &"PanelContainer"
 MenuPanel/styles/panel = SubResource("StyleBoxFlat_menupanel")
 OptionButton/font_sizes/font_size = 28
-PanelContainer/styles/panel = SubResource("StyleBoxFlat_2h7nn")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_12yoa")
 PopupMenu/colors/font_accelerator_color = Color(0.7, 0.7, 0.7, 0.8)
 PopupMenu/colors/font_color = Color(0.875, 0.875, 0.875, 1)
 PopupMenu/colors/font_disabled_color = Color(0.09493869, 0.09493861, 0.09493861, 1)

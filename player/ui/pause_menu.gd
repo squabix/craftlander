@@ -39,6 +39,8 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not can_update_pause:
 		return
+	if PopupDisplay.any_visible:
+		return
 	if not event.is_action_pressed(ACTION_PAUSE):
 		return
 	if is_instance_valid(active_submenu):

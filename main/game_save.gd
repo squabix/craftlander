@@ -10,6 +10,9 @@ class_name GameSave
 @export var generated_levels := PackedInt32Array()
 @export var sky_setting: SkySetting = preload("res://island/skies/initial_sky_setting.tres")
 
+# Tutorial
+@export var tutorial_steps_completed: Dictionary[StringName, bool]
+
 func mark_current_level_as_generated() -> void:
 	if current_level_index in generated_levels:
 		return

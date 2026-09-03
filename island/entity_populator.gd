@@ -8,6 +8,7 @@ const MAX_CAMERA_DISTANCE_SQUARED := INF
 @export var entity_quantities: Dictionary[IslandEntityResource, int]
 @export var repopulate_timer: Timer
 @export var disabled := false
+@export var gate_until_tutorial_step := &""
 
 var entities: Dictionary[IslandEntityResource, Array]
 var has_populated := false
@@ -15,6 +16,8 @@ var has_populated := false
 
 func _ready() -> void:
 	EventBus.subscribe(&"island_navigation_baked", populate)
+	if not gate_until_tutorial_step.is_empty():
+		EventBus.subscribe(&"tutorial_step_completed", _on_tutorial_step_completed)
 
 
 func clear_invalid_entities() -> void:
@@ -123,10 +126,17 @@ func initialize_repopulate_timer() -> bool:
 	return true
 
 
+func _on_tutorial_step_completed(step_id: StringName) -> void:
+	if step_id == gate_until_tutorial_step:
+		populate()
+
+
 func populate(allow_in_frustum := false) -> void:
 	if disabled:
 		return
-	
+	if not gate_until_tutorial_step.is_empty() and not TutorialManager.has_completed(gate_until_tutorial_step):
+		return
+
 	# First populate
 	if not has_populated:
 		has_populated = true
