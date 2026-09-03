@@ -73,6 +73,10 @@ func add_dynamic_nodes(scene_root: Node) -> void:
 				deferred_entries.append(node_save)
 				continue
 
+			if node_save.offloaded:
+				progress = true
+				continue
+
 			var scene_path: String = node_save.scene_file_path
 			if scene_path.is_empty() or not ResourceLoader.exists(scene_path):
 				continue

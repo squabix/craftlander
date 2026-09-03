@@ -1313,8 +1313,8 @@ ExtResource("24_6o2sf"): 8,
 ExtResource("39_gk71k"): 8,
 ExtResource("40_kn3q4"): 4
 })
-gate_until_tutorial_step = &"first_weapon_crafted"
 repopulate_timer = NodePath("../EntityRepopulateTimer")
+gate_until_tutorial_step = &"first_weapon_crafted"
 
 [node name="EntityRepopulateTimer" type="Timer" parent="." unique_id=359035167]
 wait_time = 10.0

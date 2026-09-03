@@ -103,6 +103,7 @@ func initial_save_load() -> void:
 		manager.initialize()
 	
 	prop_populator.clear()
+	await get_tree().process_frame
 	Spawner3D.spawning_enabled = true
 	prop_populator.populate()
 	
@@ -125,6 +126,7 @@ func update_sky_setting() -> void:
 func reload_save() -> void:
 	connect_player_boat_adder()
 	prop_populator.clear()
+	await get_tree().process_frame
 	Spawner3D.spawning_enabled = true
 	advance_step()
 	
