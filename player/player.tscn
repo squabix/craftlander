@@ -121,6 +121,7 @@
 [ext_resource type="AudioStream" uid="uid://cly6uplw8i3a8" path="res://assets/sound/open_drop-06.mp3" id="94_d0gtc"]
 [ext_resource type="AudioStream" uid="uid://cwqa0rroqx0ww" path="res://assets/sound/steps_stream.tres" id="94_qm6yy"]
 [ext_resource type="AudioStream" uid="uid://bngsjojub1sjy" path="res://assets/sound/swim_stream.tres" id="95_gcmgo"]
+[ext_resource type="Script" uid="uid://djjo3m58bs0x2" path="res://player/ui/tutorial/hint_toast.gd" id="95_hint"]
 [ext_resource type="Shader" uid="uid://b26au25x8xvc8" path="res://assets/shaders/water_background.gdshader" id="96_e5mnx"]
 [ext_resource type="AudioStream" uid="uid://bctut8ply616f" path="res://assets/sound/swoosh1.mp3" id="100_0iv1a"]
 [ext_resource type="Resource" uid="uid://b0gw02djkff0d" path="res://island/island_resources/undead_atoll.tres" id="109_hioli"]
@@ -294,6 +295,10 @@ _data = {
 [sub_resource type="LabelSettings" id="LabelSettings_p5tca"]
 font = ExtResource("34_6wior")
 
+[sub_resource type="LabelSettings" id="LabelSettings_7uc20"]
+line_spacing = 0.0
+font_size = 20
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8hi5"]
 bg_color = Color(0.89, 0.62299997, 0.35599998, 1)
 border_width_left = 1
@@ -317,11 +322,6 @@ corner_radius_top_left = 1
 corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
-
-[sub_resource type="LabelSettings" id="LabelSettings_7pqkx"]
-font_size = 20
-
-[sub_resource type="LabelSettings" id="LabelSettings_uw77l"]
 
 [sub_resource type="Gradient" id="Gradient_kcq4v"]
 interpolation_mode = 1
@@ -352,6 +352,12 @@ shader = ExtResource("28_ge24q")
 shader_parameter/blur_amount = 2.2500002018750003
 shader_parameter/mix_amount = 0.70000003325
 shader_parameter/color_over = Color(0.05, 0.07083334, 0.1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dt0ky"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_mhw2q"]
+font_size = 20
 
 [sub_resource type="Resource" id="Resource_3dxkp"]
 script = ExtResource("44_a1u5o")
@@ -1415,6 +1421,53 @@ autowrap_mode = 3
 script = ExtResource("19_knn7v")
 interactors = [NodePath("../../InteractorArea/Interactor3D"), NodePath("../../Head/Camera3D/InteratorRay/Interactor")]
 
+[node name="HintToast" type="Control" parent="HUD" unique_id=500000001 node_paths=PackedStringArray("label", "icon")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -260.0
+offset_top = -176.0
+offset_right = 260.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("95_hint")
+label = NodePath("Container/HBoxContainer/Label")
+icon = NodePath("Container/HBoxContainer/Icon")
+
+[node name="Container" type="PanelContainer" parent="HUD/HintToast" unique_id=1576375944]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/HintToast/Container" unique_id=500000003]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="HUD/HintToast/Container/HBoxContainer" unique_id=500000004]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_vertical = 4
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HUD/HintToast/Container/HBoxContainer" unique_id=500000005]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+text = "testestestest
+tetestset
+set"
+label_settings = SubResource("LabelSettings_7uc20")
+autowrap_mode = 3
+
 [node name="BarContainer" type="VBoxContainer" parent="HUD" unique_id=1488788714]
 unique_name_in_owner = true
 layout_mode = 1
@@ -1470,83 +1523,6 @@ layout_mode = 2
 text = "FPS"
 script = ExtResource("19_bjvpn")
 
-[node name="PopupDisplay" type="Control" parent="HUD" unique_id=2003166414 node_paths=PackedStringArray("title_label", "body_label")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -220.0
-offset_top = -72.5
-offset_right = 220.0
-offset_bottom = 72.5
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("23_7pqkx")
-title_label = NodePath("VBoxContainer/TitleLabel")
-body_label = NodePath("VBoxContainer/BodyLabel")
-
-[node name="ColorRect" type="ColorRect" parent="HUD/PopupDisplay" unique_id=875381987]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.110822044, 0.18975028, 0.25127524, 0.8627451)
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/PopupDisplay" unique_id=568522180]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TitleLabel" type="Label" parent="HUD/PopupDisplay/VBoxContainer" unique_id=1035971810]
-layout_mode = 2
-text = "Warning"
-label_settings = SubResource("LabelSettings_7pqkx")
-horizontal_alignment = 1
-uppercase = true
-
-[node name="BodyLabel" type="Label" parent="HUD/PopupDisplay/VBoxContainer" unique_id=734178331]
-layout_mode = 2
-text = "fsaf"
-label_settings = SubResource("LabelSettings_uw77l")
-
-[node name="CenterContainer" type="CenterContainer" parent="HUD/PopupDisplay" unique_id=87607025]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -35.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/PopupDisplay/CenterContainer" unique_id=1064867228]
-layout_mode = 2
-
-[node name="Button1" type="Button" parent="HUD/PopupDisplay/CenterContainer/HBoxContainer" unique_id=1065288209]
-custom_minimum_size = Vector2(200, 20)
-layout_mode = 2
-text = "Continue"
-
-[node name="Button2" type="Button" parent="HUD/PopupDisplay/CenterContainer/HBoxContainer" unique_id=1345165497]
-visible = false
-custom_minimum_size = Vector2(200, 20)
-layout_mode = 2
-text = "Continue"
-
 [node name="Cursor2" type="TextureRect" parent="HUD" unique_id=832055728]
 layout_mode = 1
 anchors_preset = 8
@@ -1583,8 +1559,115 @@ script = ExtResource("41_j420s")
 item_holder = NodePath("../../Head/Camera3D/ItemHolder")
 metadata/_custom_type_script = "uid://ddiytppqbuop1"
 
+[node name="TutorialPopupLayer" type="CanvasLayer" parent="." unique_id=203573653]
+layer = 20
+
+[node name="PopupDisplay" type="Control" parent="TutorialPopupLayer" unique_id=2003166414 node_paths=PackedStringArray("title_label", "body_label", "continue_icon_rect")]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("23_7pqkx")
+title_label = NodePath("ContentBox/Panel/VBoxContainer/TitleLabel")
+body_label = NodePath("ContentBox/Panel/VBoxContainer/BodyLabel")
+continue_icon_rect = NodePath("ContentBox/CenterContainer/HBoxContainer/ContinueIcon")
+continue_actions = Array[StringName]([&"ui_accept", &"pause"])
+
+[node name="BlurRect" type="ColorRect" parent="TutorialPopupLayer/PopupDisplay" unique_id=500000011]
+visible = false
+material = SubResource("ShaderMaterial_48p26")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="ContentBox" type="Control" parent="TutorialPopupLayer/PopupDisplay" unique_id=500000012]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -72.5
+offset_right = 220.0
+offset_bottom = 72.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="TutorialPopupLayer/PopupDisplay/ContentBox" unique_id=691748930]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TutorialPopupLayer/PopupDisplay/ContentBox/Panel" unique_id=568522180]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="TutorialPopupLayer/PopupDisplay/ContentBox/Panel/VBoxContainer" unique_id=1035971810]
+layout_mode = 2
+text = "Warning"
+label_settings = SubResource("LabelSettings_dt0ky")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="BodyLabel" type="Label" parent="TutorialPopupLayer/PopupDisplay/ContentBox/Panel/VBoxContainer" unique_id=734178331]
+layout_mode = 2
+size_flags_vertical = 1
+text = "fsaf"
+label_settings = SubResource("LabelSettings_mhw2q")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="TutorialPopupLayer/PopupDisplay/ContentBox" unique_id=87607025]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -35.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TutorialPopupLayer/PopupDisplay/ContentBox/CenterContainer" unique_id=1064867228]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Button1" type="Button" parent="TutorialPopupLayer/PopupDisplay/ContentBox/CenterContainer/HBoxContainer" unique_id=1065288209]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+text = "Continue"
+
+[node name="ContinueIcon" type="TextureRect" parent="TutorialPopupLayer/PopupDisplay/ContentBox/CenterContainer/HBoxContainer" unique_id=500000013]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 4
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Button2" type="Button" parent="TutorialPopupLayer/PopupDisplay/ContentBox/CenterContainer/HBoxContainer" unique_id=1345165497]
+visible = false
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+text = "Continue"
+
 [node name="PauseMenu" type="Control" parent="." unique_id=1163003515 node_paths=PackedStringArray("crafting_environment", "recipe_panel", "health", "settings_menu", "button_save", "button_settings", "button_quit", "visibility_proxy", "back_button")]
 process_mode = 3
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -4406,6 +4489,13 @@ signal_players = {
 }
 
 [node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/InvertY/CenterContainer/InvertYToggle" parent_id_path=PackedInt32Array(1234740637, 1517878780) index="0" unique_id=1079694290 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/TutorialHints/CenterContainer/TutorialHintsToggle" parent_id_path=PackedInt32Array(1234740637, 1517878781) index="0" unique_id=1079694291 node_paths=PackedStringArray("signal_players")]
 signal_players = {
 &"focus_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
 &"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://defaults/button_audio_manager.tscn" id="2_v0bl3"]
 [ext_resource type="Script" uid="uid://c36fqcfs66yhx" path="res://common/ui/volume_slider.gd" id="3_n4a8d"]
 
-[node name="SettingsMenu" type="Control" unique_id=788547277 node_paths=PackedStringArray("music_slider", "sfx_slider", "vsync_toggle", "full_screen_toggle", "aa_option", "invert_y_toggle", "difficulty_row", "difficulty_slider", "difficulty_name_label", "back_button")]
+[node name="SettingsMenu" type="Control" unique_id=788547277 node_paths=PackedStringArray("music_slider", "sfx_slider", "vsync_toggle", "full_screen_toggle", "aa_option", "invert_y_toggle", "tutorial_hints_toggle", "difficulty_row", "difficulty_slider", "difficulty_name_label", "back_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,6 +18,7 @@ vsync_toggle = NodePath("PanelContainer/CenterContainer/SettingsContainer/GridCo
 full_screen_toggle = NodePath("PanelContainer/CenterContainer/SettingsContainer/GridContainer/FullScreen/CenterContainer/FullScreenToggle")
 aa_option = NodePath("PanelContainer/CenterContainer/SettingsContainer/GridContainer/AntiAliasing/AAOption")
 invert_y_toggle = NodePath("PanelContainer/CenterContainer/SettingsContainer/GridContainer/InvertY/CenterContainer/InvertYToggle")
+tutorial_hints_toggle = NodePath("PanelContainer/CenterContainer/SettingsContainer/GridContainer/TutorialHints/CenterContainer/TutorialHintsToggle")
 difficulty_row = NodePath("PanelContainer/CenterContainer/SettingsContainer/Difficulty")
 difficulty_slider = NodePath("PanelContainer/CenterContainer/SettingsContainer/Difficulty/VBoxContainer/DifficultySlider")
 difficulty_name_label = NodePath("PanelContainer/CenterContainer/SettingsContainer/Difficulty/VBoxContainer/DifficultyNameLabel")
@@ -198,6 +199,34 @@ signal_players = {
 &"pressed": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
 }
 
+[node name="TutorialHints" type="HBoxContainer" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer" unique_id=573359745]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/TutorialHints" unique_id=927416759]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Tutorial Hints"
+uppercase = true
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/TutorialHints" unique_id=1327443352]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+
+[node name="TutorialHintsToggle" type="CheckBox" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/TutorialHints/CenterContainer" unique_id=1517878781]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.5, 1.5)
+alignment = 1
+
+[node name="ButtonAudioManager" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/TutorialHints/CenterContainer/TutorialHintsToggle" unique_id=1079694291 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_v0bl3")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+}
+
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/CenterContainer/SettingsContainer" unique_id=24230064]
 layout_mode = 2
 
@@ -335,5 +364,6 @@ signal_players = {
 [connection signal="item_selected" from="PanelContainer/CenterContainer/SettingsContainer/GridContainer/AntiAliasing/AAOption" to="." method="_on_anti_aliasing_selected"]
 [connection signal="item_selected" from="PanelContainer/CenterContainer/SettingsContainer/GridContainer/ShadowQuality/ShadowOption" to="." method="_on_shadow_quality_selected"]
 [connection signal="toggled" from="PanelContainer/CenterContainer/SettingsContainer/GridContainer/InvertY/CenterContainer/InvertYToggle" to="." method="_on_invert_y_toggled"]
+[connection signal="toggled" from="PanelContainer/CenterContainer/SettingsContainer/GridContainer/TutorialHints/CenterContainer/TutorialHintsToggle" to="." method="_on_tutorial_hints_toggled"]
 [connection signal="value_changed" from="PanelContainer/CenterContainer/SettingsContainer/Difficulty/VBoxContainer/DifficultySlider" to="." method="_on_difficulty_changed"]
 [connection signal="pressed" from="PanelContainer/CenterContainer/SettingsContainer/BackButton" to="." method="_on_back_button_pressed"]

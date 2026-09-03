@@ -20,15 +20,17 @@ func randomize_health() -> void:
 
 func connect_hurtbox_damage() -> void:
 	var give_to_source := func(damage: Damage):
-		give_random_item(get_damage_source_inventory(damage.source))
+		var given_item := give_random_item(get_damage_source_inventory(damage.source))
+		EventBus.trigger(&"resource_harvested", {"item": given_item, "source": damage.source})
 	hurtbox.was_dealt_damage.connect(give_to_source)
 
 func get_damage_source_inventory(source: Node) -> Inventory:
 	return Util.find_stored_child_of_class(damage_source_inventories, source)
 
-func give_random_item(to: Inventory) -> void:
+func give_random_item(to: Inventory) -> Item:
 	var item := inventory.get_item(inventory.get_random_index_weighted())
 	inventory.give_item(item, 1, to)
+	return item
 
 func _ready() -> void:
 	randomize_health()

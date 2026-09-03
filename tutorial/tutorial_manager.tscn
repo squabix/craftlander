@@ -1,0 +1,16 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://tutorial/tutorial_manager.gd" id="1"]
+[ext_resource type="Script" path="res://common/interval_staggerer.gd" id="2"]
+
+[node name="TutorialManager" type="Node"]
+process_mode = 3
+script = ExtResource("1")
+
+[node name="HungerStaggerer" type="Node" parent="." node_paths=PackedStringArray("target_methods")]
+process_mode = 1
+script = ExtResource("2")
+base_interval = 2.0
+target_methods = {
+NodePath(".."): &"_check_hunger"
+}

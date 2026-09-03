@@ -31,6 +31,8 @@ RecipeBook="*res://items/crafting/recipe_book.gd"
 GameSettings="*uid://dybhrs6lws1mr"
 SteamManager="*res://steam/steam_manager.gd"
 PerfOverlay="*res://common/debug/perf_overlay.tscn"
+ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
+TutorialManager="*res://tutorial/tutorial_manager.tscn"
 
 [debug]
 
@@ -49,7 +51,7 @@ mouse_cursor/custom_image_hotspot=Vector2(12, 12)
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg", "res://addons/IgnoreFolders/plugin.cfg", "res://addons/godotsteam/plugin.cfg")
+enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg", "res://addons/IgnoreFolders/plugin.cfg", "res://addons/godotsteam/plugin.cfg", "res://addons/controller_icons/plugin.cfg")
 
 [file_customization]
 
