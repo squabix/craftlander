@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 	if damping > 0.0:
 		velocity *= exp(-damping * delta)
 	global_position += velocity * delta
-	if velocity.length_squared() > 0.0001:
+	if Util.vec3to2(velocity, Util.VECTOR3Y).length_squared() > 0.0001:
 		look_at(global_position + velocity, Vector3.UP)
 
 	_time_alive += delta
