@@ -35,6 +35,17 @@ func _ready() -> void:
 	_setup_nav_map.call_deferred()
 
 
+func _notification(what: int) -> void:
+	if not is_instance_valid(nav):
+		return
+	
+	match what:
+		NOTIFICATION_DISABLED:
+			nav.avoidance_enabled = false
+		NOTIFICATION_ENABLED:
+			nav.avoidance_enabled = true
+
+
 func _recompute_nav_states() -> void:
 	has_direct_shot = _compute_has_direct_shot()
 	is_outside_navmesh = _compute_is_outside_navmesh()
