@@ -3,7 +3,7 @@ extends Node3D
 
 const DOCK_ELEVATION_OFFSET := 0.65
 const DEFAULT_DOCK_PLACE_RAY_LENGTH := 400.0
-const DOCK_EXPOSED_LENGTH := 6.0
+const DOCK_EXPOSED_LENGTH := 11.5
 
 @export var dock: Node3D
 

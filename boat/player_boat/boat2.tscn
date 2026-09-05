@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bpnhxoo6l4ydp"]
 
 [ext_resource type="Script" uid="uid://chfgdr4oy23or" path="res://boat/player_boat/player_boat.gd" id="1_2c4gv"]
-[ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common/move_mode.gd" id="2_tcgdv"]
+[ext_resource type="Resource" uid="uid://bbwi2cmn8e5h5" path="res://boat/player_boat/player_boat_move_mode.tres" id="2_2c4gv"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="3_rs6ae"]
 [ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_5ytbq"]
 [ext_resource type="PackedScene" uid="uid://j53nm0t5m7rf" path="res://boat/player_boat/boat1.blend" id="5_kfmqd"]
@@ -13,11 +13,6 @@
 [ext_resource type="Script" uid="uid://8bgokntpuh33" path="res://boat/boat_docked_state.gd" id="11_xablq"]
 [ext_resource type="Script" uid="uid://favgu1tbe1tq" path="res://common3d/interactions/interactable3d.gd" id="12_jense"]
 [ext_resource type="Material" uid="uid://burxmpv8yk2pd" path="res://assets/shaders/boat_interaction.tres" id="13_oqrfv"]
-
-[sub_resource type="Resource" id="Resource_thr0k"]
-script = ExtResource("2_tcgdv")
-max_speed = Vector2(40, 0)
-metadata/_custom_type_script = "uid://edbvsbdtvgtj"
 
 [sub_resource type="Resource" id="Resource_1blct"]
 script = ExtResource("3_rs6ae")
@@ -96,7 +91,7 @@ driver_seat = NodePath("DriverSeat")
 state_machine = NodePath("StateMachine")
 seats = [NodePath("DriverSeat")]
 type = &"Boat"
-move_mode = SubResource("Resource_thr0k")
+move_mode = ExtResource("2_2c4gv")
 move_up_as_jump = false
 gravity_multiplier = 0.0
 rotation_range = SubResource("Resource_wbjwq")

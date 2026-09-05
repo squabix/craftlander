@@ -5,7 +5,7 @@
 [ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="3_g2y3g"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wrd2w"]
-size = Vector3(4.5, 0.9, 17)
+size = Vector3(4.5, 0.9, 32.234375)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_r7o7e"]
 height = 8.800171
@@ -15,29 +15,29 @@ radius = 0.6
 collision_layer = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1785478165]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15.6171875)
 shape = SubResource("BoxShape3D_wrd2w")
 
 [node name="BlenderMeshes" parent="." unique_id=1351219446 instance=ExtResource("1_r7o7e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.40487766)
 
-[node name="Walkway" parent="BlenderMeshes" index="0" unique_id=1101519416]
+[node name="Walkway" parent="BlenderMeshes" index="0" unique_id=516194912]
 surface_material_override/0 = ExtResource("2_jqbpu")
 surface_material_override/1 = ExtResource("3_g2y3g")
 
-[node name="Log1" parent="BlenderMeshes" index="1" unique_id=910842540]
+[node name="Log1" parent="BlenderMeshes" index="1" unique_id=302255843]
 surface_material_override/0 = ExtResource("2_jqbpu")
 surface_material_override/1 = ExtResource("3_g2y3g")
 
-[node name="Log2" parent="BlenderMeshes" index="2" unique_id=1119714971]
+[node name="Log2" parent="BlenderMeshes" index="2" unique_id=1456594329]
 surface_material_override/0 = ExtResource("2_jqbpu")
 surface_material_override/1 = ExtResource("3_g2y3g")
 
-[node name="Log1_002" parent="BlenderMeshes" index="3" unique_id=2055820054]
+[node name="Log1_002" parent="BlenderMeshes" index="3" unique_id=273816908]
 surface_material_override/0 = ExtResource("2_jqbpu")
 surface_material_override/1 = ExtResource("3_g2y3g")
 
-[node name="Log2_002" parent="BlenderMeshes" index="4" unique_id=1680449771]
+[node name="Log2_002" parent="BlenderMeshes" index="4" unique_id=818457052]
 surface_material_override/0 = ExtResource("2_jqbpu")
 surface_material_override/1 = ExtResource("3_g2y3g")
 
@@ -49,7 +49,15 @@ shape = SubResource("CylinderShape3D_r7o7e")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.968, -3.515, -0.0028776526)
 shape = SubResource("CylinderShape3D_r7o7e")
 
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=382046437]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9681377, -3.515, -31.872963)
+shape = SubResource("CylinderShape3D_r7o7e")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="." unique_id=946060870]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.968, -3.515, -31.87334)
+shape = SubResource("CylinderShape3D_r7o7e")
+
 [node name="BoatDockPoint" type="Node3D" parent="." unique_id=2015087986]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -6)
 
 [editable path="BlenderMeshes"]

@@ -1162,7 +1162,7 @@ saved_properties = Dictionary[StringName, bool]({
 metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 
 [node name="BoatAdder" type="Node3D" parent="DockingManager" unique_id=1766073217]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 400)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 400)
 script = ExtResource("8_mngd6")
 default_parent_mode = 2
 ignore_disabling = true
