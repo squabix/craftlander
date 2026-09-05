@@ -22,7 +22,11 @@ var target_value := value:
 
 		target_value = to
 		_animate_value()
-		_handle_fade()
+		if suppress_next_fade:
+			suppress_next_fade = false
+		else:
+			_handle_fade()
+var suppress_next_fade := false
 var fade_target: CanvasItem
 var _value_tween: Tween
 var _fade_tween: Tween
@@ -31,6 +35,8 @@ var _initial_time: float
 
 
 func _ready() -> void:
+	_initial_time = Util.get_time_seconds()
+
 	# Disable step snapping so continuous float values can tween smoothly
 	step = 0.0
 
@@ -40,8 +46,6 @@ func _ready() -> void:
 	if fade_when_idle:
 		fade_target.modulate.a = 0.0
 		hide()
-
-	_initial_time = Util.get_time_seconds()
 
 
 func fill() -> void:

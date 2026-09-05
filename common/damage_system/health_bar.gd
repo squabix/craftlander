@@ -20,10 +20,15 @@ func _process(_delta: float) -> void:
 	var max_hp_changed := not is_equal_approx(health.max_hp, max_value)
 	max_value = health.max_hp
 
-	if instant_on_max_hp_change and max_hp_changed:
-		if _value_tween and _value_tween.is_valid():
-			_value_tween.kill()
-		value = health.hp
+	if max_hp_changed:
+		if not is_equal_approx(target_value, health.hp):
+			suppress_next_fade = true
+		
+		if instant_on_max_hp_change:
+			if _value_tween and _value_tween.is_valid():
+				_value_tween.kill()
+			value = health.hp
+		
 	target_value = health.hp
 
 	if is_instance_valid(label):
