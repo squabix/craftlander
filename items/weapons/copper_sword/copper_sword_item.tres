@@ -10,6 +10,7 @@ script = ExtResource("1_diou4")
 damage = ExtResource("1_f0omh")
 name = &"Copper Sword"
 icon = ExtResource("2_ebwqk")
+use_action_name = &"Attack"
 type = &"Weapon"
 scene = ExtResource("2_7bec3")
 cooldown_mode = 1

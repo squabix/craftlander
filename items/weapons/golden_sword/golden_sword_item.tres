@@ -10,6 +10,7 @@ script = ExtResource("4_lx47x")
 damage = ExtResource("1_itjf7")
 name = &"Golden Sword"
 icon = ExtResource("2_gbttv")
+use_action_name = &"Attack"
 type = &"Weapon"
 scene = ExtResource("3_lovdi")
 cooldown_mode = 1

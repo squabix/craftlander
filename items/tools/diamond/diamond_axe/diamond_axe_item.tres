@@ -11,6 +11,7 @@ script = ExtResource("4_hjow2")
 damage = ExtResource("1_8algh")
 name = &"Diamond Axe"
 icon = ExtResource("2_0qvbi")
+use_action_name = &"Chop"
 type = "Tool"
 scene = ExtResource("3_yybd1")
 cooldown_mode = 1

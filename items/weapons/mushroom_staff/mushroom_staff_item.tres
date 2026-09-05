@@ -10,6 +10,7 @@ script = ExtResource("1_weapon")
 damage = ExtResource("2_dmg")
 name = &"Mushroom Staff"
 icon = ExtResource("2_x0grh")
+use_action_name = &"Cast"
 type = &"Weapon"
 scene = ExtResource("3_scene")
 cooldown_mode = 1

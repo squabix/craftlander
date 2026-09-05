@@ -10,6 +10,7 @@ script = ExtResource("4_3ahsk")
 damage = ExtResource("1_hr632")
 name = &"Copper Axe"
 icon = ExtResource("2_rftlj")
+use_action_name = &"Chop"
 type = "Tool"
 scene = ExtResource("3_cngu5")
 cooldown_mode = 1

@@ -7,6 +7,9 @@ func _ready() -> void:
 	item_holder.updated_instance.connect(update)
 
 func update(new_instance: ItemInstance) -> void:
+	if new_instance == null:
+		text = ""
+		return
 	text = new_instance.item.name
 	anim_player.stop()
 	anim_player.play("show")
