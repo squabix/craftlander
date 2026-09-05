@@ -93,6 +93,26 @@ static func get_root_path(node: Node) -> NodePath:
 	)
 
 
+static func get_lookup_key(node_save: NodeSave) -> String:
+	match node_save.mode:
+		NodeSave.Mode.DYNAMIC:
+			return "" if node_save.dynamic_uuid.is_empty() else "D:%s" % node_save.dynamic_uuid
+		
+		NodeSave.Mode.STATIC_SCENE:
+			return "S:%s|%s|%s|%s|%s" % [
+				node_save.saver_id,
+				node_save.scene_context,
+				node_save.parent_type,
+				node_save.relative_path,
+				node_save.parent_uuid,
+			]
+		
+		NodeSave.Mode.GLOBAL:
+			return "G:%s" % node_save.saver_id
+	
+	return ""
+
+
 func _ready() -> void:
 	target = custom_target if is_instance_valid(custom_target) else get_parent()
 	all[target] = self
@@ -125,14 +145,14 @@ func default_saver_id() -> void:
 func get_dynamic_ancestor() -> NodeSaver:
 	if not is_instance_valid(target):
 		return null
-		
+
 	var check_node := target.get_parent()
 	while is_instance_valid(check_node):
 		var saver: NodeSaver = NodeSaver.all.get(check_node, null)
 		if is_instance_valid(saver) and saver.save_mode == NodeSave.Mode.DYNAMIC:
 			return saver
 		check_node = check_node.get_parent()
-	
+
 	return null
 
 
@@ -211,8 +231,10 @@ func save_properties() -> void:
 	if index != -1:
 		save.node_properties[index] = node_save
 	else:
+		index = save.node_properties.size()
 		save.node_properties.append(node_save)
-	
+	save.register_node_save(get_lookup_key(node_save), index)
+
 	finished_save.emit()
 
 
@@ -245,7 +267,7 @@ func load_properties() -> void:
 	set_property_data(node_save.properties)
 	call_load_callables()
 	loaded = true
-	
+
 	finished_load.emit()
 
 
@@ -267,56 +289,35 @@ func get_uuid() -> StringName:
 func find_index() -> int:
 	if save == null:
 		return -1
-	
-	var current_scene := get_scene_context()
-	var dynamic_ancestor := get_dynamic_ancestor()
+	return save.find_node_save_index(_search_key())
 
-	for i in range(save.node_properties.size()):
-		var node_save := save.node_properties[i]
-		if node_save.mode != save_mode or node_save.mode == NodeSave.Mode.NONE:
-			continue
-		
-		if (
-				# Dynamic
-				(
-						save_mode == NodeSave.Mode.DYNAMIC
-						and node_save.dynamic_uuid == dynamic_uuid
-						and not dynamic_uuid.is_empty()
-				)
-				
-				# Static scene
-				or (
-						save_mode == NodeSave.Mode.STATIC_SCENE
-						and node_save.saver_id == saver_id
-						and node_save.scene_context == current_scene
-						and (
-							
-							# Dynamic ancestor
-							(
-								is_instance_valid(dynamic_ancestor)
-								and node_save.parent_type == NodeSave.ParentType.DYNAMIC
-								and node_save.relative_path == dynamic_ancestor.get_path_to(self)
-								and node_save.parent_uuid == dynamic_ancestor.dynamic_uuid
-							)
-							
-							# Non-dynamic ancestor
-							or (
-								not is_instance_valid(dynamic_ancestor)
-								and node_save.parent_type == NodeSave.ParentType.RELATIVE
-								and node_save.relative_path == get_root_path(self)
-							)
-						)
-				)
-				
-				# Global
-				or (
-						save_mode == NodeSave.Mode.GLOBAL
-						and node_save.saver_id == saver_id
-				)
-		):
-			return i
 
-	return -1
+func _search_key() -> String:
+	match save_mode:
+		NodeSave.Mode.DYNAMIC:
+			return "" if dynamic_uuid.is_empty() else "D:%s" % dynamic_uuid
+		NodeSave.Mode.STATIC_SCENE:
+			var current_scene := get_scene_context()
+			var ancestor := get_dynamic_ancestor()
+			if is_instance_valid(ancestor):
+				return "S:%s|%s|%s|%s|%s" % [
+					saver_id,
+					current_scene,
+					NodeSave.ParentType.DYNAMIC,
+					ancestor.get_path_to(self),
+					ancestor.dynamic_uuid,
+				]
+			return "S:%s|%s|%s|%s|%s" % [
+				saver_id,
+				current_scene,
+				NodeSave.ParentType.RELATIVE,
+				get_root_path(self),
+				&"",
+			]
+		NodeSave.Mode.GLOBAL:
+			return "G:%s" % saver_id
+
+	return ""
 
 
 func _free_offload() -> bool:

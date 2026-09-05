@@ -8,6 +8,34 @@ extends Resource
 @export var creation_datetime: Dictionary
 @export var write_datetime: Dictionary
 
+var _node_save_index: Dictionary[String, int] = { }
+var _node_save_index_built := false
+
+
+func _ensure_node_save_index() -> void:
+	if _node_save_index_built:
+		return
+	_node_save_index.clear()
+	for i in range(node_properties.size()):
+		var key := NodeSaver.get_lookup_key(node_properties[i])
+		if not key.is_empty():
+			_node_save_index[key] = i
+	_node_save_index_built = true
+
+
+func find_node_save_index(key: String) -> int:
+	if key.is_empty():
+		return -1
+	_ensure_node_save_index()
+	return _node_save_index.get(key, -1)
+
+
+func register_node_save(key: String, index: int) -> void:
+	if key.is_empty():
+		return
+	_ensure_node_save_index()
+	_node_save_index[key] = index
+
 
 static func load_from_disk(path: String) -> Save:
 	if not ResourceLoader.exists(path):
