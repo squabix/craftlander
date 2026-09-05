@@ -18,8 +18,8 @@ func _ready() -> void:
 	hit_node.connect(_on_hit_node)
 
 
-func launch() -> void:
-	velocity = global_transform.basis * (launch_direction.normalized() * speed)
+func launch(inherited_velocity := Vector3.ZERO) -> void:
+	velocity = global_transform.basis * (launch_direction.normalized() * speed) + inherited_velocity
 
 
 func _physics_process(delta: float) -> void:

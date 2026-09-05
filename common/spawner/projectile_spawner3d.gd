@@ -22,4 +22,10 @@ func initialize_instance(instance: Node3D) -> void:
 		var instance_damage: Damage = damage.duplicate()
 		instance_damage.source = source
 		projectile.damage = instance_damage
-	projectile.launch()
+	
+	projectile.launch(get_inherited_velocity())
+
+func get_inherited_velocity() -> Vector3:
+	if source is CharacterBody3D:
+		return (source as CharacterBody3D).velocity
+	return Vector3.ZERO
