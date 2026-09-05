@@ -21,10 +21,11 @@ func _ready() -> void:
 		await get_tree().create_timer(auto_enable_wait_time).timeout
 		enabled = true
 
+	set_process(current_mode == Mode.INSIDE)
+
 
 func _process(_delta: float) -> void:
-	if current_mode == Mode.INSIDE:
-		hit_overlap()
+	hit_overlap()
 
 
 func enable() -> void:
