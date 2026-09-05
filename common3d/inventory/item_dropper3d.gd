@@ -44,6 +44,7 @@ func initialize_instance(instance: Node3D) -> void:
 	instance.global_position += position_offset
 	instance.global_rotation_degrees += rotation_offset
 	InventoryDropper3D.all_dropped_pickups.append(instance)
+	instance.tree_exiting.connect(InventoryDropper3D.all_dropped_pickups.erase.bind(instance), CONNECT_ONE_SHOT)
 
 
 func add_pickup(item: Item) -> RigidItemPickup3D:
