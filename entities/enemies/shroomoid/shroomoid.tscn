@@ -54,7 +54,7 @@
 
 [sub_resource type="Resource" id="Resource_xl8du"]
 script = ExtResource("2_mvunv")
-max_speed = Vector2(3.4, 0)
+max_speed = Vector2(3.1, 0)
 friction_sharpness = Vector2(30, 0)
 metadata/_custom_type_script = "uid://edbvsbdtvgtj"
 

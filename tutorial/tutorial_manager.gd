@@ -24,14 +24,13 @@ const STEPS: Dictionary[StringName, Dictionary] = {
 	},
 	&"copper_collected": {
 		"tier": Tier.TOAST,
-		"text": "Stronger materials let you craft stronger tools and gear. Keep exploring and gathering to upgrade your equipment.",
-		"prerequisite": &"harvesting",
+		"text": "Stronger materials let you craft stronger tools and gear. Keep exploring and gathering to upgrade your equipment."
 	},
 	&"first_weapon_crafted": {
 		"tier": Tier.POPUP,
-		"title": "The Artisan",
+		"title": "Danger",
 		"text": "You are now equipped to defend yourself from danger, but watch out: monsters have noticed you.",
-		"prerequisite": &"harvesting",
+		"prerequisite": &"item_collecting",
 	},
 	&"low_hunger": {
 		"tier": Tier.TOAST,
