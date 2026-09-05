@@ -424,6 +424,9 @@ stream_0/stream = ExtResource("76_wsa1w")
 stream_1/stream = ExtResource("77_2s0vo")
 stream_2/stream = ExtResource("78_hgm8h")
 
+[sub_resource type="LabelSettings" id="LabelSettings_jtvs6"]
+font_size = 20
+
 [sub_resource type="Animation" id="Animation_knn7v"]
 length = 0.001
 tracks/0/type = "value"
@@ -4688,6 +4691,7 @@ offset_right = 200.0
 offset_bottom = -59.0
 grow_horizontal = 2
 grow_vertical = 2
+label_settings = SubResource("LabelSettings_jtvs6")
 horizontal_alignment = 1
 script = ExtResource("43_8pxes")
 anim_player = NodePath("AnimationPlayer")
