@@ -39,6 +39,7 @@ func hold_instance(new_instance: ItemInstance) -> void:
 
 	held_item_instance = new_instance
 	if held_item_instance == null:
+		updated_instance.emit(null)
 		return
 
 	await held_item_instance.item.ensure_unique()

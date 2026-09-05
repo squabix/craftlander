@@ -9,6 +9,7 @@ script = ExtResource("1_enjs7")
 name = "Raw Meat"
 max_quantity = 99
 icon = ExtResource("1_o47ul")
+use_action_name = &"Eat"
 consumable = true
 scene = ExtResource("2_7ij5n")
 metadata/_custom_type_script = "uid://bcua33xmbibyi"

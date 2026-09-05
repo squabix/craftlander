@@ -10,6 +10,7 @@ script = ExtResource("4_f8853")
 damage = ExtResource("1_7xs2h")
 name = "Shoddy Pickaxe"
 icon = ExtResource("2_lbtfc")
+use_action_name = &"Mine"
 type = "Tool"
 scene = ExtResource("3_seaqc")
 cooldown_mode = 1

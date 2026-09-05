@@ -26,7 +26,6 @@
 [ext_resource type="Script" uid="uid://c3r6ofqamuc13" path="res://common/state_machine/mirror_state_machine.gd" id="16_mmwog"]
 [ext_resource type="Script" uid="uid://b7pvp0pnngnem" path="res://common/ui/fps_label.gd" id="19_bjvpn"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="19_c35mf"]
-[ext_resource type="Script" uid="uid://7vqcc56mnyjs" path="res://common/ui/tooltip_label.gd" id="19_knn7v"]
 [ext_resource type="Script" uid="uid://dk37mcui4c45e" path="res://common/inventory_system/inventory_holder3d.gd" id="20_mmwog"]
 [ext_resource type="Script" uid="uid://bghx5ubltmjf7" path="res://common/inventory_system/input_inventory_selector.gd" id="21_fmu53"]
 [ext_resource type="AudioStream" uid="uid://dknlikmamjcra" path="res://assets/sound/splash.wav" id="21_gci7n"]
@@ -70,6 +69,7 @@
 [ext_resource type="Script" uid="uid://bwcomtie8q510" path="res://player/ui/crafting/recipes/recipe_panel_group.gd" id="44_a1u5o"]
 [ext_resource type="Texture2D" uid="uid://c3o13o5vrivr" path="res://items/tools/shoddy/shoddy_pickaxe/shoddy_pickaxe.png" id="44_jfgyi"]
 [ext_resource type="Texture2D" uid="uid://b02s8vle3kjwk" path="res://items/food/raw_meat/raw_meat.png" id="44_vgvch"]
+[ext_resource type="Script" uid="uid://barub2aryb0nq" path="res://common/ui/icon_tooltip_label.gd" id="46_vvji8"]
 [ext_resource type="Texture2D" uid="uid://douq42dkvsywk" path="res://player/ui/inventory/inventory_slot.tres" id="48_vgvch"]
 [ext_resource type="Script" uid="uid://bs8sryrpq1j3b" path="res://player/ui/crafting/recipes/recipe_learner.gd" id="49_jbx34"]
 [ext_resource type="Texture2D" uid="uid://dst7iet4aksej" path="res://items/materials/rock/rock.png" id="50_jbx34"]
@@ -135,6 +135,8 @@
 [ext_resource type="Resource" uid="uid://cq7uj11i026we" path="res://items/tools/diamond/diamond_axe/diamond_axe_item.tres" id="127_e5mnx"]
 [ext_resource type="Resource" uid="uid://b8eby8tmkueau" path="res://items/tools/diamond/diamond_pickaxe/diamond_pickaxe_item.tres" id="128_dt0ky"]
 [ext_resource type="Resource" uid="uid://qu7qtupf3uee" path="res://items/weapons/diamond_sword/diamond_sword_item.tres" id="129_mhw2q"]
+[ext_resource type="PackedScene" uid="uid://cgkf2sh6frkfj" path="res://common/ui/action_hint/action_hint.tscn" id="200_ahint"]
+[ext_resource type="Script" uid="uid://ct3xcqdtjfkcf" path="res://common/ui/action_hint/hotkey_hints.gd" id="201_hkhint"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -291,9 +293,6 @@ _data = {
 &"RESET": SubResource("Animation_xcnuv"),
 &"hurt": SubResource("Animation_j55il")
 }
-
-[sub_resource type="LabelSettings" id="LabelSettings_p5tca"]
-font = ExtResource("34_6wior")
 
 [sub_resource type="LabelSettings" id="LabelSettings_7uc20"]
 line_spacing = 0.0
@@ -1403,7 +1402,7 @@ stream = SubResource("AudioStreamRandomizer_rnncm")
 volume_db = -10.0
 bus = &"UI"
 
-[node name="TooltipLabel" type="Label" parent="HUD" unique_id=189793984 node_paths=PackedStringArray("interactors")]
+[node name="TooltipLabel" type="RichTextLabel" parent="HUD" unique_id=189793984 node_paths=PackedStringArray("interactors")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1416,10 +1415,51 @@ offset_right = 420.0
 offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
-label_settings = SubResource("LabelSettings_p5tca")
-autowrap_mode = 3
-script = ExtResource("19_knn7v")
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("34_6wior")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+scroll_active = false
+script = ExtResource("46_vvji8")
 interactors = [NodePath("../../InteractorArea/Interactor3D"), NodePath("../../Head/Camera3D/InteratorRay/Interactor")]
+
+[node name="ActionHints" type="GridContainer" parent="HUD" unique_id=970437829 node_paths=PackedStringArray("item_holder", "use_hint")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = -41.0
+offset_right = 530.0
+grow_vertical = 0
+columns = 5
+script = ExtResource("201_hkhint")
+item_holder = NodePath("../../Head/Camera3D/ItemHolder")
+use_hint = NodePath("UseHint")
+
+[node name="DropHint" parent="HUD/ActionHints" unique_id=700000003 instance=ExtResource("200_ahint")]
+layout_mode = 2
+action = &"drop"
+hint_text = "Drop"
+
+[node name="InteractHint" parent="HUD/ActionHints" unique_id=700000004 instance=ExtResource("200_ahint")]
+layout_mode = 2
+action = &"interact"
+hint_text = "Interact"
+
+[node name="JumpHint" parent="HUD/ActionHints" unique_id=1210552226 instance=ExtResource("200_ahint")]
+layout_mode = 2
+action = &"jump"
+hint_text = "Jump"
+
+[node name="SprintHint" parent="HUD/ActionHints" unique_id=1536853724 instance=ExtResource("200_ahint")]
+layout_mode = 2
+action = &"sprint"
+hint_text = "Sprint"
+
+[node name="UseHint" parent="HUD/ActionHints" unique_id=700000002 instance=ExtResource("200_ahint")]
+layout_mode = 2
+action = &"use_primary"
 
 [node name="HintToast" type="Control" parent="HUD" unique_id=500000001 node_paths=PackedStringArray("label", "icon")]
 layout_mode = 1
@@ -1667,7 +1707,6 @@ text = "Continue"
 
 [node name="PauseMenu" type="Control" parent="." unique_id=1163003515 node_paths=PackedStringArray("crafting_environment", "recipe_panel", "health", "settings_menu", "button_save", "button_settings", "button_quit", "visibility_proxy", "back_button")]
 process_mode = 3
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -2204,6 +2243,7 @@ offset_top = -19.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "CRAFT"
+expand_icon = true
 
 [node name="ButtonAudioManager" parent="PauseMenu/CraftingInterface/CompletePanel/CraftButton" unique_id=583215524 node_paths=PackedStringArray("signal_players") instance=ExtResource("63_0iv1a")]
 signal_players = {
@@ -2275,11 +2315,34 @@ grow_horizontal = 2
 grow_vertical = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="Title" type="Label" parent="PauseMenu/CraftingInterface/BackpackPanel" unique_id=2062010731]
+[node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu/CraftingInterface/BackpackPanel" unique_id=155864823]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="PauseMenu/CraftingInterface/BackpackPanel/HBoxContainer" unique_id=2062010731]
 layout_mode = 2
 text = "BACKPACK"
 label_settings = SubResource("LabelSettings_s3g0c")
-horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PauseMenu/CraftingInterface/BackpackPanel/HBoxContainer" unique_id=642511207]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SelectHint" parent="PauseMenu/CraftingInterface/BackpackPanel/HBoxContainer" unique_id=173801619 instance=ExtResource("200_ahint")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+action = &"ui_accept"
+hint_text = "Select"
+
+[node name="SwapHint" parent="PauseMenu/CraftingInterface/BackpackPanel/HBoxContainer" unique_id=700000006 instance=ExtResource("200_ahint")]
+layout_mode = 2
+action = &"swap"
+hint_text = "Swap"
+
+[node name="CraftHint" parent="PauseMenu/CraftingInterface/BackpackPanel/HBoxContainer" unique_id=700000007 instance=ExtResource("200_ahint")]
+layout_mode = 2
+action = &"craft"
+hint_text = "Craft"
 
 [node name="Container" type="GridContainer" parent="PauseMenu/CraftingInterface/BackpackPanel" unique_id=193814556]
 layout_mode = 2
@@ -4340,6 +4403,36 @@ label_settings = SubResource("LabelSettings_wpyo2")
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="HBoxContainer" parent="PauseMenu/CraftingInterface" unique_id=1678783028]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 524.0
+offset_top = 90.0
+offset_right = -545.0
+offset_bottom = 131.0
+grow_horizontal = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="PauseMenu/CraftingInterface/VBoxContainer" unique_id=1914277493]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlaceHint" parent="PauseMenu/CraftingInterface/VBoxContainer/CenterContainer" unique_id=1498041687 instance=ExtResource("200_ahint")]
+layout_mode = 2
+size_flags_horizontal = 3
+action = &"grid_place"
+hint_text = "Place Item"
+
+[node name="CenterContainer2" type="CenterContainer" parent="PauseMenu/CraftingInterface/VBoxContainer" unique_id=832073131]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RemoveHint" parent="PauseMenu/CraftingInterface/VBoxContainer/CenterContainer2" unique_id=1283552613 instance=ExtResource("200_ahint")]
+layout_mode = 2
+size_flags_horizontal = 3
+action = &"grid_remove"
+hint_text = "Remove Item"
 
 [node name="OptionsContainer" type="VBoxContainer" parent="PauseMenu/CraftingInterface" unique_id=1312813458]
 layout_mode = 1

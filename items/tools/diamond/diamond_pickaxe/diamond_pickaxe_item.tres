@@ -11,6 +11,7 @@ script = ExtResource("4_h83bk")
 damage = ExtResource("1_wvhnx")
 name = &"Diamond Pickaxe"
 icon = ExtResource("2_eddsq")
+use_action_name = &"Mine"
 type = "Tool"
 scene = ExtResource("3_het4t")
 cooldown_mode = 1

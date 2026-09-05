@@ -10,6 +10,7 @@ script = ExtResource("4_3tk2a")
 damage = ExtResource("1_7l754")
 name = "Shoddy Mace"
 icon = ExtResource("2_0e7iq")
+use_action_name = &"Attack"
 type = &"Weapon"
 scene = ExtResource("3_scaaa")
 cooldown_mode = 1

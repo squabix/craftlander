@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cgkf2sh6frkfj"]
+
+[ext_resource type="Script" uid="uid://dfui71e6tjcfi" path="res://common/ui/action_hint/action_hint.gd" id="1"]
+[ext_resource type="Script" uid="uid://do25cobjdu8sa" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="2_shw0d"]
+
+[sub_resource type="Texture2D" id="Texture2D_fsesw"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_shw0d")
+metadata/_custom_type_script = "uid://do25cobjdu8sa"
+
+[sub_resource type="LabelSettings" id="LabelSettings_vvji8"]
+font_size = 20
+
+[node name="ActionHint" type="HBoxContainer" unique_id=706807440 node_paths=PackedStringArray("icon_rect", "label")]
+theme_override_constants/separation = 6
+script = ExtResource("1")
+icon_rect = NodePath("IconRect")
+label = NodePath("Label")
+
+[node name="IconRect" type="TextureRect" parent="." unique_id=77930511]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 4
+texture = SubResource("Texture2D_fsesw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="." unique_id=167284397]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_vvji8")
+vertical_alignment = 1

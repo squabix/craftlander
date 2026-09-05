@@ -11,6 +11,7 @@ harvest_animation = "jab"
 damage = ExtResource("1_8jt74")
 name = "Shoddy Spear"
 icon = ExtResource("1_yupxs")
+use_action_name = &"Attack"
 type = "Weapon"
 scene = ExtResource("1_o8drn")
 cooldown_mode = 1

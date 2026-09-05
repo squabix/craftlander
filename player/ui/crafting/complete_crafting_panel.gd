@@ -10,6 +10,11 @@ func _ready() -> void:
 	update()
 	craft_button.pressed.connect(crafting_environment.craft)
 
+	var craft_icon := ControllerIconTexture.new()
+	craft_icon.path = &"craft"
+	craft_button.icon = craft_icon
+	craft_button.expand_icon = true
+
 func update() -> void:
 	var recipe := RecipeBook.get_recipe(crafting_environment.get_recipe_layout())
 	if recipe == null:

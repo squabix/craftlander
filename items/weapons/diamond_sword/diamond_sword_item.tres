@@ -10,6 +10,7 @@ script = ExtResource("4_kid3l")
 damage = ExtResource("1_6ko5w")
 name = &"Diamond Sword"
 icon = ExtResource("2_kr2dc")
+use_action_name = &"Attack"
 type = &"Weapon"
 scene = ExtResource("3_sw5xj")
 cooldown_mode = 1
