@@ -178,6 +178,24 @@ script = ExtResource("6_hggc2")
 item = ExtResource("10_hioli")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
+[sub_resource type="Resource" id="Resource_c2k30"]
+script = ExtResource("6_hggc2")
+item = ExtResource("81_mhw2q")
+quantity = 40
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_bt5o1"]
+script = ExtResource("6_hggc2")
+item = ExtResource("9_jbx34")
+quantity = 40
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_46ck1"]
+script = ExtResource("6_hggc2")
+item = ExtResource("105_xgxvu")
+quantity = 40
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
 [sub_resource type="Curve" id="Curve_2uvqg"]
 _limits = [0.0, 5.0, 0.0, 1.0]
 _data = [Vector2(0, 3), 0.0, 0.0, 0, 0, Vector2(0.01, 0), 0.0, 0.0, 0, 0]
@@ -1056,7 +1074,7 @@ metadata/_custom_type_script = "uid://bki5ij8task16"
 
 [node name="Inventory" type="Node" parent="." unique_id=710458340]
 script = ExtResource("19_c35mf")
-item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_j3r50"), SubResource("Resource_hggc2"), SubResource("Resource_utr5e"), SubResource("Resource_k7n08"), SubResource("Resource_o7udw")])
+item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_j3r50"), SubResource("Resource_hggc2"), SubResource("Resource_utr5e"), SubResource("Resource_k7n08"), SubResource("Resource_o7udw"), null, null, null, null, null, null, SubResource("Resource_c2k30"), SubResource("Resource_bt5o1"), SubResource("Resource_46ck1")])
 size = 40
 
 [node name="NodeSaver" type="Node" parent="Inventory" unique_id=137251970]
