@@ -42,6 +42,7 @@
 [ext_resource type="Script" uid="uid://6poppt70f3rp" path="res://island/island_water.gd" id="30_np47g"]
 [ext_resource type="PackedScene" uid="uid://d4cc1bccfdgd5" path="res://island/props/indestructable/giant_ribcage/giant_ribcage.tscn" id="32_2utcq"]
 [ext_resource type="Resource" uid="uid://dora54e1oq756" path="res://entities/enemies/skeleton/skeleton_island_resource.tres" id="35_k7qss"]
+[ext_resource type="Resource" path="res://entities/enemies/cactoid/cactoid_island_resource.tres" id="40_cpr0p"]
 [ext_resource type="PlaneMesh" uid="uid://ben5kh83ltpe" path="res://main/water_mesh.tres" id="41_2utcq"]
 [ext_resource type="Shader" uid="uid://bjt5jcslbt2k1" path="res://assets/shaders/water.gdshader" id="42_2utcq"]
 
@@ -2475,7 +2476,8 @@ terrain_generator = NodePath("../IslandGenerator")
 [node name="EntityPopulator" type="Node3D" parent="." unique_id=1532427289 node_paths=PackedStringArray("repopulate_timer")]
 script = ExtResource("22_2pl76")
 entity_quantities = Dictionary[ExtResource("23_8k1eh"), int]({
-ExtResource("35_k7qss"): 30
+ExtResource("35_k7qss"): 30,
+ExtResource("40_cpr0p"): 6
 })
 repopulate_timer = NodePath("../EntityRepopulateTimer")
 
