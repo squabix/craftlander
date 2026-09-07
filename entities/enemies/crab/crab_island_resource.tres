@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IslandEntityResource" format=3 uid="uid://baufe7w8gugdv"]
+
+[ext_resource type="PackedScene" uid="uid://yynt7u0d7ju4" path="res://entities/enemies/crab/crab.tscn" id="1_8axfx"]
+[ext_resource type="Script" uid="uid://b0gc85inin6ad" path="res://island/island_entity_resource.gd" id="2_xar2j"]
+
+[resource]
+script = ExtResource("2_xar2j")
+scene = ExtResource("1_8axfx")
+min_height = 2.0
+metadata/_custom_type_script = "uid://b0gc85inin6ad"
