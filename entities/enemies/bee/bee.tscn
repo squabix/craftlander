@@ -21,6 +21,8 @@
 [ext_resource type="AudioStream" uid="uid://c2dpvg8ontimn" path="res://assets/sound/bee_hurt.mp3" id="17_wnfpe"]
 [ext_resource type="AudioStream" uid="uid://c3yyhxgab6684" path="res://assets/sound/bee_fly.mp3" id="19_wnfpe"]
 [ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="20_rq2ym"]
+[ext_resource type="Script" uid="uid://dd8qskwv1nlqx" path="res://common3d/damage_system/hit_ray3d.gd" id="21_atkray"]
+[ext_resource type="Resource" path="res://entities/enemies/bee/bee_damage.tres" id="22_atkdmg"]
 
 [sub_resource type="GDScript" id="GDScript_exvl0"]
 script/source = "extends EntityController3D
@@ -161,6 +163,37 @@ tracks/1/keys = {
 "values": [Vector3(0, 0.05, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_atk1"]
+resource_name = "attack"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlenderVisuals/Visuals:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.5235988, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackRay")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hit"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_yoaiu"]
 resource_name = "fly"
 length = 2.0
@@ -194,8 +227,31 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6g1qb"]
 _data = {
 &"RESET": SubResource("Animation_lfdyi"),
+&"attack": SubResource("Animation_atk1"),
 &"fly": SubResource("Animation_yoaiu")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bee_attack"]
+animation = &"attack"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_bee_attack"]
+filter_enabled = true
+filters = ["AttackRay", "BlenderVisuals/Visuals:rotation"]
+fadein_time = 0.05
+fadeout_time = 0.15
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bee_fly"]
+animation = &"fly"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_bee"]
+nodes/output/position = Vector2(160, 26.666666)
+nodes/Fly/node = SubResource("AnimationNodeAnimation_bee_fly")
+nodes/Fly/position = Vector2(-306.66666, -66.666664)
+nodes/AttackOneShot/node = SubResource("AnimationNodeOneShot_bee_attack")
+nodes/AttackOneShot/position = Vector2(-66.666664, 40)
+nodes/Attack/node = SubResource("AnimationNodeAnimation_bee_attack")
+nodes/Attack/position = Vector2(-306.66666, 120)
+node_connections = [&"output", 0, &"AttackOneShot", &"AttackOneShot", 0, &"Fly", &"AttackOneShot", 1, &"Attack"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_muv15"]
 radius = 0.15
@@ -209,24 +265,28 @@ random_pitch = 1.122462
 streams_count = 1
 stream_0/stream = ExtResource("17_wnfpe")
 
-[node name="Bee" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("sight", "hit_timer", "form_nodes")]
+[node name="Bee" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("attack_ray", "form_nodes")]
 collision_mask = 17
 wall_min_slide_angle = 3.1415927
 floor_constant_speed = true
 floor_block_on_wall = false
 floor_max_angle = 3.1415927
 script = ExtResource("1_4hd4j")
-sight = NodePath("Sight3D")
-hit_timer = NodePath("HitTimer")
+attack_ray = NodePath("AttackRay")
 form_nodes = [NodePath("BlenderVisuals"), NodePath("Sight3D"), NodePath("InventoryDropper3D"), NodePath("Hurtbox3D")]
-type = "Bee"
 move_mode = ExtResource("2_vtgqy")
 move_up_as_jump = false
 metadata/_custom_type_script = "uid://bki5ij8task16"
 
-[node name="HitTimer" type="Timer" parent="." unique_id=1781383609]
-wait_time = 0.1
-one_shot = true
+[node name="AttackRay" type="RayCast3D" parent="." unique_id=2100000001]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+target_position = Vector3(0, -0.3, -1)
+collision_mask = 8
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("21_atkray")
+damage = ExtResource("22_atkdmg")
+metadata/_custom_type_script = "uid://dd8qskwv1nlqx"
 
 [node name="Sight3D" type="Node3D" parent="." unique_id=713539717]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -245,7 +305,7 @@ from_state_whitelist = Array[StringName]([&"Wandering", &"Searching"])
 signal_name = &"found_target"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 
-[node name="StartSearchTrigger" type="Node" parent="Sight3D" node_paths=PackedStringArray("state_machine")]
+[node name="StartSearchTrigger" type="Node" parent="Sight3D" unique_id=1184064981 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("3_rq2ym")
 state_machine = NodePath("../../Controller3D/Default")
 state_name = &"Searching"
@@ -253,7 +313,7 @@ from_state_whitelist = Array[StringName]([&"Chasing"])
 signal_name = &"lost_target"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 
-[node name="IntervalStaggerer" type="Node" parent="Sight3D" node_paths=PackedStringArray("target_methods")]
+[node name="IntervalStaggerer" type="Node" parent="Sight3D" unique_id=1964031967 node_paths=PackedStringArray("target_methods")]
 script = ExtResource("16_t5evv")
 base_interval = 0.2
 target_methods = {
@@ -282,14 +342,15 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Timer" type="Timer" parent="Controller3D/Default/Wandering" unique_id=1600727395]
 
-[node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=1883496829 node_paths=PackedStringArray("guide", "sight", "interval_staggerer", "root")]
+[node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=1883496829 node_paths=PackedStringArray("interval_staggerer", "reach_anim_tree", "guide", "sight", "root")]
 script = ExtResource("7_bfxyu")
+interval_staggerer = NodePath("IntervalStaggerer")
+advance_goal_distance = 1.0
+advance_in_water = true
+reach_anim_tree = NodePath("../../../AnimationTree")
+lose_target_state = &"Searching"
 guide = NodePath("../NavEntityGuide3D")
 sight = NodePath("../../../Sight3D")
-interval_staggerer = NodePath("IntervalStaggerer")
-advance_in_water = true
-advance_goal_distance = 0.75
-lose_target_state = &"Searching"
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
@@ -301,16 +362,16 @@ NodePath(".."): &"update_path"
 }
 metadata/_custom_type_script = "uid://73ya7jxulyl4"
 
-[node name="Searching" type="Node" parent="Controller3D/Default" node_paths=PackedStringArray("guide", "sight", "interval_staggerer", "root")]
+[node name="Searching" type="Node" parent="Controller3D/Default" unique_id=1016180279 node_paths=PackedStringArray("interval_staggerer", "guide", "sight", "root")]
 script = ExtResource("8_searching")
-guide = NodePath("../NavEntityGuide3D")
-sight = NodePath("../../../Sight3D")
 interval_staggerer = NodePath("IntervalStaggerer")
 found_target_state = &"Chasing"
 give_up_state = &"Wandering"
+guide = NodePath("../NavEntityGuide3D")
+sight = NodePath("../../../Sight3D")
 root = NodePath("../../..")
 
-[node name="IntervalStaggerer" type="Node" parent="Controller3D/Default/Searching" node_paths=PackedStringArray("target_methods")]
+[node name="IntervalStaggerer" type="Node" parent="Controller3D/Default/Searching" unique_id=506125371 node_paths=PackedStringArray("target_methods")]
 script = ExtResource("16_t5evv")
 base_interval = 0.25
 target_methods = {
@@ -377,7 +438,13 @@ metadata/_custom_type_script = "uid://cbb5o5ykqwxfp"
 
 [node name="FlightAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1652503716]
 libraries/ = SubResource("AnimationLibrary_6g1qb")
-autoplay = &"fly"
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=2100000002]
+tree_root = SubResource("AnimationNodeBlendTree_bee")
+anim_player = NodePath("../FlightAnimationPlayer")
+parameters/AttackOneShot/active = false
+parameters/AttackOneShot/internal_active = false
+parameters/AttackOneShot/request = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1316642755]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.72, 0)
@@ -396,7 +463,7 @@ metadata/_custom_type_script = "uid://4dfurtssrp4f"
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1632674445]
 shape = SubResource("SphereShape3D_nw5ty")
 
-[node name="StartChaseTrigger" type="Node" parent="Hurtbox3D" node_paths=PackedStringArray("state_machine")]
+[node name="StartChaseTrigger" type="Node" parent="Hurtbox3D" unique_id=749459833 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("3_rq2ym")
 state_machine = NodePath("../../Controller3D/Default")
 state_name = &"Chasing"
