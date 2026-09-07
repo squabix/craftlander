@@ -181,6 +181,20 @@ tracks/1/path = NodePath("Visuals/Armature/Skeleton3D:RightArm")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = PackedFloat32Array(0, 1, -0.35355338, -0.14644662, 0.35355335, 0.8535534, 0.1, 1, 0.20621192, -0.38851392, 0.55210453, 0.7083178, 0.2, 1, 0.20621192, -0.38851392, 0.55210453, 0.7083178, 0.4, 1, -0.35355338, -0.14644662, 0.35355335, 0.8535534)
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ItemHolder3D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"use_item"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_v4fp6"]
 resource_name = "idle"
@@ -570,7 +584,7 @@ _data = {
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_0uawy"]
 filter_enabled = true
-filters = ["Visuals/Armature/Skeleton3D:RightArm", "Visuals/Armature/Skeleton3D:RightHand"]
+filters = ["ItemHolder3D", "Visuals/Armature/Skeleton3D:RightArm", "Visuals/Armature/Skeleton3D:RightHand"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7mn0t"]
 animation = &"idle"
@@ -765,32 +779,33 @@ signal_players = {
 }
 metadata/_custom_type_script = "uid://43bqjaemfda5"
 
-[node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=1883496829 node_paths=PackedStringArray("item_holder", "guide", "sight", "interval_staggerer", "root")]
+[node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=1883496829 node_paths=PackedStringArray("item_holder", "interval_staggerer", "reach_anim_tree", "guide", "sight", "root")]
 script = ExtResource("13_7mn0t")
 item_holder = NodePath("../../../ItemHolder3D")
+interval_staggerer = NodePath("IntervalStaggerer")
+reach_anim_tree = NodePath("../../../AnimationTree")
+lose_target_state = &"Searching"
 guide = NodePath("../../NavEntityGuide3D")
 sight = NodePath("../../../Sight3D")
-interval_staggerer = NodePath("IntervalStaggerer")
-lose_target_state = &"Searching"
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="IntervalStaggerer" type="Node" parent="Controller3D/Default/Chasing" unique_id=1668925528 node_paths=PackedStringArray("target_methods")]
 script = ExtResource("34_hswny")
 base_interval = 0.25
-initial_time_left = 5.0
 target_methods = {
 NodePath(".."): &"update_path"
 }
+initial_time_left = 5.0
 metadata/_custom_type_script = "uid://73ya7jxulyl4"
 
-[node name="Searching" type="Node" parent="Controller3D/Default" unique_id=891851214 node_paths=PackedStringArray("guide", "sight", "interval_staggerer", "root")]
+[node name="Searching" type="Node" parent="Controller3D/Default" unique_id=891851214 node_paths=PackedStringArray("interval_staggerer", "guide", "sight", "root")]
 script = ExtResource("59_searching")
-guide = NodePath("../../NavEntityGuide3D")
-sight = NodePath("../../../Sight3D")
 interval_staggerer = NodePath("IntervalStaggerer")
 found_target_state = &"Chasing"
 give_up_state = &"Wandering"
+guide = NodePath("../../NavEntityGuide3D")
+sight = NodePath("../../../Sight3D")
 root = NodePath("../../..")
 
 [node name="IntervalStaggerer" type="Node" parent="Controller3D/Default/Searching" unique_id=300850495 node_paths=PackedStringArray("target_methods")]
@@ -831,11 +846,11 @@ radius = 1.0
 [node name="Visuals" parent="." unique_id=1269952913 instance=ExtResource("13_v4fp6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 
-[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1269952913, 1587857866) index="0" unique_id=2048856360]
+[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1269952913, 31434797) index="0" unique_id=1152248800]
 bones/7/rotation = Quaternion(-0.35355338, 0.14644662, -0.35355335, 0.8535534)
 bones/10/rotation = Quaternion(-0.35355338, -0.14644662, 0.35355335, 0.8535534)
 
-[node name="Woodling" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=1053631763]
+[node name="Woodling" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=1226495854]
 surface_material_override/0 = ExtResource("21_uefcv")
 surface_material_override/1 = ExtResource("22_c3uxn")
 surface_material_override/2 = ExtResource("25_g7svr")
@@ -864,6 +879,7 @@ parameters/RunBlendSpace/blend_position = 0.0
 parameters/ItemBlend/blend_amount = 0.0
 script = ExtResource("26_f0qrw")
 item_animations = Array[ExtResource("22_sqkxx")]([SubResource("Resource_0uawy")])
+automatic = false
 
 [node name="ParticleSpawner3D" type="Node3D" parent="." unique_id=1876124391]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

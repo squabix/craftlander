@@ -70,11 +70,6 @@ metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
 radius = 0.7
 height = 2.8
 
-[sub_resource type="Resource" id="Resource_axedrop"]
-script = ExtResource("19_ayrpf")
-item = ExtResource("52_axe")
-metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
-
 [sub_resource type="Animation" id="Animation_3emv6"]
 length = 0.001
 tracks/0/type = "rotation_3d"
@@ -179,7 +174,7 @@ tracks/13/keys = PackedFloat32Array(0, 1, 4.3157854e-08, 7.600151e-08, 0.0440536
 [sub_resource type="Animation" id="Animation_aoox1"]
 resource_name = "attack"
 length = 0.4
-step = 0.1
+step = 0.05
 tracks/0/type = "rotation_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -198,14 +193,14 @@ tracks/2/type = "rotation_3d"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("Visuals/Armature/Skeleton3D:RightShoulder")
-tracks/2/interp = 2
+tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = PackedFloat32Array(0, 1, -0.50000006, -0.5, -0.5, 0.50000006, 0.1, 1, -0.7003919, -0.42162794, -0.09721801, 0.56765294, 0.4, 1, -0.50000006, -0.5, -0.5, 0.50000006)
 tracks/3/type = "rotation_3d"
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/path = NodePath("Visuals/Armature/Skeleton3D:LeftShoulder")
-tracks/3/interp = 2
+tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = PackedFloat32Array(0, 1, 0.5, -0.5, -0.5, -0.5, 0.1, 1, -0.6339249, 0.31327194, 0.31327194, 0.63392484, 0.4, 1, 0.5, -0.5, -0.5, -0.5)
 tracks/4/type = "rotation_3d"
@@ -215,6 +210,20 @@ tracks/4/path = NodePath("Visuals/Armature/Skeleton3D:Head")
 tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/keys = PackedFloat32Array(0, 1, 0, 1.1920929e-07, 0, 1, 0.1, 1, -0.1305262, 1.1818943e-07, -1.5559934e-08, 0.9914449, 0.3, 1, -0.1305262, 1.1818943e-07, -1.5559934e-08, 0.9914449, 0.4, 1, 0, 1.1920929e-07, 0, 1)
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ItemHolder3D")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"use_item"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_v4fp6"]
 resource_name = "idle"
@@ -646,7 +655,7 @@ _data = {
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_0uawy"]
 filter_enabled = true
-filters = ["Visuals/Armature/Skeleton3D:Head", "Visuals/Armature/Skeleton3D:LeftArm", "Visuals/Armature/Skeleton3D:LeftHand", "Visuals/Armature/Skeleton3D:LeftShoulder", "Visuals/Armature/Skeleton3D:RightArm", "Visuals/Armature/Skeleton3D:RightHand", "Visuals/Armature/Skeleton3D:RightShoulder"]
+filters = ["ItemHolder3D", "Visuals/Armature/Skeleton3D:Head", "Visuals/Armature/Skeleton3D:LeftArm", "Visuals/Armature/Skeleton3D:LeftHand", "Visuals/Armature/Skeleton3D:LeftShoulder", "Visuals/Armature/Skeleton3D:RightArm", "Visuals/Armature/Skeleton3D:RightHand", "Visuals/Armature/Skeleton3D:RightShoulder"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7mn0t"]
 animation = &"idle"
@@ -664,7 +673,7 @@ blend_point_1/pos = 0.8
 blend_point_1/name = &"1"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_p5gg5"]
-graph_offset = Vector2(-610.0076, -31.721405)
+graph_offset = Vector2(-599.7039, -39.019455)
 nodes/output/position = Vector2(160, 26.666666)
 nodes/RunBlendSpace/node = SubResource("AnimationNodeBlendSpace1D_7mn0t")
 nodes/RunBlendSpace/position = Vector2(-306.66666, -66.666664)
@@ -866,10 +875,11 @@ signal_players = {
 }
 metadata/_custom_type_script = "uid://43bqjaemfda5"
 
-[node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=330454410 node_paths=PackedStringArray("item_holder", "interval_staggerer", "guide", "sight", "root")]
+[node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=330454410 node_paths=PackedStringArray("item_holder", "interval_staggerer", "reach_anim_tree", "guide", "sight", "root")]
 script = ExtResource("15_d2wnc")
 item_holder = NodePath("../../../ItemHolder3D")
 interval_staggerer = NodePath("IntervalStaggerer")
+reach_anim_tree = NodePath("../../../AnimationTree")
 lose_target_state = &"Searching"
 guide = NodePath("../../NavEntityGuide3D")
 sight = NodePath("../../../Sight3D")
@@ -909,7 +919,6 @@ entity = NodePath("../..")
 [node name="Inventory" type="Node" parent="." unique_id=1701695857]
 unique_name_in_owner = true
 script = ExtResource("18_c1oxa")
-item_instances = Array[ExtResource("19_ayrpf")]([SubResource("Resource_axedrop")])
 constant = true
 size = 2
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
@@ -941,6 +950,7 @@ parameters/RunBlendSpace/blend_position = 0.0
 parameters/ItemBlend/blend_amount = 0.0
 script = ExtResource("30_g11ck")
 item_animations = Array[ExtResource("31_x5br7")]([SubResource("Resource_0uawy")])
+automatic = false
 
 [node name="ParticleSpawner3D" type="Node3D" parent="." unique_id=1709665950]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

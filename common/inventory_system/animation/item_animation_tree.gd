@@ -2,6 +2,7 @@ class_name ItemAnimationTree
 extends AnimationTree
 
 @export var item_animations: Array[ItemAnimations] = []
+@export var automatic := true
 
 @export_group("Defaults")
 @export var default_start_anim := &""
@@ -10,7 +11,7 @@ extends AnimationTree
 
 @export_group("Tree Parameter Paths")
 @export var playback_path := "parameters/ItemStateMachine/playback"
-@export var item_state_path := "parameters/ItemUseTransition/current_state"
+@export var item_state_path := "parameters/ItemStateMachine/current_state"
 @export var item_blend_path := "parameters/ItemBlend/blend_amount"
 
 @export_group("State Machine States")
@@ -19,6 +20,7 @@ extends AnimationTree
 @export var end_use_state := &"end_use"
 
 var current_item: Item
+var is_blending := false
 
 var start_anim := &""
 var continue_anim := &""
@@ -64,7 +66,8 @@ func update_item(new_item: Item) -> void:
 	await new_item.ensure_unique()
 
 	# Connect new item's signals (only start signal)
-	new_item.started_use.connect(play_start)
+	if automatic:
+		new_item.started_use.connect(play_start)
 
 	current_item = new_item
 
@@ -100,10 +103,12 @@ func get_player() -> AnimationPlayer:
 
 func enable_item_blend() -> void:
 	set(item_blend_path, 1.0)
+	is_blending = true
 
 
 func disable_item_blend() -> void:
 	set(item_blend_path, 0.0)
+	is_blending = false
 
 
 func play_start() -> void:

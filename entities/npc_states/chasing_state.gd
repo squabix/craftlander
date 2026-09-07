@@ -15,6 +15,7 @@ extends TargetingState
 
 @export_group("Reach", "reach")
 @export var reach_state := &""
+@export var reach_anim_tree: ItemAnimationTree
 
 @export_group("Target Losing")
 @export var can_lose_target := true
@@ -49,9 +50,13 @@ func physics_update(_delta: float) -> void:
 
 	# Use item if in range (independent of movement, so retreating doesn't block attacking)
 	if in_attack_range:
-		if reach_state != &"":
-			print("Transition to attacking")
+		if not reach_state.is_empty():
 			transition_to(reach_state)
+			if is_instance_valid(reach_anim_tree) and not reach_anim_tree.is_blending:
+				reach_anim_tree.play_start()
+		elif is_instance_valid(reach_anim_tree):
+			if not reach_anim_tree.is_blending:
+				reach_anim_tree.play_start()
 		elif item_holder:
 			item_holder.use_item()
 
