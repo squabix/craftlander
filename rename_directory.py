@@ -1,13 +1,49 @@
 import os
 import re
 
-def match_case(target, replacement):
-    if target.isupper():
-        return replacement.upper()
-    elif target.istitle():
-        return replacement.capitalize()
+def detect_case_style(text):
+    if text.isupper():
+        return "UPPERCASE"
+    elif text.islower():
+        if "-" in text:
+            return "kebab-case"
+        else:
+            return "lowercase"
+    elif text.istitle() and "_" not in text and "-" not in text:
+        return "Title Case"
+    elif text.isalnum():
+        if text[0].isupper():
+            return "PascalCase"
+        else:
+            return "camelCase"
+    return "default"
+
+def split_words(phrase):
+    words = re.sub(r'([a-z0-9])([A-Z])', r'\1 \2', phrase)
+    words = re.split(r'[\s_\-]+', words)
+    return [w for w in words if w]
+
+def apply_case_style(replacement, style):
+    words = split_words(replacement)
+    if not words:
+        return replacement
+
+    if style == "UPPERCASE":
+        return "_".join(w.upper() for w in words)
+    elif style == "snake_case" or style == "lowercase":
+        return "_".join(w.lower() for w in words)
+    elif style == "kebab-case":
+        return "-".join(w.lower() for w in words)
+    elif style == "PascalCase" or style == "Title Case":
+        return "".join(w.capitalize() for w in words)
+    elif style == "camelCase":
+        return words[0].lower() + "".join(w.capitalize() for w in words[1:])
     else:
-        return replacement.lower()
+        return replacement
+
+def match_case(target, replacement):
+    style = detect_case_style(target)
+    return apply_case_style(replacement, style)
 
 def replace_with_case(text, search_str, replace_str):
     def re_replace(match):
@@ -47,7 +83,6 @@ def process_directory(root_dir, search_str, replace_str):
                 print(f"Renamed file {filename} to {new_filename}")
 
         # Rename directories
-        # Bottom-up execution prevents pathing errors
         for dirname in dirnames:
             new_dirname = replace_with_case(dirname, search_str, replace_str)
             if new_dirname != dirname:
