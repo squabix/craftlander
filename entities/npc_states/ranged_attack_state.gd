@@ -7,6 +7,7 @@ extends TargetingState
 @export var health: Health
 
 @export var attack_anim := &"attack"
+@export var idle_anim := &""
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var max_range := 14.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var throw_cooldown := 1.2
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var aim_height_offset := 1.0
@@ -70,6 +71,8 @@ func is_target_in_range() -> bool:
 func _on_animation_finished(anim_name: StringName) -> void:
 	if not _is_attack_animation(anim_name):
 		return
+	if not idle_anim.is_empty() and is_instance_valid(anim_player):
+		anim_player.play(idle_anim)
 	await get_tree().create_timer(throw_cooldown).timeout
 	if not is_active:
 		return

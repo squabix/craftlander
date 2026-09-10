@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MoveMode" format=3 uid="uid://rdg0xvun1onl"]
+
+[ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common/move_mode.gd" id="1_vhdgf"]
+
+[resource]
+script = ExtResource("1_vhdgf")
+max_speed = Vector2(1.5, 0)
+friction_sharpness = Vector2(30, 0)
+metadata/_custom_type_script = "uid://edbvsbdtvgtj"

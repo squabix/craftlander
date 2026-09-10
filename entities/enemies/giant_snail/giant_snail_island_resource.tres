@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="IslandEntityResource" format=3 uid="uid://v64naelaip4g"]
+
+[ext_resource type="PackedScene" uid="uid://cee3cpn2v1wf0" path="res://entities/enemies/giant_snail/giant_snail.tscn" id="1_1juai"]
+[ext_resource type="Script" uid="uid://b0gc85inin6ad" path="res://island/island_entity_resource.gd" id="2_0uuaj"]
+
+
+[resource]
+script = ExtResource("2_0uuaj")
+scene = ExtResource("1_1juai")
+min_height = 2.0
+metadata/_custom_type_script = "uid://b0gc85inin6ad"

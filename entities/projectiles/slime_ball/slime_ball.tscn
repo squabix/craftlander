@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://brml40n12o27c"]
+
+[ext_resource type="Script" uid="uid://b1gh515736ppy" path="res://common3d/damage_system/hit_projectile3d.gd" id="1_proj"]
+[ext_resource type="Resource" path="res://entities/projectiles/slime_ball/slime_ball_damage.tres" id="2_dmg"]
+[ext_resource type="PackedScene" uid="uid://xoj4t71ndmdv" path="res://assets/models/projectiles/slime_ball.blend" id="3_848ix"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_slime"]
+radius = 0.25
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_470yt"]
+resource_name = "Material.001"
+albedo_color = Color(0.7977666, 0.91, 0.2366, 1)
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ncsrk"]
+resource_name = "Material"
+transparency = 4
+cull_mode = 2
+albedo_color = Color(0.09100003, 0.91, 0, 0.33333334)
+roughness = 0.5
+
+[node name="SlimeBall" type="Area3D" unique_id=1307818661]
+collision_layer = 0
+collision_mask = 12
+script = ExtResource("1_proj")
+free_on_collision = true
+damage = ExtResource("2_dmg")
+one_shot = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=431876776]
+shape = SubResource("SphereShape3D_slime")
+
+[node name="Visuals" parent="." unique_id=601109793 instance=ExtResource("3_848ix")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+
+[node name="InnerBall" parent="Visuals" index="0" unique_id=109889769]
+surface_material_override/0 = SubResource("StandardMaterial3D_470yt")
+
+[node name="OuterBall" parent="Visuals" index="1" unique_id=1979529813]
+surface_material_override/0 = SubResource("StandardMaterial3D_ncsrk")
+
+[editable path="Visuals"]
