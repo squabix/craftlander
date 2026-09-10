@@ -1,0 +1,726 @@
+[gd_scene format=3 uid="uid://pble5pwkpgmp"]
+
+[ext_resource type="Script" uid="uid://cpj1itin68q22" path="res://entities/enemies/evil_snowman/evil_snowman.gd" id="1_mjqu2"]
+[ext_resource type="Resource" path="res://entities/enemies/evil_snowman/evil_snowman_move_mode.tres" id="2_vey45"]
+[ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="3_j8ygh"]
+[ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_u6i5x"]
+[ext_resource type="Script" uid="uid://bp5ab438ufrus" path="res://common3d/culling_controller3d.gd" id="5_wg8x5"]
+[ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="6_wwywl"]
+[ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="7_krurl"]
+[ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/signal_triggrs/signal_state_trigger.gd" id="8_230r6"]
+[ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="9_78p2d"]
+[ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="10_3fga4"]
+[ext_resource type="Script" uid="uid://v1m6kagbghjv" path="res://common3d/radial_sight_3d.gd" id="11_qikt0"]
+[ext_resource type="Script" uid="uid://ccwod33h53a5s" path="res://common3d/controller/entity_controller3d.gd" id="12_hipvb"]
+[ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="13_8374n"]
+[ext_resource type="Script" uid="uid://cf04j3voj4xyc" path="res://entities/npc_states/wandering_state.gd" id="14_ycy1j"]
+[ext_resource type="Script" uid="uid://pdvlr6l3n04n" path="res://entities/npc_states/chasing_state.gd" id="15_r0kty"]
+[ext_resource type="Script" uid="uid://b6yrmkabhfa82" path="res://entities/npc_states/searching_state.gd" id="16_lfkj1"]
+[ext_resource type="Script" uid="uid://dmf4344ruowak" path="res://entities/enemies/evil_snowman/snowman_throwing_state.gd" id="17_7ug4v"]
+[ext_resource type="PackedScene" uid="uid://c5x1hn4vi06bh" path="res://entities/nav_entity_guide3d.tscn" id="18_heice"]
+[ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="19_obcca"]
+[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="20_wh3u0"]
+[ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="21_rrxuj"]
+[ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="23_55par"]
+[ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="24_5fvuj"]
+[ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="25_ud5t7"]
+[ext_resource type="PackedScene" uid="uid://h3veu2e18ij1" path="res://entities/entity_health_bar.tscn" id="26_w6yhc"]
+[ext_resource type="AudioStream" uid="uid://iqev25rq7fbq" path="res://assets/sound/rootling-07.mp3" id="27_ei4le"]
+[ext_resource type="AudioStream" uid="uid://b3c73cbq1ut7n" path="res://assets/sound/rootling-09.mp3" id="28_52s1i"]
+[ext_resource type="AudioStream" uid="uid://cb3edy6gssben" path="res://assets/sound/rootling-08.mp3" id="29_cp8h3"]
+[ext_resource type="AudioStream" uid="uid://vb4hdoc5mtfs" path="res://assets/sound/rootling-01.mp3" id="30_4vimb"]
+[ext_resource type="AudioStream" uid="uid://dv7i8slvjjvqf" path="res://assets/sound/rootling-02.mp3" id="31_qduvg"]
+[ext_resource type="AudioStream" uid="uid://by44iwpc4os7a" path="res://assets/sound/rootling-03.mp3" id="32_xsmug"]
+[ext_resource type="AudioStream" uid="uid://dmpw7i1okaklk" path="res://assets/sound/rootling-04.mp3" id="33_vsvbg"]
+[ext_resource type="AudioStream" uid="uid://cxppt2efnqk4e" path="res://assets/sound/rootling-05.mp3" id="34_idgdy"]
+[ext_resource type="AudioStream" uid="uid://sl2wj5r6v4jx" path="res://assets/sound/rootling-06.mp3" id="35_0l7ca"]
+[ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="36_sc0c5"]
+[ext_resource type="AudioStream" uid="uid://ck0q8lhyrv4xy" path="res://assets/sound/rootling-10.mp3" id="37_nsd4w"]
+[ext_resource type="AudioStream" uid="uid://chvu761wd8xc2" path="res://assets/sound/rootling-11.mp3" id="38_nmasq"]
+[ext_resource type="AudioStream" uid="uid://c4438fvpcmcld" path="res://assets/sound/rootling-12.mp3" id="39_eb31d"]
+[ext_resource type="Material" uid="uid://m5807bchpbmp" path="res://assets/materials/glowing_eye.tres" id="42_m7xa6"]
+[ext_resource type="PackedScene" uid="uid://ddk11nveckktx" path="res://assets/models/entities/evil_snowman.blend" id="43_fh2de"]
+[ext_resource type="Script" uid="uid://2ow28vm5clst" path="res://common/spawner/projectile_spawner3d.gd" id="43_t2yii"]
+[ext_resource type="ArrayMesh" uid="uid://doiyrsd0mnhkf" path="res://assets/models/items/weapons/snowball.res" id="44_41vbo"]
+[ext_resource type="PackedScene" path="res://entities/projectiles/snowball/snowball.tscn" id="44_n0bkx"]
+[ext_resource type="Resource" path="res://entities/projectiles/snowball/snowball_damage.tres" id="45_7623f"]
+
+[sub_resource type="Resource" id="Resource_v53xr"]
+script = ExtResource("3_j8ygh")
+y = false
+metadata/_custom_type_script = "uid://bh8pcyeueeoey"
+
+[sub_resource type="Resource" id="Resource_0dji4"]
+script = ExtResource("4_u6i5x")
+bool_vector = SubResource("Resource_v53xr")
+metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_41vbo"]
+radius = 0.7
+height = 2.8
+
+[sub_resource type="Resource" id="Resource_aoox1"]
+script = ExtResource("20_wh3u0")
+item = ExtResource("21_rrxuj")
+quantity = 3
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Animation" id="Animation_5fihd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Torso/ArmLeft:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Torso/ArmRight:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/Torso:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.1988684, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/Head:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 2.1701887, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Visuals/Head:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Visuals/Torso/ArmLeft/LeftHandSpawner/SnowballVisual:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Visuals/Torso/ArmRight/RightHandSpawner/SnowballVisual:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_bbrkv"]
+resource_name = "attack_left"
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Controller3D/Default/Throwing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_release_left"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Torso/ArmLeft:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.7853982), Vector3(7.6794486, 0, 0.7853982), Vector3(7.6794486, 0, 0.7853982), Vector3(6.2831855, 0, 0.7853982)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/Torso/ArmLeft/LeftHandSpawner/SnowballVisual:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_attackright"]
+resource_name = "attack_right"
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Controller3D/Default/Throwing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_release_right"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Torso/ArmRight:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -0.7853982), Vector3(7.6794486, 0, -0.7853982), Vector3(7.6794486, 0, -0.7853982), Vector3(6.2831855, 0, -0.7853982)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/Torso/ArmRight/RightHandSpawner/SnowballVisual:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_srjsy"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Torso/ArmLeft:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0.7853982), Vector3(0, 0, 0.52359885)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Torso/ArmRight:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -0.7853982), Vector3(0, 0, -0.52359885)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/Torso:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.1988684, 0), Vector3(0, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/Head:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 2.1701887, 0), Vector3(0, 1.884, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dqmkf"]
+resource_name = "walk"
+length = 1.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Torso/ArmLeft:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.4, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.87266463, 0, 0.7853982), Vector3(2.0943952, 0, 0.7853982)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Torso/ArmRight:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(2.0943952, 0, -0.7853982), Vector3(-0.87266463, 0, -0.7853982)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/Bottom:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-6.2831855, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visuals/Head:rotation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, -0.2617994), Vector3(0, 0, 0.2617994)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wtogd"]
+_data = {
+&"RESET": SubResource("Animation_5fihd"),
+&"attack_left": SubResource("Animation_bbrkv"),
+&"attack_right": SubResource("Animation_attackright"),
+&"idle": SubResource("Animation_srjsy"),
+&"walk": SubResource("Animation_dqmkf")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_attackleft"]
+animation = &"attack_left"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_attackleft"]
+filter_enabled = true
+filters = ["Controller3D/Default/Throwing", "Visuals/Torso/ArmLeft/LeftHandSpawner/SnowballVisual:visible", "Visuals/Torso/ArmLeft:rotation"]
+fadein_time = 0.05
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_attackright"]
+animation = &"attack_right"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_attackright"]
+filter_enabled = true
+filters = ["Controller3D/Default/Throwing", "Visuals/Torso/ArmRight/RightHandSpawner/SnowballVisual:visible", "Visuals/Torso/ArmRight:rotation"]
+fadein_time = 0.05
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_idle"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_walk"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_move"]
+min_space = 0.0
+blend_point_0/node = SubResource("AnimationNodeAnimation_idle")
+blend_point_0/pos = 0.0
+blend_point_0/name = &"0"
+blend_point_1/node = SubResource("AnimationNodeAnimation_walk")
+blend_point_1/pos = 1.0
+blend_point_1/name = &"1"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_p5gg5"]
+nodes/output/position = Vector2(560, 26.666666)
+nodes/MoveBlendSpace/node = SubResource("AnimationNodeBlendSpace1D_move")
+nodes/MoveBlendSpace/position = Vector2(-306.66666, -66.666664)
+nodes/AttackLeftOneShot/node = SubResource("AnimationNodeOneShot_attackleft")
+nodes/AttackLeftOneShot/position = Vector2(0, -66.666664)
+nodes/AttackLeftAnim/node = SubResource("AnimationNodeAnimation_attackleft")
+nodes/AttackLeftAnim/position = Vector2(-133.33333, 33.333332)
+nodes/AttackRightOneShot/node = SubResource("AnimationNodeOneShot_attackright")
+nodes/AttackRightOneShot/position = Vector2(266.66666, -66.666664)
+nodes/AttackRightAnim/node = SubResource("AnimationNodeAnimation_attackright")
+nodes/AttackRightAnim/position = Vector2(133.33333, 66.666664)
+node_connections = [&"output", 0, &"AttackRightOneShot", &"AttackLeftOneShot", 0, &"MoveBlendSpace", &"AttackLeftOneShot", 1, &"AttackLeftAnim", &"AttackRightOneShot", 0, &"AttackLeftOneShot", &"AttackRightOneShot", 1, &"AttackRightAnim"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hjjmf"]
+random_pitch = 1.122462
+streams_count = 3
+stream_0/stream = ExtResource("27_ei4le")
+stream_1/stream = ExtResource("28_52s1i")
+stream_2/stream = ExtResource("29_cp8h3")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_i6t70"]
+random_pitch = 1.1892071
+streams_count = 6
+stream_0/stream = ExtResource("30_4vimb")
+stream_1/stream = ExtResource("31_qduvg")
+stream_2/stream = ExtResource("32_xsmug")
+stream_3/stream = ExtResource("33_vsvbg")
+stream_4/stream = ExtResource("34_idgdy")
+stream_5/stream = ExtResource("35_0l7ca")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yocth"]
+random_pitch = 1.0594631
+streams_count = 3
+stream_0/stream = ExtResource("37_nsd4w")
+stream_1/stream = ExtResource("38_nmasq")
+stream_2/stream = ExtResource("39_eb31d")
+
+[node name="EvilSnowman" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
+collision_mask = 17
+script = ExtResource("1_mjqu2")
+anim_tree = NodePath("AnimationTree")
+culling_controller = NodePath("CullingController3D")
+type = &"Evil Snowman"
+move_mode = ExtResource("2_vey45")
+horizontal_rotation_target = NodePath(".")
+vertical_rotation_target = NodePath(".")
+rotation_range = SubResource("Resource_0dji4")
+metadata/_custom_type_script = "uid://bki5ij8task16"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2121250733]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+shape = SubResource("CapsuleShape3D_41vbo")
+
+[node name="CullingController3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=1066206516 node_paths=PackedStringArray("root", "visibility_control_list")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8946669, 0.16126275)
+aabb = AABB(-1.26, -0.962, -0.757, 2.565, 2.881, 1.229)
+script = ExtResource("5_wg8x5")
+root = NodePath("..")
+on_screen_process_radius = 110.0
+off_screen_process_radius = 24.0
+on_screen_visible_radius = 110.0
+visibility_control_list = [null]
+visibility_range_fade_margin = 10.0
+
+[node name="IntervalStaggerer" type="Node" parent="CullingController3D" unique_id=171446592 node_paths=PackedStringArray("target_methods")]
+script = ExtResource("6_wwywl")
+base_interval = 0.3
+target_methods = {
+NodePath(".."): &"evaluate_culling"
+}
+metadata/_custom_type_script = "uid://73ya7jxulyl4"
+
+[node name="Hurtbox3D" type="Area3D" parent="." unique_id=884870034 node_paths=PackedStringArray("health", "knockback_entity")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("7_krurl")
+health = NodePath("../Health")
+knockback_entity = NodePath("..")
+metadata/_custom_type_script = "uid://4dfurtssrp4f"
+
+[node name="StartChaseTrigger" type="Node" parent="Hurtbox3D" unique_id=1954498291 node_paths=PackedStringArray("state_machine")]
+script = ExtResource("8_230r6")
+state_machine = NodePath("../../Controller3D/Default")
+state_name = &"Chasing"
+from_state_whitelist = Array[StringName]([&"Wandering", &"Searching"])
+signal_name = &"was_hurt"
+metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Hurtbox3D" unique_id=263716078]
+shape = SubResource("CapsuleShape3D_41vbo")
+
+[node name="Health" type="Node" parent="." unique_id=780116179]
+script = ExtResource("9_78p2d")
+hp = 300.0
+free_parent_on_death = true
+difficulty_profile_index = 1
+metadata/_custom_type_script = "uid://cbb5o5ykqwxfp"
+
+[node name="SignalAudioManager3D" type="Node3D" parent="Health" unique_id=1371947431 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("10_3fga4")
+signal_players = {
+&"was_hurt": NodePath("../../HurtPlayer")
+}
+metadata/_custom_type_script = "uid://43bqjaemfda5"
+
+[node name="Sight3D" type="Node3D" parent="." unique_id=713539717]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("11_qikt0")
+radius = 15.0
+lose_distance = 23.0
+target_collision_mask = 16
+group_whitelist = Array[StringName]([&"player"])
+ray_collision_mask = 21
+
+[node name="StartChaseTrigger" type="Node" parent="Sight3D" unique_id=1196415362 node_paths=PackedStringArray("state_machine")]
+script = ExtResource("8_230r6")
+state_machine = NodePath("../../Controller3D/Default")
+state_name = &"Chasing"
+from_state_whitelist = Array[StringName]([&"Wandering", &"Searching"])
+signal_name = &"found_target"
+metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
+
+[node name="StartSearchTrigger" type="Node" parent="Sight3D" unique_id=1535908806 node_paths=PackedStringArray("state_machine")]
+script = ExtResource("8_230r6")
+state_machine = NodePath("../../Controller3D/Default")
+state_name = &"Searching"
+from_state_whitelist = Array[StringName]([&"Chasing", &"Throwing"])
+signal_name = &"lost_target"
+metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
+
+[node name="IntervalStaggerer" type="Node" parent="Sight3D" unique_id=970852926 node_paths=PackedStringArray("target_methods")]
+script = ExtResource("6_wwywl")
+base_interval = 0.2
+target_methods = {
+NodePath(".."): &"update_target"
+}
+metadata/_custom_type_script = "uid://73ya7jxulyl4"
+
+[node name="Controller3D" type="Node" parent="." unique_id=1315753818]
+script = ExtResource("12_hipvb")
+metadata/_custom_type_script = "uid://ccwod33h53a5s"
+
+[node name="Default" type="Node" parent="Controller3D" unique_id=1574117420 node_paths=PackedStringArray("root")]
+script = ExtResource("13_8374n")
+root = NodePath("../..")
+process_update = true
+physics_process_update = true
+metadata/_custom_type_script = "uid://bqonxtntgndfr"
+
+[node name="Wandering" type="Node" parent="Controller3D/Default" unique_id=1882444428 node_paths=PackedStringArray("nav_guide", "idle_timer", "root")]
+script = ExtResource("14_ycy1j")
+nav_guide = NodePath("../../NavEntityGuide3D")
+idle_timer = NodePath("Timer")
+root = NodePath("../../..")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="Timer" type="Timer" parent="Controller3D/Default/Wandering" unique_id=1600727395]
+
+[node name="SignalAudioManager3D" type="Node3D" parent="Controller3D/Default/Wandering" unique_id=1121028117 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("10_3fga4")
+signal_players = {
+&"entered": NodePath("../../../../TalkPlayer"),
+&"exited": NodePath("../../../../TalkPlayer"),
+&"started": NodePath("../../../../TalkPlayer"),
+&"stopped": NodePath("../../../../TalkPlayer")
+}
+metadata/_custom_type_script = "uid://43bqjaemfda5"
+
+[node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=1883496829 node_paths=PackedStringArray("interval_staggerer", "guide", "sight", "root")]
+script = ExtResource("15_r0kty")
+interval_staggerer = NodePath("IntervalStaggerer")
+advance_goal_distance = 8.0
+reach_state = &"Throwing"
+lose_target_state = &"Searching"
+guide = NodePath("../../NavEntityGuide3D")
+sight = NodePath("../../../Sight3D")
+root = NodePath("../../..")
+metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
+
+[node name="IntervalStaggerer" type="Node" parent="Controller3D/Default/Chasing" unique_id=1668925528 node_paths=PackedStringArray("target_methods")]
+script = ExtResource("6_wwywl")
+base_interval = 0.1
+target_methods = {
+NodePath(".."): &"update_path"
+}
+initial_time_left = 5.0
+metadata/_custom_type_script = "uid://73ya7jxulyl4"
+
+[node name="Searching" type="Node" parent="Controller3D/Default" unique_id=891851214 node_paths=PackedStringArray("interval_staggerer", "guide", "sight", "root")]
+script = ExtResource("16_lfkj1")
+interval_staggerer = NodePath("IntervalStaggerer")
+found_target_state = &"Chasing"
+give_up_state = &"Wandering"
+guide = NodePath("../../NavEntityGuide3D")
+sight = NodePath("../../../Sight3D")
+root = NodePath("../../..")
+
+[node name="IntervalStaggerer" type="Node" parent="Controller3D/Default/Searching" unique_id=300850495 node_paths=PackedStringArray("target_methods")]
+script = ExtResource("6_wwywl")
+base_interval = 0.25
+target_methods = {
+NodePath(".."): &"check_status"
+}
+metadata/_custom_type_script = "uid://73ya7jxulyl4"
+
+[node name="Throwing" type="Node" parent="Controller3D/Default" unique_id=715432133 node_paths=PackedStringArray("left_spawner", "right_spawner", "anim_player", "anim_tree", "health", "guide", "sight", "root")]
+script = ExtResource("17_7ug4v")
+left_spawner = NodePath("../../../Visuals/Torso/ArmLeft/LeftHandSpawner/ProjectileSpawner3D")
+right_spawner = NodePath("../../../Visuals/Torso/ArmRight/RightHandSpawner/ProjectileSpawner3D")
+anim_player = NodePath("../../../AnimationPlayer")
+anim_tree = NodePath("../../../AnimationTree")
+health = NodePath("../../../Health")
+max_range = 12.0
+throw_cooldown = 0.5
+return_to_chase_state = &"Chasing"
+guide = NodePath("../../NavEntityGuide3D")
+sight = NodePath("../../../Sight3D")
+root = NodePath("../../..")
+
+[node name="NavEntityGuide3D" parent="Controller3D" unique_id=1240188709 node_paths=PackedStringArray("nav", "entity") instance=ExtResource("18_heice")]
+nav = NodePath("../../NavigationAgent3D")
+entity = NodePath("../..")
+
+[node name="Inventory" type="Node" parent="." unique_id=2020826484]
+unique_name_in_owner = true
+script = ExtResource("19_obcca")
+item_instances = Array[ExtResource("20_wh3u0")]([SubResource("Resource_aoox1")])
+constant = true
+size = 2
+metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
+
+[node name="InventoryDropper3D" type="Node3D" parent="." unique_id=709626360 node_paths=PackedStringArray("inventory", "health")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("23_55par")
+inventory = NodePath("../Inventory")
+health = NodePath("../Health")
+death_drop_mode = 1
+metadata/_custom_type_script = "uid://bpmbg0e28ujs7"
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1081978445]
+target_desired_distance = 1.5
+path_max_distance = 1.01
+avoidance_enabled = true
+height = 2.0
+radius = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=997772339]
+libraries/ = SubResource("AnimationLibrary_wtogd")
+playback_default_blend_time = 0.3
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=944648514]
+tree_root = SubResource("AnimationNodeBlendTree_p5gg5")
+anim_player = NodePath("../AnimationPlayer")
+parameters/MoveBlendSpace/blend_position = -0.014219474
+parameters/AttackLeftOneShot/active = false
+parameters/AttackLeftOneShot/internal_active = false
+parameters/AttackLeftOneShot/request = 0
+parameters/AttackRightOneShot/active = false
+parameters/AttackRightOneShot/internal_active = false
+parameters/AttackRightOneShot/request = 0
+
+[node name="ParticleSpawner3D" type="Node3D" parent="." unique_id=1876124391]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("24_5fvuj")
+scenes = Array[PackedScene]([ExtResource("25_ud5t7")])
+spawn_on_exit_tree = true
+metadata/_custom_type_script = "uid://bhjxscxhtg2se"
+
+[node name="HealthBar3D" parent="." unique_id=1387087405 node_paths=PackedStringArray("entity", "health") instance=ExtResource("26_w6yhc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.4835498, 0)
+entity = NodePath("..")
+health = NodePath("../Health")
+
+[node name="HurtPlayer" type="AudioStreamPlayer3D" parent="." unique_id=502692699]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -1)
+stream = SubResource("AudioStreamRandomizer_hjjmf")
+bus = &"SFX"
+
+[node name="TalkPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1969972911]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, -1)
+stream = SubResource("AudioStreamRandomizer_i6t70")
+unit_size = 1.0
+max_db = 0.0
+bus = &"SFX"
+
+[node name="AudioSpawner3D" type="Node3D" parent="." unique_id=813638048 node_paths=PackedStringArray("templates")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+script = ExtResource("36_sc0c5")
+templates = [NodePath("DeathPlayer")]
+spawn_on_exit_tree = true
+metadata/_custom_type_script = "uid://bv2ss5hjacgd3"
+
+[node name="DeathPlayer" type="AudioStreamPlayer3D" parent="AudioSpawner3D" unique_id=1602006759]
+stream = SubResource("AudioStreamRandomizer_yocth")
+max_db = 5.0
+bus = &"SFX"
+
+[node name="Visuals" parent="." unique_id=960968621 instance=ExtResource("43_fh2de")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.5, 0)
+
+[node name="LeftHandSpawner" type="Node3D" parent="Visuals/Torso/ArmLeft" parent_id_path=PackedInt32Array(960968621, 248926446) index="0" unique_id=1644463349]
+transform = Transform3D(1.429, 0, 0, 0, 1.429, 0, 0, 0, 1.429, -1.25, 0.08, 0)
+
+[node name="ProjectileSpawner3D" type="Node3D" parent="Visuals/Torso/ArmLeft/LeftHandSpawner" unique_id=1644463350 node_paths=PackedStringArray("source")]
+script = ExtResource("43_t2yii")
+projectile_scene = ExtResource("44_n0bkx")
+damage = ExtResource("45_7623f")
+source = NodePath("../../../../..")
+metadata/_custom_type_script = "uid://2ow28vm5clst"
+
+[node name="SnowballVisual" type="MeshInstance3D" parent="Visuals/Torso/ArmLeft/LeftHandSpawner" unique_id=1644463351]
+transform = Transform3D(1, 1.5285485e-14, 1.4210855e-14, 1.5285485e-14, 1, 1.4210855e-14, 0, 0, 1, 0.14108571, -0.14108574, -0.19600484)
+visible = false
+mesh = ExtResource("44_41vbo")
+
+[node name="ArmRight" parent="Visuals/Torso" parent_id_path=PackedInt32Array(960968621, 1626459690) index="1" unique_id=389766562]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0.4069444, 0.32520258, -0.018160656)
+
+[node name="RightHandSpawner" type="Node3D" parent="Visuals/Torso/ArmRight" index="0" unique_id=1644463346]
+transform = Transform3D(1.429, 0, 0, 0, 1.429, 0, 0, 0, 1.429, 1.0572189, 0.07999992, -0.25401413)
+
+[node name="ProjectileSpawner3D" type="Node3D" parent="Visuals/Torso/ArmRight/RightHandSpawner" unique_id=1644463347 node_paths=PackedStringArray("source")]
+script = ExtResource("43_t2yii")
+projectile_scene = ExtResource("44_n0bkx")
+damage = ExtResource("45_7623f")
+source = NodePath("../../../../..")
+metadata/_custom_type_script = "uid://2ow28vm5clst"
+
+[node name="SnowballVisual" type="MeshInstance3D" parent="Visuals/Torso/ArmRight/RightHandSpawner" unique_id=1644463348]
+transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, 0)
+visible = false
+mesh = ExtResource("44_41vbo")
+
+[node name="Head" parent="Visuals" index="2" unique_id=275727902]
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1, 0, 2.1701887, 0)
+surface_material_override/3 = ExtResource("42_m7xa6")
+
+[editable path="Visuals"]

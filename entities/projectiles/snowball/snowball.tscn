@@ -1,0 +1,24 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://b1gh515736ppy" path="res://common3d/damage_system/hit_projectile3d.gd" id="1_proj"]
+[ext_resource type="Resource" path="res://entities/projectiles/snowball/snowball_damage.tres" id="2_dmg"]
+[ext_resource type="ArrayMesh" uid="uid://doiyrsd0mnhkf" path="res://assets/models/items/weapons/snowball.res" id="3_mesh"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_snowball"]
+radius = 0.2
+
+[node name="Snowball" type="Area3D"]
+collision_layer = 0
+collision_mask = 12
+script = ExtResource("1_proj")
+speed = 16.0
+gravity_scale = 0.6
+free_on_collision = true
+damage = ExtResource("2_dmg")
+one_shot = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_snowball")
+
+[node name="Visuals" type="MeshInstance3D" parent="."]
+mesh = ExtResource("3_mesh")
