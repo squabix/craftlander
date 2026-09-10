@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="IslandEntityResource" format=3 uid="uid://bnbohi50mg5t0"]
+
+[ext_resource type="PackedScene" uid="uid://dfmctlbidj2d0" path="res://entities/enemies/candy_spider/candy_spider.tscn" id="1_vhhsy"]
+[ext_resource type="Script" uid="uid://b0gc85inin6ad" path="res://island/island_entity_resource.gd" id="2_4a6l8"]
+
+[resource]
+script = ExtResource("2_4a6l8")
+scene = ExtResource("1_vhhsy")
+min_height = 2.0
+metadata/_custom_type_script = "uid://b0gc85inin6ad"
