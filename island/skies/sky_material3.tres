@@ -1,0 +1,54 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://3msqsihyp2b7"]
+
+[ext_resource type="Shader" uid="uid://beiyilngdu741" path="res://assets/shaders/sky_shader2.gdshader" id="1_b1nqa"]
+[ext_resource type="Texture2D" uid="uid://cfp60l0lt2it5" path="res://island/skies/clouds_04.tres" id="2_2eovm"]
+
+[sub_resource type="Gradient" id="Gradient_s0d0j"]
+offsets = PackedFloat32Array(0, 0.7342209)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vevmr"]
+frequency = 0.001
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_v46dl"]
+noise = SubResource("FastNoiseLite_vevmr")
+color_ramp = SubResource("Gradient_s0d0j")
+seamless = true
+
+[sub_resource type="Gradient" id="Gradient_egsba"]
+offsets = PackedFloat32Array(0.19378698, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cfytk"]
+seed = 1
+frequency = 0.0704
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_og1j7"]
+noise = SubResource("FastNoiseLite_cfytk")
+color_ramp = SubResource("Gradient_egsba")
+
+[resource]
+shader = ExtResource("1_b1nqa")
+shader_parameter/sky_day = Color(0, 0.3683334, 0.85, 1)
+shader_parameter/horizon_day = Color(0.24000001, 0.78466666, 1, 1)
+shader_parameter/horizon_sunset = Color(0.9, 0.4, 0.1, 1)
+shader_parameter/sky_sunset = Color(0.15, 0.2, 0.4, 1)
+shader_parameter/horizon_night = Color(0.1, 0.15, 0.2, 1)
+shader_parameter/sky_night = Color(0.05, 0.1, 0.15, 1)
+shader_parameter/day_night_mix = 0.8
+shader_parameter/use_directional_light = true
+shader_parameter/horizon_exponent = 20.0
+shader_parameter/sunset_amount_exponent = 0.7
+shader_parameter/night_amount_exponent = 4.0
+shader_parameter/cloud_tex_01 = ExtResource("2_2eovm")
+shader_parameter/cloud_tex_02 = SubResource("NoiseTexture2D_v46dl")
+shader_parameter/cloud_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/cloud_tiling = Vector2(1, 1)
+shader_parameter/wind_speed = Vector2(0.02, 0.02)
+shader_parameter/cloud_density = 0.60000000894072
+shader_parameter/cloud_depth = 0.5
+shader_parameter/cloud_shape_exponent = 2.0
+shader_parameter/cloud_occlude_exponent = 1.0
+shader_parameter/night_noise_01 = SubResource("NoiseTexture2D_og1j7")
+shader_parameter/night_noise_02 = SubResource("NoiseTexture2D_og1j7")
+shader_parameter/sun_scale = 0.05
+shader_parameter/sun_strength = 15.0
+shader_parameter/sun_color = Color(1, 0.9, 0, 1)

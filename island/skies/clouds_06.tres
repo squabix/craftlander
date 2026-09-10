@@ -1,0 +1,13 @@
+[gd_resource type="NoiseTexture2D" format=3 uid="uid://cuk3etwx1exvn"]
+
+[sub_resource type="Gradient" id="Gradient_l3kgg"]
+offsets = PackedFloat32Array(0, 0.3535503)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6gjkr"]
+seed = 2
+fractal_type = 2
+
+[resource]
+noise = SubResource("FastNoiseLite_6gjkr")
+color_ramp = SubResource("Gradient_l3kgg")
+seamless = true

@@ -1,0 +1,18 @@
+[gd_resource type="NoiseTexture2D" format=3 uid="uid://cfp60l0lt2it5"]
+
+[sub_resource type="Gradient" id="Gradient_6l7eq"]
+offsets = PackedFloat32Array(0, 0.93145955)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cysbe"]
+noise_type = 2
+frequency = 0.006
+fractal_octaves = 3
+
+[resource]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_cysbe")
+color_ramp = SubResource("Gradient_6l7eq")
+seamless = true
+invert = true
+seamless_blend_skirt = 0.2
