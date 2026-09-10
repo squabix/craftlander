@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="IslandEntityResource" format=3 uid="uid://crke7iuyb8dwh"]
 
-[ext_resource type="PackedScene" uid="uid://cee3cpn2v1wf0" path="res://entities/enemies/giant_snail/giant_snail.tscn" id="1_dquha"]
+[ext_resource type="PackedScene" uid="uid://pble5pwkpgmp" path="res://entities/enemies/evil_snowman/evil_snowman.tscn" id="1_b5tin"]
 [ext_resource type="Script" uid="uid://b0gc85inin6ad" path="res://island/island_entity_resource.gd" id="2_73wly"]
 
 [resource]
 script = ExtResource("2_73wly")
-scene = ExtResource("1_dquha")
+scene = ExtResource("1_b5tin")
 min_height = 2.0
 metadata/_custom_type_script = "uid://b0gc85inin6ad"

@@ -22,6 +22,7 @@
 [ext_resource type="Resource" uid="uid://crke7iuyb8dwh" path="res://entities/enemies/evil_snowman/evil_snowman_island_resource.tres" id="25_gwhu7"]
 [ext_resource type="Shader" uid="uid://bjt5jcslbt2k1" path="res://assets/shaders/water.gdshader" id="25_hhm4m"]
 [ext_resource type="PlaneMesh" uid="uid://ben5kh83ltpe" path="res://main/water_mesh.tres" id="25_vmqyq"]
+[ext_resource type="Resource" uid="uid://cplp1l7f7aeta" path="res://entities/enemies/little_ice_talus/little_ice_talus_island_resource.tres" id="26_yjqq5"]
 [ext_resource type="Script" uid="uid://c7gxodoedjemm" path="res://island/island_nav_region.gd" id="34_ga7jy"]
 [ext_resource type="Script" uid="uid://dpyn65ul3fu6v" path="res://common3d/mesh_instance_aggregator3d.gd" id="35_popsf"]
 [ext_resource type="Script" uid="uid://dm2twxr0f7ne" path="res://common3d/heightmap_occluder_instance.gd" id="36_1krkx"]
@@ -88,7 +89,7 @@ seamless = true
 [sub_resource type="Gradient" id="Gradient_eyiwh"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0.9383681, 1)
-colors = PackedColorArray(0.81, 0.85116667, 1, 1, 0.68, 0.5644, 0.3332, 1)
+colors = PackedColorArray(0.68, 0.7493334, 1, 1, 0.68, 0.5644, 0.3332, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_p1kg5"]
 gradient = SubResource("Gradient_eyiwh")
@@ -374,7 +375,8 @@ script = ExtResource("37_42tlt")
 entity_quantities = Dictionary[ExtResource("38_nmmrq"), int]({
 ExtResource("23_vmqyq"): 10,
 ExtResource("24_qki68"): 10,
-ExtResource("25_gwhu7"): 6
+ExtResource("25_gwhu7"): 6,
+ExtResource("26_yjqq5"): 8
 })
 repopulate_timer = NodePath("../EntityRepopulateTimer")
 

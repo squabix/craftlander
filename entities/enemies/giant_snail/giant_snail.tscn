@@ -16,7 +16,7 @@
 [ext_resource type="Script" uid="uid://cf04j3voj4xyc" path="res://entities/npc_states/wandering_state.gd" id="14_feq7g"]
 [ext_resource type="Script" uid="uid://pdvlr6l3n04n" path="res://entities/npc_states/chasing_state.gd" id="15_8s0dd"]
 [ext_resource type="Script" uid="uid://b6yrmkabhfa82" path="res://entities/npc_states/searching_state.gd" id="16_lk6qv"]
-[ext_resource type="Script" uid="uid://bnwdueu864i2a" path="res://entities/enemies/giant_snail/snail_spitting_state.gd" id="16_spitstate"]
+[ext_resource type="Script" uid="uid://bnwdueu864i2a" path="res://entities/npc_states/snail_spitting_state.gd" id="16_spitstate"]
 [ext_resource type="PackedScene" uid="uid://c5x1hn4vi06bh" path="res://entities/nav_entity_guide3d.tscn" id="17_2ur16"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="18_i1yyv"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="19_pgv3p"]

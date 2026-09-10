@@ -1,72 +1,72 @@
-[gd_scene format=3 uid="uid://donyajg6jg0ms"]
+[gd_scene format=3 uid="uid://drvpvkfftged1"]
 
-[ext_resource type="Script" uid="uid://ddfxl740coqoi" path="res://entities/enemies/little_talus/little_talus.gd" id="1_so7wi"]
-[ext_resource type="Resource" uid="uid://djrww7a4plilm" path="res://entities/enemies/little_talus/little_talus_move_mode.tres" id="2_aighg"]
-[ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="3_vpv56"]
-[ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_tt2u0"]
-[ext_resource type="Script" uid="uid://bp5ab438ufrus" path="res://common3d/culling_controller3d.gd" id="5_qp2xn"]
-[ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="6_7y7ru"]
-[ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="7_2a46w"]
-[ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/signal_triggrs/signal_state_trigger.gd" id="8_ik701"]
-[ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="9_3hery"]
-[ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="10_q8vi4"]
-[ext_resource type="Script" uid="uid://v1m6kagbghjv" path="res://common3d/radial_sight_3d.gd" id="11_rqsx0"]
-[ext_resource type="Script" uid="uid://ccwod33h53a5s" path="res://common3d/controller/entity_controller3d.gd" id="12_bojey"]
-[ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="13_26wst"]
-[ext_resource type="Script" uid="uid://cf04j3voj4xyc" path="res://entities/npc_states/wandering_state.gd" id="14_m1223"]
-[ext_resource type="Script" uid="uid://pdvlr6l3n04n" path="res://entities/npc_states/chasing_state.gd" id="15_g417x"]
-[ext_resource type="PackedScene" uid="uid://c5x1hn4vi06bh" path="res://entities/nav_entity_guide3d.tscn" id="16_rrqrs"]
-[ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="17_bnejs"]
-[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="18_yamgu"]
-[ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="21_q8gfh"]
-[ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="33_apxat"]
-[ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="34_ioiqg"]
-[ext_resource type="PackedScene" uid="uid://h3veu2e18ij1" path="res://entities/entity_health_bar.tscn" id="36_3usk7"]
-[ext_resource type="AudioStream" uid="uid://cwqa0rroqx0ww" path="res://assets/sound/steps_stream.tres" id="37_s6u2m"]
-[ext_resource type="AudioStream" uid="uid://iqev25rq7fbq" path="res://assets/sound/rootling-07.mp3" id="38_ts3qc"]
-[ext_resource type="AudioStream" uid="uid://b3c73cbq1ut7n" path="res://assets/sound/rootling-09.mp3" id="39_eafs2"]
-[ext_resource type="AudioStream" uid="uid://cb3edy6gssben" path="res://assets/sound/rootling-08.mp3" id="40_kmouv"]
-[ext_resource type="AudioStream" uid="uid://vb4hdoc5mtfs" path="res://assets/sound/rootling-01.mp3" id="41_apr2d"]
-[ext_resource type="Material" uid="uid://bh8sv2icydggs" path="res://assets/materials/stone.tres" id="42_37b0g"]
-[ext_resource type="AudioStream" uid="uid://dv7i8slvjjvqf" path="res://assets/sound/rootling-02.mp3" id="42_svf73"]
-[ext_resource type="AudioStream" uid="uid://by44iwpc4os7a" path="res://assets/sound/rootling-03.mp3" id="43_y4r5v"]
-[ext_resource type="AudioStream" uid="uid://dmpw7i1okaklk" path="res://assets/sound/rootling-04.mp3" id="44_yfmoj"]
-[ext_resource type="PackedScene" uid="uid://cwktpe3hn6xos" path="res://assets/models/entities/little_talus.blend" id="45_37b0g"]
-[ext_resource type="AudioStream" uid="uid://cxppt2efnqk4e" path="res://assets/sound/rootling-05.mp3" id="45_niyif"]
-[ext_resource type="AudioStream" uid="uid://sl2wj5r6v4jx" path="res://assets/sound/rootling-06.mp3" id="46_juh4j"]
-[ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="47_33mcr"]
-[ext_resource type="AudioStream" uid="uid://ck0q8lhyrv4xy" path="res://assets/sound/rootling-10.mp3" id="48_js75o"]
-[ext_resource type="AudioStream" uid="uid://chvu761wd8xc2" path="res://assets/sound/rootling-11.mp3" id="49_3wulv"]
-[ext_resource type="AudioStream" uid="uid://c4438fvpcmcld" path="res://assets/sound/rootling-12.mp3" id="50_u6fot"]
-[ext_resource type="Resource" uid="uid://b37h3pr83pcu4" path="res://items/materials/rock/rock_item.tres" id="51_rock"]
-[ext_resource type="Resource" uid="uid://c5uhmmmlb6tko" path="res://items/materials/minerals/copper_chunk/copper_chunk_item.tres" id="52_copper"]
-[ext_resource type="Script" uid="uid://2ow28vm5clst" path="res://common/spawner/projectile_spawner3d.gd" id="53_projspawn"]
-[ext_resource type="PackedScene" uid="uid://ifqgx7y3fyj1" path="res://entities/projectiles/flying_rock/flying_rock.tscn" id="54_flyrock"]
-[ext_resource type="Resource" uid="uid://sekma2rr06f1" path="res://entities/projectiles/flying_rock/flying_rock_damage.tres" id="55_flyrockdmg"]
-[ext_resource type="Script" uid="uid://bu5gejc4tee2w" path="res://entities/npc_states/talus_throwing_state.gd" id="58_talusthrow"]
-[ext_resource type="Script" uid="uid://b6yrmkabhfa82" path="res://entities/npc_states/searching_state.gd" id="59_searching"]
+[ext_resource type="Script" uid="uid://b8r0j5asi1xkj" path="res://entities/enemies/little_ice_talus/little_ice_talus.gd" id="1_iyf1a"]
+[ext_resource type="Resource" uid="uid://bh6aeavsqa6cc" path="res://entities/enemies/little_ice_talus/little_ice_talus_move_mode.tres" id="2_rjemb"]
+[ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="3_4884t"]
+[ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_sh1tn"]
+[ext_resource type="Script" uid="uid://bp5ab438ufrus" path="res://common3d/culling_controller3d.gd" id="5_q62w8"]
+[ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="6_4dt23"]
+[ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="7_tjsg6"]
+[ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/signal_triggrs/signal_state_trigger.gd" id="8_77eyn"]
+[ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="9_b7451"]
+[ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="10_ga3fa"]
+[ext_resource type="Script" uid="uid://v1m6kagbghjv" path="res://common3d/radial_sight_3d.gd" id="11_18yax"]
+[ext_resource type="Script" uid="uid://ccwod33h53a5s" path="res://common3d/controller/entity_controller3d.gd" id="12_f13uc"]
+[ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="13_1lyt2"]
+[ext_resource type="Script" uid="uid://cf04j3voj4xyc" path="res://entities/npc_states/wandering_state.gd" id="14_nrof2"]
+[ext_resource type="Script" uid="uid://pdvlr6l3n04n" path="res://entities/npc_states/chasing_state.gd" id="15_1ot8b"]
+[ext_resource type="Script" uid="uid://b6yrmkabhfa82" path="res://entities/npc_states/searching_state.gd" id="16_nsebj"]
+[ext_resource type="Script" uid="uid://digucavtmntud" path="res://entities/enemies/little_ice_talus/talus_throwing_state.gd" id="17_06fak"]
+[ext_resource type="PackedScene" uid="uid://c5x1hn4vi06bh" path="res://entities/nav_entity_guide3d.tscn" id="18_b0gad"]
+[ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="19_7yqmn"]
+[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="20_1spdq"]
+[ext_resource type="Resource" uid="uid://b37h3pr83pcu4" path="res://items/materials/rock/rock_item.tres" id="21_j2r7q"]
+[ext_resource type="Resource" uid="uid://c5uhmmmlb6tko" path="res://items/materials/minerals/copper_chunk/copper_chunk_item.tres" id="22_b5wlr"]
+[ext_resource type="PackedScene" uid="uid://h3veu2e18ij1" path="res://entities/entity_health_bar.tscn" id="23_pxum5"]
+[ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="24_xvqxy"]
+[ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="25_e1qga"]
+[ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="26_q5g8g"]
+[ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="27_r1je1"]
+[ext_resource type="AudioStream" uid="uid://ck0q8lhyrv4xy" path="res://assets/sound/rootling-10.mp3" id="28_ydpld"]
+[ext_resource type="AudioStream" uid="uid://chvu761wd8xc2" path="res://assets/sound/rootling-11.mp3" id="29_kjp1m"]
+[ext_resource type="AudioStream" uid="uid://c4438fvpcmcld" path="res://assets/sound/rootling-12.mp3" id="30_c7u08"]
+[ext_resource type="AudioStream" uid="uid://cwqa0rroqx0ww" path="res://assets/sound/steps_stream.tres" id="31_5a18v"]
+[ext_resource type="AudioStream" uid="uid://iqev25rq7fbq" path="res://assets/sound/rootling-07.mp3" id="32_1oc00"]
+[ext_resource type="AudioStream" uid="uid://b3c73cbq1ut7n" path="res://assets/sound/rootling-09.mp3" id="33_nsmjt"]
+[ext_resource type="AudioStream" uid="uid://cb3edy6gssben" path="res://assets/sound/rootling-08.mp3" id="34_tjdjv"]
+[ext_resource type="AudioStream" uid="uid://vb4hdoc5mtfs" path="res://assets/sound/rootling-01.mp3" id="35_4lp3e"]
+[ext_resource type="AudioStream" uid="uid://dv7i8slvjjvqf" path="res://assets/sound/rootling-02.mp3" id="36_5n4ng"]
+[ext_resource type="AudioStream" uid="uid://by44iwpc4os7a" path="res://assets/sound/rootling-03.mp3" id="37_5pjqt"]
+[ext_resource type="AudioStream" uid="uid://dmpw7i1okaklk" path="res://assets/sound/rootling-04.mp3" id="38_upque"]
+[ext_resource type="AudioStream" uid="uid://cxppt2efnqk4e" path="res://assets/sound/rootling-05.mp3" id="39_c4hqp"]
+[ext_resource type="AudioStream" uid="uid://sl2wj5r6v4jx" path="res://assets/sound/rootling-06.mp3" id="40_10bv7"]
+[ext_resource type="PackedScene" uid="uid://cwktpe3hn6xos" path="res://assets/models/entities/little_talus.blend" id="41_81alf"]
+[ext_resource type="Material" uid="uid://c403ng7pn0nqg" path="res://assets/materials/ice.tres" id="42_iyf1a"]
+[ext_resource type="Script" uid="uid://2ow28vm5clst" path="res://common/spawner/projectile_spawner3d.gd" id="43_4kjsw"]
+[ext_resource type="PackedScene" uid="uid://ifqgx7y3fyj1" path="res://entities/projectiles/flying_rock/flying_rock.tscn" id="44_o54g0"]
+[ext_resource type="Resource" uid="uid://sekma2rr06f1" path="res://entities/projectiles/flying_rock/flying_rock_damage.tres" id="45_lgrv3"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
-script = ExtResource("3_vpv56")
+script = ExtResource("3_4884t")
 y = false
 metadata/_custom_type_script = "uid://bh8pcyeueeoey"
 
 [sub_resource type="Resource" id="Resource_0dji4"]
-script = ExtResource("4_tt2u0")
+script = ExtResource("4_sh1tn")
 bool_vector = SubResource("Resource_v53xr")
 metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_37b0g"]
 
 [sub_resource type="Resource" id="Resource_aoox1"]
-script = ExtResource("18_yamgu")
-item = ExtResource("51_rock")
+script = ExtResource("20_1spdq")
+item = ExtResource("21_j2r7q")
 quantity = 3
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Resource" id="Resource_uefcv"]
-script = ExtResource("18_yamgu")
-item = ExtResource("52_copper")
+script = ExtResource("20_1spdq")
+item = ExtResource("22_b5wlr")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Animation" id="Animation_3emv6"]
@@ -508,36 +508,36 @@ node_connections = [&"output", 0, &"RunBlendSpace"]
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_yocth"]
 random_pitch = 1.0594631
 streams_count = 3
-stream_0/stream = ExtResource("48_js75o")
-stream_1/stream = ExtResource("49_3wulv")
-stream_2/stream = ExtResource("50_u6fot")
+stream_0/stream = ExtResource("28_ydpld")
+stream_1/stream = ExtResource("29_kjp1m")
+stream_2/stream = ExtResource("30_c7u08")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hjjmf"]
 random_pitch = 1.122462
 streams_count = 3
-stream_0/stream = ExtResource("38_ts3qc")
-stream_1/stream = ExtResource("39_eafs2")
-stream_2/stream = ExtResource("40_kmouv")
+stream_0/stream = ExtResource("32_1oc00")
+stream_1/stream = ExtResource("33_nsmjt")
+stream_2/stream = ExtResource("34_tjdjv")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_i6t70"]
 random_pitch = 1.1892071
 streams_count = 6
-stream_0/stream = ExtResource("41_apr2d")
-stream_1/stream = ExtResource("42_svf73")
-stream_2/stream = ExtResource("43_y4r5v")
-stream_3/stream = ExtResource("44_yfmoj")
-stream_4/stream = ExtResource("45_niyif")
-stream_5/stream = ExtResource("46_juh4j")
+stream_0/stream = ExtResource("35_4lp3e")
+stream_1/stream = ExtResource("36_5n4ng")
+stream_2/stream = ExtResource("37_5pjqt")
+stream_3/stream = ExtResource("38_upque")
+stream_4/stream = ExtResource("39_c4hqp")
+stream_5/stream = ExtResource("40_10bv7")
 
-[node name="LittleTalus" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "anim_player", "health", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
+[node name="LittleIceTalus" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "anim_player", "health", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
-script = ExtResource("1_so7wi")
+script = ExtResource("1_iyf1a")
 anim_tree = NodePath("AnimationTree")
 anim_player = NodePath("AnimationPlayer")
 health = NodePath("Health")
 culling_controller = NodePath("CullingController3D")
-type = &"Little Talus"
-move_mode = ExtResource("2_aighg")
+type = &"Little Ice Talus"
+move_mode = ExtResource("2_rjemb")
 horizontal_rotation_target = NodePath(".")
 vertical_rotation_target = NodePath(".")
 rotation_range = SubResource("Resource_0dji4")
@@ -549,7 +549,7 @@ shape = SubResource("SphereShape3D_37b0g")
 
 [node name="CullingController3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=1066206516 node_paths=PackedStringArray("root", "visibility_control_list")]
 aabb = AABB(-1, 0, -1, 2, 2, 2)
-script = ExtResource("5_qp2xn")
+script = ExtResource("5_q62w8")
 root = NodePath("..")
 on_screen_process_radius = 110.0
 off_screen_process_radius = 24.0
@@ -558,7 +558,7 @@ visibility_control_list = [null]
 visibility_range_fade_margin = 10.0
 
 [node name="IntervalStaggerer" type="Node" parent="CullingController3D" unique_id=171446592 node_paths=PackedStringArray("target_methods")]
-script = ExtResource("6_7y7ru")
+script = ExtResource("6_4dt23")
 base_interval = 0.3
 target_methods = {
 NodePath(".."): &"evaluate_culling"
@@ -569,7 +569,7 @@ metadata/_custom_type_script = "uid://73ya7jxulyl4"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 8
 collision_mask = 0
-script = ExtResource("7_2a46w")
+script = ExtResource("7_tjsg6")
 health = NodePath("../Health")
 knockback_entity = NodePath("..")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
@@ -579,7 +579,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5593262, 0)
 shape = SubResource("SphereShape3D_37b0g")
 
 [node name="StartChaseTrigger" type="Node" parent="Hurtbox3D" unique_id=1954498291 node_paths=PackedStringArray("state_machine")]
-script = ExtResource("8_ik701")
+script = ExtResource("8_77eyn")
 state_machine = NodePath("../../Controller3D/Default")
 state_name = &"Chasing"
 from_state_whitelist = Array[StringName]([&"Wandering", &"Searching"])
@@ -587,13 +587,13 @@ signal_name = &"was_hurt"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 
 [node name="Health" type="Node" parent="." unique_id=780116179]
-script = ExtResource("9_3hery")
+script = ExtResource("9_b7451")
 hp = 60.0
 difficulty_profile_index = 1
 metadata/_custom_type_script = "uid://cbb5o5ykqwxfp"
 
 [node name="SignalAudioManager3D" type="Node3D" parent="Health" unique_id=1371947431 node_paths=PackedStringArray("signal_players")]
-script = ExtResource("10_q8vi4")
+script = ExtResource("10_ga3fa")
 signal_players = {
 &"was_hurt": NodePath("../../HurtPlayer")
 }
@@ -601,7 +601,7 @@ metadata/_custom_type_script = "uid://43bqjaemfda5"
 
 [node name="Sight3D" type="Node3D" parent="." unique_id=713539717]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-script = ExtResource("11_rqsx0")
+script = ExtResource("11_18yax")
 radius = 15.0
 lose_distance = 20.0
 target_collision_mask = 16
@@ -609,7 +609,7 @@ group_whitelist = Array[StringName]([&"player"])
 ray_collision_mask = 21
 
 [node name="StartChaseTrigger" type="Node" parent="Sight3D" unique_id=1196415362 node_paths=PackedStringArray("state_machine")]
-script = ExtResource("8_ik701")
+script = ExtResource("8_77eyn")
 state_machine = NodePath("../../Controller3D/Default")
 state_name = &"Chasing"
 from_state_whitelist = Array[StringName]([&"Wandering", &"Searching"])
@@ -617,7 +617,7 @@ signal_name = &"found_target"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 
 [node name="StartSearchTrigger" type="Node" parent="Sight3D" unique_id=1394927032 node_paths=PackedStringArray("state_machine")]
-script = ExtResource("8_ik701")
+script = ExtResource("8_77eyn")
 state_machine = NodePath("../../Controller3D/Default")
 state_name = &"Searching"
 from_state_whitelist = Array[StringName]([&"Chasing", &"Throwing"])
@@ -625,7 +625,7 @@ signal_name = &"lost_target"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 
 [node name="IntervalStaggerer" type="Node" parent="Sight3D" unique_id=1889967183 node_paths=PackedStringArray("target_methods")]
-script = ExtResource("6_7y7ru")
+script = ExtResource("6_4dt23")
 base_interval = 0.2
 target_methods = {
 NodePath(".."): &"update_target"
@@ -633,18 +633,18 @@ NodePath(".."): &"update_target"
 metadata/_custom_type_script = "uid://73ya7jxulyl4"
 
 [node name="Controller3D" type="Node" parent="." unique_id=1315753818]
-script = ExtResource("12_bojey")
+script = ExtResource("12_f13uc")
 metadata/_custom_type_script = "uid://ccwod33h53a5s"
 
 [node name="Default" type="Node" parent="Controller3D" unique_id=1574117420 node_paths=PackedStringArray("root")]
-script = ExtResource("13_26wst")
+script = ExtResource("13_1lyt2")
 root = NodePath("../..")
 process_update = true
 physics_process_update = true
 metadata/_custom_type_script = "uid://bqonxtntgndfr"
 
 [node name="Wandering" type="Node" parent="Controller3D/Default" unique_id=1882444428 node_paths=PackedStringArray("nav_guide", "idle_timer", "root")]
-script = ExtResource("14_m1223")
+script = ExtResource("14_nrof2")
 nav_guide = NodePath("../../NavEntityGuide3D")
 reach_distance = 0.5
 idle_timer = NodePath("Timer")
@@ -654,7 +654,7 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 [node name="Timer" type="Timer" parent="Controller3D/Default/Wandering" unique_id=1600727395]
 
 [node name="SignalAudioManager3D" type="Node3D" parent="Controller3D/Default/Wandering" unique_id=1121028117 node_paths=PackedStringArray("signal_players")]
-script = ExtResource("10_q8vi4")
+script = ExtResource("10_ga3fa")
 signal_players = {
 &"entered": NodePath("../../../../TalkPlayer"),
 &"exited": NodePath("../../../../TalkPlayer"),
@@ -663,66 +663,66 @@ signal_players = {
 }
 metadata/_custom_type_script = "uid://43bqjaemfda5"
 
-[node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=1883496829 node_paths=PackedStringArray("guide", "sight", "interval_staggerer", "root")]
-script = ExtResource("15_g417x")
-guide = NodePath("../../NavEntityGuide3D")
-sight = NodePath("../../../Sight3D")
+[node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=1883496829 node_paths=PackedStringArray("interval_staggerer", "guide", "sight", "root")]
+script = ExtResource("15_1ot8b")
 interval_staggerer = NodePath("IntervalStaggerer")
 advance_goal_distance = 6.0
 reach_state = &"Throwing"
 lose_target_state = &"Searching"
+guide = NodePath("../../NavEntityGuide3D")
+sight = NodePath("../../../Sight3D")
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="IntervalStaggerer" type="Node" parent="Controller3D/Default/Chasing" unique_id=1668925528 node_paths=PackedStringArray("target_methods")]
-script = ExtResource("6_7y7ru")
+script = ExtResource("6_4dt23")
 base_interval = 0.25
 target_methods = {
 NodePath(".."): &"update_path"
 }
 metadata/_custom_type_script = "uid://73ya7jxulyl4"
 
-[node name="Searching" type="Node" parent="Controller3D/Default" unique_id=959116065 node_paths=PackedStringArray("guide", "sight", "interval_staggerer", "root")]
-script = ExtResource("59_searching")
-guide = NodePath("../../NavEntityGuide3D")
-sight = NodePath("../../../Sight3D")
+[node name="Searching" type="Node" parent="Controller3D/Default" unique_id=959116065 node_paths=PackedStringArray("interval_staggerer", "guide", "sight", "root")]
+script = ExtResource("16_nsebj")
 interval_staggerer = NodePath("IntervalStaggerer")
 found_target_state = &"Chasing"
 give_up_state = &"Wandering"
 reach_distance = 0.3
+guide = NodePath("../../NavEntityGuide3D")
+sight = NodePath("../../../Sight3D")
 root = NodePath("../../..")
 
 [node name="IntervalStaggerer" type="Node" parent="Controller3D/Default/Searching" unique_id=981935057 node_paths=PackedStringArray("target_methods")]
-script = ExtResource("6_7y7ru")
+script = ExtResource("6_4dt23")
 base_interval = 0.25
 target_methods = {
 NodePath(".."): &"check_status"
 }
 metadata/_custom_type_script = "uid://73ya7jxulyl4"
 
-[node name="Throwing" type="Node" parent="Controller3D/Default" unique_id=92875890 node_paths=PackedStringArray("left_arm", "right_arm", "left_spawner", "right_spawner", "guide", "sight", "anim_player", "anim_tree", "health", "root")]
-script = ExtResource("58_talusthrow")
+[node name="Throwing" type="Node" parent="Controller3D/Default" unique_id=92875890 node_paths=PackedStringArray("left_arm", "right_arm", "left_spawner", "right_spawner", "anim_player", "anim_tree", "health", "guide", "sight", "root")]
+script = ExtResource("17_06fak")
 left_arm = NodePath("../../../Visuals/ArmLeft")
 right_arm = NodePath("../../../Visuals/ArmRight")
 left_spawner = NodePath("../../../Visuals/ArmLeft/LeftHandSpawner/ProjectileSpawner3D")
 right_spawner = NodePath("../../../Visuals/ArmRight/RightHandSpawner/ProjectileSpawner3D")
-guide = NodePath("../../NavEntityGuide3D")
-sight = NodePath("../../../Sight3D")
 anim_player = NodePath("../../../AnimationPlayer")
 anim_tree = NodePath("../../../AnimationTree")
 health = NodePath("../../../Health")
 max_range = 12.0
 return_to_chase_state = &"Chasing"
+guide = NodePath("../../NavEntityGuide3D")
+sight = NodePath("../../../Sight3D")
 root = NodePath("../../..")
 
-[node name="NavEntityGuide3D" parent="Controller3D" unique_id=1240188709 node_paths=PackedStringArray("nav", "entity") instance=ExtResource("16_rrqrs")]
+[node name="NavEntityGuide3D" parent="Controller3D" unique_id=1240188709 node_paths=PackedStringArray("nav", "entity") instance=ExtResource("18_b0gad")]
 nav = NodePath("../../NavigationAgent3D")
 entity = NodePath("../..")
 
 [node name="Inventory" type="Node" parent="." unique_id=2020826484]
 unique_name_in_owner = true
-script = ExtResource("17_bnejs")
-item_instances = Array[ExtResource("18_yamgu")]([SubResource("Resource_aoox1"), SubResource("Resource_uefcv")])
+script = ExtResource("19_7yqmn")
+item_instances = Array[ExtResource("20_1spdq")]([SubResource("Resource_aoox1"), SubResource("Resource_uefcv")])
 constant = true
 size = 2
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
@@ -743,14 +743,14 @@ tree_root = SubResource("AnimationNodeBlendTree_p5gg5")
 anim_player = NodePath("../AnimationPlayer")
 parameters/RunBlendSpace/blend_position = 0.0
 
-[node name="HealthBar3D" parent="." unique_id=1387087405 node_paths=PackedStringArray("entity", "health") instance=ExtResource("36_3usk7")]
+[node name="HealthBar3D" parent="." unique_id=1387087405 node_paths=PackedStringArray("entity", "health") instance=ExtResource("23_pxum5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 entity = NodePath("..")
 health = NodePath("../Health")
 
 [node name="InventoryDropper3D" type="Node3D" parent="." unique_id=709626360 node_paths=PackedStringArray("inventory", "health")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-script = ExtResource("21_q8gfh")
+script = ExtResource("24_xvqxy")
 inventory = NodePath("../Inventory")
 health = NodePath("../Health")
 death_drop_mode = 1
@@ -758,14 +758,14 @@ metadata/_custom_type_script = "uid://bpmbg0e28ujs7"
 
 [node name="ParticleSpawner3D" type="Node3D" parent="." unique_id=1876124391]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-script = ExtResource("33_apxat")
-scenes = Array[PackedScene]([ExtResource("34_ioiqg")])
+script = ExtResource("25_e1qga")
+scenes = Array[PackedScene]([ExtResource("26_q5g8g")])
 spawn_on_exit_tree = true
 metadata/_custom_type_script = "uid://bhjxscxhtg2se"
 
 [node name="AudioSpawner3D" type="Node3D" parent="." unique_id=813638048 node_paths=PackedStringArray("templates")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-script = ExtResource("47_33mcr")
+script = ExtResource("27_r1je1")
 templates = [NodePath("DeathPlayer")]
 spawn_on_exit_tree = true
 metadata/_custom_type_script = "uid://bv2ss5hjacgd3"
@@ -778,7 +778,7 @@ bus = &"SFX"
 
 [node name="StepPlayer" type="AudioStreamPlayer3D" parent="." unique_id=119782908]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-stream = ExtResource("37_s6u2m")
+stream = ExtResource("31_5a18v")
 max_db = -6.0
 bus = &"SFX"
 
@@ -794,45 +794,45 @@ unit_size = 1.0
 max_db = 0.0
 bus = &"SFX"
 
-[node name="Visuals" parent="." unique_id=124486934 instance=ExtResource("45_37b0g")]
+[node name="Visuals" parent="." unique_id=124486934 instance=ExtResource("41_81alf")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
 
 [node name="Head" parent="Visuals" index="0" unique_id=1312165250]
-transform = Transform3D(1, 0, 0, 0, 0.99980646, -0.019673884, 0, 0.019673884, 0.99980646, 0, 0, 0)
-surface_material_override/0 = ExtResource("42_37b0g")
+transform = Transform3D(1, 0, 0, 0, 0.99757004, -0.06967047, 0, 0.06967047, 0.99757004, 0, 0, 0)
+surface_material_override/0 = ExtResource("42_iyf1a")
 
 [node name="LegLeft" parent="Visuals" index="1" unique_id=856653343]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -0.49508578, -0.5002392, 0.05319056)
-surface_material_override/0 = ExtResource("42_37b0g")
+surface_material_override/0 = ExtResource("42_iyf1a")
 
 [node name="LegRight" parent="Visuals" index="2" unique_id=1900297946]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.524, -0.5, 0.064)
-surface_material_override/0 = ExtResource("42_37b0g")
+surface_material_override/0 = ExtResource("42_iyf1a")
 
 [node name="ArmRight" parent="Visuals" index="3" unique_id=831163117]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.9, 0, 0)
-surface_material_override/0 = ExtResource("42_37b0g")
+surface_material_override/0 = ExtResource("42_iyf1a")
 
 [node name="RightHandSpawner" type="Node3D" parent="Visuals/ArmRight" index="0" unique_id=895416736]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
 
 [node name="ProjectileSpawner3D" type="Node3D" parent="Visuals/ArmRight/RightHandSpawner" unique_id=1580731255 node_paths=PackedStringArray("source")]
-script = ExtResource("53_projspawn")
-projectile_scene = ExtResource("54_flyrock")
-damage = ExtResource("55_flyrockdmg")
+script = ExtResource("43_4kjsw")
+projectile_scene = ExtResource("44_o54g0")
+damage = ExtResource("45_lgrv3")
 source = NodePath("../../../..")
 
 [node name="ArmLeft" parent="Visuals" index="4" unique_id=404479199]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 0, 0)
-surface_material_override/0 = ExtResource("42_37b0g")
+surface_material_override/0 = ExtResource("42_iyf1a")
 
 [node name="LeftHandSpawner" type="Node3D" parent="Visuals/ArmLeft" index="0" unique_id=1412564645]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
 
 [node name="ProjectileSpawner3D" type="Node3D" parent="Visuals/ArmLeft/LeftHandSpawner" unique_id=380382493 node_paths=PackedStringArray("source")]
-script = ExtResource("53_projspawn")
-projectile_scene = ExtResource("54_flyrock")
-damage = ExtResource("55_flyrockdmg")
+script = ExtResource("43_4kjsw")
+projectile_scene = ExtResource("44_o54g0")
+damage = ExtResource("45_lgrv3")
 source = NodePath("../../../..")
 
 [editable path="Visuals"]
