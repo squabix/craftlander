@@ -259,6 +259,7 @@ toggle_perf_overlay={
 3d_physics/layer_5="entity"
 3d_physics/layer_6="item_pickup"
 3d_physics/layer_7="ghost_floor"
+3d_physics/layer_8="climb_blocker"
 
 [physics]
 

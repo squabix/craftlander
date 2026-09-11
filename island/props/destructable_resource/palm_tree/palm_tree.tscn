@@ -28,6 +28,7 @@
 [ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="34_q3s4q"]
 [ext_resource type="PackedScene" uid="uid://72lfyk3a5w1s" path="res://assets/models/props/palm_tree1.blend" id="35_jiqyg"]
 [ext_resource type="Material" uid="uid://cxxp5ww380hsd" path="res://assets/materials/palm_leaves.tres" id="36_whjq2"]
+[ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/mesh_barrier_3d.gd" id="37_tallblk"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hjjmf"]
 height = 4.3061523
@@ -290,6 +291,15 @@ surface_material_override/1 = ExtResource("19_0rjp4")
 
 [node name="Stump" parent="Trunk/BlenderMeshes" index="8" unique_id=934986723]
 visible = false
+
+[node name="ClimbBlocker" type="StaticBody3D" parent="."]
+collision_layer = 128
+collision_mask = 0
+
+[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" node_paths=PackedStringArray("mesh_instance")]
+script = ExtResource("37_tallblk")
+mesh_instance = NodePath("../../Trunk/BlenderMeshes/Trunk")
+generate_on_ready = true
 
 [node name="ChopParticles" type="GPUParticles3D" parent="." unique_id=931223418]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)

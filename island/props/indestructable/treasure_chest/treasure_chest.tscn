@@ -14,6 +14,7 @@
 [ext_resource type="Material" uid="uid://cs0o6t0l4rg23" path="res://assets/materials/ruby.tres" id="10_mvsxc"]
 [ext_resource type="Material" uid="uid://hjut50oqofjs" path="res://assets/materials/emerald.tres" id="11_5hnl4"]
 [ext_resource type="Script" uid="uid://favgu1tbe1tq" path="res://common3d/interactions/interactable3d.gd" id="13_mvsxc"]
+[ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/mesh_barrier_3d.gd" id="14_tallblk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c835m"]
 resource_name = "Material.002"
@@ -299,6 +300,15 @@ vertices = PackedVector3Array(-1.1262299, 0, -0.6757244, 1.1262299, 0, -0.675724
 script = ExtResource("4_ccn32")
 mesh_instance = NodePath("../Visuals/Box")
 metadata/_custom_type_script = "uid://bf4816o00o0s5"
+
+[node name="ClimbBlocker" type="StaticBody3D" parent="."]
+collision_layer = 128
+collision_mask = 0
+
+[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" node_paths=PackedStringArray("mesh_instance")]
+script = ExtResource("14_tallblk")
+mesh_instance = NodePath("../../Visuals/Box")
+generate_on_ready = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=376416284]
 

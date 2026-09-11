@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cfuscb22fbm0k" path="res://assets/models/props/giant_ribcage.blend" id="3_68onp"]
 [ext_resource type="Material" uid="uid://brsw8xc5rh2lv" path="res://assets/materials/bone.tres" id="4_68onp"]
 [ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="17_daugc"]
+[ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/mesh_barrier_3d.gd" id="18_tallblk"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2maav"]
 points = PackedVector3Array(0.30919653, 0.13607265, 1.0284665, 0.8232536, -0.022055559, 0.23754287, 0.8232536, 0.09650866, 0.23754287, 0.9813082, 0.13607265, 0.75170827, 0.11135721, 0.29432863, 0.7911406, 0.11135721, -0.061576962, 0.9890342, 1.2188238, -0.14074755, 0.3166515, 1.1000118, 0.21515805, 0.23754287, 0.15092504, -0.061576962, 0.7121133, 0.94184875, 0.25472206, 0.6725997, 0.50692743, -0.061576962, 0.9099255, 0.15092504, 0.29432863, 0.9890342, 0.9023893, -0.14074755, 0.23754287, 0.11135721, 0.13607265, 0.6725997, 1.2188238, 0.13607265, 0.27713785, 1.0605524, -0.14074755, 0.47486874, 0.86282146, 0.17559406, 0.23754287, 1.2188238, -0.14074755, 0.23754287, 0.11135721, 0.017465845, 1.0681428, 0.15092504, 0.21515805, 1.0681428, 0.9813082, 0.25472206, 0.47486874, 0.11135721, 0.25472206, 0.7121133, 0.11135721, 0.057029836, 0.6725997, 1.0605524, -0.022055559, 0.5935723, 0.86282146, -0.14074755, 0.514545, 0.38822386, 0.25472206, 0.94935787, 0.30919653, 0.29432863, 0.75170827, 0.11135721, 0.29432863, 0.9890342, 0.11135721, -0.061576962, 0.75170827, 0.26962864, -0.061576962, 0.9890342, 0.19049293, 0.057029836, 1.0681428, 1.020876, 0.21515805, 0.23754287)
@@ -107,6 +108,15 @@ shape = SubResource("ConvexPolygonShape3D_lyokb")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=739207746]
 transform = Transform3D(2.5, 0, 0, 0, 0, 2.5, 0, -2.5, 0, 0, 0.53061956, -1.313453)
 shape = SubResource("ConvexPolygonShape3D_ubjhr")
+
+[node name="ClimbBlocker" type="StaticBody3D" parent="."]
+collision_layer = 128
+collision_mask = 0
+
+[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" node_paths=PackedStringArray("mesh_instance")]
+script = ExtResource("18_tallblk")
+mesh_instance = NodePath("../../giant_ribcage/Ribcage")
+generate_on_ready = true
 
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=415438826]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.018249989, -1.2936306, 0.09867191)
