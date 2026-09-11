@@ -17,6 +17,7 @@ group_uniforms Clouds;
 uniform sampler2D cloud_tex_01;
 uniform sampler2D cloud_tex_02;
 uniform vec4 cloud_color : source_color = vec4(0.8, 0.8, 0.8, 1.0);
+uniform float cloud_night_brightness : hint_range(0.0, 1.0, 0.05) = 0.15;
 uniform vec2 cloud_tiling = vec2(1.0);
 uniform vec2 wind_speed = vec2(0.5);
 uniform float cloud_density : hint_range(0.0, 5.0, 0.1) = 0.7;
@@ -91,7 +92,10 @@ void sky() {
 	sky_color = mix(sky_night_mix, sky_color, clamp(pow(1.0+blend, 4.0),0.0,1.0)).rgb;
 
 	sky = mix(sky_color, horizon_color, pow(1.0 - abs(EYEDIR.y), horizon_exponent));
-	sky = mix(sky, cloud_color.rgb * 1.0, pow(cloud_value, 0.8));
+
+	float cloud_light_amount = pow(clamp(1.0 + blend, 0.0, 1.0), night_amount_exponent);
+	vec3 lit_cloud_color = mix(cloud_color.rgb * cloud_night_brightness, cloud_color.rgb, cloud_light_amount);
+	sky = mix(sky, lit_cloud_color, pow(cloud_value, 0.8));
 
 
 	sky += stars * 1.0;
