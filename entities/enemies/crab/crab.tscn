@@ -32,6 +32,7 @@
 [ext_resource type="AudioStream" uid="uid://b3c73cbq1ut7n" path="res://assets/sound/rootling-09.mp3" id="40_1q0xn"]
 [ext_resource type="AudioStream" uid="uid://cb3edy6gssben" path="res://assets/sound/rootling-08.mp3" id="41_iu1er"]
 [ext_resource type="AudioStream" uid="uid://vb4hdoc5mtfs" path="res://assets/sound/rootling-01.mp3" id="42_gc3o0"]
+[ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/materials/base_shader.gdshader" id="43_c61qr"]
 [ext_resource type="AudioStream" uid="uid://dv7i8slvjjvqf" path="res://assets/sound/rootling-02.mp3" id="43_k123i"]
 [ext_resource type="AudioStream" uid="uid://by44iwpc4os7a" path="res://assets/sound/rootling-03.mp3" id="44_rjauu"]
 [ext_resource type="AudioStream" uid="uid://dmpw7i1okaklk" path="res://assets/sound/rootling-04.mp3" id="45_vhkt8"]
@@ -506,6 +507,18 @@ stream_0/stream = ExtResource("49_ve67p")
 stream_1/stream = ExtResource("50_tkmry")
 stream_2/stream = ExtResource("51_wsrvc")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ai86q"]
+render_priority = 0
+shader = ExtResource("43_c61qr")
+shader_parameter/albedo = Color(0.9999992, 0.3486507, 0.07053455, 1)
+shader_parameter/alpha_value = 1.0
+shader_parameter/hue_variance = 0.0
+shader_parameter/sat_variance = 0.1470000069825
+shader_parameter/val_variance = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.5
+shader_parameter/refraction_strength = 0.05
+
 [node name="Crab" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "culling_controller", "attack_ray", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
 script = ExtResource("1_bjjfe")
@@ -768,6 +781,9 @@ bus = &"SFX"
 [node name="Visuals" parent="." unique_id=126542843 instance=ExtResource("52_crab")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.05, 0)
 
+[node name="Body" parent="Visuals" index="0" unique_id=322165332]
+surface_material_override/0 = SubResource("ShaderMaterial_ai86q")
+
 [node name="LegLeft1" parent="Visuals" index="1" unique_id=1995342819]
 transform = Transform3D(0.92910683, 0, -0.36981064, 0, 0.99999976, 0, 0.36981055, 0, 0.929107, 0.61, 0.29067695, 0.46009153)
 
@@ -781,30 +797,32 @@ transform = Transform3D(0.9512167, 0, 0.30852395, 0, 0.9999999, 0, -0.30852395, 
 transform = Transform3D(0.9512165, 0, 0.3085239, 0, 0.9999998, 0, -0.3085239, 0, 0.9512165, 0.61, 0.29067695, -0.43177554)
 
 [node name="LegRight4" parent="Visuals" index="5" unique_id=1757407260]
-transform = Transform3D(-0.9291069, 0, 0.3698104, 0, 0.9999997, 0, -0.3698104, 0, -0.92910683, -0.61, 0.29067695, -0.4414636)
+transform = Transform3D(-0.92910683, 0, 0.3698104, 0, 0.9999997, 0, -0.3698104, 0, -0.92910683, -0.61, 0.29067695, -0.4414636)
 
 [node name="LegRight3" parent="Visuals" index="6" unique_id=1438847021]
 transform = Transform3D(-0.973648, 0, 0.22805592, 0, 0.99999994, 0, -0.22805592, 0, -0.973648, -0.75, 0.29067695, -0.17361851)
 
 [node name="LegRight2" parent="Visuals" index="7" unique_id=1481521480]
-transform = Transform3D(-0.9512163, 0, -0.30852425, 0, 0.9999999, 0, 0.3085242, 0, -0.95121646, -0.75, 0.29067695, 0.15406431)
+transform = Transform3D(-0.9512162, 0, -0.30852425, 0, 0.9999999, 0, 0.3085242, 0, -0.95121646, -0.75, 0.29067695, 0.15406431)
 
 [node name="LegRight1" parent="Visuals" index="8" unique_id=101064460]
-transform = Transform3D(-0.9512163, 0, -0.3085242, 0, 0.9999999, 0, 0.3085242, 0, -0.9512163, -0.61, 0.29067695, 0.45040345)
+transform = Transform3D(-0.9512162, 0, -0.3085242, 0, 0.9999999, 0, 0.3085242, 0, -0.9512162, -0.61, 0.29067695, 0.45040345)
 
 [node name="RightEye" parent="Visuals" index="9" unique_id=117339595]
-transform = Transform3D(0.9758145, 0.21859613, 0, -0.21859613, 0.9758145, 0, 0, 0, 1, 0.364232, 0.51504517, -0.35145503)
+transform = Transform3D(0.97581446, 0.21859612, 0, -0.21859612, 0.97581446, 0, 0, 0, 1, 0.364232, 0.51504517, -0.35145503)
 surface_material_override/1 = ExtResource("27_j6jda")
 surface_material_override/2 = ExtResource("26_x0yhf")
 
 [node name="LeftClaw" parent="Visuals" index="10" unique_id=238653151]
 transform = Transform3D(0.97380084, -0.22653686, 0.019819323, 7.450553e-09, 0.087155454, 0.9961944, -0.22740212, -0.9700955, 0.08487204, -0.5912068, 0.40543905, -0.3159569)
+surface_material_override/0 = SubResource("ShaderMaterial_ai86q")
 
 [node name="RightClaw" parent="Visuals" index="11" unique_id=1064897470]
 transform = Transform3D(0.9738011, -0.22653683, 0.019819323, 7.450555e-09, 0.08715545, 0.9961944, -0.22740218, -0.9700954, 0.08487204, 0.591207, 0.40543905, -0.3159569)
+surface_material_override/0 = SubResource("ShaderMaterial_ai86q")
 
 [node name="LeftEye" parent="Visuals" index="12" unique_id=2074241274]
-transform = Transform3D(0.9758152, -0.21859626, 0, 0.21859626, 0.9758152, 0, 0, 0, 1, -0.364232, 0.51504517, -0.35145503)
+transform = Transform3D(0.9758151, -0.21859626, 0, 0.21859626, 0.9758151, 0, 0, 0, 1, -0.364232, 0.51504517, -0.35145503)
 surface_material_override/1 = ExtResource("27_j6jda")
 surface_material_override/2 = ExtResource("26_x0yhf")
 

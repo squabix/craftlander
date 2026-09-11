@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ba6vucjld02co"]
 
 [ext_resource type="Script" uid="uid://cyj4kbcybeaby" path="res://main/island.gd" id="1_tvyw1"]
+[ext_resource type="PackedScene" path="res://island/skies/day_night_cycle.tscn" id="99_dncscn"]
 [ext_resource type="Resource" uid="uid://b0gw02djkff0d" path="res://island/island_resources/undead_atoll.tres" id="2_msgsa"]
 [ext_resource type="Environment" uid="uid://cibxuhtgknost" path="res://assets/default_environment.tres" id="3_n7bhn"]
 [ext_resource type="Script" uid="uid://bm2wgrxee7bdu" path="res://island/docking/docking_manager.gd" id="4_ouqo7"]
@@ -236,7 +237,7 @@ ExtResource("30_n7bhn"): 1
 spawner_distribution = 2
 metadata/_custom_type_script = "uid://bprm4lolnfext"
 
-[node name="Island3" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "player_boat_adder", "docking_managers", "name_label", "name_anim_player", "world_environment", "sun", "spawn_container")]
+[node name="Island3" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "player_boat_adder", "docking_managers", "name_label", "name_anim_player", "world_environment", "sun", "day_night_cycle", "spawn_container")]
 script = ExtResource("1_tvyw1")
 resource = ExtResource("2_msgsa")
 player = NodePath("DockingManager1/Player")
@@ -251,10 +252,15 @@ name_label = NodePath("NameLabel")
 name_anim_player = NodePath("NameLabel/AnimationPlayer")
 world_environment = NodePath("WorldEnvironment")
 sun = NodePath("DirectionalLight3D")
+day_night_cycle = NodePath("DayNightCycle")
 spawn_container = NodePath("SpawnContainer")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2120940629]
 environment = ExtResource("3_n7bhn")
+
+[node name="DayNightCycle" parent="." node_paths=PackedStringArray("sun", "world_environment") instance=ExtResource("99_dncscn")]
+sun = NodePath("../DirectionalLight3D")
+world_environment = NodePath("../WorldEnvironment")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1902175977]
 transform = Transform3D(0.926288, 0.3698345, -0.07220116, -0.23284376, 0.71241987, 0.6619982, 0.29626724, -0.59638953, 0.7460196, 0, 0, 0)

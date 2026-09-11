@@ -15,6 +15,7 @@ const CRAFT_ACHIEVEMENTS: Dictionary[String, StringName] = {
 
 const HUNTER_KILL_THRESHOLD := 50
 const CLOSE_CALL_MAX_HP_PERCENT := 0.1
+const SURVIVE_NIGHTS_THRESHOLD := 10
 
 
 func _ready() -> void:
@@ -63,3 +64,9 @@ func _on_island_populated() -> void:
 
 func _on_treasure_chest_opened() -> void:
 	SteamManager.unlock_achievement(SteamIDs.ACH_TREASURE_HUNTER)
+
+
+func on_day_survived() -> void:
+	SteamManager.increment_stat(SteamIDs.STAT_DAYS_SURVIVED)
+	if SteamManager.get_stat(SteamIDs.STAT_DAYS_SURVIVED) >= SURVIVE_NIGHTS_THRESHOLD - 1:
+		SteamManager.unlock_achievement(SteamIDs.ACH_SURVIVE_10_NIGHTS)

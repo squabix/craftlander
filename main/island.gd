@@ -31,6 +31,7 @@ enum PlayerSpawnMode {BOAT, ISLAND_CENTER}
 @export_group("Sky Setting")
 @export var world_environment: WorldEnvironment
 @export var sun: DirectionalLight3D
+@export var day_night_cycle: DayNightCycle
 
 @export_group("Misc")
 @export var spawn_container: Node3D
@@ -66,7 +67,7 @@ func _ready() -> void:
 	advance_step()
 	NodeSaver.load_all()
 	
-	update_sky_setting()
+	update_sky_setting(not is_reloading)
 	
 	advance_step()
 	mesh_aggregator.aggregate()
@@ -117,10 +118,11 @@ func connect_player_boat_adder() -> void:
 	player_boat_adder.spawned.connect(position_player_at_spawn.unbind(1))
 
 
-func update_sky_setting() -> void:
-	Main.loaded_save.sky_setting = SkySetting.latest(Main.loaded_save.sky_setting, resource.arrival_setting)
-	Main.loaded_save.sky_setting.update_sun(sun)
-	Main.loaded_save.sky_setting.update_environment(world_environment)
+func update_sky_setting(is_first_visit: bool) -> void:
+	if is_first_visit:
+		day_night_cycle.reset_to_day_start()
+	day_night_cycle.palette = resource.sky_palette
+	day_night_cycle.day_started.connect(SteamManager.achievements.on_day_survived)
 
 
 func reload_save() -> void:

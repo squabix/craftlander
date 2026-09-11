@@ -6,6 +6,7 @@ const APP_ID := 5051720
 const STATS_FLUSH_INTERVAL_S := 5.0
 
 var is_active := false
+var achievements: GameAchievements
 
 var _stats_dirty := false
 var _flush_timer: Timer
@@ -23,7 +24,8 @@ func _ready() -> void:
 	add_child(_flush_timer)
 	_flush_timer.start()
 
-	add_child(GameAchievements.new())
+	achievements = GameAchievements.new()
+	add_child(achievements)
 
 
 func _process(_delta: float) -> void:

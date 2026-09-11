@@ -1,15 +1,26 @@
 [gd_resource type="Resource" script_class="IslandResource" format=3 uid="uid://bbo58dytvrrts"]
 
-[ext_resource type="Script" uid="uid://7s1w1ts4d614" path="res://island/skies/sky_setting.gd" id="1_iviav"]
 [ext_resource type="Material" uid="uid://dia41efen5cu" path="res://island/skies/sky_material0.tres" id="2_h1gtv"]
 [ext_resource type="Script" uid="uid://7dsenmmyrsaw" path="res://island/island_resource.gd" id="2_xgdvb"]
+[ext_resource type="Script" uid="uid://7s1w1ts4d614" path="res://island/skies/sky_palette.gd" id="3_h1gtv"]
 [ext_resource type="Texture2D" uid="uid://rkjrkq1h4i1x" path="res://assets/ui/skelly_sandbar.png" id="3_iviav"]
+[ext_resource type="Curve" uid="uid://cjqbwo2cr30oc" path="res://island/skies/default_sun_energy_curve.tres" id="5_h1gtv"]
+[ext_resource type="Curve" uid="uid://dwe4cf06deruu" path="res://island/skies/default_brightness_curve.tres" id="6_bright"]
+[ext_resource type="Curve" uid="uid://cwhwu4k03glo5" path="res://island/skies/default_contrast_curve.tres" id="7_contr"]
+[ext_resource type="Curve" uid="uid://cfmvgphk3bt55" path="res://island/skies/default_saturation_curve.tres" id="8_satur"]
 
-[sub_resource type="Resource" id="Resource_bp4kh"]
-script = ExtResource("1_iviav")
-time_index = 1
+[sub_resource type="Gradient" id="Gradient_skelly_sun"]
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(1, 0.8, 0.6, 1, 1, 0.95, 0.85, 1, 1, 0.55, 0.3, 1, 0.35, 0.4, 0.55, 1, 1, 0.8, 0.6, 1)
+
+[sub_resource type="Resource" id="Resource_qki68"]
+script = ExtResource("3_h1gtv")
 sky_material = ExtResource("2_h1gtv")
-sun_rotation_degrees = Vector3(-25, 0, 0)
+sun_color = SubResource("Gradient_skelly_sun")
+sun_energy = ExtResource("5_h1gtv")
+brightness = ExtResource("6_bright")
+contrast = ExtResource("7_contr")
+saturation = ExtResource("8_satur")
 metadata/_custom_type_script = "uid://7s1w1ts4d614"
 
 [resource]
@@ -17,5 +28,5 @@ script = ExtResource("2_xgdvb")
 name = "Skelly Sandbar"
 icon = ExtResource("3_iviav")
 index = 1
-arrival_setting = SubResource("Resource_bp4kh")
+sky_palette = SubResource("Resource_qki68")
 metadata/_custom_type_script = "uid://7dsenmmyrsaw"

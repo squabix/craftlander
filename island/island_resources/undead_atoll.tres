@@ -1,17 +1,29 @@
 [gd_resource type="Resource" script_class="IslandResource" format=3 uid="uid://b0gw02djkff0d"]
 
-[ext_resource type="Script" uid="uid://7s1w1ts4d614" path="res://island/skies/sky_setting.gd" id="1_ms8qj"]
+[ext_resource type="Script" uid="uid://7s1w1ts4d614" path="res://island/skies/sky_palette.gd" id="1_ms8qj"]
 [ext_resource type="Script" uid="uid://7dsenmmyrsaw" path="res://island/island_resource.gd" id="2_6or2c"]
 [ext_resource type="Material" uid="uid://d0vqjxjqqesv3" path="res://island/skies/sky_material2.tres" id="2_jw0kq"]
 [ext_resource type="Texture2D" uid="uid://ciiwqixcwq7r4" path="res://assets/ui/undead_atoll.png" id="3_ms8qj"]
+[ext_resource type="Curve" uid="uid://dwe4cf06deruu" path="res://island/skies/default_brightness_curve.tres" id="6_bright"]
+[ext_resource type="Curve" uid="uid://cwhwu4k03glo5" path="res://island/skies/default_contrast_curve.tres" id="7_contr"]
+[ext_resource type="Curve" uid="uid://cfmvgphk3bt55" path="res://island/skies/default_saturation_curve.tres" id="8_satur"]
+
+[sub_resource type="Gradient" id="Gradient_undead_sun"]
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(0.9, 0.5, 0.6, 1, 1, 0.6, 0.69, 1, 0.8, 0.35, 0.5, 1, 0.25, 0.15, 0.3, 1, 0.9, 0.5, 0.6, 1)
+
+[sub_resource type="Curve" id="Curve_undead_energy"]
+_data = [Vector2(0, 0.3), 0.0, 0.0, 0, 0, Vector2(0.25, 0.5), 0.0, 0.0, 0, 0, Vector2(0.5, 0.25), 0.0, 0.0, 0, 0, Vector2(0.75, 0.05), 0.0, 0.0, 0, 0, Vector2(1, 0.3), 0.0, 0.0, 0, 0]
+point_count = 5
 
 [sub_resource type="Resource" id="Resource_iviav"]
 script = ExtResource("1_ms8qj")
-time_index = 3
 sky_material = ExtResource("2_jw0kq")
-sun_rotation_degrees = Vector3(-80, 0, 0)
-sun_color = Color(1, 0.6, 0.68666667, 1)
-sun_energy = 0.5
+sun_color = SubResource("Gradient_undead_sun")
+sun_energy = SubResource("Curve_undead_energy")
+brightness = ExtResource("6_bright")
+contrast = ExtResource("7_contr")
+saturation = ExtResource("8_satur")
 metadata/_custom_type_script = "uid://7s1w1ts4d614"
 
 [resource]
@@ -19,5 +31,5 @@ script = ExtResource("2_6or2c")
 name = "Undead Atoll"
 icon = ExtResource("3_ms8qj")
 index = 3
-arrival_setting = SubResource("Resource_iviav")
+sky_palette = SubResource("Resource_iviav")
 metadata/_custom_type_script = "uid://7dsenmmyrsaw"

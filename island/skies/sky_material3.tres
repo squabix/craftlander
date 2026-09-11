@@ -27,8 +27,8 @@ color_ramp = SubResource("Gradient_egsba")
 
 [resource]
 shader = ExtResource("1_b1nqa")
-shader_parameter/sky_day = Color(0, 0.3683334, 0.85, 1)
-shader_parameter/horizon_day = Color(0.24000001, 0.78466666, 1, 1)
+shader_parameter/sky_day = Color(0.12749998, 0.44058338, 0.85, 1)
+shader_parameter/horizon_day = Color(0.49, 0.745, 1, 1)
 shader_parameter/horizon_sunset = Color(0.9, 0.4, 0.1, 1)
 shader_parameter/sky_sunset = Color(0.15, 0.2, 0.4, 1)
 shader_parameter/horizon_night = Color(0.1, 0.15, 0.2, 1)
@@ -41,6 +41,7 @@ shader_parameter/night_amount_exponent = 4.0
 shader_parameter/cloud_tex_01 = ExtResource("2_2eovm")
 shader_parameter/cloud_tex_02 = SubResource("NoiseTexture2D_v46dl")
 shader_parameter/cloud_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/cloud_night_brightness = 0.15
 shader_parameter/cloud_tiling = Vector2(1, 1)
 shader_parameter/wind_speed = Vector2(0.02, 0.02)
 shader_parameter/cloud_density = 0.60000000894072

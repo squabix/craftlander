@@ -8,7 +8,6 @@ class_name GameSave
 # Levels
 @export var current_level_index := 0
 @export var generated_levels := PackedInt32Array()
-@export var sky_setting: SkySetting = preload("res://island/skies/initial_sky_setting.tres")
 
 # Tutorial
 @export var tutorial_steps_completed: Dictionary[StringName, bool]

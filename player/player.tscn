@@ -138,6 +138,7 @@
 [ext_resource type="Resource" uid="uid://qu7qtupf3uee" path="res://items/weapons/diamond_sword/diamond_sword_item.tres" id="129_mhw2q"]
 [ext_resource type="PackedScene" uid="uid://cgkf2sh6frkfj" path="res://common/ui/action_hint/action_hint.tscn" id="200_ahint"]
 [ext_resource type="Script" uid="uid://ct3xcqdtjfkcf" path="res://common/ui/action_hint/hotkey_hints.gd" id="201_hkhint"]
+[ext_resource type="Script" uid="uid://bec5onipef8yy" path="res://player/day_night_indicator.gd" id="220_dnind"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -1615,6 +1616,16 @@ visible = false
 layout_mode = 2
 text = "FPS"
 script = ExtResource("19_bjvpn")
+
+[node name="DayNightLabel" type="RichTextLabel" parent="HUD/BarContainer" unique_id=830000001]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "Day 0"
+fit_content = true
+scroll_active = false
+script = ExtResource("220_dnind")
 
 [node name="Cursor2" type="TextureRect" parent="HUD" unique_id=832055728]
 layout_mode = 1
@@ -5416,6 +5427,7 @@ flat = true
 
 [node name="BoatMenu" type="Control" parent="." unique_id=520927744 node_paths=PackedStringArray("island_option_container", "pause_menu", "boat_upgrader", "sail_button")]
 process_mode = 2
+visible = false
 z_index = 1
 layout_mode = 3
 anchors_preset = 15

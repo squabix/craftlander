@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://island/skies/day_night_cycle.gd" id="1_dnc00"]
+[ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="2_dnc01"]
+
+[node name="DayNightCycle" type="Node"]
+script = ExtResource("1_dnc00")
+
+[node name="NodeSaver" type="Node" parent="."]
+script = ExtResource("2_dnc01")
+save_mode = 1
+saver_id = &"day_night_cycle"
+saved_properties = Dictionary[StringName, bool]({
+&"phase_degrees": true,
+&"days_survived": true
+})

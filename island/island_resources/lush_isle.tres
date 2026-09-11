@@ -1,12 +1,31 @@
 [gd_resource type="Resource" script_class="IslandResource" format=3 uid="uid://bkvo3ik5y1yom"]
 
 [ext_resource type="Script" uid="uid://7dsenmmyrsaw" path="res://island/island_resource.gd" id="1_hqncd"]
-[ext_resource type="Resource" uid="uid://d1eptumm1b41d" path="res://island/skies/initial_sky_setting.tres" id="1_ln703"]
 [ext_resource type="Texture2D" uid="uid://beudtbsirofjr" path="res://assets/ui/lush_isle.png" id="1_q54vh"]
+[ext_resource type="Script" uid="uid://7s1w1ts4d614" path="res://island/skies/sky_palette.gd" id="2_skypl"]
+[ext_resource type="Material" uid="uid://dia41efen5cu" path="res://island/skies/sky_material0.tres" id="3_skymt"]
+[ext_resource type="Curve" uid="uid://cjqbwo2cr30oc" path="res://island/skies/default_sun_energy_curve.tres" id="5_xigjd"]
+[ext_resource type="Curve" uid="uid://dwe4cf06deruu" path="res://island/skies/default_brightness_curve.tres" id="6_bright"]
+[ext_resource type="Curve" uid="uid://cwhwu4k03glo5" path="res://island/skies/default_contrast_curve.tres" id="7_contr"]
+[ext_resource type="Curve" uid="uid://cfmvgphk3bt55" path="res://island/skies/default_saturation_curve.tres" id="8_satur"]
+
+[sub_resource type="Gradient" id="Gradient_lush_sun"]
+offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
+colors = PackedColorArray(1, 0.85, 0.7, 1, 1, 1, 1, 1, 1, 0.7, 0.4, 1, 0.4, 0.45, 0.6, 1, 1, 0.85, 0.7, 1)
+
+[sub_resource type="Resource" id="Resource_lush_palette"]
+script = ExtResource("2_skypl")
+sky_material = ExtResource("3_skymt")
+sun_color = SubResource("Gradient_lush_sun")
+sun_energy = ExtResource("5_xigjd")
+brightness = ExtResource("6_bright")
+contrast = ExtResource("7_contr")
+saturation = ExtResource("8_satur")
+metadata/_custom_type_script = "uid://7s1w1ts4d614"
 
 [resource]
 script = ExtResource("1_hqncd")
 name = "Lush Isle"
 icon = ExtResource("1_q54vh")
-arrival_setting = ExtResource("1_ln703")
+sky_palette = SubResource("Resource_lush_palette")
 metadata/_custom_type_script = "uid://7dsenmmyrsaw"
