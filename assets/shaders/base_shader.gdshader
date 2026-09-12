@@ -6,7 +6,7 @@ render_mode cull_back;
 
 // TRANSPARENCY & LIGHTING
 // Options: depth_draw_always ensures correct depth testing for transparent materials
-render_mode blend_mix, depth_draw_always, diffuse_lambert, specular_schlick_ggx;
+render_mode blend_mix, depth_draw_always, depth_prepass_alpha, diffuse_lambert, specular_schlick_ggx;
 
 group_uniforms Base_Color;
 uniform vec4 albedo : source_color = vec4(1.0, 1.0, 1.0, 1.0);
