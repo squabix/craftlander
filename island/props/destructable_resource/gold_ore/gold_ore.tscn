@@ -21,7 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://b6f6x800jxpvb" path="res://assets/sound/rock_destroy.mp3" id="19_2rmbx"]
 [ext_resource type="Material" uid="uid://c33644pxuf2ds" path="res://assets/materials/gold.tres" id="20_65ggh"]
 [ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="21_cokie"]
-[ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/mesh_barrier_3d.gd" id="21_tallblk"]
+[ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/collision_barrier_3d.gd" id="21_tallblk"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cokie"]
 points = PackedVector3Array(0.34774315, 0.70833397, -1.4873003, 0.47166932, 1.0824239, -0.36040342, 1.3275012, 0.6678771, -0.79161394, 1.0708221, -0.22979379, -1.2052379, -1.1792669, -0.11187017, -1.3861772, -1.0415713, 0.23228538, -1.3503275, -0.2980144, 0.9554293, -1.0909247, -0.75876546, 1.0904064, -0.080708385, 0.40246832, 0.80321705, 0.6569153, 0.7364687, 0.624336, 0.7766396, 1.2078117, 0.68801475, -0.5839565, 1.380108, 0.040886223, 1.2037917, 1.8387405, -0.13146365, -0.45340955, 1.1011859, -0.62184453, -0.89578086, 0.8339149, -0.65885437, -1.0817933, -0.73440397, -0.6018882, -0.77199805, -1.0549878, -0.6013439, -0.62893766, -1.4182926, -0.16629648, -0.7043572, -1.4670157, 0.2018066, -1.005359, -1.0355692, 0.92803466, -0.70672464, -1.768181, 0.63304424, 0.21217656, -0.89363664, 0.5924059, 1.073583, 0.43212593, 0.4264058, 1.5240713, 0.42788923, 0.60165846, 1.1124765, 1.0499913, 0.24081218, 1.2501258, 0.9998559, -0.080847204, 1.5727726, 0.92429984, -0.76299, 0.93559563, -0.91729206, -0.7040282, 1.2396413, -1.1672628, -0.3292125, 1.353278, -1.3321445, 0.02165562, 1.1834995, -1.136193, -0.09517944, 1.5294825, -0.1716168, -0.7335998, 1.9677953, -1.0800555, -0.41212186, 1.4841632)
@@ -107,9 +107,9 @@ shape = SubResource("ConvexPolygonShape3D_cokie")
 collision_layer = 128
 collision_mask = 0
 
-[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" unique_id=503513118 node_paths=PackedStringArray("mesh_instance")]
+[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" unique_id=503513118 node_paths=PackedStringArray("sample")]
 script = ExtResource("21_tallblk")
-mesh_instance = NodePath("../../BlenderMeshes/Stone")
+sample = NodePath("../../BlenderMeshes/Stone")
 generate_on_ready = true
 
 [node name="Hurtbox3D" type="Area3D" parent="." unique_id=671691308 node_paths=PackedStringArray("health")]

@@ -35,7 +35,7 @@
 [ext_resource type="ArrayMesh" uid="uid://3e0r4gwjvr23" path="res://island/props/destructable_resource/tree/tree2/tree2_Icosphere_005.res" id="23_qsktq"]
 [ext_resource type="AudioStream" uid="uid://cwmtj7gouxh3c" path="res://assets/sound/tree_destroy.mp3" id="26_h1qf7"]
 [ext_resource type="PackedScene" uid="uid://kqtvsnhnrbww" path="res://assets/models/props/tree2.blend" id="28_abb6m"]
-[ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/mesh_barrier_3d.gd" id="29_tallblk"]
+[ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/collision_barrier_3d.gd" id="29_tallblk"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hjjmf"]
 height = 4.3061523
@@ -317,9 +317,9 @@ shape = SubResource("CylinderShape3D_erttl")
 collision_layer = 128
 collision_mask = 0
 
-[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" unique_id=1390769438 node_paths=PackedStringArray("mesh_instance")]
+[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" unique_id=1390769438 node_paths=PackedStringArray("sample")]
 script = ExtResource("29_tallblk")
-mesh_instance = NodePath("../../Trunk/Trunk")
+sample = NodePath("../../Trunk/Trunk")
 generate_on_ready = true
 
 [node name="ChopParticles" type="GPUParticles3D" parent="." unique_id=931223418]

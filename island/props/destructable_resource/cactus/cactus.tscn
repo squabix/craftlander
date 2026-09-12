@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dsafdn7bsbfv7" path="res://assets/models/props/cactus1.blend" id="16_5373p"]
 [ext_resource type="Material" uid="uid://c7uysx7frg14r" path="res://assets/materials/cactus.tres" id="17_vk70i"]
 [ext_resource type="Material" uid="uid://cedafem77nnp5" path="res://assets/materials/thorn.tres" id="18_kjjyj"]
-[ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/mesh_barrier_3d.gd" id="19_tallblk"]
+[ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/collision_barrier_3d.gd" id="19_tallblk"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hjjmf"]
 height = 3.4744873
@@ -481,9 +481,9 @@ mesh = null
 collision_layer = 128
 collision_mask = 0
 
-[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" node_paths=PackedStringArray("mesh_instance")]
+[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" node_paths=PackedStringArray("sample")]
 script = ExtResource("19_tallblk")
-mesh_instance = NodePath("../../cactus1/Cactus")
+sample = NodePath("../../cactus1/Cactus")
 generate_on_ready = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1509073811]

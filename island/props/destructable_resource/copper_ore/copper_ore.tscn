@@ -20,7 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://b6f6x800jxpvb" path="res://assets/sound/rock_destroy.mp3" id="17_3o24l"]
 [ext_resource type="PackedScene" uid="uid://jnjabsrqkyyq" path="res://assets/models/props/ore1.blend" id="17_cdcgx"]
 [ext_resource type="Material" uid="uid://2lvxncgxfhjd" path="res://assets/materials/copper.tres" id="18_cdcgx"]
-[ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/mesh_barrier_3d.gd" id="19_tallblk"]
+[ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/collision_barrier_3d.gd" id="19_tallblk"]
 [ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="20_mh2mx"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cokie"]
@@ -107,9 +107,9 @@ shape = SubResource("ConvexPolygonShape3D_cokie")
 collision_layer = 128
 collision_mask = 0
 
-[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" unique_id=703216543 node_paths=PackedStringArray("mesh_instance")]
+[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" unique_id=703216543 node_paths=PackedStringArray("sample")]
 script = ExtResource("19_tallblk")
-mesh_instance = NodePath("../../BlenderMeshes/Stone")
+sample = NodePath("../../BlenderMeshes/Stone")
 generate_on_ready = true
 
 [node name="Hurtbox3D" type="Area3D" parent="." unique_id=671691308 node_paths=PackedStringArray("health")]
