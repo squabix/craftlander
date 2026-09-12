@@ -102,6 +102,7 @@ func add_entity(entity_resource: IslandEntityResource, spawnpoint := Vector3.ZER
 
 	add_child(entity)
 	entity.global_position = spawnpoint
+	entity.add_to_group(&"enemies")
 	entity.tree_exiting.connect(_on_entity_tree_exiting.bind(entity))
 
 	if entity_resource in entities:

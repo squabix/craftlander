@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://jswv1syw7ggn"]
+
+[ext_resource type="Script" uid="uid://bvt3v1isf22rm" path="res://common3d/ui/radial_compass3d.gd" id="1"]
+[ext_resource type="FontFile" uid="uid://cbr5ncx4f3a1n" path="res://assets/ui/sineas.otf" id="2_fgwke"]
+
+[node name="Compass" type="Control" unique_id=771501149]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("1")
+radius = 32.0
+font = ExtResource("2_fgwke")
+ring_color = Color(1, 1, 1, 1)
+ring_thickness = 2.0
+ticks_length = 10.0
+directions_offset = -16.0
+pointer_color = Color(1, 1, 1, 1)
+pointer_shape = PackedVector2Array(0, -5, -5, 0, 5, 0)
+marker_offset = 15.0
+marker_name_enabled = false
+marker_distance_enabled = false

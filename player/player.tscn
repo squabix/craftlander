@@ -139,6 +139,11 @@
 [ext_resource type="PackedScene" uid="uid://cgkf2sh6frkfj" path="res://common/ui/action_hint/action_hint.tscn" id="200_ahint"]
 [ext_resource type="Script" uid="uid://ct3xcqdtjfkcf" path="res://common/ui/action_hint/hotkey_hints.gd" id="201_hkhint"]
 [ext_resource type="Script" uid="uid://bec5onipef8yy" path="res://player/day_night_indicator.gd" id="220_dnind"]
+[ext_resource type="PackedScene" uid="uid://jswv1syw7ggn" path="res://player/ui/compass.tscn" id="9101_cmpss1"]
+[ext_resource type="Script" uid="uid://6bmpcar4ddbv" path="res://player/ui/boat_compass_tracker.gd" id="9102_cmpss2"]
+[ext_resource type="Script" uid="uid://bka8v53yqd1j6" path="res://player/ui/enemy_compass_tracker.gd" id="9103_cmpss3"]
+[ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="9104_cmpss4"]
+[ext_resource type="Curve" path="res://player/ui/enemy_marker_size_curve.tres" id="9105_cmpss5"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -1044,7 +1049,7 @@ random_pitch = 1.122462
 streams_count = 1
 stream_0/stream = ExtResource("112_teerl")
 
-[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("movement_state_machine", "head", "interactors", "respawn_button", "boat_menu", "item_holder", "dropper", "health", "health_saver", "hunger", "hunger_saver", "stamina", "steps_player", "swim_player", "eat_player", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
+[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("movement_state_machine", "head", "interactors", "respawn_button", "boat_menu", "boat_compass_tracker", "enemy_compass_tracker", "item_holder", "dropper", "health", "health_saver", "hunger", "hunger_saver", "stamina", "steps_player", "swim_player", "eat_player", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
 collision_layer = 17
 collision_mask = 132
 floor_constant_speed = true
@@ -1057,6 +1062,8 @@ head = NodePath("Head")
 interactors = [NodePath("InteractorArea/Interactor3D"), NodePath("Head/Camera3D/InteratorRay/Interactor")]
 respawn_button = NodePath("DeathScreen/OptionsContainer/RespawnButton")
 boat_menu = NodePath("BoatMenu")
+boat_compass_tracker = NodePath("HUD/BoatCompassTracker")
+enemy_compass_tracker = NodePath("HUD/EnemyCompassTracker")
 item_holder = NodePath("Head/Camera3D/ItemHolder")
 dropper = NodePath("Head/Camera3D/DropperRayCast/InventoryDropper3D")
 health = NodePath("Health")
@@ -1662,6 +1669,37 @@ expand_mode = 1
 script = ExtResource("41_j420s")
 item_holder = NodePath("../../Head/Camera3D/ItemHolder")
 metadata/_custom_type_script = "uid://ddiytppqbuop1"
+
+[node name="Compass" parent="HUD" unique_id=910100001 node_paths=PackedStringArray("center_node") instance=ExtResource("9101_cmpss1")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 120.0
+grow_horizontal = 0
+center_node = NodePath("../..")
+marker_min_size = 1.5
+marker_max_size = 8.0
+
+[node name="BoatCompassTracker" type="Node" parent="HUD" unique_id=910200002 node_paths=PackedStringArray("compass")]
+script = ExtResource("9102_cmpss2")
+compass = NodePath("../Compass")
+
+[node name="EnemyCompassTracker" type="Node" parent="HUD" unique_id=910300003 node_paths=PackedStringArray("compass", "center_node")]
+script = ExtResource("9103_cmpss3")
+compass = NodePath("../Compass")
+center_node = NodePath("../..")
+size_curve = ExtResource("9105_cmpss5")
+
+[node name="IntervalStaggerer" type="Node" parent="HUD/EnemyCompassTracker" unique_id=910400004 node_paths=PackedStringArray("target_methods")]
+script = ExtResource("9104_cmpss4")
+base_interval = 0.3
+target_methods = {
+NodePath(".."): &"refresh"
+}
 
 [node name="TutorialPopupLayer" type="CanvasLayer" parent="." unique_id=203573653]
 layer = 20

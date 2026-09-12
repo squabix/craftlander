@@ -116,6 +116,7 @@ func initial_save_load() -> void:
 
 func connect_player_boat_adder() -> void:
 	player_boat_adder.spawned.connect(position_player_at_spawn.unbind(1))
+	player.boat_compass_tracker.boat_adder = player_boat_adder
 
 
 func update_sky_setting(is_first_visit: bool) -> void:

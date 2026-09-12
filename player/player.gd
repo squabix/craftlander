@@ -17,6 +17,8 @@ const HEAD_SPEED := 0.1
 @export var respawn_button: Button
 @export var boat_menu: BoatMenu
 @export var docking_hidden_interfaces: Array[Control] = []
+@export var boat_compass_tracker: BoatCompassTracker
+@export var enemy_compass_tracker: EnemyCompassTracker
 
 @export_group("Inventory")
 @export var item_holder: InventoryHolder3D
