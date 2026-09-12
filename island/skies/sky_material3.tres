@@ -15,11 +15,11 @@ color_ramp = SubResource("Gradient_s0d0j")
 seamless = true
 
 [sub_resource type="Gradient" id="Gradient_egsba"]
-offsets = PackedFloat32Array(0.19378698, 1)
+offsets = PackedFloat32Array(0, 0.9413215)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_cfytk"]
 seed = 1
-frequency = 0.0704
+frequency = 0.1604
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_og1j7"]
 noise = SubResource("FastNoiseLite_cfytk")
@@ -41,7 +41,7 @@ shader_parameter/night_amount_exponent = 4.0
 shader_parameter/cloud_tex_01 = ExtResource("2_2eovm")
 shader_parameter/cloud_tex_02 = SubResource("NoiseTexture2D_v46dl")
 shader_parameter/cloud_color = Color(0.8, 0.8, 0.8, 1)
-shader_parameter/cloud_night_brightness = 0.15
+shader_parameter/cloud_night_brightness = 0.10000000149012
 shader_parameter/cloud_tiling = Vector2(1, 1)
 shader_parameter/wind_speed = Vector2(0.02, 0.02)
 shader_parameter/cloud_density = 0.60000000894072
