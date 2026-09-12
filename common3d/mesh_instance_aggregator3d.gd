@@ -215,9 +215,11 @@ func reset() -> void:
 		if aggregated_mesh_instances.get(instance, null):
 			aggregated_mesh_instances.erase(instance)
 
-	# Make all the original individual mesh instances visible again
+	# Make the previously-aggregated mesh instances visible again
 	if reset_instance_visibility:
-		for instance in get_all_mesh_instances():
+		for instance in instance_registry.keys():
+			if not is_instance_valid(instance):
+				continue
 			instance.show()
 
 	instance_registry.clear()
