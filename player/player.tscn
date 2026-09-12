@@ -4678,9 +4678,9 @@ layout_mode = 1
 
 [node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/VSync/CenterContainer/VSyncToggle" parent_id_path=PackedInt32Array(1234740637, 1518537055) index="0" unique_id=1351290583 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": null,
-&"mouse_entered": null,
-&"pressed": null
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
 
 [node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/FullScreen/CenterContainer/WindowModeOption" parent_id_path=PackedInt32Array(1234740637, 2049426436) index="1" unique_id=2144126531 node_paths=PackedStringArray("signal_players")]
@@ -4692,16 +4692,16 @@ signal_players = {
 
 [node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/AntiAliasing/AAOption" parent_id_path=PackedInt32Array(1234740637, 630181348) index="1" unique_id=875959311 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": null,
-&"mouse_entered": null,
-&"pressed": null
+&"focus_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
 
 [node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/ShadowQuality/ShadowOption" parent_id_path=PackedInt32Array(1234740637, 1710798274) index="1" unique_id=1882629603 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": null,
-&"mouse_entered": null,
-&"pressed": null
+&"focus_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
 
 [node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/SSAO/CenterContainer/SSAOToggle" parent_id_path=PackedInt32Array(1234740637, -1293967292) index="0" unique_id=-1293967291 node_paths=PackedStringArray("signal_players")]
@@ -4727,16 +4727,16 @@ signal_players = {
 
 [node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/InvertY/CenterContainer/InvertYToggle" parent_id_path=PackedInt32Array(1234740637, 1517878780) index="0" unique_id=1079694290 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": null,
-&"mouse_entered": null,
-&"pressed": null
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
 
 [node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/TutorialHints/CenterContainer/TutorialHintsToggle" parent_id_path=PackedInt32Array(1234740637, 1517878781) index="0" unique_id=1079694291 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": null,
-&"mouse_entered": null,
-&"pressed": null
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
 
 [node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenShake/CenterContainer/ScreenShakeToggle" parent_id_path=PackedInt32Array(1234740637, -1293967266) index="0" unique_id=-1293967265 node_paths=PackedStringArray("signal_players")]
