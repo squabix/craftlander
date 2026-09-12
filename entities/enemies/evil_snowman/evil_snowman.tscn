@@ -46,10 +46,11 @@
 [ext_resource type="PackedScene" uid="uid://ddk11nveckktx" path="res://assets/models/entities/evil_snowman.blend" id="43_fh2de"]
 [ext_resource type="Script" uid="uid://2ow28vm5clst" path="res://common/spawner/projectile_spawner3d.gd" id="43_t2yii"]
 [ext_resource type="ArrayMesh" uid="uid://doiyrsd0mnhkf" path="res://assets/models/items/weapons/snowball.res" id="44_41vbo"]
-[ext_resource type="PackedScene" path="res://entities/projectiles/snowball/snowball.tscn" id="44_n0bkx"]
+[ext_resource type="PackedScene" uid="uid://bv58pbog00qt4" path="res://entities/projectiles/snowball/snowball.tscn" id="44_n0bkx"]
 [ext_resource type="Resource" path="res://entities/projectiles/snowball/snowball_damage.tres" id="45_7623f"]
 [ext_resource type="Material" uid="uid://btrvrb7gvvlbr" path="res://assets/materials/crab_shell.tres" id="47_u6i5x"]
 [ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="50_wwywl"]
+[ext_resource type="Script" uid="uid://cke8g2exxgx0y" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
 script = ExtResource("3_j8ygh")
@@ -493,6 +494,11 @@ state_name = &"Chasing"
 from_state_whitelist = Array[StringName]([&"Wandering", &"Searching"])
 signal_name = &"was_hurt"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
+
+[node name="MeshFlashTrigger" type="Node" parent="Hurtbox3D" unique_id=1079465546 node_paths=PackedStringArray("mesh_root")]
+script = ExtResource("100_flash")
+mesh_root = NodePath("../../Visuals")
+signal_name = &"was_hurt"
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Hurtbox3D" unique_id=263716078]
 shape = SubResource("CapsuleShape3D_41vbo")

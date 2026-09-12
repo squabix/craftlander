@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bp5ab438ufrus" path="res://common3d/culling_controller3d.gd" id="5_mmf2n"]
 [ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="6_2pm8e"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="7_c0uva"]
+[ext_resource type="Script" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 [ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/signal_triggrs/signal_state_trigger.gd" id="8_84ijs"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="9_rhq3q"]
 [ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="10_t1jw3"]
@@ -400,8 +401,14 @@ script = ExtResource("8_84ijs")
 state_machine = NodePath("../../Controller3D/Default")
 state_name = &"Chasing"
 from_state_whitelist = Array[StringName]([&"Wandering", &"Searching"])
+
 signal_name = &"was_hurt"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
+
+[node name="MeshFlashTrigger" type="Node" parent="Hurtbox3D" node_paths=PackedStringArray("mesh_root")]
+script = ExtResource("100_flash")
+mesh_root = NodePath("../../Visuals")
+signal_name = &"was_hurt"
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Hurtbox3D" unique_id=263716078]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6341511, -0.119775295)

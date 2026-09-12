@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://doai6uyyht5am" path="res://entities/enemies/rootling/rootling.gd" id="1_wtogd"]
 [ext_resource type="Resource" uid="uid://o4s4d0gqgsng" path="res://entities/enemies/rootling/rootling_move_mode.tres" id="2_f0qrw"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="3_ihgra"]
+[ext_resource type="Script" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="3_wtogd"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="4_nauqg"]
 [ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_w8hfy"]
@@ -698,9 +699,15 @@ shape = SubResource("CapsuleShape3D_3emv6")
 script = ExtResource("8_7mn0t")
 state_machine = NodePath("../../Controller3D/Default")
 state_name = &"Chasing"
+
 from_state_whitelist = Array[StringName]([&"Wandering", &"Searching"])
 signal_name = &"was_hurt"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
+
+[node name="MeshFlashTrigger" type="Node" parent="Hurtbox3D" node_paths=PackedStringArray("mesh_root")]
+script = ExtResource("100_flash")
+mesh_root = NodePath("../../Visuals")
+signal_name = &"was_hurt"
 
 [node name="Health" type="Node" parent="." unique_id=780116179]
 script = ExtResource("4_nauqg")
