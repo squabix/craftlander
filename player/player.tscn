@@ -114,6 +114,7 @@
 [ext_resource type="AudioStream" uid="uid://dnichdtdyktgu" path="res://assets/sound/save.mp3" id="87_ycggl"]
 [ext_resource type="AudioStream" uid="uid://c03ir843xs060" path="res://assets/sound/error1.wav" id="88_5ntu2"]
 [ext_resource type="Script" uid="uid://cr3lcia8efb3c" path="res://common3d/character_audio_stream_player3d.gd" id="89_jfgxe"]
+[ext_resource type="Script" uid="uid://djeaf2iody4oi" path="res://common3d/camera/camera_shake3d.gd" id="90_camsh"]
 [ext_resource type="AudioStream" uid="uid://bosk8bvvlwxak" path="res://assets/sound/upgrade_boat.mp3" id="90_teerl"]
 [ext_resource type="AudioStream" uid="uid://by0xp4m3kjtsm" path="res://assets/sound/open_drop-04.mp3" id="92_ig2t1"]
 [ext_resource type="AudioStream" uid="uid://daku7up5e3io8" path="res://assets/sound/open_drop-05.mp3" id="93_7xdiq"]
@@ -143,7 +144,7 @@
 [ext_resource type="Script" uid="uid://6bmpcar4ddbv" path="res://player/ui/boat_compass_tracker.gd" id="9102_cmpss2"]
 [ext_resource type="Script" uid="uid://bka8v53yqd1j6" path="res://player/ui/enemy_compass_tracker.gd" id="9103_cmpss3"]
 [ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="9104_cmpss4"]
-[ext_resource type="Curve" path="res://player/ui/enemy_marker_size_curve.tres" id="9105_cmpss5"]
+[ext_resource type="Curve" uid="uid://ckgb7j52s42n3" path="res://player/ui/enemy_marker_size_curve.tres" id="9105_cmpss5"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -1049,7 +1050,7 @@ random_pitch = 1.122462
 streams_count = 1
 stream_0/stream = ExtResource("112_teerl")
 
-[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("movement_state_machine", "head", "interactors", "respawn_button", "boat_menu", "boat_compass_tracker", "enemy_compass_tracker", "item_holder", "dropper", "health", "health_saver", "hunger", "hunger_saver", "stamina", "steps_player", "swim_player", "eat_player", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
+[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("movement_state_machine", "head", "camera", "camera_shake", "interactors", "vignette", "hurt_effect_trigger", "respawn_button", "boat_menu", "boat_compass_tracker", "enemy_compass_tracker", "item_holder", "dropper", "health", "health_saver", "hunger", "hunger_saver", "stamina", "steps_player", "swim_player", "eat_player", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
 collision_layer = 17
 collision_mask = 132
 floor_constant_speed = true
@@ -1059,7 +1060,11 @@ floor_snap_length = 0.5
 script = ExtResource("1_g1dw6")
 movement_state_machine = NodePath("Controller3D/Default")
 head = NodePath("Head")
+camera = NodePath("Head/Camera3D")
+camera_shake = NodePath("Head/Camera3D/CameraShake")
 interactors = [NodePath("InteractorArea/Interactor3D"), NodePath("Head/Camera3D/InteratorRay/Interactor")]
+vignette = NodePath("ScreenEffectContainer/Vignette")
+hurt_effect_trigger = NodePath("Health/SignalAnimationTrigger")
 respawn_button = NodePath("DeathScreen/OptionsContainer/RespawnButton")
 boat_menu = NodePath("BoatMenu")
 boat_compass_tracker = NodePath("HUD/BoatCompassTracker")
@@ -1212,6 +1217,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=757383881]
 cull_mask = 1048573
 fov = 85.0
+
+[node name="CameraShake" type="Node" parent="Head/Camera3D" unique_id=90100001 node_paths=PackedStringArray("camera")]
+script = ExtResource("90_camsh")
+camera = NodePath("..")
 
 [node name="ItemHolder" type="Node3D" parent="Head/Camera3D" unique_id=1816609521 node_paths=PackedStringArray("selector", "root")]
 transform = Transform3D(1.0000004, 0, 0, 0, 0.9999994, 0, 0, 0, 0.99999994, 0, 0, 0)
@@ -4652,18 +4661,29 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 18
 text = "Item Namef"
 
+[node name="VirtualCursor" type="CanvasLayer" parent="PauseMenu/CraftingInterface" unique_id=487277741]
+script = ExtResource("84_wyvah")
+min_speed = 70.0
+max_speed = 800.0
+acceleration = 1200.0
+action_up = &"look_up"
+action_down = &"look_down"
+action_left = &"look_left"
+action_right = &"look_right"
+metadata/_custom_type_script = "uid://7t0qde2fdjb8"
+
 [node name="SettingsMenu" parent="PauseMenu" unique_id=1234740637 instance=ExtResource("39_xcnuv")]
 visible = false
 layout_mode = 1
 
 [node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/VSync/CenterContainer/VSyncToggle" parent_id_path=PackedInt32Array(1234740637, 1518537055) index="0" unique_id=1351290583 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+&"focus_entered": null,
+&"mouse_entered": null,
+&"pressed": null
 }
 
-[node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/FullScreen/CenterContainer/FullScreenToggle" parent_id_path=PackedInt32Array(1234740637, 2049426436) index="0" unique_id=2144126531 node_paths=PackedStringArray("signal_players")]
+[node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/FullScreen/CenterContainer/WindowModeOption" parent_id_path=PackedInt32Array(1234740637, 2049426436) index="1" unique_id=2144126531 node_paths=PackedStringArray("signal_players")]
 signal_players = {
 &"focus_entered": NodePath("HoverPlayer"),
 &"mouse_entered": NodePath("HoverPlayer"),
@@ -4672,30 +4692,72 @@ signal_players = {
 
 [node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/AntiAliasing/AAOption" parent_id_path=PackedInt32Array(1234740637, 630181348) index="1" unique_id=875959311 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+&"focus_entered": null,
+&"mouse_entered": null,
+&"pressed": null
 }
 
 [node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/ShadowQuality/ShadowOption" parent_id_path=PackedInt32Array(1234740637, 1710798274) index="1" unique_id=1882629603 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+&"focus_entered": null,
+&"mouse_entered": null,
+&"pressed": null
+}
+
+[node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/SSAO/CenterContainer/SSAOToggle" parent_id_path=PackedInt32Array(1234740637, -1293967292) index="0" unique_id=-1293967291 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/Glow/CenterContainer/GlowToggle" parent_id_path=PackedInt32Array(1234740637, -1293967274) index="0" unique_id=-1293967273 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/MaxFPS/MaxFPSOption" parent_id_path=PackedInt32Array(1234740637, -1293967288) index="1" unique_id=-1293967287 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
 
 [node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/InvertY/CenterContainer/InvertYToggle" parent_id_path=PackedInt32Array(1234740637, 1517878780) index="0" unique_id=1079694290 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+&"focus_entered": null,
+&"mouse_entered": null,
+&"pressed": null
 }
 
 [node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/TutorialHints/CenterContainer/TutorialHintsToggle" parent_id_path=PackedInt32Array(1234740637, 1517878781) index="0" unique_id=1079694291 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+&"focus_entered": null,
+&"mouse_entered": null,
+&"pressed": null
+}
+
+[node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenShake/CenterContainer/ScreenShakeToggle" parent_id_path=PackedInt32Array(1234740637, -1293967266) index="0" unique_id=-1293967265 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/Vignette/CenterContainer/VignetteToggle" parent_id_path=PackedInt32Array(1234740637, -1293967261) index="0" unique_id=-1293967260 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenEffects/CenterContainer/ScreenEffectsToggle" parent_id_path=PackedInt32Array(1234740637, -1293967256) index="0" unique_id=-1293967255 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
 
 [node name="ButtonAudioManager" parent="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/BackButton" parent_id_path=PackedInt32Array(1234740637, 1546788436) index="0" unique_id=1198217718 node_paths=PackedStringArray("signal_players")]
@@ -4715,17 +4777,6 @@ metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 [node name="PausePlayer" type="AudioStreamPlayer" parent="PauseMenu/SignalAudioManager" unique_id=1328479173]
 stream = SubResource("AudioStreamRandomizer_6ct4f")
 bus = &"UI"
-
-[node name="VirtualCursor" type="CanvasLayer" parent="PauseMenu" unique_id=487277741]
-script = ExtResource("84_wyvah")
-min_speed = 70.0
-max_speed = 800.0
-acceleration = 1200.0
-action_up = &"look_up"
-action_down = &"look_down"
-action_left = &"look_left"
-action_right = &"look_right"
-metadata/_custom_type_script = "uid://7t0qde2fdjb8"
 
 [node name="HotbarInterface" type="Control" parent="." unique_id=858532635]
 unique_name_in_owner = true

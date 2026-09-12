@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://defaults/button_audio_manager.tscn" id="2_v0bl3"]
 [ext_resource type="Script" uid="uid://c36fqcfs66yhx" path="res://common/ui/volume_slider.gd" id="3_n4a8d"]
 
-[node name="SettingsMenu" type="Control" unique_id=788547277 node_paths=PackedStringArray("music_slider", "sfx_slider", "vsync_toggle", "full_screen_toggle", "aa_option", "invert_y_toggle", "tutorial_hints_toggle", "difficulty_row", "difficulty_slider", "difficulty_name_label", "back_button")]
+[node name="SettingsMenu" type="Control" unique_id=788547277 node_paths=PackedStringArray("music_slider", "sfx_slider", "vsync_toggle", "window_mode_option", "aa_option", "shadow_option", "ssao_toggle", "glow_toggle", "max_fps_option", "resolution_scale_slider", "invert_y_toggle", "tutorial_hints_toggle", "screen_shake_toggle", "vignette_toggle", "screen_effects_toggle", "look_sensitivity_slider", "fov_slider", "difficulty_row", "difficulty_slider", "difficulty_name_label", "back_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,10 +15,20 @@ script = ExtResource("1_83qjl")
 music_slider = NodePath("PanelContainer/CenterContainer/SettingsContainer/AudioGridContainer/MusicVolume/Slider")
 sfx_slider = NodePath("PanelContainer/CenterContainer/SettingsContainer/AudioGridContainer/SFXVolume/Slider")
 vsync_toggle = NodePath("PanelContainer/CenterContainer/SettingsContainer/GridContainer/VSync/CenterContainer/VSyncToggle")
-full_screen_toggle = NodePath("PanelContainer/CenterContainer/SettingsContainer/GridContainer/FullScreen/CenterContainer/FullScreenToggle")
+window_mode_option = NodePath("PanelContainer/CenterContainer/SettingsContainer/GridContainer/FullScreen/CenterContainer/WindowModeOption")
 aa_option = NodePath("PanelContainer/CenterContainer/SettingsContainer/GridContainer/AntiAliasing/AAOption")
+shadow_option = NodePath("PanelContainer/CenterContainer/SettingsContainer/GridContainer/ShadowQuality/ShadowOption")
+ssao_toggle = NodePath("PanelContainer/CenterContainer/SettingsContainer/GridContainer/SSAO/CenterContainer/SSAOToggle")
+glow_toggle = NodePath("PanelContainer/CenterContainer/SettingsContainer/GridContainer/Glow/CenterContainer/GlowToggle")
+max_fps_option = NodePath("PanelContainer/CenterContainer/SettingsContainer/GridContainer/MaxFPS/MaxFPSOption")
+resolution_scale_slider = NodePath("PanelContainer/CenterContainer/SettingsContainer/GridContainer/ResolutionScale/Slider")
 invert_y_toggle = NodePath("PanelContainer/CenterContainer/SettingsContainer/GridContainer/InvertY/CenterContainer/InvertYToggle")
 tutorial_hints_toggle = NodePath("PanelContainer/CenterContainer/SettingsContainer/GridContainer/TutorialHints/CenterContainer/TutorialHintsToggle")
+screen_shake_toggle = NodePath("PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenShake/CenterContainer/ScreenShakeToggle")
+vignette_toggle = NodePath("PanelContainer/CenterContainer/SettingsContainer/GridContainer/Vignette/CenterContainer/VignetteToggle")
+screen_effects_toggle = NodePath("PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenEffects/CenterContainer/ScreenEffectsToggle")
+look_sensitivity_slider = NodePath("PanelContainer/CenterContainer/SettingsContainer/GridContainer/LookSensitivity/Slider")
+fov_slider = NodePath("PanelContainer/CenterContainer/SettingsContainer/GridContainer/FOV/Slider")
 difficulty_row = NodePath("PanelContainer/CenterContainer/SettingsContainer/Difficulty")
 difficulty_slider = NodePath("PanelContainer/CenterContainer/SettingsContainer/Difficulty/VBoxContainer/DifficultySlider")
 difficulty_name_label = NodePath("PanelContainer/CenterContainer/SettingsContainer/Difficulty/VBoxContainer/DifficultyNameLabel")
@@ -75,9 +85,9 @@ button_pressed = true
 
 [node name="ButtonAudioManager" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/VSync/CenterContainer/VSyncToggle" unique_id=1351290583 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_v0bl3")]
 signal_players = {
-&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
 
 [node name="FullScreen" type="HBoxContainer" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer" unique_id=780028123]
@@ -86,21 +96,28 @@ layout_mode = 2
 [node name="Title" type="Label" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/FullScreen" unique_id=2115819152]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-text = "Full Screen"
+text = "Window Mode"
 uppercase = true
 
 [node name="CenterContainer" type="CenterContainer" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/FullScreen" unique_id=547709853]
 custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 
-[node name="FullScreenToggle" type="CheckBox" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/FullScreen/CenterContainer" unique_id=2049426436]
+[node name="WindowModeOption" type="OptionButton" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/FullScreen/CenterContainer" unique_id=2049426436]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-offset_transform_enabled = true
-offset_transform_scale = Vector2(1.5, 1.5)
+alignment = 1
+selected = 0
+item_count = 3
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Borderless Fullscreen"
+popup/item_1/id = 1
+popup/item_2/text = "Exclusive Fullscreen"
+popup/item_2/id = 2
 
-[node name="ButtonAudioManager" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/FullScreen/CenterContainer/FullScreenToggle" unique_id=2144126531 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_v0bl3")]
+[node name="ButtonAudioManager" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/FullScreen/CenterContainer/WindowModeOption" unique_id=2144126531 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_v0bl3")]
 signal_players = {
 &"focus_entered": NodePath("HoverPlayer"),
 &"mouse_entered": NodePath("HoverPlayer"),
@@ -134,9 +151,9 @@ popup/item_3/id = 3
 
 [node name="ButtonAudioManager" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/AntiAliasing/AAOption" unique_id=875959311 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_v0bl3")]
 signal_players = {
-&"focus_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+&"focus_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
 
 [node name="ShadowQuality" type="HBoxContainer" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer" unique_id=1126559339]
@@ -166,10 +183,122 @@ popup/item_3/id = 3
 
 [node name="ButtonAudioManager" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/ShadowQuality/ShadowOption" unique_id=1882629603 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_v0bl3")]
 signal_players = {
-&"focus_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+&"focus_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
+
+[node name="SSAO" type="HBoxContainer" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer" unique_id=3001000001]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/SSAO" unique_id=3001000002]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Ambient Occlusion"
+uppercase = true
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/SSAO" unique_id=3001000003]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+
+[node name="SSAOToggle" type="CheckBox" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/SSAO/CenterContainer" unique_id=3001000004]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.5, 1.5)
+alignment = 1
+button_pressed = true
+
+[node name="ButtonAudioManager" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/SSAO/CenterContainer/SSAOToggle" unique_id=3001000005 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_v0bl3")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
+}
+
+[node name="Glow" type="HBoxContainer" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer" unique_id=3001000019]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/Glow" unique_id=3001000020]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Glow"
+uppercase = true
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/Glow" unique_id=3001000021]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+
+[node name="GlowToggle" type="CheckBox" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/Glow/CenterContainer" unique_id=3001000022]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.5, 1.5)
+alignment = 1
+button_pressed = true
+
+[node name="ButtonAudioManager" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/Glow/CenterContainer/GlowToggle" unique_id=3001000023 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_v0bl3")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
+}
+
+[node name="MaxFPS" type="HBoxContainer" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer" unique_id=3001000006]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/MaxFPS" unique_id=3001000007]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Max FPS"
+uppercase = true
+
+[node name="MaxFPSOption" type="OptionButton" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/MaxFPS" unique_id=3001000008]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+selected = 0
+item_count = 5
+popup/item_0/text = "Unlimited"
+popup/item_0/id = 0
+popup/item_1/text = "30"
+popup/item_1/id = 1
+popup/item_2/text = "60"
+popup/item_2/id = 2
+popup/item_3/text = "120"
+popup/item_3/id = 3
+popup/item_4/text = "144"
+popup/item_4/id = 4
+
+[node name="ButtonAudioManager" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/MaxFPS/MaxFPSOption" unique_id=3001000009 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_v0bl3")]
+signal_players = {
+&"focus_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ResolutionScale" type="HBoxContainer" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer" unique_id=3001000010]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/ResolutionScale" unique_id=3001000011]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Resolution Scale"
+uppercase = true
+
+[node name="Slider" type="HSlider" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/ResolutionScale" unique_id=3001000012]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.5
+max_value = 1.0
+step = 0.05
+value = 1.0
+tick_count = 11
+ticks_on_borders = true
 
 [node name="InvertY" type="HBoxContainer" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer" unique_id=573359744]
 layout_mode = 2
@@ -194,9 +323,9 @@ alignment = 1
 
 [node name="ButtonAudioManager" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/InvertY/CenterContainer/InvertYToggle" unique_id=1079694290 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_v0bl3")]
 signal_players = {
-&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
 
 [node name="TutorialHints" type="HBoxContainer" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer" unique_id=573359745]
@@ -222,10 +351,137 @@ alignment = 1
 
 [node name="ButtonAudioManager" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/TutorialHints/CenterContainer/TutorialHintsToggle" unique_id=1079694291 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_v0bl3")]
 signal_players = {
-&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
+
+[node name="ScreenShake" type="HBoxContainer" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer" unique_id=3001000027]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenShake" unique_id=3001000028]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Screen Shake"
+uppercase = true
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenShake" unique_id=3001000029]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+
+[node name="ScreenShakeToggle" type="CheckBox" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenShake/CenterContainer" unique_id=3001000030]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.5, 1.5)
+alignment = 1
+button_pressed = true
+
+[node name="ButtonAudioManager" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenShake/CenterContainer/ScreenShakeToggle" unique_id=3001000031 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_v0bl3")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
+}
+
+[node name="Vignette" type="HBoxContainer" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer" unique_id=3001000032]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/Vignette" unique_id=3001000033]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Vignette"
+uppercase = true
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/Vignette" unique_id=3001000034]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+
+[node name="VignetteToggle" type="CheckBox" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/Vignette/CenterContainer" unique_id=3001000035]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.5, 1.5)
+alignment = 1
+button_pressed = true
+
+[node name="ButtonAudioManager" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/Vignette/CenterContainer/VignetteToggle" unique_id=3001000036 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_v0bl3")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ScreenEffects" type="HBoxContainer" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer" unique_id=3001000037]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenEffects" unique_id=3001000038]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Screen Effects"
+uppercase = true
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenEffects" unique_id=3001000039]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+
+[node name="ScreenEffectsToggle" type="CheckBox" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenEffects/CenterContainer" unique_id=3001000040]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+offset_transform_enabled = true
+offset_transform_scale = Vector2(1.5, 1.5)
+alignment = 1
+button_pressed = true
+
+[node name="ButtonAudioManager" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenEffects/CenterContainer/ScreenEffectsToggle" unique_id=3001000041 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_v0bl3")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
+}
+
+[node name="LookSensitivity" type="HBoxContainer" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer" unique_id=3001000013]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/LookSensitivity" unique_id=3001000014]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Look Sensitivity"
+uppercase = true
+
+[node name="Slider" type="HSlider" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/LookSensitivity" unique_id=3001000015]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.1
+max_value = 1.0
+step = 0.05
+value = 0.35
+tick_count = 10
+ticks_on_borders = true
+
+[node name="FOV" type="HBoxContainer" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer" unique_id=3001000016]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/FOV" unique_id=3001000017]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Field of View"
+uppercase = true
+
+[node name="Slider" type="HSlider" parent="PanelContainer/CenterContainer/SettingsContainer/GridContainer/FOV" unique_id=3001000018]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 50.0
+max_value = 110.0
+step = 1.0
+value = 75.0
+tick_count = 7
+ticks_on_borders = true
 
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/CenterContainer/SettingsContainer" unique_id=24230064]
 layout_mode = 2
@@ -316,6 +572,26 @@ script = ExtResource("3_n4a8d")
 bus = &"UI"
 metadata/_custom_type_script = "uid://c36fqcfs66yhx"
 
+[node name="MasterVolume" type="HBoxContainer" parent="PanelContainer/CenterContainer/SettingsContainer/AudioGridContainer" unique_id=3001000024]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="PanelContainer/CenterContainer/SettingsContainer/AudioGridContainer/MasterVolume" unique_id=3001000025]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Master Volume"
+uppercase = true
+
+[node name="Slider" type="HSlider" parent="PanelContainer/CenterContainer/SettingsContainer/AudioGridContainer/MasterVolume" unique_id=3001000026]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+tick_count = 10
+ticks_on_borders = true
+script = ExtResource("3_n4a8d")
+bus = &"Master"
+
 [node name="HSeparator2" type="HSeparator" parent="PanelContainer/CenterContainer/SettingsContainer" unique_id=860733874]
 layout_mode = 2
 
@@ -354,16 +630,25 @@ text = "BACK"
 
 [node name="ButtonAudioManager" parent="PanelContainer/CenterContainer/SettingsContainer/BackButton" unique_id=1198217718 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_v0bl3")]
 signal_players = {
-&"focus_entered": NodePath("../../GridContainer/FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../GridContainer/FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../GridContainer/FullScreen/CenterContainer/FullScreenToggle/ButtonAudioManager/PressPlayer")
+&"focus_entered": NodePath("../../GridContainer/FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../GridContainer/FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../GridContainer/FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
 
 [connection signal="toggled" from="PanelContainer/CenterContainer/SettingsContainer/GridContainer/VSync/CenterContainer/VSyncToggle" to="." method="_on_vsync_toggled"]
-[connection signal="toggled" from="PanelContainer/CenterContainer/SettingsContainer/GridContainer/FullScreen/CenterContainer/FullScreenToggle" to="." method="_on_full_screen_toggled"]
+[connection signal="item_selected" from="PanelContainer/CenterContainer/SettingsContainer/GridContainer/FullScreen/CenterContainer/WindowModeOption" to="." method="_on_window_mode_selected"]
 [connection signal="item_selected" from="PanelContainer/CenterContainer/SettingsContainer/GridContainer/AntiAliasing/AAOption" to="." method="_on_anti_aliasing_selected"]
 [connection signal="item_selected" from="PanelContainer/CenterContainer/SettingsContainer/GridContainer/ShadowQuality/ShadowOption" to="." method="_on_shadow_quality_selected"]
+[connection signal="toggled" from="PanelContainer/CenterContainer/SettingsContainer/GridContainer/SSAO/CenterContainer/SSAOToggle" to="." method="_on_ssao_toggled"]
+[connection signal="toggled" from="PanelContainer/CenterContainer/SettingsContainer/GridContainer/Glow/CenterContainer/GlowToggle" to="." method="_on_glow_toggled"]
+[connection signal="item_selected" from="PanelContainer/CenterContainer/SettingsContainer/GridContainer/MaxFPS/MaxFPSOption" to="." method="_on_max_fps_selected"]
+[connection signal="value_changed" from="PanelContainer/CenterContainer/SettingsContainer/GridContainer/ResolutionScale/Slider" to="." method="_on_resolution_scale_changed"]
 [connection signal="toggled" from="PanelContainer/CenterContainer/SettingsContainer/GridContainer/InvertY/CenterContainer/InvertYToggle" to="." method="_on_invert_y_toggled"]
 [connection signal="toggled" from="PanelContainer/CenterContainer/SettingsContainer/GridContainer/TutorialHints/CenterContainer/TutorialHintsToggle" to="." method="_on_tutorial_hints_toggled"]
+[connection signal="toggled" from="PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenShake/CenterContainer/ScreenShakeToggle" to="." method="_on_screen_shake_toggled"]
+[connection signal="toggled" from="PanelContainer/CenterContainer/SettingsContainer/GridContainer/Vignette/CenterContainer/VignetteToggle" to="." method="_on_vignette_toggled"]
+[connection signal="toggled" from="PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenEffects/CenterContainer/ScreenEffectsToggle" to="." method="_on_screen_effects_toggled"]
+[connection signal="value_changed" from="PanelContainer/CenterContainer/SettingsContainer/GridContainer/LookSensitivity/Slider" to="." method="_on_look_sensitivity_changed"]
+[connection signal="value_changed" from="PanelContainer/CenterContainer/SettingsContainer/GridContainer/FOV/Slider" to="." method="_on_fov_changed"]
 [connection signal="value_changed" from="PanelContainer/CenterContainer/SettingsContainer/Difficulty/VBoxContainer/DifficultySlider" to="." method="_on_difficulty_changed"]
 [connection signal="pressed" from="PanelContainer/CenterContainer/SettingsContainer/BackButton" to="." method="_on_back_button_pressed"]

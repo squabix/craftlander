@@ -62,6 +62,14 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="DPITexture" id="DPITexture_chkunchk"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><rect width=\"14\" height=\"14\" x=\"1\" y=\"1\" fill=\"none\" stroke=\"#999999\" stroke-opacity=\".9\" stroke-width=\"2\" rx=\"2.333\"/></svg>
+"
+
+[sub_resource type="DPITexture" id="DPITexture_chkunchkdis"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><rect width=\"14\" height=\"14\" x=\"1\" y=\"1\" fill=\"none\" stroke=\"#999999\" stroke-opacity=\".5\" stroke-width=\"2\" rx=\"2.333\"/></svg>
+"
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2h7nn"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3lri3"]
@@ -69,6 +77,18 @@ corner_radius_bottom_left = 10
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cdrs1"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dh8sq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vj7es"]
+bg_color = Color(0.6028674, 0.81169474, 0.8652438, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.20271635, 0.36933464, 0.41002664, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_menupanel"]
 content_margin_left = 16.0
@@ -163,6 +183,8 @@ Button/styles/hover = SubResource("StyleBoxFlat_2h7nn")
 Button/styles/normal = SubResource("StyleBoxFlat_3lri3")
 Button/styles/pressed = SubResource("StyleBoxFlat_cdrs1")
 CheckBox/colors/checkbox_checked_color = Color(0.25010002, 0.52602345, 0.61, 1)
+CheckBox/icons/unchecked = SubResource("DPITexture_chkunchk")
+CheckBox/icons/unchecked_disabled = SubResource("DPITexture_chkunchkdis")
 CheckBox/styles/hover = SubResource("StyleBoxEmpty_2h7nn")
 CheckBox/styles/hover_pressed = SubResource("StyleBoxEmpty_3lri3")
 CheckBox/styles/normal = SubResource("StyleBoxEmpty_cdrs1")
@@ -170,7 +192,7 @@ CheckBox/styles/pressed = SubResource("StyleBoxEmpty_dh8sq")
 GridContainer/constants/h_separation = 12
 GridContainer/constants/v_separation = 18
 HSlider/styles/grabber_area = SubResource("StyleBoxFlat_2h7nn")
-HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_cdrs1")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_vj7es")
 Label/font_sizes/font_size = 28
 MenuPanel/base_type = &"PanelContainer"
 MenuPanel/styles/panel = SubResource("StyleBoxFlat_menupanel")

@@ -51,8 +51,9 @@ func turn_head(relative: Vector2) -> void:
 	if GameSettings.config.get_value("gameplay", "invert_y", false) == true:
 		relative.y *= -1.0
 
-	initial_entity.rotate_vertical(-relative.y * LOOK_SENSITIVITY)
-	initial_entity.rotate_horizontal(-relative.x * LOOK_SENSITIVITY)
+	var sensitivity: float = GameSettings.config.get_value("gameplay", "look_sensitivity", LOOK_SENSITIVITY)
+	initial_entity.rotate_vertical(-relative.y * sensitivity)
+	initial_entity.rotate_horizontal(-relative.x * sensitivity)
 
 
 func handle_input(event: InputEvent) -> void:

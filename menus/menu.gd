@@ -30,11 +30,12 @@ static func lock_frame() -> bool:
 
 
 func _ready() -> void:
-	
+	Util.wire_focus_neighbors(self)
+
 	# Connect back button
 	if back_button != null:
 		back_button.pressed.connect(back)
-	
+
 	# Auto focus if visible on ready
 	if visible:
 		auto_focus()

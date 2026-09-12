@@ -5,13 +5,20 @@ const DEFAULT_HEAD_HEIGHT := 1.4
 const CROUCHED_HEAD_HEIGHT := 0.7
 const SWIMMING_HEAD_HEIGHT := 0.85
 const HEAD_SPEED := 0.1
+const HURT_SHAKE_TRAUMA := 0.4
 
 @export_group("Components")
 @export var movement_state_machine: StateMachine
 
 @export_subgroup("3D")
 @export var head: Node3D
+@export var camera: Camera3D
+@export var camera_shake: CameraShake3D
 @export var interactors: Array[Interactor3D]
+
+@export_subgroup("Screen Effects")
+@export var vignette: CanvasItem
+@export var hurt_effect_trigger: SignalTrigger
 
 @export_subgroup("Control")
 @export var respawn_button: Button
@@ -53,8 +60,12 @@ func _ready() -> void:
 	respawn_button.pressed.connect(respawn)
 	health.died.connect(die)
 	health.survived_hurt.connect(_on_survived_hurt)
+	health.was_hurt.connect(_on_was_hurt)
 	health_saver.finished_load.connect(_on_health_loaded, CONNECT_ONE_SHOT)
 	hunger_saver.finished_load.connect(_on_hunger_loaded, CONNECT_ONE_SHOT)
+
+	camera.fov = GameSettings.config.get_value("gameplay", "fov", camera.fov)
+	apply_screen_effect_settings()
 
 
 func _on_health_loaded() -> void:
@@ -118,6 +129,15 @@ func die() -> void:
 
 func _on_survived_hurt() -> void:
 	EventBus.trigger(&"player_survived_hurt", health.to_percent_max(health.hp))
+
+
+func _on_was_hurt() -> void:
+	camera_shake.add_trauma(HURT_SHAKE_TRAUMA)
+
+
+func apply_screen_effect_settings() -> void:
+	vignette.visible = GameSettings.config.get_value("gameplay", "vignette_enabled", true)
+	hurt_effect_trigger.disabled = not GameSettings.config.get_value("gameplay", "hurt_effect_enabled", true)
 
 
 func respawn() -> void:

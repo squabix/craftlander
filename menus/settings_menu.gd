@@ -1,13 +1,29 @@
 class_name SettingsMenu
 extends Menu
 
+const WINDOW_MODES: Array[DisplayServer.WindowMode] = [
+	DisplayServer.WINDOW_MODE_WINDOWED,
+	DisplayServer.WINDOW_MODE_FULLSCREEN,
+	DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN,
+]
+
 @export var music_slider: Slider
 @export var sfx_slider: Slider
 @export var vsync_toggle: Button
-@export var full_screen_toggle: Button
+@export var window_mode_option: OptionButton
 @export var aa_option: OptionButton
+@export var shadow_option: OptionButton
+@export var ssao_toggle: Button
+@export var glow_toggle: Button
+@export var max_fps_option: OptionButton
+@export var resolution_scale_slider: Slider
 @export var invert_y_toggle: Button
 @export var tutorial_hints_toggle: Button
+@export var screen_shake_toggle: Button
+@export var vignette_toggle: Button
+@export var screen_effects_toggle: Button
+@export var look_sensitivity_slider: Slider
+@export var fov_slider: Slider
 
 @export_group("Difficulty", "difficulty")
 @export var difficulty_row: Control
@@ -30,12 +46,22 @@ func sync_ui_with_settings() -> void:
 
 	# Video
 	vsync_toggle.button_pressed = GameSettings.config.get_value("video", "vsync", true)
-	full_screen_toggle.button_pressed = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN
+	window_mode_option.selected = max(WINDOW_MODES.find(DisplayServer.window_get_mode()), 0)
 	aa_option.selected = GameSettings.config.get_value("video", "msaa", 1)
+	shadow_option.selected = GameSettings.config.get_value("video", "shadow_quality", 1)
+	ssao_toggle.button_pressed = GameSettings.config.get_value("video", "ssao_enabled", true)
+	glow_toggle.button_pressed = GameSettings.config.get_value("video", "glow_enabled", true)
+	max_fps_option.selected = max(GameSettings.FPS_CAPS.find(GameSettings.config.get_value("video", "max_fps", 0)), 0)
+	resolution_scale_slider.value = GameSettings.config.get_value("video", "resolution_scale", 1.0)
 
 	# Gameplay
 	invert_y_toggle.button_pressed = GameSettings.config.get_value("gameplay", "invert_y", false)
 	tutorial_hints_toggle.button_pressed = GameSettings.config.get_value("gameplay", "tutorial_hints_enabled", true)
+	screen_shake_toggle.button_pressed = GameSettings.config.get_value("gameplay", "screen_shake_enabled", true)
+	vignette_toggle.button_pressed = GameSettings.config.get_value("gameplay", "vignette_enabled", true)
+	screen_effects_toggle.button_pressed = GameSettings.config.get_value("gameplay", "hurt_effect_enabled", true)
+	look_sensitivity_slider.value = GameSettings.config.get_value("gameplay", "look_sensitivity", look_sensitivity_slider.value)
+	fov_slider.value = GameSettings.config.get_value("gameplay", "fov", fov_slider.value)
 
 	difficulty_row.visible = is_in_game()
 	if is_in_game():
@@ -43,11 +69,8 @@ func sync_ui_with_settings() -> void:
 		update_difficulty_label()
 
 
-func _on_full_screen_toggled(toggled_on: bool) -> void:
-	var mode = DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN if toggled_on else DisplayServer.WINDOW_MODE_WINDOWED
-	DisplayServer.window_set_mode(mode)
-	GameSettings.config.set_value("video", "mode", mode)
-	GameSettings.save_settings()
+func _on_window_mode_selected(index: int) -> void:
+	GameSettings.set_window_mode(WINDOW_MODES[index])
 
 
 func _on_vsync_toggled(toggled_on: bool) -> void:
@@ -60,10 +83,24 @@ func _on_anti_aliasing_selected(index: int) -> void:
 
 
 func _on_shadow_quality_selected(index: int) -> void:
-	var shadow_size = [1024, 2048, 4096, 8192]
-	RenderingServer.directional_shadow_atlas_set_size(shadow_size[index], true)
-	GameSettings.config.set_value("video", "shadow_quality", index)
-	GameSettings.save_settings()
+	GameSettings.set_shadow_quality(index)
+
+
+func _on_ssao_toggled(toggled_on: bool) -> void:
+	GameSettings.set_ssao_enabled(toggled_on)
+
+
+func _on_glow_toggled(toggled_on: bool) -> void:
+	GameSettings.set_glow_enabled(toggled_on)
+
+
+func _on_max_fps_selected(index: int) -> void:
+	# index: 0=Unlimited, 1=30, 2=60, 3=120, 4=144
+	GameSettings.set_max_fps(GameSettings.FPS_CAPS[index])
+
+
+func _on_resolution_scale_changed(value: float) -> void:
+	GameSettings.set_resolution_scale(value)
 
 
 func _on_invert_y_toggled(toggled_on: bool) -> void:
@@ -74,6 +111,42 @@ func _on_invert_y_toggled(toggled_on: bool) -> void:
 func _on_tutorial_hints_toggled(toggled_on: bool) -> void:
 	GameSettings.config.set_value("gameplay", "tutorial_hints_enabled", toggled_on)
 	GameSettings.save_settings()
+
+
+func _on_look_sensitivity_changed(value: float) -> void:
+	GameSettings.set_value("gameplay", "look_sensitivity", value)
+
+
+func _on_fov_changed(value: float) -> void:
+	GameSettings.set_value("gameplay", "fov", value)
+	var player := get_player()
+	if player != null:
+		player.camera.fov = value
+
+
+func _on_screen_shake_toggled(toggled_on: bool) -> void:
+	GameSettings.config.set_value("gameplay", "screen_shake_enabled", toggled_on)
+	GameSettings.save_settings()
+
+
+func _on_vignette_toggled(toggled_on: bool) -> void:
+	GameSettings.config.set_value("gameplay", "vignette_enabled", toggled_on)
+	GameSettings.save_settings()
+	var player := get_player()
+	if player != null:
+		player.vignette.visible = toggled_on
+
+
+func _on_screen_effects_toggled(toggled_on: bool) -> void:
+	GameSettings.config.set_value("gameplay", "hurt_effect_enabled", toggled_on)
+	GameSettings.save_settings()
+	var player := get_player()
+	if player != null:
+		player.hurt_effect_trigger.disabled = not toggled_on
+
+
+func get_player() -> Player:
+	return get_tree().get_first_node_in_group(&"player") as Player
 
 
 func is_in_game() -> bool:

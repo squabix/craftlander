@@ -9,6 +9,7 @@ signal hid_texture
 @export var do_warp_mouse := true
 @export var do_focus := true
 @export var do_match_parent_visibility := true
+@export var inivisible_as_disabled := true
 
 @export_group("Motion")
 @export_range(0.0, 0.9) var deadzone := 0.1
@@ -58,6 +59,8 @@ func _ready() -> void:
 	if do_match_parent_visibility and parent_has_visibility():
 		get_parent().visibility_changed.connect(match_parent_visibility)
 
+	ControllerIcons.input_type_changed.connect(_on_controller_icons_input_type_changed)
+
 func parent_has_visibility() -> bool:
 	var parent := get_parent()
 	return parent is CanvasItem or parent is CanvasLayer
@@ -69,6 +72,9 @@ func match_parent_visibility() -> void:
 
 
 func _process(delta: float) -> void:
+	if not visible and inivisible_as_disabled:
+		return
+	
 	if warp_cooldown > 0.0:
 		warp_cooldown -= delta
 
@@ -120,6 +126,11 @@ func _input(event: InputEvent) -> void:
 		if not receiving_motion_input() and event.velocity.length() > 0.5:
 			position = event.position
 			hide_texture()
+
+
+func _on_controller_icons_input_type_changed(input_type: int, controller: int) -> void:
+	if input_type == ControllerIcons.InputType.KEYBOARD_MOUSE and warp_cooldown > 0.0:
+		ControllerIcons._set_last_input_type(ControllerIcons.InputType.CONTROLLER, controller)
 
 
 func add_texture() -> void:

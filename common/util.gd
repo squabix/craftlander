@@ -241,6 +241,88 @@ static func find_children_of_class(parent: Node, class_string: StringName, inclu
 	return children
 
 
+static func wire_focus_neighbors(root: Node) -> void:
+	for child in root.get_children():
+		if child is GridContainer:
+			_wire_grid_focus_neighbors(child)
+		elif child is VBoxContainer:
+			_wire_linear_focus_neighbors(child, true)
+		elif child is HBoxContainer:
+			_wire_linear_focus_neighbors(child, false)
+		wire_focus_neighbors(child)
+
+
+static func _wire_linear_focus_neighbors(container: Container, vertical: bool) -> void:
+	var rows: Array = []
+	for child in container.get_children():
+		var row_focusables: Array[Control] = []
+		_collect_cell_focusables(child, row_focusables)
+		if not row_focusables.is_empty():
+			rows.append(row_focusables)
+
+	var before_side := "top" if vertical else "left"
+	var after_side := "bottom" if vertical else "right"
+
+	for r in rows.size():
+		var row: Array = rows[r]
+		for c in row.size():
+			var current: Control = row[c]
+			if r > 0:
+				var prev_row: Array = rows[r - 1]
+				if c < prev_row.size():
+					_set_neighbor_if_unset(current, before_side, prev_row[c])
+			if r < rows.size() - 1:
+				var next_row: Array = rows[r + 1]
+				if c < next_row.size():
+					_set_neighbor_if_unset(current, after_side, next_row[c])
+
+
+static func _wire_grid_focus_neighbors(grid: GridContainer) -> void:
+	var columns := grid.columns
+	if columns <= 0:
+		return
+
+	var focusables: Array[Control] = []
+	for child in grid.get_children():
+		var cell_focusables: Array[Control] = []
+		_collect_cell_focusables(child, cell_focusables)
+		focusables.append(cell_focusables[0] if cell_focusables.size() == 1 else null)
+
+	var count := focusables.size()
+	for i in count:
+		var current := focusables[i]
+		if current == null:
+			continue
+
+		var column := i % columns
+		if column > 0 and focusables[i - 1] != null:
+			_set_neighbor_if_unset(current, "left", focusables[i - 1])
+		if column < columns - 1 and i + 1 < count and focusables[i + 1] != null:
+			_set_neighbor_if_unset(current, "right", focusables[i + 1])
+		if i - columns >= 0 and focusables[i - columns] != null:
+			_set_neighbor_if_unset(current, "top", focusables[i - columns])
+		if i + columns < count and focusables[i + columns] != null:
+			_set_neighbor_if_unset(current, "bottom", focusables[i + columns])
+
+
+static func _collect_cell_focusables(node: Node, out: Array[Control], is_entry: bool = true) -> void:
+	if node is Control and node.focus_mode != Control.FOCUS_NONE:
+		out.append(node)
+		return
+	if not is_entry and (node is GridContainer or node is VBoxContainer or node is HBoxContainer):
+		return
+	for child in node.get_children():
+		_collect_cell_focusables(child, out, false)
+
+
+static func _set_neighbor_if_unset(control: Control, side: String, target: Control) -> void:
+	var property := "focus_neighbor_%s" % side
+	var existing: NodePath = control.get(property)
+	if not existing.is_empty():
+		return
+	control.set(property, control.get_path_to(target))
+
+
 static func connect_custom(callable: Callable, connecting_signal: Signal, one_shot := false, ...custom_args: Array) -> void:
 	await connecting_signal
 	callable.callv(custom_args)
