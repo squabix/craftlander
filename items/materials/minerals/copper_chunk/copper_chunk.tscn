@@ -1,7 +1,13 @@
 [gd_scene format=3 uid="uid://bxjgsyhdadcvo"]
 
 [ext_resource type="PackedScene" uid="uid://c3xsx6kskbxh2" path="res://assets/models/items/materials/mineral_chunk1.blend" id="1_udjh4"]
+[ext_resource type="Material" uid="uid://2lvxncgxfhjd" path="res://assets/materials/copper.tres" id="2_v4g2l"]
 
 [node name="CopperChunk" type="Node3D" unique_id=249716213]
 
 [node name="Visuals" parent="." unique_id=2024983763 instance=ExtResource("1_udjh4")]
+
+[node name="Ore" parent="Visuals" index="0" unique_id=1402432178]
+surface_material_override/0 = ExtResource("2_v4g2l")
+
+[editable path="Visuals"]

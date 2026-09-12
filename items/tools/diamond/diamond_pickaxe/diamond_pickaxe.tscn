@@ -42,14 +42,14 @@ bus = &"SFX"
 
 [node name="BlenderMeshes" parent="Visuals" unique_id=595334990 instance=ExtResource("5_1xbq1")]
 
-[node name="Head2" parent="Visuals/BlenderMeshes" index="0" unique_id=1426139271]
+[node name="Head2" parent="Visuals/BlenderMeshes" index="0" unique_id=828412747]
 visible = false
 surface_material_override/0 = ExtResource("6_cfakc")
 
-[node name="Handle" parent="Visuals/BlenderMeshes" index="1" unique_id=254348979]
+[node name="Handle" parent="Visuals/BlenderMeshes" index="1" unique_id=1693702199]
 surface_material_override/0 = ExtResource("6_w8sjg")
 
-[node name="Cube" parent="Visuals/BlenderMeshes" index="2" unique_id=1666831151]
+[node name="Cube" parent="Visuals/BlenderMeshes" index="2" unique_id=818501542]
 surface_material_override/0 = ExtResource("6_cfakc")
 
 [editable path="Visuals/BlenderMeshes"]

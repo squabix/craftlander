@@ -1,7 +1,21 @@
 [gd_scene format=3 uid="uid://dhy8e5mh2ovvm"]
 
 [ext_resource type="PackedScene" uid="uid://cxyo02n5xogja" path="res://assets/models/items/food/honeycomb.blend" id="1_2uevs"]
-[ext_resource type="Material" uid="uid://dxf25ivnceuua" path="res://assets/materials/honey.tres" id="2_uif06"]
+[ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="2_uif06"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_12pyb"]
+render_priority = 0
+shader = ExtResource("2_uif06")
+shader_parameter/albedo = Color(1, 0.6784314, 0.2, 1)
+shader_parameter/hue_variance = 0.0
+shader_parameter/sat_variance = 0.1
+shader_parameter/val_variance = 0.05
+shader_parameter/metallic = 1.0
+shader_parameter/roughness = 0.800000038
+shader_parameter/rim_strength = 0.4
+shader_parameter/rim_power = 3.0
+shader_parameter/rim_color = Color(0, 0, 0, 1)
+shader_parameter/refraction_strength = 0.05
 
 [node name="Honeycomb" type="Node3D" unique_id=282752753]
 
@@ -15,6 +29,6 @@ visible = false
 
 [node name="Honeycomb" parent="Visuals" index="2" unique_id=266089514]
 transform = Transform3D(0.4962165, 0, 0.8681988, 0, 1, 0, -0.8681988, 0, 0.4962165, 0, 0, 0)
-surface_material_override/0 = ExtResource("2_uif06")
+surface_material_override/0 = SubResource("ShaderMaterial_12pyb")
 
 [editable path="Visuals"]

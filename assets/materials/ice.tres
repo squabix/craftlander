@@ -1,11 +1,17 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://c403ng7pn0nqg"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c403ng7pn0nqg"]
+
+[ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="1_oo7lc"]
 
 [resource]
-transparency = 1
-albedo_color = Color(0.47000003, 0.69966674, 1, 0.78431374)
-metallic = 1.0
-roughness = 0.66
-rim_enabled = true
-clearcoat_roughness = 0.54
-subsurf_scatter_strength = 0.23
-refraction_enabled = true
+render_priority = 0
+shader = ExtResource("1_oo7lc")
+shader_parameter/albedo = Color(0.47000003, 0.67316663, 1, 0.8980392)
+shader_parameter/hue_variance = 0.0
+shader_parameter/sat_variance = 0.1
+shader_parameter/val_variance = 0.05
+shader_parameter/metallic = 1.0
+shader_parameter/roughness = 0.4730000224675
+shader_parameter/rim_strength = 0.4
+shader_parameter/rim_power = 3.0
+shader_parameter/rim_color = Color(0.47000003, 0.56716657, 1, 1)
+shader_parameter/refraction_strength = 0.5570000264575

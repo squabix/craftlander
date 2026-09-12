@@ -3,14 +3,10 @@
 [ext_resource type="Script" uid="uid://b1gh515736ppy" path="res://common3d/damage_system/hit_projectile3d.gd" id="1_proj"]
 [ext_resource type="Resource" path="res://entities/projectiles/slime_ball/slime_ball_damage.tres" id="2_dmg"]
 [ext_resource type="PackedScene" uid="uid://xoj4t71ndmdv" path="res://assets/models/projectiles/slime_ball.blend" id="3_848ix"]
+[ext_resource type="Material" uid="uid://c06whlh3ak5qm" path="res://assets/materials/slime.tres" id="4_470yt"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_slime"]
 radius = 0.25
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_470yt"]
-resource_name = "Material.001"
-albedo_color = Color(0.7977666, 0.91, 0.2366, 1)
-roughness = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ncsrk"]
 resource_name = "Material"
@@ -34,7 +30,7 @@ shape = SubResource("SphereShape3D_slime")
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 
 [node name="InnerBall" parent="Visuals" index="0" unique_id=109889769]
-surface_material_override/0 = SubResource("StandardMaterial3D_470yt")
+surface_material_override/0 = ExtResource("4_470yt")
 
 [node name="OuterBall" parent="Visuals" index="1" unique_id=1979529813]
 surface_material_override/0 = SubResource("StandardMaterial3D_ncsrk")

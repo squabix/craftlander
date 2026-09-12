@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="11_stmp3"]
 [ext_resource type="PackedScene" uid="uid://d0a4ydiqu4jj6" path="res://entities/enemies/bee/bee.tscn" id="13_ioeyq"]
 [ext_resource type="ArrayOccluder3D" uid="uid://beajm3t1eu0nc" path="res://island/props/destructable_resource/bee_nest/bee_nest.occ" id="16_m5g4y"]
+[ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="16_nfl7h"]
 [ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="16_yb7pf"]
 [ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="17_82s4c"]
 [ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="17_yb7pf"]
@@ -74,9 +75,19 @@ _data = {
 &"hurt": SubResource("Animation_ir3ee")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5xftv"]
-albedo_color = Color(0.91, 0.67946666, 0.182, 1)
-roughness = 0.6
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vlpox"]
+render_priority = 0
+shader = ExtResource("16_nfl7h")
+shader_parameter/albedo = Color(0.9098039, 0.6784314, 0.18039216, 1)
+shader_parameter/hue_variance = 0.010000000475
+shader_parameter/sat_variance = 0.1
+shader_parameter/val_variance = 0.10000000475
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/rim_strength = 0.4
+shader_parameter/rim_power = 3.0
+shader_parameter/rim_color = Color(0, 0, 0, 1)
+shader_parameter/refraction_strength = 0.05
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ioeyq"]
 shading_mode = 0
@@ -105,7 +116,6 @@ collision_mask = 0
 script = ExtResource("22_tallblk")
 mesh_instance = NodePath("../../BlenderMeshes/Nest")
 generate_on_ready = true
-height = null
 
 [node name="Hurtbox3D" type="Area3D" parent="." unique_id=671691308 node_paths=PackedStringArray("health")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39999998, 0)
@@ -166,7 +176,7 @@ metadata/_custom_type_script = "uid://bhjxscxhtg2se"
 [node name="BlenderMeshes" parent="." unique_id=340605420 instance=ExtResource("11_b76o0")]
 
 [node name="Nest" parent="BlenderMeshes" index="0" unique_id=1008846497]
-surface_material_override/0 = SubResource("StandardMaterial3D_5xftv")
+surface_material_override/0 = SubResource("ShaderMaterial_vlpox")
 surface_material_override/1 = SubResource("StandardMaterial3D_ioeyq")
 
 [node name="BeeSpawner1" type="Node3D" parent="." unique_id=1407841692]

@@ -42,6 +42,7 @@
 [ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="43_ogwbr"]
 [ext_resource type="AudioStream" uid="uid://ck0q8lhyrv4xy" path="res://assets/sound/rootling-10.mp3" id="44_75l5g"]
 [ext_resource type="AudioStream" uid="uid://chvu761wd8xc2" path="res://assets/sound/rootling-11.mp3" id="45_jhouc"]
+[ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="45_yp744"]
 [ext_resource type="AudioStream" uid="uid://c4438fvpcmcld" path="res://assets/sound/rootling-12.mp3" id="46_u3pkf"]
 [ext_resource type="Script" uid="uid://ljihr86cv3xk" path="res://common3d/item_visuals_container_3d.gd" id="47_0ksuq"]
 [ext_resource type="PackedScene" uid="uid://djvh1hk3qehkt" path="res://assets/models/entities/yeti.blend" id="47_bi43y"]
@@ -710,6 +711,34 @@ stream_0/stream = ExtResource("44_75l5g")
 stream_1/stream = ExtResource("45_jhouc")
 stream_2/stream = ExtResource("46_u3pkf")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x8btb"]
+render_priority = 0
+shader = ExtResource("45_yp744")
+shader_parameter/albedo = Color(0.7812, 0.82627994, 0.84, 1)
+shader_parameter/hue_variance = 0.0
+shader_parameter/sat_variance = 0.10000000475
+shader_parameter/val_variance = 0.10000000475
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/rim_strength = 0.4
+shader_parameter/rim_power = 3.0
+shader_parameter/rim_color = Color(0, 0, 0, 1)
+shader_parameter/refraction_strength = 0.05
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yp744"]
+render_priority = 0
+shader = ExtResource("45_yp744")
+shader_parameter/albedo = Color(0.46080002, 0.48768002, 0.64, 1)
+shader_parameter/hue_variance = 0.0
+shader_parameter/sat_variance = 0.10000000475
+shader_parameter/val_variance = 0.10000000475
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/rim_strength = 0.4
+shader_parameter/rim_power = 3.0
+shader_parameter/rim_color = Color(0, 0, 0, 1)
+shader_parameter/refraction_strength = 0.05
+
 [node name="Yeti" type="CharacterBody3D" unique_id=718268970 node_paths=PackedStringArray("anim_tree", "item_holder", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
 script = ExtResource("1_n2wx5")
@@ -971,8 +1000,7 @@ bus = &"SFX"
 [node name="Visuals" parent="." unique_id=1031188240 instance=ExtResource("47_bi43y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
 
-[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1031188240, 1793732317) index="0" unique_id=211700437]
-bones/0/scale = Vector3(1, 0.9999997, 0.9999997)
+[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1031188240, 1949534949) index="0" unique_id=1252076893]
 bones/2/rotation = Quaternion(4.2381807e-08, -4.261896e-08, 0.6204223, 0.7842679)
 bones/3/rotation = Quaternion(-1.3102502e-07, 1.9494038e-08, -0.52479047, 0.8512314)
 bones/5/rotation = Quaternion(-2.9802319e-08, -5.9604638e-08, -0.6204223, 0.7842679)
@@ -983,14 +1011,15 @@ bones/10/rotation = Quaternion(-8.1490725e-10, 1.1641532e-10, 0.06378674, 0.9979
 bones/11/rotation = Quaternion(-0.50000006, -0.5, -0.5, 0.50000006)
 bones/12/rotation = Quaternion(-0.35355338, -0.1464466, 0.35355338, 0.8535534)
 bones/13/rotation = Quaternion(1.5279511e-09, -1.1641532e-10, -0.07041717, 0.99751765)
-bones/13/scale = Vector3(1, 0.99999994, 0.9999998)
 
-[node name="Yeti" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=2016866545]
+[node name="Yeti" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=783641144]
+surface_material_override/0 = SubResource("ShaderMaterial_x8btb")
 surface_material_override/1 = ExtResource("48_n2wx5")
+surface_material_override/2 = SubResource("ShaderMaterial_yp744")
 surface_material_override/4 = ExtResource("49_8i4p0")
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Visuals/Armature/Skeleton3D" index="1" unique_id=2133014425]
-transform = Transform3D(0.629852, 0.59437895, 0.4999998, 0.09933772, -0.7000942, 0.70710665, 0.7703366, -0.3957037, -0.4999999, 0.61395425, 0.29541665, -0.27074152)
+transform = Transform3D(0.629852, 0.594379, 0.49999985, 0.09933772, -0.7000943, 0.7071067, 0.7703366, -0.3957037, -0.49999997, 0.61395425, 0.29541665, -0.27074152)
 bone_name = "RightHand"
 bone_idx = 13
 

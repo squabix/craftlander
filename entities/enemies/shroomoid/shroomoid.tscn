@@ -954,13 +954,11 @@ bus = &"SFX"
 [node name="Visuals" parent="." unique_id=1763556072 instance=ExtResource("46_cje2d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 
-[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1763556072, 1833995943) index="0" unique_id=1253488434]
+[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1763556072, 559426766) index="0" unique_id=1164416661]
 bones/2/rotation = Quaternion(4.2381807e-08, -4.261896e-08, 0.6204223, 0.7842679)
 bones/3/rotation = Quaternion(-1.3102502e-07, 1.9494038e-08, -0.52479047, 0.8512314)
-bones/4/scale = Vector3(0.9999999, 0.9999998, 1)
 bones/5/rotation = Quaternion(-2.9802319e-08, -5.9604638e-08, -0.6204223, 0.7842679)
 bones/6/rotation = Quaternion(5.029142e-08, -1.09896064e-07, 0.52479047, 0.85123146)
-bones/7/position = Vector3(2.0075708e-08, 0.63969326, 3.871437e-08)
 bones/8/rotation = Quaternion(-0.49999997, 0.5, 0.5, 0.5)
 bones/9/rotation = Quaternion(-0.3535534, 0.14644662, -0.35355338, 0.8535535)
 bones/10/rotation = Quaternion(-5.7976637e-11, -2.910383e-11, 0.06378674, 0.99796355)
@@ -968,7 +966,7 @@ bones/11/rotation = Quaternion(-0.49999997, -0.5, -0.5, 0.5)
 bones/12/rotation = Quaternion(-0.3535534, -0.14644662, 0.35355338, 0.8535535)
 bones/13/rotation = Quaternion(2.5062372e-10, -1.4551915e-11, -0.07041717, 0.99751765)
 
-[node name="Shroomoid" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=997657421]
+[node name="Shroomoid" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=2021697659]
 surface_material_override/0 = ExtResource("47_02l8s")
 surface_material_override/1 = ExtResource("27_5vsmy")
 surface_material_override/2 = ExtResource("26_fq6fk")

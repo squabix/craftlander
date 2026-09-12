@@ -42,6 +42,8 @@
 [ext_resource type="AudioStream" uid="uid://chvu761wd8xc2" path="res://assets/sound/rootling-11.mp3" id="40_yk3i6"]
 [ext_resource type="AudioStream" uid="uid://c4438fvpcmcld" path="res://assets/sound/rootling-12.mp3" id="41_roflp"]
 [ext_resource type="PackedScene" uid="uid://cleoynel5yuky" path="res://assets/models/entities/spider_striped.blend" id="42_v7hfu"]
+[ext_resource type="Material" uid="uid://bjvs4vggqwfax" path="res://assets/materials/candy_red.tres" id="43_uyxu8"]
+[ext_resource type="Material" uid="uid://cq42fta75eojy" path="res://assets/materials/candy_white.tres" id="44_1tian"]
 [ext_resource type="Material" uid="uid://m5807bchpbmp" path="res://assets/materials/glowing_eye.tres" id="44_upixq"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
@@ -704,23 +706,55 @@ bus = &"SFX"
 [node name="Visuals" parent="." unique_id=1909705867 instance=ExtResource("42_v7hfu")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 
+[node name="Body" parent="Visuals" index="0" unique_id=1924367783]
+surface_material_override/0 = ExtResource("43_uyxu8")
+surface_material_override/1 = ExtResource("44_1tian")
+
+[node name="LegLeft1" parent="Visuals" index="1" unique_id=607674772]
+surface_material_override/0 = ExtResource("43_uyxu8")
+surface_material_override/1 = ExtResource("44_1tian")
+
+[node name="LegLeft2" parent="Visuals" index="2" unique_id=1796610144]
+surface_material_override/0 = ExtResource("43_uyxu8")
+surface_material_override/1 = ExtResource("44_1tian")
+
+[node name="LegLeft3" parent="Visuals" index="3" unique_id=1061118882]
+surface_material_override/0 = ExtResource("43_uyxu8")
+surface_material_override/1 = ExtResource("44_1tian")
+
+[node name="LegLeft4" parent="Visuals" index="4" unique_id=1053339385]
+surface_material_override/0 = ExtResource("43_uyxu8")
+surface_material_override/1 = ExtResource("44_1tian")
+
 [node name="LegRight4" parent="Visuals" index="5" unique_id=1841215919]
 transform = Transform3D(-0.92910707, 0, 0.3698105, 0, 1, 0, -0.3698105, 0, -0.92910707, -0.61, 0.29067695, -0.4414636)
+surface_material_override/0 = ExtResource("43_uyxu8")
+surface_material_override/1 = ExtResource("44_1tian")
 
 [node name="LegRight3" parent="Visuals" index="6" unique_id=189635639]
-transform = Transform3D(-0.9736478, 0, 0.22805586, 0, 1, 0, -0.22805586, 0, -0.9736478, -0.75, 0.29067695, -0.17361851)
+transform = Transform3D(-0.9736477, 0, 0.22805585, 0, 1, 0, -0.22805585, 0, -0.9736477, -0.75, 0.29067695, -0.17361851)
+surface_material_override/0 = ExtResource("43_uyxu8")
+surface_material_override/1 = ExtResource("44_1tian")
 
 [node name="LegRight2" parent="Visuals" index="7" unique_id=1439470597]
-transform = Transform3D(-0.9512163, 0, -0.3085242, 0, 1, 0, 0.3085242, 0, -0.9512163, -0.75, 0.29067695, 0.15406431)
+transform = Transform3D(-0.9512162, 0, -0.3085242, 0, 1, 0, 0.3085242, 0, -0.9512162, -0.75, 0.29067695, 0.15406431)
+surface_material_override/0 = ExtResource("43_uyxu8")
+surface_material_override/1 = ExtResource("44_1tian")
 
 [node name="LegRight1" parent="Visuals" index="8" unique_id=1763787552]
-transform = Transform3D(-0.9512163, 0, -0.3085242, 0, 1, 0, 0.3085242, 0, -0.9512163, -0.61, 0.29067695, 0.45040345)
+transform = Transform3D(-0.9512162, 0, -0.3085242, 0, 1, 0, 0.3085242, 0, -0.9512162, -0.61, 0.29067695, 0.45040345)
+surface_material_override/0 = ExtResource("43_uyxu8")
+surface_material_override/1 = ExtResource("44_1tian")
 
 [node name="NewLeg" parent="Visuals" index="9" unique_id=1744633523]
 visible = false
+surface_material_override/0 = ExtResource("43_uyxu8")
+surface_material_override/1 = ExtResource("44_1tian")
 
 [node name="Head" parent="Visuals" index="10" unique_id=1861977449]
 transform = Transform3D(1, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, 0, 0.649843, -0.54697454)
+surface_material_override/0 = ExtResource("43_uyxu8")
+surface_material_override/1 = ExtResource("44_1tian")
 surface_material_override/2 = ExtResource("44_upixq")
 
 [editable path="Visuals"]

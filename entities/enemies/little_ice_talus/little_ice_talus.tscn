@@ -798,7 +798,7 @@ bus = &"SFX"
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
 
 [node name="Head" parent="Visuals" index="0" unique_id=1312165250]
-transform = Transform3D(1, 0, 0, 0, 0.99757004, -0.06967047, 0, 0.06967047, 0.99757004, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.99993885, -0.011051127, 0, 0.011051127, 0.99993885, 0, 0, 0)
 surface_material_override/0 = ExtResource("42_iyf1a")
 
 [node name="LegLeft" parent="Visuals" index="1" unique_id=856653343]

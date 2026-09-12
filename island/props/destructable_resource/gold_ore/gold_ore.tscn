@@ -19,8 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://c04ip1y1ylfw8" path="res://assets/models/props/ore2.blend" id="18_65ggh"]
 [ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="18_ya8ro"]
 [ext_resource type="AudioStream" uid="uid://b6f6x800jxpvb" path="res://assets/sound/rock_destroy.mp3" id="19_2rmbx"]
-[ext_resource type="Material" uid="uid://br2pw1ks1jy7f" path="res://assets/materials/sandstone.tres" id="19_xbmh8"]
 [ext_resource type="Material" uid="uid://c33644pxuf2ds" path="res://assets/materials/gold.tres" id="20_65ggh"]
+[ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="21_cokie"]
 [ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/mesh_barrier_3d.gd" id="21_tallblk"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cokie"]
@@ -73,6 +73,20 @@ _data = {
 &"hurt": SubResource("Animation_ir3ee")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_npxjp"]
+render_priority = 0
+shader = ExtResource("21_cokie")
+shader_parameter/albedo = Color(0.5137255, 0.44705883, 0.34901962, 1)
+shader_parameter/hue_variance = 0.0
+shader_parameter/sat_variance = 0.1
+shader_parameter/val_variance = 0.05
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/rim_strength = 0.4
+shader_parameter/rim_power = 3.0
+shader_parameter/rim_color = Color(0, 0, 0, 1)
+shader_parameter/refraction_strength = 0.05
+
 [node name="GoldOre" type="Node3D" unique_id=51772479 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
 script = ExtResource("1_lvuu1")
 min_hp = 6
@@ -89,11 +103,11 @@ collision_layer = 5
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.32276815, 0)
 shape = SubResource("ConvexPolygonShape3D_cokie")
 
-[node name="ClimbBlocker" type="StaticBody3D" parent="."]
+[node name="ClimbBlocker" type="StaticBody3D" parent="." unique_id=599536001]
 collision_layer = 128
 collision_mask = 0
 
-[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" node_paths=PackedStringArray("mesh_instance")]
+[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" unique_id=503513118 node_paths=PackedStringArray("mesh_instance")]
 script = ExtResource("21_tallblk")
 mesh_instance = NodePath("../../BlenderMeshes/Stone")
 generate_on_ready = true
@@ -191,7 +205,7 @@ bus = &"SFX"
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="Stone" parent="BlenderMeshes" index="0" unique_id=1070345765]
-surface_material_override/0 = ExtResource("19_xbmh8")
+surface_material_override/0 = SubResource("ShaderMaterial_npxjp")
 
 [node name="Ore" parent="BlenderMeshes/Stone" index="0" unique_id=1357082601]
 surface_material_override/0 = ExtResource("20_65ggh")

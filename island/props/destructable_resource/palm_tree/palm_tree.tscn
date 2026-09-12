@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://f50l344faomv" path="res://assets/sound/tree_fall.mp3" id="16_qhgoe"]
 [ext_resource type="Material" uid="uid://g7eorwmb40wm" path="res://assets/materials/palm_bark.tres" id="18_knru2"]
 [ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="19_0rjp4"]
+[ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="19_blecd"]
 [ext_resource type="Material" uid="uid://c6muf6sqewvq7" path="res://assets/materials/dead_wood.tres" id="21_x88xr"]
 [ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="28_cfe7b"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="29_0dkka"]
@@ -44,6 +45,20 @@ radius = 0.545
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_erttl"]
 height = 4.3061523
 radius = 0.429
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sli0o"]
+render_priority = 0
+shader = ExtResource("19_blecd")
+shader_parameter/albedo = Color(0.5882353, 0.43137255, 0.11764706, 1)
+shader_parameter/hue_variance = 0.0
+shader_parameter/sat_variance = 0.1
+shader_parameter/val_variance = 0.05
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/rim_strength = 0.4
+shader_parameter/rim_power = 3.0
+shader_parameter/rim_color = Color(0, 0, 0, 1)
+shader_parameter/refraction_strength = 0.05
 
 [sub_resource type="Curve" id="Curve_ndo4n"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.75779045, 0.8774637), -0.5111994, -0.5111994, 0, 0, Vector2(1, 0.2536419), -3.0296543, 0.0, 0, 0]
@@ -265,7 +280,6 @@ shape = SubResource("CylinderShape3D_erttl")
 
 [node name="Wood" parent="Trunk/BlenderMeshes" index="0" unique_id=1267708203]
 visible = false
-mesh = null
 
 [node name="Leaf_003" parent="Trunk/BlenderMeshes" index="1" unique_id=261395903]
 surface_material_override/0 = ExtResource("36_whjq2")
@@ -286,17 +300,17 @@ surface_material_override/0 = ExtResource("36_whjq2")
 surface_material_override/0 = ExtResource("36_whjq2")
 
 [node name="Trunk" parent="Trunk/BlenderMeshes" index="7" unique_id=386912730]
-surface_material_override/0 = ExtResource("18_knru2")
+surface_material_override/0 = SubResource("ShaderMaterial_sli0o")
 surface_material_override/1 = ExtResource("19_0rjp4")
 
 [node name="Stump" parent="Trunk/BlenderMeshes" index="8" unique_id=934986723]
 visible = false
 
-[node name="ClimbBlocker" type="StaticBody3D" parent="."]
+[node name="ClimbBlocker" type="StaticBody3D" parent="." unique_id=1619715065]
 collision_layer = 128
 collision_mask = 0
 
-[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" node_paths=PackedStringArray("mesh_instance")]
+[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" unique_id=680704068 node_paths=PackedStringArray("mesh_instance")]
 script = ExtResource("37_tallblk")
 mesh_instance = NodePath("../../Trunk/BlenderMeshes/Trunk")
 generate_on_ready = true
@@ -322,7 +336,6 @@ shape = SubResource("CylinderShape3D_t4kw7")
 
 [node name="Wood" parent="Stump/BlenderMeshes" index="0" unique_id=1267708203]
 visible = false
-mesh = null
 
 [node name="Leaf_003" parent="Stump/BlenderMeshes" index="1" unique_id=261395903]
 visible = false

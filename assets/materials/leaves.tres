@@ -19,3 +19,6 @@ shader_parameter/wind_strenth = 2.0
 shader_parameter/sway_speed = 2.0
 shader_parameter/bendieness_multiplier = 0.0
 shader_parameter/albedo_texture = SubResource("GradientTexture2D_55jnn")
+shader_parameter/hue_variance = 0.02000000095
+shader_parameter/sat_variance = 0.10000000475
+shader_parameter/val_variance = 0.050000002375

@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://taauldxtyjeo"]
+
+[ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="1_gu457"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_gu457")
+shader_parameter/albedo = Color(0.90999997, 0.93399996, 1, 1)
+shader_parameter/hue_variance = 0.10000000475
+shader_parameter/sat_variance = 0.10000000475
+shader_parameter/val_variance = 0.10000000475
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/rim_strength = 0.4
+shader_parameter/rim_power = 3.0
+shader_parameter/rim_color = Color(0, 0, 0, 1)
+shader_parameter/refraction_strength = 0.05

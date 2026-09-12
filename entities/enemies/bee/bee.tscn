@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://bp5ab438ufrus" path="res://common3d/culling_controller3d.gd" id="15_nj0qj"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="16_0hiqi"]
 [ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="16_4hd4j"]
+[ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="16_bfxyu"]
 [ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="16_t5evv"]
 [ext_resource type="AudioStream" uid="uid://c2dpvg8ontimn" path="res://assets/sound/bee_hurt.mp3" id="17_wnfpe"]
 [ext_resource type="AudioStream" uid="uid://c3yyhxgab6684" path="res://assets/sound/bee_fly.mp3" id="19_wnfpe"]
@@ -28,11 +29,33 @@
 script/source = "extends EntityController3D
 "
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jwu52"]
-albedo_color = Color(0.8, 0.71693337, 0.088000014, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4yb8b"]
+render_priority = 0
+shader = ExtResource("16_bfxyu")
+shader_parameter/albedo = Color(0.8, 0.7176471, 0.08627451, 1)
+shader_parameter/hue_variance = 0.0
+shader_parameter/sat_variance = 0.1
+shader_parameter/val_variance = 0.05
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/rim_strength = 0.4
+shader_parameter/rim_power = 3.0
+shader_parameter/rim_color = Color(0, 0, 0, 1)
+shader_parameter/refraction_strength = 0.05
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c6ibj"]
-albedo_color = Color(0.17112508, 0.09764192, 0.04864355, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ox776"]
+render_priority = 0
+shader = ExtResource("16_bfxyu")
+shader_parameter/albedo = Color(0.17254902, 0.09803922, 0.047058824, 1)
+shader_parameter/hue_variance = 0.0
+shader_parameter/sat_variance = 0.1
+shader_parameter/val_variance = 0.05
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/rim_strength = 0.4
+shader_parameter/rim_power = 3.0
+shader_parameter/rim_color = Color(0, 0, 0, 1)
+shader_parameter/refraction_strength = 0.05
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ff1s"]
 resource_name = "Material.002"
@@ -411,8 +434,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 transform = Transform3D(0.225, 0, 0, 0, 0.22158168, -0.03907083, 0, 0.03907083, 0.22158168, 0, 0.05, 0)
 
 [node name="Body" parent="BlenderVisuals/Visuals" index="0" unique_id=358157295]
-surface_material_override/0 = SubResource("StandardMaterial3D_jwu52")
-surface_material_override/1 = SubResource("StandardMaterial3D_c6ibj")
+surface_material_override/0 = SubResource("ShaderMaterial_4yb8b")
+surface_material_override/1 = SubResource("ShaderMaterial_ox776")
 
 [node name="Wings" parent="BlenderVisuals/Visuals" index="1" unique_id=1744401307]
 transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -0.99999994, 0, 0.99999994, -4.3711385e-08, 0, 0, 0)

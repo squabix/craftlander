@@ -20,6 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://b6f6x800jxpvb" path="res://assets/sound/rock_destroy.mp3" id="18_6k4wd"]
 [ext_resource type="PackedScene" uid="uid://dm7hgc8h3jv13" path="res://assets/models/props/ore3.blend" id="18_10xfn"]
 [ext_resource type="Material" uid="uid://bd2wsdvcuat4q" path="res://assets/materials/diamond.tres" id="19_trapn"]
+[ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="20_4yb8b"]
 [ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/mesh_barrier_3d.gd" id="20_tallblk"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cokie"]
@@ -34,6 +35,20 @@ metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 script = ExtResource("8_d83hu")
 item = ExtResource("10_trapn")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ox776"]
+render_priority = 0
+shader = ExtResource("20_4yb8b")
+shader_parameter/albedo = Color(0.43439773, 0.46195287, 0.47960454, 1)
+shader_parameter/hue_variance = 0.050000002375
+shader_parameter/sat_variance = 0.1
+shader_parameter/val_variance = 0.05
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/rim_strength = 0.4
+shader_parameter/rim_power = 3.0
+shader_parameter/rim_color = Color(0, 0, 0, 1)
+shader_parameter/refraction_strength = 0.05
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_g2k8q"]
 _surfaces = [{
@@ -120,11 +135,11 @@ collision_layer = 5
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.32276815, 0)
 shape = SubResource("ConvexPolygonShape3D_cokie")
 
-[node name="ClimbBlocker" type="StaticBody3D" parent="."]
+[node name="ClimbBlocker" type="StaticBody3D" parent="." unique_id=1892730447]
 collision_layer = 128
 collision_mask = 0
 
-[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" node_paths=PackedStringArray("mesh_instance")]
+[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" unique_id=1591466233 node_paths=PackedStringArray("mesh_instance")]
 script = ExtResource("20_tallblk")
 mesh_instance = NodePath("../../BlenderMeshes/Stone")
 generate_on_ready = true
@@ -215,124 +230,131 @@ bus = &"SFX"
 [node name="BlenderMeshes" parent="." unique_id=131310090 instance=ExtResource("18_10xfn")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
-[node name="Diamond" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="0" unique_id=464834348]
+[node name="Stone" parent="BlenderMeshes" index="0" unique_id=980467855]
+surface_material_override/0 = SubResource("ShaderMaterial_ox776")
+
+[node name="Diamond" parent="BlenderMeshes/Stone" index="0" unique_id=464834348]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond2" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="1" unique_id=1126497109]
+[node name="Diamond2" parent="BlenderMeshes/Stone" index="1" unique_id=1126497109]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond3" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="2" unique_id=679400427]
+[node name="Diamond3" parent="BlenderMeshes/Stone" index="2" unique_id=679400427]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond4" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="3" unique_id=1961058390]
+[node name="Diamond4" parent="BlenderMeshes/Stone" index="3" unique_id=1961058390]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond5" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="4" unique_id=1357172787]
+[node name="Diamond5" parent="BlenderMeshes/Stone" index="4" unique_id=1357172787]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond6" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="5" unique_id=889602917]
+[node name="Diamond6" parent="BlenderMeshes/Stone" index="5" unique_id=889602917]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond7" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="6" unique_id=2046206919]
+[node name="Diamond7" parent="BlenderMeshes/Stone" index="6" unique_id=2046206919]
+visible = false
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond8" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="7" unique_id=1310682974]
+[node name="Diamond8" parent="BlenderMeshes/Stone" index="7" unique_id=1310682974]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond9" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="8" unique_id=1335918223]
+[node name="Diamond9" parent="BlenderMeshes/Stone" index="8" unique_id=1335918223]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond10" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="9" unique_id=733347410]
+[node name="Diamond10" parent="BlenderMeshes/Stone" index="9" unique_id=733347410]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond11" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="10" unique_id=1023391888]
+[node name="Diamond11" parent="BlenderMeshes/Stone" index="10" unique_id=1023391888]
+transform = Transform3D(0.9234109, -0.23561263, -0.43127602, -0.020212248, 0.89899665, -0.5344121, 0.4910232, 0.4800954, 0.78905284, 0.66428524, 0.28066394, -1.3591838)
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond12" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="11" unique_id=335794470]
+[node name="Diamond12" parent="BlenderMeshes/Stone" index="11" unique_id=335794470]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond13" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="12" unique_id=1690333796]
+[node name="Diamond13" parent="BlenderMeshes/Stone" index="12" unique_id=1690333796]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond14" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="13" unique_id=240815290]
+[node name="Diamond14" parent="BlenderMeshes/Stone" index="13" unique_id=240815290]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond15" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="14" unique_id=1128647679]
+[node name="Diamond15" parent="BlenderMeshes/Stone" index="14" unique_id=1128647679]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond16" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="15" unique_id=246407177]
+[node name="Diamond16" parent="BlenderMeshes/Stone" index="15" unique_id=246407177]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond17" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="16" unique_id=172138031]
+[node name="Diamond17" parent="BlenderMeshes/Stone" index="16" unique_id=172138031]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond18" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="17" unique_id=1348850030]
+[node name="Diamond18" parent="BlenderMeshes/Stone" index="17" unique_id=1348850030]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond19" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="18" unique_id=1528203943]
+[node name="Diamond19" parent="BlenderMeshes/Stone" index="18" unique_id=1528203943]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond20" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="19" unique_id=1281288885]
+[node name="Diamond20" parent="BlenderMeshes/Stone" index="19" unique_id=1281288885]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond21" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="20" unique_id=1044008742]
+[node name="Diamond21" parent="BlenderMeshes/Stone" index="20" unique_id=1044008742]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond22" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="21" unique_id=762630895]
+[node name="Diamond22" parent="BlenderMeshes/Stone" index="21" unique_id=762630895]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond23" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="22" unique_id=895327746]
+[node name="Diamond23" parent="BlenderMeshes/Stone" index="22" unique_id=895327746]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond24" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="23" unique_id=1971121962]
+[node name="Diamond24" parent="BlenderMeshes/Stone" index="23" unique_id=1971121962]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond25" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="24" unique_id=1224799275]
+[node name="Diamond25" parent="BlenderMeshes/Stone" index="24" unique_id=1224799275]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond26" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="25" unique_id=1386108610]
+[node name="Diamond26" parent="BlenderMeshes/Stone" index="25" unique_id=1386108610]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond27" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="26" unique_id=1875750608]
+[node name="Diamond27" parent="BlenderMeshes/Stone" index="26" unique_id=1875750608]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond28" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="27" unique_id=1358531236]
+[node name="Diamond28" parent="BlenderMeshes/Stone" index="27" unique_id=1358531236]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond29" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="28" unique_id=319099468]
+[node name="Diamond29" parent="BlenderMeshes/Stone" index="28" unique_id=319099468]
+transform = Transform3D(-0.27154127, 0.17747332, 0.6190589, 0.14780489, 0.6710806, -0.1275545, -0.6268048, 0.08136124, -0.2982638, -1.5283028, 0.3011972, 0.73152035)
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond30" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="29" unique_id=2067106946]
+[node name="Diamond30" parent="BlenderMeshes/Stone" index="29" unique_id=2067106946]
+transform = Transform3D(0.06164935, 0.33711275, 0.3324544, -0.075803794, 0.33796376, -0.32864246, -0.46735922, -0.010347828, 0.09715853, -1.1869382, 0.729234, -0.62606883)
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond31" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="30" unique_id=1629070228]
+[node name="Diamond31" parent="BlenderMeshes/Stone" index="30" unique_id=1629070228]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond32" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="31" unique_id=801867155]
+[node name="Diamond32" parent="BlenderMeshes/Stone" index="31" unique_id=801867155]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond33" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="32" unique_id=1130527570]
+[node name="Diamond33" parent="BlenderMeshes/Stone" index="32" unique_id=1130527570]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond34" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="33" unique_id=1475716794]
+[node name="Diamond34" parent="BlenderMeshes/Stone" index="33" unique_id=1475716794]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond35" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="34" unique_id=1032686013]
+[node name="Diamond35" parent="BlenderMeshes/Stone" index="34" unique_id=1032686013]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond36" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="35" unique_id=1442295586]
+[node name="Diamond36" parent="BlenderMeshes/Stone" index="35" unique_id=1442295586]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond37" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="36" unique_id=1631838016]
+[node name="Diamond37" parent="BlenderMeshes/Stone" index="36" unique_id=1631838016]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond38" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="37" unique_id=1933840736]
+[node name="Diamond38" parent="BlenderMeshes/Stone" index="37" unique_id=1933840736]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond39" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="38" unique_id=948267588]
+[node name="Diamond39" parent="BlenderMeshes/Stone" index="38" unique_id=948267588]
 surface_material_override/0 = ExtResource("19_trapn")
 
-[node name="Diamond40" parent="BlenderMeshes/Stone" parent_id_path=PackedInt32Array(131310090, 980467855) index="39" unique_id=1125164524]
+[node name="Diamond40" parent="BlenderMeshes/Stone" index="39" unique_id=1125164524]
 surface_material_override/0 = ExtResource("19_trapn")
 
 [node name="Diamond41" parent="BlenderMeshes" index="1" unique_id=1542680378]

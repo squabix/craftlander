@@ -1,13 +1,13 @@
-[gd_resource type="ShaderMaterial" format=3 uid="uid://drfxxufa84pj2"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cq42fta75eojy"]
 
-[ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="1_y8cap"]
+[ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="1_sj30s"]
 
 [resource]
 render_priority = 0
-shader = ExtResource("1_y8cap")
-shader_parameter/albedo = Color(0.96862745, 0.85490197, 0.70980394, 1)
+shader = ExtResource("1_sj30s")
+shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/hue_variance = 0.0
-shader_parameter/sat_variance = 0.1
+shader_parameter/sat_variance = 0.050000002375
 shader_parameter/val_variance = 0.05
 shader_parameter/metallic = 0.0
 shader_parameter/roughness = 1.0

@@ -12,7 +12,6 @@
 [ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="8_uyxsq"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="10_4ojav"]
 [ext_resource type="Resource" uid="uid://bwurefwkj4gjj" path="res://common/damage_system/single_damage.tres" id="10_j52tm"]
-[ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="10_rngja"]
 [ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="11_55jnn"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="11_ytrwe"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="12_jeogd"]
@@ -24,6 +23,7 @@
 [ext_resource type="AudioStream" uid="uid://f50l344faomv" path="res://assets/sound/tree_fall.mp3" id="17_h1qf7"]
 [ext_resource type="Material" uid="uid://cs4ulhbpklb14" path="res://assets/materials/leaves.tres" id="17_snq0j"]
 [ext_resource type="ArrayMesh" uid="uid://pp7y671firv" path="res://island/props/destructable_resource/tree/tree2/tree2_Icosphere.res" id="18_2dqu6"]
+[ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="18_erttl"]
 [ext_resource type="ArrayMesh" uid="uid://bpl8qm2cp5jsc" path="res://island/props/destructable_resource/tree/tree2/tree2_Icosphere_001.res" id="19_47adh"]
 [ext_resource type="ArrayMesh" uid="uid://cec0vjfexgiy2" path="res://island/props/destructable_resource/tree/tree2/tree2_Cube_004.res" id="20_abb6m"]
 [ext_resource type="ArrayMesh" uid="uid://cc05a2oxw20on" path="res://island/props/destructable_resource/tree/tree2/tree2_Icosphere_002.res" id="20_erttl"]
@@ -264,7 +264,7 @@ bus = &"SFX"
 [node name="Trunk" type="MeshInstance3D" parent="Trunk" unique_id=1491421397]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.131, 0.247, -0.017)
 mesh = ExtResource("17_abb6m")
-surface_material_override/0 = ExtResource("10_rngja")
+surface_material_override/0 = ExtResource("18_erttl")
 surface_material_override/1 = ExtResource("11_55jnn")
 
 [node name="Leaf" type="MeshInstance3D" parent="Trunk/Trunk" unique_id=1999246969]
@@ -313,11 +313,11 @@ shape = SubResource("CylinderShape3D_47adh")
 transform = Transform3D(0.9998557, 0.005685948, -0.016009059, -0.0033987763, 0.99022627, 0.13942842, 0.016645376, -0.13935389, 0.9901025, 0.10185623, 11.19011, -0.868181)
 shape = SubResource("CylinderShape3D_erttl")
 
-[node name="ClimbBlocker" type="StaticBody3D" parent="."]
+[node name="ClimbBlocker" type="StaticBody3D" parent="." unique_id=1744659966]
 collision_layer = 128
 collision_mask = 0
 
-[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" node_paths=PackedStringArray("mesh_instance")]
+[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" unique_id=1390769438 node_paths=PackedStringArray("mesh_instance")]
 script = ExtResource("29_tallblk")
 mesh_instance = NodePath("../../Trunk/Trunk")
 generate_on_ready = true
@@ -338,7 +338,7 @@ draw_pass_1 = SubResource("SphereMesh_kblrq")
 [node name="Stump" type="MeshInstance3D" parent="Stump" unique_id=1838209816]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07776773, 0, 0)
 mesh = ExtResource("20_abb6m")
-surface_material_override/0 = ExtResource("10_rngja")
+surface_material_override/0 = ExtResource("18_erttl")
 surface_material_override/1 = ExtResource("11_55jnn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stump" unique_id=1519144985]
@@ -409,7 +409,6 @@ visible = false
 
 [node name="Stump" parent="tree2" index="8" unique_id=911531359]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07776773, 0, 0)
-surface_material_override/0 = ExtResource("10_rngja")
 surface_material_override/1 = ExtResource("11_55jnn")
 
 [editable path="tree2"]

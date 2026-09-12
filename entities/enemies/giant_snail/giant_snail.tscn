@@ -39,9 +39,11 @@
 [ext_resource type="AudioStream" uid="uid://ck0q8lhyrv4xy" path="res://assets/sound/rootling-10.mp3" id="39_a2rcb"]
 [ext_resource type="AudioStream" uid="uid://chvu761wd8xc2" path="res://assets/sound/rootling-11.mp3" id="40_a0n7q"]
 [ext_resource type="Script" uid="uid://2ow28vm5clst" path="res://common/spawner/projectile_spawner3d.gd" id="41_2cqyr"]
+[ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="41_scokl"]
 [ext_resource type="AudioStream" uid="uid://c4438fvpcmcld" path="res://assets/sound/rootling-12.mp3" id="41_thbg1"]
 [ext_resource type="PackedScene" uid="uid://bq7502yamydve" path="res://assets/models/entities/snail.blend" id="42_o4bg8"]
 [ext_resource type="Material" uid="uid://ct3rueaspkpix" path="res://assets/materials/darkness.tres" id="43_0fdpd"]
+[ext_resource type="Material" uid="uid://c06whlh3ak5qm" path="res://assets/materials/slime.tres" id="43_ccu0b"]
 [ext_resource type="Material" uid="uid://m5807bchpbmp" path="res://assets/materials/glowing_eye.tres" id="44_sq588"]
 [ext_resource type="PackedScene" uid="uid://brml40n12o27c" path="res://entities/projectiles/slime_ball/slime_ball.tscn" id="45_slimeball"]
 [ext_resource type="Resource" path="res://entities/projectiles/slime_ball/slime_ball_damage.tres" id="46_slimedmg"]
@@ -607,14 +609,17 @@ bus = &"SFX"
 [node name="Visuals" parent="." unique_id=810787991 instance=ExtResource("42_o4bg8")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.2, 0)
 
-[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(810787991, 1277648825) index="0" unique_id=1831271292]
-bones/1/rotation = Quaternion(0.72747797, 8.179318e-08, 8.672214e-08, 0.68613106)
+[node name="Shell" parent="Visuals" index="0" unique_id=442330357]
+surface_material_override/0 = ExtResource("41_scokl")
+
+[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(810787991, 133580215) index="0" unique_id=1750562930]
 bones/2/rotation = Quaternion(0.040895905, -1.0694845e-14, 9.7503445e-09, 0.99916345)
 bones/3/rotation = Quaternion(-0.032595262, 0.0055556414, 0.15076298, 0.98801684)
 
-[node name="Body" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=1488309453]
+[node name="Body" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=930011908]
 surface_material_override/0 = ExtResource("43_0fdpd")
 surface_material_override/1 = ExtResource("44_sq588")
+surface_material_override/2 = ExtResource("43_ccu0b")
 
 [node name="ProjectileSpawner3D" type="Node3D" parent="." unique_id=79420671 node_paths=PackedStringArray("source")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1.3888149)

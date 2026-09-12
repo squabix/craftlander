@@ -1,8 +1,17 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://2lvxncgxfhjd"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://2lvxncgxfhjd"]
+
+[ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="1_grilp"]
 
 [resource]
-resource_name = "Material.001"
-cull_mode = 2
-albedo_color = Color(0.90644974, 0.45769638, 0.24742264, 1)
-metallic = 1.0
-roughness = 0.65
+render_priority = 0
+shader = ExtResource("1_grilp")
+shader_parameter/albedo = Color(1, 0.50116664, 0.26999998, 1)
+shader_parameter/hue_variance = 0.010000000475
+shader_parameter/sat_variance = 0.050000002375
+shader_parameter/val_variance = 0.0
+shader_parameter/metallic = 1.0
+shader_parameter/roughness = 0.50000002375
+shader_parameter/rim_strength = 0.4
+shader_parameter/rim_power = 3.0
+shader_parameter/rim_color = Color(0, 0, 0, 1)
+shader_parameter/refraction_strength = 0.05

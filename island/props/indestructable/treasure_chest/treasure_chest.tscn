@@ -5,25 +5,16 @@
 [ext_resource type="Resource" uid="uid://b10txfbikrljt" path="res://items/weapons/copper_sword/copper_sword_item.tres" id="2_mvsxc"]
 [ext_resource type="PackedScene" uid="uid://bidtr8j4ohtih" path="res://assets/models/props/chest.blend" id="3_061qj"]
 [ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="4_ccn32"]
-[ext_resource type="Material" uid="uid://bh8sv2icydggs" path="res://assets/materials/stone.tres" id="4_dw4ik"]
+[ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="5_5hnl4"]
 [ext_resource type="Material" uid="uid://bd2wsdvcuat4q" path="res://assets/materials/diamond.tres" id="5_cfjjf"]
 [ext_resource type="Material" uid="uid://ct3rueaspkpix" path="res://assets/materials/darkness.tres" id="6_hmq6h"]
 [ext_resource type="Material" uid="uid://c33644pxuf2ds" path="res://assets/materials/gold.tres" id="7_u5f0g"]
 [ext_resource type="PackedScene" uid="uid://dvdqw51x633ni" path="res://assets/models/items/materials/ingot1.blend" id="8_c835m"]
 [ext_resource type="PackedScene" uid="uid://bdqokoejywm4w" path="res://assets/models/items/materials/gem.blend" id="9_e3py2"]
 [ext_resource type="Material" uid="uid://cs0o6t0l4rg23" path="res://assets/materials/ruby.tres" id="10_mvsxc"]
-[ext_resource type="Material" uid="uid://hjut50oqofjs" path="res://assets/materials/emerald.tres" id="11_5hnl4"]
+[ext_resource type="Material" uid="uid://dfpc2asaqlvwr" path="res://assets/materials/emerald.tres" id="11_5hnl4"]
 [ext_resource type="Script" uid="uid://favgu1tbe1tq" path="res://common3d/interactions/interactable3d.gd" id="13_mvsxc"]
 [ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/mesh_barrier_3d.gd" id="14_tallblk"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c835m"]
-resource_name = "Material.002"
-cull_mode = 2
-albedo_color = Color(0.1392, 0.38898665, 0.58, 1)
-metallic = 1.0
-roughness = 0.15
-emission = Color(0.27, 0.5340001, 0.75, 1)
-emission_energy_multiplier = 0.1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1k277"]
 resource_name = "Material.001"
@@ -147,7 +138,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_e3py2"]
 resource_name = "locked"
-length = 0.39999999999999997
+length = 0.4
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -220,14 +211,14 @@ metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 transform = Transform3D(0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0, 0, 0)
 
 [node name="Box" parent="Visuals" index="0" unique_id=1591556192]
-surface_material_override/0 = ExtResource("4_dw4ik")
+surface_material_override/0 = ExtResource("5_5hnl4")
 surface_material_override/1 = ExtResource("5_cfjjf")
 
 [node name="Lid" parent="Visuals" index="1" unique_id=307371624]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 1, 1)
-surface_material_override/0 = ExtResource("4_dw4ik")
+surface_material_override/0 = ExtResource("5_5hnl4")
 surface_material_override/1 = ExtResource("5_cfjjf")
-surface_material_override/2 = SubResource("StandardMaterial3D_c835m")
+surface_material_override/2 = ExtResource("5_cfjjf")
 surface_material_override/3 = ExtResource("6_hmq6h")
 
 [node name="TreasurePlane" parent="Visuals" index="2" unique_id=239062115]
@@ -291,21 +282,20 @@ transform = Transform3D(-0.26199377, 0.09811916, 0.9600689, 0.56611997, 0.821298
 mesh = SubResource("ArrayMesh_fuiaf")
 surface_material_override/0 = ExtResource("11_5hnl4")
 
-[node name="MeshNavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=1913287670 node_paths=PackedStringArray("mesh_instance")]
+[node name="MeshNavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=1913287670]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.30738497, 0)
 visible = false
 radius = 1.3133913
 height = 0.98591995
 vertices = PackedVector3Array(-1.1262299, 0, -0.6757244, 1.1262299, 0, -0.6757244, 1.126, 0, 1, -1.126, 0, 1, -1.1262299, 0, -0.6757244)
 script = ExtResource("4_ccn32")
-mesh_instance = NodePath("../Visuals/Box")
 metadata/_custom_type_script = "uid://bf4816o00o0s5"
 
-[node name="ClimbBlocker" type="StaticBody3D" parent="."]
+[node name="ClimbBlocker" type="StaticBody3D" parent="." unique_id=1834078042]
 collision_layer = 128
 collision_mask = 0
 
-[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" node_paths=PackedStringArray("mesh_instance")]
+[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" unique_id=167273960 node_paths=PackedStringArray("mesh_instance")]
 script = ExtResource("14_tallblk")
 mesh_instance = NodePath("../../Visuals/Box")
 generate_on_ready = true

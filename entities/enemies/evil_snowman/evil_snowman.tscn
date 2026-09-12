@@ -38,12 +38,18 @@
 [ext_resource type="AudioStream" uid="uid://ck0q8lhyrv4xy" path="res://assets/sound/rootling-10.mp3" id="37_nsd4w"]
 [ext_resource type="AudioStream" uid="uid://chvu761wd8xc2" path="res://assets/sound/rootling-11.mp3" id="38_nmasq"]
 [ext_resource type="AudioStream" uid="uid://c4438fvpcmcld" path="res://assets/sound/rootling-12.mp3" id="39_eb31d"]
+[ext_resource type="Material" uid="uid://taauldxtyjeo" path="res://assets/materials/snow.tres" id="40_mjqu2"]
+[ext_resource type="Material" uid="uid://yfalkpftjtfj" path="res://assets/materials/coal.tres" id="41_u6i5x"]
+[ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="41_wg8x5"]
 [ext_resource type="Material" uid="uid://m5807bchpbmp" path="res://assets/materials/glowing_eye.tres" id="42_m7xa6"]
+[ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="42_u6i5x"]
 [ext_resource type="PackedScene" uid="uid://ddk11nveckktx" path="res://assets/models/entities/evil_snowman.blend" id="43_fh2de"]
 [ext_resource type="Script" uid="uid://2ow28vm5clst" path="res://common/spawner/projectile_spawner3d.gd" id="43_t2yii"]
 [ext_resource type="ArrayMesh" uid="uid://doiyrsd0mnhkf" path="res://assets/models/items/weapons/snowball.res" id="44_41vbo"]
 [ext_resource type="PackedScene" path="res://entities/projectiles/snowball/snowball.tscn" id="44_n0bkx"]
 [ext_resource type="Resource" path="res://entities/projectiles/snowball/snowball_damage.tres" id="45_7623f"]
+[ext_resource type="Material" uid="uid://btrvrb7gvvlbr" path="res://assets/materials/crab_shell.tres" id="47_u6i5x"]
+[ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="50_wwywl"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
 script = ExtResource("3_j8ygh")
@@ -422,6 +428,20 @@ stream_0/stream = ExtResource("37_nsd4w")
 stream_1/stream = ExtResource("38_nmasq")
 stream_2/stream = ExtResource("39_eb31d")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_krurl"]
+render_priority = 0
+shader = ExtResource("50_wwywl")
+shader_parameter/albedo = Color(1, 0.13, 0.13, 1)
+shader_parameter/hue_variance = 0.0
+shader_parameter/sat_variance = 0.1
+shader_parameter/val_variance = 0.05
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.30000001425
+shader_parameter/rim_strength = 0.4
+shader_parameter/rim_power = 3.0
+shader_parameter/rim_color = Color(0, 0, 0, 1)
+shader_parameter/refraction_strength = 0.05
+
 [node name="EvilSnowman" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
 script = ExtResource("1_mjqu2")
@@ -686,7 +706,17 @@ bus = &"SFX"
 [node name="Visuals" parent="." unique_id=960968621 instance=ExtResource("43_fh2de")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0.5, 0)
 
-[node name="LeftHandSpawner" type="Node3D" parent="Visuals/Torso/ArmLeft" parent_id_path=PackedInt32Array(960968621, 248926446) index="0" unique_id=1644463349]
+[node name="Bottom" parent="Visuals" index="0" unique_id=1257993441]
+surface_material_override/0 = ExtResource("40_mjqu2")
+
+[node name="Torso" parent="Visuals" index="1" unique_id=1626459690]
+surface_material_override/0 = ExtResource("40_mjqu2")
+
+[node name="ArmLeft" parent="Visuals/Torso" index="0" unique_id=248926446]
+surface_material_override/0 = ExtResource("41_wg8x5")
+surface_material_override/1 = ExtResource("42_u6i5x")
+
+[node name="LeftHandSpawner" type="Node3D" parent="Visuals/Torso/ArmLeft" index="0" unique_id=1644463349]
 transform = Transform3D(1.429, 0, 0, 0, 1.429, 0, 0, 0, 1.429, -1.25, 0.08, 0)
 
 [node name="ProjectileSpawner3D" type="Node3D" parent="Visuals/Torso/ArmLeft/LeftHandSpawner" unique_id=1644463350 node_paths=PackedStringArray("source")]
@@ -700,9 +730,12 @@ metadata/_custom_type_script = "uid://2ow28vm5clst"
 transform = Transform3D(1, 1.5285485e-14, 1.4210855e-14, 1.5285485e-14, 1, 1.4210855e-14, 0, 0, 1, 0.14108571, -0.14108574, -0.19600484)
 visible = false
 mesh = ExtResource("44_41vbo")
+surface_material_override/0 = ExtResource("40_mjqu2")
 
-[node name="ArmRight" parent="Visuals/Torso" parent_id_path=PackedInt32Array(960968621, 1626459690) index="1" unique_id=389766562]
+[node name="ArmRight" parent="Visuals/Torso" index="1" unique_id=389766562]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 1, 0.4069444, 0.32520258, -0.018160656)
+surface_material_override/0 = ExtResource("41_wg8x5")
+surface_material_override/1 = ExtResource("42_u6i5x")
 
 [node name="RightHandSpawner" type="Node3D" parent="Visuals/Torso/ArmRight" index="0" unique_id=1644463346]
 transform = Transform3D(1.429, 0, 0, 0, 1.429, 0, 0, 0, 1.429, 1.0572189, 0.07999992, -0.25401413)
@@ -718,9 +751,16 @@ metadata/_custom_type_script = "uid://2ow28vm5clst"
 transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 0, 0, 0)
 visible = false
 mesh = ExtResource("44_41vbo")
+surface_material_override/0 = ExtResource("40_mjqu2")
 
 [node name="Head" parent="Visuals" index="2" unique_id=275727902]
 transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1, 0, 2.1701887, 0)
+surface_material_override/0 = ExtResource("40_mjqu2")
+surface_material_override/1 = ExtResource("41_u6i5x")
+surface_material_override/2 = ExtResource("47_u6i5x")
 surface_material_override/3 = ExtResource("42_m7xa6")
+
+[node name="Hat" parent="Visuals/Head" index="0" unique_id=1362198304]
+surface_material_override/1 = SubResource("ShaderMaterial_krurl")
 
 [editable path="Visuals"]

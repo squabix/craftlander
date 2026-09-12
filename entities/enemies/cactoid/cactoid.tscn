@@ -42,6 +42,7 @@
 [ext_resource type="PackedScene" uid="uid://kq28g8oc1l4t" path="res://assets/models/entities/cactoid.blend" id="46_cactd"]
 [ext_resource type="AudioStream" uid="uid://cxppt2efnqk4e" path="res://assets/sound/rootling-05.mp3" id="46_m2dr4"]
 [ext_resource type="AudioStream" uid="uid://sl2wj5r6v4jx" path="res://assets/sound/rootling-06.mp3" id="47_gfhyf"]
+[ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="48_dcjc4"]
 [ext_resource type="Material" uid="uid://c7uysx7frg14r" path="res://assets/materials/cactus.tres" id="48_mj0et"]
 [ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="48_t07l3"]
 [ext_resource type="AudioStream" uid="uid://ck0q8lhyrv4xy" path="res://assets/sound/rootling-10.mp3" id="49_45ed8"]
@@ -742,7 +743,19 @@ albedo_color = Color(0, 0, 0, 1)
 metallic = 1.0
 roughness = 0.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bw73x"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0wyke"]
+render_priority = 0
+shader = ExtResource("48_dcjc4")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/hue_variance = 0.0
+shader_parameter/sat_variance = 0.0
+shader_parameter/val_variance = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/rim_strength = 0.4
+shader_parameter/rim_power = 3.0
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/refraction_strength = 0.05
 
 [node name="Cactoid" type="CharacterBody3D" unique_id=718268970 node_paths=PackedStringArray("anim_tree", "item_holder", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
@@ -1028,7 +1041,7 @@ surface_material_override/0 = ExtResource("48_mj0et")
 surface_material_override/1 = ExtResource("48_mj0et")
 surface_material_override/2 = ExtResource("49_td81m")
 surface_material_override/3 = SubResource("StandardMaterial3D_h6g50")
-surface_material_override/4 = SubResource("StandardMaterial3D_bw73x")
+surface_material_override/4 = SubResource("ShaderMaterial_0wyke")
 
 [node name="Spike" parent="Visuals" index="2" unique_id=1621851710]
 visible = false
