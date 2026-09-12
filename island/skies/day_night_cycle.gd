@@ -45,7 +45,7 @@ func _process(delta: float) -> void:
 	phase_degrees = fmod(phase_degrees + (HALF_CYCLE_DEGREES / cycle_length) * delta * cycle_speed_multiplier, 360.0)
 
 	if is_instance_valid(sun):
-		sun.rotation_degrees.x = -phase_degrees
+		_update_sun_direction()
 	apply_palette()
 	_sync()
 
@@ -58,6 +58,12 @@ func _process(delta: float) -> void:
 	else:
 		day_number += 1
 		day_started.emit()
+
+
+func _update_sun_direction() -> void:
+	var phase_rad := deg_to_rad(phase_degrees)
+	var direction_to_sun := Vector3(cos(phase_rad), sin(phase_rad), 0.0)
+	sun.global_transform.basis = Basis.looking_at(-direction_to_sun, Vector3(0.0, 1.0, 0.0001))
 
 
 func reset_to_day_start() -> void:
