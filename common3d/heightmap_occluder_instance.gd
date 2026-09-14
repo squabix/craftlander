@@ -20,68 +20,91 @@ func generate() -> void:
 		return
 
 	WorkerThreadPool.add_task(
-			_bake_occluder_thread.bind(
-					terrain_generator.map_resolution,
-					terrain_generator.map_size,
-					terrain_generator.heightmap_sampler,
-					step_size
-			)
+		_bake_occluder_thread.bind(
+			terrain_generator.map_resolution,
+			terrain_generator.map_size,
+			terrain_generator.heightmap_sampler,
+			step_size,
+		),
 	)
 
-func _bake_occluder_thread(map_resolution: Vector2i, map_size: Vector3, sample_callable: Callable, step: int) -> void:
+
+func _get_decimated_pixels(resolution: int, step: int) -> PackedInt32Array:
+	var pixels := PackedInt32Array()
+	for pixel in range(0, resolution, step):
+		pixels.append(pixel)
+	if pixels[-1] != resolution - 1:
+		pixels.append(resolution - 1)
+	return pixels
+
+
+func _bake_occluder_thread(map_resolution: Vector2i, map_size: Vector3, heightmap_sampler: Callable, decimation_step: int) -> void:
 	var vertices := PackedVector3Array()
 	var indices := PackedInt32Array()
 
-	var x_coords := PackedInt32Array()
-	var y_coords := PackedInt32Array()
+	var decimated_pixels_x := _get_decimated_pixels(map_resolution.x, decimation_step)
+	var grid_width := decimated_pixels_x.size()
+	var cell_pixel_ranges_x := _compute_cell_pixel_ranges(decimated_pixels_x, map_resolution.x)
 
-	for x in range(0, map_resolution.x, step):
-		x_coords.append(x)
-	if x_coords[-1] != map_resolution.x - 1:
-		x_coords.append(map_resolution.x - 1)
-
-	for y in range(0, map_resolution.y, step):
-		y_coords.append(y)
-	if y_coords[-1] != map_resolution.y - 1:
-		y_coords.append(map_resolution.y - 1)
-
-	var grid_w := x_coords.size()
-	var grid_h := y_coords.size()
+	var decimated_pixels_y := _get_decimated_pixels(map_resolution.y, decimation_step)
+	var grid_height := decimated_pixels_y.size()
+	var cell_pixel_ranges_y := _compute_cell_pixel_ranges(decimated_pixels_y, map_resolution.y)
 
 	# Build local vertex positions mirroring PlaneMesh spatial layout
-	for y_idx in grid_h:
-		var y := y_coords[y_idx]
-		for x_idx in grid_w:
-			var x := x_coords[x_idx]
-			
-			var l_x := (float(x) / float(map_resolution.x - 1)) * map_size.x - map_size.x / 2.0
-			var l_y: float = sample_callable.call(x, y) * map_size.y
-			var l_z := (float(y) / float(map_resolution.y - 1)) * map_size.z - map_size.z / 2.0
+	# Each vertex takes lowest sampled height across cell so decimated occluder surface never exceeds true terrain between sampled points
+	for grid_row in grid_height:
+		var pixel_y := decimated_pixels_y[grid_row]
+		var cell_pixel_range_y := cell_pixel_ranges_y[grid_row]
+		for grid_column in grid_width:
+			var pixel_x := decimated_pixels_x[grid_column]
+			var cell_pixel_range_x := cell_pixel_ranges_x[grid_column]
 
-			vertices.append(Vector3(l_x, l_y, l_z))
+			var lowest_sampled_height := 1.0
+			for sample_pixel_y in range(cell_pixel_range_y.x, cell_pixel_range_y.y + 1):
+				for sample_pixel_x in range(cell_pixel_range_x.x, cell_pixel_range_x.y + 1):
+					lowest_sampled_height = minf(lowest_sampled_height, heightmap_sampler.call(sample_pixel_x, sample_pixel_y))
+
+			var vertex_local_x := (float(pixel_x) / float(map_resolution.x - 1)) * map_size.x - map_size.x / 2.0
+			var vertex_local_y := lowest_sampled_height * map_size.y
+			var vertex_local_z := (float(pixel_y) / float(map_resolution.y - 1)) * map_size.z - map_size.z / 2.0
+
+			vertices.append(Vector3(vertex_local_x, vertex_local_y, vertex_local_z))
 
 	# Map structural triangulation indices
-	for y in grid_h - 1:
-		for x in grid_w - 1:
-			var row1 := y * grid_w
-			var row2 := (y + 1) * grid_w
+	for grid_row in grid_height - 1:
+		for grid_col in grid_width - 1:
+			var near_row_start := grid_row * grid_width
+			var far_row_start := (grid_row + 1) * grid_width
 
-			var v00 := row1 + x
-			var v10 := row1 + x + 1
-			var v01 := row2 + x
-			var v11 := row2 + x + 1
+			var near_left := near_row_start + grid_col
+			var near_right := near_row_start + grid_col + 1
+			var far_left := far_row_start + grid_col
+			var far_right := far_row_start + grid_col + 1
 
 			# Triangle 1 (Standard facing-up winding order)
-			indices.append(v00)
-			indices.append(v01)
-			indices.append(v10)
+			indices.append(near_left)
+			indices.append(far_left)
+			indices.append(near_right)
 
 			# Triangle 2 (Standard facing-up winding order)
-			indices.append(v10)
-			indices.append(v01)
-			indices.append(v11)
+			indices.append(near_right)
+			indices.append(far_left)
+			indices.append(far_right)
 
 	_finalize_occluder.call_deferred(vertices, indices)
+
+
+func _compute_cell_pixel_ranges(decimated_pixels: PackedInt32Array, axis_resolution: int) -> Array[Vector2i]:
+	var cell_pixel_ranges: Array[Vector2i] = []
+	for grid_index in decimated_pixels.size():
+		var is_first := grid_index == 0
+		var is_last := grid_index == decimated_pixels.size() - 1
+
+		var cell_pixel_start := 0 if is_first else (decimated_pixels[grid_index - 1] + decimated_pixels[grid_index]) / 2 + 1
+		var cell_pixel_end := axis_resolution - 1 if is_last else (decimated_pixels[grid_index] + decimated_pixels[grid_index + 1]) / 2
+
+		cell_pixel_ranges.append(Vector2i(cell_pixel_start, cell_pixel_end))
+	return cell_pixel_ranges
 
 
 func _finalize_occluder(vertices: PackedVector3Array, indices: PackedInt32Array) -> void:
