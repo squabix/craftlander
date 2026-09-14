@@ -1818,7 +1818,6 @@ text = "Continue"
 
 [node name="PauseMenu" type="Control" parent="." unique_id=1163003515 node_paths=PackedStringArray("crafting_environment", "recipe_panel", "health", "settings_menu", "button_save", "button_settings", "button_quit", "visibility_proxy", "back_button")]
 process_mode = 3
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1870,11 +1869,11 @@ offset_top = 37.0
 offset_right = 331.0
 offset_bottom = -37.0
 script = ExtResource("38_1so5t")
-entry_container = NodePath("RecipeList/EntryContainer")
-entry_template = NodePath("RecipeList/EntryContainer/Entry")
+entry_container = NodePath("RecipeList/Margin/EntryContainer")
+entry_template = NodePath("RecipeList/Margin/EntryContainer/Entry")
 recipe_display = NodePath("CenterContainer/RecipeDisplay")
 recipe_learner = NodePath("RecipeLearner")
-back_entry = NodePath("RecipeList/EntryContainer/BackEntry")
+back_entry = NodePath("RecipeList/Margin/EntryContainer/BackEntry")
 recipe_groups = Dictionary[StringName, ExtResource("44_a1u5o")]({
 &"Food": SubResource("Resource_3dxkp"),
 &"Tool": SubResource("Resource_6wior"),
@@ -1895,47 +1894,55 @@ layout_mode = 2
 size_flags_vertical = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="EntryContainer" type="VBoxContainer" parent="PauseMenu/CraftingInterface/RecipePanel/RecipeList" unique_id=1086293113]
+[node name="Margin" type="MarginContainer" parent="PauseMenu/CraftingInterface/RecipePanel/RecipeList" unique_id=962093805]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="EntryContainer" type="VBoxContainer" parent="PauseMenu/CraftingInterface/RecipePanel/RecipeList/Margin" unique_id=1086293113]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Entry" type="HBoxContainer" parent="PauseMenu/CraftingInterface/RecipePanel/RecipeList/EntryContainer" unique_id=1802325341]
+[node name="Entry" type="HBoxContainer" parent="PauseMenu/CraftingInterface/RecipePanel/RecipeList/Margin/EntryContainer" unique_id=1802325341]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="IconRect" type="TextureRect" parent="PauseMenu/CraftingInterface/RecipePanel/RecipeList/EntryContainer/Entry" unique_id=370566999]
+[node name="IconRect" type="TextureRect" parent="PauseMenu/CraftingInterface/RecipePanel/RecipeList/Margin/EntryContainer/Entry" unique_id=370566999]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("50_jbx34")
 expand_mode = 1
 
-[node name="Button" type="Button" parent="PauseMenu/CraftingInterface/RecipePanel/RecipeList/EntryContainer/Entry" unique_id=2103479977]
+[node name="Button" type="Button" parent="PauseMenu/CraftingInterface/RecipePanel/RecipeList/Margin/EntryContainer/Entry" unique_id=2103479977]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Item"
 
-[node name="ButtonAudioManager" parent="PauseMenu/CraftingInterface/RecipePanel/RecipeList/EntryContainer/Entry/Button" unique_id=2144126531 node_paths=PackedStringArray("signal_players") instance=ExtResource("63_0iv1a")]
+[node name="ButtonAudioManager" parent="PauseMenu/CraftingInterface/RecipePanel/RecipeList/Margin/EntryContainer/Entry/Button" unique_id=2144126531 node_paths=PackedStringArray("signal_players") instance=ExtResource("63_0iv1a")]
 signal_players = {
-&"focus_entered": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+&"focus_entered": NodePath("../../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
 }
 
-[node name="BackEntry" type="CenterContainer" parent="PauseMenu/CraftingInterface/RecipePanel/RecipeList/EntryContainer" unique_id=626121332]
+[node name="BackEntry" type="CenterContainer" parent="PauseMenu/CraftingInterface/RecipePanel/RecipeList/Margin/EntryContainer" unique_id=626121332]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="PauseMenu/CraftingInterface/RecipePanel/RecipeList/EntryContainer/BackEntry" unique_id=519946777]
+[node name="Button" type="Button" parent="PauseMenu/CraftingInterface/RecipePanel/RecipeList/Margin/EntryContainer/BackEntry" unique_id=519946777]
 custom_minimum_size = Vector2(64, 24)
 layout_mode = 2
 text = "Back"
 
-[node name="ButtonAudioManager" parent="PauseMenu/CraftingInterface/RecipePanel/RecipeList/EntryContainer/BackEntry/Button" unique_id=1837032648 node_paths=PackedStringArray("signal_players") instance=ExtResource("63_0iv1a")]
+[node name="ButtonAudioManager" parent="PauseMenu/CraftingInterface/RecipePanel/RecipeList/Margin/EntryContainer/BackEntry/Button" unique_id=1837032648 node_paths=PackedStringArray("signal_players") instance=ExtResource("63_0iv1a")]
 signal_players = {
-&"focus_entered": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+&"focus_entered": NodePath("../../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
 }
 
 [node name="CenterContainer" type="CenterContainer" parent="PauseMenu/CraftingInterface/RecipePanel" unique_id=1737049201]
