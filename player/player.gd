@@ -43,9 +43,6 @@ const HURT_SHAKE_TRAUMA := 0.4
 @export var swim_player: CharacterAudioStreamPlayer3D
 @export var eat_player: AudioStreamPlayer
 
-@export_group("External Dependencies")
-@export var respawn_point_node: Node3D
-
 var is_in_water := false
 
 
@@ -141,17 +138,7 @@ func apply_screen_effect_settings() -> void:
 
 
 func respawn() -> void:
-	# Transform to respawn point
-	global_position = respawn_point_node.global_position
-	global_rotation = respawn_point_node.global_rotation
-
-	# Replenish stats
-	health.revive()
-	hunger.value = hunger.initial_value
-	stamina.value = 1.0
-
-	MouseModeController.capture()
-	get_tree().paused = false
+	Main.root.load_game(Main.current_save_slot)
 
 
 func _on_pause_interface_updated_pause(to: bool) -> void:

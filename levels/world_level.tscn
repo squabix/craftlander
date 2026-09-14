@@ -21,9 +21,8 @@ transform = Transform3D(0.926288, 0.3698345, -0.07220116, -0.23284376, 0.7124198
 shadow_enabled = true
 shadow_blur = 2.0
 
-[node name="Player" parent="." unique_id=30929158 node_paths=PackedStringArray("respawn_point_node") instance=ExtResource("2_0dwa0")]
+[node name="Player" parent="." unique_id=30929158 instance=ExtResource("2_0dwa0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4989454, 403.02567)
-respawn_point_node = NodePath("../Boat/DriverSeat")
 
 [node name="WaterMesh" type="MeshInstance3D" parent="." unique_id=264507659]
 mesh = SubResource("PlaneMesh_i8ckm")
