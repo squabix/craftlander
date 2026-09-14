@@ -14,21 +14,22 @@ func enter() -> void:
 
 func handle_input(event: InputEvent) -> void:
 	super(event)
-	if event.is_action_pressed(ACTION_INTERACT):
-		root.interact()
 	if event.is_action_pressed(ACTION_USE_PRIMARY):
 		root.use_item()
 
 func update(delta: float) -> void:
 	if root.is_in_water:
 		transition_to(&"Swimming")
-	
+
 	if Input.is_action_just_pressed(ACTION_JUMP):
 		root.jump()
-	
+
 	if Input.is_action_just_pressed(ACTION_DROP):
 		root.drop_selected_item()
-	
+
+	if Input.is_action_just_pressed(ACTION_INTERACT):
+		root.interact()
+
 	super(delta)
 
 func physics_update(delta: float) -> void:

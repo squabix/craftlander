@@ -11,16 +11,15 @@ func enter() -> void:
 	super()
 	root.set_character_stream_player(root.swim_player)
 
-func handle_input(event: InputEvent) -> void:
-	super(event)
-	if event.is_action_pressed(ACTION_INTERACT):
+func update(_delta: float) -> void:
+	if Input.is_action_just_pressed(ACTION_INTERACT):
 		root.interact()
 
 func physics_update(_delta: float) -> void:
 	stamina.spend(STAMINA_COST)
-	
+
 	if not root.is_in_water:
 		transition_to(&"Default")
 		return
-	
+
 	root.move_planar(PlayerController.get_input_motion_vector().normalized())
