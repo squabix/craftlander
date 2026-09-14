@@ -62,20 +62,20 @@ func advance_loading_step() -> String:
 	return step
 
 
-func load_level(index: int) -> void:
+func load_level(index: int, save_before_clear := true) -> void:
 	var path := ISLAND_SCENE_PATH_FORMAT % index
 	if not ResourceLoader.exists(path):
 		Util.node_error("Cannot load nonexistant level %s from %s", index, path)
 		return
 
 	current_level_index = index
-	
+
 	var loaded_level := await load_scene(path)
 	if loaded_level == null:
 		push_error("Cannot load null level")
 		return
-	
-	clear()
+
+	clear(save_before_clear)
 	level = loaded_level
 	print("Loaded level %s" % level)
 	NodeSaver.scene_root = level
@@ -164,7 +164,7 @@ func load_game(slot: int) -> void:
 	base_seed = loaded_save.base_seed
 
 	NodeSaver.save = loaded_save
-	load_level(loaded_save.current_level_index)
+	load_level(loaded_save.current_level_index, false)
 
 
 func quit_level() -> void:
@@ -187,7 +187,7 @@ func load_title() -> void:
 	SteamManager.update_status("In the Main Menu")
 
 
-func clear() -> void:
+func clear(save_before_clear := true) -> void:
 	InventoryDropper3D.clear_dropped_pickups()
 	for child in get_children():
 		if child == loading_screen:
@@ -196,7 +196,7 @@ func clear() -> void:
 
 	title_screen = null
 
-	if is_instance_valid(level):
+	if save_before_clear and is_instance_valid(level):
 		save_game(current_save_slot)
 	level = null
 
