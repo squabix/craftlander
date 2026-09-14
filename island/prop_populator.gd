@@ -81,6 +81,7 @@ func add_prop(prop: IslandProp, point: Vector2i, spawn_position: Vector3) -> Nod
 			# Finish transforming instance after island generator placement
 			instance.rotation_degrees.y = randf() * 360.0
 			instance.scale = Vector3.ONE * randf_range(prop.min_scale, prop.max_scale)
+			regenerate_collision_barriers.call_deferred(instance)
 	)
 	
 	# Assign prop instance in dictionaries
@@ -88,6 +89,13 @@ func add_prop(prop: IslandProp, point: Vector2i, spawn_position: Vector3) -> Nod
 	prop_resources[spawn_position] = prop
 
 	return instance
+
+
+func regenerate_collision_barriers(instance: Node3D) -> void:
+	if not is_instance_valid(instance):
+		return
+	for barrier in Util.find_children_of_class(instance, &"CollisionBarrier3D"):
+		barrier.generate()
 
 
 func populate() -> void:
