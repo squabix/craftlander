@@ -552,6 +552,7 @@ static func find_all_resources(resource_type: StringName, start_path: String = "
 			if dir.current_is_dir():
 				function.call(full_path, function)
 			else:
+				full_path = full_path.trim_suffix(".remap")
 				if not ResourceLoader.exists(full_path):
 					continue
 				var res := load(full_path)
