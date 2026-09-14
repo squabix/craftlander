@@ -329,18 +329,18 @@ wave_spawner = NodePath("../../../../WaveSpawner3D")
 [node name="PauseMenu" parent="DockingManager1/Player" index="12" unique_id=1163003515]
 visible = false
 
-[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/CraftingInterface/RecipePanel/RecipeList/EntryContainer/Entry/Button" parent_id_path=PackedInt32Array(1858460853, 2103479977) index="0" unique_id=2144126531 node_paths=PackedStringArray("signal_players")]
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/CraftingInterface/RecipePanel/RecipeList/Margin/EntryContainer/Entry/Button" parent_id_path=PackedInt32Array(1858460853, 2103479977) index="0" unique_id=2144126531 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+&"focus_entered": NodePath("../../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
 }
 
-[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/CraftingInterface/RecipePanel/RecipeList/EntryContainer/BackEntry/Button" parent_id_path=PackedInt32Array(1858460853, 519946777) index="0" unique_id=1837032648 node_paths=PackedStringArray("signal_players")]
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/CraftingInterface/RecipePanel/RecipeList/Margin/EntryContainer/BackEntry/Button" parent_id_path=PackedInt32Array(1858460853, 519946777) index="0" unique_id=1837032648 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+&"focus_entered": NodePath("../../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
 }
 
 [node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/CraftingInterface/CompletePanel/CraftButton" parent_id_path=PackedInt32Array(1858460853, 1652755923) index="0" unique_id=583215524 node_paths=PackedStringArray("signal_players")]

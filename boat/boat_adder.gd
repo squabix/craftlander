@@ -18,4 +18,5 @@ func initialize_instance(instance: Node3D) -> void:
 		return
 	boat = instance
 	boat.dock_position = self.dock_position
+	boat.global_position.y = boat.dock_position.y
 	boat.look_at(boat.dock_position)
