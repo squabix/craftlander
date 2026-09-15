@@ -1006,7 +1006,7 @@ random_pitch = 1.122462
 streams_count = 1
 stream_0/stream = ExtResource("112_teerl")
 
-[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("movement_state_machine", "head", "camera", "camera_shake", "interactors", "vignette", "hurt_effect_trigger", "respawn_button", "boat_menu", "boat_compass_tracker", "enemy_compass_tracker", "item_holder", "dropper", "health", "health_saver", "hunger", "hunger_saver", "stamina", "steps_player", "swim_player", "eat_player", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
+[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("movement_state_machine", "head", "camera", "camera_shake", "interactors", "vignette", "hurt_effect_trigger", "respawn_button", "boat_menu", "boat_compass_tracker", "enemy_compass_tracker", "item_holder", "dropper", "health", "health_saver", "hunger", "hunger_saver", "stamina", "steps_player", "swim_player", "eat_player", "horizontal_rotation_target", "vertical_rotation_target", "hud", "hotbar_interface") groups=["player"]]
 collision_layer = 17
 collision_mask = 132
 floor_constant_speed = true
@@ -1038,6 +1038,8 @@ eat_player = NodePath("EatPlayer")
 type = &"Player"
 horizontal_rotation_target = NodePath(".")
 vertical_rotation_target = NodePath("Head/Camera3D")
+hud = NodePath("HUD")
+hotbar_interface = NodePath("HotbarInterface")
 rotation_range = SubResource("Resource_g6k8r")
 metadata/_custom_type_script = "uid://bki5ij8task16"
 

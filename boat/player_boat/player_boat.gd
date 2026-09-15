@@ -31,6 +31,13 @@ func _ready() -> void:
 	super()
 
 
+func _process(_delta: float) -> void:
+	if Main.trailer_mode:
+		interactable.visible = false
+	elif interactable.visible_as_enabled:
+		interactable.visible = interactable.enabled
+
+
 func open_boat_menu(interact_source: Node) -> void:
 	if not interact_source is Player:
 		Util.node_error("Invalid interact source %s cannot open boat interface", interact_source)

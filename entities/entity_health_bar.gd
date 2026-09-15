@@ -10,3 +10,9 @@ func _ready() -> void:
 	health_bar.health = health
 	if is_instance_valid(entity) and is_instance_valid(type_label):
 		type_label.text = entity.type
+
+
+func _process(delta: float) -> void:
+	super(delta)
+	if Main.trailer_mode:
+		target.hide()

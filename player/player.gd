@@ -26,6 +26,8 @@ const HURT_SHAKE_TRAUMA := 0.4
 @export var docking_hidden_interfaces: Array[Control] = []
 @export var boat_compass_tracker: BoatCompassTracker
 @export var enemy_compass_tracker: EnemyCompassTracker
+@export var hud: Control
+@export var hotbar_interface: Control
 
 @export_group("Inventory")
 @export var item_holder: InventoryHolder3D
@@ -81,6 +83,8 @@ func _process(_delta: float) -> void:
 	# Drown if swimming when out of stamina
 	if is_in_water and not stamina.is_usable():
 		health.hurt(INF)
+
+	update_trailer_mode_visibility()
 
 
 func set_character_stream_player(to: CharacterAudioStreamPlayer3D) -> void:
@@ -141,7 +145,16 @@ func respawn() -> void:
 	Main.root.load_game(Main.current_save_slot)
 
 
+func update_trailer_mode_visibility() -> void:
+	var hide_for_trailer := Main.trailer_mode and not get_tree().paused
+	if is_instance_valid(hud):
+		hud.visible = not hide_for_trailer
+	if is_instance_valid(hotbar_interface):
+		hotbar_interface.visible = not hide_for_trailer
+
+
 func _on_pause_interface_updated_pause(to: bool) -> void:
+	update_trailer_mode_visibility()
 	if to == true:
 		return
 	await get_tree().process_frame
