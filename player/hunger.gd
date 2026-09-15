@@ -41,8 +41,9 @@ func _process(_delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	lose(loss_per_minute * loss_multiplier / 60.0)
-	value -= queued_loss * delta * GameWorld.TIME_SCALE
+	if not Main.trailer_mode:
+		lose(loss_per_minute * loss_multiplier / 60.0)
+		value -= queued_loss * delta * GameWorld.TIME_SCALE
 	queued_loss = 0.0
 
 	health.heal(regeneration_curve.sample(value) * delta * GameWorld.TIME_SCALE)

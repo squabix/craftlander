@@ -89,7 +89,7 @@ func complete_step(step_id: StringName) -> void:
 	Main.loaded_save.tutorial_steps_completed[step_id] = true
 	EventBus.trigger(&"tutorial_step_completed", step_id)
 
-	if not are_hints_enabled():
+	if not are_hints_enabled() or Main.trailer_mode:
 		return
 
 	match int(step.get("tier", Tier.TOAST)):

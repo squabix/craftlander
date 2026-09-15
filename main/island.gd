@@ -1,6 +1,7 @@
 extends Node3D
 
 const ISLAND_CENTER_SPAWN_HEIGHT := 55.0
+const TIME_MULTIPLIER_TRAILER_MODE := 3.0
 
 enum PlayerSpawnMode {BOAT, ISLAND_CENTER}
 
@@ -87,6 +88,8 @@ func _ready() -> void:
 
 
 func show_name() -> void:
+	if Main.trailer_mode:
+		return
 	name_label.text = name_format % resource.name
 	name_anim_player.play(&"show")
 
@@ -124,6 +127,8 @@ func update_sky_setting(is_first_visit: bool) -> void:
 		day_night_cycle.reset_to_day_start()
 	day_night_cycle.palette = resource.sky_palette
 	day_night_cycle.day_started.connect(SteamManager.achievements.on_day_survived)
+	if Main.trailer_mode:
+		day_night_cycle.cycle_speed_multiplier = TIME_MULTIPLIER_TRAILER_MODE
 
 
 func reload_save() -> void:

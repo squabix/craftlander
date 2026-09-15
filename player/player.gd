@@ -28,6 +28,8 @@ const HURT_SHAKE_TRAUMA := 0.4
 @export var enemy_compass_tracker: EnemyCompassTracker
 @export var hud: Control
 @export var hotbar_interface: Control
+@export var player_bars: Control
+@export var compass: Control
 
 @export_group("Inventory")
 @export var item_holder: InventoryHolder3D
@@ -151,6 +153,14 @@ func update_trailer_mode_visibility() -> void:
 		hud.visible = not hide_for_trailer
 	if is_instance_valid(hotbar_interface):
 		hotbar_interface.visible = not hide_for_trailer
+
+	# Bars and compass stay hidden in trailer mode even while paused
+	if is_instance_valid(player_bars):
+		player_bars.visible = not Main.trailer_mode
+	if is_instance_valid(compass):
+		compass.visible = not Main.trailer_mode
+
+	health.immortal = Main.trailer_mode
 
 
 func _on_pause_interface_updated_pause(to: bool) -> void:

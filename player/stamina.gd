@@ -64,7 +64,7 @@ func _physics_process(delta: float) -> void:
 	last_value = value
 
 	# Refill if not spending or are locked in depletion
-	if queued_spend == 0.0 or (depletable and is_depleted):
+	if queued_spend == 0.0 or (depletable and is_depleted) or Main.trailer_mode:
 		if is_filling:
 			_current_fill_time += delta * GameWorld.TIME_SCALE
 
@@ -80,7 +80,7 @@ func _physics_process(delta: float) -> void:
 			idle_timer.start()
 
 	# Spend logic
-	if queued_spend != 0.0:
+	if queued_spend != 0.0 and not Main.trailer_mode:
 		# If depletable and depleted, block spending
 		if depletable and is_depleted:
 			queued_spend = 0.0

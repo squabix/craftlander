@@ -24,7 +24,7 @@ static var loaded_save: Save:
 		is_save_loaded = true
 static var is_save_loaded := false
 static var current_level_index := 0
-static var trailer_mode := false
+static var trailer_mode := true
 static var base_seed := 0:
 	set(to):
 		base_seed = to
