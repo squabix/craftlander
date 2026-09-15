@@ -39,6 +39,9 @@ radius = 1.0
 height = 2.449585
 radius = 0.545
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qjosc"]
+points = PackedVector3Array(-0.5444781, 0, -0.09016907, -0.5444781, 1000, -0.09016907, -0.4287786, 0, -0.3501243, -0.4287786, 1000, -0.3501243, -0.19877936, 0, -0.51747483, -0.19877936, 1000, -0.51747483, 0.08414504, 0, -0.54751974, 0.08414504, 1000, -0.54751974, 0.3441979, 0, -0.43221274, 0.3441979, 1000, -0.43221274, 0.511952, 0, -0.20227301, 0.511952, 1000, -0.20227301, 0.5445486, 0, 0.08523175, 0.5445486, 1000, 0.08523175, 0.4309332, 0, 0.34610987, 0.4309332, 1000, 0.34610987, 0.20210497, 0, 0.51534843, 0.20210497, 1000, 0.51534843, -0.0805247, 0, 0.54756796, -0.0805247, 1000, 0.54756796, -0.3415639, 0, 0.4341979, -0.3415639, 1000, 0.4341979, -0.51093996, 0, 0.20545384, -0.51093996, 1000, 0.20545384, -0.51466787, 0, 0.1929523, -0.51466787, 1000, 0.1929523, -0.5444781, 0, -0.09016907, -0.5444781, 1000, -0.09016907)
+
 [sub_resource type="Curve" id="Curve_ndo4n"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.75779045, 0.8774637), -0.5111994, -0.5111994, 0, 0, Vector2(1, 0.2536419), -3.0296543, 0.0, 0, 0]
 point_count = 3
@@ -261,18 +264,18 @@ shape = SubResource("CylinderShape3D_2dqu6")
 
 [node name="candy_cane" parent="Trunk" unique_id=124373033 instance=ExtResource("17_vd6dv")]
 
-[node name="Cane" parent="Trunk/candy_cane" index="0" unique_id=1406856962]
+[node name="Cane" parent="Trunk/candy_cane" index="0" unique_id=269374418]
 visible = false
 
-[node name="Curve" parent="Trunk/candy_cane" index="1" unique_id=915656240]
+[node name="Curve" parent="Trunk/candy_cane" index="1" unique_id=1553830095]
 visible = false
 
-[node name="Stump" parent="Trunk/candy_cane" index="2" unique_id=205389431]
+[node name="Stump" parent="Trunk/candy_cane" index="2" unique_id=368171659]
 visible = false
 surface_material_override/0 = ExtResource("18_xaafx")
 surface_material_override/1 = ExtResource("19_srio2")
 
-[node name="Top" parent="Trunk/candy_cane" index="3" unique_id=360807782]
+[node name="Top" parent="Trunk/candy_cane" index="3" unique_id=728988658]
 surface_material_override/0 = ExtResource("18_xaafx")
 surface_material_override/1 = ExtResource("19_srio2")
 
@@ -281,8 +284,10 @@ collision_layer = 128
 collision_mask = 0
 
 [node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" unique_id=680704068 node_paths=PackedStringArray("sample")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.025250003, -0.7651, -0.013899982)
+shape = SubResource("ConvexPolygonShape3D_qjosc")
 script = ExtResource("21_yosqv")
-sample = NodePath("")
+sample = NodePath("../../Stump/Visuals/Stump")
 generate_on_ready = true
 
 [node name="ChopParticles" type="GPUParticles3D" parent="." unique_id=931223418]
@@ -304,17 +309,17 @@ shape = SubResource("CylinderShape3D_t4kw7")
 
 [node name="Visuals" parent="Stump" unique_id=370745963 instance=ExtResource("17_vd6dv")]
 
-[node name="Cane" parent="Stump/Visuals" index="0" unique_id=1406856962]
+[node name="Cane" parent="Stump/Visuals" index="0" unique_id=269374418]
 visible = false
 
-[node name="Curve" parent="Stump/Visuals" index="1" unique_id=915656240]
+[node name="Curve" parent="Stump/Visuals" index="1" unique_id=1553830095]
 visible = false
 
-[node name="Stump" parent="Stump/Visuals" index="2" unique_id=205389431]
+[node name="Stump" parent="Stump/Visuals" index="2" unique_id=368171659]
 surface_material_override/0 = ExtResource("18_xaafx")
 surface_material_override/1 = ExtResource("19_srio2")
 
-[node name="Top" parent="Stump/Visuals" index="3" unique_id=360807782]
+[node name="Top" parent="Stump/Visuals" index="3" unique_id=728988658]
 visible = false
 surface_material_override/0 = ExtResource("18_xaafx")
 surface_material_override/1 = ExtResource("19_srio2")

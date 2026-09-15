@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://bp5ab438ufrus" path="res://common3d/culling_controller3d.gd" id="5_6cqhx"]
 [ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="6_wi5jn"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="7_4vqkf"]
-[ext_resource type="Script" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 [ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/signal_triggrs/signal_state_trigger.gd" id="8_8fl4g"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="9_xcoaf"]
 [ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="10_2c4wq"]
@@ -46,6 +45,7 @@
 [ext_resource type="Material" uid="uid://bjvs4vggqwfax" path="res://assets/materials/candy_red.tres" id="43_uyxu8"]
 [ext_resource type="Material" uid="uid://cq42fta75eojy" path="res://assets/materials/candy_white.tres" id="44_1tian"]
 [ext_resource type="Material" uid="uid://m5807bchpbmp" path="res://assets/materials/glowing_eye.tres" id="44_upixq"]
+[ext_resource type="Script" uid="uid://cke8g2exxgx0y" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
 script = ExtResource("3_d2kbg")
@@ -497,11 +497,10 @@ script = ExtResource("8_8fl4g")
 state_machine = NodePath("../../Controller3D/Default")
 state_name = &"Chasing"
 from_state_whitelist = Array[StringName]([&"Wandering", &"Searching"])
-
 signal_name = &"was_hurt"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 
-[node name="MeshFlashTrigger" type="Node" parent="Hurtbox3D" node_paths=PackedStringArray("mesh_root")]
+[node name="MeshFlashTrigger" type="Node" parent="Hurtbox3D" unique_id=1088726401 node_paths=PackedStringArray("mesh_root")]
 script = ExtResource("100_flash")
 mesh_root = NodePath("../../Visuals")
 signal_name = &"was_hurt"
@@ -668,7 +667,7 @@ metadata/_custom_type_script = "uid://bhjxscxhtg2se"
 
 [node name="AttackRay" type="RayCast3D" parent="." unique_id=2130000001]
 transform = Transform3D(1, 0, 0, 0, 0.9848077, -0.17364818, 0, 0.17364818, 0.9848077, 0, 0.5, 0)
-target_position = Vector3(0, 0, -1.5)
+target_position = Vector3(0, 0, -2)
 collision_mask = 8
 collide_with_areas = true
 collide_with_bodies = false
@@ -739,17 +738,17 @@ surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 
 [node name="LegRight3" parent="Visuals" index="6" unique_id=189635639]
-transform = Transform3D(-0.9736477, 0, 0.22805585, 0, 1, 0, -0.22805585, 0, -0.9736477, -0.75, 0.29067695, -0.17361851)
+transform = Transform3D(-0.97364765, 0, 0.22805585, 0, 1, 0, -0.22805585, 0, -0.97364765, -0.75, 0.29067695, -0.17361851)
 surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 
 [node name="LegRight2" parent="Visuals" index="7" unique_id=1439470597]
-transform = Transform3D(-0.9512162, 0, -0.3085242, 0, 1, 0, 0.3085242, 0, -0.9512162, -0.75, 0.29067695, 0.15406431)
+transform = Transform3D(-0.95121616, 0, -0.30852416, 0, 1, 0, 0.30852416, 0, -0.95121616, -0.75, 0.29067695, 0.15406431)
 surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 
 [node name="LegRight1" parent="Visuals" index="8" unique_id=1763787552]
-transform = Transform3D(-0.9512162, 0, -0.3085242, 0, 1, 0, 0.3085242, 0, -0.9512162, -0.61, 0.29067695, 0.45040345)
+transform = Transform3D(-0.95121616, 0, -0.30852416, 0, 1, 0, 0.30852416, 0, -0.95121616, -0.61, 0.29067695, 0.45040345)
 surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 
