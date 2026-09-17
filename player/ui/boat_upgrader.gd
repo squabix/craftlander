@@ -5,10 +5,11 @@ signal upgraded(level: int)
 signal started_upgrade(level: int)
 signal failed_upgrade
 
+@export var max_level := 3
 @export var requirements: Dictionary[int, Inventory]
 @export var requirement_display_container: Node
-@export var default_requirement: Inventory
 @export var upgrade_button: Button
+@export var title_label: Label
 @export var player_inventory: Inventory
 @export var boat_menu: BoatMenu
 
@@ -30,16 +31,25 @@ func update() -> void:
 		return
 	
 	current_upgrade_level = boat.level + 1
-	current_requirement = requirements.get(current_upgrade_level, default_requirement)
+	current_requirement = requirements.get(current_upgrade_level)
+
+	if boat.level >= max_level or current_requirement == null:
+		for display in requirement_displays:
+			display.inventory = null
+		upgrade_button.disabled = true
+		title_label.text = "Max Level Reached"
+		return
+
+	title_label.text = "Next Upgrade"
 	for display in requirement_displays:
 		display.inventory = current_requirement
 		display.fraction_number = player_inventory.get_item_quantity(display.get_item())
-	
+
 	var can_upgrade := current_requirement.is_inside(player_inventory)
 	upgrade_button.disabled = not can_upgrade
 
 func upgrade() -> void:
-	if not current_requirement.is_inside(player_inventory):
+	if current_requirement == null or not current_requirement.is_inside(player_inventory):
 		failed_upgrade.emit()
 		return
 	started_upgrade.emit(current_upgrade_level)

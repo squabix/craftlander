@@ -683,11 +683,6 @@ NodePath("../../../HUD/SecondaryInventorySelector"): 1,
 NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
 }
 
-[node name="BoatUpgrader" parent="DockingManager1/Player/BoatMenu/BottomOptions/HBoxContainer" parent_id_path=PackedInt32Array(1858460853, 1336276305) index="0" unique_id=1389163300 node_paths=PackedStringArray("requirements")]
-requirements = {
-1: NodePath("UpgradeRequirement1")
-}
-
 [node name="ButtonAudioManager" parent="DockingManager1/Player/BoatMenu/BottomOptions/HBoxContainer/BoatUpgrader/UpgradeButtonContainer/UpgradeButton" parent_id_path=PackedInt32Array(1858460853, 1038887707) index="0" unique_id=1941231385 node_paths=PackedStringArray("signal_players")]
 signal_players = {
 &"focus_entered": NodePath("../../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),

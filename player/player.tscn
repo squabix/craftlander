@@ -134,6 +134,7 @@
 [ext_resource type="Resource" uid="uid://c8f1dnnf2038y" path="res://items/tools/gold/golden_axe/golden_axe_item.tres" id="116_kosww"]
 [ext_resource type="Resource" uid="uid://15kkf14ddukd" path="res://items/tools/gold/golden_pickaxe/golden_pickaxe_item.tres" id="117_s15n6"]
 [ext_resource type="Resource" uid="uid://br8x8o2qqedfv" path="res://items/weapons/golden_sword/golden_sword_item.tres" id="118_es2j2"]
+[ext_resource type="Resource" uid="uid://kf1haxayj2yo" path="res://items/materials/minerals/diamond/diamond_item.tres" id="119_diamnd"]
 [ext_resource type="Resource" uid="uid://cq7uj11i026we" path="res://items/tools/diamond/diamond_axe/diamond_axe_item.tres" id="127_e5mnx"]
 [ext_resource type="Resource" uid="uid://b8eby8tmkueau" path="res://items/tools/diamond/diamond_pickaxe/diamond_pickaxe_item.tres" id="128_dt0ky"]
 [ext_resource type="Resource" uid="uid://qu7qtupf3uee" path="res://items/weapons/diamond_sword/diamond_sword_item.tres" id="129_mhw2q"]
@@ -513,7 +514,7 @@ corner_detail = 6
 [sub_resource type="Resource" id="Resource_8rogd"]
 script = ExtResource("6_hggc2")
 item = ExtResource("10_s3g0c")
-quantity = 40
+quantity = 15
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Resource" id="Resource_vvji8"]
@@ -525,13 +526,25 @@ metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 [sub_resource type="Resource" id="Resource_xgxvu"]
 script = ExtResource("6_hggc2")
 item = ExtResource("105_xgxvu")
-quantity = 30
+quantity = 20
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Resource" id="Resource_pdnyr"]
 script = ExtResource("6_hggc2")
 item = ExtResource("9_jbx34")
 quantity = 10
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_pgwk2"]
+script = ExtResource("6_hggc2")
+item = ExtResource("12_vuyvy")
+quantity = 20
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_k8h4n"]
+script = ExtResource("6_hggc2")
+item = ExtResource("119_diamnd")
+quantity = 20
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_islandopt"]
@@ -5547,17 +5560,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BoatUpgrader" type="VBoxContainer" parent="BoatMenu/BottomOptions/HBoxContainer" unique_id=1389163300 node_paths=PackedStringArray("requirements", "requirement_display_container", "default_requirement", "upgrade_button", "player_inventory", "boat_menu")]
+[node name="BoatUpgrader" type="VBoxContainer" parent="BoatMenu/BottomOptions/HBoxContainer" unique_id=1389163300 node_paths=PackedStringArray("requirements", "requirement_display_container", "upgrade_button", "title_label", "player_inventory", "boat_menu")]
 custom_minimum_size = Vector2(650, 162)
 layout_mode = 2
 theme_override_constants/separation = 12
 script = ExtResource("66_2h6tc")
 requirements = {
-1: NodePath("UpgradeRequirement1")
+1: NodePath("UpgradeRequirement1"),
+2: NodePath("UpgradeRequirement2"),
+3: NodePath("UpgradeRequirement3")
 }
 requirement_display_container = NodePath("RequirementContainer/GridContainer")
-default_requirement = NodePath("UpgradeRequirement1")
 upgrade_button = NodePath("UpgradeButtonContainer/UpgradeButton")
+title_label = NodePath("TitleLabel")
 player_inventory = NodePath("../../../../Inventory")
 boat_menu = NodePath("../../..")
 
@@ -6043,6 +6058,20 @@ signal_players = {
 [node name="UpgradeRequirement1" type="Node" parent="BoatMenu/BottomOptions/HBoxContainer/BoatUpgrader" unique_id=1136310646]
 script = ExtResource("19_c35mf")
 item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_8rogd"), SubResource("Resource_vvji8"), SubResource("Resource_xgxvu"), SubResource("Resource_pdnyr")])
+constant = true
+size = 9
+metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
+
+[node name="UpgradeRequirement2" type="Node" parent="BoatMenu/BottomOptions/HBoxContainer/BoatUpgrader" unique_id=1136310647]
+script = ExtResource("19_c35mf")
+item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_8rogd"), SubResource("Resource_pgwk2"), SubResource("Resource_xgxvu"), SubResource("Resource_pdnyr")])
+constant = true
+size = 9
+metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
+
+[node name="UpgradeRequirement3" type="Node" parent="BoatMenu/BottomOptions/HBoxContainer/BoatUpgrader" unique_id=1136310648]
+script = ExtResource("19_c35mf")
+item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_8rogd"), SubResource("Resource_k8h4n"), SubResource("Resource_xgxvu"), SubResource("Resource_pdnyr")])
 constant = true
 size = 9
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
