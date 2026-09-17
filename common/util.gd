@@ -189,6 +189,25 @@ static func classify_dict_value(dictionary: Dictionary, default_to_builtin := tr
 	return type_string(dictionary.get_typed_value_builtin())
 
 
+static func retype_array(from: Array, to: Array) -> Variant:
+	if not from.is_typed() or to.is_typed():
+		return to
+	return Array(to, from.get_typed_builtin(), from.get_typed_class_name(), from.get_typed_script())
+
+
+static func retype_dictionary(from: Dictionary, to: Dictionary) -> Variant:
+	if not (from.is_typed_key() or from.is_typed_value()):
+		return to
+	if to.is_typed_key() or to.is_typed_value():
+		return to
+
+	return Dictionary(
+		to,
+		from.get_typed_key_builtin(), from.get_typed_key_class_name(), from.get_typed_key_script(),
+		from.get_typed_value_builtin(), from.get_typed_value_class_name(), from.get_typed_value_script(),
+	)
+
+
 static func find_child_of_class(parent: Node, class_string: StringName, include_parent := false) -> Node:
 	if not is_instance_valid(parent) or class_string.is_empty():
 		return null

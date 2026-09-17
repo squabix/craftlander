@@ -186,6 +186,11 @@ func set_property_data(property_data: Dictionary[StringName, Variant]) -> void:
 		if not property in target:
 			Util.node_error("%s cannot set nonexistant property '%s' to %s in %s", self, property, property_data[property], target)
 			continue
+		var current_value: Variant = target.get(property)
+		if current_value is Array and value is Array:
+			value = Util.retype_array(current_value, value)
+		elif current_value is Dictionary and value is Dictionary:
+			value = Util.retype_dictionary(current_value, value)
 		target.set(property, value)
 		set_property.emit(property, value)
 
