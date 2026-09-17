@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://bp5ab438ufrus" path="res://common3d/culling_controller3d.gd" id="5_avqix"]
 [ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="6_dsvmj"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="7_nvqed"]
-[ext_resource type="Script" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 [ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/signal_triggrs/signal_state_trigger.gd" id="8_sxsrr"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="9_8bxnd"]
 [ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="10_3lqhx"]
@@ -21,6 +20,7 @@
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="18_i5kk2"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="19_voigo"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://clw23t4rpt3rl" path="res://common/inventory_system/animation/item_anim_tree_state_machine.tres" id="20_y8y67"]
+[ext_resource type="Resource" path="res://items/weapons/ice_staff/ice_staff_item.tres" id="21_4uann"]
 [ext_resource type="Script" uid="uid://bi8ev1kcq2ayf" path="res://common/inventory_system/animation/item_animation_tree.gd" id="21_8bbbt"]
 [ext_resource type="Script" uid="uid://c622jer80j3sk" path="res://common/inventory_system/animation/item_animation.gd" id="22_0cwlt"]
 [ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="23_qsm0a"]
@@ -50,6 +50,7 @@
 [ext_resource type="PackedScene" uid="uid://dubfkmgg38psa" path="res://assets/models/items/weapons/sword1.blend" id="48_mcsqu"]
 [ext_resource type="Material" uid="uid://ct3rueaspkpix" path="res://assets/materials/darkness.tres" id="48_n2wx5"]
 [ext_resource type="Material" uid="uid://m5807bchpbmp" path="res://assets/materials/glowing_eye.tres" id="49_8i4p0"]
+[ext_resource type="Script" uid="uid://cke8g2exxgx0y" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 
 [sub_resource type="Resource" id="Resource_xl8du"]
 script = ExtResource("2_8i4p0")
@@ -70,6 +71,11 @@ metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3emv6"]
 radius = 0.7
 height = 2.8
+
+[sub_resource type="Resource" id="Resource_mmf2n"]
+script = ExtResource("31_4i62f")
+item = ExtResource("21_4uann")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Animation" id="Animation_3emv6"]
 length = 0.001
@@ -790,12 +796,11 @@ shape = SubResource("CapsuleShape3D_3emv6")
 script = ExtResource("8_sxsrr")
 state_machine = NodePath("../../Controller3D/Default")
 state_name = &"Chasing"
-
 from_state_whitelist = Array[StringName]([&"Wandering", &"Searching"])
 signal_name = &"was_hurt"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 
-[node name="MeshFlashTrigger" type="Node" parent="Hurtbox3D" node_paths=PackedStringArray("mesh_root")]
+[node name="MeshFlashTrigger" type="Node" parent="Hurtbox3D" unique_id=775363064 node_paths=PackedStringArray("mesh_root")]
 script = ExtResource("100_flash")
 mesh_root = NodePath("../../Visuals")
 signal_name = &"was_hurt"
@@ -921,6 +926,7 @@ entity = NodePath("../..")
 [node name="Inventory" type="Node" parent="." unique_id=1701695857]
 unique_name_in_owner = true
 script = ExtResource("18_i5kk2")
+item_instances = Array[ExtResource("31_4i62f")]([SubResource("Resource_mmf2n")])
 constant = true
 size = 2
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"

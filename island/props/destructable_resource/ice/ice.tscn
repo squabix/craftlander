@@ -13,7 +13,6 @@
 [ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="13_dcsl8"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="14_4wrvt"]
 [ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="15_ibn25"]
-[ext_resource type="ArrayOccluder3D" uid="uid://e31y43s46lyy" path="res://island/props/destructable_resource/ice/ice.occ" id="16_kvkr8"]
 [ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="17_hjh3y"]
 [ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="18_vklpg"]
 [ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="19_ikxh3"]
@@ -151,18 +150,13 @@ scenes = Array[PackedScene]([ExtResource("15_ibn25")])
 spawn_on_exit_tree = true
 metadata/_custom_type_script = "uid://bhjxscxhtg2se"
 
-[node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=374514710]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5692959, 0, 0.67521065)
-occluder = ExtResource("16_kvkr8")
-
-[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=415438826 node_paths=PackedStringArray("mesh_instance")]
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=415438826]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15434992, -0.5418159, -0.04430008)
 visible = false
 radius = 2.4766686
 height = 5.2881994
 vertices = PackedVector3Array(-2.2027876, 0, -0.41444498, -0.3317475, 0, -2.4543493, 1.6186407, 0, -1.1221877, 2.2014802, 0, -0.670569, 1.9436817, 0, 1.2115489, 0.13172925, 0, 2.4547281, -1.455066, 0, 1.4336929, -2.2027876, 0, -0.41444498)
 script = ExtResource("17_hjh3y")
-mesh_instance = NodePath("../BlenderMeshes/Stone")
 generate_on_ready = true
 
 [node name="NodeSaver" type="Node" parent="." unique_id=1812045563]

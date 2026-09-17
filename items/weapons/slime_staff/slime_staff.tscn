@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://bsm7sn5w0iwkl"]
+
+[ext_resource type="Script" uid="uid://2ow28vm5clst" path="res://common/spawner/projectile_spawner3d.gd" id="1_spawner"]
+[ext_resource type="PackedScene" uid="uid://brml40n12o27c" path="res://entities/projectiles/slime_ball/slime_ball.tscn" id="2_ball"]
+[ext_resource type="PackedScene" uid="uid://droq7dydiqro" path="res://assets/models/items/weapons/slime_staff.blend" id="3_model"]
+[ext_resource type="Material" uid="uid://c33644pxuf2ds" path="res://assets/materials/gold.tres" id="4_j4fcv"]
+[ext_resource type="Material" uid="uid://c06whlh3ak5qm" path="res://assets/materials/slime.tres" id="5_slime"]
+[ext_resource type="PackedScene" uid="uid://xoj4t71ndmdv" path="res://assets/models/projectiles/slime_ball.blend" id="6_85x3y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j4fcv"]
+resource_name = "Material"
+transparency = 1
+albedo_color = Color(0.09100003, 0.91, 0, 0.4)
+roughness = 0.5
+
+[node name="SlimeStaff" type="Node3D" unique_id=1602859400]
+
+[node name="ProjectileSpawner" type="Node3D" parent="." unique_id=2022753182]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+script = ExtResource("1_spawner")
+projectile_scene = ExtResource("2_ball")
+
+[node name="Visuals" parent="." unique_id=1747278558 instance=ExtResource("3_model")]
+
+[node name="Tip" parent="Visuals" index="0" unique_id=735395208]
+visible = false
+
+[node name="Handle_001" parent="Visuals" index="1" unique_id=641367984]
+visible = false
+
+[node name="Trunk" parent="Visuals" index="2" unique_id=1974135643]
+surface_material_override/0 = ExtResource("4_j4fcv")
+
+[node name="Top" parent="Visuals" index="3" unique_id=59125313]
+surface_material_override/0 = ExtResource("5_slime")
+
+[node name="slime_ball" parent="Visuals/Top" index="0" unique_id=601109793 instance=ExtResource("6_85x3y")]
+
+[node name="InnerBall" parent="Visuals/Top/slime_ball" index="0" unique_id=109889769]
+visible = false
+
+[node name="OuterBall" parent="Visuals/Top/slime_ball" index="1" unique_id=1979529813]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, -3.405979e-08, 0, 3.405979e-08, 0.8, 0, 0, 0.028)
+surface_material_override/0 = SubResource("StandardMaterial3D_j4fcv")
+
+[editable path="Visuals"]
+[editable path="Visuals/Top/slime_ball"]

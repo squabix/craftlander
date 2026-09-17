@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ProjectileWeapon" format=3 uid="uid://cjunsi1o8hn8q"]
+
+[ext_resource type="Script" uid="uid://b1jj1b7rvurvy" path="res://items/weapons/projectile_weapon.gd" id="1_weapon"]
+[ext_resource type="Resource" path="res://items/weapons/slime_staff/slime_staff_damage.tres" id="2_dmg"]
+[ext_resource type="Texture2D" uid="uid://co1jawqbvknus" path="res://items/weapons/slime_staff/slime_staff.png" id="2_p8ukx"]
+[ext_resource type="PackedScene" uid="uid://bsm7sn5w0iwkl" path="res://items/weapons/slime_staff/slime_staff.tscn" id="3_scene"]
+
+[resource]
+script = ExtResource("1_weapon")
+damage = ExtResource("2_dmg")
+name = &"Slime Staff"
+icon = ExtResource("2_p8ukx")
+type = &"Weapon"
+use_action_name = &"Cast"
+scene = ExtResource("3_scene")
+cooldown_mode = 1
+default_cooldown_length = 1.2
+metadata/_custom_type_script = "uid://b1jj1b7rvurvy"

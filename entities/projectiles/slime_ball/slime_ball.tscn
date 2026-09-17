@@ -4,6 +4,8 @@
 [ext_resource type="Resource" path="res://entities/projectiles/slime_ball/slime_ball_damage.tres" id="2_dmg"]
 [ext_resource type="PackedScene" uid="uid://xoj4t71ndmdv" path="res://assets/models/projectiles/slime_ball.blend" id="3_848ix"]
 [ext_resource type="Material" uid="uid://c06whlh3ak5qm" path="res://assets/materials/slime.tres" id="4_470yt"]
+[ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="5_45plf"]
+[ext_resource type="PackedScene" uid="uid://bq52ep7qhybkj" path="res://particles/slime_particles.tscn" id="6_hcsjo"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_slime"]
 radius = 0.25
@@ -34,5 +36,12 @@ surface_material_override/0 = ExtResource("4_470yt")
 
 [node name="OuterBall" parent="Visuals" index="1" unique_id=1979529813]
 surface_material_override/0 = SubResource("StandardMaterial3D_ncsrk")
+
+[node name="ParticleSpawner3D" type="Node3D" parent="." unique_id=676953635]
+script = ExtResource("5_45plf")
+defer = true
+scenes = Array[PackedScene]([ExtResource("6_hcsjo")])
+spawn_on_exit_tree = true
+metadata/_custom_type_script = "uid://bhjxscxhtg2se"
 
 [editable path="Visuals"]

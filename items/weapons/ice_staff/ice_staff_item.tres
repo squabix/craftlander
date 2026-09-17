@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="IceStaffWeapon" format=3 uid="uid://dfolqijsstxy3"]
+
+[ext_resource type="Script" uid="uid://bjgkpkmx1gven" path="res://items/weapons/ice_staff/ice_staff_weapon.gd" id="1_weapon"]
+[ext_resource type="Resource" uid="uid://62f4ju0xbsdg" path="res://items/weapons/ice_staff/ice_staff_damage.tres" id="2_dmg"]
+[ext_resource type="Texture2D" uid="uid://cr2esjvp5aglv" path="res://items/weapons/ice_staff/ice_staff.png" id="2_k1bt8"]
+[ext_resource type="PackedScene" uid="uid://cj2wh0qh5emdj" path="res://items/weapons/ice_staff/ice_staff.tscn" id="3_scene"]
+
+[resource]
+script = ExtResource("1_weapon")
+max_aim_distance = 25.0
+aim_collision_mask = 69
+damage = ExtResource("2_dmg")
+name = &"Ice Staff"
+icon = ExtResource("2_k1bt8")
+type = &"Weapon"
+use_action_name = &"Cast"
+scene = ExtResource("3_scene")
+cooldown_mode = 1
+default_cooldown_length = 3.0

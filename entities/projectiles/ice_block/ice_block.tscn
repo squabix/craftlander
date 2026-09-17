@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://cfyf4objjhj4u"]
+
+[ext_resource type="Script" uid="uid://i43eyy1fl3oh" path="res://entities/projectiles/ice_block/ice_block.gd" id="1_script"]
+[ext_resource type="Resource" path="res://entities/projectiles/ice_block/ice_block_damage.tres" id="2_dmg"]
+[ext_resource type="PackedScene" uid="uid://c5p1su4igelsy" path="res://assets/models/props/ice_chunk.blend" id="3_model"]
+[ext_resource type="Material" uid="uid://c403ng7pn0nqg" path="res://assets/materials/ice.tres" id="4_ice"]
+[ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="5_8un2i"]
+[ext_resource type="PackedScene" uid="uid://w4nm4moe5341" path="res://particles/ice_block_smash_particles.tscn" id="6_65djb"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_iceblock"]
+radius = 2.5
+
+[sub_resource type="Animation" id="Animation_reset"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2, 2, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_spawn"]
+resource_name = "spawn"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.05, 0.05, 0.05), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iceblock"]
+_data = {
+&"RESET": SubResource("Animation_reset"),
+&"spawn": SubResource("Animation_spawn")
+}
+
+[node name="IceBlock" type="Area3D" unique_id=376294253]
+collision_layer = 0
+collision_mask = 12
+script = ExtResource("1_script")
+gravity_scale = 9.8
+lifetime = 15.0
+free_on_collision = true
+damage = ExtResource("2_dmg")
+one_shot = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=985194632]
+shape = SubResource("SphereShape3D_iceblock")
+
+[node name="Visuals" type="Node3D" parent="." unique_id=2051746666]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="BlenderMeshes" parent="Visuals" unique_id=673685849 instance=ExtResource("3_model")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+
+[node name="Stone" parent="Visuals/BlenderMeshes" index="0" unique_id=1395198130]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8385246, 0)
+surface_material_override/0 = ExtResource("4_ice")
+
+[node name="SpawnAnimation" type="AnimationPlayer" parent="." unique_id=667989977]
+libraries/ = SubResource("AnimationLibrary_iceblock")
+
+[node name="ParticleSpawner3D" type="Node3D" parent="." unique_id=1376109397]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+script = ExtResource("5_8un2i")
+scenes = Array[PackedScene]([ExtResource("6_65djb")])
+defer = true
+spawn_on_exit_tree = true
+metadata/_custom_type_script = "uid://bhjxscxhtg2se"
+
+[editable path="Visuals/BlenderMeshes"]
