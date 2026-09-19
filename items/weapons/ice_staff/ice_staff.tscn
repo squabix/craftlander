@@ -1,10 +1,12 @@
-[gd_scene format=4 uid="uid://cj2wh0qh5emdj"]
+[gd_scene format=4 uid="uid://csfhasxx56uiw"]
 
 [ext_resource type="Script" uid="uid://2ow28vm5clst" path="res://common/spawner/projectile_spawner3d.gd" id="1_spawner"]
 [ext_resource type="PackedScene" uid="uid://cfyf4objjhj4u" path="res://entities/projectiles/ice_block/ice_block.tscn" id="2_block"]
+[ext_resource type="Shader" uid="uid://rnggagu1i5kt" path="res://assets/shaders/interactable_ring.gdshader" id="3_487w6"]
 [ext_resource type="PackedScene" uid="uid://cjqrn56fnuju6" path="res://assets/models/items/weapons/ice_staff.blend" id="3_model"]
 [ext_resource type="Material" uid="uid://bd2wsdvcuat4q" path="res://assets/materials/diamond.tres" id="4_6gf45"]
 [ext_resource type="Material" uid="uid://c403ng7pn0nqg" path="res://assets/materials/ice.tres" id="5_ice"]
+[ext_resource type="AudioStream" uid="uid://cpt2s6883glj2" path="res://assets/sound/spell.mp3" id="6_spell"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v4bkn"]
 resource_name = "Material.006"
@@ -82,11 +84,39 @@ _data = {
 &"spin": SubResource("Animation_vuxpg")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_487w6"]
+render_priority = 0
+shader = ExtResource("3_487w6")
+shader_parameter/base_color = Color(0.22000003, 0.636, 1, 0.9019608)
+shader_parameter/accent_color = Color(0.45, 0.78, 1, 0.9019608)
+shader_parameter/emission_strength = 5.5
+shader_parameter/stripe_count = 12.0
+shader_parameter/stripe_speed = 0.2
+shader_parameter/stripe_softness = 2.0
+shader_parameter/ring_radius = 1.0
+shader_parameter/ring_width = 0.5
+shader_parameter/edge_softness = 0.06
+shader_parameter/pulse_speed = 1.5
+shader_parameter/pulse_amount = 0.0
+shader_parameter/vertical_fade = 2.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_t58lg"]
+material = SubResource("ShaderMaterial_487w6")
+top_radius = 1.0
+bottom_radius = 1.2
+height = 3.0
+cap_top = false
+cap_bottom = false
+
 [node name="IceStaff" type="Node3D" unique_id=1765621485]
 
 [node name="ProjectileSpawner" type="Node3D" parent="." unique_id=429157316]
 script = ExtResource("1_spawner")
 projectile_scene = ExtResource("2_block")
+
+[node name="SpellPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1107093432]
+stream = ExtResource("6_spell")
+bus = &"SFX"
 
 [node name="Visuals" parent="." unique_id=85625797 instance=ExtResource("3_model")]
 
@@ -128,5 +158,11 @@ surface_material_override/0 = ExtResource("5_ice")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Visuals/Orbit" unique_id=2033066096]
 libraries/ = SubResource("AnimationLibrary_487w6")
 autoplay = &"spin"
+
+[node name="AimIndicator" type="MeshInstance3D" parent="." unique_id=1565523757]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.27437466, 0)
+top_level = true
+visible = false
+mesh = SubResource("CylinderMesh_t58lg")
 
 [editable path="Visuals"]

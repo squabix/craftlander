@@ -8,6 +8,7 @@ enum Mode { ENTERING, INSIDE, EXTERNAL }
 @export var damage: Damage
 @export var current_mode: Mode
 @export var one_shot := false
+@export var can_hit_source := false
 @export var enabled := true
 @export var auto_enable_wait_time: float
 
@@ -69,7 +70,7 @@ func hit(area: Area3D) -> bool:
 		return false
 
 	# BAIL if area belongs to this hitbox's own damage source (no friendly/self fire)
-	if is_instance_valid(damage) and is_instance_valid(damage.source) and area.get_parent() == damage.source:
+	if not can_hit_source and is_instance_valid(damage) and is_instance_valid(damage.source) and area.get_parent() == damage.source:
 		return false
 
 	area.hurt(damage, get_knock_direction(global_rotation.y, damage))

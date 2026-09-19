@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://w4nm4moe5341"]
 
 [ext_resource type="Material" uid="uid://c403ng7pn0nqg" path="res://assets/materials/ice.tres" id="1_hod0w"]
+[ext_resource type="AudioStream" uid="uid://bmxsnrxw1o7s6" path="res://assets/sound/ice_break.mp3" id="2_icebreak"]
 
 [sub_resource type="Curve" id="Curve_w3oie"]
 _data = [Vector2(0, 0.7798611), 0.0, 0.0, 0, 0, Vector2(0.19283122, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.0089314, 0.0, 0, 0]
@@ -72,6 +73,7 @@ process_material = SubResource("ParticleProcessMaterial_1f2jk")
 draw_pass_1 = SubResource("ArrayMesh_ammaq")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." unique_id=332836626]
+stream = ExtResource("2_icebreak")
 max_db = 4.5
 autoplay = true
 bus = &"SFX"

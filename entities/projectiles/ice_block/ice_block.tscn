@@ -6,6 +6,8 @@
 [ext_resource type="Material" uid="uid://c403ng7pn0nqg" path="res://assets/materials/ice.tres" id="4_ice"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="5_8un2i"]
 [ext_resource type="PackedScene" uid="uid://w4nm4moe5341" path="res://particles/ice_block_smash_particles.tscn" id="6_65djb"]
+[ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="7_puff"]
+[ext_resource type="Script" uid="uid://bxjt3nibhkxh8" path="res://common/signal_triggrs/camera_shake_trigger.gd" id="8_b3hui"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_iceblock"]
 radius = 2.5
@@ -48,15 +50,19 @@ _data = {
 &"spawn": SubResource("Animation_spawn")
 }
 
-[node name="IceBlock" type="Area3D" unique_id=376294253]
+[node name="IceBlock" type="Area3D" unique_id=376294253 node_paths=PackedStringArray("visuals", "spawn_player", "spawn_particle_spawner")]
 collision_layer = 0
 collision_mask = 12
 script = ExtResource("1_script")
+visuals = NodePath("Visuals")
+spawn_player = NodePath("SpawnAnimationPlayer")
+spawn_particle_spawner = NodePath("SpawnParticleSpawner3D")
 gravity_scale = 9.8
 lifetime = 15.0
 free_on_collision = true
 damage = ExtResource("2_dmg")
 one_shot = true
+can_hit_source = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=985194632]
 shape = SubResource("SphereShape3D_iceblock")
@@ -71,7 +77,7 @@ transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8385246, 0)
 surface_material_override/0 = ExtResource("4_ice")
 
-[node name="SpawnAnimation" type="AnimationPlayer" parent="." unique_id=667989977]
+[node name="SpawnAnimationPlayer" type="AnimationPlayer" parent="." unique_id=667989977]
 libraries/ = SubResource("AnimationLibrary_iceblock")
 
 [node name="ParticleSpawner3D" type="Node3D" parent="." unique_id=1376109397]
@@ -81,5 +87,16 @@ scenes = Array[PackedScene]([ExtResource("6_65djb")])
 defer = true
 spawn_on_exit_tree = true
 metadata/_custom_type_script = "uid://bhjxscxhtg2se"
+
+[node name="SpawnParticleSpawner3D" type="Node3D" parent="." unique_id=244933949]
+script = ExtResource("5_8un2i")
+scenes = Array[PackedScene]([ExtResource("7_puff")])
+metadata/_custom_type_script = "uid://bhjxscxhtg2se"
+
+[node name="CameraShakeTrigger" type="Node" parent="." unique_id=1773595818]
+script = ExtResource("8_b3hui")
+trauma = 0.5
+signal_name = &"body_entered"
+metadata/_custom_type_script = "uid://bxjt3nibhkxh8"
 
 [editable path="Visuals/BlenderMeshes"]
