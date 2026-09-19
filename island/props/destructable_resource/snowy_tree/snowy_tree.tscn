@@ -24,11 +24,10 @@
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="25_yrpb4"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="26_kco7h"]
 [ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="27_tdfff"]
-[ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="28_w5cin"]
 [ext_resource type="ArrayOccluder3D" uid="uid://dxvs6e1pbvl0h" path="res://island/props/destructable_resource/tree/tree.occ" id="29_3c1gc"]
 [ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="30_cp0wd"]
-[ext_resource type="PackedScene" path="res://island/props/destructable_resource/destroy_shake_trigger.tscn" id="99_destroyshk"]
-[ext_resource type="PackedScene" path="res://island/props/destructable_resource/hurt_shake_trigger.tscn" id="99_hurtshk"]
+[ext_resource type="PackedScene" uid="uid://b42ejh4s3ni40" path="res://island/props/destructable_resource/destroy_shake_trigger.tscn" id="99_destroyshk"]
+[ext_resource type="PackedScene" uid="uid://p8wwjit2trpc" path="res://island/props/destructable_resource/hurt_shake_trigger.tscn" id="99_hurtshk"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hjjmf"]
 height = 4.3061523
@@ -142,12 +141,6 @@ _data = {
 [sub_resource type="Resource" id="Resource_xgieu"]
 script = ExtResource("26_kco7h")
 item = ExtResource("27_tdfff")
-quantity = 3
-metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
-
-[sub_resource type="Resource" id="Resource_rngja"]
-script = ExtResource("26_kco7h")
-item = ExtResource("28_w5cin")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [node name="SnowyTree" type="Node3D" unique_id=1544571203 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
@@ -161,9 +154,9 @@ health = NodePath("Health")
 script = ExtResource("2_tklfs")
 damage_override = ExtResource("3_qu850")
 
-[node name="DestroyShakeTrigger" parent="Health" instance=ExtResource("99_destroyshk")]
+[node name="DestroyShakeTrigger" parent="Health" unique_id=1654180458 instance=ExtResource("99_destroyshk")]
 
-[node name="HurtShakeTrigger" parent="Health" instance=ExtResource("99_hurtshk")]
+[node name="HurtShakeTrigger" parent="Health" unique_id=1368974182 instance=ExtResource("99_hurtshk")]
 
 [node name="FallTrigger" type="Node" parent="Health" unique_id=1612475271 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("4_hc21u")
@@ -302,9 +295,8 @@ visible = false
 collision_layer = 128
 collision_mask = 0
 
-[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" unique_id=680704068 node_paths=PackedStringArray("sample")]
+[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" unique_id=680704068]
 script = ExtResource("21_sbsjk")
-sample = NodePath("")
 generate_on_ready = true
 
 [node name="ChopParticles" type="GPUParticles3D" parent="." unique_id=931223418]
@@ -342,9 +334,9 @@ metadata/_custom_type_script = "uid://c1bce1sw2dgnf"
 
 [node name="Inventory" type="Node" parent="." unique_id=997929093]
 script = ExtResource("25_yrpb4")
-item_instances = Array[ExtResource("26_kco7h")]([SubResource("Resource_xgieu"), SubResource("Resource_rngja")])
+item_instances = Array[ExtResource("26_kco7h")]([SubResource("Resource_xgieu")])
 constant = true
-size = 2
+size = 1
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 
 [node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=186356672]

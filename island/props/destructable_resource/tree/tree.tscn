@@ -17,7 +17,6 @@
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="12_jeogd"]
 [ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="13_mw2c8"]
 [ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="13_snq0j"]
-[ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="16_cs0vr"]
 [ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="16_k7n08"]
 [ext_resource type="ArrayMesh" uid="uid://n401vdsvwqt4" path="res://island/props/destructable_resource/tree/tree2/tree2_Cube_003.res" id="17_abb6m"]
 [ext_resource type="AudioStream" uid="uid://f50l344faomv" path="res://assets/sound/tree_fall.mp3" id="17_h1qf7"]
@@ -36,8 +35,8 @@
 [ext_resource type="AudioStream" uid="uid://cwmtj7gouxh3c" path="res://assets/sound/tree_destroy.mp3" id="26_h1qf7"]
 [ext_resource type="PackedScene" uid="uid://kqtvsnhnrbww" path="res://assets/models/props/tree2.blend" id="28_abb6m"]
 [ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/collision_barrier_3d.gd" id="29_tallblk"]
-[ext_resource type="PackedScene" path="res://island/props/destructable_resource/destroy_shake_trigger.tscn" id="99_destroyshk"]
-[ext_resource type="PackedScene" path="res://island/props/destructable_resource/hurt_shake_trigger.tscn" id="99_hurtshk"]
+[ext_resource type="PackedScene" uid="uid://b42ejh4s3ni40" path="res://island/props/destructable_resource/destroy_shake_trigger.tscn" id="99_destroyshk"]
+[ext_resource type="PackedScene" uid="uid://p8wwjit2trpc" path="res://island/props/destructable_resource/hurt_shake_trigger.tscn" id="99_hurtshk"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hjjmf"]
 height = 4.3061523
@@ -134,12 +133,6 @@ _data = {
 [sub_resource type="Resource" id="Resource_xgieu"]
 script = ExtResource("12_jeogd")
 item = ExtResource("13_mw2c8")
-quantity = 3
-metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
-
-[sub_resource type="Resource" id="Resource_rngja"]
-script = ExtResource("12_jeogd")
-item = ExtResource("16_cs0vr")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [node name="Tree" type="Node3D" unique_id=1544571203 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
@@ -153,9 +146,9 @@ health = NodePath("Health")
 script = ExtResource("2_27px0")
 damage_override = ExtResource("10_j52tm")
 
-[node name="DestroyShakeTrigger" parent="Health" instance=ExtResource("99_destroyshk")]
+[node name="DestroyShakeTrigger" parent="Health" unique_id=1179972054 instance=ExtResource("99_destroyshk")]
 
-[node name="HurtShakeTrigger" parent="Health" instance=ExtResource("99_hurtshk")]
+[node name="HurtShakeTrigger" parent="Health" unique_id=1023450694 instance=ExtResource("99_hurtshk")]
 
 [node name="FallTrigger" type="Node" parent="Health" unique_id=1612475271 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("5_afesh")
@@ -358,9 +351,9 @@ metadata/_custom_type_script = "uid://c1bce1sw2dgnf"
 
 [node name="Inventory" type="Node" parent="." unique_id=997929093]
 script = ExtResource("11_ytrwe")
-item_instances = Array[ExtResource("12_jeogd")]([SubResource("Resource_xgieu"), SubResource("Resource_rngja")])
+item_instances = Array[ExtResource("12_jeogd")]([SubResource("Resource_xgieu")])
 constant = true
-size = 2
+size = 1
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 
 [node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=186356672]
