@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://h257chlnqrha" path="res://menus/title_screen.gd" id="1_m4alt"]
 [ext_resource type="PackedScene" uid="uid://byosfqwobl3sl" path="res://menus/settings_menu.tscn" id="2_dbvjn"]
+[ext_resource type="PackedScene" path="res://menus/about_menu.tscn" id="2_about"]
 [ext_resource type="Texture2D" uid="uid://bcbbncdb8r7w0" path="res://assets/artwork/craftlander_name_logo.png" id="2_jtp7x"]
 [ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://defaults/button_audio_manager.tscn" id="3_823ok"]
 [ext_resource type="Script" uid="uid://dlutjgdrcstqh" path="res://menus/save_menu.gd" id="3_eujrm"]
@@ -131,7 +132,7 @@ subdivide_depth = 800
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jtp7x"]
 
-[node name="TitleScreen" type="Control" unique_id=788547277 node_paths=PackedStringArray("save_submenu", "settings_submenu", "new_game_button", "load_game_button", "settings_button", "quit_button", "visibility_proxy")]
+[node name="TitleScreen" type="Control" unique_id=788547277 node_paths=PackedStringArray("save_submenu", "settings_submenu", "about_submenu", "new_game_button", "load_game_button", "settings_button", "about_button", "quit_button", "visibility_proxy")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -141,9 +142,11 @@ grow_vertical = 2
 script = ExtResource("1_m4alt")
 save_submenu = NodePath("SaveMenu")
 settings_submenu = NodePath("SettingsMenu")
+about_submenu = NodePath("AboutMenu")
 new_game_button = NodePath("MainPanel/MainButtonContainer/NewGameButton")
 load_game_button = NodePath("MainPanel/MainButtonContainer/LoadGameButton")
 settings_button = NodePath("MainPanel/MainButtonContainer/HBoxContainer/SettingsButton")
+about_button = NodePath("MainPanel/MainButtonContainer/HBoxContainer/AboutButton")
 quit_button = NodePath("MainPanel/MainButtonContainer/HBoxContainer/QuitButton")
 visibility_proxy = NodePath("MainPanel")
 
@@ -192,6 +195,10 @@ expand_mode = 1
 stretch_mode = 3
 
 [node name="SettingsMenu" parent="." unique_id=1608320205 instance=ExtResource("2_dbvjn")]
+visible = false
+layout_mode = 1
+
+[node name="AboutMenu" parent="." instance=ExtResource("2_about")]
 visible = false
 layout_mode = 1
 
@@ -3246,6 +3253,19 @@ size_flags_horizontal = 3
 text = "SETTINGS"
 
 [node name="ButtonAudioManager" parent="MainPanel/MainButtonContainer/HBoxContainer/SettingsButton" unique_id=1116253875 node_paths=PackedStringArray("signal_players") instance=ExtResource("3_823ok")]
+signal_players = {
+&"focus_entered": NodePath("../../../../../SaveMenu/PanelContainer/SaveButtonContainer/SaveRow1/SaveButton1/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../SaveMenu/PanelContainer/SaveButtonContainer/SaveRow1/SaveButton1/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../SaveMenu/PanelContainer/SaveButtonContainer/SaveRow1/SaveButton1/ButtonAudioManager/PressPlayer")
+}
+
+[node name="AboutButton" type="Button" parent="MainPanel/MainButtonContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ABOUT"
+
+[node name="ButtonAudioManager" parent="MainPanel/MainButtonContainer/HBoxContainer/AboutButton" node_paths=PackedStringArray("signal_players") instance=ExtResource("3_823ok")]
 signal_players = {
 &"focus_entered": NodePath("../../../../../SaveMenu/PanelContainer/SaveButtonContainer/SaveRow1/SaveButton1/ButtonAudioManager/HoverPlayer"),
 &"mouse_entered": NodePath("../../../../../SaveMenu/PanelContainer/SaveButtonContainer/SaveRow1/SaveButton1/ButtonAudioManager/HoverPlayer"),

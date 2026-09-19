@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://xf6ehrtx7yt5"]
+
+[ext_resource type="Script" uid="uid://dvc12hwt0aa4c" path="res://menus/about_menu.gd" id="1_about"]
+[ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://defaults/button_audio_manager.tscn" id="2_audio"]
+
+[node name="AboutMenu" type="Control" unique_id=1118483580 node_paths=PackedStringArray("text_scroll", "back_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_about")
+text_scroll = NodePath("PanelContainer/VBoxContainer/ScrollContainer")
+back_button = NodePath("PanelContainer/VBoxContainer/BackButton")
+back_action = &"back"
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1615928282]
+custom_minimum_size = Vector2(900, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -300.0
+offset_right = 450.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"MenuPanel"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=600063283]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer" unique_id=15466527]
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "ABOUT THE GAME"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer" unique_id=279889479]
+custom_minimum_size = Vector2(0, 420)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="AboutText" type="RichTextLabel" parent="PanelContainer/VBoxContainer/ScrollContainer" unique_id=860887969]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[font_size=34][color=#f2c14e]THE GAME[/color][/font_size]
+CRAFTLANDER is a 3D island adventure about sailing into the unknown. Every island is generated procedurally, so no two playthroughs look the same. Fight, explore, and sail across dangerous islands with discovery around every corner. Harvest rare materials and craft special gear to help you as you battle menacing fantastical creatures, build up your ship, and conquer a high-stakes final boss in a compact first-person island adventure.
+
+
+[font_size=34][color=#f2c14e]MY STORY[/color][/font_size]
+I'm SQUABIX. At the time of release, I am a 17-year-old developer who started building CRAFTLANDER in November of 2025. I developed in using the Godot Game Engine. My journey making games in Godot started in 2019 when I was 10 years old. I loved building worlds that could be experienced by anyone, and game development seemed like the ultimate creative outlet between designing and coding and drawing and 3D modeling. This project serves as a capstone to all of the 7 years of work I have put into game development. This game was difficult to make, but it is the most complete game I have ever worked on, and I learned a lot along the way. I am so proud of this project and I hope that you enjoy!
+
+[font_size=34][color=#f2c14e]CREDITS[/color][/font_size]
+[b]Design[/b]
+[color=#ffd166]SQUABIX[/color]
+
+[b]Programming[/b]
+[color=#ffd166]SQUABIX[/color]
+
+[b]3D Modeling[/b]
+[color=#ffd166]SQUABIX[/color]
+
+[b]2D Art[/b]
+[color=#ffd166]SQUABIX[/color]
+
+[b]Music[/b]
+[color=#ffd166]...[/color]
+
+[b]Sound effects[/b]
+[color=#ffd166]...[/color]
+
+[b]Built with[/b]
+Godot Engine. Copyright (c) 2014-present Godot Engine contributors. Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur. MIT license. godotengine.org
+
+GodotSteam. Copyright (c) 2015-present GP Garcia, Chris Ridenour and contributors. MIT license. godotsteam.com
+
+Controller Icons. Copyright (c) 2023 Ricardo Subtil. MIT license.
+
+Thank you for playing."
+fit_content = true
+scroll_active = false
+
+[node name="BackButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=602940379]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+text = "BACK"
+
+[node name="ButtonAudioManager" parent="PanelContainer/VBoxContainer/BackButton" unique_id=352817906 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_audio")]
+signal_players = {
+&"focus_entered": NodePath("HoverPlayer"),
+&"mouse_entered": NodePath("HoverPlayer"),
+&"pressed": NodePath("PressPlayer")
+}
