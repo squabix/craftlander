@@ -19,6 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://c5p1su4igelsy" path="res://assets/models/props/ice_chunk.blend" id="19_qat6t"]
 [ext_resource type="Material" uid="uid://c403ng7pn0nqg" path="res://assets/materials/ice.tres" id="20_pc4fx"]
 [ext_resource type="AudioStream" uid="uid://b6f6x800jxpvb" path="res://assets/sound/rock_destroy.mp3" id="20_ui87x"]
+[ext_resource type="PackedScene" path="res://island/props/destructable_resource/destroy_shake_trigger.tscn" id="99_destroyshk"]
+[ext_resource type="PackedScene" path="res://island/props/destructable_resource/hurt_shake_trigger.tscn" id="99_hurtshk"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pc4fx"]
 points = PackedVector3Array(-0.025318384, 1.0866077, 2.3605456, 1.7467864, 1.9117204, 1.1407089, 1.0443532, 3.896339, 1.1538913, -0.7121514, 2.8020554, 1.7320309, -1.5739602, 2.897818, 1.3539803, -1.4365094, -0.6754271, 1.3073714, -0.502602, -0.7779191, 1.5253506, 1.0489912, 0.32619965, 1.5597186, 1.6999857, 0.20714319, 1.1101072, 1.9993422, 2.1104927, -0.7005806, 0.17748499, 4.3849874, -0.28062916, -0.7349193, 4.2198615, -0.042405367, -2.3080156, -0.49477193, -0.4496454, -1.1670886, -0.90318716, 1.0578485, 0.95538974, -0.7406493, 0.8525808, 1.4457438, -0.34103388, -0.66856635, -0.47983408, 2.4821558, -2.449123, 1.4229758, 0.2387191, -1.1384224, -1.273339, -0.10913271, -1.325329, -1.4251254, -0.8012128, -0.94822013, 0.82805777, -0.6588627, -1.1501923, 1.084408, -0.6366043, -0.8823085, 1.0346558, -0.25355327, -1.2768369)
@@ -124,6 +126,10 @@ bus = &"SFX"
 script = ExtResource("5_du0du")
 damage_override = ExtResource("6_l43k0")
 free_parent_on_death = true
+
+[node name="DestroyShakeTrigger" parent="Health" instance=ExtResource("99_destroyshk")]
+
+[node name="HurtShakeTrigger" parent="Health" instance=ExtResource("99_hurtshk")]
 
 [node name="HurtAnimTrigger" type="Node" parent="Health" unique_id=1514929013 node_paths=PackedStringArray("anim_player")]
 script = ExtResource("7_2w7t6")

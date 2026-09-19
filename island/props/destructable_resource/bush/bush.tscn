@@ -18,6 +18,8 @@
 [ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="17_j2qlb"]
 [ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="18_6lx07"]
 [ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="18_f1rr7"]
+[ext_resource type="PackedScene" path="res://island/props/destructable_resource/destroy_shake_trigger.tscn" id="99_destroyshk"]
+[ext_resource type="PackedScene" path="res://island/props/destructable_resource/hurt_shake_trigger.tscn" id="99_hurtshk"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lx2ta"]
 radius = 0.4
@@ -258,6 +260,10 @@ script = ExtResource("5_inqls")
 hp = 3.0
 damage_override = ExtResource("3_f1rr7")
 free_parent_on_death = true
+
+[node name="DestroyShakeTrigger" parent="Health" instance=ExtResource("99_destroyshk")]
+
+[node name="HurtShakeTrigger" parent="Health" instance=ExtResource("99_hurtshk")]
 
 [node name="HurtAnimTrigger" type="Node" parent="Health" unique_id=1514929013 node_paths=PackedStringArray("anim_player")]
 script = ExtResource("6_ru1ff")

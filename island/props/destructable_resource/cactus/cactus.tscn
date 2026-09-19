@@ -19,6 +19,8 @@
 [ext_resource type="Material" uid="uid://c7uysx7frg14r" path="res://assets/materials/cactus.tres" id="17_vk70i"]
 [ext_resource type="Material" uid="uid://cedafem77nnp5" path="res://assets/materials/thorn.tres" id="18_kjjyj"]
 [ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/collision_barrier_3d.gd" id="19_tallblk"]
+[ext_resource type="PackedScene" path="res://island/props/destructable_resource/destroy_shake_trigger.tscn" id="99_destroyshk"]
+[ext_resource type="PackedScene" path="res://island/props/destructable_resource/hurt_shake_trigger.tscn" id="99_hurtshk"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hjjmf"]
 height = 3.4744873
@@ -111,6 +113,10 @@ script = ExtResource("4_t32xe")
 hp = 3.0
 damage_override = ExtResource("3_e6cgp")
 free_parent_on_death = true
+
+[node name="DestroyShakeTrigger" parent="Health" instance=ExtResource("99_destroyshk")]
+
+[node name="HurtShakeTrigger" parent="Health" instance=ExtResource("99_hurtshk")]
 
 [node name="HurtAnimTrigger" type="Node" parent="Health" unique_id=1514929013 node_paths=PackedStringArray("anim_player")]
 script = ExtResource("5_ueeso")

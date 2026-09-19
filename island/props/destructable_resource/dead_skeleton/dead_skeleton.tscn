@@ -17,6 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://dcwjoiv4psjwc" path="res://assets/models/props/dead_skeleton.blend" id="16_ibdu0"]
 [ext_resource type="Material" uid="uid://brsw8xc5rh2lv" path="res://assets/materials/bone.tres" id="17_rx1cw"]
 [ext_resource type="Material" uid="uid://ct3rueaspkpix" path="res://assets/materials/darkness.tres" id="18_ran2n"]
+[ext_resource type="PackedScene" path="res://island/props/destructable_resource/destroy_shake_trigger.tscn" id="99_destroyshk"]
+[ext_resource type="PackedScene" path="res://island/props/destructable_resource/hurt_shake_trigger.tscn" id="99_hurtshk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ibdu0"]
 size = Vector3(0.49700928, 0.3114624, 0.6456299)
@@ -106,6 +108,10 @@ script = ExtResource("4_joy77")
 hp = 3.0
 damage_override = ExtResource("3_ran2n")
 free_parent_on_death = true
+
+[node name="DestroyShakeTrigger" parent="Health" instance=ExtResource("99_destroyshk")]
+
+[node name="HurtShakeTrigger" parent="Health" instance=ExtResource("99_hurtshk")]
 
 [node name="HurtAnimTrigger" type="Node" parent="Health" unique_id=1514929013 node_paths=PackedStringArray("anim_player")]
 script = ExtResource("5_dplr8")

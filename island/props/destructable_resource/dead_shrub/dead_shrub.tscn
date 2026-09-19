@@ -17,6 +17,8 @@
 [ext_resource type="AudioStream" uid="uid://bus7hgef3h35c" path="res://assets/sound/step.mp3" id="15_dcakd"]
 [ext_resource type="PackedScene" uid="uid://dwthx0c5m81il" path="res://assets/models/props/dead_shrub1.blend" id="16_beyq1"]
 [ext_resource type="Material" uid="uid://qbk54giebf0" path="res://assets/materials/dead_shrub.tres" id="17_dpgh7"]
+[ext_resource type="PackedScene" path="res://island/props/destructable_resource/destroy_shake_trigger.tscn" id="99_destroyshk"]
+[ext_resource type="PackedScene" path="res://island/props/destructable_resource/hurt_shake_trigger.tscn" id="99_hurtshk"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_beyq1"]
 points = PackedVector3Array(-0.7843075, 1.4715104, 0.40295, -0.7816848, 1.4810951, 0.41691226, -0.7766268, 1.4831343, 0.39326173, -0.26707923, 1.6519873, -0.8728946, -0.3626194, 1.4158379, -0.63895416, -0.40308347, 1.2957238, -0.5199893, -0.12770301, -0.26535055, -0.072339535, -0.14905906, -0.26535055, -0.0015305281, -0.6385619, 1.4013588, 0.46378583, -0.67846394, 1.423791, 0.4506784, -0.7384107, 1.4798715, 0.41363543, -0.7738168, 1.4929229, 0.40708166, -0.1951431, -0.10363506, 0.054318845, -0.27719527, 1.626904, -0.8481043, -0.2584619, 1.6619798, -0.8617817, 0.6716497, 1.7939217, -0.89569026, -0.25227988, 1.644238, -0.8773113, -0.13500899, -0.104246855, -0.14443082, 0.40132725, 0.80649877, -0.7859862, -0.059138894, -0.2835002, -0.051538527, -0.08049494, -0.2835002, 0.019128025, -0.54264706, 1.3479296, 0.49512988, -0.5939765, 1.3766835, 0.47831804, -0.51061296, 1.3956488, 0.4553799, 1.1126331, 1.6648349, -0.08302504, 0.66940176, 1.7998357, -0.8797333, -0.05951357, -0.24842446, 0.04420328, -0.001065433, -0.14849938, 0.113160074, -0.3324587, 1.2314863, 0.5598126, -0.47820428, 1.3120381, 0.5160734, 0.6871984, 1.7880077, -0.8914161, 0.43111324, 0.8205699, -0.7912576, -0.027666807, -0.24842446, -0.060656786, 0.44891, 0.8038478, -0.7577765, 0.5094187, 0.74654377, -0.6428009, 0.56318355, 0.6955616, -0.54036295, -0.4398009, 1.3693421, 0.468345, 1.1219999, 1.6509676, -0.07846588, 1.1294932, 1.6509676, -0.09399545, 1.1199392, 1.6648349, -0.09855455, -0.29405528, 1.315301, 0.49484497, 0.68495035, 1.7939217, -0.87545913, 0.05906868, -0.14911117, -0.08573198, 0.012609899, 1.0585548, 0.4415601, -0.09435761, 1.1144311, 0.4885761, -0.16872907, 1.1509345, 0.5113718, -0.24328786, 1.1874377, 0.53416747, 0.5339595, 0.7234998, -0.59621227, 0.6137636, 0.6301005, -0.4023067)
@@ -89,6 +91,10 @@ script = ExtResource("4_6htl5")
 hp = 3.0
 damage_override = ExtResource("3_li7iq")
 free_parent_on_death = true
+
+[node name="DestroyShakeTrigger" parent="Health" instance=ExtResource("99_destroyshk")]
+
+[node name="HurtShakeTrigger" parent="Health" instance=ExtResource("99_hurtshk")]
 
 [node name="HurtAnimTrigger" type="Node" parent="Health" unique_id=1514929013 node_paths=PackedStringArray("anim_player")]
 script = ExtResource("5_bdrnu")

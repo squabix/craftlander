@@ -30,6 +30,8 @@
 [ext_resource type="PackedScene" uid="uid://72lfyk3a5w1s" path="res://assets/models/props/palm_tree1.blend" id="35_jiqyg"]
 [ext_resource type="Material" uid="uid://cxxp5ww380hsd" path="res://assets/materials/palm_leaves.tres" id="36_whjq2"]
 [ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/collision_barrier_3d.gd" id="37_tallblk"]
+[ext_resource type="PackedScene" path="res://island/props/destructable_resource/destroy_shake_trigger.tscn" id="99_destroyshk"]
+[ext_resource type="PackedScene" path="res://island/props/destructable_resource/hurt_shake_trigger.tscn" id="99_hurtshk"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hjjmf"]
 height = 4.3061523
@@ -154,6 +156,10 @@ health = NodePath("Health")
 [node name="Health" type="Node" parent="." unique_id=95922495]
 script = ExtResource("2_whjq2")
 damage_override = ExtResource("12_f35uo")
+
+[node name="DestroyShakeTrigger" parent="Health" instance=ExtResource("99_destroyshk")]
+
+[node name="HurtShakeTrigger" parent="Health" instance=ExtResource("99_hurtshk")]
 
 [node name="FallTrigger" type="Node" parent="Health" unique_id=1612475271 node_paths=PackedStringArray("state_machine")]
 script = ExtResource("3_te0j3")

@@ -11,13 +11,21 @@ extends Node
 @export var trauma_exponent := 2.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:cycles/s") var shake_speed := 18.0
 
+static var current: CameraShake3D
+
 var trauma := 0.0
 
 var noise := FastNoiseLite.new()
 var _time_offset := 0.0
 
 
+static func shake(amount: float) -> void:
+	if is_instance_valid(current):
+		current.add_trauma(amount)
+
+
 func _ready() -> void:
+	current = self
 	noise.seed = randi()
 	noise.frequency = 1.0
 	_time_offset = randf() * 1000.0
