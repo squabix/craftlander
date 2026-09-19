@@ -20,7 +20,7 @@
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="18_i5kk2"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="19_voigo"]
 [ext_resource type="AnimationNodeStateMachine" uid="uid://clw23t4rpt3rl" path="res://common/inventory_system/animation/item_anim_tree_state_machine.tres" id="20_y8y67"]
-[ext_resource type="Resource" path="res://items/weapons/ice_staff/ice_staff_item.tres" id="21_4uann"]
+[ext_resource type="Resource" uid="uid://dfolqijsstxy3" path="res://items/weapons/ice_staff/ice_staff_item.tres" id="21_4uann"]
 [ext_resource type="Script" uid="uid://bi8ev1kcq2ayf" path="res://common/inventory_system/animation/item_animation_tree.gd" id="21_8bbbt"]
 [ext_resource type="Script" uid="uid://c622jer80j3sk" path="res://common/inventory_system/animation/item_animation.gd" id="22_0cwlt"]
 [ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="23_qsm0a"]

@@ -747,17 +747,17 @@ surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 
 [node name="LegRight3" parent="Visuals" index="6" unique_id=189635639]
-transform = Transform3D(-0.97364765, 0, 0.22805585, 0, 1, 0, -0.22805585, 0, -0.97364765, -0.75, 0.29067695, -0.17361851)
+transform = Transform3D(-0.9736476, 0, 0.22805583, 0, 1, 0, -0.22805583, 0, -0.9736476, -0.75, 0.29067695, -0.17361851)
 surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 
 [node name="LegRight2" parent="Visuals" index="7" unique_id=1439470597]
-transform = Transform3D(-0.95121616, 0, -0.30852416, 0, 1, 0, 0.30852416, 0, -0.95121616, -0.75, 0.29067695, 0.15406431)
+transform = Transform3D(-0.9512161, 0, -0.30852413, 0, 1, 0, 0.30852413, 0, -0.9512161, -0.75, 0.29067695, 0.15406431)
 surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 
 [node name="LegRight1" parent="Visuals" index="8" unique_id=1763787552]
-transform = Transform3D(-0.95121616, 0, -0.30852416, 0, 1, 0, 0.30852416, 0, -0.95121616, -0.61, 0.29067695, 0.45040345)
+transform = Transform3D(-0.9512161, 0, -0.30852413, 0, 1, 0, 0.30852413, 0, -0.9512161, -0.61, 0.29067695, 0.45040345)
 surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 

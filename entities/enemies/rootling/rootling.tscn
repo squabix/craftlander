@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://doai6uyyht5am" path="res://entities/enemies/rootling/rootling.gd" id="1_wtogd"]
 [ext_resource type="Resource" uid="uid://o4s4d0gqgsng" path="res://entities/enemies/rootling/rootling_move_mode.tres" id="2_f0qrw"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="3_ihgra"]
-[ext_resource type="Script" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="3_wtogd"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="4_nauqg"]
 [ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_w8hfy"]
@@ -53,6 +52,7 @@
 [ext_resource type="AudioStream" uid="uid://sl2wj5r6v4jx" path="res://assets/sound/rootling-06.mp3" id="44_ve4h5"]
 [ext_resource type="Script" uid="uid://b6yrmkabhfa82" path="res://entities/npc_states/searching_state.gd" id="59_searching"]
 [ext_resource type="Script" uid="uid://h3nqpcog77iq" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="60_normconf"]
+[ext_resource type="Script" uid="uid://cke8g2exxgx0y" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
 script = ExtResource("3_wtogd")
@@ -700,12 +700,11 @@ shape = SubResource("CapsuleShape3D_3emv6")
 script = ExtResource("8_7mn0t")
 state_machine = NodePath("../../Controller3D/Default")
 state_name = &"Chasing"
-
 from_state_whitelist = Array[StringName]([&"Wandering", &"Searching"])
 signal_name = &"was_hurt"
 metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 
-[node name="MeshFlashTrigger" type="Node" parent="Hurtbox3D" node_paths=PackedStringArray("mesh_root")]
+[node name="MeshFlashTrigger" type="Node" parent="Hurtbox3D" unique_id=2040187292 node_paths=PackedStringArray("mesh_root")]
 script = ExtResource("100_flash")
 mesh_root = NodePath("../../Visuals")
 signal_name = &"was_hurt"
