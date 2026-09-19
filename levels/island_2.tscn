@@ -48,6 +48,7 @@
 [ext_resource type="Script" uid="uid://bvnl07wfykf0p" path="res://common3d/audio_stream_curver3d.gd" id="43_m538g"]
 [ext_resource type="PackedScene" path="res://island/skies/day_night_cycle.tscn" id="99_dncscn"]
 
+[ext_resource type="Resource" path="res://island/props/destructable_resource/mushroom/mushroom_prop.tres" id="gen_mushroom_prop"]
 [sub_resource type="Gradient" id="Gradient_eo3xd"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_s5hfs"]
@@ -366,7 +367,9 @@ ExtResource("17_vmqyq"): 50,
 ExtResource("19_l3kgg"): 45,
 ExtResource("20_d4wp7"): 130,
 ExtResource("21_6l7eq"): 30,
-ExtResource("23_s0d0j"): 50
+ExtResource("23_s0d0j"): 50,
+
+ExtResource("gen_mushroom_prop"): 15,
 })
 populate_on_ready = false
 

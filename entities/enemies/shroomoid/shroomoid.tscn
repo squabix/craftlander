@@ -53,6 +53,7 @@
 [ext_resource type="Material" uid="uid://fs0rcuantoc5" path="res://assets/materials/mushroom_spot.tres" id="51_rf56o"]
 [ext_resource type="Resource" uid="uid://cg5u4clq7rpal" path="res://items/weapons/mushroom_staff/mushroom_staff_item.tres" id="52_staff"]
 [ext_resource type="Script" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="53_normconf"]
+[ext_resource type="Resource" path="res://items/food/mushroom/mushroom_item.tres" id="54_mushroom"]
 
 [sub_resource type="Resource" id="Resource_xl8du"]
 script = ExtResource("2_mvunv")
@@ -77,6 +78,12 @@ height = 2.8
 [sub_resource type="Resource" id="Resource_7qf20"]
 script = ExtResource("19_ayrpf")
 item = ExtResource("52_staff")
+quantity = 3
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_mushroom"]
+script = ExtResource("19_ayrpf")
+item = ExtResource("54_mushroom")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Animation" id="Animation_3emv6"]
@@ -884,7 +891,7 @@ entity = NodePath("../..")
 [node name="Inventory" type="Node" parent="." unique_id=2020826484]
 unique_name_in_owner = true
 script = ExtResource("18_c1oxa")
-item_instances = Array[ExtResource("19_ayrpf")]([SubResource("Resource_7qf20")])
+item_instances = Array[ExtResource("19_ayrpf")]([SubResource("Resource_7qf20"), SubResource("Resource_mushroom")])
 constant = true
 size = 2
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"

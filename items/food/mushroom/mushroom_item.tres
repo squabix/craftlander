@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Food" format=3]
+
+[ext_resource type="Texture2D" uid="uid://6lrmo35ogbkc" path="res://items/food/mushroom/mushroom.png" id="1_icon"]
+[ext_resource type="PackedScene" path="res://items/food/mushroom/mushroom.tscn" id="2_scene"]
+[ext_resource type="Script" uid="uid://bcua33xmbibyi" path="res://items/food/food.gd" id="3_food"]
+
+[resource]
+script = ExtResource("3_food")
+health_restoration = 5.0
+hunger_restoration = 0.1
+name = "Mushroom"
+max_quantity = 99
+icon = ExtResource("1_icon")
+consumable = true
+type = "Food"
+use_action_name = &"Eat"
+scene = ExtResource("2_scene")
+metadata/_custom_type_script = "uid://bcua33xmbibyi"

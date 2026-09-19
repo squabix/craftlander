@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cxnouh0ml5l0e"]
+
+[ext_resource type="PackedScene" uid="uid://cf1vt1van08av" path="res://assets/models/items/food/mushroom.blend" id="1_mushroom"]
+[ext_resource type="Material" uid="uid://bntpptj6c08nu" path="res://assets/materials/red_mushroom.tres" id="2_q2i1b"]
+[ext_resource type="Material" uid="uid://fs0rcuantoc5" path="res://assets/materials/mushroom_spot.tres" id="3_d8gx6"]
+
+[node name="Mushroom" type="Node3D" unique_id=1155323892]
+
+[node name="Visuals" parent="." unique_id=1476788046 instance=ExtResource("1_mushroom")]
+
+[node name="Top" parent="Visuals" index="0" unique_id=1652583776]
+surface_material_override/0 = ExtResource("2_q2i1b")
+surface_material_override/1 = ExtResource("3_d8gx6")
+
+[editable path="Visuals"]

@@ -52,6 +52,7 @@
 [ext_resource type="PackedScene" uid="uid://cxbfwy8aapt0k" path="res://island/props/destructable_resource/copper_ore/copper_ore.tscn" id="46_hfmnx"]
 [ext_resource type="PackedScene" path="res://island/skies/day_night_cycle.tscn" id="99_dncscn"]
 
+[ext_resource type="Resource" path="res://island/props/destructable_resource/mushroom/mushroom_prop.tres" id="gen_mushroom_prop"]
 [sub_resource type="LabelSettings" id="LabelSettings_hjjmf"]
 font_size = 70
 shadow_size = 4
@@ -1262,7 +1263,9 @@ ExtResource("15_1lm7x"): 20,
 ExtResource("20_ai0lq"): 80,
 ExtResource("21_t5ill"): 50,
 ExtResource("22_kngna"): 30,
-ExtResource("24_j7xto"): 45
+ExtResource("24_j7xto"): 45,
+
+ExtResource("gen_mushroom_prop"): 60,
 })
 populate_on_ready = false
 
