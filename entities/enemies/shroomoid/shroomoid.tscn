@@ -52,6 +52,7 @@
 [ext_resource type="AudioStream" uid="uid://c4438fvpcmcld" path="res://assets/sound/rootling-12.mp3" id="51_oe4m7"]
 [ext_resource type="Material" uid="uid://fs0rcuantoc5" path="res://assets/materials/mushroom_spot.tres" id="51_rf56o"]
 [ext_resource type="Resource" uid="uid://cg5u4clq7rpal" path="res://items/weapons/mushroom_staff/mushroom_staff_item.tres" id="52_staff"]
+[ext_resource type="Script" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="53_normconf"]
 
 [sub_resource type="Resource" id="Resource_xl8du"]
 script = ExtResource("2_mvunv")
@@ -751,6 +752,14 @@ metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 script = ExtResource("100_flash")
 mesh_root = NodePath("../../Visuals")
 signal_name = &"was_hurt"
+
+[node name="NormalConformityRayCast3D" type="RayCast3D" parent="." node_paths=PackedStringArray("targets")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+target_position = Vector3(0, -0.6, 0)
+collision_mask = 1
+script = ExtResource("53_normconf")
+targets = [NodePath("../Visuals"), NodePath("../Hurtbox3D")]
+conformity = 0.2
 
 [node name="Health" type="Node" parent="." unique_id=780116179]
 script = ExtResource("9_frg4g")

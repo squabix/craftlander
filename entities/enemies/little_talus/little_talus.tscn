@@ -46,6 +46,7 @@
 [ext_resource type="Resource" uid="uid://sekma2rr06f1" path="res://entities/projectiles/flying_rock/flying_rock_damage.tres" id="55_flyrockdmg"]
 [ext_resource type="Script" uid="uid://bu5gejc4tee2w" path="res://entities/npc_states/talus_throwing_state.gd" id="58_talusthrow"]
 [ext_resource type="Script" uid="uid://b6yrmkabhfa82" path="res://entities/npc_states/searching_state.gd" id="59_searching"]
+[ext_resource type="Script" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="60_normconf"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
 script = ExtResource("3_vpv56")
@@ -592,6 +593,14 @@ metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 script = ExtResource("100_flash")
 mesh_root = NodePath("../../Visuals")
 signal_name = &"was_hurt"
+
+[node name="NormalConformityRayCast3D" type="RayCast3D" parent="." node_paths=PackedStringArray("targets")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+target_position = Vector3(0, -0.5, 0)
+collision_mask = 1
+script = ExtResource("60_normconf")
+targets = [NodePath("../Visuals"), NodePath("../Hurtbox3D")]
+interpolation_speed = 5.0
 
 [node name="Health" type="Node" parent="." unique_id=780116179]
 script = ExtResource("9_3hery")

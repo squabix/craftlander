@@ -51,6 +51,7 @@
 [ext_resource type="Material" uid="uid://ct3rueaspkpix" path="res://assets/materials/darkness.tres" id="48_n2wx5"]
 [ext_resource type="Material" uid="uid://m5807bchpbmp" path="res://assets/materials/glowing_eye.tres" id="49_8i4p0"]
 [ext_resource type="Script" uid="uid://cke8g2exxgx0y" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
+[ext_resource type="Script" uid="uid://h3nqpcog77iq" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="101_normconf"]
 
 [sub_resource type="Resource" id="Resource_xl8du"]
 script = ExtResource("2_8i4p0")
@@ -804,6 +805,14 @@ metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 script = ExtResource("100_flash")
 mesh_root = NodePath("../../Visuals")
 signal_name = &"was_hurt"
+
+[node name="NormalConformityRayCast3D" type="RayCast3D" parent="." unique_id=1512732142 node_paths=PackedStringArray("targets")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+target_position = Vector3(0, -0.7, 0)
+script = ExtResource("101_normconf")
+targets = [NodePath("../Visuals"), NodePath("../Hurtbox3D")]
+conformity = 0.2
+interpolation_speed = 6.0
 
 [node name="Health" type="Node" parent="." unique_id=535744160]
 script = ExtResource("9_8bxnd")

@@ -51,6 +51,7 @@
 [ext_resource type="Material" uid="uid://btrvrb7gvvlbr" path="res://assets/materials/crab_shell.tres" id="47_u6i5x"]
 [ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="50_wwywl"]
 [ext_resource type="Script" uid="uid://cke8g2exxgx0y" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
+[ext_resource type="Script" uid="uid://h3nqpcog77iq" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="101_normconf"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
 script = ExtResource("3_j8ygh")
@@ -502,6 +503,13 @@ signal_name = &"was_hurt"
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Hurtbox3D" unique_id=263716078]
 shape = SubResource("CapsuleShape3D_41vbo")
+
+[node name="NormalConformityRayCast3D" type="RayCast3D" parent="." unique_id=1439876315 node_paths=PackedStringArray("targets")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+target_position = Vector3(0, -0.6, 0)
+script = ExtResource("101_normconf")
+targets = [NodePath("../Visuals"), NodePath("../Hurtbox3D")]
+interpolation_speed = 6.0
 
 [node name="Health" type="Node" parent="." unique_id=780116179]
 script = ExtResource("9_78p2d")

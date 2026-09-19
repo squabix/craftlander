@@ -53,6 +53,7 @@
 [ext_resource type="AudioStream" uid="uid://c4438fvpcmcld" path="res://assets/sound/rootling-12.mp3" id="48_t8qc2"]
 [ext_resource type="PackedScene" uid="uid://6t3jpflaiiij" path="res://assets/models/entities/skeleton.blend" id="49_4huls"]
 [ext_resource type="Script" uid="uid://b6yrmkabhfa82" path="res://entities/npc_states/searching_state.gd" id="59_searching"]
+[ext_resource type="Script" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="61_normconf"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
 script = ExtResource("3_6kq1n")
@@ -817,6 +818,14 @@ metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
 script = ExtResource("60_flash")
 mesh_root = NodePath("../../Visuals")
 signal_name = &"was_hurt"
+
+[node name="NormalConformityRayCast3D" type="RayCast3D" parent="." node_paths=PackedStringArray("targets")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+target_position = Vector3(0, -0.6, 0)
+collision_mask = 1
+script = ExtResource("61_normconf")
+targets = [NodePath("../Visuals"), NodePath("../Hurtbox3D")]
+conformity = 0.2
 
 [node name="Health" type="Node" parent="." unique_id=780116179]
 script = ExtResource("9_ir2xu")
