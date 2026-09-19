@@ -594,7 +594,7 @@ metadata/_custom_type_script = "uid://43bqjaemfda5"
 [node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=1883496829 node_paths=PackedStringArray("interval_staggerer", "reach_anim_tree", "guide", "sight", "root")]
 script = ExtResource("15_wkrbi")
 interval_staggerer = NodePath("IntervalStaggerer")
-advance_goal_distance = 1.0
+advance_goal_distance = 1.5
 reach_anim_tree = NodePath("../../../AnimationTree")
 lose_target_state = &"Searching"
 guide = NodePath("../../NavEntityGuide3D")
