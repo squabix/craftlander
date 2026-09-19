@@ -1,5 +1,5 @@
-extends Menu
 class_name TitleScreen
+extends Menu
 
 @export_group("Submenus")
 @export var save_submenu: SaveMenu
@@ -13,13 +13,20 @@ class_name TitleScreen
 @export var about_button: Button
 @export var quit_button: Button
 
+@onready var button_connections: Dictionary[Button, Callable] = {
+	new_game_button: start_save_selection.bind(SaveMenu.SelectMode.NEW),
+	load_game_button: start_save_selection.bind(SaveMenu.SelectMode.LOAD),
+	settings_button: open_submenu.bind(settings_submenu),
+	about_button: open_submenu.bind(about_submenu),
+	quit_button: get_tree().quit,
+}
+
+
 func _ready() -> void:
 	super()
-	new_game_button.pressed.connect(start_save_selection.bind(SaveMenu.SelectMode.NEW))
-	load_game_button.pressed.connect(start_save_selection.bind(SaveMenu.SelectMode.LOAD))
-	settings_button.pressed.connect(open_submenu.bind(settings_submenu))
-	about_button.pressed.connect(open_submenu.bind(about_submenu))
-	quit_button.pressed.connect(get_tree().quit)
+	for button: Button in button_connections:
+		button.pressed.connect(button_connections[button])
+
 
 func start_save_selection(mode: SaveMenu.SelectMode) -> void:
 	save_submenu.current_select_mode = mode
