@@ -8,7 +8,7 @@ extends SignalTrigger
 var flash_material: StandardMaterial3D
 
 var _revert_tween: Tween
-var _flashed_meshes: Array[Node] = []
+var _original_overrides: Dictionary[MeshInstance3D, Material] = {}
 
 
 func _ready() -> void:
@@ -22,8 +22,9 @@ func trigger(..._args: Array) -> void:
 	if disabled:
 		return
 
-	_flashed_meshes = Util.find_children_of_class(mesh_root, "MeshInstance3D")
-	for mesh in _flashed_meshes:
+	for mesh: MeshInstance3D in Util.find_children_of_class(mesh_root, "MeshInstance3D"):
+		if not _original_overrides.has(mesh):
+			_original_overrides[mesh] = mesh.material_override
 		mesh.material_override = flash_material
 
 	if is_instance_valid(_revert_tween):
@@ -34,8 +35,8 @@ func trigger(..._args: Array) -> void:
 
 
 func _revert() -> void:
-	for mesh in _flashed_meshes:
+	for mesh in _original_overrides:
 		if not is_instance_valid(mesh):
 			continue
-		mesh.material_override = null
-	_flashed_meshes.clear()
+		mesh.material_override = _original_overrides[mesh]
+	_original_overrides.clear()
