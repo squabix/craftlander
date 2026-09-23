@@ -212,7 +212,10 @@ func _spawn_scene_with_distribution(scene: PackedScene, wave: WaveSpawnerWave) -
 	match wave.spawner_distribution:
 		WaveSpawnerWave.SpawnerDistribution.BATCH_SIMULTANEOUS:
 			var count_to_spawn := mini(pool_count, selected_spawners.size())
-			target_spawners = selected_spawners.slice(0, count_to_spawn)
+			round_robin_index %= selected_spawners.size()
+			for i in count_to_spawn:
+				target_spawners.append(selected_spawners[(round_robin_index + i) % selected_spawners.size()])
+			round_robin_index += count_to_spawn
 		WaveSpawnerWave.SpawnerDistribution.SINGLE_ROUND_ROBIN:
 			round_robin_index %= selected_spawners.size()
 			target_spawners.append(selected_spawners[round_robin_index])
