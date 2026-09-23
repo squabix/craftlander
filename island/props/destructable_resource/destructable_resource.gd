@@ -20,6 +20,8 @@ func randomize_health() -> void:
 
 func connect_hurtbox_damage() -> void:
 	var give_to_source := func(damage: Damage):
+		if not is_instance_valid(damage.source):
+			return
 		var given_item := give_random_item(get_damage_source_inventory(damage.source))
 		EventBus.trigger(&"resource_harvested", {"item": given_item, "source": damage.source})
 	hurtbox.was_dealt_damage.connect(give_to_source)
