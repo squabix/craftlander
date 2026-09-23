@@ -4,6 +4,7 @@ extends Area3D
 enum PostInteractionMode {NOTHING, DISABLE, FREE}
 
 signal interacted_with(source: Node)
+signal condition_failed(condition: InteractableCondition, source: Node)
 
 @export var enabled := true:
 	set(to):
@@ -13,6 +14,7 @@ signal interacted_with(source: Node)
 @export var channel := 0
 @export var visible_as_enabled := false
 @export var post_interaction_mode := PostInteractionMode.NOTHING
+@export var conditions: Array[InteractableCondition] = []
 
 @export_group("Tooltips", "tooltip")
 @export var tooltip_enabled := ""
@@ -28,6 +30,13 @@ func disable() -> void:
 
 
 func interact(source: Node, _etc: Dictionary = { }) -> void:
+	for condition in conditions:
+		if not condition.is_met(self, source):
+			condition_failed.emit(condition, source)
+			return
+	for condition in conditions:
+		condition.on_fulfilled(self, source)
+
 	interacted_with.emit(source)
 	match post_interaction_mode:
 		PostInteractionMode.NOTHING:
