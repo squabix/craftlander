@@ -19,6 +19,10 @@ func face_target() -> void:
 	pass
 
 
+func face_true_target() -> void:
+	face_target()
+
+
 func get_distance_to_target() -> float:
 	return 0.0
 

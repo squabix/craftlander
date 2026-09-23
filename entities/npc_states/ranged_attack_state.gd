@@ -15,8 +15,7 @@ extends TargetingState
 @export_group("Target Losing")
 @export var return_to_chase_state := &""
 
-# Far enough in the past that the very first attack is never delayed.
-var _last_attack_msec := -2000000000
+var _last_attack_msec := -INF
 
 
 func enter() -> void:
@@ -29,10 +28,6 @@ func enter() -> void:
 	if is_instance_valid(hurt_trigger):
 		hurt_trigger.disabled = true
 
-	# Re-entering this state (e.g. bouncing back from Chasing) must not let an
-	# attack fire sooner than throw_cooldown after the previous one — only
-	# _on_animation_finished's own wait normally enforces that, and it can't
-	# do so for a fresh enter().
 	var remaining_sec := throw_cooldown - (Time.get_ticks_msec() - _last_attack_msec) / 1000.0
 	if remaining_sec > 0.0:
 		await get_tree().create_timer(remaining_sec).timeout
@@ -55,11 +50,12 @@ func exit() -> void:
 func physics_update(_delta: float) -> void:
 	if is_instance_valid(guide):
 		guide.set_target(get_target_position())
-		guide.face_target()
+		guide.face_true_target()
 
 
 func get_aim_position() -> Vector3:
-	return get_target_position() + Vector3.UP * aim_height_offset
+	var aim := sight.target.global_position if is_instance_valid(sight) and is_instance_valid(sight.target) else get_target_position()
+	return aim + Vector3.UP * aim_height_offset
 
 
 func is_target_in_range() -> bool:
