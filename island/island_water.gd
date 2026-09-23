@@ -19,7 +19,7 @@ func sink(body: RigidBody3D) -> void:
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_SINE)
 	tween.set_ease(Tween.EASE_OUT)
-	tween.tween_property(body, "global_position:y", global_position.y - SINK_DEPTH, sink_duration)
+	tween.tween_property(body, ^"global_position:y", global_position.y - SINK_DEPTH, sink_duration)
 
 	await tween.finished
 	Util.safe_free(body)

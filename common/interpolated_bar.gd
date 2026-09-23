@@ -65,7 +65,7 @@ func _animate_value() -> void:
 		_value_tween.kill()
 
 	_value_tween = create_tween().set_trans(transition_type).set_ease(ease_type)
-	_value_tween.tween_property(self, "value", target_value, interpolation_duration)
+	_value_tween.tween_property(self, ^"value", target_value, interpolation_duration)
 
 
 func _handle_fade() -> void:
@@ -78,7 +78,7 @@ func _handle_fade() -> void:
 		_fade_tween.kill()
 
 	_fade_tween = create_tween()
-	_fade_tween.tween_property(fade_target, "modulate:a", 1.0, fade_duration_in)
+	_fade_tween.tween_property(fade_target, ^"modulate:a", 1.0, fade_duration_in)
 
 	_idle_timer = get_tree().create_timer(fade_wait_time_idle)
 	var current_timer := _idle_timer
@@ -94,4 +94,4 @@ func _start_fade_out() -> void:
 		_fade_tween.kill()
 
 	_fade_tween = create_tween()
-	_fade_tween.tween_property(fade_target, "modulate:a", 0.0, fade_duration_out)
+	_fade_tween.tween_property(fade_target, ^"modulate:a", 0.0, fade_duration_out)

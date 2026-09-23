@@ -16,7 +16,7 @@ func set_up_scene() -> void:
 	if scene_instance == null:
 		return
 	super()
-	harvest_ray = scene_instance.get_node("HarvestRay")
+	harvest_ray = scene_instance.get_node(^"HarvestRay")
 	damage.source = root
 	harvest_ray.damage = damage
 

@@ -88,8 +88,8 @@ func _animate_regrow(arm: Node3D, rest_position: Vector3, tween: Tween) -> Tween
 
 	var new_tween := create_tween()
 	new_tween.set_parallel(true)
-	new_tween.tween_property(arm, "scale", Vector3.ONE, regrow_anim_duration)
-	new_tween.tween_property(arm, "position", rest_position, regrow_anim_duration)
+	new_tween.tween_property(arm, ^"scale", Vector3.ONE, regrow_anim_duration)
+	new_tween.tween_property(arm, ^"position", rest_position, regrow_anim_duration)
 	return new_tween
 
 

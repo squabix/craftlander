@@ -59,7 +59,7 @@ func get_harvest_range(item: HarvestingTool) -> float:
 	if item.scene == null:
 		return 0.0
 	var temp := item.scene.instantiate()
-	var ray := temp.get_node_or_null("HarvestRay") as RayCast3D
+	var ray := temp.get_node_or_null(^"HarvestRay") as RayCast3D
 	var harvest_range := ray.target_position.length() if ray != null else 0.0
 	temp.queue_free()
 	return harvest_range

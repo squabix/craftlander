@@ -18,7 +18,7 @@ func set_up_scene() -> void:
 	if scene_instance == null:
 		return
 	super()
-	spawner = scene_instance.get_node("ProjectileSpawner")
+	spawner = scene_instance.get_node(^"ProjectileSpawner")
 	damage.source = root
 	spawner.damage = damage
 	spawner.source = root

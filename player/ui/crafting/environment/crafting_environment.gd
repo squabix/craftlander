@@ -298,7 +298,7 @@ func tween_craft_fail() -> void:
 	var step2_time := fail_wiggle_duration / 2.0
 
 	var turn := func(visual: Node3D, amount: float, delay: float) -> void:
-		tween.tween_property(visual, "rotation_degrees", VISUALS_TILT + Vector3(0.0, amount, 0.0), step1_time).set_delay(delay)
+		tween.tween_property(visual, ^"rotation_degrees", VISUALS_TILT + Vector3(0.0, amount, 0.0), step1_time).set_delay(delay)
 
 	for visual in slots_contents:
 		if not is_instance_valid(visual):
@@ -347,8 +347,8 @@ func tween_craft_success(item: Item) -> void:
 		var delay: float = i * success_merge_stagger_delay_offset
 		max_delay = max(max_delay, delay)
 
-		merge_tween.tween_property(visual, "global_position", craft_center, success_merge_duration).set_delay(delay)
-		merge_tween.tween_property(visual, "scale", Vector3.ZERO, success_merge_duration).set_delay(delay)
+		merge_tween.tween_property(visual, ^"global_position", craft_center, success_merge_duration).set_delay(delay)
+		merge_tween.tween_property(visual, ^"scale", Vector3.ZERO, success_merge_duration).set_delay(delay)
 
 	merge_tween.tween_interval(max_delay + success_merge_duration)
 	await merge_tween.finished
@@ -367,16 +367,16 @@ func tween_craft_success(item: Item) -> void:
 	crafted_visuals.rotation_degrees = VISUALS_TILT
 
 	var showcase_tween := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	showcase_tween.tween_property(crafted_visuals, "scale", Vector3.ONE * VISUALS_SCALE, success_showcase_pop_duration)
-	showcase_tween.parallel().tween_property(crafted_visuals, "global_position", craft_center + Vector3.UP * success_showcase_height, success_showcase_pop_duration)
+	showcase_tween.tween_property(crafted_visuals, ^"scale", Vector3.ONE * VISUALS_SCALE, success_showcase_pop_duration)
+	showcase_tween.parallel().tween_property(crafted_visuals, ^"global_position", craft_center + Vector3.UP * success_showcase_height, success_showcase_pop_duration)
 
 	craft_particles.emitting = true
 
 	showcase_tween.tween_interval(success_showcase_hang_duration)
 
 	showcase_tween.chain().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-	showcase_tween.tween_property(crafted_visuals, "global_position", craft_center + Vector3.DOWN * success_drop_sink_depth, success_drop_duration)
-	showcase_tween.parallel().tween_property(crafted_visuals, "scale", Vector3.ZERO, success_drop_duration)
+	showcase_tween.tween_property(crafted_visuals, ^"global_position", craft_center + Vector3.DOWN * success_drop_sink_depth, success_drop_duration)
+	showcase_tween.parallel().tween_property(crafted_visuals, ^"scale", Vector3.ZERO, success_drop_duration)
 
 	await showcase_tween.finished
 	tweened_craft_showcase.emit()
