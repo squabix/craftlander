@@ -57,6 +57,7 @@ func disable_update_pause() -> void:
 
 
 func open() -> void:
+	_refresh_save_button()
 	auto_focus()
 	if is_instance_valid(recipe_panel):
 		recipe_panel.show_types()
@@ -85,3 +86,9 @@ func update_pause(to: bool) -> void:
 		open()
 	else:
 		close()
+
+
+func _refresh_save_button() -> void:
+	if not is_instance_valid(button_save):
+		return
+	button_save.disabled = Main.saving_locked

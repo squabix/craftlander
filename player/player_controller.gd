@@ -14,6 +14,8 @@ const ACTION_LOOK_DOWN := &"look_down"
 const LOOK_SENSITIVITY := 0.35
 const LOOK_SENSITIVITY_INPUT_MULTIPLIER := 350.0
 
+var input_locked := false
+
 
 static func get_input_motion_vector() -> Vector2:
 	return Input.get_vector(
@@ -47,6 +49,9 @@ func _physics_process(delta: float) -> void:
 
 
 func turn_head(relative: Vector2) -> void:
+	if input_locked:
+		return
+
 	# Invert y
 	if GameSettings.config.get_value("gameplay", "invert_y", false) == true:
 		relative.y *= -1.0
@@ -57,7 +62,7 @@ func turn_head(relative: Vector2) -> void:
 
 
 func handle_input(event: InputEvent) -> void:
-	if not is_controlling():
+	if not is_controlling() or input_locked:
 		return
 	super(event)
 
