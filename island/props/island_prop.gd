@@ -1,6 +1,8 @@
 extends Resource
 class_name IslandProp
 
+enum Placement { RANDOM, HIGHEST_POINT }
+
 @export var scene: PackedScene
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var radius := 1.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var min_height := 0.0
@@ -8,3 +10,4 @@ class_name IslandProp
 @export var min_scale := 1.0
 @export var max_scale := 1.0
 @export_range(0.0, 1.0) var normal_conformity := 1.0
+@export var placement := Placement.RANDOM

@@ -109,7 +109,7 @@ func populate() -> void:
 	)
 
 	# Process each prop type independently
-	for prop in sorted_props:
+	for prop: IslandProp in sorted_props:
 		var target_quantity := prop_quantities[prop]
 		var spawned_count := 0
 
@@ -123,9 +123,15 @@ func populate() -> void:
 
 				if pos.y >= prop.min_height and pos.y <= prop.max_height:
 					valid_points.append(pt)
-
-		# Shuffle only the valid locations for this prop
-		valid_points.shuffle()
+		
+		match prop.placement:
+			IslandProp.Placement.HIGHEST_POINT:
+				var heights: Dictionary[Vector2i, float] = { }
+				for point in valid_points:
+					heights[point] = island_generator.get_pixel_position(point.x, point.y).y
+				valid_points.sort_custom(func(a: Vector2i, b: Vector2i) -> bool: return heights[a] > heights[b])
+			IslandProp.Placement.RANDOM:
+				valid_points.shuffle()
 
 		for point in valid_points:
 			if spawned_count >= target_quantity:
