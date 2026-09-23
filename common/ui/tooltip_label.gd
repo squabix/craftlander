@@ -15,6 +15,8 @@ func _process(_delta: float) -> void:
 		var interactable := interactor.get_current_interactable()
 		if interactable == null:
 			continue
+		if not interactable.enabled and interactable.tooltip_disabled.is_empty():
+			continue
 		show_tooltip(interactable.get_tooltip())
 		return
 	hide()
