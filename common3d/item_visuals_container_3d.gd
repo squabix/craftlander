@@ -11,6 +11,7 @@ const GHOSTED_ANIMATION_PROPERTIES: PackedStringArray = [
 @export var do_ghost_animations := true
 @export var visuals_scale_ratio := 1.0
 @export var do_disable_shadows := false
+@export var material_override: Material
 @export_flags_3d_render var layers := 1
 
 var contained_visuals: Node3D
@@ -76,6 +77,8 @@ func update_visuals() -> void:
 	contained_visuals.show()
 	if do_disable_shadows:
 		disable_shadows()
+	if material_override != null:
+		apply_material_override()
 
 	# Transform contained visuals
 	contained_visuals.position = Vector3.ZERO
@@ -90,3 +93,11 @@ func update_visuals() -> void:
 func disable_shadows() -> void:
 	for mesh_instance in Util.find_children_of_class(contained_visuals, &"MeshInstance3D"):
 		mesh_instance.cast_shadow = false
+
+
+func apply_material_override() -> void:
+	for mesh_instance: MeshInstance3D in Util.find_children_of_class(contained_visuals, &"MeshInstance3D"):
+		if mesh_instance.mesh == null:
+			continue
+		for surface in mesh_instance.mesh.get_surface_count():
+			mesh_instance.set_surface_override_material(surface, material_override)
