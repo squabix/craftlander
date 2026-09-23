@@ -56,6 +56,13 @@ func hold_instance(new_instance: ItemInstance) -> void:
 	connect_triggered_event(held_item_instance)
 
 
+func aim_at(point: Vector3) -> void:
+	var offset := point - global_position
+	if Vector2(offset.x, offset.z).length_squared() < 0.0025:
+		return
+	look_at(point, Vector3.UP)
+
+
 func get_held_item() -> Item:
 	return null if held_item_instance == null else held_item_instance.item
 

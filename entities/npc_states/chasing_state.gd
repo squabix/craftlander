@@ -1,6 +1,8 @@
 class_name ChasingState
 extends TargetingState
 
+const TARGET_CHEST_HEIGHT := 1.0
+
 @export var item_holder: ItemHolder3D
 @export var interval_staggerer: IntervalStaggerer
 
@@ -45,6 +47,7 @@ func physics_update(_delta: float) -> void:
 		return
 
 	guide.face_target()
+	_aim_held_item()
 
 	var distance_to_target := guide.get_distance_to_target()
 	var in_goal_range := distance_to_target <= advance_goal_distance and sight.does_see_target()
@@ -90,6 +93,11 @@ func reach_goal() -> void:
 	
 	elif item_holder:
 		item_holder.use_item()
+
+
+func _aim_held_item() -> void:
+	if is_instance_valid(item_holder) and is_instance_valid(sight.target):
+		item_holder.aim_at(sight.target.global_position + Vector3.UP * TARGET_CHEST_HEIGHT)
 
 
 func update_path() -> void:
