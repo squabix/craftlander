@@ -10,7 +10,9 @@ const TRACKED_ENEMY_SCENES: Array[String] = [
 ]
 
 const CRAFT_ACHIEVEMENTS: Dictionary[String, StringName] = {
-	"res://items/weapons/mushroom_staff/mushroom_staff_item.tres": SteamIDs.ACH_CRAFT_MUSHROOM_STAFF,
+	"res://items/weapons/mushroom_staff/mushroom_staff_item.tres": SteamIDs.ACH_MUSHROOM_STAFF,
+	"res://items/weapons/ice_staff/ice_staff_item.tres": SteamIDs.ACH_ICE_STAFF,
+	"res://items/weapons/slime_staff/slime_staff_item.tres": SteamIDs.ACH_SLIME_STAFF,
 }
 
 const HUNTER_KILL_THRESHOLD := 50
@@ -31,7 +33,6 @@ func _on_enemy_died(entity: Entity3D) -> void:
 	if not entity.scene_file_path in TRACKED_ENEMY_SCENES:
 		return
 
-	SteamManager.unlock_achievement(SteamIDs.ACH_FIRST_BLOOD)
 	SteamManager.increment_stat(SteamIDs.STAT_ENEMIES_KILLED)
 	if SteamManager.get_stat(SteamIDs.STAT_ENEMIES_KILLED) >= HUNTER_KILL_THRESHOLD:
 		SteamManager.unlock_achievement(SteamIDs.ACH_HUNTER)
@@ -58,7 +59,7 @@ func _on_item_crafted(item: Item) -> void:
 
 
 func _on_island_populated() -> void:
-	SteamManager.unlock_achievement(SteamIDs.ACH_FIRST_ISLAND)
+	SteamManager.unlock_achievement(SteamIDs.ACH_ISLAND_EXPLORER)
 	SteamManager.increment_stat(SteamIDs.STAT_ISLANDS_EXPLORED)
 
 
