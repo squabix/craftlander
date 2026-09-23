@@ -14,6 +14,16 @@ var entities: Dictionary[IslandEntityResource, Array]
 var has_populated := false
 
 
+static func report_death_on_exit(entity: Entity3D) -> void:
+	entity.tree_exiting.connect(_report_if_killed.bind(entity))
+
+
+static func _report_if_killed(entity: Entity3D) -> void:
+	var health := Health.search(entity)
+	if is_instance_valid(health) and health.dead:
+		EventBus.trigger(&"enemy_died", entity)
+
+
 func _ready() -> void:
 	EventBus.subscribe(&"island_navigation_baked", populate)
 	if not gate_until_tutorial_step.is_empty():
@@ -103,7 +113,7 @@ func add_entity(entity_resource: IslandEntityResource, spawnpoint := Vector3.ZER
 	add_child(entity)
 	entity.global_position = spawnpoint
 	entity.add_to_group(&"enemies")
-	entity.tree_exiting.connect(_on_entity_tree_exiting.bind(entity))
+	report_death_on_exit(entity)
 
 	if entity_resource in entities:
 		entities[entity_resource].append(entity)
@@ -111,12 +121,6 @@ func add_entity(entity_resource: IslandEntityResource, spawnpoint := Vector3.ZER
 		entities[entity_resource] = [entity]
 
 	return entity
-
-
-func _on_entity_tree_exiting(entity: Entity3D) -> void:
-	var health := Health.search(entity)
-	if is_instance_valid(health) and health.dead:
-		EventBus.trigger(&"enemy_died", entity)
 
 
 func initialize_repopulate_timer() -> bool:
