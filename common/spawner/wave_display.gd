@@ -20,13 +20,15 @@ func _ready() -> void:
 	
 	wave_spawner.wave_started.connect(set_wave)
 	wave_spawner.entity_despawned.connect(update)
+	wave_spawner.progress_changed.connect(update)
 	wave_spawner.finished.connect(deactivate)
 
 func update() -> void:
 	
 	visible = active
 	if is_instance_valid(interpolated_bar):
-		interpolated_bar.target_value = wave_spawner.get_total_remaining_count()
+		interpolated_bar.max_value = wave_spawner.get_progress_max()
+		interpolated_bar.target_value = wave_spawner.get_progress_value()
 	if is_instance_valid(name_label) and current_wave != null:
 		name_label.text = (
 			String(current_wave.name) if not current_wave.name.is_empty()
@@ -44,7 +46,7 @@ func set_wave(index: int) -> void:
 	update()
 	
 	if is_instance_valid(interpolated_bar):
-		interpolated_bar.max_value = WaveSpawner3D.count_pool(current_wave.pool)
+		interpolated_bar.max_value = wave_spawner.get_progress_max()
 		interpolated_bar.value = interpolated_bar.max_value
 		interpolated_bar.target_value = interpolated_bar.value
 
@@ -53,3 +55,4 @@ func activate() -> void:
 
 func deactivate() -> void:
 	active = false
+	update()

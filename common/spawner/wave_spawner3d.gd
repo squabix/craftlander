@@ -6,6 +6,7 @@ signal wave_completed(index: int)
 signal entity_spawned
 signal entity_despawned
 signal finished
+signal progress_changed
 
 enum WavesState { IDLE, SPAWNING, WAITING_FOR_CLEAR, PAUSED }
 
@@ -25,6 +26,7 @@ var total_instance_count := 0
 var active_instances: Array[Node3D] = []
 var round_robin_index := 0
 var _stop_requested := false
+var _progress_health_max := 0.0
 
 
 static func count_pool(pool: Dictionary[PackedScene, int]) -> int:
@@ -131,6 +133,24 @@ func get_wave(index: int) -> WaveSpawnerWave:
 	return waves[index]
 
 
+func get_progress_value() -> float:
+	if _get_progress_mode() == WaveSpawnerWave.ProgressMode.HEALTH:
+		var total := 0.0
+		for instance in active_instances:
+			var health := Health.search(instance)
+			if is_instance_valid(health):
+				total += health.hp
+		return total
+	return float(get_total_remaining_count())
+
+
+func get_progress_max() -> float:
+	if _get_progress_mode() == WaveSpawnerWave.ProgressMode.HEALTH:
+		return maxf(_progress_health_max, 1.0)
+	var wave := get_wave(current_wave_index) if current_wave_index >= 0 else null
+	return float(count_pool(wave.pool)) if wave != null else 1.0
+
+
 func pool_subtract(scene: PackedScene, amount: int) -> void:
 	if not remaining_pool.has(scene):
 		return
@@ -146,6 +166,7 @@ func _process_wave(wave: WaveSpawnerWave) -> void:
 	wave_started.emit(current_wave_index)
 	
 	total_instance_count = 0
+	_progress_health_max = 0.0
 
 	# Spawning loop
 	while not remaining_pool.is_empty() and not _stop_requested:
@@ -254,11 +275,24 @@ func _initialize_instance(node: Node3D) -> void:
 	total_instance_count += 1
 	node.tree_exiting.connect(_on_instance_tree_exiting.bind(node), CONNECT_ONE_SHOT)
 
+	if _get_progress_mode() == WaveSpawnerWave.ProgressMode.HEALTH:
+		var health := Health.search(node)
+		if is_instance_valid(health):
+			_progress_health_max += health.max_hp
+			health.hp_changed.connect(progress_changed.emit)
+	progress_changed.emit()
+
 
 func _on_instance_tree_exiting(node: Node3D) -> void:
 	active_instances.erase(node)
 	entity_despawned.emit()
+	progress_changed.emit()
 	_check_wave_completion()
+
+
+func _get_progress_mode() -> WaveSpawnerWave.ProgressMode:
+	var wave := get_wave(current_wave_index) if current_wave_index >= 0 else null
+	return wave.progress_mode if wave != null else WaveSpawnerWave.ProgressMode.COUNT
 
 
 func _check_wave_completion() -> void:

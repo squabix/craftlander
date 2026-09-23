@@ -3,6 +3,7 @@ extends Resource
 
 enum SceneSelectMode { SEQUENTIAL, UNWEIGTED, WEIGHTED }
 enum SpawnerDistribution { SINGLE_ROUND_ROBIN, SINGLE_RANDOM, BATCH_SIMULTANEOUS }
+enum ProgressMode { COUNT, HEALTH }
 
 @export var name := &""
 @export var pool: Dictionary[PackedScene, int]
@@ -16,3 +17,6 @@ enum SpawnerDistribution { SINGLE_ROUND_ROBIN, SINGLE_RANDOM, BATCH_SIMULTANEOUS
 @export_group("Pause Lengths", "pause_length")
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var pause_length_between_spawns := 1.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var pause_length_begin := 1.0
+
+@export_group("Progress")
+@export var progress_mode := ProgressMode.COUNT
