@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cee3cpn2v1wf0"]
 
-[ext_resource type="Script" uid="uid://bwi1bbylf8ck5" path="res://entities/enemies/giant_snail/giant_snail.gd" id="1_e37vq"]
+[ext_resource type="Script" uid="uid://dwttvyxjgf2ew" path="res://entities/enemies/enemy3d.gd" id="1_e37vq"]
 [ext_resource type="Resource" uid="uid://rdg0xvun1onl" path="res://entities/enemies/giant_snail/giant_snail_move_mode.tres" id="2_xqf8t"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="3_ccu0b"]
 [ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_scokl"]
@@ -355,6 +355,7 @@ collision_mask = 17
 script = ExtResource("1_e37vq")
 anim_tree = NodePath("AnimationTree")
 culling_controller = NodePath("CullingController3D")
+locomotion_blend_parameter = &"parameters/MoveBlendSpace/blend_position"
 type = &"Giant Snail"
 move_mode = ExtResource("2_xqf8t")
 horizontal_rotation_target = NodePath(".")

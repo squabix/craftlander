@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://2qh1cil1du0g"]
 
-[ext_resource type="Script" uid="uid://doai6uyyht5am" path="res://entities/enemies/rootling/rootling.gd" id="1_1dvk3"]
+[ext_resource type="Script" uid="uid://dwttvyxjgf2ew" path="res://entities/enemies/enemy3d.gd" id="1_1dvk3"]
 [ext_resource type="Resource" uid="uid://o4s4d0gqgsng" path="res://entities/enemies/rootling/rootling_move_mode.tres" id="2_3rmgh"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="3_6kq1n"]
 [ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_lklid"]
@@ -763,11 +763,10 @@ shadow_mesh = SubResource("ArrayMesh_6omtf")
 [sub_resource type="Resource" id="Resource_acl"]
 script = ExtResource("acl_script")
 
-[node name="Skeleton" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "item_holder", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
+[node name="Skeleton" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
 script = ExtResource("1_1dvk3")
 anim_tree = NodePath("AnimationTree")
-item_holder = NodePath("ItemHolder3D")
 culling_controller = NodePath("CullingController3D")
 type = &"Skeleton"
 move_mode = ExtResource("2_3rmgh")

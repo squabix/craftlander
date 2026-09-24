@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dfmctlbidj2d0"]
 
-[ext_resource type="Script" uid="uid://b4r1lbanwqx8i" path="res://entities/enemies/candy_spider/candy_spider.gd" id="1_hww71"]
+[ext_resource type="Script" uid="uid://dwttvyxjgf2ew" path="res://entities/enemies/enemy3d.gd" id="1_hww71"]
 [ext_resource type="Resource" uid="uid://752wn0sh5o8h" path="res://entities/enemies/candy_spider/candy_spider_move_mode.tres" id="2_sfg3b"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="3_d2kbg"]
 [ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_kfmgm"]
@@ -456,6 +456,7 @@ script = ExtResource("1_hww71")
 anim_tree = NodePath("AnimationTree")
 culling_controller = NodePath("CullingController3D")
 attack_ray = NodePath("AttackRay")
+locomotion_blend_parameter = &"parameters/MoveBlendSpace/blend_position"
 type = &"Candy Spider"
 move_mode = ExtResource("2_sfg3b")
 horizontal_rotation_target = NodePath(".")

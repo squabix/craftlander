@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://blqm74wdjassn"]
 
-[ext_resource type="Script" uid="uid://doai6uyyht5am" path="res://entities/enemies/rootling/rootling.gd" id="1_n2wx5"]
+[ext_resource type="Script" uid="uid://dwttvyxjgf2ew" path="res://entities/enemies/enemy3d.gd" id="1_n2wx5"]
 [ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common/move_mode.gd" id="2_8i4p0"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="3_83p8k"]
 [ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_0ut0o"]
@@ -751,11 +751,10 @@ shader_parameter/refraction_strength = 0.05
 [sub_resource type="Resource" id="Resource_acl"]
 script = ExtResource("acl_script")
 
-[node name="Yeti" type="CharacterBody3D" unique_id=718268970 node_paths=PackedStringArray("anim_tree", "item_holder", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
+[node name="Yeti" type="CharacterBody3D" unique_id=718268970 node_paths=PackedStringArray("anim_tree", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
 script = ExtResource("1_n2wx5")
 anim_tree = NodePath("AnimationTree")
-item_holder = NodePath("ItemHolder3D")
 culling_controller = NodePath("CullingController3D")
 type = &"Yeti"
 move_mode = SubResource("Resource_xl8du")

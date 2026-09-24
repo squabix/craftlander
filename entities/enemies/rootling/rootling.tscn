@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://mwsmthp4sn6c"]
 
-[ext_resource type="Script" uid="uid://doai6uyyht5am" path="res://entities/enemies/rootling/rootling.gd" id="1_wtogd"]
+[ext_resource type="Script" uid="uid://dwttvyxjgf2ew" path="res://entities/enemies/enemy3d.gd" id="1_wtogd"]
 [ext_resource type="Resource" uid="uid://o4s4d0gqgsng" path="res://entities/enemies/rootling/rootling_move_mode.tres" id="2_f0qrw"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="3_ihgra"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="3_wtogd"]
@@ -653,11 +653,10 @@ stream_2/stream = ExtResource("41_pqd7v")
 [sub_resource type="Resource" id="Resource_acl"]
 script = ExtResource("acl_script")
 
-[node name="Rootling" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "item_holder", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
+[node name="Rootling" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
 script = ExtResource("1_wtogd")
 anim_tree = NodePath("AnimationTree")
-item_holder = NodePath("ItemHolder3D")
 culling_controller = NodePath("CullingController3D")
 type = "Rootling"
 move_mode = ExtResource("2_f0qrw")

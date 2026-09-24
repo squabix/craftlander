@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://drvpvkfftged1"]
 
-[ext_resource type="Script" uid="uid://b8r0j5asi1xkj" path="res://entities/enemies/little_ice_talus/little_ice_talus.gd" id="1_iyf1a"]
+[ext_resource type="Script" uid="uid://dwttvyxjgf2ew" path="res://entities/enemies/enemy3d.gd" id="1_iyf1a"]
 [ext_resource type="Resource" uid="uid://bh6aeavsqa6cc" path="res://entities/enemies/little_ice_talus/little_ice_talus_move_mode.tres" id="2_rjemb"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="3_4884t"]
 [ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_sh1tn"]

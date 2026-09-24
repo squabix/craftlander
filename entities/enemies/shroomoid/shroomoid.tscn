@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cwpdi2v8dtqyv"]
 
-[ext_resource type="Script" uid="uid://doai6uyyht5am" path="res://entities/enemies/rootling/rootling.gd" id="1_rf56o"]
+[ext_resource type="Script" uid="uid://dwttvyxjgf2ew" path="res://entities/enemies/enemy3d.gd" id="1_rf56o"]
 [ext_resource type="Script" uid="uid://edbvsbdtvgtj" path="res://common/move_mode.gd" id="2_mvunv"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="3_an7a5"]
 [ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_mvunv"]
@@ -703,11 +703,10 @@ stream_2/stream = ExtResource("51_oe4m7")
 [sub_resource type="Resource" id="Resource_acl"]
 script = ExtResource("acl_script")
 
-[node name="Shroomoid" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "item_holder", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
+[node name="Shroomoid" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
 script = ExtResource("1_rf56o")
 anim_tree = NodePath("AnimationTree")
-item_holder = NodePath("ItemHolder3D")
 culling_controller = NodePath("CullingController3D")
 type = &"Shroomoid"
 move_mode = SubResource("Resource_xl8du")

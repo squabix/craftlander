@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://yynt7u0d7ju4"]
 
-[ext_resource type="Script" uid="uid://ctj5arwshunkr" path="res://entities/enemies/crab/crab.gd" id="1_bjjfe"]
+[ext_resource type="Script" uid="uid://dwttvyxjgf2ew" path="res://entities/enemies/enemy3d.gd" id="1_bjjfe"]
 [ext_resource type="Resource" uid="uid://c1xgncwnfsnxg" path="res://entities/enemies/crab/crab_move_mode.tres" id="2_kdjvd"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="3_2e40p"]
 [ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_hjeps"]
@@ -505,6 +505,7 @@ script = ExtResource("1_bjjfe")
 anim_tree = NodePath("AnimationTree")
 culling_controller = NodePath("CullingController3D")
 attack_ray = NodePath("AttackRay")
+locomotion_blend_parameter = &"parameters/MoveBlendSpace/blend_position"
 type = &"Crab"
 move_mode = ExtResource("2_kdjvd")
 horizontal_rotation_target = NodePath(".")
