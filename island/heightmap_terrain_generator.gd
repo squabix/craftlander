@@ -129,19 +129,9 @@ func align_node_to_normal(node: Node3D, px: int, py: int, conformity := 1.0) -> 
 	var target_normal := get_pixel_normal(px, py).normalized()
 	var current_basis := node.global_transform.basis
 
-	# Calculate a new right (X) and forward (Z) vector based on the new normal (Y)
-	var current_forward := -current_basis.z.normalized()
-
-	var target_right := current_forward.cross(target_normal).normalized()
-	var target_forward := target_normal.cross(target_right).normalized()
-
-	# Create the fully aligned target basis
-	var target_basis := Basis(target_right, target_normal, -target_forward)
-
-	# Smoothly blend between the completely upright orientation and aligned orientation
-	if conformity < 1.0:
-		var upright_basis := Basis.from_euler(Vector3(0, current_basis.get_euler().y, 0))
-		target_basis = upright_basis.slerp(target_basis, conformity) # Slerp between upright and fully aligned
+	# Blend between the completely upright orientation and the normal-aligned orientation
+	var upright_basis := Basis.from_euler(Vector3(0, current_basis.get_euler().y, 0))
+	var target_basis := Util.align_basis_to_normal(upright_basis, target_normal, conformity)
 
 	# Apply the new basis back to the node, preserving its scale
 	node.global_transform.basis = target_basis.orthonormalized().scaled(current_basis.get_scale())

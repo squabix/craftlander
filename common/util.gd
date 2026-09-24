@@ -498,6 +498,16 @@ static func reset_local_transform_3d(node: Node3D) -> void:
 	node.scale = Vector3.ONE
 
 
+static func align_basis_to_normal(basis: Basis, normal: Vector3, conformity := 1.0) -> Basis:
+	var forward := -basis.z
+	var right := forward.cross(normal).normalized()
+	if right.length_squared() < 0.0001:
+		return basis
+	var aligned_forward := normal.cross(right).normalized()
+	var aligned_basis := Basis(right, normal, -aligned_forward)
+	return basis.slerp(aligned_basis, conformity)
+
+
 static func distance_sort_3d(nodes: Array, position: Vector3) -> Array[Node3D]:
 	if nodes.is_empty():
 		return [null]

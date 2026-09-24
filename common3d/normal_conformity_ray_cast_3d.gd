@@ -39,12 +39,7 @@ func _get_aligned_basis(base_basis: Basis, world_normal: Vector3) -> Basis:
 	# node's parent, so it needs to be brought into that local frame first.
 	var local_normal := (global_transform.basis.inverse() * world_normal).normalized()
 
-	var forward := -base_basis.z
-	var right := forward.cross(local_normal).normalized()
-	var aligned_forward := local_normal.cross(right).normalized()
-	var aligned_basis := Basis(right, local_normal, -aligned_forward)
-
-	return base_basis.slerp(aligned_basis, conformity)
+	return Util.align_basis_to_normal(base_basis, local_normal, conformity)
 
 
 func _apply_targets(delta_basis: Basis) -> void:
