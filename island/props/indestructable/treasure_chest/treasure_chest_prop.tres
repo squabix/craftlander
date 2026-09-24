@@ -6,6 +6,7 @@
 [resource]
 script = ExtResource("1_je4mc")
 scene = ExtResource("1_jeb6v")
-radius = 2.0
+radius = 18.0
 min_height = 3.0
+placement = 1
 metadata/_custom_type_script = "uid://csprfavexgrle"
