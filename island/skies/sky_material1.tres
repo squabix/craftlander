@@ -54,3 +54,7 @@ shader_parameter/night_noise_02 = SubResource("NoiseTexture2D_og1j7")
 shader_parameter/sun_scale = 0.05
 shader_parameter/sun_strength = 15.0
 shader_parameter/sun_color = Color(1, 0.85, 0.65, 1)
+shader_parameter/moon_strength = 0.0
+shader_parameter/moon_direction = Vector3(0.35, 0.45, -0.82)
+shader_parameter/moon_scale = 0.25
+shader_parameter/moon_color = Color(1, 0.1, 0.06, 1)

@@ -34,6 +34,12 @@ uniform float sun_scale = 0.05;
 uniform float sun_strength = 15.0;
 uniform vec4 sun_color : source_color = vec4(1.0,0.9,0.0,1.0);
 
+group_uniforms Moon;
+uniform float moon_strength = 0.0;
+uniform vec3 moon_direction = vec3(0.35, 0.45, -0.82);
+uniform float moon_scale = 0.05;
+uniform vec4 moon_color : source_color = vec4(1.0);
+
 float plane_intersection(vec3 origin, vec3 normal, vec3 ray_start, vec3 ray_dir) {
 	return dot(origin - ray_start, normal) / dot(ray_dir, normal);
 }
@@ -103,6 +109,14 @@ void sky() {
 	sky = mix(sky, mix(sky_color * 0.5, horizon_color, EYEDIR.y + 1.0).rgb, clamp(pow(1.0 - EYEDIR.y, 2.0), 0.0, 1.0));
 	if(use_directional_light) {
 		sky += sun * clamp(pow(EYEDIR.y + 1.0, 16.0),0.0,1.0);
+	}
+
+	if (moon_strength > 0.0) {
+		float moon_closeness = clamp(1.0 - distance(EYEDIR, normalize(moon_direction)), 0.0, 1.0);
+		float moon_disc = smoothstep(1.0 - moon_scale, 1.0 - moon_scale * 0.5, moon_closeness);
+		float moon_glow = pow(moon_closeness, 8.0) * 0.6;
+		float moon_mask = (1.0 - cloud_value * 0.85) * clamp(EYEDIR.y * 6.0 + 1.0, 0.0, 1.0);
+		sky += moon_color.rgb * moon_strength * max(moon_disc, moon_glow) * moon_mask;
 	}
 
 	COLOR = sky;
