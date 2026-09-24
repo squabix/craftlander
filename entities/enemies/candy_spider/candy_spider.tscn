@@ -47,6 +47,7 @@
 [ext_resource type="Material" uid="uid://m5807bchpbmp" path="res://assets/materials/glowing_eye.tres" id="44_upixq"]
 [ext_resource type="Script" uid="uid://cke8g2exxgx0y" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 [ext_resource type="Script" uid="uid://h3nqpcog77iq" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="101_normconf"]
+[ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
 script = ExtResource("3_d2kbg")
@@ -446,6 +447,9 @@ stream_0/stream = ExtResource("39_7wmfw")
 stream_1/stream = ExtResource("40_yk3i6")
 stream_2/stream = ExtResource("41_roflp")
 
+[sub_resource type="Resource" id="Resource_acl"]
+script = ExtResource("acl_script")
+
 [node name="CandySpider" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "culling_controller", "attack_ray", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
 script = ExtResource("1_hww71")
@@ -534,7 +538,8 @@ script = ExtResource("11_757vc")
 radius = 15.0
 lose_distance = 23.0
 target_collision_mask = 16
-group_whitelist = Array[StringName]([&"player"])
+target_groups = Array[StringName]([&"player"])
+target_acl = SubResource("Resource_acl")
 ray_collision_mask = 21
 
 [node name="StartChaseTrigger" type="Node" parent="Sight3D" unique_id=1196415362 node_paths=PackedStringArray("state_machine")]

@@ -52,6 +52,7 @@
 [ext_resource type="AudioStream" uid="uid://c4438fvpcmcld" path="res://assets/sound/rootling-12.mp3" id="51_oe4m7"]
 [ext_resource type="Resource" uid="uid://vulwxanblunx" path="res://items/tools/copper/copper_axe/copper_axe_item.tres" id="52_axe"]
 [ext_resource type="Script" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="53_normconf"]
+[ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
 
 [sub_resource type="Resource" id="Resource_xl8du"]
 script = ExtResource("2_mvunv")
@@ -759,6 +760,9 @@ shader_parameter/rim_power = 3.0
 shader_parameter/rim_color = Color(1, 1, 1, 1)
 shader_parameter/refraction_strength = 0.05
 
+[sub_resource type="Resource" id="Resource_acl"]
+script = ExtResource("acl_script")
+
 [node name="Cactoid" type="CharacterBody3D" unique_id=718268970 node_paths=PackedStringArray("anim_tree", "item_holder", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
 script = ExtResource("1_rf56o")
@@ -847,7 +851,8 @@ script = ExtResource("11_07fqs")
 radius = 15.0
 lose_distance = 23.0
 target_collision_mask = 16
-group_whitelist = Array[StringName]([&"player"])
+target_groups = Array[StringName]([&"player"])
+target_acl = SubResource("Resource_acl")
 ray_collision_mask = 21
 
 [node name="StartChaseTrigger" type="Node" parent="Sight3D" unique_id=1191319825 node_paths=PackedStringArray("state_machine")]

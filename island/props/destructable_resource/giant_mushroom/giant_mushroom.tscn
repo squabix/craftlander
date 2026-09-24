@@ -29,6 +29,7 @@
 [ext_resource type="Resource" path="res://items/food/mushroom/mushroom_item.tres" id="25_mushroom"]
 [ext_resource type="PackedScene" uid="uid://b42ejh4s3ni40" path="res://island/props/destructable_resource/destroy_shake_trigger.tscn" id="99_destroyshk"]
 [ext_resource type="PackedScene" uid="uid://p8wwjit2trpc" path="res://island/props/destructable_resource/hurt_shake_trigger.tscn" id="99_hurtshk"]
+[ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_r4p3j"]
 height = 10.25
@@ -191,6 +192,9 @@ script = ExtResource("15_vwjnp")
 item = ExtResource("25_mushroom")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
+[sub_resource type="Resource" id="Resource_acl"]
+script = ExtResource("acl_script")
+
 [node name="GiantMushroom" type="Node3D" unique_id=1544571203 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
 script = ExtResource("1_xeyix")
 max_hp = 6
@@ -271,7 +275,8 @@ collision_layer = 8
 monitoring = false
 script = ExtResource("9_0sf1c")
 health = NodePath("../../Health")
-type_whitelist = Array[StringName]([&"axe"])
+type_list = Array[StringName]([&"axe"])
+type_acl = SubResource("Resource_acl")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="HurtboxCollision" type="CollisionShape3D" parent="Trunk/Hurtbox3D" unique_id=29216433]

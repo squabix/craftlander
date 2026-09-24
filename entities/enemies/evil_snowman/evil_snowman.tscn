@@ -52,6 +52,7 @@
 [ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="50_wwywl"]
 [ext_resource type="Script" uid="uid://cke8g2exxgx0y" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 [ext_resource type="Script" uid="uid://h3nqpcog77iq" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="101_normconf"]
+[ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
 script = ExtResource("3_j8ygh")
@@ -444,6 +445,9 @@ shader_parameter/rim_power = 3.0
 shader_parameter/rim_color = Color(0, 0, 0, 1)
 shader_parameter/refraction_strength = 0.05
 
+[sub_resource type="Resource" id="Resource_acl"]
+script = ExtResource("acl_script")
+
 [node name="EvilSnowman" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
 script = ExtResource("1_mjqu2")
@@ -531,7 +535,8 @@ script = ExtResource("11_qikt0")
 radius = 15.0
 lose_distance = 23.0
 target_collision_mask = 16
-group_whitelist = Array[StringName]([&"player"])
+target_groups = Array[StringName]([&"player"])
+target_acl = SubResource("Resource_acl")
 ray_collision_mask = 21
 
 [node name="StartChaseTrigger" type="Node" parent="Sight3D" unique_id=1196415362 node_paths=PackedStringArray("state_machine")]

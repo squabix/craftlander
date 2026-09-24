@@ -7,7 +7,8 @@ signal was_dealt_damage(damage: Damage)
 @export var health: Health
 @export var inactive := false
 @export var damage_multiplier := 1.0
-@export var type_whitelist: Array[StringName] = []
+@export var type_list: Array[StringName] = []
+@export var type_acl: ACL
 @export var free_parent_on_hurt := false
 
 @export_group("Damage Override")
@@ -30,6 +31,7 @@ var total_damage_taken := 0.0
 
 
 func _ready() -> void:
+	type_acl = ACL.resolve(type_acl, type_list)
 	_set_up_auto_hurt()
 
 
@@ -42,8 +44,8 @@ func get_hurt_direction_from(from_position: Vector3) -> Vector3:
 	return from_position.direction_to(global_position + knockback_center_offset)
 
 
-func is_type_whitelisted(type: StringName) -> bool:
-	return type_whitelist.is_empty() or type in type_whitelist
+func accepts_type(type: StringName) -> bool:
+	return type_acl.passes(type)
 
 
 func scale_damage(base_amount: float) -> float:
@@ -60,7 +62,7 @@ func hurt(damage: Damage, direction: Vector3 = Vector3.ZERO) -> float:
 	# Confirm damage is valid
 	if damage == null:
 		return 0.0
-	if not is_type_whitelisted(damage.type):
+	if not accepts_type(damage.type):
 		return 0.0
 
 	var dp := scale_damage(damage.sample())

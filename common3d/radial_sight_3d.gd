@@ -8,7 +8,8 @@ signal lost_target
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var lose_distance := 40.0
 @export var can_lose_target := true
 @export_flags_3d_physics var target_collision_mask := 1
-@export var group_whitelist: Array[StringName] = []
+@export var target_groups: Array[StringName] = []
+@export var target_acl: ACL
 
 @export_group("Ray Casting", "ray")
 @export var ray_enabled := true
@@ -28,6 +29,7 @@ var target_position: Vector3:
 
 
 func _ready() -> void:
+	target_acl = ACL.resolve(target_acl, target_groups)
 	target_position = global_position
 	add_area()
 	add_collision()
@@ -71,10 +73,7 @@ func set_target(to: Node3D) -> void:
 func is_targetable(node: Node3D) -> bool:
 	if not is_instance_valid(node):
 		return false
-	for group in group_whitelist:
-		if node.is_in_group(group):
-			return true
-	return false
+	return target_acl.passes_groups(node)
 
 
 func get_targetable_nodes() -> Array[Node3D]:

@@ -9,7 +9,8 @@ enum Mode { ENTERING, INSIDE, EXTERNAL }
 @export var current_mode: Mode
 @export var one_shot := false
 @export var can_hit_source := false
-@export var restrict_to_group: StringName = &""
+@export var target_groups: Array[StringName]
+@export var target_acl: ACL
 @export var enabled := true
 @export var auto_enable_wait_time: float
 
@@ -17,6 +18,7 @@ var hit_nodes: Array[Node]
 
 
 func _ready() -> void:
+	target_acl = ACL.resolve(target_acl, target_groups)
 	area_entered.connect(_hit_enter)
 	if auto_enable_wait_time > 0.0:
 		enabled = false
@@ -70,8 +72,8 @@ func hit(area: Area3D) -> bool:
 	if not (area is Hurtbox3D):
 		return false
 
-	# BAIL if this hitbox is restricted to a target group and the hurtbox's owner isn't in it
-	if not restrict_to_group.is_empty() and not area.get_parent().is_in_group(restrict_to_group):
+	# BAIL if the hurtbox's owner is not an allowed target
+	if not target_acl.passes_groups(area.get_parent()):
 		return false
 
 	# BAIL if area belongs to this hitbox's own damage source (no friendly/self fire)

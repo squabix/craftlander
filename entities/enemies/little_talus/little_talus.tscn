@@ -47,6 +47,7 @@
 [ext_resource type="Script" uid="uid://bu5gejc4tee2w" path="res://entities/npc_states/talus_throwing_state.gd" id="58_talusthrow"]
 [ext_resource type="Script" uid="uid://b6yrmkabhfa82" path="res://entities/npc_states/searching_state.gd" id="59_searching"]
 [ext_resource type="Script" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="60_normconf"]
+[ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
 script = ExtResource("3_vpv56")
@@ -531,6 +532,9 @@ stream_3/stream = ExtResource("44_yfmoj")
 stream_4/stream = ExtResource("45_niyif")
 stream_5/stream = ExtResource("46_juh4j")
 
+[sub_resource type="Resource" id="Resource_acl"]
+script = ExtResource("acl_script")
+
 [node name="LittleTalus" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "anim_player", "health", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
 script = ExtResource("1_so7wi")
@@ -621,7 +625,8 @@ script = ExtResource("11_rqsx0")
 radius = 15.0
 lose_distance = 20.0
 target_collision_mask = 16
-group_whitelist = Array[StringName]([&"player"])
+target_groups = Array[StringName]([&"player"])
+target_acl = SubResource("Resource_acl")
 ray_collision_mask = 21
 
 [node name="StartChaseTrigger" type="Node" parent="Sight3D" unique_id=1196415362 node_paths=PackedStringArray("state_machine")]

@@ -22,6 +22,7 @@
 [ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/collision_barrier_3d.gd" id="19_tallblk"]
 [ext_resource type="PackedScene" path="res://island/props/destructable_resource/destroy_shake_trigger.tscn" id="99_destroyshk"]
 [ext_resource type="PackedScene" path="res://island/props/destructable_resource/hurt_shake_trigger.tscn" id="99_hurtshk"]
+[ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fq6f2"]
 points = PackedVector3Array(-1.179174, -0.11186457, -1.3860993, -0.73430926, -0.60198766, -0.7722725, -1.0437803, -0.6014435, -0.621044, -1.3925592, -0.16628236, -0.686308, -1.4540167, 0.20176345, -0.9965278, -1.0322375, 0.23223746, -1.3380858, 0.47206628, 0.708212, -1.2216455, 1.0623074, -0.22976983, -1.288347, 0.82802033, -0.6587636, -1.1503439, -1.0802804, -0.719893, 1.0048063, -1.2790033, -0.34041938, 1.1893857, -1.478662, 0.632934, 0.41311765, -1.0272461, 0.92805994, -0.6638825, -0.27072668, 0.9554503, -0.95397675, 0.49234414, 1.0824251, -0.24239767, 1.3081372, 0.66794276, -0.7573222, 1.7083907, -0.13145494, -0.7837728, 1.1016152, -0.62194085, -0.88928777, 0.9556148, -0.7402089, 0.8524277, -0.4956547, -0.76270163, 1.5211685, -1.1021181, -0.41678572, 1.4331913, -1.3092641, 0.018919587, 1.1784604, -1.093695, -0.09626478, 1.551069, -0.8531686, 0.59030664, 1.0850208, -0.6397833, 1.0904064, 0.018370867, 0.43057466, 0.81668484, 0.626735, 0.82396483, 0.6663102, 0.6822238, 1.5945227, 0.14371783, 0.9726057, 1.2198505, 0.6889843, -0.4913785, 1.0972476, -0.031144798, 1.4472792, 0.45802772, 0.44990873, 1.4257162, 0.4614594, 0.62186897, 1.0496573, 1.1839745, 0.3051573, 1.1057212)
@@ -71,6 +72,9 @@ _data = {
 &"hurt": SubResource("Animation_ir3ee")
 }
 
+[sub_resource type="Resource" id="Resource_acl"]
+script = ExtResource("acl_script")
+
 [node name="Stone" type="Node3D" unique_id=51772479 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
 script = ExtResource("1_a54gr")
 min_hp = 6
@@ -105,7 +109,8 @@ collision_mask = 0
 monitoring = false
 script = ExtResource("2_sq77v")
 health = NodePath("../Health")
-type_whitelist = Array[StringName]([&"pickaxe"])
+type_list = Array[StringName]([&"pickaxe"])
+type_acl = SubResource("Resource_acl")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1342616063]

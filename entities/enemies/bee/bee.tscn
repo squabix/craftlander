@@ -25,6 +25,7 @@
 [ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="20_rq2ym"]
 [ext_resource type="Script" uid="uid://dd8qskwv1nlqx" path="res://common3d/damage_system/hit_ray3d.gd" id="21_atkray"]
 [ext_resource type="Resource" path="res://entities/enemies/bee/bee_damage.tres" id="22_atkdmg"]
+[ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
 
 [sub_resource type="GDScript" id="GDScript_exvl0"]
 script/source = "extends EntityController3D
@@ -289,6 +290,9 @@ random_pitch = 1.122462
 streams_count = 1
 stream_0/stream = ExtResource("17_wnfpe")
 
+[sub_resource type="Resource" id="Resource_acl"]
+script = ExtResource("acl_script")
+
 [node name="Bee" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("attack_ray", "form_nodes")]
 collision_mask = 17
 wall_min_slide_angle = 3.1415927
@@ -319,7 +323,8 @@ script = ExtResource("2_wnfpe")
 radius = 15.0
 lose_distance = 18.0
 target_collision_mask = 16
-group_whitelist = Array[StringName]([&"player"])
+target_groups = Array[StringName]([&"player"])
+target_acl = SubResource("Resource_acl")
 ray_collision_mask = 21
 
 [node name="StartChaseTrigger" type="Node" parent="Sight3D" unique_id=1196415362 node_paths=PackedStringArray("state_machine")]

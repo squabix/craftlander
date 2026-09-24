@@ -42,6 +42,7 @@
 [ext_resource type="AudioStream" uid="uid://ck0q8lhyrv4xy" path="res://assets/sound/rootling-10.mp3" id="48_fv4t6"]
 [ext_resource type="AudioStream" uid="uid://chvu761wd8xc2" path="res://assets/sound/rootling-11.mp3" id="49_xyq4d"]
 [ext_resource type="AudioStream" uid="uid://c4438fvpcmcld" path="res://assets/sound/rootling-12.mp3" id="50_64wk0"]
+[ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
 
 [sub_resource type="Resource" id="Resource_gcq1i"]
 script = ExtResource("2_o84ao")
@@ -591,6 +592,9 @@ stream_0/stream = ExtResource("48_fv4t6")
 stream_1/stream = ExtResource("49_xyq4d")
 stream_2/stream = ExtResource("50_64wk0")
 
+[sub_resource type="Resource" id="Resource_acl"]
+script = ExtResource("acl_script")
+
 [node name="GhostRootling" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "item_holder", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_layer = 17
 collision_mask = 80
@@ -673,7 +677,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("11_jiypu")
 can_lose_target = false
 target_collision_mask = 16
-group_whitelist = Array[StringName]([&"player"])
+target_groups = Array[StringName]([&"player"])
+target_acl = SubResource("Resource_acl")
 ray_enabled = false
 
 [node name="StartChaseTrigger" type="Node" parent="Sight3D" unique_id=1196415362 node_paths=PackedStringArray("state_machine")]
