@@ -72,6 +72,15 @@ func reset_to_day_start() -> void:
 	_sync()
 
 
+func jump_to_phase(degrees: float) -> void:
+	phase_degrees = degrees
+	_was_night = is_currently_night()
+	if is_instance_valid(sun):
+		_update_sun_direction()
+	apply_palette()
+	_sync()
+
+
 func is_currently_night() -> bool:
 	return phase_degrees >= HALF_CYCLE_DEGREES
 
