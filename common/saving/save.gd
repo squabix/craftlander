@@ -57,6 +57,13 @@ func is_tagged(tag: StringName) -> bool:
 	return tag in tags
 
 
+func add_tag(tag: StringName) -> bool:
+	if tag in tags:
+		return false
+	tags.append(tag)
+	return true
+
+
 func get_node_saves(scene_root: Node, mode: NodeSave.Mode) -> Array[NodeSave]:
 	if not is_instance_valid(scene_root):
 		return []
