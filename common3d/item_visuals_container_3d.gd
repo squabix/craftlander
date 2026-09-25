@@ -1,3 +1,4 @@
+@tool
 class_name ItemVisualsContainer3D
 extends Node3D
 
@@ -14,6 +15,8 @@ const GHOSTED_ANIMATION_PROPERTIES: PackedStringArray = [
 @export var material_override: Material
 @export_flags_3d_render var layers := 1
 
+@export_tool_button("Display Item") var display_item_action := display_item
+
 var contained_visuals: Node3D
 
 
@@ -25,6 +28,9 @@ static func from_item(item: Item) -> ItemVisualsContainer3D:
 
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
+
 	# Update visuals when inventory selector changes if using inventory holder
 	if item_holder is InventoryHolder3D:
 		item_holder.selector.selected_instance_changed.connect(update_visuals.call_deferred.unbind(1))
@@ -34,7 +40,35 @@ func _ready() -> void:
 
 func reset_visuals() -> void:
 	for child in get_children():
+		# Scene-authored children belong to the user; only spawned visuals have no owner
+		if Engine.is_editor_hint() and child.owner != null:
+			continue
 		Util.safe_free(child)
+
+
+func display_item() -> void:
+	reset_visuals()
+	contained_visuals = null
+	
+	var item: Item = item_override
+	if item == null and item_holder != null and item_holder.initial_item_instance != null:
+		item = item_holder.initial_item_instance.item
+	if item == null or item.scene == null:
+		push_warning("%s has no item to display" % name)
+		return
+
+	var temp_instance := item.scene.instantiate()
+	var target_node := temp_instance.get_node_or_null(item.visuals_scene_path)
+	if target_node == null:
+		push_warning("%s: item scene has no '%s' node" % [name, item.visuals_scene_path])
+		temp_instance.free()
+		return
+	
+	contained_visuals = target_node.duplicate()
+	temp_instance.free()
+	add_child(contained_visuals)
+	contained_visuals.position = Vector3.ZERO
+	contained_visuals.scale *= visuals_scale_ratio
 
 
 func get_item() -> Item:
