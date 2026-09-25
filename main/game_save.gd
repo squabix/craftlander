@@ -1,6 +1,9 @@
 extends Save
 class_name GameSave
 
+const TAG_CAPTAIN_DEFEATED := &"captain_defeated"
+const TAG_GAME_BEATEN := &"game_beaten"
+
 @export var boat_level: int
 @export var base_seed := 0
 @export var difficulty: int = Difficulty.SETTINGS.default_value
@@ -11,6 +14,7 @@ class_name GameSave
 
 # Tutorial
 @export var tutorial_steps_completed: Dictionary[StringName, bool]
+
 
 func mark_current_level_as_generated() -> void:
 	if current_level_index in generated_levels:
