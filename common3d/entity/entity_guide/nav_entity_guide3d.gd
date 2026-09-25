@@ -12,7 +12,6 @@ const DIRECTION_MIN_LENGTH_SQ := 0.05
 @export_group("Off Navmesh Settings")
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var off_navmesh_threshold: float = 0.3
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var navmesh_ingress_depth: float = 0.4
-@export var ignore_y_distance := true
 
 @export_group("Move Directly", "move_directly")
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var move_directly_range := 3.6
@@ -26,6 +25,10 @@ var _is_nav_ready := false
 
 var has_direct_shot := false
 var is_outside_navmesh := false
+
+
+func _init() -> void:
+	ignore_y_distance = true
 
 
 func _ready() -> void:

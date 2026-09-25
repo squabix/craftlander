@@ -3,6 +3,7 @@ extends Node
 
 @export var entity: Entity3D
 @export_range(0.0, 1.0) var face_interpolation: float = 1.0
+@export var ignore_y_distance := false
 
 var target_position: Vector3
 
