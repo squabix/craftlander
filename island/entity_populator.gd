@@ -10,8 +10,13 @@ const MAX_CAMERA_DISTANCE_SQUARED := INF
 @export var disabled := false
 @export var gate_until_tutorial_step := &""
 
+@export_group("Ghost", "ghost")
+@export_range(0.0, 1.0, 0.01) var ghost_night_chance := 0.0
+
 var entities: Dictionary[IslandEntityResource, Array]
 var has_populated := false
+
+var _night_ghosts: Array[GhostTraits]
 
 
 static func report_death_on_exit(entity: Entity3D) -> void:
@@ -28,6 +33,23 @@ func _ready() -> void:
 	EventBus.subscribe(&"island_navigation_baked", populate)
 	if not gate_until_tutorial_step.is_empty():
 		EventBus.subscribe(&"tutorial_step_completed", _on_tutorial_step_completed)
+	set_process(false)
+
+
+func _process(_delta: float) -> void:
+	if DayNightCycle.is_night():
+		return
+	for i in range(_night_ghosts.size() - 1, -1, -1):
+		var traits := _night_ghosts[i]
+		if not is_instance_valid(traits):
+			_night_ghosts.remove_at(i)
+			continue
+		var culling := traits.culling_controller
+		if is_instance_valid(culling) and culling.is_on_screen():
+			continue
+		traits.entity.queue_free()
+		_night_ghosts.remove_at(i)
+	set_process(not _night_ghosts.is_empty())
 
 
 func clear_invalid_entities() -> void:
@@ -114,6 +136,7 @@ func add_entity(entity_resource: IslandEntityResource, spawnpoint := Vector3.ZER
 	entity.global_position = spawnpoint
 	entity.add_to_group(&"enemies")
 	report_death_on_exit(entity)
+	try_ghostify(entity)
 
 	if entity_resource in entities:
 		entities[entity_resource].append(entity)
@@ -129,6 +152,17 @@ func initialize_repopulate_timer() -> bool:
 	repopulate_timer.timeout.connect(populate.bind(false))
 	repopulate_timer.start()
 	return true
+
+
+func try_ghostify(entity: Entity3D) -> void:
+	if ghost_night_chance <= 0.0 or not DayNightCycle.is_night() or randf() >= ghost_night_chance:
+		return
+	var traits := Util.find_child_of_class(entity, &"GhostTraits") as GhostTraits
+	if not is_instance_valid(traits):
+		return
+	traits.ghostify()
+	_night_ghosts.append(traits)
+	set_process(true)
 
 
 func _on_tutorial_step_completed(step_id: StringName) -> void:

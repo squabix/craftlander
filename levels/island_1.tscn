@@ -2548,6 +2548,7 @@ ExtResource("41_48rcp"): 12,
 ExtResource("42_o5g2o"): 10
 })
 repopulate_timer = NodePath("../EntityRepopulateTimer")
+ghost_night_chance = 0.2
 
 [node name="EntityRepopulateTimer" type="Timer" parent="." unique_id=934557699]
 wait_time = 10.0
