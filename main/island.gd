@@ -67,7 +67,9 @@ func _ready() -> void:
 	
 	advance_step()
 	NodeSaver.load_all()
-	
+	if is_reloading:
+		place_unsaved_docks()
+
 	update_sky_setting(not is_reloading)
 	
 	advance_step()
@@ -151,3 +153,11 @@ func position_player_at_spawn() -> void:
 			player_boat_adder.boat.driver_seat.mount(player)
 		PlayerSpawnMode.ISLAND_CENTER:
 			player.global_position = Vector3(0.0, ISLAND_CENTER_SPAWN_HEIGHT, 0.0)
+
+
+func place_unsaved_docks() -> void:
+	for manager in docking_managers:
+		var saver: NodeSaver = NodeSaver.all.get(manager.dock)
+		if is_instance_valid(saver) and saver.loaded:
+			continue
+		manager.place_dock()
