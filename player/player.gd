@@ -23,6 +23,7 @@ const HURT_SHAKE_TRAUMA := 0.4
 @export_subgroup("Control")
 @export var respawn_button: Button
 @export var boat_menu: BoatMenu
+@export var pause_menu: PauseMenu
 @export var docking_hidden_interfaces: Array[Control] = []
 @export var boat_compass_tracker: BoatCompassTracker
 @export var enemy_compass_tracker: EnemyCompassTracker
@@ -30,6 +31,7 @@ const HURT_SHAKE_TRAUMA := 0.4
 @export var hotbar_interface: Control
 @export var player_bars: Control
 @export var compass: Control
+@export var viewmodel_container: Control
 
 @export_group("Inventory")
 @export var item_holder: InventoryHolder3D
@@ -48,6 +50,7 @@ const HURT_SHAKE_TRAUMA := 0.4
 @export var eat_player: AudioStreamPlayer
 
 var is_in_water := false
+var cutscene_locked := false
 
 
 func _ready() -> void:
@@ -86,7 +89,7 @@ func _process(_delta: float) -> void:
 	if is_in_water and not stamina.is_usable():
 		health.hurt(INF)
 
-	update_trailer_mode_visibility()
+	update_hud_visibility()
 
 
 func set_character_stream_player(to: CharacterAudioStreamPlayer3D) -> void:
@@ -111,14 +114,20 @@ func adjust_head() -> void:
 
 
 func drop_selected_item() -> void:
+	if cutscene_locked:
+		return
 	dropper.drop(item_holder.selector.selected_index)
 
 
 func use_item() -> void:
+	if cutscene_locked:
+		return
 	item_holder.use_item()
 
 
 func interact() -> void:
+	if cutscene_locked:
+		return
 	for interactor in interactors:
 		if interactor.interact() != null:
 			return
@@ -147,24 +156,47 @@ func respawn() -> void:
 	Main.root.load_game(Main.current_save_slot)
 
 
-func update_trailer_mode_visibility() -> void:
+func set_cutscene_locked(locked: bool) -> void:
+	cutscene_locked = locked
+	frozen = locked
+	
+	var controller := EntityController3D.get_controller(self) as PlayerController
+	if is_instance_valid(controller):
+		controller.input_locked = locked
+	else:
+		Util.node_error("%s cannot lock input without a controller", self)
+	
+	update_hud_visibility()
+	
+	if is_instance_valid(pause_menu):
+		if locked:
+			pause_menu.disable_update_pause()
+		else:
+			pause_menu.enable_update_pause()
+
+
+func update_hud_visibility() -> void:
 	var hide_for_trailer := Main.trailer_mode and not get_tree().paused
 	if is_instance_valid(hud):
-		hud.visible = not hide_for_trailer
+		hud.visible = not (hide_for_trailer or cutscene_locked)
 	if is_instance_valid(hotbar_interface):
-		hotbar_interface.visible = not hide_for_trailer
+		hotbar_interface.visible = not (hide_for_trailer or cutscene_locked)
 
 	# Bars and compass stay hidden in trailer mode even while paused
 	if is_instance_valid(player_bars):
-		player_bars.visible = not Main.trailer_mode
+		player_bars.visible = not (Main.trailer_mode or cutscene_locked)
 	if is_instance_valid(compass):
-		compass.visible = not Main.trailer_mode
+		compass.visible = not (Main.trailer_mode or cutscene_locked)
+	if is_instance_valid(viewmodel_container):
+		viewmodel_container.visible = not cutscene_locked
+	if is_instance_valid(item_holder):
+		item_holder.visible = not cutscene_locked
 
 	health.immortal = Main.trailer_mode
 
 
 func _on_pause_interface_updated_pause(to: bool) -> void:
-	update_trailer_mode_visibility()
+	update_hud_visibility()
 	if to == true:
 		return
 	await get_tree().process_frame

@@ -1021,7 +1021,7 @@ random_pitch = 1.122462
 streams_count = 1
 stream_0/stream = ExtResource("112_teerl")
 
-[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("movement_state_machine", "head", "camera", "camera_shake", "interactors", "vignette", "hurt_effect_trigger", "respawn_button", "boat_menu", "boat_compass_tracker", "enemy_compass_tracker", "hud", "hotbar_interface", "player_bars", "compass", "item_holder", "dropper", "health", "health_saver", "hunger", "hunger_saver", "stamina", "steps_player", "swim_player", "eat_player", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
+[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("movement_state_machine", "head", "camera", "camera_shake", "interactors", "vignette", "hurt_effect_trigger", "respawn_button", "boat_menu", "pause_menu", "boat_compass_tracker", "enemy_compass_tracker", "hud", "hotbar_interface", "player_bars", "compass", "viewmodel_container", "item_holder", "dropper", "health", "health_saver", "hunger", "hunger_saver", "stamina", "steps_player", "swim_player", "eat_player", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
 collision_layer = 17
 collision_mask = 132
 floor_constant_speed = true
@@ -1038,12 +1038,14 @@ vignette = NodePath("ScreenEffectContainer/Vignette")
 hurt_effect_trigger = NodePath("Health/SignalAnimationTrigger")
 respawn_button = NodePath("DeathScreen/OptionsContainer/RespawnButton")
 boat_menu = NodePath("BoatMenu")
+pause_menu = NodePath("PauseMenu")
 boat_compass_tracker = NodePath("HUD/BoatCompassTracker")
 enemy_compass_tracker = NodePath("HUD/EnemyCompassTracker")
 hud = NodePath("HUD")
 hotbar_interface = NodePath("HotbarInterface")
 player_bars = NodePath("HUD/BarContainer")
 compass = NodePath("HUD/Compass")
+viewmodel_container = NodePath("Head/SubViewportContainer")
 item_holder = NodePath("Head/Camera3D/ItemHolder")
 dropper = NodePath("Head/Camera3D/DropperRayCast/InventoryDropper3D")
 health = NodePath("Health")
