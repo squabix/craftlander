@@ -46,11 +46,15 @@ func physics_update(_delta: float) -> void:
 		Util.node_error("Chasing state of %s has no guide", root)
 		return
 
-	guide.face_target()
-	_aim_held_item()
-
 	var distance_to_target := guide.get_distance_to_target()
 	var in_goal_range := distance_to_target <= advance_goal_distance and sight.does_see_target()
+	
+	# Face target
+	if in_goal_range:
+		guide.face_true_target()
+	else:
+		guide.face_target()
+	_aim_held_item()
 
 	# Use item if in range (independent of movement, so retreating doesn't block attacking)
 	if in_goal_range:
