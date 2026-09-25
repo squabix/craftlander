@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="ACL" format=3 uid="uid://dv277xhyv1vav"]
+
+[ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="1_acl"]
+
+[resource]
+script = ExtResource("1_acl")
+list = [&"player"]
