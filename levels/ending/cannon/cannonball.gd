@@ -13,6 +13,8 @@ var _exploded := false
 
 static func clear_all() -> void:
 	for ball in all:
+		if not is_instance_valid(ball):
+			continue
 		ball.queue_free()
 
 
