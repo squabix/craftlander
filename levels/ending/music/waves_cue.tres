@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="MusicCue" format=3 uid="uid://qockxfcp84yf"]
+
+[ext_resource type="Script" uid="uid://bmw5fohlj3xt8" path="res://common/sound/music_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" uid="uid://blulf3b5sca27" path="res://assets/sound/music/music_ghost_waves_fight.mp3" id="2_stream"]
+
+[resource]
+script = ExtResource("1_cue")
+stream = ExtResource("2_stream")

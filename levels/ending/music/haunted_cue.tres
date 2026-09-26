@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="MusicCue" format=3]
+
+[ext_resource type="Script" uid="uid://bmw5fohlj3xt8" path="res://common/sound/music_cue.gd" id="1_cue"]
+[ext_resource type="AudioStream" path="res://assets/sound/music/music_haunted.mp3" id="2_stream"]
+
+[resource]
+script = ExtResource("1_cue")
+stream = ExtResource("2_stream")
