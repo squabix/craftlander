@@ -2,6 +2,7 @@ class_name TreasureChest
 extends Node3D
 
 signal opened
+signal locked
 
 @export var key_condition: InteractableItemCondition
 
@@ -22,6 +23,7 @@ func _ready() -> void:
 func play_locked() -> void:
 	_release_meshes()
 	anim_player.play(&"locked")
+	locked.emit()
 
 
 func open() -> void:
