@@ -8,10 +8,11 @@
 [ext_resource type="Script" uid="uid://dukhrkatonywt" path="res://common3d/entity/vehicle/entity_vehicle_seat3d.gd" id="8_5xlxr"]
 [ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="9_4mpps"]
 [ext_resource type="Script" uid="uid://dacuhxdpe6083" path="res://boat/boat_docking_state.gd" id="10_u7y0l"]
+[ext_resource type="PackedScene" uid="uid://bkpo6b688jo27" path="res://assets/models/boats/boat3.blend" id="11_3gr63"]
 [ext_resource type="Script" uid="uid://8bgokntpuh33" path="res://boat/boat_docked_state.gd" id="11_j07bl"]
+[ext_resource type="Material" uid="uid://b5c8c8msr1j84" path="res://assets/materials/ghost.tres" id="12_i8nx6"]
 [ext_resource type="Script" uid="uid://iyqixpr4un6s" path="res://common/spawner/spawner3d.gd" id="12_ytrio"]
 [ext_resource type="PackedScene" uid="uid://cmevksacmox4r" path="res://levels/ending/cannon/ghost_cannon.tscn" id="13_cannon"]
-[ext_resource type="PackedScene" uid="uid://lr6ppimygqbw" path="res://assets/models/boats/boat2.blend" id="15_i8nx6"]
 [ext_resource type="Material" uid="uid://dk2hwa4l1ovce" path="res://assets/materials/ghost_full.tres" id="16_jf1ee"]
 
 [sub_resource type="Resource" id="Resource_thr0k"]
@@ -55,7 +56,7 @@ frequency = 0.02
 noise = SubResource("FastNoiseLite_674mm")
 color_ramp = SubResource("Gradient_jf1ee")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hdqir"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jf1ee"]
 render_priority = 0
 shader = ExtResource("6_w6ehl")
 shader_parameter/double_sided = true
@@ -128,20 +129,18 @@ script = ExtResource("12_ytrio")
 metadata/_custom_type_script = "uid://iyqixpr4un6s"
 
 [node name="Cannon" parent="." unique_id=2056755056 instance=ExtResource("13_cannon")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.79999995, -0.20000005)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, -0.20000005)
 
-[node name="Visuals" parent="." unique_id=97311556 instance=ExtResource("15_i8nx6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.8)
+[node name="Visuals" parent="." unique_id=545632550 instance=ExtResource("11_3gr63")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 
-[node name="Cube" parent="Visuals" index="0" unique_id=1303688810]
-material_override = ExtResource("16_jf1ee")
+[node name="Cube" parent="Visuals" index="0" unique_id=330923318]
+material_override = ExtResource("12_i8nx6")
 
-[node name="Flag" parent="Visuals" index="4" unique_id=813397939]
-surface_material_override/0 = SubResource("ShaderMaterial_hdqir")
+[node name="Flag" parent="Visuals" index="1" unique_id=912980557]
+surface_material_override/0 = SubResource("ShaderMaterial_jf1ee")
 surface_material_override/1 = ExtResource("16_jf1ee")
 surface_material_override/2 = ExtResource("16_jf1ee")
-
-[node name="Flag_001" parent="Visuals" index="5" unique_id=205463908]
-surface_material_override/0 = ExtResource("16_jf1ee")
+surface_material_override/3 = ExtResource("16_jf1ee")
 
 [editable path="Visuals"]
