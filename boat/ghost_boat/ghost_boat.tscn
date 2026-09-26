@@ -133,15 +133,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.79999995, -0.20000005)
 [node name="Visuals" parent="." unique_id=97311556 instance=ExtResource("15_i8nx6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.8)
 
-[node name="Cube" parent="Visuals" index="0" unique_id=1505386918]
+[node name="Cube" parent="Visuals" index="0" unique_id=1303688810]
 material_override = ExtResource("16_jf1ee")
 
-[node name="Flag" parent="Visuals" index="4" unique_id=1965457688]
+[node name="Flag" parent="Visuals" index="4" unique_id=813397939]
 surface_material_override/0 = SubResource("ShaderMaterial_hdqir")
 surface_material_override/1 = ExtResource("16_jf1ee")
 surface_material_override/2 = ExtResource("16_jf1ee")
 
-[node name="Flag_001" parent="Visuals" index="5" unique_id=1034619832]
+[node name="Flag_001" parent="Visuals" index="5" unique_id=205463908]
 surface_material_override/0 = ExtResource("16_jf1ee")
 
 [editable path="Visuals"]

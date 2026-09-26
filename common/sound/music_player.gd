@@ -7,7 +7,7 @@ const PLAYER_COUNT := 2
 @export var bus := &"Music"
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var default_fade_out := 1.5
 
-var current_cue: MusicCue
+var current_cue: MusicCue	
 
 var _players: Array[AudioStreamPlayer] = []
 var _active_index := 0
