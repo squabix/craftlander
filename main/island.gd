@@ -1,3 +1,4 @@
+class_name Island
 extends Node3D
 
 const ISLAND_CENTER_SPAWN_HEIGHT := 55.0
