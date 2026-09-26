@@ -2,19 +2,32 @@
 
 [ext_resource type="Script" uid="uid://cpjmityab1msq" path="res://island/props/indestructable/treasure_chest/treasure_chest.gd" id="1_e3py2"]
 [ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="2_k1bhr"]
-[ext_resource type="Resource" uid="uid://b10txfbikrljt" path="res://items/weapons/copper_sword/copper_sword_item.tres" id="2_mvsxc"]
+[ext_resource type="Resource" path="res://items/misc/captains_key/captains_key_item.tres" id="2_mvsxc"]
 [ext_resource type="PackedScene" uid="uid://bidtr8j4ohtih" path="res://assets/models/props/chest.blend" id="3_061qj"]
 [ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="4_ccn32"]
 [ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="5_5hnl4"]
-[ext_resource type="Material" uid="uid://bd2wsdvcuat4q" path="res://assets/materials/diamond.tres" id="5_cfjjf"]
 [ext_resource type="Material" uid="uid://ct3rueaspkpix" path="res://assets/materials/darkness.tres" id="6_hmq6h"]
 [ext_resource type="Material" uid="uid://c33644pxuf2ds" path="res://assets/materials/gold.tres" id="7_u5f0g"]
+[ext_resource type="Material" uid="uid://cjbj2g8c763yy" path="res://assets/materials/bronze.tres" id="8_4wudc"]
 [ext_resource type="PackedScene" uid="uid://dvdqw51x633ni" path="res://assets/models/items/materials/ingot1.blend" id="8_c835m"]
 [ext_resource type="PackedScene" uid="uid://bdqokoejywm4w" path="res://assets/models/items/materials/gem.blend" id="9_e3py2"]
 [ext_resource type="Material" uid="uid://cs0o6t0l4rg23" path="res://assets/materials/ruby.tres" id="10_mvsxc"]
 [ext_resource type="Material" uid="uid://dfpc2asaqlvwr" path="res://assets/materials/emerald.tres" id="11_5hnl4"]
 [ext_resource type="Script" uid="uid://favgu1tbe1tq" path="res://common3d/interactions/interactable3d.gd" id="13_mvsxc"]
 [ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/collision_barrier_3d.gd" id="14_tallblk"]
+[ext_resource type="Script" uid="uid://bl24g1nnncs0d" path="res://island/props/indestructable/treasure_chest/chest_cursed_state.gd" id="chest_cursed_gd"]
+[ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="chest_machine_gd"]
+[ext_resource type="Script" uid="uid://bjsswyax35y3b" path="res://island/props/indestructable/treasure_chest/chest_opened_state.gd" id="chest_opened_gd"]
+[ext_resource type="Script" uid="uid://biyldy0ukp34p" path="res://island/props/indestructable/treasure_chest/chest_sealed_state.gd" id="chest_sealed_gd"]
+[ext_resource type="Script" uid="uid://iyqixpr4un6s" path="res://common/spawner/spawner3d.gd" id="chest_spawner_gd"]
+[ext_resource type="Script" uid="uid://cahhppx2qjcc5" path="res://island/props/indestructable/treasure_chest/chest_unlockable_state.gd" id="chest_unlockable_gd"]
+[ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="item_gd"]
+[ext_resource type="Script" uid="uid://bhkngqnpf30n8" path="res://common3d/interactions/interactable_item_condition.gd" id="key_condition_gd"]
+
+[sub_resource type="Resource" id="Resource_keycondition"]
+script = ExtResource("key_condition_gd")
+items = Array[ExtResource("item_gd")]([ExtResource("2_mvsxc")])
+remove_item_on_fulfilled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1k277"]
 resource_name = "Material.001"
@@ -192,11 +205,13 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_5hnl4"]
 size = Vector3(0.49543458, 0.35170972, 0.2784668)
 
-[node name="TreasureChest" type="Node3D" unique_id=51772479 node_paths=PackedStringArray("interactable", "anim_player")]
+[node name="TreasureChest" type="Node3D" unique_id=51772479 node_paths=PackedStringArray("interactable", "anim_player", "state_machine", "captain_spawner")]
 script = ExtResource("1_e3py2")
-unlock_item = ExtResource("2_mvsxc")
+key_condition = SubResource("Resource_keycondition")
 interactable = NodePath("Interactable3D")
 anim_player = NodePath("AnimationPlayer")
+state_machine = NodePath("StateMachine")
+captain_spawner = NodePath("CaptainSpawner")
 
 [node name="NodeSaver" type="Node" parent="." unique_id=1812045563]
 script = ExtResource("2_k1bhr")
@@ -212,13 +227,13 @@ transform = Transform3D(0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0, 0, 0)
 
 [node name="Box" parent="Visuals" index="0" unique_id=1591556192]
 surface_material_override/0 = ExtResource("5_5hnl4")
-surface_material_override/1 = ExtResource("5_cfjjf")
+surface_material_override/1 = ExtResource("8_4wudc")
 
 [node name="Lid" parent="Visuals" index="1" unique_id=307371624]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 1, 1)
 surface_material_override/0 = ExtResource("5_5hnl4")
-surface_material_override/1 = ExtResource("5_cfjjf")
-surface_material_override/2 = ExtResource("5_cfjjf")
+surface_material_override/1 = ExtResource("8_4wudc")
+surface_material_override/2 = ExtResource("7_u5f0g")
 surface_material_override/3 = ExtResource("6_hmq6h")
 
 [node name="TreasurePlane" parent="Visuals" index="2" unique_id=239062115]
@@ -327,6 +342,26 @@ transform = Transform3D(1, 0, 0, 0, -0.10007593, 0.9949798, 0, -0.9949798, -0.10
 light_color = Color(1, 0.9113333, 0.72, 1)
 light_energy = 0.0
 area_size = Vector2(1.3, 0.8)
+
+[node name="StateMachine" type="Node" parent="." unique_id=2104851060 node_paths=PackedStringArray("root")]
+script = ExtResource("chest_machine_gd")
+root = NodePath("..")
+
+[node name="Sealed" type="Node" parent="StateMachine" unique_id=532297136]
+script = ExtResource("chest_sealed_gd")
+
+[node name="Cursed" type="Node" parent="StateMachine" unique_id=1746131888]
+script = ExtResource("chest_cursed_gd")
+
+[node name="Unlockable" type="Node" parent="StateMachine" unique_id=149971550]
+script = ExtResource("chest_unlockable_gd")
+
+[node name="Opened" type="Node" parent="StateMachine" unique_id=10557550]
+script = ExtResource("chest_opened_gd")
+
+[node name="CaptainSpawner" type="Node3D" parent="." unique_id=1509071603]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -8)
+script = ExtResource("chest_spawner_gd")
 
 [editable path="Visuals"]
 [editable path="Visuals/TreasurePlane/ingot1"]
