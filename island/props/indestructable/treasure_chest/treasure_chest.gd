@@ -40,18 +40,14 @@ func _release_meshes() -> void:
 
 
 func _apply_saved_state() -> void:
-	var save := Main.loaded_save as GameSave
-	if save == null:
-		return
-	
-	if save.is_tagged(GameSave.TAG_GAME_BEATEN):
+	if GameSave.is_game_beaten():
 		state_machine.enter_state(&"Opened")
 		anim_player.play(&"open")
 		anim_player.advance(anim_player.current_animation_length)
 		interactable.disable()
 		return
 	
-	if save.is_tagged(GameSave.TAG_CAPTAIN_DEFEATED):
+	if GameSave.is_captain_defeated():
 		(state_machine.get_state(&"Unlockable") as ChestUnlockableState).key_required = false
 		state_machine.enter_state(&"Unlockable")
 
