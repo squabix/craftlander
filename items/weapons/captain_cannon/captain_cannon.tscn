@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c3ew6ki578v54"]
+
+[ext_resource type="Script" uid="uid://2ow28vm5clst" path="res://common/spawner/projectile_spawner3d.gd" id="1_spawner"]
+[ext_resource type="PackedScene" path="res://entities/projectiles/spectral_bolt/spectral_bolt.tscn" id="2_bolt"]
+[ext_resource type="PackedScene" uid="uid://d1hnre616kr65" path="res://assets/models/items/weapons/cannon1.blend" id="3_model"]
+[ext_resource type="Material" uid="uid://cjbj2g8c763yy" path="res://assets/materials/bronze.tres" id="4_qrvwk"]
+[ext_resource type="Material" uid="uid://ct3rueaspkpix" path="res://assets/materials/darkness.tres" id="5_djdq2"]
+
+[node name="CaptainCannon" type="Node3D" unique_id=1081770910]
+
+[node name="ProjectileSpawner" type="Node3D" parent="." unique_id=1445115089]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0.43, 0)
+script = ExtResource("1_spawner")
+projectile_scene = ExtResource("2_bolt")
+
+[node name="Visuals" parent="." unique_id=496025205 instance=ExtResource("3_model")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="Cylinder" parent="Visuals" index="0" unique_id=1887551729]
+surface_material_override/0 = ExtResource("4_qrvwk")
+surface_material_override/1 = ExtResource("5_djdq2")
+
+[editable path="Visuals"]

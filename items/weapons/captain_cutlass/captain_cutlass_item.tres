@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="HarvestingTool" format=3]
+
+[ext_resource type="Script" uid="uid://6x786nnhteca" path="res://items/tools/harvesting_tool.gd" id="1_script"]
+[ext_resource type="Resource" path="res://items/weapons/captain_cutlass/captain_cutlass_damage.tres" id="2_damage"]
+[ext_resource type="PackedScene" path="res://items/weapons/captain_cutlass/captain_cutlass.tscn" id="3_scene"]
+
+[resource]
+script = ExtResource("1_script")
+damage = ExtResource("2_damage")
+name = &"Captain's Cutlass"
+use_action_name = &"Attack"
+type = &"Weapon"
+scene = ExtResource("3_scene")
+cooldown_mode = 1
+default_cooldown_length = 0.3
+metadata/_custom_type_script = "uid://6x786nnhteca"

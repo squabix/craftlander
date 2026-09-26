@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ProjectileWeapon" format=3]
+
+[ext_resource type="Script" uid="uid://b1jj1b7rvurvy" path="res://items/weapons/projectile_weapon.gd" id="1_script"]
+[ext_resource type="Resource" path="res://items/weapons/captain_cannon/captain_cannon_damage.tres" id="2_damage"]
+[ext_resource type="PackedScene" path="res://items/weapons/captain_cannon/captain_cannon.tscn" id="3_scene"]
+
+[resource]
+script = ExtResource("1_script")
+damage = ExtResource("2_damage")
+name = &"Captain's Cannon"
+use_action_name = &"Fire"
+type = &"Weapon"
+scene = ExtResource("3_scene")
+metadata/_custom_type_script = "uid://b1jj1b7rvurvy"
