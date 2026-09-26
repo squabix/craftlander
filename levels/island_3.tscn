@@ -1024,12 +1024,13 @@ script = ExtResource("9_ro2lq")
 noise_textures = Array[Texture2D]([SubResource("NoiseTexture2D_xu5xl"), SubResource("NoiseTexture2D_6a1qf"), SubResource("NoiseTexture2D_1jqb7")])
 taper_gradient_texture = SubResource("GradientTexture2D_ekm7f")
 absolute_gradient_texture = ExtResource("10_2cx01")
+domain_warp_max_strength = 26.0
 domain_warp_mask_texture = SubResource("GradientTexture2D_vwc2c")
 ridged_noise_influence = 0.0
 mesh_instance = NodePath("MeshInstance3D")
 collision_shape = NodePath("StaticBody3D/CollisionShape3D")
-map_size = Vector3(300, 15, 300)
-map_resolution = Vector2i(500, 500)
+map_size = Vector3(150, 12, 150)
+map_resolution = Vector2i(260, 260)
 metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="IslandGenerator" unique_id=1778323968 groups=["navigation_mesh_source_group"]]
@@ -1050,8 +1051,8 @@ shape = SubResource("HeightMapShape3D_ioqp7")
 script = ExtResource("12_rl17t")
 island_generator = NodePath("../IslandGenerator")
 prop_quantities = Dictionary[ExtResource("13_babke"), int]({
-ExtResource("14_8y6y8"): 80,
-ExtResource("16_3exlf"): 50,
+ExtResource("14_8y6y8"): 10,
+ExtResource("16_3exlf"): 25,
 ExtResource("16_xnw05"): 1
 })
 populate_on_ready = false
