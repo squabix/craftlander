@@ -67,6 +67,7 @@
 [ext_resource type="Script" uid="uid://b27rf6w7cghg2" path="res://entities/enemies/ghosts/captain/states/captain_volley_state.gd" id="state_volley"]
 [ext_resource type="Script" uid="uid://cil2fha1xdwb5" path="res://entities/npc_states/wait_for_target_state.gd" id="state_wait"]
 [ext_resource type="Script" uid="uid://s03orp42ne5g" path="res://entities/enemies/ghosts/captain/line_player3d.gd" id="voice_script"]
+[ext_resource type="AudioStream" uid="uid://c3gu6wxuuw7i6" path="res://assets/sound/shockwave.mp3" id="snd_shockwave"]
 
 [sub_resource type="Resource" id="Resource_xl8du"]
 script = ExtResource("2_pyya0")
@@ -154,6 +155,11 @@ stream_0/stream = ExtResource("snd_swoosh")
 random_pitch = 1.1
 streams_count = 1
 stream_0/stream = ExtResource("snd_teleport")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_shockwave"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("snd_shockwave")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_cannon"]
 random_pitch = 1.1
@@ -741,6 +747,25 @@ bus = &"SFX"
 script = ExtResource("snd_trigger")
 spawner = NodePath("../CannonSoundSpawner")
 signal_name = &"cannon_fired"
+
+[node name="ShockwaveSpawner" type="Node3D" parent="." node_paths=PackedStringArray("templates")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("47_255rd")
+templates = [NodePath("Template")]
+
+[node name="Template" type="AudioStreamPlayer3D" parent="ShockwaveSpawner"]
+stream = SubResource("AudioStreamRandomizer_shockwave")
+bus = &"SFX"
+
+[node name="PhaseShockwaveTrigger" type="Node" parent="." node_paths=PackedStringArray("spawner")]
+script = ExtResource("snd_trigger")
+spawner = NodePath("../ShockwaveSpawner")
+signal_name = &"phase_changed"
+
+[node name="VanishShockwaveTrigger" type="Node" parent="." node_paths=PackedStringArray("spawner")]
+script = ExtResource("snd_trigger")
+spawner = NodePath("../ShockwaveSpawner")
+signal_name = &"vanished"
 
 [node name="AudioSpawner3D" type="Node3D" parent="." unique_id=1370682903 node_paths=PackedStringArray("templates")]
 script = ExtResource("47_255rd")
