@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://pdx4nb37dqj1"]
+
+[ext_resource type="Script" uid="uid://bv320ddrjxwrk" path="res://menus/credits.gd" id="1_credits"]
+
+[node name="Credits" type="Control" unique_id=509927763 node_paths=PackedStringArray("content")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_credits")
+content = NodePath("Content")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1985672255]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Content" type="VBoxContainer" parent="." unique_id=708825624]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 260.0
+offset_right = -260.0
+offset_bottom = 480.0
+grow_horizontal = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Title" type="Label" parent="Content" unique_id=1057846826]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "CRAFTLANDER"
+horizontal_alignment = 1
+
+[node name="Body" type="RichTextLabel" parent="Content" unique_id=1025180467]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.92, 0.92, 0.92, 1)
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+text = "[center][font_size=34][color=#f2c14e]MY STORY[/color][/font_size]
+I'm SQUABIX. At the time of release, I am a 17-year-old developer who started building CRAFTLANDER in November of 2025. My journey making games started in 2019 with the Godot Game Engine when I was 10 years old. I loved building worlds that could be experienced by anyone, and game development seemed like the ultimate creative outlet between designing and coding and drawing and 3D modeling. This project serves as a capstone to all of the 7 years of work I have put into game development so far. I learned a lot along the way. I am so proud of this project and I hope that you enjoy!
+
+
+[font_size=34][color=#f2c14e]CREDITS[/color][/font_size]
+[b]Design[/b]
+[color=#ffd166]SQUABIX[/color]
+
+[b]Programming[/b]
+[color=#ffd166]SQUABIX[/color]
+
+[b]3D Modeling[/b]
+[color=#ffd166]SQUABIX[/color]
+
+[b]2D Art[/b]
+[color=#ffd166]SQUABIX[/color]
+
+[b]Music[/b]
+[color=#ffd166]...[/color]
+
+[b]Sound effects[/b]
+[color=#ffd166]...[/color]
+
+
+[font_size=34][color=#f2c14e]BUILT WITH[/color][/font_size]
+Godot Engine. Copyright (c) 2014-present Godot Engine contributors. Copyright (c) 2007-2014 Juan Linietsky, Ariel Manzur. MIT license. godotengine.org
+
+GodotSteam. Copyright (c) 2015-present GP Garcia, Chris Ridenour and contributors. MIT license. godotsteam.com
+
+Controller Icons. Copyright (c) 2023 Ricardo Subtil. MIT license.[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="Thanks" type="Label" parent="Content" unique_id=349384617]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Thanks for playing"
+horizontal_alignment = 1
