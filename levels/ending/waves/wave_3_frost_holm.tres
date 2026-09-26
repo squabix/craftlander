@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="WaveSpawnerWave" format=3 uid="uid://b70i6rw8hst63"]
+
+[ext_resource type="Script" uid="uid://bprm4lolnfext" path="res://common/spawner/wave_spawner_wave.gd" id="1_wave"]
+[ext_resource type="PackedScene" uid="uid://blqm74wdjassn" path="res://entities/enemies/yeti/yeti.tscn" id="2_a"]
+[ext_resource type="PackedScene" uid="uid://dfmctlbidj2d0" path="res://entities/enemies/candy_spider/candy_spider.tscn" id="3_b"]
+[ext_resource type="PackedScene" uid="uid://pble5pwkpgmp" path="res://entities/enemies/evil_snowman/evil_snowman.tscn" id="4_c"]
+[ext_resource type="PackedScene" uid="uid://drvpvkfftged1" path="res://entities/enemies/little_ice_talus/little_ice_talus.tscn" id="5_d"]
+
+[resource]
+script = ExtResource("1_wave")
+name = &"Wave 3"
+pool = Dictionary[PackedScene, int]({
+ExtResource("2_a"): 6,
+ExtResource("3_b"): 6,
+ExtResource("4_c"): 6,
+ExtResource("5_d"): 6
+})
+spawner_distribution = 2
+pause_length_between_spawns = 0.8
+pause_length_begin = 8.0

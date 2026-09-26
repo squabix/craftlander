@@ -1,34 +1,33 @@
+class_name GhostWaveSpawner
 extends WaveSpawner3D
 
 @export var player: Player
-@export var ghost_docking_managers: Array[DockingManager]
-
-var started := false
+@export var melee_coordinator: GhostMeleeCoordinator
 
 
-func _ready() -> void:
-	EventBus.subscribe(&"treasure_chest_opened", start)
-
-
-func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("drop") and not started:
-		EventBus.trigger(&"treasure_chest_opened")
-
-
-func start(start_index := 0) -> void:
-	if started:
-		return
-	started = true
-	for manager in ghost_docking_managers:
-		manager.add_boat()
-		var boat := manager.boat as GhostBoat
-		disable_spawner(boat.spawner)
-		boat.docked.connect(enable_spawner.bind(boat.spawner), CONNECT_ONE_SHOT)
-
-	super(start_index)
+func arrive(manager: DockingManager) -> GhostBoat:
+	manager.add_boat()
+	var boat := manager.boat as GhostBoat
+	if not is_instance_valid(boat):
+		Util.node_error("%s cannot arrive without a ghost boat from %s", self, manager)
+		return null
+	disable_spawner(boat.spawner)
+	boat.docked.connect(enable_spawner.bind(boat.spawner), CONNECT_ONE_SHOT)
+	return boat
 
 
 func _initialize_instance(instance: Node3D) -> void:
 	super(instance)
+	var entity := instance as Entity3D
+	if is_instance_valid(entity):
+		var traits := Util.find_child_of_class(entity, &"GhostTraits") as GhostTraits
+		if is_instance_valid(traits):
+			traits.ghostify(melee_coordinator)
+			traits.play_spawn_in()
+		else:
+			Util.node_error("%s cannot ghostify %s without a GhostTraits node", self, entity)
+		entity.add_to_group(&"enemies")
+		EntityPopulator.report_death_on_exit(entity)
 	var sight := Util.find_child_of_class(instance, &"RadialSight3D") as RadialSight3D
-	sight.set_target(player)
+	if is_instance_valid(sight):
+		sight.set_target(player)

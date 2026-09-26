@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="WaveSpawnerWave" format=3 uid="uid://dvnvj22f0h3p7"]
+
+[ext_resource type="Script" uid="uid://bprm4lolnfext" path="res://common/spawner/wave_spawner_wave.gd" id="1_wave"]
+[ext_resource type="PackedScene" uid="uid://2r1ou8neorht" path="res://entities/enemies/ghosts/ghost_captain.tscn" id="2_a"]
+
+[resource]
+script = ExtResource("1_wave")
+name = &"The Ghost Captain"
+pool = Dictionary[PackedScene, int]({
+ExtResource("2_a"): 1
+})
+spawner_distribution = 2
+pause_length_begin = 7.0
+progress_mode = 1
