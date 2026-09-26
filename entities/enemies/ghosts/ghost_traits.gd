@@ -8,13 +8,24 @@ const GHOST_MATERIAL := preload("res://assets/materials/ghost.tres")
 const GHOST_MATERIAL_REPLACE_BLACKLIST := [preload("res://assets/materials/glowing_eye.tres")]
 
 const CULLING_RADIUS := 1000.0
+const SPAWN_COLOR := Color(0.55, 1.0, 1.0)
 
 @export var entity: Entity3D
 @export var ghostify_on_ready := false
 @export var is_ranged := false
 @export var animates_locomotion := false
 @export var material: Material = GHOST_MATERIAL
+@export var override_materials := true
 @export var projectile_acl: ACL
+
+@export_group("Spawning", "spawn")
+@export var spawn_effect_enabled := true
+@export var spawn_start_scale := 0.2
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var spawn_duration := 0.7
+
+@export_group("Multipliers", "multiplier")
+@export var multiplier_damage := 1.3
+@export var multiplier_health := 1.3
 
 @export_group("Movement")
 @export var guide: GhostEntityGuide3D
@@ -28,7 +39,6 @@ const CULLING_RADIUS := 1000.0
 @export var projectile_spawners: Array[ProjectileSpawner3D]
 @export var inventory: Inventory
 @export var dropper: InventoryDropper3D
-@export var item_visuals: ItemVisualsContainer3D
 @export var item_holder: ItemHolder3D
 
 var _is_ghost := false
@@ -55,14 +65,52 @@ func ghostify(coordinator: GhostMeleeCoordinator = null) -> void:
 	restrict_projectiles()
 	strip_drops()
 	apply_material()
+	apply_multipliers()
 	if is_instance_valid(coordinator):
 		coordinator.register(self)
+
+
+func play_spawn_in() -> void:
+	if not spawn_effect_enabled:
+		return
+
+	var center := entity.global_position + Vector3.UP
+	GhostVFX.teleport(Spawner3D.root, center, SPAWN_COLOR)
+	GhostVFX.shockwave(Spawner3D.root, entity.global_position, SPAWN_COLOR, 3.0)
+
+	var visuals := entity.get_node_or_null(^"Visuals") as Node3D
+	if visuals == null:
+		return
+	
+	var base_scale := visuals.scale
+	visuals.scale = base_scale * spawn_start_scale
+	
+	var tween := entity.create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.tween_property(visuals, ^"scale", base_scale, spawn_duration)
 
 
 func get_goal_distance() -> float:
 	if is_instance_valid(chasing_state):
 		return chasing_state.advance_goal_distance
 	return 1.5
+
+
+func apply_multipliers() -> void:
+	if multiplier_damage != 1.0:
+		entity.set_meta(Damage.MULTIPLIER_META, multiplier_damage)
+
+	var health := Health.search(entity)
+	if multiplier_health != 1.0 and health != null:
+		scale_health(health)
+
+
+func scale_health(health: Health) -> void:
+	health.hp *= multiplier_health
+	if health.max_hp <= 0.0:
+		return
+	health.base_max_hp *= multiplier_health
+	health.max_hp *= multiplier_health
+	health.hp_changed.emit()
 
 
 func swap_guide() -> void:
@@ -135,23 +183,32 @@ func restrict_projectile(instance: Node3D) -> void:
 	if projectile == null:
 		return
 	projectile.target_acl = ACL.resolve(projectile_acl, [])
+	apply_material_to(projectile)
 
 
 func apply_material() -> void:
-	
-	# Apply to entity
-	for node in Util.find_children_of_class(entity, &"MeshInstance3D"):
+	apply_material_to(entity)
+
+
+func apply_material_to(root: Node) -> void:
+	for node in Util.find_children_of_class(root, &"MeshInstance3D"):
 		var mesh_instance := node as MeshInstance3D
-		if mesh_instance.is_in_group(GROUP_EXEMPT) or mesh_instance.mesh == null:
+		if mesh_instance.is_in_group(GROUP_EXEMPT) or mesh_instance.mesh == null or is_held_item_visual(mesh_instance):
 			continue
 		
 		mesh_instance.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		if not override_materials:
+			continue
 		for surface in mesh_instance.mesh.get_surface_count():
 			if mesh_instance.get_active_material(surface) in GHOST_MATERIAL_REPLACE_BLACKLIST:
 				continue
 			mesh_instance.set_surface_override_material(surface, material)
-	
-	# Apply to item
-	if is_instance_valid(item_visuals):
-		item_visuals.do_disable_shadows = true
-		item_visuals.material_override = material
+
+
+func is_held_item_visual(node: Node) -> bool:
+	var parent := node.get_parent()
+	while parent != null and parent != entity:
+		if parent is ItemVisualsContainer3D:
+			return true
+		parent = parent.get_parent()
+	return false

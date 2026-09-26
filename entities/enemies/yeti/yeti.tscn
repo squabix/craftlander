@@ -1073,7 +1073,7 @@ collision_mask = 64
 script = ExtResource("eh_script")
 target = NodePath("..")
 
-[node name="GhostTraits" type="Node" parent="." node_paths=PackedStringArray("entity", "guide", "hoverer", "nav_guide", "targeting_states", "chasing_state", "culling_controller", "inventory", "dropper", "item_visuals")]
+[node name="GhostTraits" type="Node" parent="." node_paths=PackedStringArray("entity", "guide", "hoverer", "nav_guide", "targeting_states", "chasing_state", "culling_controller", "inventory", "dropper")]
 script = ExtResource("gt_script")
 material = ExtResource("gt_mat")
 entity = NodePath("..")
@@ -1085,6 +1085,5 @@ chasing_state = NodePath("../Controller3D/Default/Chasing")
 culling_controller = NodePath("../CullingController3D")
 inventory = NodePath("../Inventory")
 dropper = NodePath("../InventoryDropper3D")
-item_visuals = NodePath("../Visuals/Armature/Skeleton3D/BoneAttachment3D/ItemVisualsContainer3D")
 
 [editable path="Visuals"]
