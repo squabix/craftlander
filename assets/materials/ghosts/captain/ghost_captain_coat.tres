@@ -1,0 +1,33 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cn6dxmvlk517y"]
+
+[ext_resource type="Shader" uid="uid://b4owsaj4sd2fg" path="res://assets/shaders/ghost.gdshader" id="1_uxivm"]
+
+[sub_resource type="Gradient" id="Gradient_e294e934"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_e294e934"]
+frequency = 0.02
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e294e934"]
+noise = SubResource("FastNoiseLite_e294e934")
+color_ramp = SubResource("Gradient_e294e934")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_uxivm")
+shader_parameter/double_sided = false
+shader_parameter/albedo = Color(0.28, 0.32, 0.62, 1)
+shader_parameter/emission_color = Color(0.45, 0.55, 1, 1)
+shader_parameter/emission_amount = 3.0
+shader_parameter/rim_steepness = 1.30000006175
+shader_parameter/uv_scale = Vector3(0, 0, 0)
+shader_parameter/uv_offset = Vector3(0, 0, 0)
+shader_parameter/model_height = 2.0
+shader_parameter/dissolve_start = 0.10400000494
+shader_parameter/dissolve_length = 0.4050000192375
+shader_parameter/gradient_bias = 2.37600010960012
+shader_parameter/wave_speed = 2.0
+shader_parameter/wave_amplitude = 0.2000000095
+shader_parameter/wave_frequency = 4.00000018674012
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_e294e934")
+shader_parameter/noise_distortion = 0.05
+shader_parameter/noise_flow_speed = Vector2(0, -0.02)
