@@ -1,0 +1,43 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://levels/ending/ending_encounter.gd" id="enc_script"]
+[ext_resource type="Script" path="res://common/state_machine/state_machine.gd" id="machine_script"]
+[ext_resource type="Script" path="res://levels/ending/states/ending_dormant_state.gd" id="dormant_script"]
+[ext_resource type="Script" path="res://levels/ending/states/ending_curse_state.gd" id="curse_script"]
+[ext_resource type="Script" path="res://levels/ending/states/ending_waves_state.gd" id="waves_script"]
+[ext_resource type="Script" path="res://levels/ending/states/ending_captain_state.gd" id="captain_script"]
+[ext_resource type="Script" path="res://levels/ending/states/ending_resolved_state.gd" id="resolved_script"]
+[ext_resource type="Script" path="res://levels/ending/states/ending_finale_state.gd" id="finale_script"]
+[ext_resource type="Resource" path="res://levels/ending/music/haunted_cue.tres" id="haunted_cue"]
+[ext_resource type="Resource" path="res://levels/ending/music/waves_cue.tres" id="waves_cue"]
+[ext_resource type="Resource" path="res://levels/ending/music/boss_cue.tres" id="boss_cue"]
+
+[node name="EndingEncounter" type="Node" node_paths=PackedStringArray("brain")]
+script = ExtResource("enc_script")
+brain = NodePath("Stages")
+
+[node name="Stages" type="Node" parent="." node_paths=PackedStringArray("initial_state", "root")]
+script = ExtResource("machine_script")
+initial_state = NodePath("Dormant")
+root = NodePath("..")
+
+[node name="Dormant" type="Node" parent="Stages"]
+script = ExtResource("dormant_script")
+cue = ExtResource("haunted_cue")
+
+[node name="Curse" type="Node" parent="Stages"]
+script = ExtResource("curse_script")
+cue = ExtResource("waves_cue")
+
+[node name="Waves" type="Node" parent="Stages"]
+script = ExtResource("waves_script")
+
+[node name="Captain" type="Node" parent="Stages"]
+script = ExtResource("captain_script")
+cue = ExtResource("boss_cue")
+
+[node name="Resolved" type="Node" parent="Stages"]
+script = ExtResource("resolved_script")
+
+[node name="Finale" type="Node" parent="Stages"]
+script = ExtResource("finale_script")
