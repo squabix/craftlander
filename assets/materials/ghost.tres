@@ -14,6 +14,7 @@ color_ramp = SubResource("Gradient_f1q4c")
 [resource]
 render_priority = 0
 shader = ExtResource("1_7qf20")
+shader_parameter/double_sided = false
 shader_parameter/albedo = Color(0.26999998, 1, 1, 1)
 shader_parameter/emission_color = Color(0.7, 0.8449999, 1, 1)
 shader_parameter/emission_amount = 5.0

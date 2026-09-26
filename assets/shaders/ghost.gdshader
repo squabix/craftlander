@@ -1,6 +1,7 @@
 shader_type spatial;
-render_mode blend_mix, depth_prepass_alpha, cull_back, diffuse_burley, specular_schlick_ggx;
+render_mode blend_mix, depth_prepass_alpha, cull_disabled, diffuse_burley, specular_schlick_ggx;
 
+uniform bool double_sided = false;
 uniform vec4 albedo : source_color = vec4(1.0);
 uniform vec4 emission_color : source_color = vec4(0.0, 1.0, 1.0, 1.0);
 uniform sampler2D texture_albedo : source_color;
@@ -42,6 +43,11 @@ void vertex() {
 }
 
 void fragment() {
+	// Culling is a compile-time mode, so single-sided is done by dropping the back faces
+	if (!double_sided && !FRONT_FACING) {
+		discard;
+	}
+
 	// Sample floating noise texture
 	vec4 noise_val = texture(noise_texture, noise_uv);
 	
