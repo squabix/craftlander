@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://ewqjmcwekpkv"]
+
+[ext_resource type="PackedScene" uid="uid://ddggx8bh3030j" path="res://assets/models/items/materials/key.blend" id="1_67tb8"]
+[ext_resource type="Material" uid="uid://c33644pxuf2ds" path="res://assets/materials/gold.tres" id="2_3pnof"]
+
+[node name="CaptainsKey" type="Node3D" unique_id=1925677032]
+
+[node name="Visuals" parent="." unique_id=153441480 instance=ExtResource("1_67tb8")]
+
+[node name="Torus" parent="Visuals" index="0" unique_id=1539612570]
+surface_material_override/0 = ExtResource("2_3pnof")
+
+[editable path="Visuals"]
