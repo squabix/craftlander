@@ -1,6 +1,8 @@
 class_name Damage
 extends Resource
 
+const MULTIPLIER_META := &"damage_multiplier"
+
 @export_custom(PROPERTY_HINT_NONE, "suffix:dp") var base_amount := 1.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:dp") var variation := 0.0
 @export var type: StringName
@@ -20,7 +22,8 @@ static func from_base(base: float, damage_source: Node = null) -> Damage:
 
 
 func sample() -> float:
-	return base_amount + randf_range(0.0, variation)
+	var multiplier: float = source.get_meta(MULTIPLIER_META, 1.0) if is_instance_valid(source) else 1.0
+	return (base_amount + randf_range(0.0, variation)) * multiplier
 
 func override(other_damage: Damage) -> Damage:
 	if other_damage == null:
