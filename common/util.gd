@@ -249,7 +249,6 @@ static func find_children_of_class(parent: Node, class_string: StringName, inclu
 	for child in parent.get_children():
 		if is_object_class(child, class_string):
 			children.append(child)
-			continue
 		
 		var grandchildren := find_children_of_class(child, class_string)
 		if grandchildren.is_empty():
