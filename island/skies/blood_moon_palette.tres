@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="SkyPalette" format=3 uid="uid://dr2s6nrhe1a8l"]
+
+[ext_resource type="Curve" uid="uid://dwe4cf06deruu" path="res://island/skies/default_brightness_curve.tres" id="1_qvel5"]
+[ext_resource type="Curve" uid="uid://cwhwu4k03glo5" path="res://island/skies/default_contrast_curve.tres" id="2_7cr23"]
+[ext_resource type="Curve" uid="uid://cfmvgphk3bt55" path="res://island/skies/default_saturation_curve.tres" id="3_yvt8i"]
+[ext_resource type="Script" uid="uid://7s1w1ts4d614" path="res://island/skies/sky_palette.gd" id="4_r8ffn"]
+[ext_resource type="Material" uid="uid://dwsp2k1mh3jmi" path="res://island/skies/blood_moon_sky_material.tres" id="5_0lpul"]
+
+[sub_resource type="Gradient" id="Gradient_xck8q"]
+colors = PackedColorArray(1, 0.16, 0.1, 1, 1, 0.16, 0.1, 1)
+
+[sub_resource type="Curve" id="Curve_64sm8"]
+_data = [Vector2(0, 0.9), 0.0, 0.0, 0, 0, Vector2(1, 0.9), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("4_r8ffn")
+sky_material = ExtResource("5_0lpul")
+sun_color = SubResource("Gradient_xck8q")
+sun_energy = SubResource("Curve_64sm8")
+brightness = ExtResource("1_qvel5")
+contrast = ExtResource("2_7cr23")
+saturation = ExtResource("3_yvt8i")
+fog_color = Color(0.45, 0.04, 0.03, 1)
+fog_density = 0.006
+fog_sky_affect = 0.25
