@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://ba6vucjld02co"]
 
-[ext_resource type="Script" uid="uid://cyj4kbcybeaby" path="res://main/island.gd" id="1_tvyw1"]
-[ext_resource type="PackedScene" path="res://island/skies/day_night_cycle.tscn" id="99_dncscn"]
+[ext_resource type="Script" uid="uid://cmfrr64ej37g1" path="res://levels/ending/ending_island.gd" id="1_tvyw1"]
 [ext_resource type="Resource" uid="uid://b0gw02djkff0d" path="res://island/island_resources/undead_atoll.tres" id="2_msgsa"]
 [ext_resource type="Environment" uid="uid://cibxuhtgknost" path="res://assets/default_environment.tres" id="3_n7bhn"]
 [ext_resource type="Script" uid="uid://bm2wgrxee7bdu" path="res://island/docking/docking_manager.gd" id="4_ouqo7"]
@@ -31,7 +30,27 @@
 [ext_resource type="Script" uid="uid://bvnl07wfykf0p" path="res://common3d/audio_stream_curver3d.gd" id="28_dmi3c"]
 [ext_resource type="Script" uid="uid://brn3oogq86g4b" path="res://levels/undead_atoll_wave_manager.gd" id="29_f1q4c"]
 [ext_resource type="Script" uid="uid://bprm4lolnfext" path="res://common/spawner/wave_spawner_wave.gd" id="30_ioqp7"]
-[ext_resource type="PackedScene" uid="uid://b36ufslrm8hg7" path="res://entities/enemies/ghosts/ghost_rootling.tscn" id="30_n7bhn"]
+[ext_resource type="PackedScene" path="res://island/skies/day_night_cycle.tscn" id="99_dncscn"]
+[ext_resource type="Resource" uid="uid://dr2s6nrhe1a8l" path="res://island/skies/blood_moon_palette.tres" id="blood_palette_tres"]
+[ext_resource type="PackedScene" uid="uid://pdx4nb37dqj1" path="res://menus/credits.tscn" id="credits_tscn"]
+[ext_resource type="Texture2D" uid="uid://gdiwpux4vw37" path="res://island/lush_ground_gradient.tres" id="day_ground_gradient"]
+[ext_resource type="Resource" uid="uid://c0rx8ptt3dclp" path="res://island/skies/clear_day_palette.tres" id="day_palette_tres"]
+[ext_resource type="Script" uid="uid://cx8tglal0aa6p" path="res://common3d/camera/cutscene3d.gd" id="ending_cutscene_gd"]
+[ext_resource type="PackedScene" path="res://levels/ending/ending_encounter.tscn" id="ending_encounter_tscn"]
+[ext_resource type="Script" uid="uid://vpkfqm1tg0gd" path="res://levels/ending/ending_hud.gd" id="ending_hud_gd"]
+[ext_resource type="Resource" uid="uid://beieg36rghbqo" path="res://island/props/destructable_resource/bush/bush.tres" id="freed_bush"]
+[ext_resource type="Resource" uid="uid://csb30iff5ceag" path="res://island/props/destructable_resource/giant_mushroom/giant_mushroom_prop.tres" id="freed_mushroom"]
+[ext_resource type="Resource" path="res://island/props/destructable_resource/mushroom/mushroom_prop.tres" id="freed_small_mushroom"]
+[ext_resource type="Resource" uid="uid://dntsc8a8c3qsr" path="res://island/props/destructable_resource/tree/tree_prop.tres" id="freed_tree"]
+[ext_resource type="Resource" uid="uid://weqyppvdot2i" path="res://island/props/destructable_resource/tree2/tree2.tres" id="freed_tree2"]
+[ext_resource type="Script" uid="uid://ns4e4mdh7jwf" path="res://entities/enemies/ghosts/ghost_melee_coordinator.gd" id="ghost_melee_coordinator_gd"]
+[ext_resource type="Script" uid="uid://dxx3ryri4rcce" path="res://common/sound/music_player.gd" id="music_player_gd"]
+[ext_resource type="Resource" uid="uid://cnmcthuebb8yb" path="res://levels/ending/waves/wave_1_lush_isle.tres" id="wave_1_tres"]
+[ext_resource type="Resource" uid="uid://cs7jvqv1n5hi7" path="res://levels/ending/waves/wave_2_skelly_sandbar.tres" id="wave_2_tres"]
+[ext_resource type="Resource" uid="uid://b70i6rw8hst63" path="res://levels/ending/waves/wave_3_frost_holm.tres" id="wave_3_tres"]
+[ext_resource type="Resource" uid="uid://dvnvj22f0h3p7" path="res://levels/ending/waves/wave_4_ghost_captain.tres" id="wave_4_tres"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_lnj0c"]
 
 [sub_resource type="Gradient" id="Gradient_eo3xd"]
 
@@ -220,25 +239,17 @@ _data = {
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), -0.015610588, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="Resource" id="Resource_hjjmf"]
-script = ExtResource("30_ioqp7")
-pool = Dictionary[PackedScene, int]({
-ExtResource("30_n7bhn"): 10
-})
-spawner_distribution = 2
-metadata/_custom_type_script = "uid://bprm4lolnfext"
-
-[sub_resource type="Resource" id="Resource_ouqo7"]
-script = ExtResource("30_ioqp7")
-name = &"Boss"
-pool = Dictionary[PackedScene, int]({
-ExtResource("30_n7bhn"): 1
-})
-spawner_distribution = 2
-metadata/_custom_type_script = "uid://bprm4lolnfext"
-
-[node name="Island3" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "player_boat_adder", "docking_managers", "name_label", "name_anim_player", "world_environment", "sun", "day_night_cycle", "spawn_container")]
+[node name="Island3" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("freed_ground", "player_docking_manager", "ghost_docking_managers", "player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "player_boat_adder", "docking_managers", "name_label", "name_anim_player", "world_environment", "sun", "day_night_cycle", "spawn_container")]
 script = ExtResource("1_tvyw1")
+curse_palette = ExtResource("blood_palette_tres")
+freed_palette = ExtResource("day_palette_tres")
+freed_ground = NodePath("IslandGenerator/MeshInstance3D")
+freed_ground_gradient = ExtResource("day_ground_gradient")
+freed_shrub_prop = ExtResource("16_3exlf")
+freed_tree_props = Array[ExtResource("13_babke")]([ExtResource("freed_tree"), ExtResource("freed_tree2"), ExtResource("freed_mushroom")])
+freed_small_props = Array[ExtResource("13_babke")]([ExtResource("freed_bush"), ExtResource("freed_small_mushroom")])
+player_docking_manager = NodePath("DockingManager1")
+ghost_docking_managers = [NodePath("DockingManager2"), NodePath("DockingManager3"), NodePath("DockingManager4")]
 resource = ExtResource("2_msgsa")
 player = NodePath("DockingManager1/Player")
 island_generator = NodePath("IslandGenerator")
@@ -1114,20 +1125,81 @@ max_distance = 187.0
 attenuation_curve = SubResource("Curve_0eh6l")
 metadata/_custom_type_script = "uid://bvnl07wfykf0p"
 
-[node name="WaveSpawner3D" type="Node3D" parent="." unique_id=348118355 node_paths=PackedStringArray("player", "ghost_docking_managers", "sub_spawners")]
+[node name="WaveSpawner3D" type="Node3D" parent="." unique_id=348118355 node_paths=PackedStringArray("player", "melee_coordinator", "sub_spawners")]
 script = ExtResource("29_f1q4c")
 player = NodePath("../DockingManager1/Player")
-ghost_docking_managers = [NodePath("../DockingManager2"), NodePath("../DockingManager3"), NodePath("../DockingManager4")]
-waves = Array[ExtResource("30_ioqp7")]([SubResource("Resource_hjjmf"), SubResource("Resource_ouqo7")])
-auto_start = true
+melee_coordinator = NodePath("../GhostMeleeCoordinator")
+waves = Array[ExtResource("30_ioqp7")]([ExtResource("wave_1_tres"), ExtResource("wave_2_tres"), ExtResource("wave_3_tres"), ExtResource("wave_4_tres")])
+max_concurrent_instances = 10
 sub_spawners = {
 null: true
 }
 default_parent_mode = 1
 metadata/_custom_type_script = "uid://bvbqrk13ieyil"
 
+[node name="GhostMeleeCoordinator" type="Node" parent="." unique_id=120499790 node_paths=PackedStringArray("player")]
+script = ExtResource("ghost_melee_coordinator_gd")
+player = NodePath("../DockingManager1/Player")
+
+[node name="EndingMusicPlayer" type="Node" parent="." unique_id=922789670]
+script = ExtResource("music_player_gd")
+
+[node name="Cutscene" type="Node" parent="." unique_id=1420401297 node_paths=PackedStringArray("camera", "subject", "subject_camera")]
+script = ExtResource("ending_cutscene_gd")
+camera = NodePath("CutsceneCamera")
+subject = NodePath("../DockingManager1/Player")
+subject_camera = NodePath("../DockingManager1/Player/Head/Camera3D")
+letterbox_enabled = true
+
+[node name="CutsceneCamera" type="Camera3D" parent="Cutscene" unique_id=407120946]
+
+[node name="EndingHUD" type="CanvasLayer" parent="." unique_id=423748539 node_paths=PackedStringArray("flash_rect", "line_label", "credits")]
+layer = 20
+script = ExtResource("ending_hud_gd")
+flash_rect = NodePath("Flash")
+line_label = NodePath("ClosingLine")
+credits = NodePath("Credits")
+
+[node name="Flash" type="ColorRect" parent="EndingHUD" unique_id=203304414]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 0, 0, 0)
+
+[node name="ClosingLine" type="Label" parent="EndingHUD" unique_id=699734434]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -270.0
+offset_bottom = -190.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.46666667)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 5
+theme_override_font_sizes/font_size = 36
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits" parent="EndingHUD" unique_id=1086256154 instance=ExtResource("credits_tscn")]
+
+[node name="EndingEncounter" parent="." unique_id=1954245460 node_paths=PackedStringArray("player", "wave_spawner", "cutscene", "island", "music", "hud") instance=ExtResource("ending_encounter_tscn")]
+player = NodePath("../DockingManager1/Player")
+wave_spawner = NodePath("../WaveSpawner3D")
+cutscene = NodePath("../Cutscene")
+island = NodePath("..")
+music = NodePath("../EndingMusicPlayer")
+hud = NodePath("../EndingHUD")
+
 [editable path="DockingManager1/Player"]
 [editable path="DockingManager1/Player/PauseMenu/SettingsMenu"]
+[editable path="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/BackButton/ButtonAudioManager"]
 [editable path="DockingManager1/Dock"]
 [editable path="DockingManager1/Dock/BlenderMeshes"]
 [editable path="DockingManager2/Dock"]
