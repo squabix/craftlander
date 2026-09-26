@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://sts8ewjyaalb"]
+
+[ext_resource type="Script" uid="uid://0sxxfwom1dvf" path="res://levels/ending/cannon/cannonball.gd" id="1_ball"]
+[ext_resource type="PackedScene" path="res://levels/ending/cannon/cannon_blast.tscn" id="2_blast"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ball"]
+radius = 0.35
+
+[sub_resource type="SphereMesh" id="SphereMesh_ball"]
+radius = 0.35
+height = 0.7
+
+[sub_resource type="StandardMaterial3D" id="Material_ball"]
+albedo_color = Color(0.08, 0.08, 0.1, 1)
+emission_enabled = true
+emission = Color(1, 0.25, 0.1, 1)
+emission_energy_multiplier = 0.8
+
+[node name="Cannonball" type="Area3D" unique_id=1451278774]
+collision_layer = 0
+collision_mask = 72
+script = ExtResource("1_ball")
+blast_scene = ExtResource("2_blast")
+speed = 0.0
+gravity_scale = 12.0
+free_on_collision = true
+one_shot = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1970489904]
+shape = SubResource("SphereShape3D_ball")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=97938634]
+mesh = SubResource("SphereMesh_ball")
+surface_material_override/0 = SubResource("Material_ball")

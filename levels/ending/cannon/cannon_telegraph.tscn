@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cmivy4luymkrt"]
+
+[ext_resource type="Script" uid="uid://fjr56rfcbr16" path="res://common3d/telegraphs/disc_telegraph3d.gd" id="1_disc"]
+
+[node name="CannonTelegraph" type="Node3D" unique_id=663214572]
+script = ExtResource("1_disc")
+normal_conformity = 0.0
+color_base = Color(1, 0.1, 0.05, 1)
+outline_alpha = 0.25
+fill_alpha = 0.55

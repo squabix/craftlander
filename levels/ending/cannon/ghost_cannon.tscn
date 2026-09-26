@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://cmevksacmox4r"]
+
+[ext_resource type="Script" uid="uid://dj5h8ux4he6vj" path="res://levels/ending/cannon/ghost_cannon.gd" id="1_cannon"]
+[ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="2_staggerer"]
+[ext_resource type="Script" uid="uid://bl5x717nsijmk" path="res://common/damage_system/damage.gd" id="3_damage"]
+[ext_resource type="PackedScene" path="res://levels/ending/cannon/cannonball.tscn" id="4_ball"]
+[ext_resource type="PackedScene" uid="uid://cmivy4luymkrt" path="res://levels/ending/cannon/cannon_telegraph.tscn" id="5_telegraph"]
+[ext_resource type="PackedScene" uid="uid://d1hnre616kr65" path="res://assets/models/items/weapons/cannon1.blend" id="6_be1m4"]
+[ext_resource type="Material" uid="uid://dk2hwa4l1ovce" path="res://assets/materials/ghost_full.tres" id="7_h6vma"]
+[ext_resource type="Material" uid="uid://ct3rueaspkpix" path="res://assets/materials/darkness.tres" id="8_8hdwc"]
+[ext_resource type="AnimationLibrary" uid="uid://b0ysnecw0daet" path="res://levels/ending/cannon/ghost_cannon_animations.tres" id="9_anims"]
+[ext_resource type="Script" uid="uid://dapeyi3eetek1" path="res://common/signal_triggrs/signal_animation_trigger.gd" id="10_animtrigger"]
+[ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="11_audio"]
+
+[sub_resource type="Resource" id="Resource_damage"]
+script = ExtResource("3_damage")
+base_amount = 25.0
+knockback_force = 12.0
+knockback_angle = 30.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_flash"]
+direction = Vector3(0, 0, -1)
+spread = 25.0
+initial_velocity_min = 4.0
+initial_velocity_max = 9.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.7
+color = Color(1, 0.65, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_flash"]
+shading_mode = 0
+albedo_color = Color(1, 0.65, 0.2, 1)
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_flash"]
+material = SubResource("StandardMaterial3D_flash")
+size = Vector2(0.25, 0.25)
+
+[node name="GhostCannon" type="Node3D" unique_id=1626802846 node_paths=PackedStringArray("interval_staggerer", "visuals")]
+script = ExtResource("1_cannon")
+cannonball_scene = ExtResource("4_ball")
+telegraph_scene = ExtResource("5_telegraph")
+damage = SubResource("Resource_damage")
+interval_staggerer = NodePath("IntervalStaggerer")
+visuals = NodePath("Visuals")
+
+[node name="IntervalStaggerer" type="Node" parent="." unique_id=815744128 node_paths=PackedStringArray("target_methods")]
+script = ExtResource("2_staggerer")
+disabled = true
+base_interval = 5.0
+stagger_amount = 1.0
+target_methods = {
+NodePath(".."): &"fire"
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=48844439]
+libraries/ = ExtResource("9_anims")
+
+[node name="ShootAnimationTrigger" type="Node" parent="." unique_id=542058078 node_paths=PackedStringArray("anim_player")]
+script = ExtResource("10_animtrigger")
+anim_player = NodePath("../AnimationPlayer")
+anim_name = &"shoot"
+signal_name = &"spawned"
+
+[node name="SignalAudioManager3D" type="Node3D" parent="." unique_id=144910256 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("11_audio")
+signal_players = {
+&"spawned": NodePath("FireSound")
+}
+
+[node name="FireSound" type="AudioStreamPlayer3D" parent="SignalAudioManager3D" unique_id=57239628]
+bus = &"SFX"
+
+[node name="Visuals" parent="." unique_id=86909946 instance=ExtResource("6_be1m4")]
+
+[node name="Cylinder" parent="Visuals" index="0" unique_id=1887551729]
+surface_material_override/0 = ExtResource("7_h6vma")
+surface_material_override/1 = ExtResource("8_8hdwc")
+
+[node name="Muzzle" type="Marker3D" parent="Visuals" unique_id=585874468]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.7)
+
+[node name="FlashParticles" type="GPUParticles3D" parent="Visuals/Muzzle" unique_id=1732905754]
+emitting = false
+amount = 16
+lifetime = 0.35
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_flash")
+draw_pass_1 = SubResource("QuadMesh_flash")
+
+[editable path="Visuals"]

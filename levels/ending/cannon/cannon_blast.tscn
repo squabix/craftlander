@@ -1,0 +1,20 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://levels/ending/cannon/cannon_blast.gd" id="1_blast"]
+[ext_resource type="PackedScene" path="res://particles/puff_particles.tscn" id="2_puff"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_blast"]
+radius = 3.5
+
+[node name="CannonBlast" type="Area3D"]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_blast")
+current_mode = 1
+one_shot = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_blast")
+
+[node name="PuffParticles" parent="." instance=ExtResource("2_puff")]
+emitting = true
