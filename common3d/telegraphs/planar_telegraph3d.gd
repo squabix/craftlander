@@ -22,6 +22,7 @@ static var all: Array[PlanarTelegraph3D] = []
 @export_range(0.0, 1.0) var fill_alpha := 0.5
 @export var color_activate := Color(1.0, 1.0, 1.0, 0.9)
 
+var yaw := 0.0
 var fill: MeshInstance3D
 var outline: MeshInstance3D
 
@@ -60,6 +61,11 @@ func _ready() -> void:
 
 func _exit_tree() -> void:
 	all.erase(self)
+
+
+func set_yaw(new_yaw: float) -> void:
+	global_basis = global_basis.rotated(Vector3.UP, new_yaw - yaw)
+	yaw = new_yaw
 
 
 func activate() -> void:
