@@ -7,6 +7,7 @@ const GROUP_EXEMPT := &"skin_exempt"
 const GHOST_MATERIAL := preload("res://assets/materials/ghost.tres")
 const GHOST_MATERIAL_REPLACE_BLACKLIST := [preload("res://assets/materials/glowing_eye.tres")]
 
+const GHOST_BUS := &"SFX Ghost"
 const CULLING_RADIUS := 1000.0
 const SPAWN_COLOR := Color(0.55, 1.0, 1.0)
 
@@ -66,6 +67,7 @@ func ghostify(coordinator: GhostMeleeCoordinator = null) -> void:
 	strip_drops()
 	apply_material()
 	apply_multipliers()
+	route_sounds()
 	if is_instance_valid(coordinator):
 		coordinator.register(self)
 
@@ -93,6 +95,23 @@ func get_goal_distance() -> float:
 	if is_instance_valid(chasing_state):
 		return chasing_state.advance_goal_distance
 	return 1.5
+
+
+func route_sounds() -> void:
+	for node in Util.find_children_of_class(entity, &"AudioStreamPlayer3D"):
+		route_player(node as AudioStreamPlayer3D)
+
+	for node in Util.find_children_of_class(entity, &"AudioSpawner3D"):
+		var spawner := node as AudioSpawner3D
+		if spawner.override_stream != null:
+			spawner.override_bus = GHOST_BUS
+		spawner.spawned.connect(route_player)
+
+
+func route_player(player: Node3D) -> void:
+	var audio_player := player as AudioStreamPlayer3D
+	if is_instance_valid(audio_player) and audio_player.bus == &"SFX":
+		audio_player.bus = GHOST_BUS
 
 
 func apply_multipliers() -> void:

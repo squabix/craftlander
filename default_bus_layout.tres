@@ -36,6 +36,16 @@ ceiling_db = -0.8
 threshold_db = -0.1
 soft_clip_db = 1.8
 
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_ghost"]
+resource_name = "Reverb"
+predelay_msec = 60.0
+predelay_feedback = 0.3
+room_size = 0.85
+damping = 0.4
+spread = 1.0
+dry = 0.8
+wet = 0.4
+
 [resource]
 bus/0/effect/0/effect = SubResource("AudioEffectHighPassFilter_j3pel")
 bus/0/effect/0/enabled = true
@@ -73,3 +83,11 @@ bus/4/mute = false
 bus/4/bypass_fx = false
 bus/4/volume_db = 0.0
 bus/4/send = &"Master"
+bus/5/name = &"SFX Ghost"
+bus/5/solo = false
+bus/5/mute = false
+bus/5/bypass_fx = false
+bus/5/volume_db = 0.0
+bus/5/send = &"SFX"
+bus/5/effect/0/effect = SubResource("AudioEffectReverb_ghost")
+bus/5/effect/0/enabled = true
