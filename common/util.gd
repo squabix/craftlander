@@ -275,7 +275,7 @@ static func _wire_linear_focus_neighbors(container: Container, vertical: bool) -
 	for child in container.get_children():
 		var row_focusables: Array[Control] = []
 		_collect_cell_focusables(child, row_focusables)
-		if not row_focusables.is_empty():
+		if not row_focusables.is_empty() or _has_focusable_descendant(child):
 			rows.append(row_focusables)
 
 	var before_side := "top" if vertical else "left"
@@ -331,6 +331,15 @@ static func _collect_cell_focusables(node: Node, out: Array[Control], is_entry: 
 		return
 	for child in node.get_children():
 		_collect_cell_focusables(child, out, false)
+
+
+static func _has_focusable_descendant(node: Node) -> bool:
+	for child in node.get_children():
+		if child is Control and child.focus_mode != Control.FOCUS_NONE:
+			return true
+		if _has_focusable_descendant(child):
+			return true
+	return false
 
 
 static func _set_neighbor_if_unset(control: Control, side: String, target: Control) -> void:
