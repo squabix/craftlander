@@ -7,6 +7,8 @@ extends HSlider
 
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
 	value_changed.connect(set_volume.unbind(1))
 	if not GameSettings.is_config_loaded:
 		await GameSettings.config_loaded
