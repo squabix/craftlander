@@ -13,10 +13,14 @@ var _give_up_at_msec := 0
 
 
 func enter() -> void:
-	if is_instance_valid(guide):
-		guide.set_target(sight.target_position)
+	restart()
 	if is_instance_valid(interval_staggerer):
 		interval_staggerer.disabled = false
+
+
+func restart() -> void:
+	if is_instance_valid(guide):
+		guide.set_target(sight.target_position)
 	_give_up_at_msec = Time.get_ticks_msec() + roundi(max_search_time * 1000.0)
 
 
@@ -38,10 +42,8 @@ func check_status() -> void:
 		return
 	
 	if can_see_target():
-		print("Found target!")
 		transition_to(found_target_state)
 		return
 
 	if guide.get_distance_to_target() <= reach_distance or Time.get_ticks_msec() >= _give_up_at_msec:
-		print("Giving up")
 		transition_to(give_up_state)

@@ -50,6 +50,7 @@
 [ext_resource type="PackedScene" uid="uid://dubfkmgg38psa" path="res://assets/models/items/weapons/sword1.blend" id="48_mcsqu"]
 [ext_resource type="Material" uid="uid://ct3rueaspkpix" path="res://assets/materials/darkness.tres" id="48_n2wx5"]
 [ext_resource type="Material" uid="uid://m5807bchpbmp" path="res://assets/materials/glowing_eye.tres" id="49_8i4p0"]
+[ext_resource type="Script" uid="uid://cqq5b76xuq0i3" path="res://entities/npc_states/search_trigger.gd" id="99_searchtrigger"]
 [ext_resource type="Script" uid="uid://cke8g2exxgx0y" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 [ext_resource type="Script" uid="uid://h3nqpcog77iq" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="101_normconf"]
 [ext_resource type="Script" uid="uid://crtlax17o248r" path="res://entities/enemies/ghosts/ghost_traits.gd" id="gt_script"]
@@ -800,13 +801,13 @@ metadata/_custom_type_script = "uid://4dfurtssrp4f"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1276337582]
 shape = SubResource("CapsuleShape3D_3emv6")
 
-[node name="StartChaseTrigger" type="Node" parent="Hurtbox3D" unique_id=200617314 node_paths=PackedStringArray("state_machine")]
-script = ExtResource("8_sxsrr")
+[node name="SearchTrigger" type="Node" parent="Hurtbox3D" unique_id=200617314 node_paths=PackedStringArray("sight", "state_machine")]
+script = ExtResource("99_searchtrigger")
+sight = NodePath("../../Sight3D")
 state_machine = NodePath("../../Controller3D/Default")
-state_name = &"Chasing"
+state_name = &"Searching"
 from_state_whitelist = Array[StringName]([&"Wandering", &"Searching"])
-signal_name = &"was_hurt"
-metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
+signal_name = &"was_dealt_damage"
 
 [node name="MeshFlashTrigger" type="Node" parent="Hurtbox3D" unique_id=775363064 node_paths=PackedStringArray("mesh_root")]
 script = ExtResource("100_flash")

@@ -59,6 +59,7 @@
 [ext_resource type="Script" uid="uid://c8o56lvh1smbc" path="res://entities/enemies/ghosts/ghost_entity_guide3d.gd" id="gg_script"]
 [ext_resource type="Material" uid="uid://d3ver5ewkvmwd" path="res://assets/materials/ghosts/ghost_skeleton.tres" id="gt_mat"]
 [ext_resource type="Script" uid="uid://crtlax17o248r" path="res://entities/enemies/ghosts/ghost_traits.gd" id="gt_script"]
+[ext_resource type="Script" path="res://entities/npc_states/search_trigger.gd" id="99_searchtrigger"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
 script = ExtResource("3_6kq1n")
@@ -813,13 +814,13 @@ metadata/_custom_type_script = "uid://4dfurtssrp4f"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1941702815]
 shape = SubResource("CapsuleShape3D_3emv6")
 
-[node name="StartChaseTrigger" type="Node" parent="Hurtbox3D" unique_id=1954498291 node_paths=PackedStringArray("state_machine")]
-script = ExtResource("8_vx64r")
+[node name="SearchTrigger" type="Node" parent="Hurtbox3D" unique_id=1954498291 node_paths=PackedStringArray("sight", "state_machine")]
+script = ExtResource("99_searchtrigger")
+sight = NodePath("../../Sight3D")
 state_machine = NodePath("../../Controller3D/Default")
-state_name = &"Chasing"
+state_name = &"Searching"
 from_state_whitelist = Array[StringName]([&"Wandering", &"Searching"])
-signal_name = &"was_hurt"
-metadata/_custom_type_script = "uid://byrrmqcy6nc6v"
+signal_name = &"was_dealt_damage"
 
 [node name="MeshFlashTrigger" type="Node" parent="Hurtbox3D" unique_id=1690356373 node_paths=PackedStringArray("mesh_root")]
 script = ExtResource("60_flash")
