@@ -53,6 +53,8 @@ const RECIPE_LAYOUT_SCALE := 1.0
 @export var is_crafting := false:
 	set(value):
 		is_crafting = value
+		if is_node_ready():
+			update_viewport_size()
 		if is_crafting:
 			update_selection_visuals()
 		else:
@@ -74,6 +76,7 @@ func _ready() -> void:
 		pause_interface.updated_pause.connect(func(_paused: bool): clear())
 
 	update_selection_visuals.call_deferred()
+	update_viewport_size()
 
 
 func _process(_delta: float) -> void:
@@ -104,6 +107,12 @@ func _input(event: InputEvent) -> void:
 		return
 	if event.is_action_pressed("craft"):
 		craft()
+
+
+func update_viewport_size() -> void:
+	stretch = is_crafting
+	if not is_crafting:
+		sub_viewport.size = Vector2i.ONE
 
 
 func reset_slots() -> void:
