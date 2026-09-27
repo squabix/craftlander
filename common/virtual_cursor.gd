@@ -68,7 +68,8 @@ func parent_has_visibility() -> bool:
 func match_parent_visibility() -> void:
 	if not parent_has_visibility():
 		return
-	visible = get_parent().visible
+	var parent := get_parent()
+	visible = parent.is_visible_in_tree() if parent is CanvasItem else parent.visible
 
 
 func _process(delta: float) -> void:
