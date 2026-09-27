@@ -16,7 +16,8 @@ var _tweens: Dictionary[AudioStreamPlayer, Tween] = { }
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	
+	EventBus.subscribe(&"player_died", _on_player_died)
+
 	for i in PLAYER_COUNT:
 		add_player()
 
@@ -51,6 +52,18 @@ func play_cue(cue: MusicCue) -> void:
 	_fade(incoming, cue.volume_db, cue.fade_in, false)
 
 
+func set_paused(paused: bool) -> void:
+	for player in _players:
+		player.stream_paused = paused
+
+	for tween in _tweens.values():
+		if tween.is_valid():
+			if paused:
+				tween.pause()
+			else:
+				tween.play()
+
+
 func _fade(player: AudioStreamPlayer, target_db: float, duration: float, stop_when_done: bool) -> void:
 	var existing: Tween = _tweens.get(player)
 	if existing != null and existing.is_valid():
@@ -62,6 +75,10 @@ func _fade(player: AudioStreamPlayer, target_db: float, duration: float, stop_wh
 		tween.tween_callback(player.stop)
 	
 	_tweens[player] = tween
+
+
+func _on_player_died(_is_in_water: bool) -> void:
+	set_paused(true)
 
 
 func _on_player_finished(player: AudioStreamPlayer) -> void:
