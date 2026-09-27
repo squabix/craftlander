@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Damage" format=3 uid="uid://c53n70xfsqot0"]
+
+[ext_resource type="Script" uid="uid://bl5x717nsijmk" path="res://common/damage_system/damage.gd" id="1_x2pxo"]
+
+[resource]
+script = ExtResource("1_x2pxo")
+base_amount = 30.0
+type = &"melee"
+knockback_force = 30.0
+knockback_angle = 12.5
+metadata/_custom_type_script = "uid://bl5x717nsijmk"

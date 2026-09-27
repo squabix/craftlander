@@ -34,6 +34,7 @@
 [ext_resource type="AudioStream" uid="uid://iqev25rq7fbq" path="res://assets/sound/rootling-07.mp3" id="34_3an3f"]
 [ext_resource type="AudioStream" uid="uid://b3c73cbq1ut7n" path="res://assets/sound/rootling-09.mp3" id="35_li8kl"]
 [ext_resource type="AudioStream" uid="uid://cb3edy6gssben" path="res://assets/sound/rootling-08.mp3" id="36_uxxo0"]
+[ext_resource type="Resource" uid="uid://xvtksatkf3wl" path="res://items/weapons/ice_club/ice_club_item.tres" id="37_7n1wh"]
 [ext_resource type="AudioStream" uid="uid://vb4hdoc5mtfs" path="res://assets/sound/rootling-01.mp3" id="37_jqdyo"]
 [ext_resource type="AudioStream" uid="uid://dv7i8slvjjvqf" path="res://assets/sound/rootling-02.mp3" id="38_wytg4"]
 [ext_resource type="AudioStream" uid="uid://by44iwpc4os7a" path="res://assets/sound/rootling-03.mp3" id="39_a7cit"]
@@ -47,7 +48,6 @@
 [ext_resource type="AudioStream" uid="uid://c4438fvpcmcld" path="res://assets/sound/rootling-12.mp3" id="46_u3pkf"]
 [ext_resource type="Script" uid="uid://ljihr86cv3xk" path="res://common3d/item_visuals_container_3d.gd" id="47_0ksuq"]
 [ext_resource type="PackedScene" uid="uid://djvh1hk3qehkt" path="res://assets/models/entities/yeti.blend" id="47_bi43y"]
-[ext_resource type="PackedScene" uid="uid://dubfkmgg38psa" path="res://assets/models/items/weapons/sword1.blend" id="48_mcsqu"]
 [ext_resource type="Material" uid="uid://ct3rueaspkpix" path="res://assets/materials/darkness.tres" id="48_n2wx5"]
 [ext_resource type="Material" uid="uid://m5807bchpbmp" path="res://assets/materials/glowing_eye.tres" id="49_8i4p0"]
 [ext_resource type="Script" uid="uid://cqq5b76xuq0i3" path="res://entities/npc_states/search_trigger.gd" id="99_searchtrigger"]
@@ -1083,13 +1083,13 @@ node_connections = [&"output", 0, &"PounceSlamShot", &"ItemBlend", 0, &"RunBlend
 
 [sub_resource type="Resource" id="Resource_0uawy"]
 script = ExtResource("22_0cwlt")
-items = Array[ExtResource("23_qsm0a")]([ExtResource("24_cphn7")])
+items = Array[ExtResource("23_qsm0a")]([ExtResource("24_cphn7"), ExtResource("37_7n1wh")])
 start_anim = "attack"
 metadata/_custom_type_script = "uid://c622jer80j3sk"
 
 [sub_resource type="Resource" id="Resource_axehold"]
 script = ExtResource("31_4i62f")
-item = ExtResource("24_cphn7")
+item = ExtResource("37_7n1wh")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hjjmf"]
@@ -1494,12 +1494,11 @@ bone_name = "RightHand"
 bone_idx = 13
 
 [node name="ItemVisualsContainer3D" type="Node3D" parent="Visuals/Armature/Skeleton3D/BoneAttachment3D" unique_id=1111234605 node_paths=PackedStringArray("item_holder")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.063063, 0.1987517, 0.18797785)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.063, 0.199, 0.3)
 script = ExtResource("47_0ksuq")
 item_holder = NodePath("../../../../../ItemHolder3D")
+visuals_scale_ratio = 1.25
 metadata/_custom_type_script = "uid://ljihr86cv3xk"
-
-[node name="sword1" parent="Visuals/Armature/Skeleton3D/BoneAttachment3D/ItemVisualsContainer3D" unique_id=537100708 instance=ExtResource("48_mcsqu")]
 
 [node name="GhostEntityGuide3D" type="Node" parent="Controller3D" node_paths=PackedStringArray("entity", "hoverer")]
 process_mode = 4

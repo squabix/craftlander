@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="HarvestingTool" format=3 uid="uid://xvtksatkf3wl"]
+
+[ext_resource type="Resource" uid="uid://c53n70xfsqot0" path="res://items/weapons/ice_club/ice_club_damage.tres" id="1_ipolf"]
+[ext_resource type="Texture2D" uid="uid://c3nicjjgn237w" path="res://items/weapons/ice_club/ice_club.png" id="2_ukqi1"]
+[ext_resource type="PackedScene" uid="uid://bdogmx51k57is" path="res://items/weapons/ice_club/ice_club.tscn" id="3_cxaif"]
+[ext_resource type="Script" uid="uid://6x786nnhteca" path="res://items/tools/harvesting_tool.gd" id="4_yt4yt"]
+
+[resource]
+script = ExtResource("4_yt4yt")
+damage = ExtResource("1_ipolf")
+name = &"Ice Club"
+icon = ExtResource("2_ukqi1")
+type = &"Weapon"
+use_action_name = &"Attack"
+scene = ExtResource("3_cxaif")
+cooldown_mode = 1
+default_cooldown_length = 0.65
+metadata/_custom_type_script = "uid://6x786nnhteca"
