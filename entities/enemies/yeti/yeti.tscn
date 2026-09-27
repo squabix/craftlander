@@ -58,6 +58,8 @@
 [ext_resource type="Material" uid="uid://m8k8vocmjefa" path="res://assets/materials/ghosts/ghost_yeti.tres" id="gt_mat"]
 [ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
 [ext_resource type="Script" uid="uid://bqct5adpvfunh" path="res://common3d/hoverer3d.gd" id="eh_script"]
+[ext_resource type="Script" uid="uid://dner7f67gj7sk" path="res://entities/npc_states/specials/blink_attack_state.gd" id="sp_blink"]
+[ext_resource type="Script" uid="uid://ctk7my54vljch" path="res://entities/npc_states/specials/attack_rhythm.gd" id="sp_rhythm"]
 
 [sub_resource type="Resource" id="Resource_xl8du"]
 script = ExtResource("2_8i4p0")
@@ -756,11 +758,15 @@ shader_parameter/refraction_strength = 0.05
 [sub_resource type="Resource" id="Resource_acl"]
 script = ExtResource("acl_script")
 
-[node name="Yeti" type="CharacterBody3D" unique_id=718268970 node_paths=PackedStringArray("anim_tree", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
+[node name="Yeti" type="CharacterBody3D" unique_id=718268970 node_paths=PackedStringArray("anim_tree", "culling_controller", "sight", "visuals", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
 script = ExtResource("1_n2wx5")
 anim_tree = NodePath("AnimationTree")
 culling_controller = NodePath("CullingController3D")
+sight = NodePath("Sight3D")
+visuals = NodePath("Visuals")
+special_charge_height = 1.6
+special_charge_radius = 0.7
 type = &"Yeti"
 move_mode = SubResource("Resource_xl8du")
 horizontal_rotation_target = NodePath(".")
@@ -900,12 +906,16 @@ signal_players = {
 }
 metadata/_custom_type_script = "uid://43bqjaemfda5"
 
-[node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=330454410 node_paths=PackedStringArray("item_holder", "interval_staggerer", "reach_anim_tree", "guide", "sight", "root")]
+[node name="Chasing" type="Node" parent="Controller3D/Default" unique_id=330454410 node_paths=PackedStringArray("item_holder", "interval_staggerer", "rhythm", "reach_anim_tree", "timed_special_staggerer", "guide", "sight", "root")]
 script = ExtResource("15_rilxa")
 item_holder = NodePath("../../../ItemHolder3D")
 interval_staggerer = NodePath("IntervalStaggerer")
+rhythm = NodePath("../../Rhythm")
 reach_anim_tree = NodePath("../../../AnimationTree")
 lose_target_state = &"Searching"
+timed_special_state = &"Pounce"
+timed_special_staggerer = NodePath("SpecialTimer")
+timed_special_min_distance = 5.0
 guide = NodePath("../../NavEntityGuide3D")
 sight = NodePath("../../../Sight3D")
 root = NodePath("../../..")
@@ -919,6 +929,14 @@ NodePath(".."): &"update_path"
 }
 initial_time_left = 5.0
 metadata/_custom_type_script = "uid://73ya7jxulyl4"
+
+[node name="SpecialTimer" type="Node" parent="Controller3D/Default/Chasing" unique_id=100871912 node_paths=PackedStringArray("target_methods")]
+script = ExtResource("6_dsvmj")
+base_interval = 1.5
+stagger_amount = 0.2
+target_methods = {
+NodePath(".."): &"try_timed_special"
+}
 
 [node name="Searching" type="Node" parent="Controller3D/Default" unique_id=1932789682 node_paths=PackedStringArray("interval_staggerer", "guide", "sight", "root")]
 script = ExtResource("16_48gnu")
@@ -936,6 +954,24 @@ target_methods = {
 NodePath(".."): &"check_status"
 }
 metadata/_custom_type_script = "uid://73ya7jxulyl4"
+
+[node name="Pounce" type="Node" parent="Controller3D/Default" unique_id=2052353896]
+script = ExtResource("sp_blink")
+vanish = false
+min_distance = 0.0
+max_distance = 1.5
+radius = 2.8
+leap_duration = 0.55
+range_max = 12.0
+color = Color(0.75, 0.9, 1, 1)
+tell = 0.9
+recovery = 0.8
+damage = 14.0
+knockback = 16.0
+
+[node name="Rhythm" type="Node" parent="Controller3D" unique_id=2103381096]
+script = ExtResource("sp_rhythm")
+pattern = Array[StringName]([&"", &"", &"", &"Pounce"])
 
 [node name="NavEntityGuide3D" parent="Controller3D" unique_id=1775925744 node_paths=PackedStringArray("nav", "entity") instance=ExtResource("17_amxmq")]
 nav = NodePath("../../NavigationAgent3D")
