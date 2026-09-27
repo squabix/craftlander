@@ -25,8 +25,9 @@ func update_sun(sun: DirectionalLight3D, normalized_time_of_day: float) -> void:
 
 func update_environment(world_environment: WorldEnvironment, normalized_time_of_day: float) -> void:
 	var environment := world_environment.environment
-	environment.sky.sky_material = sky_material
-	
+	if environment.sky.sky_material != sky_material:
+		environment.sky.sky_material = sky_material
+
 	# Adjustments
 	if brightness != null:
 		environment.adjustment_brightness = brightness.sample(normalized_time_of_day)
