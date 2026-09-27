@@ -5,6 +5,7 @@
 
 [node name="DayNightCycle" type="Node"]
 script = ExtResource("1_dnc00")
+cycle_night_length = 180.0
 
 [node name="NodeSaver" type="Node" parent="."]
 script = ExtResource("2_dnc01")
