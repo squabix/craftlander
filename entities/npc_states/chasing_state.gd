@@ -166,7 +166,14 @@ func _aim_held_item() -> void:
 
 
 func update_path() -> void:
+	if has_no_target():
+		transition_to(lose_target_state)
+		return
 	guide.set_target(get_target_position())
+
+
+func has_no_target() -> bool:
+	return can_lose_target and not lose_target_state.is_empty() and not is_instance_valid(sight.target)
 
 
 func _on_item_used(_item: Item) -> void:
