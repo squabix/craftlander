@@ -1862,6 +1862,7 @@ text = "Continue"
 
 [node name="PauseMenu" type="Control" parent="." unique_id=1163003515 node_paths=PackedStringArray("crafting_environment", "recipe_panel", "health", "settings_menu", "button_save", "button_settings", "button_quit", "visibility_proxy", "back_button")]
 process_mode = 3
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
