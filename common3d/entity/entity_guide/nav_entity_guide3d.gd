@@ -25,6 +25,8 @@ var _is_nav_ready := false
 
 var has_direct_shot := false
 var is_outside_navmesh := false
+var closest_navmesh_point := Vector3.ZERO
+var _has_closest_navmesh_point := false
 
 
 func _init() -> void:
@@ -50,6 +52,7 @@ func _notification(what: int) -> void:
 
 
 func _recompute_nav_states() -> void:
+	update_closest_navmesh_point()
 	has_direct_shot = _compute_has_direct_shot()
 	is_outside_navmesh = _compute_is_outside_navmesh()
 
@@ -99,15 +102,26 @@ func get_nav_map() -> RID:
 	return RID()
 
 
+func update_closest_navmesh_point() -> void:
+	if not has_entity():
+		return
+
+	var nav_map := get_nav_map()
+	_has_closest_navmesh_point = nav_map.is_valid()
+	if not _has_closest_navmesh_point:
+		closest_navmesh_point = entity.global_position
+		return
+
+	closest_navmesh_point = NavigationServer3D.map_get_closest_point(nav_map, entity.global_position)
+
+
 func get_closest_navmesh_point(include_ingress: bool = true) -> Vector3:
 	if not has_entity():
 		return Vector3.ZERO
 
-	var nav_map := get_nav_map()
-	if not nav_map.is_valid():
-		return entity.global_position
-
-	var closest := NavigationServer3D.map_get_closest_point(nav_map, entity.global_position)
+	if not _has_closest_navmesh_point:
+		update_closest_navmesh_point()
+	var closest := closest_navmesh_point
 
 	# Push target inside the navmesh toward target_position
 	if not include_ingress or navmesh_ingress_depth <= 0.0:
@@ -123,18 +137,12 @@ func get_closest_navmesh_point(include_ingress: bool = true) -> Vector3:
 
 
 func _compute_is_outside_navmesh() -> bool:
-	if not has_entity():
+	if not has_entity() or not _has_closest_navmesh_point:
 		return false
-
-	var nav_map := get_nav_map()
-	if not nav_map.is_valid():
-		return false
-
-	var closest_point := NavigationServer3D.map_get_closest_point(nav_map, entity.global_position)
 
 	var distance := (
-		Util.vec3to2(entity.global_position - closest_point, Util.VECTOR3Y).length() if ignore_y_distance
-		else entity.global_position.distance_to(closest_point)
+		Util.vec3to2(entity.global_position - closest_navmesh_point, Util.VECTOR3Y).length() if ignore_y_distance
+		else entity.global_position.distance_to(closest_navmesh_point)
 	)
 
 	return distance > off_navmesh_threshold
