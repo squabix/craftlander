@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://bturgkik5ddxy"]
+
+[ext_resource type="Texture2D" uid="uid://cvdr5qh306gga" path="res://items/materials/snail_shell/snail_shell.png" id="1_v8nmj"]
+[ext_resource type="PackedScene" uid="uid://cksi8uwyrmk4k" path="res://items/materials/snail_shell/snail_shell.tscn" id="2_cg5qn"]
+[ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="3_aexi2"]
+
+[resource]
+script = ExtResource("3_aexi2")
+name = &"Snail Shell"
+max_quantity = 99
+icon = ExtResource("1_v8nmj")
+scene = ExtResource("2_cg5qn")
+metadata/_custom_type_script = "uid://bfstlagsbeqe2"

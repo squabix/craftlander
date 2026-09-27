@@ -19,13 +19,12 @@
 [ext_resource type="PackedScene" uid="uid://c5x1hn4vi06bh" path="res://entities/nav_entity_guide3d.tscn" id="17_p43xh"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="18_a8v0i"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="19_ou3my"]
-[ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="20_f5do3"]
-[ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="21_jch4j"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="22_3emem"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="23_n8175"]
 [ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="24_oni7p"]
 [ext_resource type="Script" uid="uid://dd8qskwv1nlqx" path="res://common3d/damage_system/hit_ray3d.gd" id="25_0wyuk"]
 [ext_resource type="Script" uid="uid://bl5x717nsijmk" path="res://common/damage_system/damage.gd" id="26_0dir6"]
+[ext_resource type="Resource" uid="uid://5n0rxogo7ow0" path="res://items/food/candy_cane/candy_cane.tres" id="27_5a8ae"]
 [ext_resource type="PackedScene" uid="uid://h3veu2e18ij1" path="res://entities/entity_health_bar.tscn" id="27_sexsv"]
 [ext_resource type="AudioStream" uid="uid://cwqa0rroqx0ww" path="res://assets/sound/steps_stream.tres" id="28_nxx0q"]
 [ext_resource type="AudioStream" uid="uid://iqev25rq7fbq" path="res://assets/sound/rootling-07.mp3" id="29_koe6k"]
@@ -71,15 +70,9 @@ metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
 height = 1.2
 radius = 0.8
 
-[sub_resource type="Resource" id="Resource_aoox1"]
+[sub_resource type="Resource" id="Resource_00qym"]
 script = ExtResource("19_ou3my")
-item = ExtResource("20_f5do3")
-quantity = 3
-metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
-
-[sub_resource type="Resource" id="Resource_uefcv"]
-script = ExtResource("19_ou3my")
-item = ExtResource("21_jch4j")
+item = ExtResource("27_5a8ae")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Animation" id="Animation_5fihd"]
@@ -674,9 +667,9 @@ entity = NodePath("../..")
 [node name="Inventory" type="Node" parent="." unique_id=2020826484]
 unique_name_in_owner = true
 script = ExtResource("18_a8v0i")
-item_instances = Array[ExtResource("19_ou3my")]([SubResource("Resource_aoox1"), SubResource("Resource_uefcv")])
+item_instances = Array[ExtResource("19_ou3my")]([SubResource("Resource_00qym")])
 constant = true
-size = 2
+size = 1
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 
 [node name="InventoryDropper3D" type="Node3D" parent="." unique_id=709626360 node_paths=PackedStringArray("inventory", "health")]

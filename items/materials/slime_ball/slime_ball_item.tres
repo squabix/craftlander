@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://chwiax8g7xg2"]
+
+[ext_resource type="Texture2D" uid="uid://dgifuh5nmd33d" path="res://items/materials/slime_ball/slime_ball.png" id="1_q6usc"]
+[ext_resource type="PackedScene" uid="uid://blwhhtuhn2s20" path="res://items/materials/slime_ball/slime_ball.tscn" id="2_6g44g"]
+[ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="3_ncpls"]
+
+[resource]
+script = ExtResource("3_ncpls")
+name = &"Slime Ball"
+max_quantity = 99
+icon = ExtResource("1_q6usc")
+scene = ExtResource("2_6g44g")
+metadata/_custom_type_script = "uid://bfstlagsbeqe2"

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://blwhhtuhn2s20"]
+
+[ext_resource type="PackedScene" uid="uid://xoj4t71ndmdv" path="res://assets/models/projectiles/slime_ball.blend" id="1_7oy6n"]
+[ext_resource type="Material" uid="uid://c06whlh3ak5qm" path="res://assets/materials/slime.tres" id="2_ufnaf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tg280"]
+resource_name = "Material"
+transparency = 4
+cull_mode = 2
+albedo_color = Color(0.09100003, 0.91, 0, 0.33333334)
+roughness = 0.5
+
+[node name="SlimeBall" type="Node3D" unique_id=249716213]
+
+[node name="Visuals" parent="." unique_id=601109793 instance=ExtResource("1_7oy6n")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+
+[node name="InnerBall" parent="Visuals" index="0" unique_id=109889769]
+surface_material_override/0 = ExtResource("2_ufnaf")
+
+[node name="OuterBall" parent="Visuals" index="1" unique_id=1979529813]
+surface_material_override/0 = SubResource("StandardMaterial3D_tg280")
+
+[editable path="Visuals"]

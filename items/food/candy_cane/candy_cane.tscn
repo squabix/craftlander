@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://ibmh17p5lyw1"]
+
+[ext_resource type="PackedScene" uid="uid://bx2g3mpbrky8h" path="res://assets/models/props/candy_cane.blend" id="1_36qm0"]
+
+[node name="CandyCane" type="Node3D" unique_id=1155323892]
+
+[node name="Visuals" parent="." unique_id=694186197 instance=ExtResource("1_36qm0")]
+
+[node name="Cane" parent="Visuals" index="0" unique_id=1941248729]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.35, 0)
+
+[node name="Curve" parent="Visuals" index="1" unique_id=1771265316]
+visible = false
+
+[node name="Stump" parent="Visuals" index="2" unique_id=1036192232]
+visible = false
+
+[node name="Top" parent="Visuals" index="3" unique_id=406237]
+visible = false
+
+[editable path="Visuals"]

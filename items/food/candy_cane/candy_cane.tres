@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Food" format=3 uid="uid://5n0rxogo7ow0"]
+
+[ext_resource type="Texture2D" uid="uid://bvcbnlt47dur8" path="res://items/food/candy_cane/candy_cane.png" id="1_icon"]
+[ext_resource type="PackedScene" uid="uid://ibmh17p5lyw1" path="res://items/food/candy_cane/candy_cane.tscn" id="2_scene"]
+[ext_resource type="Script" uid="uid://bcua33xmbibyi" path="res://items/food/food.gd" id="3_food"]
+
+[resource]
+script = ExtResource("3_food")
+health_restoration = 8.0
+hunger_restoration = 0.05
+name = &"Candy Cane"
+max_quantity = 99
+icon = ExtResource("1_icon")
+consumable = true
+type = "Food"
+use_action_name = &"Eat"
+scene = ExtResource("2_scene")
+metadata/_custom_type_script = "uid://bcua33xmbibyi"

@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://ck6tbv657xvan"]
+
+[ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="1_10umi"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_10umi")
+shader_parameter/albedo = Color(0.45, 0.3312, 0.15299998, 1)
+shader_parameter/hue_variance = 0.010000000475
+shader_parameter/sat_variance = 0.05
+shader_parameter/val_variance = 0.02000000095
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.50000002375
+shader_parameter/rim_strength = 0.4
+shader_parameter/rim_power = 3.0
+shader_parameter/rim_color = Color(0, 0, 0, 1)
+shader_parameter/refraction_strength = 0.05

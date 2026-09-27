@@ -23,8 +23,7 @@
 [ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="24_h06m4"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="25_s1u1g"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="26_irq8y"]
-[ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="27_ng5sv"]
-[ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="28_y7jrf"]
+[ext_resource type="Resource" uid="uid://5n0rxogo7ow0" path="res://items/food/candy_cane/candy_cane.tres" id="27_303ff"]
 [ext_resource type="ArrayOccluder3D" uid="uid://dxvs6e1pbvl0h" path="res://island/props/destructable_resource/tree/tree.occ" id="29_8iico"]
 [ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="30_2uuu8"]
 [ext_resource type="PackedScene" path="res://island/props/destructable_resource/destroy_shake_trigger.tscn" id="99_destroyshk"]
@@ -120,13 +119,8 @@ _data = {
 
 [sub_resource type="Resource" id="Resource_xgieu"]
 script = ExtResource("26_irq8y")
-item = ExtResource("27_ng5sv")
+item = ExtResource("27_303ff")
 quantity = 3
-metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
-
-[sub_resource type="Resource" id="Resource_rngja"]
-script = ExtResource("26_irq8y")
-item = ExtResource("28_y7jrf")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Resource" id="Resource_acl"]
@@ -275,18 +269,18 @@ shape = SubResource("CylinderShape3D_2dqu6")
 
 [node name="candy_cane" parent="Trunk" unique_id=124373033 instance=ExtResource("17_vd6dv")]
 
-[node name="Cane" parent="Trunk/candy_cane" index="0" unique_id=269374418]
+[node name="Cane" parent="Trunk/candy_cane" index="0" unique_id=1941248729]
 visible = false
 
-[node name="Curve" parent="Trunk/candy_cane" index="1" unique_id=1553830095]
+[node name="Curve" parent="Trunk/candy_cane" index="1" unique_id=1771265316]
 visible = false
 
-[node name="Stump" parent="Trunk/candy_cane" index="2" unique_id=368171659]
+[node name="Stump" parent="Trunk/candy_cane" index="2" unique_id=1036192232]
 visible = false
 surface_material_override/0 = ExtResource("18_xaafx")
 surface_material_override/1 = ExtResource("19_srio2")
 
-[node name="Top" parent="Trunk/candy_cane" index="3" unique_id=728988658]
+[node name="Top" parent="Trunk/candy_cane" index="3" unique_id=406237]
 surface_material_override/0 = ExtResource("18_xaafx")
 surface_material_override/1 = ExtResource("19_srio2")
 
@@ -320,17 +314,17 @@ shape = SubResource("CylinderShape3D_t4kw7")
 
 [node name="Visuals" parent="Stump" unique_id=370745963 instance=ExtResource("17_vd6dv")]
 
-[node name="Cane" parent="Stump/Visuals" index="0" unique_id=269374418]
+[node name="Cane" parent="Stump/Visuals" index="0" unique_id=1941248729]
 visible = false
 
-[node name="Curve" parent="Stump/Visuals" index="1" unique_id=1553830095]
+[node name="Curve" parent="Stump/Visuals" index="1" unique_id=1771265316]
 visible = false
 
-[node name="Stump" parent="Stump/Visuals" index="2" unique_id=368171659]
+[node name="Stump" parent="Stump/Visuals" index="2" unique_id=1036192232]
 surface_material_override/0 = ExtResource("18_xaafx")
 surface_material_override/1 = ExtResource("19_srio2")
 
-[node name="Top" parent="Stump/Visuals" index="3" unique_id=728988658]
+[node name="Top" parent="Stump/Visuals" index="3" unique_id=406237]
 visible = false
 surface_material_override/0 = ExtResource("18_xaafx")
 surface_material_override/1 = ExtResource("19_srio2")
@@ -342,7 +336,7 @@ metadata/_custom_type_script = "uid://c1bce1sw2dgnf"
 
 [node name="Inventory" type="Node" parent="." unique_id=997929093]
 script = ExtResource("25_s1u1g")
-item_instances = Array[ExtResource("26_irq8y")]([SubResource("Resource_xgieu"), SubResource("Resource_rngja")])
+item_instances = Array[ExtResource("26_irq8y")]([SubResource("Resource_xgieu")])
 constant = true
 size = 2
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"

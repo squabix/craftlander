@@ -20,12 +20,13 @@
 [ext_resource type="PackedScene" uid="uid://c5x1hn4vi06bh" path="res://entities/nav_entity_guide3d.tscn" id="17_2ur16"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="18_i1yyv"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="19_pgv3p"]
-[ext_resource type="Resource" path="res://items/weapons/slime_staff/slime_staff_item.tres" id="22_scokl"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="22_ygpbl"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="23_64iow"]
 [ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="24_ronam"]
 [ext_resource type="PackedScene" uid="uid://h3veu2e18ij1" path="res://entities/entity_health_bar.tscn" id="27_x1l0v"]
+[ext_resource type="Resource" uid="uid://bturgkik5ddxy" path="res://items/materials/snail_shell/snail_shell_item.tres" id="28_feq7g"]
 [ext_resource type="AudioStream" uid="uid://iqev25rq7fbq" path="res://assets/sound/rootling-07.mp3" id="29_5kefh"]
+[ext_resource type="Resource" uid="uid://chwiax8g7xg2" path="res://items/materials/slime_ball/slime_ball_item.tres" id="29_8s0dd"]
 [ext_resource type="AudioStream" uid="uid://b3c73cbq1ut7n" path="res://assets/sound/rootling-09.mp3" id="30_wmp2y"]
 [ext_resource type="AudioStream" uid="uid://cb3edy6gssben" path="res://assets/sound/rootling-08.mp3" id="31_xh30c"]
 [ext_resource type="AudioStream" uid="uid://vb4hdoc5mtfs" path="res://assets/sound/rootling-01.mp3" id="32_exg68"]
@@ -38,7 +39,6 @@
 [ext_resource type="AudioStream" uid="uid://ck0q8lhyrv4xy" path="res://assets/sound/rootling-10.mp3" id="39_a2rcb"]
 [ext_resource type="AudioStream" uid="uid://chvu761wd8xc2" path="res://assets/sound/rootling-11.mp3" id="40_a0n7q"]
 [ext_resource type="Script" uid="uid://2ow28vm5clst" path="res://common/spawner/projectile_spawner3d.gd" id="41_2cqyr"]
-[ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="41_scokl"]
 [ext_resource type="AudioStream" uid="uid://c4438fvpcmcld" path="res://assets/sound/rootling-12.mp3" id="41_thbg1"]
 [ext_resource type="PackedScene" uid="uid://bq7502yamydve" path="res://assets/models/entities/snail.blend" id="42_o4bg8"]
 [ext_resource type="Material" uid="uid://ct3rueaspkpix" path="res://assets/materials/darkness.tres" id="43_0fdpd"]
@@ -46,6 +46,7 @@
 [ext_resource type="Material" uid="uid://m5807bchpbmp" path="res://assets/materials/glowing_eye.tres" id="44_sq588"]
 [ext_resource type="PackedScene" uid="uid://brml40n12o27c" path="res://entities/projectiles/slime_ball/slime_ball.tscn" id="45_slimeball"]
 [ext_resource type="Resource" path="res://entities/projectiles/slime_ball/slime_ball_damage.tres" id="46_slimedmg"]
+[ext_resource type="Material" uid="uid://ck6tbv657xvan" path="res://assets/materials/snail_shell.tres" id="47_feq7g"]
 [ext_resource type="Script" uid="uid://cqq5b76xuq0i3" path="res://entities/npc_states/search_trigger.gd" id="99_searchtrigger"]
 [ext_resource type="Script" uid="uid://cke8g2exxgx0y" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 [ext_resource type="Script" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="101_normconf"]
@@ -73,7 +74,13 @@ size = Vector3(1, 1.8878174, 2.2010422)
 
 [sub_resource type="Resource" id="Resource_aoox1"]
 script = ExtResource("19_pgv3p")
-item = ExtResource("22_scokl")
+item = ExtResource("28_feq7g")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_pnkvf"]
+script = ExtResource("19_pgv3p")
+item = ExtResource("29_8s0dd")
+quantity = 6
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Animation" id="Animation_5fihd"]
@@ -590,7 +597,7 @@ entity = NodePath("../..")
 [node name="Inventory" type="Node" parent="." unique_id=2020826484]
 unique_name_in_owner = true
 script = ExtResource("18_i1yyv")
-item_instances = Array[ExtResource("19_pgv3p")]([SubResource("Resource_aoox1")])
+item_instances = Array[ExtResource("19_pgv3p")]([SubResource("Resource_aoox1"), SubResource("Resource_pnkvf")])
 constant = true
 size = 2
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
@@ -659,7 +666,7 @@ bus = &"SFX"
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.2, 0)
 
 [node name="Shell" parent="Visuals" index="0" unique_id=442330357]
-surface_material_override/0 = ExtResource("41_scokl")
+surface_material_override/0 = ExtResource("47_feq7g")
 
 [node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(810787991, 133580215) index="0" unique_id=1750562930]
 bones/1/rotation = Quaternion(0.7325361, 8.114913e-08, 8.7325105e-08, 0.68072826)
