@@ -165,6 +165,6 @@ material_override = ExtResource("12_i8nx6")
 surface_material_override/0 = SubResource("ShaderMaterial_jf1ee")
 surface_material_override/1 = ExtResource("16_jf1ee")
 surface_material_override/2 = ExtResource("16_jf1ee")
-surface_material_override/3 = ExtResource("16_jf1ee")
+surface_material_override/3 = SubResource("ShaderMaterial_jf1ee")
 
 [editable path="Visuals"]
