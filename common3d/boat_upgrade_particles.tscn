@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://lyptlia5fnc8"]
+
+[sub_resource type="Curve" id="Curve_shrink"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.75779045, 0.8774637), -0.5111994, -0.5111994, 0, 0, Vector2(1, 0.2536419), -3.0296543, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_shrink"]
+curve = SubResource("Curve_shrink")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_puff"]
+lifetime_randomness = 0.3
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector3(0, 1, 0)
+spread = 90.0
+initial_velocity_min = 8.0
+initial_velocity_max = 16.0
+gravity = Vector3(0, -2, 0)
+damping_min = 5.0
+damping_max = 5.0
+scale_min = 1.5
+scale_max = 2.5
+scale_curve = SubResource("CurveTexture_shrink")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_puff"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.1
+proximity_fade_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_puff"]
+material = SubResource("StandardMaterial3D_puff")
+radial_segments = 16
+rings = 8
+
+[sub_resource type="Gradient" id="Gradient_fade"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fade"]
+gradient = SubResource("Gradient_fade")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sparkle"]
+lifetime_randomness = 0.3
+emission_shape = 1
+emission_sphere_radius = 2.0
+direction = Vector3(0, 1, 0)
+spread = 35.0
+initial_velocity_min = 14.0
+initial_velocity_max = 24.0
+damping_min = 2.0
+damping_max = 2.0
+scale_min = 0.6
+scale_max = 1.2
+color = Color(1, 0.85, 0.35, 1)
+color_ramp = SubResource("GradientTexture1D_fade")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sparkle"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_sparkle"]
+material = SubResource("StandardMaterial3D_sparkle")
+radius = 0.2
+height = 0.4
+radial_segments = 6
+rings = 3
+
+[node name="BoatUpgradeParticles" type="GPUParticles3D" unique_id=1871574976]
+cast_shadow = 0
+emitting = false
+amount = 96
+lifetime = 1.6
+one_shot = true
+explosiveness = 0.9
+visibility_aabb = AABB(-16, -6, -16, 32, 28, 32)
+process_material = SubResource("ParticleProcessMaterial_puff")
+draw_pass_1 = SubResource("SphereMesh_puff")
+
+[node name="Sparkles" type="GPUParticles3D" parent="." unique_id=553804674]
+cast_shadow = 0
+emitting = false
+amount = 80
+lifetime = 1.4
+one_shot = true
+explosiveness = 0.8
+visibility_aabb = AABB(-16, -6, -16, 32, 28, 32)
+process_material = SubResource("ParticleProcessMaterial_sparkle")
+draw_pass_1 = SubResource("SphereMesh_sparkle")

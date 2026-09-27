@@ -59,5 +59,12 @@ func make_current() -> Boat:
 	get_parent().add_child(next_boat)
 	next_boat.global_transform = self.global_transform
 	next_boat.state_machine.enter_state(&"Docked")
+	next_boat.play_upgrade_particles()
 	queue_free()
 	return next_boat
+
+
+func play_upgrade_particles() -> void:
+	var spawner := get_node_or_null(^"%UpgradeParticleSpawner") as ParticleSpawner3D
+	if is_instance_valid(spawner):
+		spawner.spawn()

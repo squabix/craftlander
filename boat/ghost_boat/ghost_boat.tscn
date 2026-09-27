@@ -34,12 +34,36 @@ size = Vector3(4.5, 0.5, 5.5)
 
 [sub_resource type="Animation" id="Animation_0q3wp"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.017453292, 0, 0.017453292)]
+}
 
 [sub_resource type="Animation" id="Animation_1blct"]
 resource_name = "rock"
 length = 4.0
 loop_mode = 1
 step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.017453292, 0, 0.017453292), Vector3(-0.017453292, 0, -0.017453292), Vector3(0.017453292, 0, 0.017453292)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wbjwq"]
 _data = {
@@ -132,7 +156,7 @@ metadata/_custom_type_script = "uid://iyqixpr4un6s"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, -0.20000005)
 
 [node name="Visuals" parent="." unique_id=545632550 instance=ExtResource("11_3gr63")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+transform = Transform3D(0.9998477, -0.017452406, 0, 0.017449748, 0.9996954, -0.017452406, 0.00030458646, 0.017449748, 0.9998477, 0, 0, 3)
 
 [node name="Cube" parent="Visuals" index="0" unique_id=330923318]
 material_override = ExtResource("12_i8nx6")
