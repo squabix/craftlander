@@ -20,6 +20,7 @@ var active_baking_geometry: NavigationMeshSourceGeometryData3D
 var has_baked := false
 var is_region_baking := false
 var is_bake_queued := false
+var merge_task_id := -1
 
 
 static func transform_to_region_space(vertices: PackedFloat32Array, relative_transform: Transform3D) -> void:
@@ -28,6 +29,13 @@ static func transform_to_region_space(vertices: PackedFloat32Array, relative_tra
 		vertices[i] = world_vertex.x
 		vertices[i + 1] = world_vertex.y
 		vertices[i + 2] = world_vertex.z
+
+
+static func merge_geometries(base: NavigationMeshSourceGeometryData3D, prop_geometries: Array, on_merged: Callable) -> void:
+	var merged: NavigationMeshSourceGeometryData3D = base.duplicate()
+	for prop_geometry: NavigationMeshSourceGeometryData3D in prop_geometries:
+		merged.merge(prop_geometry)
+	on_merged.call_deferred(merged)
 
 
 func _ready() -> void:
@@ -91,22 +99,19 @@ func bake_props() -> void:
 		return
 
 	is_region_baking = true
+	merge_task_id = WorkerThreadPool.add_task(
+		IslandNavRegion.merge_geometries.bind(base_geometry, prop_geometry_cache.values(), bake_merged_geometry),
+	)
 
-	# Merge all cached prop geometries into the base island geometry
-	update_active_geometry()
 
-	# Bake the new geometry
+func bake_merged_geometry(merged: NavigationMeshSourceGeometryData3D) -> void:
+	WorkerThreadPool.wait_for_task_completion(merge_task_id)
+	active_baking_geometry = merged
 	NavigationServer3D.bake_from_source_geometry_data_async(
 		navigation_mesh,
 		active_baking_geometry,
 		_complete_baking,
 	)
-
-
-func update_active_geometry() -> void:
-	active_baking_geometry = base_geometry.duplicate()
-	for prop_geom in prop_geometry_cache.values():
-		active_baking_geometry.merge(prop_geom)
 
 
 func initialize_prop_cache() -> void:

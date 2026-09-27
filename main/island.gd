@@ -103,7 +103,7 @@ func advance_step() -> void:
 
 func initial_save_load() -> void:
 	advance_step()
-	await island_generator.generated
+	await island_generator.wait_until_generated()
 	
 	connect_player_boat_adder()
 	for manager in docking_managers:
@@ -141,7 +141,7 @@ func reload_save() -> void:
 	Spawner3D.spawning_enabled = true
 	advance_step()
 	
-	await island_generator.generated
+	await island_generator.wait_until_generated()
 	
 	advance_step()
 	Main.loaded_save.add_dynamic_nodes(self)

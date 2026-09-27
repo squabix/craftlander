@@ -343,6 +343,7 @@ domain_warp_mask_texture = SubResource("GradientTexture2D_vwc2c")
 ridged_noise_influence = 0.0
 mesh_instance = NodePath("MeshInstance3D")
 collision_shape = NodePath("StaticBody3D/CollisionShape3D")
+generate_on_ready = false
 map_size = Vector3(600, 20, 600)
 map_resolution = Vector2i(800, 800)
 metadata/_edit_group_ = true

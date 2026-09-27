@@ -20,6 +20,8 @@ var heightmap_sampler: Callable:
 		if not heightmap_sampler.is_valid():
 			heightmap_sampler = get_heightmap_sampler((shader_get(&"heightmap") as ImageTexture).get_image())
 		return heightmap_sampler
+var is_generated := false
+var generation_task_id := -1
 
 
 func _ready() -> void:
@@ -164,8 +166,14 @@ func get_pixel_position(x: int, y: int) -> Vector3:
 	)
 
 func generate() -> void:
+	is_generated = false
 	add_new_mesh()
-	WorkerThreadPool.add_task(_generate_heightmap_image)
+	generation_task_id = WorkerThreadPool.add_task(_generate_heightmap_image)
+
+
+func wait_until_generated() -> void:
+	if not is_generated:
+		await generated
 
 
 func _generate_heightmap_image() -> void:
@@ -173,7 +181,13 @@ func _generate_heightmap_image() -> void:
 
 
 func _finalize_generation(output_image: Image) -> void:
+	if generation_task_id != -1:
+		WorkerThreadPool.wait_for_task_completion(generation_task_id)
+		generation_task_id = -1
+
 	heightmap_sampler = get_heightmap_sampler(output_image)
 	var image_texture := update_shader_texture(output_image)
 	update_collision_shape(image_texture)
+
+	is_generated = true
 	generated.emit()
