@@ -5,6 +5,9 @@ const DOCK_ELEVATION_OFFSET := 0.65
 const DEFAULT_DOCK_PLACE_RAY_LENGTH := 400.0
 const DOCK_EXPOSED_LENGTH := 11.5
 const SEPARATION_MAX_ATTEMPTS := 200
+const ROTATION_RANGE_MAX_ATTEMPTS := 1000
+const PLACEMENT_MAX_ATTEMPTS := 2000
+const FULL_TURN_DEGREES := 360.0
 
 @export var dock: Node3D
 
@@ -83,11 +86,12 @@ func place_dock() -> void:
 
 	while not found_placement:
 		attempts += 1
+		if attempts > PLACEMENT_MAX_ATTEMPTS:
+			Util.node_error("%s could not find any dock placement after %s attempts", self, PLACEMENT_MAX_ATTEMPTS)
+			return
+
 		extend_dock_place_rays()
-		rotation_degrees.y = randf_range(
-			rotation_degrees_from + rotation_degrees_offset,
-			rotation_degrees_to - rotation_degrees_offset
-		)
+		rotation_degrees.y = get_random_rotation_degrees(attempts < ROTATION_RANGE_MAX_ATTEMPTS)
 		if attempts == SEPARATION_MAX_ATTEMPTS and not separation_avoid_managers.is_empty():
 			push_warning("%s could not keep %s degrees away from its avoided docks; ignoring separation" % [name, separation_min_degrees])
 		if attempts < SEPARATION_MAX_ATTEMPTS and not _is_separated_from_avoided():
@@ -100,6 +104,15 @@ func place_dock() -> void:
 		found_placement = are_dock_places_rays_colliding(placement_point)
 
 	set_dock_position(placement_point)
+
+
+func get_random_rotation_degrees(within_range: bool) -> float:
+	if not within_range:
+		return randf_range(0.0, FULL_TURN_DEGREES)
+	return randf_range(
+		rotation_degrees_from + rotation_degrees_offset,
+		rotation_degrees_to - rotation_degrees_offset
+	)
 
 
 func _is_separated_from_avoided() -> bool:
