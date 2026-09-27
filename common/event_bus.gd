@@ -23,7 +23,7 @@ static func subscribe(to: StringName, subscriber: Callable, unsubscribe_signal: 
 
 	# Unsubscribe when received signal
 	if unsubscribe_signal.get_object() != null:
-		unsubscribe_signal.connect(EventBus.unsubscribe.bind(to, subscriber), CONNECT_ONE_SHOT)
+		unsubscribe_signal.connect(func() -> void: unsubscribe(to, subscriber), CONNECT_ONE_SHOT)
 	return true
 
 
