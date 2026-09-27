@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://favgu1tbe1tq" path="res://common3d/interactions/interactable3d.gd" id="13_e44pp"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="99_particlespawner"]
 [ext_resource type="PackedScene" uid="uid://lyptlia5fnc8" path="res://common3d/boat_upgrade_particles.tscn" id="99_upgradeparticles"]
+[ext_resource type="Script" uid="uid://bxjt3nibhkxh8" path="res://common/signal_triggrs/camera_shake_trigger.gd" id="99_shaketrigger"]
 
 [sub_resource type="Resource" id="Resource_1blct"]
 script = ExtResource("2_fs7t1")
@@ -90,6 +91,11 @@ move_up_as_jump = false
 gravity_multiplier = 0.0
 rotation_range = SubResource("Resource_wbjwq")
 metadata/_custom_type_script = "uid://sw1ikf32qnw0"
+
+[node name="DockShakeTrigger" type="Node" parent="."]
+script = ExtResource("99_shaketrigger")
+trauma = 0.25
+signal_name = &"docked"
 
 [node name="BlenderMeshes1" parent="." unique_id=562094623 instance=ExtResource("2_6h0kv")]
 transform = Transform3D(0.9998477, -0.017452406, 0, 0.017449748, 0.9996954, -0.017452406, 0.00030458646, 0.017449748, 0.9998477, 0, 0.2, 2.78762)

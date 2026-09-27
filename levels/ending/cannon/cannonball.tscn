@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://0sxxfwom1dvf" path="res://levels/ending/cannon/cannonball.gd" id="1_ball"]
 [ext_resource type="PackedScene" path="res://levels/ending/cannon/cannon_blast.tscn" id="2_blast"]
+[ext_resource type="Script" uid="uid://bxjt3nibhkxh8" path="res://common/signal_triggrs/camera_shake_trigger.gd" id="3_shaketrigger"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ball"]
 radius = 0.35
@@ -32,3 +33,9 @@ shape = SubResource("SphereShape3D_ball")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=97938634]
 mesh = SubResource("SphereMesh_ball")
 surface_material_override/0 = SubResource("Material_ball")
+
+[node name="ExplosionShakeTrigger" type="Node" parent="."]
+script = ExtResource("3_shaketrigger")
+trauma = 0.5
+signal_name = &"exploded"
+use_signal_position = true

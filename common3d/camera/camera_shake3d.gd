@@ -12,6 +12,7 @@ extends Node
 @export_custom(PROPERTY_HINT_NONE, "suffix:cycles/s") var shake_speed := 18.0
 
 static var current: CameraShake3D
+static var max_distance := 15.0 # m
 
 var trauma := 0.0
 
@@ -19,9 +20,17 @@ var noise := FastNoiseLite.new()
 var _time_offset := 0.0
 
 
-static func shake(amount: float) -> void:
-	if is_instance_valid(current):
-		current.add_trauma(amount)
+static func shake(amount: float, at: Variant = null) -> void:
+	if not is_instance_valid(current):
+		return
+
+	if at is Vector3 and is_instance_valid(current.camera):
+		var distance := current.camera.global_position.distance_to(at)
+		if distance >= max_distance:
+			return
+		amount *= 1.0 - distance / max_distance
+
+	current.add_trauma(amount)
 
 
 func _ready() -> void:

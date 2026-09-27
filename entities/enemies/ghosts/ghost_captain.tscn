@@ -68,6 +68,7 @@
 [ext_resource type="Script" uid="uid://cil2fha1xdwb5" path="res://entities/npc_states/wait_for_target_state.gd" id="state_wait"]
 [ext_resource type="Script" uid="uid://s03orp42ne5g" path="res://entities/enemies/ghosts/captain/line_player3d.gd" id="voice_script"]
 [ext_resource type="AudioStream" uid="uid://c3gu6wxuuw7i6" path="res://assets/sound/shockwave.mp3" id="snd_shockwave"]
+[ext_resource type="Script" uid="uid://bxjt3nibhkxh8" path="res://common/signal_triggrs/camera_shake_trigger.gd" id="shake_trigger_script"]
 
 [sub_resource type="Resource" id="Resource_xl8du"]
 script = ExtResource("2_pyya0")
@@ -437,6 +438,11 @@ horizontal_rotation_target = NodePath(".")
 vertical_rotation_target = NodePath(".")
 rotation_range = SubResource("Resource_0dji4")
 
+[node name="SwungShakeTrigger" type="Node" parent="."]
+script = ExtResource("shake_trigger_script")
+trauma = 0.3
+signal_name = &"swung"
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1536011462]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 shape = SubResource("CapsuleShape3D_3emv6")
@@ -604,12 +610,22 @@ script = ExtResource("state_open")
 [node name="PhaseBreak" type="Node" parent="Controller3D/Default" unique_id=942592155]
 script = ExtResource("state_phase")
 
+[node name="ShakeTrigger" type="Node" parent="Controller3D/Default/PhaseBreak"]
+script = ExtResource("shake_trigger_script")
+trauma = 0.7
+signal_name = &"entered"
+
 [node name="Dead" type="Node" parent="Controller3D/Default" unique_id=1615198282 node_paths=PackedStringArray("dropper", "held_key")]
 script = ExtResource("state_dead")
 dropper = NodePath("../../../InventoryDropper3D")
 key_item = ExtResource("23_hc0l4")
 held_key = NodePath("../../../Visuals/Armature/key")
 priority = 100.0
+
+[node name="ShakeTrigger" type="Node" parent="Controller3D/Default/Dead"]
+script = ExtResource("shake_trigger_script")
+trauma = 0.8
+signal_name = &"entered"
 
 [node name="GhostEntityGuide3D" type="Node" parent="Controller3D" unique_id=1381005085 node_paths=PackedStringArray("hoverer", "entity")]
 script = ExtResource("20_ghj0v")

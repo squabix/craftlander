@@ -1,6 +1,8 @@
 class_name Cannonball
 extends HitProjectile3D
 
+signal exploded(at: Vector3)
+
 static var in_flight := 0
 static var all: Array[Cannonball] = []
 
@@ -60,6 +62,7 @@ func add_blast() -> void:
 	Spawner3D.root.add_child(blast)
 	blast.global_position = global_position
 	blast.damage = damage
+	exploded.emit(blast.global_position)
 
 
 func _on_tree_exiting() -> void:

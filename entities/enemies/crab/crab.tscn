@@ -49,6 +49,7 @@
 [ext_resource type="Material" uid="uid://b4edt0v3tfua" path="res://assets/materials/ghosts/ghost_crab.tres" id="gt_mat"]
 [ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
 [ext_resource type="Script" uid="uid://bqct5adpvfunh" path="res://common3d/hoverer3d.gd" id="eh_script"]
+[ext_resource type="Script" uid="uid://bxjt3nibhkxh8" path="res://common/signal_triggrs/camera_shake_trigger.gd" id="shake_trigger_script"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
 script = ExtResource("3_2e40p")
@@ -516,6 +517,11 @@ horizontal_rotation_target = NodePath(".")
 vertical_rotation_target = NodePath(".")
 rotation_range = SubResource("Resource_0dji4")
 metadata/_custom_type_script = "uid://bki5ij8task16"
+
+[node name="SwungShakeTrigger" type="Node" parent="."]
+script = ExtResource("shake_trigger_script")
+trauma = 0.3
+signal_name = &"swung"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2121250733]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.28881836, 0)
