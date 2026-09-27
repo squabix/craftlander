@@ -132,8 +132,8 @@ func add_entity(entity_resource: IslandEntityResource, spawnpoint := Vector3.ZER
 	
 	var entity := entity_resource.scene.instantiate() as Entity3D
 
+	entity.position = to_local(spawnpoint)
 	add_child(entity)
-	entity.global_position = spawnpoint
 	entity.add_to_group(&"enemies")
 	report_death_on_exit(entity)
 	try_ghostify(entity)

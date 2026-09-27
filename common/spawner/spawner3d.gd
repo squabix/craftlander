@@ -44,13 +44,15 @@ var has_started_timer: bool
 var spawned_instances: Array[Node]
 
 
-static func _transform(node: Node3D, node_position: Vector3, node_rotation_degrees: Vector3) -> void:
-	await Util.get_tree().process_frame
-	if not is_instance_valid(node):
-		push_error("Cannot spawn transform invalid node")
-		return
-	node.global_position = node_position
-	node.global_rotation_degrees = node_rotation_degrees
+static func get_local_spawn_transform(parent: Node, instance: Node3D, spawn_position: Vector3, spawn_rotation_degrees: Vector3) -> Transform3D:
+	var parent_transform := (parent as Node3D).global_transform if parent is Node3D else Transform3D.IDENTITY
+	var spawn_rotation := Vector3(
+		deg_to_rad(spawn_rotation_degrees.x),
+		deg_to_rad(spawn_rotation_degrees.y),
+		deg_to_rad(spawn_rotation_degrees.z),
+	)
+	var spawn_basis := Basis.from_euler(spawn_rotation).scaled_local(parent_transform.basis.get_scale() * instance.scale)
+	return parent_transform.affine_inverse() * Transform3D(spawn_basis, spawn_position)
 
 
 func _ready() -> void:
@@ -139,14 +141,12 @@ func spawn(instance: Node3D = null, parent: Node = null) -> Node3D:
 		return null
 	var instance_position := get_spawn_position(parent)
 	var instance_rotation_degrees := get_spawn_rotation_degrees(parent)
+	instance.transform = get_local_spawn_transform(parent, instance, instance_position, instance_rotation_degrees)
 
 	if defer:
 		parent.add_child.call_deferred(instance)
-		_transform(instance, instance_position, instance_rotation_degrees)
 	else:
 		parent.add_child(instance)
-		instance.global_position = instance_position
-		instance.global_rotation_degrees = instance_rotation_degrees
 
 	_call_initializer(instance)
 	spawned.emit(instance)
