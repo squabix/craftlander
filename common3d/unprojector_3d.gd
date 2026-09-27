@@ -16,16 +16,18 @@ extends Marker3D
 var camera: Camera3D
 
 
-func _process(_delta: float) -> void:
-	if not is_instance_valid(camera):
-		camera = get_viewport().get_camera_3d()
-		return
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_DISABLED and is_instance_valid(target):
+		target.visible = false
 
-	if not is_instance_valid(target):
+
+func _process(_delta: float) -> void:
+	camera = get_viewport().get_camera_3d()
+	if not is_instance_valid(camera) or not is_instance_valid(target):
 		return
 
 	# Hide target if behind camera
-	if camera.is_position_behind(global_position):
+	if not is_visible_in_tree() or camera.is_position_behind(global_position):
 		target.visible = false
 		return
 	
