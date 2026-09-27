@@ -13,5 +13,5 @@ save_mode = 1
 saver_id = &"day_night_cycle"
 saved_properties = Dictionary[StringName, bool]({
 &"phase_degrees": true,
-&"days_survived": true
+&"day_number": true
 })
