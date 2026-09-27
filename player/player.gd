@@ -49,9 +49,14 @@ const HURT_SHAKE_TRAUMA := 0.4
 @export var swim_player: CharacterAudioStreamPlayer3D
 @export var eat_player: AudioStreamPlayer
 
+@export_group("Drowning", "drowning")
+@export_custom(PROPERTY_HINT_NONE, "suffix:dp") var drowning_damage := 25.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var drowning_interval := 1.0
+
 var is_in_water := false
 var cutscene_locked := false
 var respawn_override: Callable
+var drowning_cooldown := 0.0
 
 
 func _ready() -> void:
@@ -83,14 +88,23 @@ func _on_hunger_loaded() -> void:
 		hunger.value = hunger.initial_value
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	adjust_head()
-
-	# Drown if swimming when out of stamina
-	if is_in_water and not stamina.is_usable():
-		health.hurt(INF)
-
+	update_drowning(delta)
 	update_hud_visibility()
+
+
+func update_drowning(delta: float) -> void:
+	if not is_in_water or stamina.is_usable():
+		drowning_cooldown = 0.0
+		return
+
+	drowning_cooldown -= delta
+	if drowning_cooldown > 0.0:
+		return
+
+	drowning_cooldown = drowning_interval
+	health.hurt(drowning_damage)
 
 
 func set_character_stream_player(to: CharacterAudioStreamPlayer3D) -> void:
