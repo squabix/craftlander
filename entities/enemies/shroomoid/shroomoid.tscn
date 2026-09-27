@@ -60,6 +60,8 @@
 [ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
 [ext_resource type="Script" uid="uid://bqct5adpvfunh" path="res://common3d/hoverer3d.gd" id="eh_script"]
 [ext_resource type="Resource" path="res://entities/enemies/ghosts/ghost_projectile_acl.tres" id="gt_acl"]
+[ext_resource type="Script" path="res://entities/npc_states/specials/blink_attack_state.gd" id="sp_blink"]
+[ext_resource type="Script" path="res://entities/npc_states/hit_count_trigger.gd" id="sp_hit_count"]
 [ext_resource type="Script" path="res://entities/npc_states/search_trigger.gd" id="99_searchtrigger"]
 
 [sub_resource type="Resource" id="Resource_xl8du"]
@@ -709,9 +711,13 @@ stream_2/stream = ExtResource("51_oe4m7")
 [sub_resource type="Resource" id="Resource_acl"]
 script = ExtResource("acl_script")
 
-[node name="Shroomoid" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
+[node name="Shroomoid" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target", "sight", "visuals")]
 collision_mask = 17
 script = ExtResource("1_rf56o")
+sight = NodePath("Sight3D")
+visuals = NodePath("Visuals")
+special_charge_height = 1.2
+special_charge_radius = 0.6
 anim_tree = NodePath("AnimationTree")
 culling_controller = NodePath("CullingController3D")
 type = &"Shroomoid"
@@ -762,6 +768,14 @@ state_machine = NodePath("../../Controller3D/Default")
 state_name = &"Searching"
 from_state_whitelist = Array[StringName]([&"Wandering", &"Searching"])
 signal_name = &"was_dealt_damage"
+
+[node name="BlinkTrigger" type="Node" parent="Hurtbox3D" node_paths=PackedStringArray("state_machine")]
+script = ExtResource("sp_hit_count")
+state_machine = NodePath("../../Controller3D/Default")
+state_name = &"Blink"
+from_state_whitelist = Array[StringName]([&"Wandering", &"Chasing", &"Searching"])
+signal_name = &"was_hurt"
+hits_required = 2
 
 [node name="MeshFlashTrigger" type="Node" parent="Hurtbox3D" node_paths=PackedStringArray("mesh_root")]
 script = ExtResource("100_flash")
@@ -859,8 +873,6 @@ script = ExtResource("15_d2wnc")
 item_holder = NodePath("../../../ItemHolder3D")
 interval_staggerer = NodePath("IntervalStaggerer")
 advance_goal_distance = 5.0
-retreat_enabled = true
-retreat_goal_distance = 4.0
 lose_target_state = &"Searching"
 guide = NodePath("../../NavEntityGuide3D")
 sight = NodePath("../../../Sight3D")
@@ -892,6 +904,21 @@ target_methods = {
 NodePath(".."): &"check_status"
 }
 metadata/_custom_type_script = "uid://73ya7jxulyl4"
+
+[node name="Blink" type="Node" parent="Controller3D/Default"]
+script = ExtResource("sp_blink")
+range_min = 0.0
+range_max = 4.0
+color = Color(0.95, 0.25, 0.65, 1)
+tell = 2.0
+recovery = 0.3
+damage = 0.0
+land_near_target = false
+require_dry_landing = true
+min_distance = 8.0
+max_distance = 11.0
+land_spread = 0.8
+radius = 1.2
 
 [node name="NavEntityGuide3D" parent="Controller3D" unique_id=1240188709 node_paths=PackedStringArray("nav", "entity") instance=ExtResource("17_hqd4c")]
 nav = NodePath("../../NavigationAgent3D")
