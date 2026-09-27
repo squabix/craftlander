@@ -582,97 +582,6 @@ signal_players = {
 [node name="InventoryOrganizer" parent="DockingManager1/Player/PauseMenu/CraftingInterface" parent_id_path=PackedInt32Array(1858460853, 1908131253) index="7" unique_id=1412121172 node_paths=PackedStringArray("inventory_display_rows")]
 inventory_display_rows = [NodePath("../../../HotbarInterface/HotbarDisplay"), null, null, null]
 
-[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/VSync/CenterContainer/VSyncToggle" parent_id_path=PackedInt32Array(1858460853, 1234740637, 1518537055) index="0" unique_id=1351290583 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"focus_entered": null,
-&"mouse_entered": null,
-&"pressed": null
-}
-
-[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/FullScreen/CenterContainer/WindowModeOption" parent_id_path=PackedInt32Array(1858460853, 1234740637, 2049426436) index="1" unique_id=2144126531 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"focus_entered": NodePath("HoverPlayer"),
-&"mouse_entered": NodePath("HoverPlayer"),
-&"pressed": NodePath("PressPlayer")
-}
-
-[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/AntiAliasing/AAOption" parent_id_path=PackedInt32Array(1858460853, 1234740637, 630181348) index="1" unique_id=875959311 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"focus_entered": null,
-&"mouse_entered": null,
-&"pressed": null
-}
-
-[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/ShadowQuality/ShadowOption" parent_id_path=PackedInt32Array(1858460853, 1234740637, 1710798274) index="1" unique_id=1882629603 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"focus_entered": null,
-&"mouse_entered": null,
-&"pressed": null
-}
-
-[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/SSAO/CenterContainer/SSAOToggle" parent_id_path=PackedInt32Array(1858460853, 1234740637, -1293967292) index="0" unique_id=-1293967291 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
-}
-
-[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/Glow/CenterContainer/GlowToggle" parent_id_path=PackedInt32Array(1858460853, 1234740637, -1293967274) index="0" unique_id=-1293967273 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
-}
-
-[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/MaxFPS/MaxFPSOption" parent_id_path=PackedInt32Array(1858460853, 1234740637, -1293967288) index="1" unique_id=-1293967287 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"focus_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
-}
-
-[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/InvertY/CenterContainer/InvertYToggle" parent_id_path=PackedInt32Array(1858460853, 1234740637, 1517878780) index="0" unique_id=1079694290 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"focus_entered": null,
-&"mouse_entered": null,
-&"pressed": null
-}
-
-[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/TutorialHints/CenterContainer/TutorialHintsToggle" parent_id_path=PackedInt32Array(1858460853, 1234740637, 1517878781) index="0" unique_id=1079694291 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
-}
-
-[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenShake/CenterContainer/ScreenShakeToggle" parent_id_path=PackedInt32Array(1858460853, 1234740637, -1293967266) index="0" unique_id=-1293967265 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
-}
-
-[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/Vignette/CenterContainer/VignetteToggle" parent_id_path=PackedInt32Array(1858460853, 1234740637, -1293967261) index="0" unique_id=-1293967260 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
-}
-
-[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenEffects/CenterContainer/ScreenEffectsToggle" parent_id_path=PackedInt32Array(1858460853, 1234740637, -1293967256) index="0" unique_id=-1293967255 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
-}
-
-[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/BackButton" parent_id_path=PackedInt32Array(1858460853, 1234740637, 1546788436) index="0" unique_id=1198217718 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"focus_entered": null,
-&"mouse_entered": null,
-&"pressed": null
-}
-
 [node name="SignalAudioManager" parent="DockingManager1/Player/PauseMenu" index="3" unique_id=1037296529 node_paths=PackedStringArray("signal_players")]
 signal_players = {
 &"updated_pause": NodePath("PausePlayer")
@@ -1272,8 +1181,6 @@ music = NodePath("../EndingMusicPlayer")
 hud = NodePath("../EndingHUD")
 
 [editable path="DockingManager1/Player"]
-[editable path="DockingManager1/Player/PauseMenu/SettingsMenu"]
-[editable path="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/BackButton/ButtonAudioManager"]
 [editable path="DockingManager1/Dock"]
 [editable path="DockingManager1/Dock/BlenderMeshes"]
 [editable path="DockingManager2/Dock"]
