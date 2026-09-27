@@ -3,6 +3,8 @@ extends Area3D
 
 signal was_hurt
 signal was_dealt_damage(damage: Damage)
+signal was_blocked(damage: Damage, direction: Vector3)
+signal was_resisted(damage: Damage)
 
 @export var health: Health
 @export var inactive := false
@@ -69,6 +71,10 @@ func hurt(damage: Damage, direction: Vector3 = Vector3.ZERO) -> float:
 	
 	var success := not is_instance_valid(health) or health.hurt(dp) 
 	if not success:
+		if health.invulnerable:
+			was_blocked.emit(damage, direction)
+		elif dp < health.hurt_threshold:
+			was_resisted.emit(damage)
 		return 0.0
 	
 	total_damage_taken += dp

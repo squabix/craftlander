@@ -6,6 +6,11 @@ const LOW_HUNGER_THRESHOLD := 0.35
 const SPRINT_HINT_HOLD_DURATION := 3.0
 const COPPER_ITEM_NAME := &"Copper Chunk"
 
+const WEAK_TOOL_STEPS: Dictionary[StringName, StringName] = {
+	&"pickaxe": &"weak_pickaxe",
+	&"axe": &"weak_axe",
+}
+
 const STEPS: Dictionary[StringName, Dictionary] = {
 	&"item_collecting": {
 		"tier": Tier.TOAST,
@@ -47,6 +52,16 @@ const STEPS: Dictionary[StringName, Dictionary] = {
 		"title": "Sailing",
 		"text": "Collect the listed resources to upgrade your ship and travel to the next island.",
 	},
+	&"weak_pickaxe": {
+		"tier": Tier.POPUP,
+		"title": "Too Tough",
+		"text": "Your pickaxe isn't strong enough to mine this. Craft a stronger pickaxe from better materials.",
+	},
+	&"weak_axe": {
+		"tier": Tier.POPUP,
+		"title": "Too Tough",
+		"text": "Your axe isn't strong enough to chop this down. Craft a stronger axe from better materials.",
+	},
 }
 
 var _player: Player
@@ -57,6 +72,7 @@ func _ready() -> void:
 	EventBus.subscribe(&"item_crafted", _on_item_crafted)
 	EventBus.subscribe(&"player_survived_hurt", _on_player_survived_hurt)
 	EventBus.subscribe(&"resource_harvested", _on_resource_harvested)
+	EventBus.subscribe(&"resource_resisted", _on_resource_resisted)
 	get_tree().node_added.connect(_on_node_added)
 
 
@@ -158,6 +174,16 @@ func _on_resource_harvested(payload: Dictionary) -> void:
 	var item: Item = payload.get("item")
 	if is_instance_valid(item) and item.name == COPPER_ITEM_NAME:
 		complete_step(&"copper_collected")
+
+
+func _on_resource_resisted(payload: Dictionary) -> void:
+	var source: Node = payload.get("source")
+	if not is_instance_valid(_player) or source != _player:
+		return
+
+	var step_id: StringName = WEAK_TOOL_STEPS.get(payload.get("type", &""), &"")
+	if not step_id.is_empty():
+		complete_step(step_id)
 
 
 func _on_boat_menu_opened() -> void:

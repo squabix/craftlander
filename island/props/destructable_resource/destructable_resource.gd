@@ -26,6 +26,11 @@ func connect_hurtbox_damage() -> void:
 		EventBus.trigger(&"resource_harvested", {"item": given_item, "source": damage.source})
 	hurtbox.was_dealt_damage.connect(give_to_source)
 
+func connect_hurtbox_resistance() -> void:
+	var report_resistance := func(damage: Damage):
+		EventBus.trigger(&"resource_resisted", {"type": damage.type, "source": damage.source})
+	hurtbox.was_resisted.connect(report_resistance)
+
 func get_damage_source_inventory(source: Node) -> Inventory:
 	return Util.find_stored_child_of_class(damage_source_inventories, source)
 
@@ -41,3 +46,4 @@ func _ready() -> void:
 		return
 	
 	connect_hurtbox_damage()
+	connect_hurtbox_resistance()
