@@ -27,7 +27,7 @@ stream_0/stream = ExtResource("11_y6dg1")
 stream_1/stream = ExtResource("12_agq30")
 stream_2/stream = ExtResource("13_n0yuo")
 
-[node name="DefaultRigidItemPickup" type="RigidBody3D" unique_id=1935409248 node_paths=PackedStringArray("item_pickup_interactable", "hurtbox")]
+[node name="DefaultRigidItemPickup" type="RigidBody3D" unique_id=1935409248 node_paths=PackedStringArray("item_pickup_interactable", "hurtbox", "ground_recovery_staggerer")]
 collision_layer = 32
 collision_mask = 36
 gravity_scale = 3.0
@@ -39,12 +39,14 @@ linear_damp = 0.3
 script = ExtResource("1_kqrhr")
 item_pickup_interactable = NodePath("ItemPickup3D")
 hurtbox = NodePath("Hurtbox3D")
+ground_recovery_staggerer = NodePath("GroundRecoveryStaggerer")
 metadata/_custom_type_script = "uid://oexynjvr31bs"
 
 [node name="ItemPickup3D" type="Area3D" parent="." unique_id=1836251032]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("2_d36xw")
+generate_floor_raycast = false
 auto_generate_collision = false
 visibility_fading_enabled = true
 visibility_fading_distance = 35.0
@@ -91,6 +93,15 @@ target_methods = {
 NodePath(".."): &"evaluate_culling"
 }
 initial_time_left = 3.0
+metadata/_custom_type_script = "uid://73ya7jxulyl4"
+
+[node name="GroundRecoveryStaggerer" type="Node" parent="." unique_id=1935407583 node_paths=PackedStringArray("target_methods")]
+script = ExtResource("7_4u05t")
+disabled = true
+stagger_amount = 0.13
+target_methods = {
+NodePath(".."): &"recover_from_underground"
+}
 metadata/_custom_type_script = "uid://73ya7jxulyl4"
 
 [node name="NodeSaver" type="Node" parent="." unique_id=671650205]

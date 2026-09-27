@@ -36,7 +36,7 @@ func _ready() -> void:
 	if is_instance_valid(health):
 		health.died.connect(die)
 	if drop_on_ready:
-		drop(on_ready_index)
+		drop(on_ready_index, false)
 
 
 func initialize_instance(instance: Node3D) -> void:
@@ -47,16 +47,18 @@ func initialize_instance(instance: Node3D) -> void:
 	instance.tree_exiting.connect(InventoryDropper3D.all_dropped_pickups.erase.bind(instance), CONNECT_ONE_SHOT)
 
 
-func add_pickup(item: Item) -> RigidItemPickup3D:
+func add_pickup(item: Item, recovers_from_underground := true) -> RigidItemPickup3D:
 	var pickup := RigidItemPickup3D.from_item(item, rigid_item_pickup_scene)
 	if pickup == null:
 		Util.node_error("%s cannot add null pickup", self)
 		return null
+	if recovers_from_underground:
+		pickup.enable_ground_recovery()
 	spawn(pickup)
 	return pickup
 
 
-func drop(index: int = -1) -> Node3D:
+func drop(index: int = -1, recovers_from_underground := true) -> Node3D:
 	var instance := get_instance(index)
 
 	if instance == null:
@@ -66,7 +68,7 @@ func drop(index: int = -1) -> Node3D:
 		Util.node_error("%s cannot remove nonexistant item %s from %s", self, instance.item, inventory)
 		return null
 	
-	var pickup := add_pickup(instance.item)
+	var pickup := add_pickup(instance.item, recovers_from_underground)
 	dropped.emit()
 	return pickup
 

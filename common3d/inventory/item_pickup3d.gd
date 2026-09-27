@@ -114,6 +114,6 @@ func interact(source: Node, _etc: Dictionary = { }) -> void:
 	
 	if inventory.add_item(item, 1) == 1:
 		return # Inventory was too full to pick up
-	
+
 	queue_free()
 	picked_up.emit()
