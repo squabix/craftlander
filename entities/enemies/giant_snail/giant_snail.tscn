@@ -49,13 +49,13 @@
 [ext_resource type="Material" uid="uid://ck6tbv657xvan" path="res://assets/materials/snail_shell.tres" id="47_feq7g"]
 [ext_resource type="Script" uid="uid://cqq5b76xuq0i3" path="res://entities/npc_states/search_trigger.gd" id="99_searchtrigger"]
 [ext_resource type="Script" uid="uid://cke8g2exxgx0y" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
-[ext_resource type="Script" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="101_normconf"]
-[ext_resource type="Script" uid="uid://crtlax17o248r" path="res://entities/enemies/ghosts/ghost_traits.gd" id="gt_script"]
-[ext_resource type="Script" uid="uid://c8o56lvh1smbc" path="res://entities/enemies/ghosts/ghost_entity_guide3d.gd" id="gg_script"]
-[ext_resource type="Material" uid="uid://dhg5ygkg71g1g" path="res://assets/materials/ghosts/ghost_giant_snail.tres" id="gt_mat"]
+[ext_resource type="Script" uid="uid://h3nqpcog77iq" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="101_normconf"]
 [ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
-[ext_resource type="Resource" path="res://entities/enemies/ghosts/ghost_projectile_acl.tres" id="gt_acl"]
 [ext_resource type="Script" uid="uid://bqct5adpvfunh" path="res://common3d/hoverer3d.gd" id="eh_script"]
+[ext_resource type="Script" uid="uid://c8o56lvh1smbc" path="res://entities/enemies/ghosts/ghost_entity_guide3d.gd" id="gg_script"]
+[ext_resource type="Resource" uid="uid://dv277xhyv1vav" path="res://entities/enemies/ghosts/ghost_projectile_acl.tres" id="gt_acl"]
+[ext_resource type="Material" uid="uid://dhg5ygkg71g1g" path="res://assets/materials/ghosts/ghost_giant_snail.tres" id="gt_mat"]
+[ext_resource type="Script" uid="uid://crtlax17o248r" path="res://entities/enemies/ghosts/ghost_traits.gd" id="gt_script"]
 [ext_resource type="Script" uid="uid://ctk7my54vljch" path="res://entities/npc_states/specials/attack_rhythm.gd" id="sp_rhythm"]
 [ext_resource type="Script" uid="uid://ch14yjdx5v63k" path="res://entities/npc_states/specials/volley_attack_state.gd" id="sp_volley"]
 
@@ -71,6 +71,9 @@ metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ccu0b"]
 size = Vector3(1, 1.8878174, 2.2010422)
+
+[sub_resource type="Resource" id="Resource_acl"]
+script = ExtResource("acl_script")
 
 [sub_resource type="Resource" id="Resource_aoox1"]
 script = ExtResource("19_pgv3p")
@@ -362,9 +365,6 @@ stream_0/stream = ExtResource("39_a2rcb")
 stream_1/stream = ExtResource("40_a0n7q")
 stream_2/stream = ExtResource("41_thbg1")
 
-[sub_resource type="Resource" id="Resource_acl"]
-script = ExtResource("acl_script")
-
 [node name="GiantSnail" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "anim_player", "culling_controller", "sight", "visuals", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
 script = ExtResource("1_e37vq")
@@ -432,10 +432,9 @@ signal_name = &"was_hurt"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6341511, -0.119775295)
 shape = SubResource("BoxShape3D_ccu0b")
 
-[node name="NormalConformityRayCast3D" type="RayCast3D" parent="." node_paths=PackedStringArray("targets")]
+[node name="NormalConformityRayCast3D" type="RayCast3D" parent="." unique_id=1312986088 node_paths=PackedStringArray("targets")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 target_position = Vector3(0, -0.6, 0)
-collision_mask = 1
 script = ExtResource("101_normconf")
 targets = [NodePath("../Visuals"), NodePath("../Hurtbox3D")]
 interpolation_speed = 5.0
@@ -594,6 +593,12 @@ pattern = Array[StringName]([&"", &"", &"Volley"])
 nav = NodePath("../../NavigationAgent3D")
 entity = NodePath("../..")
 
+[node name="GhostEntityGuide3D" type="Node" parent="Controller3D" unique_id=1827078033 node_paths=PackedStringArray("hoverer", "entity")]
+process_mode = 4
+script = ExtResource("gg_script")
+hoverer = NodePath("../../Hoverer3D")
+entity = NodePath("../..")
+
 [node name="Inventory" type="Node" parent="." unique_id=2020826484]
 unique_name_in_owner = true
 script = ExtResource("18_i1yyv")
@@ -669,7 +674,7 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.2, 0)
 surface_material_override/0 = ExtResource("47_feq7g")
 
 [node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(810787991, 133580215) index="0" unique_id=1750562930]
-bones/1/rotation = Quaternion(0.7325361, 8.114913e-08, 8.7325105e-08, 0.68072826)
+bones/1/rotation = Quaternion(0.73271495, 8.112616e-08, 8.734644e-08, 0.6805357)
 bones/2/rotation = Quaternion(0.040895905, -1.0694845e-14, 9.7503445e-09, 0.99916345)
 bones/3/rotation = Quaternion(-0.032595262, 0.0055556414, 0.15076298, 0.98801684)
 
@@ -686,24 +691,18 @@ damage = ExtResource("46_slimedmg")
 source = NodePath("..")
 metadata/_custom_type_script = "uid://2ow28vm5clst"
 
-[node name="GhostEntityGuide3D" type="Node" parent="Controller3D" node_paths=PackedStringArray("entity", "hoverer")]
-process_mode = 4
-script = ExtResource("gg_script")
-entity = NodePath("../..")
-hoverer = NodePath("../../Hoverer3D")
-
-[node name="Hoverer3D" type="RayCast3D" parent="." node_paths=PackedStringArray("target")]
+[node name="Hoverer3D" type="RayCast3D" parent="." unique_id=1845776101 node_paths=PackedStringArray("target")]
 process_mode = 4
 collision_mask = 64
 script = ExtResource("eh_script")
 target = NodePath("..")
 
-[node name="GhostTraits" type="Node" parent="." node_paths=PackedStringArray("entity", "guide", "hoverer", "nav_guide", "targeting_states", "chasing_state", "culling_controller", "projectile_spawners", "inventory", "dropper")]
+[node name="GhostTraits" type="Node" parent="." unique_id=1913090766 node_paths=PackedStringArray("entity", "guide", "hoverer", "nav_guide", "targeting_states", "chasing_state", "culling_controller", "projectile_spawners", "inventory", "dropper")]
 script = ExtResource("gt_script")
+entity = NodePath("..")
 is_ranged = true
 material = ExtResource("gt_mat")
 projectile_acl = ExtResource("gt_acl")
-entity = NodePath("..")
 guide = NodePath("../Controller3D/GhostEntityGuide3D")
 hoverer = NodePath("../Hoverer3D")
 nav_guide = NodePath("../Controller3D/NavEntityGuide3D")

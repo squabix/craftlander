@@ -12,7 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://dfb8pgndra5o7" path="res://assets/sound/water_drip-02.wav" id="12_agq30"]
 [ext_resource type="AudioStream" uid="uid://dsfup266yewgk" path="res://assets/sound/water_drip-03.wav" id="13_n0yuo"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="14_spawner"]
-[ext_resource type="PackedScene" path="res://particles/pickup_sparkle_particles.tscn" id="15_sparkle"]
+[ext_resource type="PackedScene" uid="uid://ccl7orod872ji" path="res://particles/pickup_sparkle_particles.tscn" id="15_sparkle"]
 [ext_resource type="Script" uid="uid://c6klwkv4b0dhs" path="res://common/signal_triggrs/signal_spawn_trigger.gd" id="16_trigger"]
 
 [sub_resource type="Resource" id="Resource_nmw4j"]
@@ -52,12 +52,12 @@ visibility_fading_enabled = true
 visibility_fading_distance = 35.0
 metadata/_custom_type_script = "uid://c00hsywtiwt6w"
 
-[node name="PickupParticleSpawner3D" type="Node3D" parent="ItemPickup3D"]
+[node name="PickupParticleSpawner3D" type="Node3D" parent="ItemPickup3D" unique_id=38507554]
 script = ExtResource("14_spawner")
 scenes = Array[PackedScene]([ExtResource("15_sparkle")])
 defer = true
 
-[node name="PickupParticleTrigger" type="Node" parent="ItemPickup3D" node_paths=PackedStringArray("spawner")]
+[node name="PickupParticleTrigger" type="Node" parent="ItemPickup3D" unique_id=1676083901 node_paths=PackedStringArray("spawner")]
 script = ExtResource("16_trigger")
 spawner = NodePath("../PickupParticleSpawner3D")
 signal_name = &"picked_up"

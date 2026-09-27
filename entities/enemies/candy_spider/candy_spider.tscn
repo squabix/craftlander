@@ -47,11 +47,11 @@
 [ext_resource type="Script" uid="uid://cqq5b76xuq0i3" path="res://entities/npc_states/search_trigger.gd" id="99_searchtrigger"]
 [ext_resource type="Script" uid="uid://cke8g2exxgx0y" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 [ext_resource type="Script" uid="uid://h3nqpcog77iq" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="101_normconf"]
-[ext_resource type="Script" uid="uid://crtlax17o248r" path="res://entities/enemies/ghosts/ghost_traits.gd" id="gt_script"]
-[ext_resource type="Script" uid="uid://c8o56lvh1smbc" path="res://entities/enemies/ghosts/ghost_entity_guide3d.gd" id="gg_script"]
-[ext_resource type="Material" uid="uid://dfoa0stliya12" path="res://assets/materials/ghosts/ghost_candy_spider.tres" id="gt_mat"]
 [ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
 [ext_resource type="Script" uid="uid://bqct5adpvfunh" path="res://common3d/hoverer3d.gd" id="eh_script"]
+[ext_resource type="Script" uid="uid://c8o56lvh1smbc" path="res://entities/enemies/ghosts/ghost_entity_guide3d.gd" id="gg_script"]
+[ext_resource type="Material" uid="uid://dfoa0stliya12" path="res://assets/materials/ghosts/ghost_candy_spider.tres" id="gt_mat"]
+[ext_resource type="Script" uid="uid://crtlax17o248r" path="res://entities/enemies/ghosts/ghost_traits.gd" id="gt_script"]
 [ext_resource type="Script" uid="uid://4xddu7ckg4hq" path="res://entities/npc_states/specials/dash_attack_state.gd" id="sp_dash"]
 [ext_resource type="Script" uid="uid://ctk7my54vljch" path="res://entities/npc_states/specials/attack_rhythm.gd" id="sp_rhythm"]
 [ext_resource type="Script" uid="uid://bxjt3nibhkxh8" path="res://common/signal_triggrs/camera_shake_trigger.gd" id="shake_trigger_script"]
@@ -69,6 +69,9 @@ metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_qjyjv"]
 height = 1.2
 radius = 0.8
+
+[sub_resource type="Resource" id="Resource_acl"]
+script = ExtResource("acl_script")
 
 [sub_resource type="Resource" id="Resource_00qym"]
 script = ExtResource("19_ou3my")
@@ -448,9 +451,6 @@ stream_0/stream = ExtResource("39_7wmfw")
 stream_1/stream = ExtResource("40_yk3i6")
 stream_2/stream = ExtResource("41_roflp")
 
-[sub_resource type="Resource" id="Resource_acl"]
-script = ExtResource("acl_script")
-
 [node name="CandySpider" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "culling_controller", "attack_ray", "sight", "visuals", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
 script = ExtResource("1_hww71")
@@ -664,6 +664,12 @@ pattern = Array[StringName]([&"Dash"])
 nav = NodePath("../../NavigationAgent3D")
 entity = NodePath("../..")
 
+[node name="GhostEntityGuide3D" type="Node" parent="Controller3D" unique_id=1341521152 node_paths=PackedStringArray("hoverer", "entity")]
+process_mode = 4
+script = ExtResource("gg_script")
+hoverer = NodePath("../../Hoverer3D")
+entity = NodePath("../..")
+
 [node name="Inventory" type="Node" parent="." unique_id=2020826484]
 unique_name_in_owner = true
 script = ExtResource("18_a8v0i")
@@ -753,73 +759,67 @@ bus = &"SFX"
 [node name="Visuals" parent="." unique_id=1909705867 instance=ExtResource("42_v7hfu")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 
-[node name="Body" parent="Visuals" index="0" unique_id=1924367783]
+[node name="Body" parent="Visuals" index="0" unique_id=1001427935]
 surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 
-[node name="LegLeft1" parent="Visuals" index="1" unique_id=607674772]
+[node name="LegLeft1" parent="Visuals" index="1" unique_id=1136514692]
 surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 
-[node name="LegLeft2" parent="Visuals" index="2" unique_id=1796610144]
+[node name="LegLeft2" parent="Visuals" index="2" unique_id=1001287721]
 surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 
-[node name="LegLeft3" parent="Visuals" index="3" unique_id=1061118882]
+[node name="LegLeft3" parent="Visuals" index="3" unique_id=1655605998]
 surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 
-[node name="LegLeft4" parent="Visuals" index="4" unique_id=1053339385]
+[node name="LegLeft4" parent="Visuals" index="4" unique_id=2005036997]
 surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 
-[node name="LegRight4" parent="Visuals" index="5" unique_id=1841215919]
+[node name="LegRight4" parent="Visuals" index="5" unique_id=1067743515]
 transform = Transform3D(-0.92910707, 0, 0.3698105, 0, 1, 0, -0.3698105, 0, -0.92910707, -0.61, 0.29067695, -0.4414636)
 surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 
-[node name="LegRight3" parent="Visuals" index="6" unique_id=189635639]
-transform = Transform3D(-0.9736476, 0, 0.22805583, 0, 1, 0, -0.22805583, 0, -0.9736476, -0.75, 0.29067695, -0.17361851)
+[node name="LegRight3" parent="Visuals" index="6" unique_id=474170665]
+transform = Transform3D(-0.97364753, 0, 0.22805582, 0, 1, 0, -0.22805582, 0, -0.97364753, -0.75, 0.29067695, -0.17361851)
 surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 
-[node name="LegRight2" parent="Visuals" index="7" unique_id=1439470597]
-transform = Transform3D(-0.9512161, 0, -0.30852413, 0, 1, 0, 0.30852413, 0, -0.9512161, -0.75, 0.29067695, 0.15406431)
+[node name="LegRight2" parent="Visuals" index="7" unique_id=970820104]
+transform = Transform3D(-0.95121604, 0, -0.30852413, 0, 1, 0, 0.30852413, 0, -0.95121604, -0.75, 0.29067695, 0.15406431)
 surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 
-[node name="LegRight1" parent="Visuals" index="8" unique_id=1763787552]
-transform = Transform3D(-0.9512161, 0, -0.30852413, 0, 1, 0, 0.30852413, 0, -0.9512161, -0.61, 0.29067695, 0.45040345)
+[node name="LegRight1" parent="Visuals" index="8" unique_id=1978653653]
+transform = Transform3D(-0.95121604, 0, -0.30852413, 0, 1, 0, 0.30852413, 0, -0.95121604, -0.61, 0.29067695, 0.45040345)
 surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 
-[node name="NewLeg" parent="Visuals" index="9" unique_id=1744633523]
+[node name="NewLeg" parent="Visuals" index="9" unique_id=689904833]
 visible = false
 surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 
-[node name="Head" parent="Visuals" index="10" unique_id=1861977449]
+[node name="Head" parent="Visuals" index="10" unique_id=1438802393]
 transform = Transform3D(1, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, 0, 0.649843, -0.54697454)
 surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 surface_material_override/2 = ExtResource("44_upixq")
 
-[node name="GhostEntityGuide3D" type="Node" parent="Controller3D" node_paths=PackedStringArray("entity", "hoverer")]
-process_mode = 4
-script = ExtResource("gg_script")
-entity = NodePath("../..")
-hoverer = NodePath("../../Hoverer3D")
-
-[node name="Hoverer3D" type="RayCast3D" parent="." node_paths=PackedStringArray("target")]
+[node name="Hoverer3D" type="RayCast3D" parent="." unique_id=506377167 node_paths=PackedStringArray("target")]
 process_mode = 4
 collision_mask = 64
 script = ExtResource("eh_script")
 target = NodePath("..")
 
-[node name="GhostTraits" type="Node" parent="." node_paths=PackedStringArray("entity", "guide", "hoverer", "nav_guide", "targeting_states", "chasing_state", "culling_controller", "inventory", "dropper")]
+[node name="GhostTraits" type="Node" parent="." unique_id=911217489 node_paths=PackedStringArray("entity", "guide", "hoverer", "nav_guide", "targeting_states", "chasing_state", "culling_controller", "inventory", "dropper")]
 script = ExtResource("gt_script")
-material = ExtResource("gt_mat")
 entity = NodePath("..")
+material = ExtResource("gt_mat")
 guide = NodePath("../Controller3D/GhostEntityGuide3D")
 hoverer = NodePath("../Hoverer3D")
 nav_guide = NodePath("../Controller3D/NavEntityGuide3D")

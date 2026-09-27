@@ -53,11 +53,11 @@
 [ext_resource type="Script" uid="uid://cqq5b76xuq0i3" path="res://entities/npc_states/search_trigger.gd" id="99_searchtrigger"]
 [ext_resource type="Script" uid="uid://cke8g2exxgx0y" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 [ext_resource type="Script" uid="uid://h3nqpcog77iq" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="101_normconf"]
-[ext_resource type="Script" uid="uid://crtlax17o248r" path="res://entities/enemies/ghosts/ghost_traits.gd" id="gt_script"]
-[ext_resource type="Script" uid="uid://c8o56lvh1smbc" path="res://entities/enemies/ghosts/ghost_entity_guide3d.gd" id="gg_script"]
-[ext_resource type="Material" uid="uid://m8k8vocmjefa" path="res://assets/materials/ghosts/ghost_yeti.tres" id="gt_mat"]
 [ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
 [ext_resource type="Script" uid="uid://bqct5adpvfunh" path="res://common3d/hoverer3d.gd" id="eh_script"]
+[ext_resource type="Script" uid="uid://c8o56lvh1smbc" path="res://entities/enemies/ghosts/ghost_entity_guide3d.gd" id="gg_script"]
+[ext_resource type="Material" uid="uid://m8k8vocmjefa" path="res://assets/materials/ghosts/ghost_yeti.tres" id="gt_mat"]
+[ext_resource type="Script" uid="uid://crtlax17o248r" path="res://entities/enemies/ghosts/ghost_traits.gd" id="gt_script"]
 [ext_resource type="Script" uid="uid://dner7f67gj7sk" path="res://entities/npc_states/specials/blink_attack_state.gd" id="sp_blink"]
 [ext_resource type="Script" uid="uid://ctk7my54vljch" path="res://entities/npc_states/specials/attack_rhythm.gd" id="sp_rhythm"]
 
@@ -80,6 +80,9 @@ metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3emv6"]
 radius = 0.7
 height = 2.8
+
+[sub_resource type="Resource" id="Resource_acl"]
+script = ExtResource("acl_script")
 
 [sub_resource type="Resource" id="Resource_mmf2n"]
 script = ExtResource("31_4i62f")
@@ -1144,9 +1147,6 @@ shader_parameter/rim_power = 3.0
 shader_parameter/rim_color = Color(0, 0, 0, 1)
 shader_parameter/refraction_strength = 0.05
 
-[sub_resource type="Resource" id="Resource_acl"]
-script = ExtResource("acl_script")
-
 [node name="Yeti" type="CharacterBody3D" unique_id=718268970 node_paths=PackedStringArray("anim_tree", "culling_controller", "sight", "visuals", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
 script = ExtResource("1_n2wx5")
@@ -1371,6 +1371,12 @@ pattern = Array[StringName]([&"", &"", &"", &"Pounce"])
 nav = NodePath("../../NavigationAgent3D")
 entity = NodePath("../..")
 
+[node name="GhostEntityGuide3D" type="Node" parent="Controller3D" unique_id=1153308585 node_paths=PackedStringArray("hoverer", "entity")]
+process_mode = 4
+script = ExtResource("gg_script")
+hoverer = NodePath("../../Hoverer3D")
+entity = NodePath("../..")
+
 [node name="Inventory" type="Node" parent="." unique_id=1701695857]
 unique_name_in_owner = true
 script = ExtResource("18_i5kk2")
@@ -1470,7 +1476,7 @@ bus = &"SFX"
 [node name="Visuals" parent="." unique_id=1031188240 instance=ExtResource("47_bi43y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
 
-[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1031188240, 1949534949) index="0" unique_id=1252076893]
+[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1031188240, 1802944346) index="0" unique_id=807241022]
 bones/2/rotation = Quaternion(4.2381807e-08, -4.261896e-08, 0.6204223, 0.7842679)
 bones/3/rotation = Quaternion(-1.3102502e-07, 1.9494038e-08, -0.52479047, 0.8512314)
 bones/5/rotation = Quaternion(-2.9802319e-08, -5.9604638e-08, -0.6204223, 0.7842679)
@@ -1482,7 +1488,7 @@ bones/11/rotation = Quaternion(-0.50000006, -0.5, -0.5, 0.50000006)
 bones/12/rotation = Quaternion(-0.35355338, -0.1464466, 0.35355338, 0.8535534)
 bones/13/rotation = Quaternion(1.5279511e-09, -1.1641532e-10, -0.07041717, 0.99751765)
 
-[node name="Yeti" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=783641144]
+[node name="Yeti" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=324203401]
 surface_material_override/0 = SubResource("ShaderMaterial_x8btb")
 surface_material_override/1 = ExtResource("48_n2wx5")
 surface_material_override/2 = SubResource("ShaderMaterial_yp744")
@@ -1500,22 +1506,16 @@ item_holder = NodePath("../../../../../ItemHolder3D")
 visuals_scale_ratio = 1.25
 metadata/_custom_type_script = "uid://ljihr86cv3xk"
 
-[node name="GhostEntityGuide3D" type="Node" parent="Controller3D" node_paths=PackedStringArray("entity", "hoverer")]
-process_mode = 4
-script = ExtResource("gg_script")
-entity = NodePath("../..")
-hoverer = NodePath("../../Hoverer3D")
-
-[node name="Hoverer3D" type="RayCast3D" parent="." node_paths=PackedStringArray("target")]
+[node name="Hoverer3D" type="RayCast3D" parent="." unique_id=1800589109 node_paths=PackedStringArray("target")]
 process_mode = 4
 collision_mask = 64
 script = ExtResource("eh_script")
 target = NodePath("..")
 
-[node name="GhostTraits" type="Node" parent="." node_paths=PackedStringArray("entity", "guide", "hoverer", "nav_guide", "targeting_states", "chasing_state", "culling_controller", "inventory", "dropper")]
+[node name="GhostTraits" type="Node" parent="." unique_id=2052798415 node_paths=PackedStringArray("entity", "guide", "hoverer", "nav_guide", "targeting_states", "chasing_state", "culling_controller", "inventory", "dropper")]
 script = ExtResource("gt_script")
-material = ExtResource("gt_mat")
 entity = NodePath("..")
+material = ExtResource("gt_mat")
 guide = NodePath("../Controller3D/GhostEntityGuide3D")
 hoverer = NodePath("../Hoverer3D")
 nav_guide = NodePath("../Controller3D/NavEntityGuide3D")
