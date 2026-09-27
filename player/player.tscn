@@ -150,6 +150,9 @@
 [ext_resource type="Script" uid="uid://bka8v53yqd1j6" path="res://player/ui/enemy_compass_tracker.gd" id="9103_cmpss3"]
 [ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="9104_cmpss4"]
 [ext_resource type="Curve" uid="uid://ckgb7j52s42n3" path="res://player/ui/enemy_marker_size_curve.tres" id="9105_cmpss5"]
+[ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="9200_grounddust1"]
+[ext_resource type="PackedScene" path="res://particles/land_puff_particles.tscn" id="9201_grounddust2"]
+[ext_resource type="Script" uid="uid://c6klwkv4b0dhs" path="res://common/signal_triggrs/signal_spawn_trigger.gd" id="9202_grounddust3"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -1075,6 +1078,21 @@ horizontal_rotation_target = NodePath(".")
 vertical_rotation_target = NodePath("Head/Camera3D")
 rotation_range = SubResource("Resource_g6k8r")
 metadata/_custom_type_script = "uid://bki5ij8task16"
+
+[node name="GroundDustParticleSpawner3D" type="Node3D" parent="." unique_id=2043976733]
+script = ExtResource("9200_grounddust1")
+scenes = Array[PackedScene]([ExtResource("9201_grounddust2")])
+defer = true
+
+[node name="LandedDustTrigger" type="Node" parent="." unique_id=38533673 node_paths=PackedStringArray("spawner")]
+script = ExtResource("9202_grounddust3")
+spawner = NodePath("../GroundDustParticleSpawner3D")
+signal_name = &"landed"
+
+[node name="JumpedDustTrigger" type="Node" parent="." unique_id=2129988546 node_paths=PackedStringArray("spawner")]
+script = ExtResource("9202_grounddust3")
+spawner = NodePath("../GroundDustParticleSpawner3D")
+signal_name = &"jumped"
 
 [node name="Inventory" type="Node" parent="." unique_id=710458340]
 script = ExtResource("19_c35mf")
