@@ -1,12 +1,12 @@
-class_name GhostVFX
+class_name EnemyVfx
 extends Object
 
 
-const IMPACT_SCENE := preload("res://particles/ghost_impact_particles.tscn")
-const TELEPORT_SCENE := preload("res://particles/ghost_teleport_particles.tscn")
-const SHOCKWAVE_SCENE := preload("res://particles/ghost_shockwave_particles.tscn")
-const CHARGE_SCENE := preload("res://particles/ghost_charge_particles.tscn")
-const AURA_SCENE := preload("res://particles/ghost_aura_particles.tscn")
+const IMPACT_SCENE := preload("res://particles/impact_particles.tscn")
+const TELEPORT_SCENE := preload("res://particles/teleport_particles.tscn")
+const SHOCKWAVE_SCENE := preload("res://particles/shockwave_particles.tscn")
+const CHARGE_SCENE := preload("res://particles/charge_particles.tscn")
+const AURA_SCENE := preload("res://particles/aura_particles.tscn")
 
 
 static func impact(parent: Node, at: Vector3, color: Color, direction := Vector3.UP) -> void:

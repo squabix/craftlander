@@ -23,6 +23,7 @@ static var all: Array[PlanarTelegraph3D] = []
 @export var color_activate := Color(1.0, 1.0, 1.0, 0.9)
 
 var yaw := 0.0
+var is_activated := false
 var fill: MeshInstance3D
 var outline: MeshInstance3D
 
@@ -69,9 +70,20 @@ func set_yaw(new_yaw: float) -> void:
 
 
 func activate() -> void:
+	is_activated = true
 	get_fill_material().albedo_color = color_activate
 	fill.scale = Vector3.ONE
 	get_tree().create_timer(activate_hold_time, false).timeout.connect(fade_out)
+
+
+func dismiss() -> void:
+	if is_activated:
+		return
+	is_activated = true
+	if is_inside_tree():
+		fade_out()
+	else:
+		queue_free()
 
 
 func fade_out() -> void:

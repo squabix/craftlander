@@ -1,15 +1,5 @@
-class_name CaptainBurstState
-extends CaptainAttackState
-
-const LINE := &"burst"
-
-const ANIM_WINDUP := &"BurstWindupShot"
-const ANIM_BURST := &"BurstShot"
-
-const WINDUP_POSE_ROTATION := 0.5
-const WINDUP_POSE_SCALE := 1.15
-const BURST_POSE_ROTATION := -0.2
-const BURST_POSE_DURATION := 0.1
+class_name BurstAttackState
+extends SpecialAttackState
 
 const SHOCKWAVE_RADIUS_SCALE := 1.6
 const MUZZLE_FORWARD_OFFSET := 0.8
@@ -22,35 +12,34 @@ const MUZZLE_FORWARD_OFFSET := 0.8
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var warning_radius := 5.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var speed := 12.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var ring_delay := 0.8
-@export var damage := 7.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var muzzle_height := 1.4
+
+@export_group("Pose", "pose")
+@export var pose_tell_animation := &""
+@export var pose_strike_animation := &""
+@export_custom(PROPERTY_HINT_NONE, "suffix:rad") var pose_windup_rotation := 0.5
+@export var pose_windup_scale := 1.15
+@export_custom(PROPERTY_HINT_NONE, "suffix:rad") var pose_burst_rotation := -0.2
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var pose_burst_duration := 0.1
 
 
 func run() -> void:
-	var wind_up := captain.tell_time(tell)
-	var origin := captain.ground(captain.global_position)
-	var warning := start_wind_up(origin, wind_up)
+	var wind_up := enemy.tell_time(tell)
+	var origin := enemy.ground(enemy.global_position)
+	var warning := track(PlanarTelegraphVfx.disc(Spawner3D.root, origin, warning_radius, color, wind_up))
+	begin_tell(pose_tell_animation, pose_windup_rotation, pose_windup_scale, wind_up)
 	if not await wait(wind_up):
 		return
 
 	warning.activate()
-	animate_burst()
+	enemy.play_animation(pose_strike_animation)
+	pose(pose_burst_rotation, 1.0, pose_burst_duration)
 	if not await fire_rings(origin):
 		return
 
-	captain.stop_animation(ANIM_BURST)
+	enemy.stop_animation(pose_strike_animation)
+	pose(0.0, 1.0, STRIKE_ANIMATION_TIME)
 	recover()
-
-
-func start_wind_up(origin: Vector3, duration: float) -> PlanarTelegraph3D:
-	var warning := PlanarTelegraphVfx.disc(Spawner3D.root, origin, warning_radius, color, duration)
-	begin_tell(LINE, ANIM_WINDUP, WINDUP_POSE_ROTATION, WINDUP_POSE_SCALE, duration)
-	return warning
-
-
-func animate_burst() -> void:
-	captain.play_animation(ANIM_BURST)
-	captain.pose(BURST_POSE_ROTATION, 1.0, BURST_POSE_DURATION)
 
 
 func fire_rings(origin: Vector3) -> bool:
@@ -63,8 +52,8 @@ func fire_rings(origin: Vector3) -> bool:
 
 
 func fire_ring(origin: Vector3, ring: int) -> void:
-	captain.cannon_fired.emit()
-	GhostVFX.shockwave(Spawner3D.root, origin, color, warning_radius * SHOCKWAVE_RADIUS_SCALE)
+	enemy.fired.emit()
+	EnemyVfx.shockwave(Spawner3D.root, origin, color, warning_radius * SHOCKWAVE_RADIUS_SCALE)
 
 	var half_gap := TAU / count / 2.0
 	for i in count:
@@ -74,16 +63,16 @@ func fire_ring(origin: Vector3, ring: int) -> void:
 
 func shoot(direction: Vector3) -> void:
 	if projectile_scene == null:
-		Util.node_error("%s has no projectile scene for its ranged attack", captain)
+		Util.node_error("%s has no projectile scene for its burst", enemy)
 		return
 
 	var projectile := projectile_scene.instantiate() as HitProjectile3D
 	Spawner3D.root.add_child(projectile)
 
-	var muzzle := captain.global_position + Vector3.UP * muzzle_height + direction * MUZZLE_FORWARD_OFFSET
+	var muzzle := enemy.global_position + Vector3.UP * muzzle_height + direction * MUZZLE_FORWARD_OFFSET
 	projectile.global_position = muzzle
 	projectile.look_at(muzzle + direction, Vector3.UP)
-	projectile.damage = Damage.from_base(damage, captain)
+	projectile.damage = Damage.from_base(damage, enemy)
 	projectile.speed = speed
 	projectile.gravity_scale = 0.0
 	projectile.launch()

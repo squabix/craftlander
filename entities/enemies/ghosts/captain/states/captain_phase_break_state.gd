@@ -33,8 +33,8 @@ func begin_phase(phase_color: Color) -> void:
 	captain.voice.say(LINE)
 	captain.apply_phase_look()
 	captain.set_light(phase_color, captain.read_tell_energy)
-	GhostVFX.impact(Spawner3D.root, captain.global_position + Vector3.UP * IMPACT_HEIGHT, phase_color)
-	GhostVFX.shockwave(Spawner3D.root, captain.ground(captain.global_position), phase_color, SHOCKWAVE_RADIUS)
+	EnemyVfx.impact(Spawner3D.root, captain.global_position + Vector3.UP * IMPACT_HEIGHT, phase_color)
+	EnemyVfx.shockwave(Spawner3D.root, captain.ground(captain.global_position), phase_color, SHOCKWAVE_RADIUS)
 
 
 func roar() -> void:

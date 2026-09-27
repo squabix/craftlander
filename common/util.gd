@@ -507,6 +507,59 @@ static func align_basis_to_normal(basis: Basis, normal: Vector3, conformity := 1
 	return basis.slerp(aligned_basis, conformity)
 
 
+static func ground_point(world: World3D, point: Vector3, mask: int, lift := 0.25, ray_up := 30.0, ray_down := 80.0) -> Vector3:
+	var query := PhysicsRayQueryParameters3D.create(point + Vector3.UP * ray_up, point + Vector3.DOWN * ray_down, mask)
+	var hit := world.direct_space_state.intersect_ray(query)
+	if hit.is_empty():
+		return point
+	return (hit.position as Vector3) + Vector3.UP * lift
+
+
+static func pick_land_point(world: World3D, center: Vector3, min_distance: float, max_distance: float, base_angle: float, spread: float, mask: int, water_level: float, attempts := 8) -> Vector3:
+	var best := ground_point(world, center, mask)
+	for attempt in attempts:
+		var candidate := ground_point(world, random_planar_point(center, min_distance, max_distance, base_angle, spread), mask)
+		if candidate.y > water_level:
+			return candidate
+		if candidate.y > best.y:
+			best = candidate
+
+	return best
+
+
+static func random_planar_point(center: Vector3, min_distance: float, max_distance: float, base_angle: float, spread: float) -> Vector3:
+	var angle := base_angle + randf_range(-spread, spread)
+	return center + Vector3(cos(angle), 0.0, sin(angle)) * randf_range(min_distance, max_distance)
+
+
+static func yaw_direction(yaw: float) -> Vector3:
+	return Vector3(-sin(yaw), 0.0, -cos(yaw))
+
+
+static func direction_yaw(direction: Vector3) -> float:
+	return atan2(-direction.x, -direction.z)
+
+
+static func in_planar_sector(origin: Vector3, yaw: float, point: Vector3, reach: float, arc: float, pad := 0.0, height_tolerance := INF) -> bool:
+	var offset := point - origin
+	if absf(offset.y) > height_tolerance:
+		return false
+	offset.y = 0.0
+
+	var distance := offset.length()
+	if distance > reach + pad:
+		return false
+	if distance <= pad:
+		return true
+
+	return yaw_direction(yaw).angle_to(offset) <= arc / 2.0 + asin(minf(pad / distance, 1.0))
+
+
+static func planar_distance_to_segment(point: Vector3, from: Vector3, to: Vector3) -> float:
+	var flat := Vector2(point.x, point.z)
+	return flat.distance_to(Geometry2D.get_closest_point_to_segment(flat, Vector2(from.x, from.z), Vector2(to.x, to.z)))
+
+
 static func distance_sort_3d(nodes: Array, position: Vector3) -> Array[Node3D]:
 	if nodes.is_empty():
 		return [null]

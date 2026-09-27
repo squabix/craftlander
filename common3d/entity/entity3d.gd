@@ -32,6 +32,8 @@ var _floor_state_initialized := false
 var motion_direction := Vector3.ZERO
 var last_motion_direction := Vector3.ZERO
 var queued_impulse := Vector3.ZERO
+var forced_planar_velocity := Vector3.ZERO
+var is_velocity_forced := false
 
 
 func _ready() -> void:
@@ -110,6 +112,18 @@ func rotate_vertical(deg: float) -> void:
 
 func add_impulse(impulse: Vector3) -> void:
 	queued_impulse += impulse
+
+
+func force_planar_velocity(to: Vector3) -> void:
+	forced_planar_velocity = to
+	is_velocity_forced = true
+
+
+func release_velocity() -> void:
+	is_velocity_forced = false
+	forced_planar_velocity = Vector3.ZERO
+	velocity.x = 0.0
+	velocity.z = 0.0
 
 
 func face_target(target: Variant) -> void:

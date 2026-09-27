@@ -55,12 +55,12 @@
 [ext_resource type="AudioStream" uid="uid://ckhwur7cq4t0m" path="res://assets/sound/teleport1.mp3" id="snd_teleport"]
 [ext_resource type="Script" uid="uid://c6klwkv4b0dhs" path="res://common/signal_triggrs/signal_spawn_trigger.gd" id="snd_trigger"]
 [ext_resource type="Script" uid="uid://dhfd4x307ca40" path="res://entities/enemies/ghosts/captain/states/captain_blink_state.gd" id="state_blink"]
-[ext_resource type="Script" uid="uid://mejcximoxvxm" path="res://entities/enemies/ghosts/captain/states/captain_burst_state.gd" id="state_burst"]
+[ext_resource type="Script" path="res://entities/npc_states/specials/burst_attack_state.gd" id="state_burst"]
 [ext_resource type="Script" uid="uid://bguy5mfwlbjw" path="res://entities/enemies/ghosts/captain/states/captain_combo_state.gd" id="state_combo"]
 [ext_resource type="Script" uid="uid://dnb3fd8ewo24v" path="res://entities/npc_states/cycle_state.gd" id="state_cycle"]
 [ext_resource type="Script" uid="uid://bj44ganpri8gk" path="res://entities/enemies/ghosts/captain/states/captain_dead_state.gd" id="state_dead"]
 [ext_resource type="Script" uid="uid://cwk21ypx0egm8" path="res://entities/enemies/ghosts/captain/states/captain_lull_state.gd" id="state_lull"]
-[ext_resource type="Script" uid="uid://dvv6cqxjtlgm0" path="res://entities/enemies/ghosts/captain/states/captain_lunge_state.gd" id="state_lunge"]
+[ext_resource type="Script" path="res://entities/npc_states/specials/dash_attack_state.gd" id="state_lunge"]
 [ext_resource type="Script" uid="uid://ync36jkm0fuy" path="res://entities/enemies/ghosts/captain/states/captain_open_state.gd" id="state_open"]
 [ext_resource type="Script" uid="uid://c5rhv3q35pmmp" path="res://entities/enemies/ghosts/captain/states/captain_phase_break_state.gd" id="state_phase"]
 [ext_resource type="Script" uid="uid://ddg1metiv17a0" path="res://entities/enemies/ghosts/captain/states/captain_retreat_state.gd" id="state_retreat"]
@@ -431,6 +431,9 @@ anim_player = NodePath("AnimationPlayer")
 health = NodePath("Health")
 culling_controller = NodePath("CullingController3D")
 type = &"Ghost Captain"
+special_turn_speed = 4.0
+special_poses = true
+terrain_water_level = 0.3
 move_mode = SubResource("Resource_xl8du")
 does_obey_gravity = false
 accelerate_rotation_base = NodePath(".")
@@ -571,20 +574,42 @@ cycles = Array[PackedStringArray]([PackedStringArray("Combo", "Combo", "Lunge"),
 
 [node name="Retreat" type="Node" parent="Controller3D/Default" unique_id=1155763795]
 script = ExtResource("state_retreat")
+next_state = &"Lull"
+voice_line = &"retreat"
+abort_state = &"Lull"
 
-[node name="Combo" type="Node" parent="Controller3D/Default" unique_id=1604717127 node_paths=PackedStringArray("cutlass_holder")]
+[node name="Combo" type="Node" parent="Controller3D/Default" unique_id=1604717127 node_paths=PackedStringArray("weapon_holder")]
 script = ExtResource("state_combo")
-cutlass_holder = NodePath("../../../Visuals/Armature/Skeleton3D/CutlassAttachment/ItemHolder3D")
+pose_tell_animation = &"ComboWindupShot"
+pose_strike_animation = &"SlashShot"
+voice_line = &"combo"
+abort_state = &"Lull"
+approach_state = &"Chasing"
+approach_fail_state = &"Lunge"
+weapon_holder = NodePath("../../../Visuals/Armature/Skeleton3D/CutlassAttachment/ItemHolder3D")
 
-[node name="Lunge" type="Node" parent="Controller3D/Default" unique_id=374049333 node_paths=PackedStringArray("cutlass_holder")]
+[node name="Lunge" type="Node" parent="Controller3D/Default" unique_id=374049333 node_paths=PackedStringArray("weapon_holder")]
 script = ExtResource("state_lunge")
+pose_tell_animation = &"LungeWindupShot"
+pose_strike_animation = &"StabShot"
+voice_line = &"lunge"
+abort_state = &"Lull"
+approach_state = &"Chasing"
+approach_fraction = 0.85
 aim_time = 0.5
 tell = 1.6
 recovery = 2.4
-cutlass_holder = NodePath("../../../Visuals/Armature/Skeleton3D/CutlassAttachment/ItemHolder3D")
+weapon_holder = NodePath("../../../Visuals/Armature/Skeleton3D/CutlassAttachment/ItemHolder3D")
 
 [node name="Volley" type="Node" parent="Controller3D/Default" unique_id=1717143279 node_paths=PackedStringArray("cannon_holder")]
 script = ExtResource("state_volley")
+pose_tell_animation = &"AimShot"
+pose_strike_animation = &"ShootShot"
+voice_line = &"volley"
+abort_state = &"Lull"
+approach_state = &"Chasing"
+approach_fraction = 0.7
+approach_starts_beyond_reach = true
 color = Color(1, 0.8, 0.15, 1)
 aim_time = 0.6
 tell = 2.0
@@ -593,19 +618,30 @@ cannon_holder = NodePath("../../../Visuals/Armature/Skeleton3D/CannonAttachment/
 
 [node name="Blink" type="Node" parent="Controller3D/Default" unique_id=1784941195]
 script = ExtResource("state_blink")
+pose_arrival_animation = &"BlinkInShot"
+voice_line = &"blink"
+abort_state = &"Lull"
 color = Color(0.75, 0.3, 1, 1)
+damage = 16.0
+knockback = 20.0
 tell = 1.8
 recovery = 2.2
 
 [node name="Burst" type="Node" parent="Controller3D/Default" unique_id=654509877]
 script = ExtResource("state_burst")
+pose_tell_animation = &"BurstWindupShot"
+pose_strike_animation = &"BurstShot"
+voice_line = &"burst"
+abort_state = &"Lull"
 color = Color(1, 0.8, 0.15, 1)
+damage = 7.0
 tell = 2.0
 recovery = 2.4
 projectile_scene = ExtResource("57_jiwjm")
 
 [node name="Open" type="Node" parent="Controller3D/Default" unique_id=756223947]
 script = ExtResource("state_open")
+next_state = &"Lull"
 
 [node name="PhaseBreak" type="Node" parent="Controller3D/Default" unique_id=942592155]
 script = ExtResource("state_phase")
@@ -762,7 +798,7 @@ bus = &"SFX"
 [node name="CannonSoundTrigger" type="Node" parent="." unique_id=766018042 node_paths=PackedStringArray("spawner")]
 script = ExtResource("snd_trigger")
 spawner = NodePath("../CannonSoundSpawner")
-signal_name = &"cannon_fired"
+signal_name = &"fired"
 
 [node name="ShockwaveSpawner" type="Node3D" parent="." node_paths=PackedStringArray("templates")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

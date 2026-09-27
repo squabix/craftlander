@@ -14,4 +14,4 @@ func enter() -> void:
 
 
 func get_distance() -> float:
-	return captain.distance_to_player()
+	return captain.distance_to_target()

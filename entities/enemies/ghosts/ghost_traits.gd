@@ -77,8 +77,8 @@ func play_spawn_in() -> void:
 		return
 
 	var center := entity.global_position + Vector3.UP
-	GhostVFX.teleport(Spawner3D.root, center, SPAWN_COLOR)
-	GhostVFX.shockwave(Spawner3D.root, entity.global_position, SPAWN_COLOR, 3.0)
+	EnemyVfx.teleport(Spawner3D.root, center, SPAWN_COLOR)
+	EnemyVfx.shockwave(Spawner3D.root, entity.global_position, SPAWN_COLOR, 3.0)
 
 	var visuals := entity.get_node_or_null(^"Visuals") as Node3D
 	if visuals == null:

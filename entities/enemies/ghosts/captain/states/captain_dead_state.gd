@@ -16,6 +16,8 @@ const PUFF_SHOCKWAVE_RADIUS := 12.0
 
 const KEY_GLOW_COLOR := Color(1.0, 0.85, 0.3)
 const KEY_GLOW_RADIUS := 0.5
+const KEY_DROP_HEIGHT := 1.0
+const KEY_LAND_SEARCH_RADIUS := 25.0
 
 @export var dropper: InventoryDropper3D
 @export var key_item: Item
@@ -46,7 +48,7 @@ func begin_death(phase_color: Color) -> void:
 
 	captain.set_light(phase_color, 0.0)
 	captain.fade_aura(AURA_FADE_TIME)
-	GhostVFX.impact(Spawner3D.root, captain.global_position + Vector3.UP * IMPACT_HEIGHT, phase_color)
+	EnemyVfx.impact(Spawner3D.root, captain.global_position + Vector3.UP * IMPACT_HEIGHT, phase_color)
 
 
 func clear_hazards() -> void:
@@ -76,17 +78,25 @@ func drop_key() -> void:
 
 	var pickup := dropper.add_pickup(key_item)
 	if is_instance_valid(pickup):
+		pickup.global_position = get_key_drop_point()
 		glow_key(pickup)
 
 
+func get_key_drop_point() -> Vector3:
+	var below := captain.ground(dropper.global_position)
+	if not captain.is_dry(below):
+		below = captain.pick_land_point(dropper.global_position, 0.0, KEY_LAND_SEARCH_RADIUS, 0.0, PI)
+	return below + Vector3.UP * KEY_DROP_HEIGHT
+
+
 func glow_key(pickup: Node3D) -> void:
-	var aura := GhostVFX.aura(pickup, pickup.global_position, KEY_GLOW_COLOR, KEY_GLOW_RADIUS)
+	var aura := EnemyVfx.aura(pickup, pickup.global_position, KEY_GLOW_COLOR, KEY_GLOW_RADIUS)
 	aura.process_mode = Node.PROCESS_MODE_PAUSABLE
 	aura.visibility_range_end = 0.0
 
 
 func puff_away(phase_color: Color) -> void:
-	GhostVFX.teleport(Spawner3D.root, captain.global_position + Vector3.UP * IMPACT_HEIGHT, phase_color)
-	GhostVFX.shockwave(Spawner3D.root, captain.ground(captain.global_position), Color.WHITE, PUFF_SHOCKWAVE_RADIUS)
+	EnemyVfx.teleport(Spawner3D.root, captain.global_position + Vector3.UP * IMPACT_HEIGHT, phase_color)
+	EnemyVfx.shockwave(Spawner3D.root, captain.ground(captain.global_position), Color.WHITE, PUFF_SHOCKWAVE_RADIUS)
 	captain.vanished.emit()
 	captain.queue_free()
