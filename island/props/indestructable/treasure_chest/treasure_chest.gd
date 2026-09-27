@@ -11,6 +11,7 @@ signal locked
 @export var anim_player: AnimationPlayer
 @export var state_machine: StateMachine
 @export var captain_spawner: Spawner3D
+@export var open_particle_spawner: ParticleSpawner3D
 
 
 func _ready() -> void:
@@ -30,6 +31,7 @@ func open() -> void:
 	_release_meshes()
 	anim_player.play(&"open")
 	interactable.disable()
+	open_particle_spawner.spawn()
 	EventBus.trigger("treasure_chest_opened")
 	opened.emit()
 

@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://ccl7orod872ji"]
+
+[ext_resource type="Script" uid="uid://3rylx4xtm1lm" path="res://particles/adjustable_particles3d.gd" id="1_script"]
+
+[sub_resource type="Gradient" id="Gradient_fade"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fade"]
+gradient = SubResource("Gradient_fade")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sparkle"]
+lifetime_randomness = 0.3
+emission_shape = 1
+emission_sphere_radius = 0.15
+direction = Vector3(0, 1, 0)
+spread = 60.0
+initial_velocity_min = 1.5
+initial_velocity_max = 3.0
+gravity = Vector3(0, -1, 0)
+damping_min = 2.0
+damping_max = 2.0
+scale_min = 0.15
+scale_max = 0.3
+color = Color(1, 0.9, 0.5, 1)
+color_ramp = SubResource("GradientTexture1D_fade")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sparkle"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_sparkle"]
+material = SubResource("StandardMaterial3D_sparkle")
+radius = 0.1
+height = 0.2
+radial_segments = 6
+rings = 3
+
+[node name="PickupSparkleParticles" type="GPUParticles3D" unique_id=1503688465]
+cast_shadow = 0
+emitting = false
+amount = 20
+lifetime = 0.6
+one_shot = true
+explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_sparkle")
+draw_pass_1 = SubResource("SphereMesh_sparkle")
+script = ExtResource("1_script")

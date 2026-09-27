@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://0omxrkxu1djy" path="res://assets/models/items/materials/rock1.blend" id="2_model"]
 [ext_resource type="Material" uid="uid://bh8sv2icydggs" path="res://assets/materials/stone.tres" id="3_mat"]
 [ext_resource type="Resource" uid="uid://sekma2rr06f1" path="res://entities/projectiles/flying_rock/flying_rock_damage.tres" id="4_dmg"]
+[ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="5_spawner"]
+[ext_resource type="PackedScene" path="res://particles/flying_rock_impact_particles.tscn" id="6_impact"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_flyrock"]
 radius = 0.18
@@ -25,5 +27,11 @@ transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0, 0, 0)
 [node name="Cube" parent="Visuals" index="0" unique_id=2052744971]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 surface_material_override/0 = ExtResource("3_mat")
+
+[node name="ParticleSpawner3D" type="Node3D" parent="."]
+script = ExtResource("5_spawner")
+scenes = Array[PackedScene]([ExtResource("6_impact")])
+defer = true
+spawn_on_exit_tree = true
 
 [editable path="Visuals"]

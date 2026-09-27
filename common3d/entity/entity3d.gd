@@ -28,6 +28,7 @@ static var active_count := 0
 
 var was_on_floor := false
 var frozen := false
+var _floor_state_initialized := false
 var motion_direction := Vector3.ZERO
 var last_motion_direction := Vector3.ZERO
 var queued_impulse := Vector3.ZERO
@@ -46,7 +47,11 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor() and does_obey_gravity:
 		velocity += GameWorld.get_current().get_gravity3d(gravity_multiplier) * delta
 
-	_accelerate(motion_direction, delta)
+	if is_velocity_forced:
+		velocity.x = forced_planar_velocity.x
+		velocity.z = forced_planar_velocity.z
+	else:
+		_accelerate(motion_direction, delta)
 
 	last_motion_direction = motion_direction
 	motion_direction = Vector3.ZERO
@@ -54,11 +59,12 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	rotate_targets()
 
-	# Signal checking system updates correctly now
-	if was_on_floor and not is_on_floor():
-		left_ground.emit()
-	elif not was_on_floor and is_on_floor():
-		landed.emit()
+	if _floor_state_initialized:
+		if was_on_floor and not is_on_floor():
+			left_ground.emit()
+		elif not was_on_floor and is_on_floor():
+			landed.emit()
+	_floor_state_initialized = true
 
 	was_on_floor = is_on_floor()
 

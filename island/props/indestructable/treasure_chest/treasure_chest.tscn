@@ -25,6 +25,8 @@
 [ext_resource type="Script" uid="uid://bhkngqnpf30n8" path="res://common3d/interactions/interactable_item_condition.gd" id="key_condition_gd"]
 [ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="audio_manager_script"]
 [ext_resource type="AudioStream" uid="uid://o4oflyiwo3e0" path="res://assets/sound/ghost2.mp3" id="locked_sound"]
+[ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="open_particle_spawner_script"]
+[ext_resource type="PackedScene" uid="uid://lyptlia5fnc8" path="res://common3d/boat_upgrade_particles.tscn" id="open_particles"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_locked"]
 random_pitch = 1.1
@@ -212,13 +214,14 @@ _data = {
 [sub_resource type="BoxShape3D" id="BoxShape3D_5hnl4"]
 size = Vector3(0.49543458, 0.35170972, 0.2784668)
 
-[node name="TreasureChest" type="Node3D" unique_id=51772479 node_paths=PackedStringArray("interactable", "anim_player", "state_machine", "captain_spawner")]
+[node name="TreasureChest" type="Node3D" unique_id=51772479 node_paths=PackedStringArray("interactable", "anim_player", "state_machine", "captain_spawner", "open_particle_spawner")]
 script = ExtResource("1_e3py2")
 key_condition = SubResource("Resource_keycondition")
 interactable = NodePath("Interactable3D")
 anim_player = NodePath("AnimationPlayer")
 state_machine = NodePath("StateMachine")
 captain_spawner = NodePath("CaptainSpawner")
+open_particle_spawner = NodePath("OpenParticleSpawner3D")
 
 [node name="NodeSaver" type="Node" parent="." unique_id=1812045563]
 script = ExtResource("2_k1bhr")
@@ -353,6 +356,12 @@ metadata/_custom_type_script = "uid://favgu1tbe1tq"
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Interactable3D" unique_id=1910136104]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, -0.049)
 shape = SubResource("BoxShape3D_5hnl4")
+
+[node name="OpenParticleSpawner3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+script = ExtResource("open_particle_spawner_script")
+scenes = Array[PackedScene]([ExtResource("open_particles")])
+defer = true
 
 [node name="AreaLight3D" type="AreaLight3D" parent="." unique_id=1058633458]
 transform = Transform3D(1, 0, 0, 0, -0.10007593, 0.9949798, 0, -0.9949798, -0.10007593, 0, 0.86961335, 0)

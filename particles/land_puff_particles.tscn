@@ -1,0 +1,48 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://particles/adjustable_particles3d.gd" id="1_script"]
+
+[sub_resource type="Curve" id="Curve_shrink"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.75779045, 0.8774637), -0.5111994, -0.5111994, 0, 0, Vector2(1, 0.2536419), -3.0296543, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_shrink"]
+curve = SubResource("Curve_shrink")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_land"]
+lifetime_randomness = 0.3
+direction = Vector3(0, 1, 0)
+spread = 180.0
+initial_velocity_min = 3.0
+initial_velocity_max = 6.0
+radial_accel_min = -4.0
+radial_accel_max = -4.0
+damping_min = 4.0
+damping_max = 4.0
+scale_min = 0.2
+scale_max = 0.35
+scale_curve = SubResource("CurveTexture_shrink")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_land"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.1
+normal_enabled = true
+proximity_fade_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_land"]
+material = SubResource("StandardMaterial3D_land")
+radial_segments = 12
+rings = 6
+
+[node name="LandPuffParticles" type="GPUParticles3D"]
+cast_shadow = 0
+emitting = false
+amount = 12
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_land")
+draw_pass_1 = SubResource("SphereMesh_land")
+script = ExtResource("1_script")
+base_radius = 1.0
