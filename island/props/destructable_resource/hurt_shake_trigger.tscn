@@ -4,4 +4,5 @@
 
 [node name="HurtShakeTrigger" type="Node" unique_id=252964983]
 script = ExtResource("1_shake")
+trauma = 0.25
 signal_name = &"survived_hurt"

@@ -4,5 +4,5 @@
 
 [node name="DestroyShakeTrigger" type="Node" unique_id=2098056896]
 script = ExtResource("1_shake")
-trauma = 0.25
+trauma = 0.5
 signal_name = &"died"
