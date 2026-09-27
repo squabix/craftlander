@@ -144,6 +144,7 @@
 [ext_resource type="Resource" uid="uid://dfolqijsstxy3" path="res://items/weapons/ice_staff/ice_staff_item.tres" id="300_icestf"]
 [ext_resource type="Resource" uid="uid://cjunsi1o8hn8q" path="res://items/weapons/slime_staff/slime_staff_item.tres" id="301_slmstf"]
 [ext_resource type="Script" uid="uid://dk6do6ua1pycb" path="res://player/ui/boat_upgrade_bar.gd" id="500_boatupg"]
+[ext_resource type="Script" uid="uid://wye585kqw6a6" path="res://player/ui/collected_items_list.gd" id="501_colist"]
 [ext_resource type="PackedScene" uid="uid://jswv1syw7ggn" path="res://player/ui/compass.tscn" id="9101_cmpss1"]
 [ext_resource type="Script" uid="uid://6bmpcar4ddbv" path="res://player/ui/boat_compass_tracker.gd" id="9102_cmpss2"]
 [ext_resource type="Script" uid="uid://bka8v53yqd1j6" path="res://player/ui/enemy_compass_tracker.gd" id="9103_cmpss3"]
@@ -1631,6 +1632,14 @@ text = "Day 0"
 fit_content = true
 scroll_active = false
 script = ExtResource("220_dnind")
+
+[node name="CollectedItemsList" type="VBoxContainer" parent="HUD/BarContainer" unique_id=463573664 node_paths=PackedStringArray("player")]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+alignment = 2
+script = ExtResource("501_colist")
+player = NodePath("../../..")
 
 [node name="Cursor2" type="TextureRect" parent="HUD" unique_id=832055728]
 layout_mode = 1

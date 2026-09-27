@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://rtw3bx6fgjge"]
+
+[ext_resource type="Script" uid="uid://b64ydnuocgfmn" path="res://player/ui/collected_item_entry.gd" id="1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b5s7l"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.0622, 0.0718, 0.075, 0.8)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.144, 0.276, 0.32, 0.6)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_qvxeb"]
+
+[node name="CollectedItemEntry" type="PanelContainer" unique_id=2094506569 node_paths=PackedStringArray("icon_rect", "label")]
+offset_right = 33.0
+offset_bottom = 24.0
+theme_type_variation = &"MenuPanel"
+theme_override_styles/panel = SubResource("StyleBoxFlat_b5s7l")
+script = ExtResource("1")
+icon_rect = NodePath("CenterContainer/HBoxContainer/Icon")
+label = NodePath("CenterContainer/HBoxContainer/Label")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=441089739]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer" unique_id=1355229270]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="CenterContainer/HBoxContainer" unique_id=1065640876]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_vertical = 4
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer" unique_id=908586569]
+clip_contents = true
+layout_mode = 2
+label_settings = SubResource("LabelSettings_qvxeb")
