@@ -12,14 +12,12 @@ func enter() -> void:
 	for control in root.docking_hidden_interfaces:
 		control.show()
 
-func handle_input(event: InputEvent) -> void:
-	super(event)
-	if event.is_action_pressed(ACTION_USE_PRIMARY):
-		root.use_item()
-
 func update(delta: float) -> void:
 	if root.is_in_water:
 		transition_to(&"Swimming")
+
+	if Input.is_action_just_pressed(ACTION_USE_PRIMARY):
+		root.use_item()
 
 	if Input.is_action_just_pressed(ACTION_JUMP):
 		root.jump()
