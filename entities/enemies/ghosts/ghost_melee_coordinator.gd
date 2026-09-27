@@ -41,6 +41,7 @@ func register(traits: GhostTraits) -> void:
 	member.orbit_radius = randf_range(orbit_radius_min, orbit_radius_max)
 	member.orbit_direction = 1.0 if randf() < 0.5 else -1.0
 	_members.append(member)
+	traits.allow_specials(traits.is_ranged)
 
 
 func assign_tokens(now: float, delta: float) -> void:
@@ -101,12 +102,14 @@ func has_token(member: Member) -> bool:
 func release_token(member: Member, now: float) -> void:
 	member.has_token = false
 	member.released_at = now
+	member.traits.allow_specials(false)
 	member.angle = get_bearing(member.traits)
 
 
 func give_token(member: Member) -> void:
 	member.has_token = true
 	member.idle_time = 0.0
+	member.traits.allow_specials(true)
 
 
 func is_closer_to_player(a: Member, b: Member) -> bool:

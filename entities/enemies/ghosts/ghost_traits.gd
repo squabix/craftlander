@@ -91,6 +91,11 @@ func play_spawn_in() -> void:
 	tween.tween_property(visuals, ^"scale", base_scale, spawn_duration)
 
 
+func allow_specials(allowed: bool) -> void:
+	if is_instance_valid(chasing_state) and is_instance_valid(chasing_state.rhythm):
+		chasing_state.rhythm.enabled = allowed
+
+
 func get_goal_distance() -> float:
 	if is_instance_valid(chasing_state):
 		return chasing_state.advance_goal_distance

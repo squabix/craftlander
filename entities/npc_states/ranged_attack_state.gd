@@ -12,6 +12,8 @@ extends TargetingState
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var throw_cooldown := 1.2
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var aim_height_offset := 1.0
 
+@export var rhythm: AttackRhythm
+
 @export_group("Target Losing")
 @export var return_to_chase_state := &""
 
@@ -78,7 +80,21 @@ func _on_animation_finished(anim_name: StringName) -> void:
 		transition_to(return_to_chase_state)
 		print("Target too far, starting chase")
 		return
+	if try_special():
+		return
 	_start_attack()
+
+
+func try_special() -> bool:
+	if not is_instance_valid(rhythm):
+		return false
+
+	var special := rhythm.take_ready_special(get_parent() as StateMachine, sight)
+	if special == &"":
+		return false
+
+	transition_to(special)
+	return true
 
 
 func _start_attack() -> void:
@@ -86,6 +102,8 @@ func _start_attack() -> void:
 		return
 	_last_attack_msec = Time.get_ticks_msec()
 	anim_player.play(_get_attack_animation())
+	if is_instance_valid(rhythm):
+		rhythm.count_basic_attack()
 
 
 func _get_attack_animation() -> StringName:
