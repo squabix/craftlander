@@ -143,6 +143,7 @@
 [ext_resource type="Script" uid="uid://bec5onipef8yy" path="res://player/day_night_indicator.gd" id="220_dnind"]
 [ext_resource type="Resource" uid="uid://dfolqijsstxy3" path="res://items/weapons/ice_staff/ice_staff_item.tres" id="300_icestf"]
 [ext_resource type="Resource" uid="uid://cjunsi1o8hn8q" path="res://items/weapons/slime_staff/slime_staff_item.tres" id="301_slmstf"]
+[ext_resource type="Script" uid="uid://dk6do6ua1pycb" path="res://player/ui/boat_upgrade_bar.gd" id="500_boatupg"]
 [ext_resource type="PackedScene" uid="uid://jswv1syw7ggn" path="res://player/ui/compass.tscn" id="9101_cmpss1"]
 [ext_resource type="Script" uid="uid://6bmpcar4ddbv" path="res://player/ui/boat_compass_tracker.gd" id="9102_cmpss2"]
 [ext_resource type="Script" uid="uid://bka8v53yqd1j6" path="res://player/ui/enemy_compass_tracker.gd" id="9103_cmpss3"]
@@ -330,6 +331,18 @@ colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_hjjmf"]
 gradient = SubResource("Gradient_j420s")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boatupg"]
+bg_color = Color(0.35599998, 0.62299997, 0.89, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_48p26"]
 shader = ExtResource("28_ge24q")
@@ -1044,7 +1057,7 @@ enemy_compass_tracker = NodePath("HUD/EnemyCompassTracker")
 hud = NodePath("HUD")
 hotbar_interface = NodePath("HotbarInterface")
 player_bars = NodePath("HUD/BarContainer")
-compass = NodePath("HUD/Compass")
+compass = NodePath("HUD/RightContainer/Compass")
 viewmodel_container = NodePath("Head/SubViewportContainer")
 item_holder = NodePath("Head/Camera3D/ItemHolder")
 dropper = NodePath("Head/Camera3D/DropperRayCast/InventoryDropper3D")
@@ -1655,27 +1668,39 @@ script = ExtResource("41_j420s")
 item_holder = NodePath("../../Head/Camera3D/ItemHolder")
 metadata/_custom_type_script = "uid://ddiytppqbuop1"
 
-[node name="Compass" parent="HUD" unique_id=910100001 node_paths=PackedStringArray("center_node") instance=ExtResource("9101_cmpss1")]
+[node name="UpgradeBarContainer" type="VBoxContainer" parent="HUD" unique_id=1079188015]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -120.0
-offset_top = 10.0
-offset_right = -10.0
-offset_bottom = 120.0
-grow_horizontal = 0
-center_node = NodePath("../..")
-marker_min_size = 1.5
-marker_max_size = 8.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -132.5
+offset_right = 132.5
+offset_bottom = 43.0
+grow_horizontal = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="HUD/UpgradeBarContainer" unique_id=835050548]
+layout_mode = 2
+text = "Next Upgrade"
+horizontal_alignment = 1
+
+[node name="BoatUpgradeBar" type="ProgressBar" parent="HUD/UpgradeBarContainer" unique_id=1267940476 node_paths=PackedStringArray("boat_upgrader", "player_inventory")]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+theme_override_styles/background = ExtResource("35_b2j0d")
+theme_override_styles/fill = SubResource("StyleBoxFlat_boatupg")
+show_percentage = false
+script = ExtResource("500_boatupg")
+boat_upgrader = NodePath("../../../BoatMenu/BottomOptions/HBoxContainer/BoatUpgrader")
+player_inventory = NodePath("../../../Inventory")
 
 [node name="BoatCompassTracker" type="Node" parent="HUD" unique_id=910200002 node_paths=PackedStringArray("compass")]
 script = ExtResource("9102_cmpss2")
-compass = NodePath("../Compass")
+compass = NodePath("../RightContainer/Compass")
 
 [node name="EnemyCompassTracker" type="Node" parent="HUD" unique_id=910300003 node_paths=PackedStringArray("compass", "center_node")]
 script = ExtResource("9103_cmpss3")
-compass = NodePath("../Compass")
+compass = NodePath("../RightContainer/Compass")
 center_node = NodePath("../..")
 size_curve = ExtResource("9105_cmpss5")
 
@@ -1685,6 +1710,22 @@ base_interval = 0.3
 target_methods = {
 NodePath(".."): &"refresh"
 }
+
+[node name="RightContainer" type="VBoxContainer" parent="HUD" unique_id=854803699]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -193.0
+offset_right = -3.0
+offset_bottom = 236.0
+grow_horizontal = 0
+
+[node name="Compass" parent="HUD/RightContainer" unique_id=910100001 node_paths=PackedStringArray("center_node") instance=ExtResource("9101_cmpss1")]
+layout_mode = 2
+center_node = NodePath("../../..")
+marker_min_size = 1.5
+marker_max_size = 8.0
 
 [node name="TutorialPopupLayer" type="CanvasLayer" parent="." unique_id=203573653]
 layer = 20
