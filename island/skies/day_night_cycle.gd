@@ -13,6 +13,7 @@ static var current_day_number := 0
 @export var palette: SkyPalette
 
 @export var sun: DirectionalLight3D
+@export var moon: DirectionalLight3D
 @export var world_environment: WorldEnvironment
 
 @export_group("Cycle", "cycle")
@@ -36,6 +37,8 @@ func apply_palette() -> void:
 		return
 	if is_instance_valid(sun):
 		palette.update_sun(sun, get_normalized_time())
+	if is_instance_valid(moon):
+		palette.update_moon(moon, get_normalized_time())
 	if is_instance_valid(world_environment):
 		palette.update_environment(world_environment, get_normalized_time())
 

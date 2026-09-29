@@ -1,11 +1,18 @@
 class_name SkyPalette
 extends Resource
 
+const DEFAULT_MOON_DIRECTION := Vector3(0.35, 0.45, -0.82)
+
 @export var sky_material: ShaderMaterial
 
 @export_group("Sun", "sun")
 @export var sun_color: Gradient
 @export var sun_energy: Curve
+
+@export_group("Moon", "moon")
+@export var moon_color := Color(0.75, 0.85, 1.0)
+@export var moon_energy := 0.4
+@export_range(1.0, 10.0) var moon_fade_sharpness := 4.0
 
 @export_group("Adjustments")
 @export var brightness: Curve
@@ -21,6 +28,16 @@ extends Resource
 func update_sun(sun: DirectionalLight3D, normalized_time_of_day: float) -> void:
 	sun.light_color = sun_color.sample(normalized_time_of_day)
 	sun.light_energy = sun_energy.sample(normalized_time_of_day)
+
+
+func update_moon(moon: DirectionalLight3D, normalized_time_of_day: float) -> void:
+	var sun_elevation := sin(normalized_time_of_day * TAU)
+	var night_amount := clampf(-sun_elevation * moon_fade_sharpness, 0.0, 1.0)
+
+	moon.light_color = moon_color
+	moon.light_energy = moon_energy * night_amount
+	moon.visible = moon.light_energy > 0.0
+	moon.global_transform.basis = Basis.looking_at(-_get_moon_direction(), Vector3.UP)
 
 
 func update_environment(world_environment: WorldEnvironment, normalized_time_of_day: float) -> void:
@@ -42,3 +59,10 @@ func update_environment(world_environment: WorldEnvironment, normalized_time_of_
 	if fog_density > 0.0:
 		environment.fog_light_color = fog_color
 		environment.fog_density = fog_density
+
+
+func _get_moon_direction() -> Vector3:
+	var direction: Variant = sky_material.get_shader_parameter("moon_direction") if sky_material != null else null
+	if direction is Vector3 and direction != Vector3.ZERO:
+		return (direction as Vector3).normalized()
+	return DEFAULT_MOON_DIRECTION.normalized()
