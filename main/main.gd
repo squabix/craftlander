@@ -50,6 +50,12 @@ static func is_saved(slot: int) -> bool:
 	return ResourceLoader.exists(SAVE_PATH_FORMAT % slot)
 
 
+static func quit_game() -> void:
+	Spawner3D.spawning_enabled = false
+	NodeSaver.offload_on_free_enabled = false
+	Util.get_tree().quit()
+
+
 func _ready() -> void:
 	root = self
 	load_title()
@@ -163,6 +169,7 @@ func load_game(slot: int) -> void:
 
 	if res == null:
 		Util.node_error("Failed to load game: No save file found at %s", path)
+		restart_level()
 		return
 
 	loaded_save = res
@@ -171,6 +178,24 @@ func load_game(slot: int) -> void:
 
 	NodeSaver.save = loaded_save
 	load_level(loaded_save.current_level_index, false)
+
+
+func respawn_game(slot: int) -> void:
+	clear(false)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	load_game(slot)
+
+
+func restart_level() -> void:
+	if not is_inside_tree():
+		Util.get_tree().paused = false
+		Util.get_tree().reload_current_scene()
+		return
+
+	loaded_save.forget_level_generation(current_level_index)
+	NodeSaver.save = loaded_save
+	load_level(current_level_index, false)
 
 
 func quit_level() -> void:
