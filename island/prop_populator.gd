@@ -67,7 +67,6 @@ func add_prop(prop: IslandProp, point: Vector2i, spawn_position: Vector3) -> Nod
 	var instance := spawn(prop.scene.instantiate() as Node3D, self)
 
 	if not is_instance_valid(instance):
-		instance.queue_free()
 		return null
 
 	# Place/transform instance
