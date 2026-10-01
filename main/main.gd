@@ -137,7 +137,7 @@ func save_game(slot: int) -> void:
 		return
 
 	if slot < 0 or slot >= MAX_SLOT:
-		Util.node_error("%s cannot save game to invalid slot number: %s", slot)
+		Util.node_error("%s cannot save game to invalid slot number: %s", self, slot)
 		return
 
 	if loaded_save == null:
