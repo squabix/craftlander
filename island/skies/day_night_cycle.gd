@@ -71,6 +71,7 @@ func _update_sun_direction() -> void:
 
 func reset_to_day_start() -> void:
 	phase_degrees = DAY_START_PHASE_DEGREES
+	day_number += 1
 	_was_night = false
 	_sync()
 
