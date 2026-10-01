@@ -22,6 +22,7 @@ BUGS.txt
 /testing
 testing/test_scene1.tscn
 /assets/outsourced_assets
+/assets/sound/
 .vscode/
 addons/IgnoreFolders/
 addons/GDQuest_GDScript_formatter/
