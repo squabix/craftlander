@@ -13,7 +13,7 @@ static var _last_action_frame: int = -1
 
 @export_group("Back", "back")
 @export var back_button: Button
-@export var back_action: StringName = &"ui_cancel"
+@export var back_action: StringName = &"back"
 
 var active_submenu: Menu
 
