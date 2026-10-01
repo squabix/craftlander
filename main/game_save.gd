@@ -43,5 +43,11 @@ func mark_current_level_as_generated() -> void:
 		return
 	generated_levels.append(current_level_index)
 
+func forget_level_generation(level_index: int) -> void:
+	var position := generated_levels.find(level_index)
+	if position >= 0:
+		generated_levels.remove_at(position)
+
+
 func is_current_level_generated() -> bool:
 	return current_level_index in generated_levels
