@@ -158,7 +158,7 @@ func get_dynamic_ancestor() -> NodeSaver:
 
 func get_property_data() -> Dictionary[StringName, Variant]:
 	if not is_instance_valid(target):
-		Util.node_error("%s cannot get property data from invalid target: %s", target)
+		Util.node_error("%s cannot get property data from invalid target: %s", self, target)
 		return { }
 
 	var property_data: Dictionary[StringName, Variant] = { }
@@ -174,7 +174,7 @@ func get_property_data() -> Dictionary[StringName, Variant]:
 
 func set_property_data(property_data: Dictionary[StringName, Variant]) -> void:
 	if not is_instance_valid(target):
-		Util.node_error("%s cannot set property data to invalid target: %s", target)
+		Util.node_error("%s cannot set property data to invalid target: %s", self, target)
 		return
 	for property: StringName in property_data:
 		var value: Variant = property_data[property]
