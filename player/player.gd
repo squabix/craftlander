@@ -168,10 +168,7 @@ func apply_screen_effect_settings() -> void:
 
 
 func respawn() -> void:
-	if respawn_override.is_valid():
-		respawn_override.call()
-		return
-	Main.root.load_game(Main.current_save_slot)
+	Main.root.respawn_game(Main.current_save_slot)
 
 
 func set_cutscene_locked(locked: bool) -> void:
