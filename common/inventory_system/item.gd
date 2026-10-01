@@ -137,6 +137,10 @@ func reached_use_limit() -> bool:
 	return max_uses > 0 and _updates_attempted_use >= max_uses
 
 
+func can_use() -> bool:
+	return true
+
+
 func use() -> bool:
 	_attempted_use = true
 
@@ -146,6 +150,9 @@ func use() -> bool:
 
 	# Fail if reached limit
 	if reached_use_limit():
+		return false
+
+	if not can_use():
 		return false
 
 	# Use is successful
