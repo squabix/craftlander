@@ -11,3 +11,4 @@ enum Placement { RANDOM, HIGHEST_POINT }
 @export var max_scale := 1.0
 @export_range(0.0, 1.0) var normal_conformity := 1.0
 @export var placement := Placement.RANDOM
+@export var faces_player := false

@@ -6,6 +6,7 @@ signal populated
 
 const PLACEMENT_STEP := Vector2i(2, 2)
 const JITTER_AMOUNT := Vector2i(1, 1)
+const FACE_PLAYER_MIN_DISTANCE_SQUARED := 0.01 # m squared
 
 @export_tool_button("Populate", "TileMapDock") var populate_tool_button := populate
 @export_tool_button("Clear", "Reload") var clear_tool_button := clear
@@ -80,6 +81,8 @@ func add_prop(prop: IslandProp, point: Vector2i, spawn_position: Vector3) -> Nod
 				return
 			# Finish transforming instance after island generator placement
 			instance.rotation_degrees.y = randf() * 360.0
+			if prop.faces_player:
+				face_player(instance)
 			instance.scale = Vector3.ONE * randf_range(prop.min_scale, prop.max_scale)
 			regenerate_collision_barriers.call_deferred(instance)
 	)
@@ -89,6 +92,18 @@ func add_prop(prop: IslandProp, point: Vector2i, spawn_position: Vector3) -> Nod
 	prop_resources[spawn_position] = prop
 
 	return instance
+
+
+func face_player(instance: Node3D) -> void:
+	var player := get_tree().get_first_node_in_group(&"player") as Node3D
+	if not is_instance_valid(player):
+		return
+
+	var to_player := player.global_position - instance.global_position
+	if Vector2(to_player.x, to_player.z).length_squared() < FACE_PLAYER_MIN_DISTANCE_SQUARED:
+		return
+
+	instance.rotation.y = atan2(-to_player.x, -to_player.z)
 
 
 func regenerate_collision_barriers(instance: Node3D) -> void:
