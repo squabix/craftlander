@@ -15,6 +15,9 @@ static var active_count := 0
 @export var does_obey_gravity := true
 @export var gravity_multiplier := 1.0
 
+@export_group("Landing")
+@export_custom(PROPERTY_HINT_NONE, "suffix:m/s") var min_landing_speed := 0.0
+
 @export_group("Rigid Bodies")
 @export var do_push_rigid_bodies := false
 @export var rigid_body_push_force := 4.0
@@ -29,6 +32,7 @@ static var active_count := 0
 var was_on_floor := false
 var frozen := false
 var _floor_state_initialized := false
+var _peak_fall_speed := 0.0
 var motion_direction := Vector3.ZERO
 var last_motion_direction := Vector3.ZERO
 var queued_impulse := Vector3.ZERO
@@ -58,15 +62,20 @@ func _physics_process(delta: float) -> void:
 	last_motion_direction = motion_direction
 	motion_direction = Vector3.ZERO
 
+	_peak_fall_speed = maxf(_peak_fall_speed, -velocity.y)
+
 	move_and_slide()
 	rotate_targets()
 
 	if _floor_state_initialized:
 		if was_on_floor and not is_on_floor():
 			left_ground.emit()
-		elif not was_on_floor and is_on_floor():
+		elif not was_on_floor and is_on_floor() and _peak_fall_speed >= min_landing_speed:
 			landed.emit()
 	_floor_state_initialized = true
+
+	if is_on_floor():
+		_peak_fall_speed = 0.0
 
 	was_on_floor = is_on_floor()
 
