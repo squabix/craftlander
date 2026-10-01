@@ -31,11 +31,11 @@ static func is_hidden() -> bool:
 
 
 static func is_captured() -> bool:
-	return Input.mouse_mode == Input.MOUSE_MODE_VISIBLE
+	return Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
 
 
 static func is_confined() -> bool:
-	return Input.mouse_mode == Input.MOUSE_MODE_CAPTURED
+	return Input.mouse_mode == Input.MOUSE_MODE_CONFINED
 
 
 static func is_confined_hidden() -> bool:
