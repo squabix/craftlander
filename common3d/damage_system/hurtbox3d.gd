@@ -12,6 +12,7 @@ signal was_resisted(damage: Damage)
 @export var type_list: Array[StringName] = []
 @export var type_acl: ACL
 @export var free_parent_on_hurt := false
+@export var size_multiplier := 1.0
 
 @export_group("Damage Override")
 @export var damage_override: Damage
@@ -34,7 +35,17 @@ var total_damage_taken := 0.0
 
 func _ready() -> void:
 	type_acl = ACL.resolve(type_acl, type_list)
+	_scale_collision_shapes()
 	_set_up_auto_hurt()
+
+
+func _scale_collision_shapes() -> void:
+	if is_equal_approx(size_multiplier, 1.0):
+		return
+
+	for child in get_children():
+		if child is CollisionShape3D:
+			child.scale *= size_multiplier
 
 
 func auto_hurt(node: Node3D = null) -> void:
