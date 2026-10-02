@@ -218,7 +218,7 @@ func hurt_target(hit: Damage) -> void:
 
 	var health := Health.search(target)
 	if is_instance_valid(health):
-		health.hurt(hit.base_amount)
+		health.hurt(hit.sample())
 
 
 func find_target_hurtbox(target: Node3D) -> Hurtbox3D:
