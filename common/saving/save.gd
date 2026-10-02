@@ -40,7 +40,7 @@ func register_node_save(key: String, index: int) -> void:
 static func load_from_disk(path: String) -> Save:
 	if not ResourceLoader.exists(path):
 		return null
-	var res := ResourceLoader.load(path)
+	var res := ResourceLoader.load(path, "", ResourceLoader.CACHE_MODE_IGNORE)
 	if not res is Save:
 		return null
 	return res
