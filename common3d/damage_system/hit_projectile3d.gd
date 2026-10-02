@@ -40,6 +40,10 @@ func _on_body_entered(_body: Node3D) -> void:
 		queue_free()
 
 
+func is_source(body: Node3D) -> bool:
+	return is_instance_valid(damage) and is_instance_valid(damage.source) and body == damage.source
+
+
 func _on_hit_node() -> void:
 	if free_on_collision:
 		queue_free()
