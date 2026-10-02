@@ -24,7 +24,9 @@ static var all_telegraphs: Array[PlanarTelegraph3D]
 @export_custom(PROPERTY_HINT_NONE, "suffix:°") var aim_front_arc := 120.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var aim_telegraph_spacing := 10.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var aim_blast_radius := 3.5
-@export_flags_3d_physics var aim_ground_mask := 4
+@export_flags_3d_physics var aim_ground_mask := 64
+@export_flags_3d_physics var aim_obstacle_mask := 128
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var aim_obstacle_radius := 3.0
 
 var target: Node3D
 var active := false
@@ -131,6 +133,9 @@ func get_landing_point() -> Vector3:
 		var offset := facing.rotated(spread) * randf_range(aim_min_offset, aim_max_offset)
 		var candidate := snap_to_ground(target.global_position + Vector3(offset.x, 0.0, offset.y))
 		
+		if is_landing_obstructed(candidate):
+			continue
+
 		var clearance := get_telegraph_clearance(candidate)
 		if clearance >= aim_telegraph_spacing:
 			return candidate
@@ -139,6 +144,17 @@ func get_landing_point() -> Vector3:
 			best_clearance = clearance
 	
 	return best
+
+
+func is_landing_obstructed(point: Vector3) -> bool:
+	var shape := SphereShape3D.new()
+	shape.radius = aim_obstacle_radius
+
+	var query := PhysicsShapeQueryParameters3D.new()
+	query.shape = shape
+	query.transform = Transform3D(Basis.IDENTITY, point + Vector3.UP * aim_obstacle_radius)
+	query.collision_mask = aim_obstacle_mask
+	return not get_world_3d().direct_space_state.intersect_shape(query, 1).is_empty()
 
 
 func get_facing() -> Vector2:
