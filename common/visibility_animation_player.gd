@@ -40,7 +40,7 @@ func _on_animation_started(anim_name: StringName) -> void:
 
 		_affected_nodes.append(target_node)
 		if deep:
-			Util.set_visibility_deep(target_node, true)
+			show_deep(target_node, true)
 		else:
 			target_node.show()
 
@@ -58,3 +58,18 @@ func _on_animation_finished(_anim_name: StringName) -> void:
 			node.hide()
 
 	_affected_nodes.clear()
+
+
+func show_deep(node: Node, is_target := false) -> void:
+	if not is_instance_valid(node):
+		return
+
+	if (node is CanvasItem or node is Node3D) and (is_target or not intentionally_hidden(node)):
+		node.visible = true
+
+	for child in node.get_children():
+		show_deep(child, false)
+
+
+func intentionally_hidden(node: Node) -> bool:
+	return node is MeshInstance3D and not MeshInstanceAggregator3D.aggregated_mesh_instances.has(node)
