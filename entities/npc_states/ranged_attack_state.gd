@@ -78,7 +78,6 @@ func _on_animation_finished(anim_name: StringName) -> void:
 		return
 	if not can_see_target() or not is_target_in_range():
 		transition_to(return_to_chase_state)
-		print("Target too far, starting chase")
 		return
 	if try_special():
 		return

@@ -90,7 +90,6 @@ func _ready() -> void:
 	get_tree().paused = false
 	advance_step()
 	NodeSaver.offload_on_free_enabled = true
-	print()
 	show_name()
 	await get_tree().process_frame
 	AudioServer.set_bus_mute(master_bus_index, false)
@@ -115,7 +114,7 @@ func show_name() -> void:
 
 
 func advance_step() -> void:
-	print(await Main.root.advance_loading_step())
+	await Main.root.advance_loading_step()
 
 
 func initial_save_load() -> void:

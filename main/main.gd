@@ -86,7 +86,6 @@ func load_level(index: int, save_before_clear := true) -> void:
 
 	clear(save_before_clear)
 	level = loaded_level
-	print("Loaded level %s" % level)
 	NodeSaver.scene_root = level
 	add_child(level)
 
@@ -99,7 +98,6 @@ func load_scene(path: String) -> Node:
 	Util.safe_free(loading_screen)
 	loading_screen = loading_screen_scene.instantiate()
 	add_child(loading_screen)
-	print("Loading %s..." % path)
 	
 	var scene := (await loading_screen.load_resource(path) as PackedScene)
 	return scene.instantiate() if scene != null else null
@@ -134,7 +132,6 @@ func save_current_game() -> void:
 
 func save_game(slot: int) -> void:
 	if saving_locked:
-		print("Saving is locked")
 		return
 
 	if slot < 0 or slot >= MAX_SLOT:
@@ -153,7 +150,6 @@ func save_game(slot: int) -> void:
 	var path := get_slot_path(slot)
 	var err := loaded_save.write_to_disk(path)
 	if err == OK:
-		print("Successfully saved game to slot %s" % slot)
 		_push_save_to_cloud(path, slot)
 	else:
 		Util.node_error("Failed to save game to slot %s. Error: %s", slot, err)

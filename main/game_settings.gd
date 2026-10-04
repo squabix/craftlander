@@ -31,7 +31,6 @@ func load_settings() -> void:
 		Util.node_error("%s failed to load config", self)
 	is_config_loaded = true
 	config_loaded.emit()
-	print("%s loaded config" % self)
 
 func get_volume(bus_name: StringName) -> float:
 	return config.get_value(SECTION_AUDIO, bus_name, DEFAULT_VOLUME)
