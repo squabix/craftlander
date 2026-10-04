@@ -214,6 +214,10 @@ func _convert_joypad_to_switch(path: String):
 			return path.replace("/start", "/plus")
 		"share":
 			return path.replace("/share", "/square")
+		"l_stick_click":
+			return path.replace("/l_stick_click", "/l_stick")
+		"r_stick_click":
+			return path.replace("/r_stick_click", "/r_stick")
 		_:
 			return path
 
