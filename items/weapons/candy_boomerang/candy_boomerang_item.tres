@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CandyBoomerangWeapon" format=3]
+
+[ext_resource type="Script" path="res://items/weapons/candy_boomerang/candy_boomerang_weapon.gd" id="1_script"]
+[ext_resource type="Resource" path="res://items/weapons/candy_boomerang/candy_boomerang_damage.tres" id="2_damage"]
+[ext_resource type="PackedScene" path="res://items/weapons/candy_boomerang/candy_boomerang.tscn" id="3_scene"]
+[ext_resource type="Texture2D" path="res://items/weapons/candy_boomerang/candy_boomerang.png" id="4_icon"]
+
+[resource]
+script = ExtResource("1_script")
+damage = ExtResource("2_damage")
+name = &"Candy Boomerang"
+icon = ExtResource("4_icon")
+consumable = true
+type = &"Weapon"
+use_action_name = &"Throw"
+scene = ExtResource("3_scene")

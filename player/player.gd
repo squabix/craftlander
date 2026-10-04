@@ -66,6 +66,8 @@ func _ready() -> void:
 				health.hp += event.health_restoration
 				hunger.value += event.hunger_restoration
 				eat_player.play()
+			elif event is CandyBoomerangWeapon.ReturnedEvent:
+				item_holder.selector.inventory.add_item(event.item, 1)
 	)
 	respawn_button.pressed.connect(respawn)
 	health.died.connect(die)

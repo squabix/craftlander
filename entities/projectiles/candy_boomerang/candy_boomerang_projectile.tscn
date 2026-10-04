@@ -1,0 +1,26 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://entities/projectiles/candy_boomerang/candy_boomerang_projectile.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://assets/models/items/weapons/boomerang.blend" id="2_model"]
+[ext_resource type="Material" path="res://assets/materials/candy_red.tres" id="3_red"]
+[ext_resource type="Material" path="res://assets/materials/candy_white.tres" id="4_white"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_boomerang"]
+radius = 0.3
+
+[node name="CandyBoomerangProjectile" type="Area3D"]
+collision_layer = 0
+collision_mask = 12
+script = ExtResource("1_script")
+speed = 14.0
+lifetime = 6.0
+one_shot = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_boomerang")
+
+[node name="Visuals" parent="." instance=ExtResource("2_model")]
+
+[node name="Boomerang" parent="Visuals" index="0"]
+surface_material_override/0 = ExtResource("3_red")
+surface_material_override/1 = ExtResource("4_white")

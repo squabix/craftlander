@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://common/spawner/projectile_spawner3d.gd" id="1_spawner"]
+[ext_resource type="PackedScene" path="res://entities/projectiles/candy_boomerang/candy_boomerang_projectile.tscn" id="2_projectile"]
+[ext_resource type="PackedScene" path="res://assets/models/items/weapons/boomerang.blend" id="3_model"]
+[ext_resource type="Material" path="res://assets/materials/candy_red.tres" id="4_red"]
+[ext_resource type="Material" path="res://assets/materials/candy_white.tres" id="5_white"]
+
+[node name="CandyBoomerang" type="Node3D"]
+
+[node name="ProjectileSpawner" type="Node3D" parent="."]
+script = ExtResource("1_spawner")
+projectile_scene = ExtResource("2_projectile")
+
+[node name="Visuals" parent="." instance=ExtResource("3_model")]
+
+[node name="Boomerang" parent="Visuals" index="0"]
+surface_material_override/0 = ExtResource("4_red")
+surface_material_override/1 = ExtResource("5_white")
