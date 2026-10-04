@@ -8,6 +8,7 @@ const IMPACT_INTERVAL := 0.03
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var width := 2.6
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var dash_duration := 0.3
 @export var damage_multiplier := 1.33
+@export var passes_through_target := false
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var shockwave_radius := 5.0
 
 @export_group("Pose", "pose")
@@ -25,6 +26,12 @@ const IMPACT_INTERVAL := 0.03
 var _telegraph: PlanarTelegraph3D
 var _has_hit := false
 var _since_impact := 0.0
+var _passed_target: PhysicsBody3D
+
+
+func exit() -> void:
+	super()
+	restore_target_collision()
 
 
 func get_reach() -> float:
@@ -81,12 +88,28 @@ func dash(start: Vector3, direction: Vector3) -> bool:
 	_has_hit = false
 	_since_impact = 0.0
 
+	ignore_target_collision()
+
 	var destination := start + direction * length
-	if not await drive(enemy.global_position, destination, dash_duration, Tween.TRANS_EXPO, Tween.EASE_OUT, dash_step.bind(start)):
+	var completed := await drive(enemy.global_position, destination, dash_duration, Tween.TRANS_EXPO, Tween.EASE_OUT, dash_step.bind(start))
+	restore_target_collision()
+	if not completed:
 		return false
 
 	pose(0.0, 1.0, pose_dash_duration)
 	return true
+
+
+func ignore_target_collision() -> void:
+	_passed_target = get_target() as PhysicsBody3D
+	if passes_through_target and is_instance_valid(_passed_target):
+		enemy.add_collision_exception_with(_passed_target)
+
+
+func restore_target_collision() -> void:
+	if is_instance_valid(_passed_target):
+		enemy.remove_collision_exception_with(_passed_target)
+	_passed_target = null
 
 
 func dash_step(start: Vector3) -> void:
