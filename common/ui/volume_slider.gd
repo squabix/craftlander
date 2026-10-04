@@ -12,7 +12,7 @@ func _ready() -> void:
 	value_changed.connect(set_volume.unbind(1))
 	if not GameSettings.is_config_loaded:
 		await GameSettings.config_loaded
-	value = GameSettings.config.get_value(GameSettings.SECTION_AUDIO, bus, 0.8)
+	value = GameSettings.get_volume(bus)
 	set_volume()
 
 
@@ -26,9 +26,7 @@ func get_bus_index() -> int:
 
 
 func set_volume() -> void:
-	var bus_index := get_bus_index()
-	if bus_index == -1:
+	if not GameSettings.apply_bus_volume(bus, value):
 		return
 
-	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
 	GameSettings.set_value(GameSettings.SECTION_AUDIO, bus, value)

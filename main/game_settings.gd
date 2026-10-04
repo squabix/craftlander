@@ -6,6 +6,9 @@ const SECTION_AUDIO := "audio"
 const SECTION_VIDEO := "video"
 const SECTION_GAMEPLAY := "gameplay"
 
+const DEFAULT_VOLUME := 0.8
+const MAX_MUSIC_GAIN := 0.5
+
 const ENVIRONMENT_PATH := "res://assets/default_environment.tres"
 const SHADOW_ATLAS_SIZES: Array[int] = [1024, 2048, 4096, 8192]
 const FPS_CAPS: Array[int] = [0, 30, 60, 120, 144]
@@ -30,14 +33,24 @@ func load_settings() -> void:
 	config_loaded.emit()
 	print("%s loaded config" % self)
 
+func get_volume(bus_name: StringName) -> float:
+	return config.get_value(SECTION_AUDIO, bus_name, DEFAULT_VOLUME)
+
 func set_volume(bus_name: StringName, value: float) -> void:
-	var bus_index = AudioServer.get_bus_index(bus_name)
-	if bus_index == -1:
+	if not apply_bus_volume(bus_name, value):
 		return
 
-	AudioServer.set_bus_volume_db(bus_index, linear_to_db(value))
 	set_value(SECTION_AUDIO, bus_name, value)
 	save_settings()
+
+func apply_bus_volume(bus_name: StringName, value: float) -> bool:
+	var bus_index := AudioServer.get_bus_index(bus_name)
+	if bus_index == -1:
+		return false
+
+	var gain := value * MAX_MUSIC_GAIN if bus_name == &"Music" else value
+	AudioServer.set_bus_volume_db(bus_index, linear_to_db(gain))
+	return true
 
 func set_vsync(enabled: bool) -> void:
 	var mode = DisplayServer.VSYNC_ENABLED if enabled else DisplayServer.VSYNC_DISABLED

@@ -41,7 +41,7 @@ func _ready() -> void:
 
 func sync_ui_with_settings() -> void:
 	# Audio
-	music_slider.value = GameSettings.config.get_value("audio", "Music", 0.8)
+	music_slider.value = GameSettings.get_volume(&"Music")
 	#sfx_slider.value = GameSettings.config.get_value("audio", "SFX", 0.8)
 
 	# Video
