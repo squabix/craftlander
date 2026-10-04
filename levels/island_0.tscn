@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://colgye866oyqn"]
 
+[ext_resource type="Script" uid="uid://dxx3ryri4rcce" path="res://common/sound/music_player.gd" id="music_player_gd"]
 [ext_resource type="Script" uid="uid://cyj4kbcybeaby" path="res://main/island.gd" id="1_1lm7x"]
 [ext_resource type="Environment" uid="uid://cibxuhtgknost" path="res://assets/default_environment.tres" id="2_f11vp"]
 [ext_resource type="Resource" uid="uid://bkvo3ik5y1yom" path="res://island/island_resources/lush_isle.tres" id="2_mngd6"]
@@ -1109,7 +1110,7 @@ buffer = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), -0.015610588, 0.0, 0, 0]
 point_count = 2
 
-[node name="Island0" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "player_boat_adder", "docking_managers", "name_label", "name_anim_player", "world_environment", "sun", "day_night_cycle", "spawn_container")]
+[node name="Island0" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "player_boat_adder", "docking_managers", "name_label", "name_anim_player", "world_environment", "sun", "day_night_cycle", "spawn_container", "music_player")]
 script = ExtResource("1_1lm7x")
 resource = ExtResource("2_mngd6")
 player = NodePath("DockingManager/Player")
@@ -1126,6 +1127,7 @@ world_environment = NodePath("WorldEnvironment")
 sun = NodePath("DirectionalLight3D")
 day_night_cycle = NodePath("DayNightCycle")
 spawn_container = NodePath("SpawnContainer")
+music_player = NodePath("MusicPlayer")
 
 [node name="NameLabel" type="Label" parent="." unique_id=1346364616]
 modulate = Color(1, 1, 1, 0)
@@ -1140,6 +1142,9 @@ horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="NameLabel" unique_id=727042222]
 libraries/ = SubResource("AnimationLibrary_6o2sf")
+
+[node name="MusicPlayer" type="Node" parent="." unique_id=730000]
+script = ExtResource("music_player_gd")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2120940629]
 environment = ExtResource("2_f11vp")

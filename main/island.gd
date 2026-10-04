@@ -37,6 +37,7 @@ enum PlayerSpawnMode {BOAT, ISLAND_CENTER}
 
 @export_group("Misc")
 @export var spawn_container: Node3D
+@export var music_player: MusicPlayer
 
 
 func _ready() -> void:
@@ -93,6 +94,10 @@ func _ready() -> void:
 	show_name()
 	await get_tree().process_frame
 	AudioServer.set_bus_mute(master_bus_index, false)
+
+	if music_player != null:
+		music_player.play_cue(resource.music)
+
 
 func has_saved_props() -> bool:
 	var populator_path := get_path_to(prop_populator)

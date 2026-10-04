@@ -48,6 +48,7 @@
 [ext_resource type="Shader" uid="uid://bjt5jcslbt2k1" path="res://assets/shaders/water.gdshader" id="42_2utcq"]
 [ext_resource type="Resource" uid="uid://v64naelaip4g" path="res://entities/enemies/giant_snail/giant_snail_island_resource.tres" id="42_o5g2o"]
 [ext_resource type="PackedScene" path="res://island/skies/day_night_cycle.tscn" id="99_dncscn"]
+[ext_resource type="Script" uid="uid://dxx3ryri4rcce" path="res://common/sound/music_player.gd" id="music_player_gd"]
 
 [sub_resource type="Gradient" id="Gradient_eo3xd"]
 
@@ -236,7 +237,7 @@ _data = {
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), -0.015610588, 0.0, 0, 0]
 point_count = 2
 
-[node name="Island1" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "player_boat_adder", "docking_managers", "name_label", "name_anim_player", "world_environment", "sun", "day_night_cycle", "spawn_container")]
+[node name="Island1" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "player_boat_adder", "docking_managers", "name_label", "name_anim_player", "world_environment", "sun", "day_night_cycle", "spawn_container", "music_player")]
 script = ExtResource("1_0eh6l")
 resource = ExtResource("2_ygej4")
 player = NodePath("DockingManager/Player")
@@ -253,6 +254,10 @@ world_environment = NodePath("WorldEnvironment")
 sun = NodePath("DirectionalLight3D")
 day_night_cycle = NodePath("DayNightCycle")
 spawn_container = NodePath("SpawnContainer")
+music_player = NodePath("MusicPlayer")
+
+[node name="MusicPlayer" type="Node" parent="." unique_id=730001]
+script = ExtResource("music_player_gd")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2120940629]
 environment = ExtResource("2_vwc2c")

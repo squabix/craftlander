@@ -16,7 +16,7 @@ var _tweens: Dictionary[AudioStreamPlayer, Tween] = { }
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	EventBus.subscribe(&"player_died", _on_player_died)
+	EventBus.subscribe(&"player_died", _on_player_died, tree_exiting)
 
 	for i in PLAYER_COUNT:
 		add_player()

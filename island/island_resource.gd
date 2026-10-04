@@ -5,3 +5,4 @@ extends Resource
 @export var icon: Texture2D
 @export var index := 0
 @export var sky_palette: SkyPalette
+@export var music: MusicCue

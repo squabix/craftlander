@@ -49,6 +49,8 @@
 [ext_resource type="PackedScene" path="res://island/skies/day_night_cycle.tscn" id="99_dncscn"]
 
 [ext_resource type="Resource" path="res://island/props/destructable_resource/mushroom/mushroom_prop.tres" id="gen_mushroom_prop"]
+[ext_resource type="Script" uid="uid://dxx3ryri4rcce" path="res://common/sound/music_player.gd" id="music_player_gd"]
+
 [sub_resource type="Gradient" id="Gradient_eo3xd"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_s5hfs"]
@@ -227,7 +229,7 @@ _data = {
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), -0.015610588, 0.0, 0, 0]
 point_count = 2
 
-[node name="Island2" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "player_boat_adder", "docking_managers", "name_label", "name_anim_player", "world_environment", "sun", "day_night_cycle", "spawn_container")]
+[node name="Island2" type="Node3D" unique_id=125848165 node_paths=PackedStringArray("player", "island_generator", "nav_region", "occluder_instance", "prop_populator", "mesh_aggregator", "player_boat_adder", "docking_managers", "name_label", "name_anim_player", "world_environment", "sun", "day_night_cycle", "spawn_container", "music_player")]
 script = ExtResource("1_pu37u")
 resource = ExtResource("2_a72t2")
 player = NodePath("DockingManager/Player")
@@ -244,6 +246,10 @@ world_environment = NodePath("WorldEnvironment")
 sun = NodePath("DirectionalLight3D")
 day_night_cycle = NodePath("DayNightCycle")
 spawn_container = NodePath("SpawnContainer")
+music_player = NodePath("MusicPlayer")
+
+[node name="MusicPlayer" type="Node" parent="." unique_id=730002]
+script = ExtResource("music_player_gd")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2120940629]
 environment = ExtResource("3_v46dl")
