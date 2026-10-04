@@ -137,6 +137,7 @@ func generate_multi_mesh(mesh: Mesh, instances: Array[MeshInstance3D], multi_ins
 		aggregated_mesh_instances[instance] = self
 
 		instance.hide() # Hide the original mesh source so only the MultiMesh is visible initially
+		instance.ignore_occlusion_culling = true
 		multimesh.set_instance_transform(i, relative_transform)
 
 		connect_visibility_inversion(instance)
@@ -220,6 +221,7 @@ func reset() -> void:
 		for instance in instance_registry.keys():
 			if not is_instance_valid(instance):
 				continue
+			instance.ignore_occlusion_culling = false
 			instance.show()
 
 	instance_registry.clear()
@@ -257,6 +259,10 @@ func _on_instance_visibility_changed(instance: MeshInstance3D) -> void:
 		return
 
 	# If the source mesh is shown, then hide the multimesh element (and vice versa)
+	if instance.is_visible_in_tree():
+		await get_tree().process_frame
+		if not is_instance_valid(instance) or not instance.is_visible_in_tree():
+			return
 	set_instance_visibility(instance, not instance.is_visible_in_tree())
 
 

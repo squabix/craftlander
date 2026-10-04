@@ -165,6 +165,7 @@ metadata/_custom_type_script = "uid://favgu1tbe1tq"
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Interactable3D" unique_id=1970934138]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.27437466, 0)
 cast_shadow = 0
+ignore_occlusion_culling = true
 mesh = SubResource("CylinderMesh_5wiqi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable3D" unique_id=1111912395]
