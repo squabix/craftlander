@@ -5,7 +5,9 @@ extends State
 @export var trunk: Node3D
 @export var animation_player: VisibilityAnimationPlayer
 @export var occluder_instance: OccluderInstance3D
-@export var falling_mesh_instances: Array[MeshInstance3D]
+
+@export_group("Achievements")
+@export var counts_as_tree := true
 
 const FALL_ACCEL := 0.002
 
@@ -13,6 +15,9 @@ var fall_speed := 0.01
 var fall_direction: Vector3
 
 func enter() -> void:
+	if counts_as_tree:
+		EventBus.trigger(&"tree_chopped")
+
 	await get_tree().process_frame
 	fall_speed = 0.0
 	fall_direction = root.hurtbox.last_hurt_direction
@@ -20,8 +25,7 @@ func enter() -> void:
 	
 	occluder_instance.queue_free()
 	
-	for instance in falling_mesh_instances:
-		MeshInstanceAggregator3D.disassociate_mesh_instance(instance)
+	release_trunk_meshes()
 	animation_player.disable_visibility_updates()
 
 func has_landed() -> bool:
@@ -45,3 +49,10 @@ func physics_update(_delta: float) -> void:
 			Util.VECTOR3Y,
 			fall_speed
 		)
+
+
+func release_trunk_meshes() -> void:
+	for mesh: MeshInstance3D in Util.find_children_of_class(trunk, &"MeshInstance3D"):
+		if not MeshInstanceAggregator3D.aggregated_mesh_instances.has(mesh):
+			continue
+		MeshInstanceAggregator3D.disassociate_mesh_instance(mesh)

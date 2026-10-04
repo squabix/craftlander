@@ -165,14 +165,13 @@ metadata/_custom_type_script = "uid://bqonxtntgndfr"
 script = ExtResource("7_yr1oo")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Falling" type="Node" parent="StateMachine" unique_id=490514813 node_paths=PackedStringArray("hurtbox_collision", "continue_fall_area", "trunk", "animation_player", "occluder_instance", "falling_mesh_instances")]
+[node name="Falling" type="Node" parent="StateMachine" unique_id=490514813 node_paths=PackedStringArray("hurtbox_collision", "continue_fall_area", "trunk", "animation_player", "occluder_instance")]
 script = ExtResource("8_upgh6")
 hurtbox_collision = NodePath("../../Trunk/Hurtbox3D/CollisionShape3D5")
 continue_fall_area = NodePath("../../Trunk/ContinueFallArea")
 trunk = NodePath("../../Trunk")
 animation_player = NodePath("../../AnimationPlayer")
 occluder_instance = NodePath("../../OccluderInstance3D")
-falling_mesh_instances = [null, null]
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="SignalAudioManager" type="Node3D" parent="StateMachine/Falling" unique_id=707435236 node_paths=PackedStringArray("signal_players")]
