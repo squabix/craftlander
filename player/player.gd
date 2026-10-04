@@ -19,6 +19,7 @@ const HURT_SHAKE_TRAUMA := 0.4
 @export_subgroup("Screen Effects")
 @export var vignette: CanvasItem
 @export var hurt_effect_trigger: SignalTrigger
+@export var low_health_indicator: LowHealthIndicator
 
 @export_subgroup("Control")
 @export var respawn_button: Button
@@ -169,7 +170,9 @@ func _on_was_hurt() -> void:
 
 func apply_screen_effect_settings() -> void:
 	vignette.visible = GameSettings.config.get_value("gameplay", "vignette_enabled", true)
-	hurt_effect_trigger.disabled = not GameSettings.config.get_value("gameplay", "hurt_effect_enabled", true)
+	var hurt_effect_enabled: bool = GameSettings.config.get_value("gameplay", "hurt_effect_enabled", true)
+	hurt_effect_trigger.disabled = not hurt_effect_enabled
+	low_health_indicator.enabled = hurt_effect_enabled
 
 
 func respawn() -> void:

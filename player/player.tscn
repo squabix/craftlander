@@ -1058,7 +1058,86 @@ random_pitch = 1.122462
 streams_count = 1
 stream_0/stream = ExtResource("112_teerl")
 
-[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("movement_state_machine", "head", "camera", "camera_shake", "interactors", "vignette", "hurt_effect_trigger", "respawn_button", "boat_menu", "pause_menu", "boat_compass_tracker", "enemy_compass_tracker", "hud", "hotbar_interface", "player_bars", "compass", "viewmodel_container", "item_holder", "dropper", "health", "health_saver", "hunger", "hunger_saver", "stamina", "steps_player", "swim_player", "eat_player", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
+[sub_resource type="Animation" id="Animation_deathintro"]
+resource_name = "intro"
+length = 2.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BackgroundRect:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TitleLabel:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TitleLabel:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 2.2),
+"transitions": PackedFloat32Array(1, 1, 0.33333),
+"update": 0,
+"values": [Vector2(1.4, 1.4), Vector2(1.4, 1.4), Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("OptionsContainer:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.3, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_deathintro"]
+_data = {
+&"intro": SubResource("Animation_deathintro")
+}
+
+[sub_resource type="Animation" id="Animation_lowhealthpulse"]
+resource_name = "pulse"
+length = 1.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.25, 0.7, 0.25]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lowhealthpulse"]
+_data = {
+&"pulse": SubResource("Animation_lowhealthpulse")
+}
+
+[node name="Player" type="CharacterBody3D" unique_id=1858460853 node_paths=PackedStringArray("movement_state_machine", "head", "camera", "camera_shake", "interactors", "vignette", "hurt_effect_trigger", "low_health_indicator", "respawn_button", "boat_menu", "pause_menu", "boat_compass_tracker", "enemy_compass_tracker", "hud", "hotbar_interface", "player_bars", "compass", "viewmodel_container", "item_holder", "dropper", "inventory_saver", "health", "health_saver", "hunger", "hunger_saver", "stamina", "steps_player", "swim_player", "eat_player", "horizontal_rotation_target", "vertical_rotation_target") groups=["player"]]
 collision_layer = 17
 collision_mask = 132
 floor_constant_speed = true
@@ -1073,6 +1152,7 @@ camera_shake = NodePath("Head/Camera3D/CameraShake")
 interactors = [NodePath("InteractorArea/Interactor3D"), NodePath("Head/Camera3D/InteratorRay/Interactor")]
 vignette = NodePath("ScreenEffectContainer/Vignette")
 hurt_effect_trigger = NodePath("Health/SignalAnimationTrigger")
+low_health_indicator = NodePath("ScreenEffectContainer/LowHealthIndicator")
 respawn_button = NodePath("DeathScreen/OptionsContainer/RespawnButton")
 boat_menu = NodePath("BoatMenu")
 pause_menu = NodePath("PauseMenu")
@@ -1469,28 +1549,24 @@ texture = SubResource("GradientTexture2D_j55il")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ScreenEffectContainer/Hurt" unique_id=1282475695]
 libraries/ = SubResource("AnimationLibrary_hjies")
 
-[node name="HUD" type="Control" parent="." unique_id=1406402649]
-process_mode = 3
-layout_mode = 3
+[node name="LowHealth" type="TextureRect" parent="ScreenEffectContainer"]
+visible = false
+modulate = Color(1, 0, 0, 0.25)
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PrimaryInventorySelector" type="Node" parent="HUD" unique_id=573150197 node_paths=PackedStringArray("inventory")]
-script = ExtResource("9_bjvpn")
-enabled = false
-reset_selection_on_disable = true
-inventory = NodePath("../../Inventory")
-metadata/_custom_type_script = "uid://ioo6s3m7wbha"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ScreenEffectContainer/LowHealth"]
+libraries/ = SubResource("AnimationLibrary_lowhealthpulse")
 
-[node name="SignalAudioManager" type="Node" parent="HUD/PrimaryInventorySelector" unique_id=1399028685 node_paths=PackedStringArray("signal_players")]
-script = ExtResource("84_onxu2")
-signal_players = {
-&"selected_new_index": NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector/SignalAudioManager/SelectPlayer")
-}
-metadata/_custom_type_script = "uid://b3snj0gi7akf8"
+[node name="LowHealthIndicator" type="Node" parent="ScreenEffectContainer" node_paths=PackedStringArray("health", "indicator", "animation_player")]
+script = ExtResource("low_health_script")
+health = NodePath("../../Health")
+indicator = NodePath("../LowHealth")
+animation_player = NodePath("../LowHealth/AnimationPlayer")
 
 [node name="SelectPlayer" type="AudioStreamPlayer" parent="HUD/PrimaryInventorySelector/SignalAudioManager" unique_id=256799826]
 stream = SubResource("AudioStreamRandomizer_rnncm")
