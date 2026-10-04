@@ -6550,7 +6550,7 @@ metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 stream = SubResource("AudioStreamRandomizer_vyxke")
 bus = &"SFX"
 
-[node name="DeathScreen" type="Control" parent="." unique_id=1492309495 node_paths=PackedStringArray("respawn_button", "quit_button", "health")]
+[node name="DeathScreen" type="Control" parent="." unique_id=1492309495 node_paths=PackedStringArray("respawn_button", "quit_button", "health", "animation_player", "animation_title_label")]
 process_mode = 2
 visible = false
 z_index = 2
@@ -6564,6 +6564,12 @@ script = ExtResource("40_gswnw")
 respawn_button = NodePath("OptionsContainer/RespawnButton")
 quit_button = NodePath("OptionsContainer/QuitButton")
 health = NodePath("../Health")
+animation_player = NodePath("IntroAnimationPlayer")
+animation_title_label = NodePath("TitleLabel")
+back_action = &""
+
+[node name="IntroAnimationPlayer" type="AnimationPlayer" parent="DeathScreen"]
+libraries/ = SubResource("AnimationLibrary_deathintro")
 
 [node name="BackgroundRect" type="TextureRect" parent="DeathScreen" unique_id=690622334]
 layout_mode = 1
