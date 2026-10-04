@@ -18,11 +18,19 @@ const MIDAIR_TRANSITION_REQUEST := &"midair"
 @export var walking_move_mode: MoveMode
 @export var sprinting_move_mode: MoveMode
 
+@export_group("Midair", "midair")
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var midair_delay := 0.15
+
 var default_move_blend_space: AnimationNodeBlendSpace1D
+var _airborne_time := 0.0
+var _jump_pending := false
 
 
 func _ready() -> void:
 	super()
+	if player != null:
+		player.jumped.connect(_on_player_jumped)
+
 	if tree_root == null:
 		return
 
@@ -47,9 +55,11 @@ func _ready() -> void:
 		default_move_blend_space.set_blend_point_position(i, blend_positions.get(anim_name, 0.0))
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if player == null:
 		return
+
+	update_airborne_time(delta)
 
 	var move_state := get_move_state()
 	set_move_transition_request(move_state)
@@ -57,6 +67,14 @@ func _process(_delta: float) -> void:
 	if move_state == DEFAULT_TRANSITION_REQUEST:
 		var speed := player.get_planar_speed()
 		set_default_move_blend_position(speed)
+
+
+func update_airborne_time(delta: float) -> void:
+	if not player.is_on_floor():
+		_jump_pending = false
+		_airborne_time += delta
+	elif not _jump_pending:
+		_airborne_time = 0.0
 
 
 func set_move_transition_request(to: String) -> void:
@@ -78,6 +96,11 @@ func get_anim_blend_positions() -> Dictionary[StringName, float]:
 func get_move_state() -> StringName:
 	if player.is_in_water:
 		return SWIM_TRANSITION_REQUEST
-	if not player.is_on_floor():
+	if _airborne_time >= midair_delay:
 		return MIDAIR_TRANSITION_REQUEST
 	return DEFAULT_TRANSITION_REQUEST
+
+
+func _on_player_jumped() -> void:
+	_jump_pending = true
+	_airborne_time = midair_delay
