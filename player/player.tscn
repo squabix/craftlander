@@ -1734,26 +1734,30 @@ health = NodePath("../../Health")
 indicator = NodePath("../LowHealth")
 animation_player = NodePath("../LowHealth/AnimationPlayer")
 
-[node name="SelectPlayer" type="AudioStreamPlayer" parent="HUD/PrimaryInventorySelector/SignalAudioManager" unique_id=256799826]
-stream = SubResource("AudioStreamRandomizer_rnncm")
-volume_db = -10.0
-bus = &"UI"
+[node name="HUD" type="Control" parent="." unique_id=1406402649]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="SecondaryInventorySelector" type="Node" parent="HUD" unique_id=486779293 node_paths=PackedStringArray("inventory")]
+[node name="HoverInventorySelector" type="Node" parent="HUD" unique_id=486779293 node_paths=PackedStringArray("inventory")]
 script = ExtResource("9_bjvpn")
 enabled = false
 reset_selection_on_disable = true
 inventory = NodePath("../../Inventory")
 metadata/_custom_type_script = "uid://ioo6s3m7wbha"
 
-[node name="SignalAudioManager" type="Node" parent="HUD/SecondaryInventorySelector" unique_id=133390007 node_paths=PackedStringArray("signal_players")]
+[node name="SignalAudioManager" type="Node" parent="HUD/HoverInventorySelector" unique_id=133390007 node_paths=PackedStringArray("signal_players")]
 script = ExtResource("84_onxu2")
 signal_players = {
 &"selected_new_index": NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector/SignalAudioManager/SelectPlayer")
 }
 metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 
-[node name="SelectPlayer" type="AudioStreamPlayer" parent="HUD/SecondaryInventorySelector/SignalAudioManager" unique_id=1428930165]
+[node name="SelectPlayer" type="AudioStreamPlayer" parent="HUD/HoverInventorySelector/SignalAudioManager" unique_id=1428930165]
 stream = SubResource("AudioStreamRandomizer_rnncm")
 volume_db = -10.0
 bus = &"UI"
@@ -2809,8 +2813,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -2877,8 +2880,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -2945,8 +2947,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -3013,8 +3014,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -3081,8 +3081,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -3149,8 +3148,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -3217,8 +3215,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -3285,8 +3282,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -3353,8 +3349,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -3421,8 +3416,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -3489,8 +3483,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -3557,8 +3550,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -3625,8 +3617,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -3693,8 +3684,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -3761,8 +3751,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -3829,8 +3818,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -3897,8 +3885,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -3965,8 +3952,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -4033,8 +4019,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -4101,8 +4086,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -4169,8 +4153,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -4237,8 +4220,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -4305,8 +4287,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -4373,8 +4354,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -4441,8 +4421,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -4509,8 +4488,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -4577,8 +4555,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -4645,8 +4622,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -4713,8 +4689,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -4781,8 +4756,7 @@ script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
@@ -5218,8 +5192,7 @@ layout_mode = 2
 script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 inventory_selectors = {
-NodePath("../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../HUD/HoverInventorySelector"): 1,
 NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
 }
 select_button = NodePath("Button")
@@ -5286,8 +5259,7 @@ layout_mode = 2
 script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 inventory_selectors = {
-NodePath("../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../HUD/HoverInventorySelector"): 1,
 NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
 }
 select_button = NodePath("Button")
@@ -5354,8 +5326,7 @@ layout_mode = 2
 script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 inventory_selectors = {
-NodePath("../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../HUD/HoverInventorySelector"): 1,
 NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
 }
 select_button = NodePath("Button")
@@ -5422,8 +5393,7 @@ layout_mode = 2
 script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 inventory_selectors = {
-NodePath("../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../HUD/HoverInventorySelector"): 1,
 NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
 }
 select_button = NodePath("Button")
@@ -5490,8 +5460,7 @@ layout_mode = 2
 script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 inventory_selectors = {
-NodePath("../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../HUD/HoverInventorySelector"): 1,
 NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
 }
 select_button = NodePath("Button")
@@ -5558,8 +5527,7 @@ layout_mode = 2
 script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 inventory_selectors = {
-NodePath("../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../HUD/HoverInventorySelector"): 1,
 NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
 }
 select_button = NodePath("Button")
@@ -5626,8 +5594,7 @@ layout_mode = 2
 script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 inventory_selectors = {
-NodePath("../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../HUD/HoverInventorySelector"): 1,
 NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
 }
 select_button = NodePath("Button")
@@ -5694,8 +5661,7 @@ layout_mode = 2
 script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 inventory_selectors = {
-NodePath("../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../HUD/HoverInventorySelector"): 1,
 NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
 }
 select_button = NodePath("Button")
@@ -5762,8 +5728,7 @@ layout_mode = 2
 script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 inventory_selectors = {
-NodePath("../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../HUD/HoverInventorySelector"): 1,
 NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
 }
 select_button = NodePath("Button")
@@ -5830,8 +5795,7 @@ layout_mode = 2
 script = ExtResource("16_e7oew")
 auto_set_index_enabled = true
 inventory_selectors = {
-NodePath("../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../HUD/HoverInventorySelector"): 1,
 NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
 }
 select_button = NodePath("Button")

@@ -350,17 +350,12 @@ signal_players = {
 &"was_hurt": NodePath("HurtPlayer")
 }
 
-[node name="SignalAudioManager" parent="DockingManager1/Player/HUD/PrimaryInventorySelector" parent_id_path=PackedInt32Array(1858460853, 573150197) index="0" unique_id=1399028685 node_paths=PackedStringArray("signal_players")]
+[node name="SignalAudioManager" parent="DockingManager1/Player/HUD/HoverInventorySelector" parent_id_path=PackedInt32Array(1858460853, 486779293) index="0" unique_id=133390007 node_paths=PackedStringArray("signal_players")]
 signal_players = {
 &"selected_new_index": NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector/SignalAudioManager/SelectPlayer")
 }
 
-[node name="SignalAudioManager" parent="DockingManager1/Player/HUD/SecondaryInventorySelector" parent_id_path=PackedInt32Array(1858460853, 486779293) index="0" unique_id=133390007 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"selected_new_index": NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector/SignalAudioManager/SelectPlayer")
-}
-
-[node name="PlayerWaveDisplay" parent="DockingManager1/Player/HUD" parent_id_path=PackedInt32Array(1858460853, 1406402649) index="7" unique_id=1784845363 node_paths=PackedStringArray("wave_spawner") instance=ExtResource("6_ouqo7")]
+[node name="PlayerWaveDisplay" parent="DockingManager1/Player/HUD" parent_id_path=PackedInt32Array(1858460853, 1406402649) index="6" unique_id=1784845363 node_paths=PackedStringArray("wave_spawner") instance=ExtResource("6_ouqo7")]
 layout_mode = 1
 wave_spawner = NodePath("../../../../WaveSpawner3D")
 
@@ -395,182 +390,152 @@ signal_players = {
 
 [node name="ItemDisplay1" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="0" unique_id=1415722122 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay2" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="1" unique_id=1939377631 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay3" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="2" unique_id=297821000 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay4" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="3" unique_id=1307875736 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay5" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="4" unique_id=1672323268 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay6" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="5" unique_id=638191121 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay7" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="6" unique_id=1597090716 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay8" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="7" unique_id=733254478 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay9" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="8" unique_id=21220049 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay10" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="9" unique_id=1203064439 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay11" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="10" unique_id=1117020034 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay12" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="11" unique_id=91122897 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay13" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="12" unique_id=307274892 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay14" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="13" unique_id=54047539 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay15" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="14" unique_id=1350210029 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay16" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="15" unique_id=502623721 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay17" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="16" unique_id=1823664861 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay18" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="17" unique_id=1236255505 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay19" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="18" unique_id=333045167 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay20" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="19" unique_id=1492452488 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay21" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="20" unique_id=153567164 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay22" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="21" unique_id=1255520953 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay23" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="22" unique_id=1650907097 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay24" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="23" unique_id=247187989 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay25" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="24" unique_id=446389058 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay26" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="25" unique_id=332974293 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay27" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="26" unique_id=304512266 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay28" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="27" unique_id=981272684 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay29" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="28" unique_id=1677969850 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ItemDisplay30" parent="DockingManager1/Player/PauseMenu/CraftingInterface/BackpackPanel/Container" parent_id_path=PackedInt32Array(1858460853, 193814556) index="29" unique_id=289659285 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../../../HUD/SecondaryInventorySelector"): 1
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
 }
 
 [node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/CraftingInterface/OptionsContainer/ResumeButton" parent_id_path=PackedInt32Array(1858460853, 1612901605) index="0" unique_id=132595468 node_paths=PackedStringArray("signal_players")]
@@ -616,71 +581,61 @@ signal_players = {
 
 [node name="ItemDisplay1" parent="DockingManager1/Player/HotbarInterface/HotbarDisplay" parent_id_path=PackedInt32Array(1858460853, 1354943621) index="0" unique_id=468719072 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../HUD/HoverInventorySelector"): 1,
 NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
 }
 
 [node name="ItemDisplay2" parent="DockingManager1/Player/HotbarInterface/HotbarDisplay" parent_id_path=PackedInt32Array(1858460853, 1354943621) index="1" unique_id=985434587 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../HUD/HoverInventorySelector"): 1,
 NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
 }
 
 [node name="ItemDisplay3" parent="DockingManager1/Player/HotbarInterface/HotbarDisplay" parent_id_path=PackedInt32Array(1858460853, 1354943621) index="2" unique_id=1259146327 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../HUD/HoverInventorySelector"): 1,
 NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
 }
 
 [node name="ItemDisplay4" parent="DockingManager1/Player/HotbarInterface/HotbarDisplay" parent_id_path=PackedInt32Array(1858460853, 1354943621) index="3" unique_id=670893783 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../HUD/HoverInventorySelector"): 1,
 NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
 }
 
 [node name="ItemDisplay5" parent="DockingManager1/Player/HotbarInterface/HotbarDisplay" parent_id_path=PackedInt32Array(1858460853, 1354943621) index="4" unique_id=1500826809 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../HUD/HoverInventorySelector"): 1,
 NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
 }
 
 [node name="ItemDisplay6" parent="DockingManager1/Player/HotbarInterface/HotbarDisplay" parent_id_path=PackedInt32Array(1858460853, 1354943621) index="5" unique_id=151983203 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../HUD/HoverInventorySelector"): 1,
 NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
 }
 
 [node name="ItemDisplay7" parent="DockingManager1/Player/HotbarInterface/HotbarDisplay" parent_id_path=PackedInt32Array(1858460853, 1354943621) index="6" unique_id=2108656168 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../HUD/HoverInventorySelector"): 1,
 NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
 }
 
 [node name="ItemDisplay8" parent="DockingManager1/Player/HotbarInterface/HotbarDisplay" parent_id_path=PackedInt32Array(1858460853, 1354943621) index="7" unique_id=790300123 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../HUD/HoverInventorySelector"): 1,
 NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
 }
 
 [node name="ItemDisplay9" parent="DockingManager1/Player/HotbarInterface/HotbarDisplay" parent_id_path=PackedInt32Array(1858460853, 1354943621) index="8" unique_id=590478775 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../HUD/HoverInventorySelector"): 1,
 NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
 }
 
 [node name="ItemDisplay10" parent="DockingManager1/Player/HotbarInterface/HotbarDisplay" parent_id_path=PackedInt32Array(1858460853, 1354943621) index="9" unique_id=1585960647 node_paths=PackedStringArray("inventory_selectors")]
 inventory_selectors = {
-NodePath("../../../HUD/PrimaryInventorySelector"): 0,
-NodePath("../../../HUD/SecondaryInventorySelector"): 1,
+NodePath("../../../HUD/HoverInventorySelector"): 1,
 NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
 }
 
