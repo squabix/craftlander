@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Food" format=3 uid="uid://7l110b4c1wej"]
+
+[ext_resource type="Script" uid="uid://bcua33xmbibyi" path="res://items/food/food.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://dmn0287iafl5k" path="res://items/food/cactus_fruit/cactus_fruit.tscn" id="2_scene"]
+[ext_resource type="Texture2D" uid="uid://d3b42u1vl8bgx" path="res://items/food/cactus_fruit/cactus_fruit.png" id="3_icon"]
+
+[resource]
+script = ExtResource("1_script")
+health_restoration = 10.0
+name = &"Cactus Fruit"
+max_quantity = 99
+icon = ExtResource("3_icon")
+consumable = true
+type = "Food"
+use_action_name = &"Eat"
+scene = ExtResource("2_scene")
+cooldown_mode = 1
+default_cooldown_length = 0.1

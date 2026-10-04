@@ -6,8 +6,8 @@
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="4_t32xe"]
 [ext_resource type="Script" uid="uid://dapeyi3eetek1" path="res://common/signal_triggrs/signal_animation_trigger.gd" id="5_ueeso"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="6_p1kvo"]
-[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="7_6281o"]
-[ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="8_bkkoy"]
+[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="ii_script"]
+[ext_resource type="Resource" path="res://items/food/cactus_fruit/cactus_fruit_item.tres" id="fruit_item"]
 [ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="9_m411m"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="10_qi2ay"]
 [ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="11_hdilg"]
@@ -19,8 +19,17 @@
 [ext_resource type="Material" uid="uid://c7uysx7frg14r" path="res://assets/materials/cactus.tres" id="17_vk70i"]
 [ext_resource type="Material" uid="uid://cedafem77nnp5" path="res://assets/materials/thorn.tres" id="18_kjjyj"]
 [ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/collision_barrier_3d.gd" id="19_tallblk"]
-[ext_resource type="PackedScene" path="res://island/props/destructable_resource/destroy_shake_trigger.tscn" id="99_destroyshk"]
-[ext_resource type="PackedScene" path="res://island/props/destructable_resource/hurt_shake_trigger.tscn" id="99_hurtshk"]
+[ext_resource type="PackedScene" uid="uid://b42ejh4s3ni40" path="res://island/props/destructable_resource/destroy_shake_trigger.tscn" id="99_destroyshk"]
+[ext_resource type="PackedScene" uid="uid://p8wwjit2trpc" path="res://island/props/destructable_resource/hurt_shake_trigger.tscn" id="99_hurtshk"]
+[ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
+
+[sub_resource type="Resource" id="Resource_fruit"]
+script = ExtResource("ii_script")
+item = ExtResource("fruit_item")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_acl"]
+script = ExtResource("acl_script")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hjjmf"]
 height = 3.4744873
@@ -127,7 +136,7 @@ metadata/_custom_type_script = "uid://dapeyi3eetek1"
 
 [node name="Inventory" type="Node" parent="." unique_id=836906820]
 script = ExtResource("6_p1kvo")
-item_instances = Array[ExtResource("7_6281o")]([SubResource("Resource_6ugkb")])
+item_instances = Array[ExtResource("ii_script")]([SubResource("Resource_fruit")])
 constant = true
 size = 1
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"

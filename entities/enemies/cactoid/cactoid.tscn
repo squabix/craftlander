@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://c5x1hn4vi06bh" path="res://entities/nav_entity_guide3d.tscn" id="17_hqd4c"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="18_c1oxa"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="19_ayrpf"]
+[ext_resource type="Resource" path="res://items/food/cactus_fruit/cactus_fruit_item.tres" id="fruit_item"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="22_42y5n"]
 [ext_resource type="Script" uid="uid://8kgnmccrqot4" path="res://common3d/inventory/dropper_trigger.gd" id="dropper_trigger_script"]
 [ext_resource type="Script" uid="uid://bl5x717nsijmk" path="res://common/damage_system/damage.gd" id="29_jw58x"]
@@ -82,6 +83,14 @@ metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3emv6"]
 radius = 0.7
 height = 2.8
+
+[sub_resource type="Resource" id="Resource_fruit"]
+script = ExtResource("19_ayrpf")
+item = ExtResource("fruit_item")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_acl"]
+script = ExtResource("acl_script")
 
 [sub_resource type="Animation" id="Animation_3emv6"]
 length = 0.001
@@ -960,6 +969,7 @@ entity = NodePath("../..")
 [node name="Inventory" type="Node" parent="." unique_id=1701695857]
 unique_name_in_owner = true
 script = ExtResource("18_c1oxa")
+item_instances = Array[ExtResource("19_ayrpf")]([SubResource("Resource_fruit")])
 constant = true
 size = 2
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"

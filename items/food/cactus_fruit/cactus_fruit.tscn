@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://dmn0287iafl5k"]
+
+[ext_resource type="PackedScene" uid="uid://dg72sfxiqunvj" path="res://assets/models/items/food/cactus_fruit.blend" id="1_model"]
+[ext_resource type="Material" uid="uid://c7uysx7frg14r" path="res://assets/materials/cactus.tres" id="2_7gsen"]
+[ext_resource type="Material" uid="uid://cedafem77nnp5" path="res://assets/materials/thorn.tres" id="3_inua7"]
+
+[node name="CactusFruit" type="Node3D" unique_id=1908336564]
+
+[node name="Visuals" parent="." unique_id=758031985 instance=ExtResource("1_model")]
+
+[node name="Spike" parent="Visuals" index="1" unique_id=1900348128]
+visible = false
+
+[node name="Fruit" parent="Visuals" index="2" unique_id=453732840]
+surface_material_override/0 = ExtResource("2_7gsen")
+
+[node name="Spike2" parent="Visuals/Fruit" index="0" unique_id=1895552430]
+surface_material_override/0 = ExtResource("3_inua7")
+
+[node name="Spike3" parent="Visuals/Fruit" index="1" unique_id=982327934]
+surface_material_override/0 = ExtResource("3_inua7")
+
+[node name="Spike4" parent="Visuals/Fruit" index="2" unique_id=1790497960]
+surface_material_override/0 = ExtResource("3_inua7")
+
+[node name="Spike5" parent="Visuals/Fruit" index="3" unique_id=1925137707]
+surface_material_override/0 = ExtResource("3_inua7")
+
+[node name="Spike6" parent="Visuals/Fruit" index="4" unique_id=1962090774]
+surface_material_override/0 = ExtResource("3_inua7")
+
+[node name="Spike7" parent="Visuals/Fruit" index="5" unique_id=661205051]
+surface_material_override/0 = ExtResource("3_inua7")
+
+[node name="Spike8" parent="Visuals/Fruit" index="6" unique_id=1018942790]
+surface_material_override/0 = ExtResource("3_inua7")
+
+[node name="Spike9" parent="Visuals/Fruit" index="7" unique_id=1051989830]
+surface_material_override/0 = ExtResource("3_inua7")
+
+[node name="Spike10" parent="Visuals/Fruit" index="8" unique_id=222995588]
+surface_material_override/0 = ExtResource("3_inua7")
+
+[node name="Spike11" parent="Visuals/Fruit" index="9" unique_id=1079564182]
+surface_material_override/0 = ExtResource("3_inua7")
+
+[node name="Spike12" parent="Visuals/Fruit" index="10" unique_id=2012064985]
+surface_material_override/0 = ExtResource("3_inua7")
+
+[node name="Spike13" parent="Visuals/Fruit" index="11" unique_id=825804343]
+surface_material_override/0 = ExtResource("3_inua7")
+
+[node name="Spike14" parent="Visuals/Fruit" index="12" unique_id=1325874693]
+surface_material_override/0 = ExtResource("3_inua7")
+
+[node name="Spike15" parent="Visuals/Fruit" index="13" unique_id=896554684]
+surface_material_override/0 = ExtResource("3_inua7")
+
+[node name="Spike16" parent="Visuals/Fruit" index="14" unique_id=948390343]
+surface_material_override/0 = ExtResource("3_inua7")
+
+[node name="Spike17" parent="Visuals/Fruit" index="15" unique_id=1936420344]
+surface_material_override/0 = ExtResource("3_inua7")
+
+[node name="Spike18" parent="Visuals/Fruit" index="16" unique_id=1187337137]
+surface_material_override/0 = ExtResource("3_inua7")
+
+[node name="Spike19" parent="Visuals/Fruit" index="17" unique_id=1988903070]
+surface_material_override/0 = ExtResource("3_inua7")
+
+[node name="Spike20" parent="Visuals/Fruit" index="18" unique_id=1246390832]
+surface_material_override/0 = ExtResource("3_inua7")
+
+[node name="Spike21" parent="Visuals/Fruit" index="19" unique_id=934017309]
+surface_material_override/0 = ExtResource("3_inua7")
+
+[editable path="Visuals"]
