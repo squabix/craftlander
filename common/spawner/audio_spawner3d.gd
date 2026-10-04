@@ -32,6 +32,25 @@ func create_instance() -> Node3D:
 	return new_player
 
 
+func defers_when_exiting_tree() -> bool:
+	return true
+
+
+func _call_initializer(instance: Node3D, use_deferred_add: bool) -> void:
+	if not use_deferred_add:
+		super(instance, use_deferred_add)
+		return
+
+	var player := instance as AudioStreamPlayer3D
+	if not is_instance_valid(player) or not autoplay:
+		return
+
+	if one_shot:
+		AudioSpawner3D.play_one_shot.call_deferred(player)
+	else:
+		player.play.call_deferred()
+
+
 func initialize_instance(instance: Node3D) -> void:
 	super(instance)
 	

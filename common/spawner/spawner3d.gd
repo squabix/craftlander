@@ -42,6 +42,7 @@ static var spawning_enabled := true
 
 var has_started_timer: bool
 var spawned_instances: Array[Node]
+var is_exiting_tree := false
 
 
 static func get_local_spawn_transform(parent: Node, instance: Node3D, spawn_position: Vector3, spawn_rotation_degrees: Vector3) -> Transform3D:
@@ -57,7 +58,10 @@ static func get_local_spawn_transform(parent: Node, instance: Node3D, spawn_posi
 
 func _ready() -> void:
 	if spawn_on_exit_tree:
-		tree_exiting.connect(func(): spawn())
+		tree_exiting.connect(func():
+			is_exiting_tree = true
+			spawn()
+		)
 		if default_parent_mode == DefaultParentMode.SELF:
 			Util.node_error("Default parent mode of %s is set to SELF and spawning on exit tree; updating mode to ROOT", self)
 			default_parent_mode = DefaultParentMode.ROOT
@@ -120,6 +124,10 @@ func initialize_instance(_instance: Node3D) -> void:
 	pass
 
 
+func defers_when_exiting_tree() -> bool:
+	return false
+
+
 func spawn(instance: Node3D = null, parent: Node = null) -> Node3D:
 	if is_queued_for_deletion() or not is_inside_tree():
 		return null
@@ -148,19 +156,20 @@ func spawn(instance: Node3D = null, parent: Node = null) -> Node3D:
 	var instance_rotation_degrees := get_spawn_rotation_degrees(parent)
 	instance.transform = get_local_spawn_transform(parent, instance, instance_position, instance_rotation_degrees)
 
-	if defer:
+	var use_deferred_add := defer or (is_exiting_tree and defers_when_exiting_tree())
+	if use_deferred_add:
 		parent.add_child.call_deferred(instance)
 	else:
 		parent.add_child(instance)
 
-	_call_initializer(instance)
+	_call_initializer(instance, use_deferred_add)
 	spawned.emit(instance)
 	spawned_instances.append(instance)
 	return instance
 
 
-func _call_initializer(instance: Node3D) -> void:
-	if defer:
+func _call_initializer(instance: Node3D, use_deferred_add: bool) -> void:
+	if use_deferred_add:
 		initialize_instance.call_deferred(instance)
 	else:
 		initialize_instance(instance)

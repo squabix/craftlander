@@ -9,8 +9,12 @@ func initialize_instance(instance: Node3D) -> void:
 	emit_particles(instance, free_on_finish)
 
 
-func _call_initializer(instance: Node3D) -> void:
-	if defer:
+func defers_when_exiting_tree() -> bool:
+	return true
+
+
+func _call_initializer(instance: Node3D, use_deferred_add: bool) -> void:
+	if use_deferred_add:
 		# initialize_instance.call_deferred(instance) would bind to self, which can
 		# already be freed by the time it runs if spawn_on_exit_tree fired because our
 		# own parent is dying (e.g. a projectile parented under the tree root freeing
