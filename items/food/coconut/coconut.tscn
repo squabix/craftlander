@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cocihpd3lpwu6"]
+
+[ext_resource type="PackedScene" uid="uid://cilukxmf8uvnc" path="res://assets/models/items/food/coconut.blend" id="1_model"]
+[ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="2_gnai7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aw2mm"]
+render_priority = 0
+shader = ExtResource("2_gnai7")
+shader_parameter/albedo = Color(0.37254903, 0.25882354, 0.16862746, 1)
+shader_parameter/hue_variance = 0.010000000475
+shader_parameter/sat_variance = 0.05
+shader_parameter/val_variance = 0.02000000095
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/rim_strength = 0.4
+shader_parameter/rim_power = 3.0
+shader_parameter/rim_color = Color(0, 0, 0, 1)
+shader_parameter/refraction_strength = 0.05
+
+[node name="Coconut" type="Node3D" unique_id=736436702]
+
+[node name="Visuals" parent="." unique_id=83449782 instance=ExtResource("1_model")]
+
+[node name="Fruit" parent="Visuals" index="1" unique_id=1581289770]
+surface_material_override/0 = SubResource("ShaderMaterial_aw2mm")
+
+[editable path="Visuals"]

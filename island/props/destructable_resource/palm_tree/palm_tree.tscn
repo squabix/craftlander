@@ -32,6 +32,11 @@
 [ext_resource type="PackedScene" uid="uid://b42ejh4s3ni40" path="res://island/props/destructable_resource/destroy_shake_trigger.tscn" id="99_destroyshk"]
 [ext_resource type="PackedScene" uid="uid://p8wwjit2trpc" path="res://island/props/destructable_resource/hurt_shake_trigger.tscn" id="99_hurtshk"]
 [ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
+[ext_resource type="Script" uid="uid://b1b8bmd3gmvvk" path="res://island/props/item_dropper_props/item_dropper_prop.gd" id="cd_prop"]
+[ext_resource type="Resource" path="res://items/food/coconut/coconut_item.tres" id="coconut_item"]
+
+[sub_resource type="Resource" id="Resource_acl"]
+script = ExtResource("acl_script")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_hjjmf"]
 height = 4.3061523
@@ -140,8 +145,10 @@ script = ExtResource("30_okiyi")
 item = ExtResource("31_8g2cu")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
-[sub_resource type="Resource" id="Resource_acl"]
-script = ExtResource("acl_script")
+[sub_resource type="Resource" id="Resource_coconut"]
+script = ExtResource("30_okiyi")
+item = ExtResource("coconut_item")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [node name="PalmTree" type="Node3D" unique_id=1544571203 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
 script = ExtResource("1_jiqyg")
@@ -409,6 +416,24 @@ saved_properties = Dictionary[StringName, bool]({
 &"global_transform": true
 })
 metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
+
+[node name="CoconutDropProp" type="Node3D" parent="." node_paths=PackedStringArray("dropper")]
+script = ExtResource("cd_prop")
+dropper = NodePath("InventoryDropper3D")
+drop_chance = 0.2
+
+[node name="InventoryDropper3D" type="Node3D" parent="CoconutDropProp" node_paths=PackedStringArray("inventory")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 0)
+script = ExtResource("15_fpe86")
+inventory = NodePath("../CoconutInventory")
+metadata/_custom_type_script = "uid://bpmbg0e28ujs7"
+
+[node name="CoconutInventory" type="Node" parent="CoconutDropProp"]
+script = ExtResource("29_0dkka")
+item_instances = Array[ExtResource("30_okiyi")]([SubResource("Resource_coconut")])
+constant = true
+size = 1
+metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 
 [editable path="Trunk/BlenderMeshes"]
 [editable path="Stump/BlenderMeshes"]

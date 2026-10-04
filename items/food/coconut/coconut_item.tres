@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Food" format=3 uid="uid://c3ypi3hvus10x"]
+
+[ext_resource type="Script" uid="uid://bcua33xmbibyi" path="res://items/food/food.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://items/food/coconut/coconut.tscn" id="2_scene"]
+[ext_resource type="Texture2D" uid="uid://b5kvp5d3a3875" path="res://items/food/coconut/coconut.png" id="3_icon"]
+
+[resource]
+script = ExtResource("1_script")
+health_restoration = 20.0
+hunger_restoration = 0.3
+name = &"Coconut"
+max_quantity = 99
+icon = ExtResource("3_icon")
+consumable = true
+type = "Food"
+use_action_name = &"Eat"
+scene = ExtResource("2_scene")
+cooldown_mode = 1
+default_cooldown_length = 0.1
