@@ -2,8 +2,11 @@ class_name PauseMenu
 extends Menu
 
 signal updated_pause(to: bool)
+signal before_save
 
 const ACTION_PAUSE := &"pause"
+const QUIT_TEXT_SAVED := "SAVE AND QUIT TO TITLE"
+const QUIT_TEXT_UNSAVED := "QUIT TO TITLE"
 
 @export var crafting_environment: CraftingEnvironment
 @export var recipe_panel: Control
@@ -29,11 +32,11 @@ func _ready() -> void:
 
 	# Connect options buttons
 	if is_instance_valid(button_save):
-		button_save.pressed.connect(Main.root.save_current_game)
+		button_save.pressed.connect(save)
 	if is_instance_valid(button_settings):
 		button_settings.pressed.connect(open_submenu.bind(settings_menu))
 	if is_instance_valid(button_quit):
-		button_quit.pressed.connect(Main.root.quit_to_title)
+		button_quit.pressed.connect(quit_to_title)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -69,6 +72,16 @@ func back() -> void:
 	backed_out.emit()
 
 
+func save() -> void:
+	before_save.emit()
+	Main.root.save_current_game()
+
+
+func quit_to_title() -> void:
+	before_save.emit()
+	Main.root.quit_to_title()
+
+
 func update_pause(to: bool) -> void:
 	if Menu.lock_frame():
 		return
@@ -89,6 +102,7 @@ func update_pause(to: bool) -> void:
 
 
 func _refresh_save_button() -> void:
-	if not is_instance_valid(button_save):
-		return
-	button_save.disabled = Main.saving_locked
+	if is_instance_valid(button_save):
+		button_save.disabled = Main.saving_locked
+	if is_instance_valid(button_quit):
+		button_quit.text = QUIT_TEXT_UNSAVED if Main.saving_locked else QUIT_TEXT_SAVED
