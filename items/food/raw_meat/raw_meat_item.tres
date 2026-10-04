@@ -6,10 +6,13 @@
 
 [resource]
 script = ExtResource("1_enjs7")
+hunger_restoration = 0.15
 name = "Raw Meat"
 max_quantity = 99
 icon = ExtResource("1_o47ul")
 use_action_name = &"Eat"
 consumable = true
 scene = ExtResource("2_7ij5n")
+cooldown_mode = 1
+default_cooldown_length = 0.1
 metadata/_custom_type_script = "uid://bcua33xmbibyi"

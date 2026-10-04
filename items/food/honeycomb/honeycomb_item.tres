@@ -6,8 +6,8 @@
 
 [resource]
 script = ExtResource("3_w883n")
-health_restoration = 10.0
-hunger_restoration = 0.2
+health_restoration = 25.0
+hunger_restoration = 0.3
 name = "Honeycomb"
 max_quantity = 99
 icon = ExtResource("1_5ikg0")
@@ -15,4 +15,6 @@ consumable = true
 type = "Food"
 use_action_name = &"Eat"
 scene = ExtResource("2_bccu5")
+cooldown_mode = 1
+default_cooldown_length = 0.1
 metadata/_custom_type_script = "uid://bcua33xmbibyi"

@@ -36,7 +36,7 @@ func get_info(item: Item) -> String:
 	if item is Food:
 		if item.health_restoration > 0.0:
 			lines.append("Heals: %s" % item.health_restoration)
-		lines.append("Restores Hunger: %d%%" % roundi(item.hunger_restoration * 100.0))
+		lines.append("Restores Hunger: %d" % roundi(item.hunger_restoration * 100.0))
 
 	if item is HarvestingTool:
 		if item.damage != null:
