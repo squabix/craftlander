@@ -1,2 +1,12 @@
 # Normalize EOL for all files that Git considers text files.
 * text=auto eol=lf
+
+# Binary assets
+*.blend binary
+*.mp3 binary
+*.wav binary
+*.ogg binary
+*.res binary
+*.occ binary
+*.ttf binary
+*.otf binary
