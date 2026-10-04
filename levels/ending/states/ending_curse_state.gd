@@ -36,7 +36,7 @@ func run() -> void:
 
 
 func play_fleet_cutscene() -> bool:
-	await encounter.cutscene.begin(encounter.cutscene_camera_lift)
+	await encounter.cutscene.begin(encounter.cutscene_curse_camera_lift)
 	if not is_alive():
 		return false
 

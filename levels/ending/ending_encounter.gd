@@ -13,6 +13,7 @@ const BOSS_WAVE_INDEX := 3
 
 @export_group("Cutscene", "cutscene")
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var cutscene_camera_lift := 6.0
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var cutscene_curse_camera_lift := 12.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var cutscene_blend_back_time := 0.8
 
 var chest: TreasureChest
