@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://dildagot4v08a"]
+
+[ext_resource type="Texture2D" uid="uid://bfere6rdr1enm" path="res://items/materials/palm_wood/palm_wood.png" id="1_5jgbv"]
+[ext_resource type="PackedScene" uid="uid://olnouu64pber" path="res://items/materials/palm_wood/palm_wood.tscn" id="2_ep4fp"]
+[ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="3_rogkw"]
+
+[resource]
+script = ExtResource("3_rogkw")
+name = &"Palm Wood"
+max_quantity = 50
+icon = ExtResource("1_5jgbv")
+scene = ExtResource("2_ep4fp")
+metadata/_custom_type_script = "uid://bfstlagsbeqe2"

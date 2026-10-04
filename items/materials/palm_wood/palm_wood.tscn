@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://olnouu64pber"]
+
+[ext_resource type="PackedScene" uid="uid://b5mk2ohahh5e8" path="res://assets/models/items/materials/wood1.blend" id="1_yl3ap"]
+[ext_resource type="Material" uid="uid://g7eorwmb40wm" path="res://assets/materials/palm_bark.tres" id="2_02plc"]
+[ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="3_knc44"]
+
+[node name="PalmWood" type="Node3D" unique_id=1422949405]
+
+[node name="Visuals" parent="." unique_id=1919549888 instance=ExtResource("1_yl3ap")]
+
+[node name="Stump" parent="Visuals" index="0" unique_id=1517384359]
+surface_material_override/0 = ExtResource("2_02plc")
+surface_material_override/1 = ExtResource("3_knc44")
+
+[editable path="Visuals"]
