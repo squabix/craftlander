@@ -49,10 +49,10 @@ sky = SubResource("Sky_craft")
 ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_sky_contribution = 0.5
-ambient_light_energy = 0.8
+ambient_light_energy = 1.2
 reflected_light_source = 2
 tonemap_mode = 3
-tonemap_exposure = 0.5
+tonemap_exposure = 1.0
 tonemap_white = 16.0
 adjustment_enabled = true
 adjustment_brightness = 1.1
@@ -407,7 +407,7 @@ shape = SubResource("CylinderShape3D_4aq3d")
 [node name="OmniLight3D" type="OmniLight3D" parent="SubViewport/Space" unique_id=1511305085]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 layers = 2
-light_energy = 2.0
+light_energy = 3.0
 shadow_enabled = true
 shadow_caster_mask = 4293918722
 omni_range = 10.0
@@ -418,7 +418,11 @@ environment = SubResource("Environment_craft")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport/Space" unique_id=1733801143]
 transform = Transform3D(0.8660254, -0.35355338, 0.35355338, 0, 0.70710677, 0.70710677, -0.5, -0.6123724, 0.6123724, 0, 5, 0)
 layers = 3
-light_energy = 1.25
+light_energy = 1.75
+
+[node name="FillLight" type="DirectionalLight3D" parent="SubViewport/Space" unique_id=1733801144]
+rotation_degrees = Vector3(-50, -35, 0)
+light_energy = 0.7
 
 [node name="Cursor3D" type="RayCast3D" parent="SubViewport/Space" unique_id=101020664]
 target_position = Vector3(0, 0.1, 0)
