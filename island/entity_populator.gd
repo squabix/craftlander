@@ -2,6 +2,9 @@ class_name EntityPopulator
 extends Node3D
 
 const MAX_SPAWN_POSITION_ATTEMPTS_PER_FRAME := 64
+const SPAWN_CLEARANCE_RADIUS := 1.5
+const SPAWN_CLEARANCE_HEIGHT := 1.0
+const SPAWN_CLEARANCE_MASK := 4
 const MIN_CAMERA_DISTANCE_SQUARED := 100.0
 const MAX_CAMERA_DISTANCE_SQUARED := INF
 
@@ -115,12 +118,30 @@ func get_spawnpoint(min_height: float, max_height: float, allow_in_frustum: bool
 			continue # Too far from camera
 		if distance_squared < MIN_CAMERA_DISTANCE_SQUARED:
 			continue # Too close to camera
+		if is_blocked_by_prop(point):
+			continue # Inside a prop
 		
 		return point # Found a valid point!
 	
 	# If ran out of attempts this frame, wait to try again next frame
 	await get_tree().physics_frame
 	return await get_spawnpoint(min_height, max_height, allow_in_frustum)
+
+
+func is_blocked_by_prop(point: Vector3) -> bool:
+	var shape := SphereShape3D.new()
+	shape.radius = SPAWN_CLEARANCE_RADIUS
+
+	var query := PhysicsShapeQueryParameters3D.new()
+	query.shape = shape
+	query.transform = Transform3D(Basis.IDENTITY, point + Vector3.UP * SPAWN_CLEARANCE_HEIGHT)
+	query.collision_mask = SPAWN_CLEARANCE_MASK
+
+	for hit in get_world_3d().direct_space_state.intersect_shape(query):
+		var body := hit.collider as Node
+		if is_instance_valid(body) and not body.get_parent() is HeightMapTerrainGenerator:
+			return true
+	return false
 
 
 func add_entity(entity_resource: IslandEntityResource, spawnpoint := Vector3.ZERO, allow_in_frustum := false) -> Entity3D:
