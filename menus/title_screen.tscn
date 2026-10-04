@@ -13,7 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://bcj8kf1cl1icf" path="res://assets/sound/ocean.mp3" id="8_vppps"]
 [ext_resource type="Shader" uid="uid://bv7qqp8qrt8qt" path="res://island/heightmap_shader.gdshader" id="9_2fvq7"]
 [ext_resource type="PlaneMesh" uid="uid://ben5kh83ltpe" path="res://main/water_mesh.tres" id="9_ctf6r"]
-[ext_resource type="Environment" uid="uid://cibxuhtgknost" path="res://assets/default_environment.tres" id="10_jtp7x"]
+[ext_resource type="Shader" uid="uid://beiyilngdu741" path="res://assets/shaders/sky_shader2.gdshader" id="11_864al"]
 [ext_resource type="PackedScene" uid="uid://c16m48qir7vc7" path="res://island/props/destructable_resource/tree/tree.tscn" id="20_3lq1y"]
 [ext_resource type="PackedScene" uid="uid://b1en432erfol4" path="res://island/props/destructable_resource/bee_nest/bee_nest.tscn" id="21_v0f1x"]
 [ext_resource type="PackedScene" uid="uid://biex0hrp2cqrg" path="res://island/props/destructable_resource/giant_mushroom/giant_mushroom.tscn" id="22_etr5l"]
@@ -40,7 +40,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_dbvjn"]
 resource_name = "spin"
-length = 120.0
+length = 200.0
 loop_mode = 1
 step = 1.0
 tracks/0/type = "value"
@@ -50,7 +50,7 @@ tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 120),
+"times": PackedFloat32Array(0, 200),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
@@ -81,6 +81,116 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_864al"]
+
+[sub_resource type="Gradient" id="Gradient_a0bkl"]
+offsets = PackedFloat32Array(0, 0.93145955)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_g2kaq"]
+noise_type = 2
+frequency = 0.006
+fractal_octaves = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rtwa6"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_g2kaq")
+color_ramp = SubResource("Gradient_a0bkl")
+seamless = true
+invert = true
+seamless_blend_skirt = 0.2
+
+[sub_resource type="Gradient" id="Gradient_qtkw4"]
+offsets = PackedFloat32Array(0, 0.7342209)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6oeb3"]
+frequency = 0.001
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mvlpt"]
+noise = SubResource("FastNoiseLite_6oeb3")
+color_ramp = SubResource("Gradient_qtkw4")
+seamless = true
+
+[sub_resource type="Gradient" id="Gradient_63rrs"]
+offsets = PackedFloat32Array(0, 0.9413215)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vnik4"]
+seed = 1
+frequency = 0.1604
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ht5pn"]
+noise = SubResource("FastNoiseLite_vnik4")
+color_ramp = SubResource("Gradient_63rrs")
+
+[sub_resource type="Gradient" id="Gradient_i2rej"]
+offsets = PackedFloat32Array(0, 0.9413215)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_noxtl"]
+seed = 1
+frequency = 0.1604
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_irjwq"]
+noise = SubResource("FastNoiseLite_noxtl")
+color_ramp = SubResource("Gradient_i2rej")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o075b"]
+shader = ExtResource("11_864al")
+shader_parameter/sky_day = Color(0.12749998, 0.6332499, 0.85, 1)
+shader_parameter/horizon_day = Color(0.4, 0.78039217, 1, 1)
+shader_parameter/horizon_sunset = Color(0.9, 0.4, 0.1, 1)
+shader_parameter/sky_sunset = Color(0.15, 0.2, 0.4, 1)
+shader_parameter/horizon_night = Color(0.1, 0.15, 0.2, 1)
+shader_parameter/sky_night = Color(0.05, 0.1, 0.15, 1)
+shader_parameter/day_night_mix = 0.8
+shader_parameter/use_directional_light = true
+shader_parameter/horizon_exponent = 20.0
+shader_parameter/sunset_amount_exponent = 0.7
+shader_parameter/night_amount_exponent = 4.0
+shader_parameter/cloud_tex_01 = SubResource("NoiseTexture2D_rtwa6")
+shader_parameter/cloud_tex_02 = SubResource("NoiseTexture2D_mvlpt")
+shader_parameter/cloud_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/cloud_night_brightness = 0.10000000149012
+shader_parameter/cloud_tiling = Vector2(1, 1)
+shader_parameter/wind_speed = Vector2(0.02, 0.02)
+shader_parameter/cloud_density = 0.60000000894072
+shader_parameter/cloud_depth = 0.5
+shader_parameter/cloud_shape_exponent = 2.0
+shader_parameter/cloud_occlude_exponent = 1.0
+shader_parameter/night_noise_01 = SubResource("NoiseTexture2D_ht5pn")
+shader_parameter/night_noise_02 = SubResource("NoiseTexture2D_irjwq")
+shader_parameter/sun_scale = 0.05
+shader_parameter/sun_strength = 15.0
+shader_parameter/sun_color = Color(1, 0.9, 0, 1)
+shader_parameter/moon_strength = 0.5
+shader_parameter/moon_direction = Vector3(0.35, 0.45, -0.82)
+shader_parameter/moon_scale = 0.05
+shader_parameter/moon_color = Color(0.95, 0.96416664, 1, 1)
+
+[sub_resource type="Sky" id="Sky_luith"]
+sky_material = SubResource("ShaderMaterial_o075b")
+
+[sub_resource type="Environment" id="Environment_2wu25"]
+background_mode = 2
+sky = SubResource("Sky_luith")
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.5
+ambient_light_energy = 0.8
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_exposure = 0.5
+tonemap_white = 16.0
+ssao_enabled = true
+ssao_intensity = 3.0
+sdfgi_use_occlusion = true
+sdfgi_bounce_feedback = 1.99
+sdfgi_min_cell_size = 0.8
+glow_enabled = true
+glow_intensity = 0.6
+glow_bloom = 0.1
+glow_blend_mode = 0
+adjustment_enabled = true
+adjustment_brightness = 1.1
+adjustment_contrast = 1.25
+adjustment_saturation = 1.1
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_it87k"]
 frequency = 0.0034
@@ -417,11 +527,13 @@ layout_mode = 1
 [node name="PreviewIsland" type="Node3D" parent="." unique_id=125848165]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="PreviewIsland" unique_id=2120940629]
-environment = ExtResource("10_jtp7x")
+environment = SubResource("Environment_2wu25")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="PreviewIsland" unique_id=1902175977]
-transform = Transform3D(-0.971961, 0.23514202, 0, -0.11792625, -0.4874489, 0.8651514, 0.20343345, 0.84089345, 0.50151074, 0, 0, 0)
+transform = Transform3D(-0.971961, 0.23514202, 0, 0.0036934623, 0.015266949, 0.9998766, 0.23511301, 0.9718411, -0.015707368, 0, 0, 0)
+shadow_enabled = true
 shadow_blur = 2.0
+directional_shadow_max_distance = 300.0
 
 [node name="WaterMesh" type="MeshInstance3D" parent="PreviewIsland" unique_id=1348275800]
 ignore_occlusion_culling = true
