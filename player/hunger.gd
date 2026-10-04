@@ -8,6 +8,9 @@ extends Node
 @export var loss_per_minute := 0.2
 @export var loss_multiplier := 1.0
 
+@export_group("Difficulty", "difficulty")
+@export var difficulty_profile_index := -1 # -1 = no difficulty scaling
+
 @export_group("Health")
 @export var health: Health
 @export var hurt_curve: Curve
@@ -43,7 +46,7 @@ func _process(_delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	if not Main.trailer_mode:
 		lose(loss_per_minute * loss_multiplier / 60.0)
-		value -= queued_loss * delta * GameWorld.TIME_SCALE
+		value -= queued_loss * get_difficulty_multiplier() * delta * GameWorld.TIME_SCALE
 	queued_loss = 0.0
 
 	health.heal(regeneration_curve.sample(value) * delta * GameWorld.TIME_SCALE)
@@ -57,6 +60,15 @@ func add_hurt_timer() -> void:
 		func() -> void:
 			health.hurt(hurt_curve.sample(value))
 	)
+
+
+func get_difficulty_multiplier() -> float:
+	if difficulty_profile_index < 0:
+		return 1.0
+	var profile := Difficulty.get_profile(difficulty_profile_index) as PlayerDifficultyProfile
+	if profile == null:
+		return 1.0
+	return Difficulty.lookup_multiplier(Main.loaded_save.difficulty, profile.hunger_loss_multipliers)
 
 
 func lose(amount: float) -> void:

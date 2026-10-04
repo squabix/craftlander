@@ -1375,6 +1375,7 @@ shape = SubResource("BoxShape3D_ebec5")
 unique_name_in_owner = true
 script = ExtResource("dhealth_script")
 difficulty_profile_index = 0
+hp = 100.0
 
 [node name="SignalAnimationTrigger" type="Node" parent="Health" unique_id=1074142864 node_paths=PackedStringArray("anim_player")]
 script = ExtResource("25_j55il")

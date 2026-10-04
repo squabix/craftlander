@@ -2,9 +2,16 @@
 
 [ext_resource type="Script" uid="uid://cvtlcbkq20618" path="res://common/difficulty/difficulty_settings.gd" id="1_ebrsa"]
 [ext_resource type="Script" uid="uid://bpjc0ljm65h5d" path="res://common/difficulty/difficulty_profile.gd" id="2_profile"]
+[ext_resource type="Script" uid="uid://s5itb6q4nder" path="res://player/player_difficulty_profile.gd" id="3_player_profile"]
 
 [sub_resource type="Resource" id="DifficultyProfile_player"]
-script = ExtResource("2_profile")
+script = ExtResource("3_player_profile")
+hunger_loss_multipliers = Dictionary[int, float]({
+0: 0.5,
+1: 0.6,
+2: 0.7,
+3: 0.85
+})
 max_hp_multipliers = Dictionary[int, float]({
 0: 1.0,
 1: 1.0,
