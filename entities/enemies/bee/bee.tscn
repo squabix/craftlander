@@ -560,9 +560,17 @@ parameters/looping = true
 script = ExtResource("20_rq2ym")
 override_stream = ExtResource("17_wnfpe")
 override_bus = &"SFX"
-override_volume_db = 4.0
+override_volume_db = -5.0
+override_pitch_scale = 1.35
 spawn_on_exit_tree = true
 ignore_pausing = true
 metadata/_custom_type_script = "uid://bv2ss5hjacgd3"
+
+[node name="DeathParticleSpawner3D" type="Node3D" parent="." unique_id=1770541300]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("bee_puff_script")
+scenes = Array[PackedScene]([ExtResource("bee_puff_scene")])
+spawn_on_exit_tree = true
+metadata/_custom_type_script = "uid://bhjxscxhtg2se"
 
 [editable path="BlenderVisuals/Visuals"]
