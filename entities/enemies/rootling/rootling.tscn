@@ -59,6 +59,7 @@
 [ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
 [ext_resource type="Script" uid="uid://bqct5adpvfunh" path="res://common3d/hoverer3d.gd" id="eh_script"]
 [ext_resource type="Script" path="res://entities/npc_states/search_trigger.gd" id="99_searchtrigger"]
+[ext_resource type="Script" uid="uid://d2ddr3dd478t7" path="res://difficulty/difficulty_health.gd" id="dhealth_script"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
 script = ExtResource("3_wtogd")
@@ -725,11 +726,11 @@ targets = [NodePath("../Visuals"), NodePath("../Hurtbox3D")]
 conformity = 0.2
 
 [node name="Health" type="Node" parent="." unique_id=780116179]
-script = ExtResource("4_nauqg")
+script = ExtResource("dhealth_script")
 hp = 60.0
 free_parent_on_death = true
 difficulty_profile_index = 1
-metadata/_custom_type_script = "uid://cbb5o5ykqwxfp"
+metadata/_custom_type_script = "uid://d2ddr3dd478t7"
 
 [node name="SignalAudioManager3D" type="Node3D" parent="Health" unique_id=1371947431 node_paths=PackedStringArray("signal_players")]
 script = ExtResource("10_21a2r")

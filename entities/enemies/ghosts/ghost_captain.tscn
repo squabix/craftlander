@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="7_qq7g8"]
 [ext_resource type="Script" uid="uid://cke8g2exxgx0y" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="9_n23el"]
 [ext_resource type="Script" uid="uid://h3nqpcog77iq" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="10_i0sbo"]
-[ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="11_o0m55"]
 [ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="12_8i3r8"]
 [ext_resource type="Script" uid="uid://v1m6kagbghjv" path="res://common3d/radial_sight_3d.gd" id="13_uwlny"]
 [ext_resource type="Script" uid="uid://ccwod33h53a5s" path="res://common3d/controller/entity_controller3d.gd" id="14_8ooxv"]
@@ -39,6 +38,7 @@
 [ext_resource type="Script" uid="uid://u8acd7bt1f36" path="res://entities/enemies/ghosts/captain/ghost_captain.gd" id="58_0cy1y"]
 [ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
 [ext_resource type="AnimationLibrary" uid="uid://m7hhyrhawtq8" path="res://entities/enemies/ghosts/captain/ghost_captain_animations.tres" id="captain_anims"]
+[ext_resource type="Script" uid="uid://d2ddr3dd478t7" path="res://difficulty/difficulty_health.gd" id="dhealth_script"]
 [ext_resource type="Script" uid="uid://bqct5adpvfunh" path="res://common3d/hoverer3d.gd" id="eh_script"]
 [ext_resource type="AudioStream" uid="uid://ss43k3v5unu" path="res://assets/sound/cannon.mp3" id="snd_cannon"]
 [ext_resource type="AudioStream" uid="uid://ch4752gr7arb0" path="res://assets/sound/ghost1.mp3" id="snd_ghost1"]
@@ -493,10 +493,9 @@ targets = [null, NodePath("../Hurtbox3D")]
 conformity = 0.2
 
 [node name="Health" type="Node" parent="." unique_id=535744160]
-script = ExtResource("11_o0m55")
-hp = 1500.0
-difficulty_profile_index = 1
-metadata/_custom_type_script = "uid://cbb5o5ykqwxfp"
+script = ExtResource("dhealth_script")
+hp = 1250.0
+metadata/_custom_type_script = "uid://d2ddr3dd478t7"
 
 [node name="SignalAudioManager3D" type="Node3D" parent="Health" unique_id=542186097 node_paths=PackedStringArray("signal_players")]
 script = ExtResource("12_8i3r8")

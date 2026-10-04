@@ -23,9 +23,6 @@ signal given_hp(amount: float)
 @export var one_shot := false
 @export var free_parent_on_death := false
 
-@export_group("Difficulty", "difficulty")
-@export var difficulty_profile_index := -1 # -1 = no difficulty scaling
-
 
 var dead := false
 var max_hp := 0.0
@@ -34,27 +31,7 @@ var base_max_hp := 0.0
 
 func _ready() -> void:
 	base_max_hp = hp
-	if difficulty_profile_index >= 0:
-		Main.root.difficulty_changed.connect(_on_difficulty_changed)
-	_apply_difficulty_scaling(true)
-
-
-func _apply_difficulty_scaling(full_heal: bool) -> void:
-	var multiplier := 1.0
-	if difficulty_profile_index >= 0:
-		multiplier = Difficulty.get_max_hp_multiplier(difficulty_profile_index, Main.loaded_save.difficulty)
-
-	var new_max_hp := base_max_hp * multiplier
-	if full_heal or max_hp <= 0.0:
-		hp = new_max_hp
-	else:
-		hp *= new_max_hp / max_hp
-	max_hp = new_max_hp
-	hp_changed.emit()
-
-
-func _on_difficulty_changed(_value: int) -> void:
-	_apply_difficulty_scaling(false)
+	refresh_max_hp(true)
 
 
 static func search(root: Node) -> Health:
@@ -67,6 +44,24 @@ static func search(root: Node) -> Health:
 			return child
 
 	return null
+
+
+func get_max_hp_multiplier() -> float:
+	return 1.0
+
+
+func get_damage_taken_multiplier() -> float:
+	return 1.0
+
+
+func refresh_max_hp(full_heal: bool) -> void:
+	var new_max_hp := base_max_hp * get_max_hp_multiplier()
+	if full_heal or max_hp <= 0.0:
+		hp = new_max_hp
+	else:
+		hp *= new_max_hp / max_hp
+	max_hp = new_max_hp
+	hp_changed.emit()
 
 
 func from_percent_max(percent: float) -> float:
@@ -137,8 +132,7 @@ func hurt(amount: float) -> bool:
 		amount = damage_override.sample()
 
 	amount *= hurt_multiplier
-	if difficulty_profile_index >= 0:
-		amount *= Difficulty.get_damage_taken_multiplier(difficulty_profile_index, Main.loaded_save.difficulty)
+	amount *= get_damage_taken_multiplier()
 	took_dp.emit(amount)
 
 	if dead:

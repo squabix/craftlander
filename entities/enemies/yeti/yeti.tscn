@@ -60,6 +60,8 @@
 [ext_resource type="Script" uid="uid://crtlax17o248r" path="res://entities/enemies/ghosts/ghost_traits.gd" id="gt_script"]
 [ext_resource type="Script" uid="uid://dner7f67gj7sk" path="res://entities/npc_states/specials/blink_attack_state.gd" id="sp_blink"]
 [ext_resource type="Script" uid="uid://ctk7my54vljch" path="res://entities/npc_states/specials/attack_rhythm.gd" id="sp_rhythm"]
+[ext_resource type="Resource" path="res://items/weapons/snowball/snowball_item.tres" id="yeti_snowball"]
+[ext_resource type="Script" uid="uid://d2ddr3dd478t7" path="res://difficulty/difficulty_health.gd" id="dhealth_script"]
 
 [sub_resource type="Resource" id="Resource_xl8du"]
 script = ExtResource("2_8i4p0")
@@ -1218,11 +1220,11 @@ conformity = 0.2
 interpolation_speed = 6.0
 
 [node name="Health" type="Node" parent="." unique_id=535744160]
-script = ExtResource("9_8bxnd")
-hp = 120.0
+script = ExtResource("dhealth_script")
+hp = 88.0
 free_parent_on_death = true
 difficulty_profile_index = 1
-metadata/_custom_type_script = "uid://cbb5o5ykqwxfp"
+metadata/_custom_type_script = "uid://d2ddr3dd478t7"
 
 [node name="SignalAudioManager3D" type="Node3D" parent="Health" unique_id=542186097 node_paths=PackedStringArray("signal_players")]
 script = ExtResource("10_3lqhx")

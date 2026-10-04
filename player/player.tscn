@@ -18,7 +18,6 @@
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="11_2ieo8"]
 [ext_resource type="Script" uid="uid://0ys7hbc4clgc" path="res://player/states/player_default_state.gd" id="11_art4l"]
 [ext_resource type="Script" uid="uid://pnxdwk3pye0h" path="res://common3d/pointer_raycast3d.gd" id="11_rptt4"]
-[ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="12_ebec5"]
 [ext_resource type="Script" uid="uid://idhcfku7c3tn" path="res://player/states/player_docking_boat_state.gd" id="12_fjxoa"]
 [ext_resource type="Resource" uid="uid://cgr4031ngjynl" path="res://items/materials/minerals/gold_ingot/golden_ingot_item.tres" id="12_vuyvy"]
 [ext_resource type="Script" uid="uid://b6gq5g1xvdnsu" path="res://player/states/player_swimming_state.gd" id="16_art4l"]
@@ -153,6 +152,13 @@
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="9200_grounddust1"]
 [ext_resource type="PackedScene" path="res://particles/land_puff_particles.tscn" id="9201_grounddust2"]
 [ext_resource type="Script" uid="uid://c6klwkv4b0dhs" path="res://common/signal_triggrs/signal_spawn_trigger.gd" id="9202_grounddust3"]
+[ext_resource type="Script" uid="uid://d4j2f61wlss4j" path="res://player/auto_saver.gd" id="auto_saver_script"]
+[ext_resource type="PackedScene" path="res://player/ui/boat_progress_panel.tscn" id="boat_progress_panel_scene"]
+[ext_resource type="Script" uid="uid://d2ddr3dd478t7" path="res://difficulty/difficulty_health.gd" id="dhealth_script"]
+[ext_resource type="Script" uid="uid://2c3hqvv0hv0x" path="res://player/ui/inventory/held_stack.gd" id="held_stack_script"]
+[ext_resource type="Texture2D" uid="uid://dhv8ewr4yjk1o" path="res://items/tools/shoddy/shoddy_axe/shoddy_axe.png" id="rc_axe_icon"]
+[ext_resource type="Resource" uid="uid://cx014d56i747y" path="res://items/weapons/ice_club/ice_club_recipe.tres" id="rc_ice_club_recipe"]
+[ext_resource type="Resource" path="res://items/materials/ice_cube/ice_cube_item.tres" id="rc_ice_cube_item"]
 
 [sub_resource type="Resource" id="Resource_qjkh3"]
 script = ExtResource("2_g1dw6")
@@ -1112,6 +1118,7 @@ script = ExtResource("31_2uvqg")
 bar = NodePath("../HUD/BarContainer/HBoxContainer/HungerBar")
 initial_value = 1.0
 loss_per_minute = 0.1
+difficulty_profile_index = 0
 health = NodePath("../Health")
 hurt_curve = SubResource("Curve_2uvqg")
 regeneration_curve = SubResource("Curve_1s1yo")
@@ -1366,8 +1373,7 @@ shape = SubResource("BoxShape3D_ebec5")
 
 [node name="Health" type="Node" parent="." unique_id=1348652794]
 unique_name_in_owner = true
-script = ExtResource("12_ebec5")
-hp = 100.0
+script = ExtResource("dhealth_script")
 difficulty_profile_index = 0
 
 [node name="SignalAnimationTrigger" type="Node" parent="Health" unique_id=1074142864 node_paths=PackedStringArray("anim_player")]
