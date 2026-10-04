@@ -160,12 +160,18 @@ func _convert_joypad_to_stadia(path: String):
 			return path.replace("/start", "/menu")
 		"share":
 			return path.replace("/share", "/select")
+		"l_stick_click":
+			return path.replace("/l_stick_click", "/l_stick")
+		"r_stick_click":
+			return path.replace("/r_stick_click", "/r_stick")
 		_:
 			return path
 
 func _convert_joypad_to_steam(path: String):
 	path = path.replace("joypad", "steam")
 	match path.substr(path.find("/") + 1):
+		"l_stick_click":
+			return path.replace("/l_stick_click", "/stick")
 		"r_stick_click":
 			return path.replace("/r_stick_click", "/right_track_center")
 		"select":
@@ -301,5 +307,9 @@ func _convert_joypad_to_ouya(path: String):
 			return path.replace("/start", "/menu")
 		"share":
 			return path.replace("/share", "/microphone")
+		"l_stick_click":
+			return path.replace("/l_stick_click", "/l_stick")
+		"r_stick_click":
+			return path.replace("/r_stick_click", "/r_stick")
 		_:
 			return path
