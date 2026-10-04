@@ -3,25 +3,25 @@ extends Menu
 
 signal opened
 
-@export var island_option_container: Control
+const LEVEL_FORMAT := "Boat Level %d / %d"
+const SAIL_TEXT := "Set Sail"
+const CURRENT_TEXT := "You Are Here"
+const LOCKED_TEXT := "Locked"
+
+@export var island_carousel: IslandCarousel
 @export var pause_menu: PauseMenu
 @export var boat_upgrader: BoatUpgrader
 @export var sail_button: Button
+@export var level_label: Label
 
-var selected_option: IslandOption
 var current_boat: Boat
 
 
 func _ready() -> void:
 	hide()
 	super()
-	var options: Array[IslandOption]
-	options.assign(island_option_container.get_children())
-	for option in options:
-		option.select_button.toggled.connect(_on_option_toggled.bind(option))
-		option.hide()
-
 	sail_button.pressed.connect(load_selected_island)
+	island_carousel.page_changed.connect(_on_page_changed)
 
 
 func open_boat(boat: Boat) -> void:
@@ -38,12 +38,13 @@ func open_boat(boat: Boat) -> void:
 
 
 func reload_options() -> void:
-	if not is_instance_valid(island_option_container):
-		Util.node_error("%s cannot reload options inside invalid container: %s", self, island_option_container)
+	if not is_instance_valid(island_carousel):
+		Util.node_error("%s cannot reload options inside invalid carousel: %s", self, island_carousel)
 		return
-	
-	for i in min(current_boat.level + 1, island_option_container.get_child_count()):
-		island_option_container.get_child(i).reload()
+
+	level_label.text = LEVEL_FORMAT % [current_boat.level, boat_upgrader.max_level]
+	island_carousel.reload(current_boat.level)
+	update_sail_button()
 
 
 func back() -> void:
@@ -51,18 +52,10 @@ func back() -> void:
 		return
 	if not is_instance_valid(current_boat):
 		return
-	
-	set_pause(false)
 
-	if not is_instance_valid(island_option_container):
-		selected_option = null
-		current_boat = null
-		backed_out.emit()
-		return
-	
-	for option in island_option_container.get_children():
-		option.select_button.button_pressed = false
-		option.hide()
+	set_pause(false)
+	current_boat = null
+	backed_out.emit()
 
 
 func auto_focus() -> void:
@@ -70,10 +63,8 @@ func auto_focus() -> void:
 		boat_upgrader.upgrade_button.grab_focus()
 		return
 
-	for option: IslandOption in island_option_container.get_children():
-		if not option.visible or option.select_button.disabled:
-			continue
-		option.select_button.grab_focus()
+	if not sail_button.disabled:
+		sail_button.grab_focus()
 		return
 
 	super()
@@ -87,16 +78,27 @@ func set_pause(to: bool) -> void:
 
 
 func load_selected_island() -> void:
-	if not is_instance_valid(selected_option):
+	var option := island_carousel.get_current_option()
+	if not is_instance_valid(option) or not option.is_sailable():
 		return
-	Main.root.load_level(selected_option.island_resource.index)
+	Main.root.load_level(option.island_resource.index)
 
 
-func _on_option_toggled(to: bool, option: IslandOption) -> void:
-	if to == false:
-		selected_option = null
+func update_sail_button() -> void:
+	var option := island_carousel.get_current_option()
+	if not is_instance_valid(option):
 		sail_button.disabled = true
 		return
 
-	selected_option = option
-	sail_button.disabled = false
+	match option.status:
+		IslandOption.Status.AVAILABLE:
+			sail_button.text = SAIL_TEXT
+		IslandOption.Status.CURRENT:
+			sail_button.text = CURRENT_TEXT
+		IslandOption.Status.LOCKED:
+			sail_button.text = LOCKED_TEXT
+	sail_button.disabled = not option.is_sailable()
+
+
+func _on_page_changed(_index: int, _page: Control) -> void:
+	update_sail_button()

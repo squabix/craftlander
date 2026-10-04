@@ -70,8 +70,6 @@
 [ext_resource type="Resource" uid="uid://b70i6rw8hst63" path="res://levels/ending/waves/wave_3_frost_holm.tres" id="wave_3_tres"]
 [ext_resource type="Resource" uid="uid://dvnvj22f0h3p7" path="res://levels/ending/waves/wave_4_ghost_captain.tres" id="wave_4_tres"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_rfsud"]
-
 [sub_resource type="Gradient" id="Gradient_eo3xd"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_s5hfs"]
@@ -722,84 +720,6 @@ NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
 inventory_selectors = {
 NodePath("../../../HUD/HoverInventorySelector"): 1,
 NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
-}
-
-[node name="BoatUpgrader" parent="DockingManager1/Player/BoatMenu/BottomOptions/HBoxContainer" parent_id_path=PackedInt32Array(1858460853, 1336276305) index="0" unique_id=1389163300 node_paths=PackedStringArray("requirements")]
-requirements = {
-1: NodePath("UpgradeRequirement1"),
-2: NodePath("UpgradeRequirement2"),
-3: NodePath("UpgradeRequirement3")
-}
-
-[node name="ButtonAudioManager" parent="DockingManager1/Player/BoatMenu/BottomOptions/HBoxContainer/BoatUpgrader/UpgradeButtonContainer/UpgradeButton" parent_id_path=PackedInt32Array(1858460853, 1038887707) index="0" unique_id=1941231385 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"focus_entered": NodePath("../../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
-}
-
-[node name="SignalAudioManager" parent="DockingManager1/Player/BoatMenu/BottomOptions/HBoxContainer/BoatUpgrader" index="6" unique_id=1165337501 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"failed_upgrade": NodePath("FailPlayer"),
-&"started_upgrade": NodePath("UpgradePlayer")
-}
-
-[node name="ButtonAudioManager" parent="DockingManager1/Player/BoatMenu/BottomOptions/HBoxContainer/Control/SailButton" parent_id_path=PackedInt32Array(1858460853, 1632329268) index="0" unique_id=1159382491 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"focus_entered": NodePath("../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
-}
-
-[node name="SignalAudioManager" parent="DockingManager1/Player/BoatMenu/BottomOptions/HBoxContainer/Control/SailButton" parent_id_path=PackedInt32Array(1858460853, 1632329268) index="1" unique_id=1827454759 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"pressed": NodePath("AudioStreamPlayer")
-}
-
-[node name="SelectButton" parent="DockingManager1/Player/BoatMenu/IslandOptionContainer/IslandOption0" parent_id_path=PackedInt32Array(1858460853, 1381974933) index="2" unique_id=2011677331]
-button_group = SubResource("ButtonGroup_rfsud")
-
-[node name="ButtonAudioManager" parent="DockingManager1/Player/BoatMenu/IslandOptionContainer/IslandOption0/SelectButton" index="0" unique_id=513675797 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"focus_entered": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
-}
-
-[node name="SelectButton" parent="DockingManager1/Player/BoatMenu/IslandOptionContainer/IslandOption1" parent_id_path=PackedInt32Array(1858460853, 687684142) index="2" unique_id=291589597]
-button_group = SubResource("ButtonGroup_rfsud")
-
-[node name="ButtonAudioManager" parent="DockingManager1/Player/BoatMenu/IslandOptionContainer/IslandOption1/SelectButton" index="0" unique_id=1488544473 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"focus_entered": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
-}
-
-[node name="SelectButton" parent="DockingManager1/Player/BoatMenu/IslandOptionContainer/IslandOption2" parent_id_path=PackedInt32Array(1858460853, 2004637537) index="2" unique_id=1934516890]
-button_group = SubResource("ButtonGroup_rfsud")
-
-[node name="ButtonAudioManager" parent="DockingManager1/Player/BoatMenu/IslandOptionContainer/IslandOption2/SelectButton" index="0" unique_id=1436596817 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"focus_entered": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
-}
-
-[node name="SelectButton" parent="DockingManager1/Player/BoatMenu/IslandOptionContainer/IslandOption3" parent_id_path=PackedInt32Array(1858460853, 1909481650) index="2" unique_id=527816358]
-button_group = SubResource("ButtonGroup_rfsud")
-
-[node name="ButtonAudioManager" parent="DockingManager1/Player/BoatMenu/IslandOptionContainer/IslandOption3/SelectButton" index="0" unique_id=2133439628 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"focus_entered": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
-&"mouse_entered": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
-&"pressed": NodePath("../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
-}
-
-[node name="SignalAudioManager" parent="DockingManager1/Player/BoatMenu" parent_id_path=PackedInt32Array(1858460853, 520927744) index="4" unique_id=226451644 node_paths=PackedStringArray("signal_players")]
-signal_players = {
-&"backed_out": NodePath("BoatPlayer"),
-&"opened": NodePath("BoatPlayer")
 }
 
 [node name="ButtonAudioManager" parent="DockingManager1/Player/DeathScreen/OptionsContainer/RespawnButton" parent_id_path=PackedInt32Array(1858460853, 361444523) index="0" unique_id=1873573606 node_paths=PackedStringArray("signal_players")]
