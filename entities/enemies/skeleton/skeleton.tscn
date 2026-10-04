@@ -36,6 +36,7 @@
 [ext_resource type="AudioStream" uid="uid://cwqa0rroqx0ww" path="res://assets/sound/steps_stream.tres" id="35_ujid8"]
 [ext_resource type="AudioStream" uid="uid://iqev25rq7fbq" path="res://assets/sound/rootling-07.mp3" id="36_fti4h"]
 [ext_resource type="AudioStream" uid="uid://b3c73cbq1ut7n" path="res://assets/sound/rootling-09.mp3" id="37_88114"]
+[ext_resource type="Resource" uid="uid://15kkf14ddukd" path="res://items/tools/gold/golden_pickaxe/golden_pickaxe_item.tres" id="37_ych0l"]
 [ext_resource type="AudioStream" uid="uid://cb3edy6gssben" path="res://assets/sound/rootling-08.mp3" id="38_vmqmh"]
 [ext_resource type="AudioStream" uid="uid://vb4hdoc5mtfs" path="res://assets/sound/rootling-01.mp3" id="39_1r2is"]
 [ext_resource type="AudioStream" uid="uid://dv7i8slvjjvqf" path="res://assets/sound/rootling-02.mp3" id="40_p44nf"]
@@ -692,13 +693,13 @@ node_connections = [&"output", 0, &"ItemBlend", &"ItemBlend", 0, &"RunBlendSpace
 
 [sub_resource type="Resource" id="Resource_0uawy"]
 script = ExtResource("28_bfpnq")
-items = Array[ExtResource("29_kttsx")]([ExtResource("30_jfrea"), ExtResource("27_dg8e3"), ExtResource("30_4huls")])
+items = Array[ExtResource("29_kttsx")]([ExtResource("30_jfrea"), ExtResource("27_dg8e3"), ExtResource("30_4huls"), ExtResource("37_ych0l")])
 start_anim = "attack"
 metadata/_custom_type_script = "uid://c622jer80j3sk"
 
 [sub_resource type="Resource" id="Resource_eph8r"]
 script = ExtResource("18_48lup")
-item = ExtResource("30_4huls")
+item = ExtResource("37_ych0l")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hjjmf"]
