@@ -744,10 +744,74 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="LabelSettings" id="LabelSettings_xcnuv"]
-font_size = 100
+font_size = 300
 font_color = Color(0.4990024, 0.07549464, 0.13403434, 1)
-outline_size = 10
+outline_size = 5
 outline_color = Color(0.22169957, 0.027884055, 0.028120998, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_deathbtn_normal"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.42, 0.05, 0.08, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.22, 0.03, 0.03, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_deathbtn_pressed"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.28, 0.03, 0.05, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.22, 0.03, 0.03, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_deathbtn_hover"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.65, 0.09, 0.13, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.95, 0.4, 0.4, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_deathbtn_disabled"]
+content_margin_left = 12.0
+content_margin_top = 8.0
+content_margin_right = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0.25, 0.04, 0.06, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.15, 0.03, 0.03, 0.6)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="Animation" id="Animation_tqiix"]
 length = 0.001
@@ -6736,7 +6800,16 @@ theme_override_constants/separation = 10
 
 [node name="RespawnButton" type="Button" parent="DeathScreen/OptionsContainer" unique_id=361444523]
 layout_mode = 2
-theme_override_colors/font_hover_color = Color(0.65697014, 0.65697014, 0.65697014, 1)
+theme_override_colors/font_color = Color(1, 0.88, 0.88, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.85, 0.7, 0.7, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(0.7, 0.5, 0.5, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_deathbtn_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_deathbtn_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_deathbtn_hover")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_deathbtn_disabled")
+theme_override_styles/focus = SubResource("StyleBoxFlat_deathbtn_hover")
 text = "Respawn"
 
 [node name="ButtonAudioManager" parent="DeathScreen/OptionsContainer/RespawnButton" unique_id=1873573606 node_paths=PackedStringArray("signal_players") instance=ExtResource("63_0iv1a")]
@@ -6748,7 +6821,16 @@ signal_players = {
 
 [node name="QuitButton" type="Button" parent="DeathScreen/OptionsContainer" unique_id=394106598]
 layout_mode = 2
-theme_override_colors/font_hover_color = Color(0.65697014, 0.65697014, 0.65697014, 1)
+theme_override_colors/font_color = Color(1, 0.88, 0.88, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.85, 0.7, 0.7, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(0.7, 0.5, 0.5, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_deathbtn_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_deathbtn_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_deathbtn_hover")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_deathbtn_disabled")
+theme_override_styles/focus = SubResource("StyleBoxFlat_deathbtn_hover")
 text = "Quit to Title Screen"
 
 [node name="ButtonAudioManager" parent="DeathScreen/OptionsContainer/QuitButton" unique_id=1703455280 node_paths=PackedStringArray("signal_players") instance=ExtResource("63_0iv1a")]
