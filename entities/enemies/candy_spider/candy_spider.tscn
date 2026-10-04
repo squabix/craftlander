@@ -25,7 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="24_oni7p"]
 [ext_resource type="Script" uid="uid://dd8qskwv1nlqx" path="res://common3d/damage_system/hit_ray3d.gd" id="25_0wyuk"]
 [ext_resource type="Script" uid="uid://bl5x717nsijmk" path="res://common/damage_system/damage.gd" id="26_0dir6"]
-[ext_resource type="Resource" uid="uid://5n0rxogo7ow0" path="res://items/food/candy_cane/candy_cane.tres" id="27_5a8ae"]
+[ext_resource type="Resource" uid="uid://5n0rxogo7ow0" path="res://items/food/candy_cane/candy_cane_item.tres" id="27_5a8ae"]
 [ext_resource type="PackedScene" uid="uid://h3veu2e18ij1" path="res://entities/entity_health_bar.tscn" id="27_sexsv"]
 [ext_resource type="AudioStream" uid="uid://cwqa0rroqx0ww" path="res://assets/sound/steps_stream.tres" id="28_nxx0q"]
 [ext_resource type="AudioStream" uid="uid://iqev25rq7fbq" path="res://assets/sound/rootling-07.mp3" id="29_koe6k"]
@@ -53,6 +53,7 @@
 [ext_resource type="Script" uid="uid://c8o56lvh1smbc" path="res://entities/enemies/ghosts/ghost_entity_guide3d.gd" id="gg_script"]
 [ext_resource type="Material" uid="uid://dfoa0stliya12" path="res://assets/materials/ghosts/ghost_candy_spider.tres" id="gt_mat"]
 [ext_resource type="Script" uid="uid://crtlax17o248r" path="res://entities/enemies/ghosts/ghost_traits.gd" id="gt_script"]
+[ext_resource type="Script" uid="uid://bxjt3nibhkxh8" path="res://common/signal_triggrs/camera_shake_trigger.gd" id="shake_trigger_script"]
 [ext_resource type="Script" uid="uid://4xddu7ckg4hq" path="res://entities/npc_states/specials/dash_attack_state.gd" id="sp_dash"]
 [ext_resource type="Script" uid="uid://ctk7my54vljch" path="res://entities/npc_states/specials/attack_rhythm.gd" id="sp_rhythm"]
 [ext_resource type="Script" uid="uid://d2ddr3dd478t7" path="res://difficulty/difficulty_health.gd" id="dhealth_script"]
@@ -470,7 +471,7 @@ vertical_rotation_target = NodePath(".")
 rotation_range = SubResource("Resource_0dji4")
 metadata/_custom_type_script = "uid://bki5ij8task16"
 
-[node name="SwungShakeTrigger" type="Node" parent="."]
+[node name="SwungShakeTrigger" type="Node" parent="." unique_id=1036388917]
 script = ExtResource("shake_trigger_script")
 trauma = 0.3
 signal_name = &"swung"
@@ -791,17 +792,17 @@ surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 
 [node name="LegRight3" parent="Visuals" index="6" unique_id=474170665]
-transform = Transform3D(-0.97364753, 0, 0.22805582, 0, 1, 0, -0.22805582, 0, -0.97364753, -0.75, 0.29067695, -0.17361851)
+transform = Transform3D(-0.9736474, 0, 0.22805579, 0, 1, 0, -0.22805579, 0, -0.9736474, -0.75, 0.29067695, -0.17361851)
 surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 
 [node name="LegRight2" parent="Visuals" index="7" unique_id=970820104]
-transform = Transform3D(-0.95121604, 0, -0.30852413, 0, 1, 0, 0.30852413, 0, -0.95121604, -0.75, 0.29067695, 0.15406431)
+transform = Transform3D(-0.9512159, 0, -0.30852407, 0, 1, 0, 0.30852407, 0, -0.9512159, -0.75, 0.29067695, 0.15406431)
 surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 
 [node name="LegRight1" parent="Visuals" index="8" unique_id=1978653653]
-transform = Transform3D(-0.95121604, 0, -0.30852413, 0, 1, 0, 0.30852413, 0, -0.95121604, -0.61, 0.29067695, 0.45040345)
+transform = Transform3D(-0.9512159, 0, -0.30852407, 0, 1, 0, 0.30852407, 0, -0.9512159, -0.61, 0.29067695, 0.45040345)
 surface_material_override/0 = ExtResource("43_uyxu8")
 surface_material_override/1 = ExtResource("44_1tian")
 

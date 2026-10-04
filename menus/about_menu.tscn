@@ -13,7 +13,6 @@ grow_vertical = 2
 script = ExtResource("1_about")
 text_scroll = NodePath("PanelContainer/VBoxContainer/ScrollContainer")
 back_button = NodePath("PanelContainer/VBoxContainer/BackButton")
-back_action = &"back"
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1615928282]
 custom_minimum_size = Vector2(900, 0)

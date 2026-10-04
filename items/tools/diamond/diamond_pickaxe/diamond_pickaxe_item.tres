@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://cixpbgeowrljm" path="res://items/tools/diamond/diamond_pickaxe/diamond_pickaxe.tscn" id="3_het4t"]
 [ext_resource type="Script" uid="uid://6x786nnhteca" path="res://items/tools/harvesting_tool.gd" id="4_h83bk"]
 
-
 [resource]
 script = ExtResource("4_h83bk")
 damage = ExtResource("1_wvhnx")

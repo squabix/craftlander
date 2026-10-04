@@ -61,7 +61,6 @@ const HURT_SHAKE_TRAUMA := 0.4
 
 var is_in_water := false
 var cutscene_locked := false
-var respawn_override: Callable
 var drowning_cooldown := 0.0
 
 

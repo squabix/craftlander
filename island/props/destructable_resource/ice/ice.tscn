@@ -19,8 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://c5p1su4igelsy" path="res://assets/models/props/ice_chunk.blend" id="19_qat6t"]
 [ext_resource type="Material" uid="uid://c403ng7pn0nqg" path="res://assets/materials/ice.tres" id="20_pc4fx"]
 [ext_resource type="AudioStream" uid="uid://b6f6x800jxpvb" path="res://assets/sound/rock_destroy.mp3" id="20_ui87x"]
-[ext_resource type="PackedScene" path="res://island/props/destructable_resource/destroy_shake_trigger.tscn" id="99_destroyshk"]
-[ext_resource type="PackedScene" path="res://island/props/destructable_resource/hurt_shake_trigger.tscn" id="99_hurtshk"]
+[ext_resource type="PackedScene" uid="uid://b42ejh4s3ni40" path="res://island/props/destructable_resource/destroy_shake_trigger.tscn" id="99_destroyshk"]
+[ext_resource type="PackedScene" uid="uid://p8wwjit2trpc" path="res://island/props/destructable_resource/hurt_shake_trigger.tscn" id="99_hurtshk"]
 [ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pc4fx"]
@@ -133,9 +133,9 @@ hurt_threshold = 12.0
 damage_override = ExtResource("6_l43k0")
 free_parent_on_death = true
 
-[node name="DestroyShakeTrigger" parent="Health" instance=ExtResource("99_destroyshk")]
+[node name="DestroyShakeTrigger" parent="Health" unique_id=602066750 instance=ExtResource("99_destroyshk")]
 
-[node name="HurtShakeTrigger" parent="Health" instance=ExtResource("99_hurtshk")]
+[node name="HurtShakeTrigger" parent="Health" unique_id=1465994343 instance=ExtResource("99_hurtshk")]
 
 [node name="HurtAnimTrigger" type="Node" parent="Health" unique_id=1514929013 node_paths=PackedStringArray("anim_player")]
 script = ExtResource("7_2w7t6")

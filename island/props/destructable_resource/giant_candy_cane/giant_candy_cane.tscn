@@ -23,7 +23,7 @@
 [ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="24_h06m4"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="25_s1u1g"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="26_irq8y"]
-[ext_resource type="Resource" uid="uid://5n0rxogo7ow0" path="res://items/food/candy_cane/candy_cane.tres" id="27_303ff"]
+[ext_resource type="Resource" uid="uid://5n0rxogo7ow0" path="res://items/food/candy_cane/candy_cane_item.tres" id="27_303ff"]
 [ext_resource type="ArrayOccluder3D" uid="uid://dxvs6e1pbvl0h" path="res://island/props/destructable_resource/tree/tree.occ" id="29_8iico"]
 [ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="30_2uuu8"]
 [ext_resource type="PackedScene" uid="uid://b42ejh4s3ni40" path="res://island/props/destructable_resource/destroy_shake_trigger.tscn" id="99_destroyshk"]

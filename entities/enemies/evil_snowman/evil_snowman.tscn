@@ -51,16 +51,17 @@
 [ext_resource type="Resource" path="res://entities/projectiles/snowball/snowball_damage.tres" id="45_7623f"]
 [ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="50_wwywl"]
 [ext_resource type="Material" uid="uid://cjaa3xqqchd63" path="res://assets/materials/carrot.tres" id="55_7ug4v"]
+[ext_resource type="Script" uid="uid://cqq5b76xuq0i3" path="res://entities/npc_states/search_trigger.gd" id="99_searchtrigger"]
 [ext_resource type="Script" uid="uid://cke8g2exxgx0y" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 [ext_resource type="Script" uid="uid://h3nqpcog77iq" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="101_normconf"]
-[ext_resource type="Script" uid="uid://crtlax17o248r" path="res://entities/enemies/ghosts/ghost_traits.gd" id="gt_script"]
-[ext_resource type="Script" uid="uid://c8o56lvh1smbc" path="res://entities/enemies/ghosts/ghost_entity_guide3d.gd" id="gg_script"]
-[ext_resource type="Material" uid="uid://cog62eu3d3sx5" path="res://assets/materials/ghosts/ghost_evil_snowman.tres" id="gt_mat"]
 [ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
 [ext_resource type="Resource" uid="uid://b6x75m56u6heb" path="res://items/food/carrot/carrot_item.tres" id="carrot_item"]
 [ext_resource type="Script" uid="uid://d2ddr3dd478t7" path="res://difficulty/difficulty_health.gd" id="dhealth_script"]
 [ext_resource type="Script" uid="uid://bqct5adpvfunh" path="res://common3d/hoverer3d.gd" id="eh_script"]
-[ext_resource type="Script" path="res://entities/npc_states/search_trigger.gd" id="99_searchtrigger"]
+[ext_resource type="Script" uid="uid://c8o56lvh1smbc" path="res://entities/enemies/ghosts/ghost_entity_guide3d.gd" id="gg_script"]
+[ext_resource type="Resource" uid="uid://dv277xhyv1vav" path="res://entities/enemies/ghosts/ghost_projectile_acl.tres" id="gt_acl"]
+[ext_resource type="Material" uid="uid://cog62eu3d3sx5" path="res://assets/materials/ghosts/ghost_evil_snowman.tres" id="gt_mat"]
+[ext_resource type="Script" uid="uid://crtlax17o248r" path="res://entities/enemies/ghosts/ghost_traits.gd" id="gt_script"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
 script = ExtResource("3_j8ygh")
@@ -75,6 +76,9 @@ metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_41vbo"]
 radius = 0.7
 height = 2.8
+
+[sub_resource type="Resource" id="Resource_acl"]
+script = ExtResource("acl_script")
 
 [sub_resource type="Resource" id="Resource_aoox1"]
 script = ExtResource("20_wh3u0")
@@ -463,9 +467,6 @@ shader_parameter/rim_power = 3.0
 shader_parameter/rim_color = Color(0, 0, 0, 1)
 shader_parameter/refraction_strength = 0.05
 
-[sub_resource type="Resource" id="Resource_acl"]
-script = ExtResource("acl_script")
-
 [node name="EvilSnowman" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
 script = ExtResource("1_mjqu2")
@@ -667,6 +668,12 @@ root = NodePath("../../..")
 nav = NodePath("../../NavigationAgent3D")
 entity = NodePath("../..")
 
+[node name="GhostEntityGuide3D" type="Node" parent="Controller3D" unique_id=491312385 node_paths=PackedStringArray("hoverer", "entity")]
+process_mode = 4
+script = ExtResource("gg_script")
+hoverer = NodePath("../../Hoverer3D")
+entity = NodePath("../..")
+
 [node name="Inventory" type="Node" parent="." unique_id=2020826484]
 unique_name_in_owner = true
 script = ExtResource("19_obcca")
@@ -823,25 +830,19 @@ surface_material_override/3 = ExtResource("42_m7xa6")
 [node name="Hat" parent="Visuals/Head" index="0" unique_id=1362198304]
 surface_material_override/1 = SubResource("ShaderMaterial_krurl")
 
-[node name="GhostEntityGuide3D" type="Node" parent="Controller3D" node_paths=PackedStringArray("entity", "hoverer")]
-process_mode = 4
-script = ExtResource("gg_script")
-entity = NodePath("../..")
-hoverer = NodePath("../../Hoverer3D")
-
-[node name="Hoverer3D" type="RayCast3D" parent="." node_paths=PackedStringArray("target")]
+[node name="Hoverer3D" type="RayCast3D" parent="." unique_id=5103135 node_paths=PackedStringArray("target")]
 process_mode = 4
 collision_mask = 64
 script = ExtResource("eh_script")
 target = NodePath("..")
 
-[node name="GhostTraits" type="Node" parent="." node_paths=PackedStringArray("entity", "guide", "hoverer", "nav_guide", "targeting_states", "chasing_state", "culling_controller", "projectile_spawners", "inventory", "dropper")]
+[node name="GhostTraits" type="Node" parent="." unique_id=1811031645 node_paths=PackedStringArray("entity", "guide", "hoverer", "nav_guide", "targeting_states", "chasing_state", "culling_controller", "projectile_spawners", "inventory", "dropper")]
 script = ExtResource("gt_script")
+entity = NodePath("..")
 is_ranged = true
 animates_locomotion = true
 material = ExtResource("gt_mat")
 projectile_acl = ExtResource("gt_acl")
-entity = NodePath("..")
 guide = NodePath("../Controller3D/GhostEntityGuide3D")
 hoverer = NodePath("../Hoverer3D")
 nav_guide = NodePath("../Controller3D/NavEntityGuide3D")

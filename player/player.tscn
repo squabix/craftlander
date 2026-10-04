@@ -429,13 +429,13 @@ font_size = 26
 [sub_resource type="Resource" id="Resource_b2j0d"]
 script = ExtResource("50_or4qq")
 item = ExtResource("9_jbx34")
-discovered_recipes = Array[ExtResource("50_pjwc4")]([ExtResource("52_hggc2"), ExtResource("53_hggc2"), ExtResource("51_or4qq")])
+discovered_recipes = Array[ExtResource("50_pjwc4")]([ExtResource("51_or4qq"), ExtResource("52_hggc2"), ExtResource("53_hggc2")])
 metadata/_custom_type_script = "uid://cpv5s708r1wvo"
 
 [sub_resource type="Resource" id="Resource_7l6ig"]
 script = ExtResource("50_or4qq")
 item = ExtResource("10_s3g0c")
-discovered_recipes = Array[ExtResource("50_pjwc4")]([ExtResource("51_or4qq"), ExtResource("53_hggc2"), ExtResource("52_hggc2")])
+discovered_recipes = Array[ExtResource("50_pjwc4")]([ExtResource("51_or4qq"), ExtResource("52_hggc2"), ExtResource("53_hggc2")])
 metadata/_custom_type_script = "uid://cpv5s708r1wvo"
 
 [sub_resource type="Resource" id="Resource_g3ghg"]
@@ -734,7 +734,7 @@ stream_1/stream = ExtResource("93_7xdiq")
 stream_2/stream = ExtResource("94_d0gtc")
 
 [sub_resource type="Gradient" id="Gradient_fjxoa"]
-colors = PackedColorArray(0.021340871, 0.02564397, 0.0343922, 1, 0, 0, 0, 1)
+colors = PackedColorArray(0.012399999, 0.014933335, 0.02, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_gswnw"]
 gradient = SubResource("Gradient_fjxoa")
@@ -903,7 +903,7 @@ tracks/1/keys = {
 resource_name = "sprint"
 length = 0.6
 loop_mode = 1
-step = 0.05
+step = 0.025
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1340,6 +1340,7 @@ steps_player = NodePath("StepsPlayer")
 swim_player = NodePath("SwimPlayer")
 eat_player = NodePath("EatPlayer")
 type = &"Player"
+min_landing_speed = 4.0
 horizontal_rotation_target = NodePath(".")
 vertical_rotation_target = NodePath("Head/Camera3D")
 rotation_range = SubResource("Resource_g6k8r")
@@ -1466,7 +1467,7 @@ stamina = NodePath("../../../Stamina")
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
-[node name="Sprinting" type="Node" parent="Controller3D/Default" unique_id=900263776 node_paths=PackedStringArray("stamina", "root")]
+[node name="Sprinting" type="Node" parent="Controller3D/Default" unique_id=900263776 node_paths=PackedStringArray("camera", "stamina", "root")]
 script = ExtResource("10_8t03j")
 camera = NodePath("../../../Head/Camera3D")
 stamina = NodePath("../../../Stamina")
@@ -1506,6 +1507,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head" unique_id=757383881]
 cull_mask = 1048573
+current = true
 fov = 85.0
 
 [node name="CameraShake" type="Node" parent="Head/Camera3D" unique_id=90100001 node_paths=PackedStringArray("camera")]
@@ -1553,7 +1555,7 @@ bus = &"UI"
 
 [node name="InteratorRay" type="RayCast3D" parent="Head/Camera3D" unique_id=1551921047]
 visible = false
-target_position = Vector3(0, 0, -2)
+target_position = Vector3(0, 0, -2.8)
 collision_mask = 2
 hit_from_inside = true
 collide_with_areas = true
@@ -1724,6 +1726,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_j55il")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ScreenEffectContainer/LowHealth"]
 libraries/ = SubResource("AnimationLibrary_lowhealthpulse")
@@ -1782,6 +1786,7 @@ bbcode_enabled = true
 fit_content = true
 scroll_active = false
 script = ExtResource("46_vvji8")
+icon_size = 30
 interactors = [NodePath("../../InteractorArea/Interactor3D"), NodePath("../../Head/Camera3D/InteratorRay/Interactor")]
 
 [node name="ActionHints" type="GridContainer" parent="HUD" unique_id=970437829 node_paths=PackedStringArray("item_holder", "use_hint")]
@@ -1793,7 +1798,7 @@ offset_left = 35.0
 offset_top = -41.0
 offset_right = 530.0
 grow_vertical = 0
-columns = 5
+columns = 6
 script = ExtResource("201_hkhint")
 item_holder = NodePath("../../Head/Camera3D/ItemHolder")
 use_hint = NodePath("UseHint")
@@ -1817,6 +1822,11 @@ hint_text = "Jump"
 layout_mode = 2
 action = &"sprint"
 hint_text = "Sprint"
+
+[node name="PauseHint" parent="HUD/ActionHints" unique_id=706807440 instance=ExtResource("200_ahint")]
+layout_mode = 2
+action = &"pause"
+hint_text = "Pause/Inventory"
 
 [node name="UseHint" parent="HUD/ActionHints" unique_id=700000002 instance=ExtResource("200_ahint")]
 layout_mode = 2
@@ -1997,7 +2007,7 @@ layout_mode = 2
 text = "Next Upgrade"
 horizontal_alignment = 1
 
-[node name="BoatUpgradeBar" type="ProgressBar" parent="HUD/UpgradeBarContainer" unique_id=1267940476 node_paths=PackedStringArray("boat_upgrader", "player_inventory")]
+[node name="BoatUpgradeBar" type="ProgressBar" parent="HUD/UpgradeBarContainer" unique_id=1267940476 node_paths=PackedStringArray("boat_upgrader", "player_inventory", "container")]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 theme_override_styles/background = ExtResource("35_b2j0d")
@@ -2044,6 +2054,7 @@ marker_max_size = 8.0
 
 [node name="TutorialPopupLayer" type="CanvasLayer" parent="." unique_id=203573653]
 layer = 20
+visible = false
 
 [node name="PopupDisplay" type="Control" parent="TutorialPopupLayer" unique_id=2003166414 node_paths=PackedStringArray("title_label", "body_label", "continue_icon_rect")]
 unique_name_in_owner = true
@@ -2167,7 +2178,7 @@ button_settings = NodePath("CraftingInterface/OptionsContainer/SettingsButton")
 button_quit = NodePath("CraftingInterface/OptionsContainer/QuitButton")
 visibility_proxy = NodePath("CraftingInterface")
 back_button = NodePath("CraftingInterface/OptionsContainer/ResumeButton")
-back_action = &"back"
+back_action = &"pause"
 
 [node name="BlurRect" type="ColorRect" parent="PauseMenu" unique_id=1141508559]
 material = SubResource("ShaderMaterial_48p26")
@@ -2691,7 +2702,7 @@ label = NodePath("Preview/PreviewLabel")
 label_mode = 1
 
 [node name="CraftButton" type="Button" parent="PauseMenu/CraftingInterface/CompletePanel" unique_id=1652755923]
-custom_minimum_size = Vector2(0, 30)
+custom_minimum_size = Vector2(0, 44)
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -2700,6 +2711,7 @@ anchor_bottom = 1.0
 offset_top = -19.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_font_sizes/font_size = 24
 text = "CRAFT"
 expand_icon = true
 
@@ -2792,10 +2804,10 @@ size_flags_horizontal = 3
 action = &"ui_accept"
 hint_text = "Select"
 
-[node name="SwapHint" parent="PauseMenu/CraftingInterface/BackpackPanel/HBoxContainer" unique_id=700000006 instance=ExtResource("200_ahint")]
+[node name="SecondaryHint" parent="PauseMenu/CraftingInterface/BackpackPanel/HBoxContainer" unique_id=700000006 instance=ExtResource("200_ahint")]
 layout_mode = 2
-action = &"swap"
-hint_text = "Swap"
+action = &"inventory_secondary"
+hint_text = "Split / Place one"
 
 [node name="CraftHint" parent="PauseMenu/CraftingInterface/BackpackPanel/HBoxContainer" unique_id=700000007 instance=ExtResource("200_ahint")]
 layout_mode = 2
@@ -5002,10 +5014,10 @@ script = ExtResource("84_wyvah")
 min_speed = 70.0
 max_speed = 800.0
 acceleration = 1200.0
-action_up = &"look_up"
-action_down = &"look_down"
-action_left = &"look_left"
-action_right = &"look_right"
+action_up = &"virtual_cursor_up"
+action_down = &"virtual_cursor_down"
+action_left = &"virtual_cursor_left"
+action_right = &"virtual_cursor_right"
 metadata/_custom_type_script = "uid://7t0qde2fdjb8"
 
 [node name="BoatProgressPanel" parent="PauseMenu/CraftingInterface" unique_id=1468243080 node_paths=PackedStringArray("boat_upgrader", "player_inventory") instance=ExtResource("boat_progress_panel_scene")]
@@ -6484,18 +6496,20 @@ stream = ExtResource("93_w10ni")
 bus = &"SFX"
 
 [node name="IslandOptionContainer" type="Control" parent="BoatMenu" unique_id=288135614]
-anchors_preset = 0
-offset_right = 1152.0
-offset_bottom = 447.0
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 345.0
+grow_horizontal = 2
 
 [node name="IslandOption0" type="VBoxContainer" parent="BoatMenu/IslandOptionContainer" unique_id=1381974933 node_paths=PackedStringArray("name_label", "texture_rect", "select_button", "animation_player")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.13717014
-anchor_top = 0.601264
-anchor_right = 0.22050346
-anchor_bottom = 0.8585352
-offset_left = 1.5258789e-05
+anchor_left = 0.108125
+anchor_top = 0.7594203
+anchor_right = 0.19145831
+anchor_bottom = 1.2927536
+offset_bottom = 3.0517578e-05
 script = ExtResource("64_kewli")
 current_alpha = 0.7
 island_resource = ExtResource("73_kcq4v")
@@ -6542,14 +6556,10 @@ autoplay = &"float"
 [node name="IslandOption1" type="VBoxContainer" parent="BoatMenu/IslandOptionContainer" unique_id=687684142 node_paths=PackedStringArray("name_label", "texture_rect", "select_button", "animation_player")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.30293834
-anchor_top = 0.2488926
-anchor_right = 0.3862717
-anchor_bottom = 0.50616264
-offset_left = 207.01501
-offset_top = -2.2549973
-offset_right = 217.01501
-offset_bottom = 66.7453
+anchor_left = 0.32125
+anchor_top = 0.2753623
+anchor_right = 0.41083333
+anchor_bottom = 0.8086957
 script = ExtResource("64_kewli")
 current_alpha = 0.7
 island_resource = ExtResource("75_lufic")
@@ -6557,6 +6567,7 @@ name_label = NodePath("NameLabel")
 texture_rect = NodePath("TextureRect")
 select_button = NodePath("SelectButton")
 animation_player = NodePath("AnimationPlayer")
+metadata/_edit_use_anchors_ = true
 
 [node name="NameLabel" type="Label" parent="BoatMenu/IslandOptionContainer/IslandOption1" unique_id=1736962781]
 layout_mode = 2
@@ -6595,14 +6606,10 @@ autoplay = &"float"
 [node name="IslandOption2" type="VBoxContainer" parent="BoatMenu/IslandOptionContainer" unique_id=2004637537 node_paths=PackedStringArray("name_label", "texture_rect", "select_button", "animation_player")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5182292
-anchor_top = 0.4577517
-anchor_right = 0.6015625
-anchor_bottom = 0.71502304
-offset_left = 325.0
-offset_top = 21.384995
-offset_right = 335.0
-offset_bottom = 90.384705
+anchor_left = 0.560625
+anchor_top = 0.8
+anchor_right = 0.6502083
+anchor_bottom = 1.3333334
 script = ExtResource("64_kewli")
 current_alpha = 0.7
 island_resource = ExtResource("76_nxclr")
@@ -6610,6 +6617,7 @@ name_label = NodePath("NameLabel")
 texture_rect = NodePath("TextureRect")
 select_button = NodePath("SelectButton")
 animation_player = NodePath("AnimationPlayer")
+metadata/_edit_use_anchors_ = true
 
 [node name="NameLabel" type="Label" parent="BoatMenu/IslandOptionContainer/IslandOption2" unique_id=776332412]
 layout_mode = 2
@@ -6648,10 +6656,10 @@ autoplay = &"float"
 [node name="IslandOption3" type="VBoxContainer" parent="BoatMenu/IslandOptionContainer" unique_id=1909481650 node_paths=PackedStringArray("name_label", "texture_rect", "select_button", "animation_player")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 1.1414931
-anchor_top = 0.30425057
-anchor_right = 1.2335069
-anchor_bottom = 0.7158837
+anchor_left = 0.780625
+anchor_top = 0.28405797
+anchor_right = 0.8726389
+anchor_bottom = 0.8173913
 script = ExtResource("64_kewli")
 current_alpha = 0.7
 island_resource = ExtResource("109_hioli")
@@ -6741,7 +6749,7 @@ texture = SubResource("GradientTexture2D_gswnw")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 289.0
+offset_bottom = 400.0
 grow_horizontal = 2
 text = "YOU DIED"
 label_settings = SubResource("LabelSettings_xcnuv")

@@ -17,7 +17,6 @@
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="15_7niy0"]
 [ext_resource type="Script" uid="uid://bp5ab438ufrus" path="res://common3d/culling_controller3d.gd" id="15_nj0qj"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="16_0hiqi"]
-[ext_resource type="Script" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 [ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="16_4hd4j"]
 [ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="16_bfxyu"]
 [ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="16_t5evv"]
@@ -26,6 +25,8 @@
 [ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="20_rq2ym"]
 [ext_resource type="Script" uid="uid://dd8qskwv1nlqx" path="res://common3d/damage_system/hit_ray3d.gd" id="21_atkray"]
 [ext_resource type="Resource" path="res://entities/enemies/bee/bee_damage.tres" id="22_atkdmg"]
+[ext_resource type="Script" uid="uid://cqq5b76xuq0i3" path="res://entities/npc_states/search_trigger.gd" id="99_searchtrigger"]
+[ext_resource type="Script" uid="uid://cke8g2exxgx0y" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 [ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
 [ext_resource type="Script" uid="uid://d2ddr3dd478t7" path="res://difficulty/difficulty_health.gd" id="dhealth_script"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="bee_puff_script"]
@@ -297,18 +298,15 @@ random_pitch = 1.122462
 streams_count = 1
 stream_0/stream = ExtResource("17_wnfpe")
 
-[sub_resource type="Resource" id="Resource_acl"]
-script = ExtResource("acl_script")
-
-[node name="Bee" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("attack_ray", "form_nodes")]
+[node name="Bee" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("form_nodes", "attack_ray")]
 collision_mask = 17
 wall_min_slide_angle = 3.1415927
 floor_constant_speed = true
 floor_block_on_wall = false
 floor_max_angle = 3.1415927
 script = ExtResource("1_4hd4j")
-attack_ray = NodePath("AttackRay")
 form_nodes = [NodePath("BlenderVisuals"), NodePath("Sight3D"), NodePath("InventoryDropper3D"), NodePath("Hurtbox3D")]
+attack_ray = NodePath("AttackRay")
 type = &"Bee"
 move_mode = ExtResource("2_vtgqy")
 move_up_as_jump = false
@@ -508,7 +506,7 @@ state_name = &"Searching"
 from_state_whitelist = Array[StringName]([&"Wandering", &"Searching"])
 signal_name = &"was_dealt_damage"
 
-[node name="MeshFlashTrigger" type="Node" parent="Hurtbox3D" node_paths=PackedStringArray("mesh_root")]
+[node name="MeshFlashTrigger" type="Node" parent="Hurtbox3D" unique_id=1964968318 node_paths=PackedStringArray("mesh_root")]
 script = ExtResource("100_flash")
 mesh_root = NodePath("../../BlenderVisuals")
 signal_name = &"was_hurt"

@@ -17,8 +17,8 @@
 [ext_resource type="Shader" uid="uid://d0g1tx71qh1wb" path="res://assets/shaders/tree_wind_shader.gdshader" id="15_bcrwv"]
 [ext_resource type="Material" uid="uid://c403ng7pn0nqg" path="res://assets/materials/ice.tres" id="18_1s6km"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="99_particlespawner"]
-[ext_resource type="PackedScene" uid="uid://lyptlia5fnc8" path="res://common3d/boat_upgrade_particles.tscn" id="99_upgradeparticles"]
 [ext_resource type="Script" uid="uid://bxjt3nibhkxh8" path="res://common/signal_triggrs/camera_shake_trigger.gd" id="99_shaketrigger"]
+[ext_resource type="PackedScene" uid="uid://lyptlia5fnc8" path="res://common3d/boat_upgrade_particles.tscn" id="99_upgradeparticles"]
 
 [sub_resource type="Resource" id="Resource_1blct"]
 script = ExtResource("3_fqixs")
@@ -127,7 +127,7 @@ gravity_multiplier = 0.0
 rotation_range = SubResource("Resource_wbjwq")
 metadata/_custom_type_script = "uid://sw1ikf32qnw0"
 
-[node name="DockShakeTrigger" type="Node" parent="."]
+[node name="DockShakeTrigger" type="Node" parent="." unique_id=1402430251]
 script = ExtResource("99_shaketrigger")
 trauma = 0.25
 signal_name = &"docked"
@@ -206,7 +206,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_8tukb")
 [node name="Visuals" parent="." unique_id=836045816 instance=ExtResource("11_jxxau")]
 transform = Transform3D(0.9998477, -0.017452406, 0, 0.017449748, 0.9996954, -0.017452406, 0.00030458646, 0.017449748, 0.9998477, 0, -0.16110516, 3)
 
-[node name="Cube" parent="Visuals" index="0" unique_id=1457282026]
+[node name="Cube" parent="Visuals" index="0" unique_id=1211706]
 surface_material_override/0 = ExtResource("12_bcrwv")
 surface_material_override/1 = ExtResource("13_bee6a")
 surface_material_override/2 = ExtResource("6_64a40")

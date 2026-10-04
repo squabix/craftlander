@@ -505,7 +505,6 @@ blend_point_1/pos = 0.8
 blend_point_1/name = &"1"
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_p5gg5"]
-graph_offset = Vector2(-714.21014, -116.97181)
 nodes/output/position = Vector2(160, 26.666666)
 nodes/RunBlendSpace/node = SubResource("AnimationNodeBlendSpace1D_7mn0t")
 nodes/RunBlendSpace/position = Vector2(-306.66666, -66.666664)
@@ -593,15 +592,14 @@ state_name = &"Searching"
 from_state_whitelist = Array[StringName]([&"Wandering", &"Searching"])
 signal_name = &"was_dealt_damage"
 
-[node name="MeshFlashTrigger" type="Node" parent="Hurtbox3D" node_paths=PackedStringArray("mesh_root")]
+[node name="MeshFlashTrigger" type="Node" parent="Hurtbox3D" unique_id=1088356859 node_paths=PackedStringArray("mesh_root")]
 script = ExtResource("100_flash")
 mesh_root = NodePath("../../Visuals")
 signal_name = &"was_hurt"
 
-[node name="NormalConformityRayCast3D" type="RayCast3D" parent="." node_paths=PackedStringArray("targets")]
+[node name="NormalConformityRayCast3D" type="RayCast3D" parent="." unique_id=1134681236 node_paths=PackedStringArray("targets")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 target_position = Vector3(0, -0.5, 0)
-collision_mask = 1
 script = ExtResource("46_normconf")
 targets = [NodePath("../Visuals"), NodePath("../Hurtbox3D")]
 interpolation_speed = 5.0
@@ -826,20 +824,18 @@ bus = &"SFX"
 [node name="Visuals" parent="." unique_id=124486934 instance=ExtResource("41_81alf")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, 0)
 
-[node name="Head" parent="Visuals" index="0" unique_id=1312165250]
-transform = Transform3D(1, 0, 0, 0, 0.99993885, -0.011051127, 0, 0.011051127, 0.99993885, 0, 0, 0)
+[node name="Head" parent="Visuals" index="0" unique_id=1781998638]
+transform = Transform3D(1, 0, 0, 0, 0.9999189, -0.012734373, 0, 0.012734373, 0.9999189, 0, 0, 0)
 surface_material_override/0 = ExtResource("42_iyf1a")
 
-[node name="LegLeft" parent="Visuals" index="1" unique_id=856653343]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, -0.49508578, -0.5002392, 0.05319056)
+[node name="LegLeft" parent="Visuals" index="1" unique_id=821429671]
 surface_material_override/0 = ExtResource("42_iyf1a")
 
-[node name="LegRight" parent="Visuals" index="2" unique_id=1900297946]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.524, -0.5, 0.064)
+[node name="LegRight" parent="Visuals" index="2" unique_id=2023090713]
 surface_material_override/0 = ExtResource("42_iyf1a")
 
-[node name="ArmRight" parent="Visuals" index="3" unique_id=831163117]
-transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.9, 0, 0)
+[node name="ArmRight" parent="Visuals" index="3" unique_id=1139020328]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 0, 0)
 surface_material_override/0 = ExtResource("42_iyf1a")
 
 [node name="RightHandSpawner" type="Node3D" parent="Visuals/ArmRight" index="0" unique_id=895416736]
@@ -851,7 +847,7 @@ projectile_scene = ExtResource("44_o54g0")
 damage = ExtResource("45_lgrv3")
 source = NodePath("../../../..")
 
-[node name="ArmLeft" parent="Visuals" index="4" unique_id=404479199]
+[node name="ArmLeft" parent="Visuals" index="4" unique_id=55966903]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 0, 0)
 surface_material_override/0 = ExtResource("42_iyf1a")
 
@@ -870,12 +866,12 @@ collision_mask = 64
 script = ExtResource("eh_script")
 target = NodePath("..")
 
-[node name="GhostTraits" type="Node" parent="." node_paths=PackedStringArray("entity", "guide", "hoverer", "nav_guide", "targeting_states", "chasing_state", "culling_controller", "projectile_spawners", "inventory", "dropper")]
+[node name="GhostTraits" type="Node" parent="." unique_id=1265519802 node_paths=PackedStringArray("entity", "guide", "hoverer", "nav_guide", "targeting_states", "chasing_state", "culling_controller", "projectile_spawners", "inventory", "dropper")]
 script = ExtResource("gt_script")
+entity = NodePath("..")
 is_ranged = true
 material = ExtResource("gt_mat")
 projectile_acl = ExtResource("gt_acl")
-entity = NodePath("..")
 guide = NodePath("../Controller3D/GhostEntityGuide3D")
 hoverer = NodePath("../Hoverer3D")
 nav_guide = NodePath("../Controller3D/NavEntityGuide3D")

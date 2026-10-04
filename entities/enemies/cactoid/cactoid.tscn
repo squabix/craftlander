@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://bp5ab438ufrus" path="res://common3d/culling_controller3d.gd" id="5_xl8du"]
 [ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="6_yujnt"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="7_i4mhh"]
-[ext_resource type="Script" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 [ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/signal_triggrs/signal_state_trigger.gd" id="8_uctin"]
 [ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="9_frg4g"]
 [ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="10_xdklk"]
@@ -53,10 +52,9 @@
 [ext_resource type="AudioStream" uid="uid://chvu761wd8xc2" path="res://assets/sound/rootling-11.mp3" id="50_k4805"]
 [ext_resource type="AudioStream" uid="uid://c4438fvpcmcld" path="res://assets/sound/rootling-12.mp3" id="51_oe4m7"]
 [ext_resource type="Resource" uid="uid://vulwxanblunx" path="res://items/tools/copper/copper_axe/copper_axe_item.tres" id="52_axe"]
-[ext_resource type="Script" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="53_normconf"]
-[ext_resource type="Script" uid="uid://crtlax17o248r" path="res://entities/enemies/ghosts/ghost_traits.gd" id="gt_script"]
-[ext_resource type="Script" uid="uid://c8o56lvh1smbc" path="res://entities/enemies/ghosts/ghost_entity_guide3d.gd" id="gg_script"]
-[ext_resource type="Material" uid="uid://daqg55airrnuo" path="res://assets/materials/ghosts/ghost_cactoid.tres" id="gt_mat"]
+[ext_resource type="Script" uid="uid://h3nqpcog77iq" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="53_normconf"]
+[ext_resource type="Script" uid="uid://cqq5b76xuq0i3" path="res://entities/npc_states/search_trigger.gd" id="99_searchtrigger"]
+[ext_resource type="Script" uid="uid://cke8g2exxgx0y" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 [ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
 [ext_resource type="Script" uid="uid://bqct5adpvfunh" path="res://common3d/hoverer3d.gd" id="eh_script"]
 [ext_resource type="Script" uid="uid://c8o56lvh1smbc" path="res://entities/enemies/ghosts/ghost_entity_guide3d.gd" id="gg_script"]
@@ -778,9 +776,6 @@ shader_parameter/rim_power = 3.0
 shader_parameter/rim_color = Color(1, 1, 1, 1)
 shader_parameter/refraction_strength = 0.05
 
-[sub_resource type="Resource" id="Resource_acl"]
-script = ExtResource("acl_script")
-
 [node name="Cactoid" type="CharacterBody3D" unique_id=718268970 node_paths=PackedStringArray("anim_tree", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
 script = ExtResource("1_rf56o")
@@ -835,15 +830,14 @@ state_name = &"Searching"
 from_state_whitelist = Array[StringName]([&"Wandering", &"Searching"])
 signal_name = &"was_dealt_damage"
 
-[node name="MeshFlashTrigger" type="Node" parent="Hurtbox3D" node_paths=PackedStringArray("mesh_root")]
+[node name="MeshFlashTrigger" type="Node" parent="Hurtbox3D" unique_id=1049865801 node_paths=PackedStringArray("mesh_root")]
 script = ExtResource("100_flash")
 mesh_root = NodePath("../../Visuals")
 signal_name = &"was_hurt"
 
-[node name="NormalConformityRayCast3D" type="RayCast3D" parent="." node_paths=PackedStringArray("targets")]
+[node name="NormalConformityRayCast3D" type="RayCast3D" parent="." unique_id=400383205 node_paths=PackedStringArray("targets")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 target_position = Vector3(0, -0.6, 0)
-collision_mask = 1
 script = ExtResource("53_normconf")
 targets = [NodePath("../Visuals"), NodePath("../Hurtbox3D")]
 conformity = 0.2
@@ -967,6 +961,12 @@ metadata/_custom_type_script = "uid://73ya7jxulyl4"
 nav = NodePath("../../NavigationAgent3D")
 entity = NodePath("../..")
 
+[node name="GhostEntityGuide3D" type="Node" parent="Controller3D" unique_id=1400265870 node_paths=PackedStringArray("hoverer", "entity")]
+process_mode = 4
+script = ExtResource("gg_script")
+hoverer = NodePath("../../Hoverer3D")
+entity = NodePath("../..")
+
 [node name="Inventory" type="Node" parent="." unique_id=1701695857]
 unique_name_in_owner = true
 script = ExtResource("18_c1oxa")
@@ -1060,7 +1060,7 @@ bus = &"SFX"
 [node name="Visuals" parent="." unique_id=1796611049 instance=ExtResource("46_cactd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 
-[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1796611049, 2029290930) index="0" unique_id=1187886671]
+[node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(1796611049, 1204917952) index="0" unique_id=625751422]
 bones/0/scale = Vector3(1, 0.99999994, 0.99999994)
 bones/2/rotation = Quaternion(4.2381807e-08, -4.261896e-08, 0.6204223, 0.7842679)
 bones/3/rotation = Quaternion(-1.3102502e-07, 1.9494038e-08, -0.52479047, 0.8512314)
@@ -1078,32 +1078,26 @@ bones/11/rotation = Quaternion(-0.50000006, -0.5, -0.5, 0.50000006)
 bones/12/rotation = Quaternion(-0.35355338, -0.1464466, 0.35355338, 0.8535534)
 bones/13/rotation = Quaternion(1.5279511e-09, -1.1641532e-10, -0.07041717, 0.99751765)
 
-[node name="Cactoid" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=1667155672]
+[node name="Cactoid" parent="Visuals/Armature/Skeleton3D" index="0" unique_id=352475692]
 surface_material_override/0 = ExtResource("48_mj0et")
 surface_material_override/1 = ExtResource("48_mj0et")
 surface_material_override/2 = ExtResource("49_td81m")
 surface_material_override/3 = SubResource("StandardMaterial3D_h6g50")
 surface_material_override/4 = SubResource("ShaderMaterial_0wyke")
 
-[node name="Spike" parent="Visuals" index="2" unique_id=1621851710]
+[node name="Spike" parent="Visuals" index="2" unique_id=1954715264]
 visible = false
 
-[node name="GhostEntityGuide3D" type="Node" parent="Controller3D" node_paths=PackedStringArray("entity", "hoverer")]
-process_mode = 4
-script = ExtResource("gg_script")
-entity = NodePath("../..")
-hoverer = NodePath("../../Hoverer3D")
-
-[node name="Hoverer3D" type="RayCast3D" parent="." node_paths=PackedStringArray("target")]
+[node name="Hoverer3D" type="RayCast3D" parent="." unique_id=270660892 node_paths=PackedStringArray("target")]
 process_mode = 4
 collision_mask = 64
 script = ExtResource("eh_script")
 target = NodePath("..")
 
-[node name="GhostTraits" type="Node" parent="." node_paths=PackedStringArray("entity", "guide", "hoverer", "nav_guide", "targeting_states", "chasing_state", "culling_controller", "inventory", "dropper")]
+[node name="GhostTraits" type="Node" parent="." unique_id=432318439 node_paths=PackedStringArray("entity", "guide", "hoverer", "nav_guide", "targeting_states", "chasing_state", "culling_controller", "inventory", "dropper")]
 script = ExtResource("gt_script")
-material = ExtResource("gt_mat")
 entity = NodePath("..")
+material = ExtResource("gt_mat")
 guide = NodePath("../Controller3D/GhostEntityGuide3D")
 hoverer = NodePath("../Hoverer3D")
 nav_guide = NodePath("../Controller3D/NavEntityGuide3D")

@@ -680,7 +680,7 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 surface_material_override/0 = ExtResource("47_feq7g")
 
 [node name="Skeleton3D" parent="Visuals/Armature" parent_id_path=PackedInt32Array(810787991, 133580215) index="0" unique_id=1750562930]
-bones/1/rotation = Quaternion(0.73271495, 8.112616e-08, 8.734644e-08, 0.6805357)
+bones/1/rotation = Quaternion(0.7204957, 8.26668e-08, 8.5889795e-08, 0.69345945)
 bones/2/rotation = Quaternion(0.040895905, -1.0694845e-14, 9.7503445e-09, 0.99916345)
 bones/3/rotation = Quaternion(-0.032595262, 0.0055556414, 0.15076298, 0.98801684)
 

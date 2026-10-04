@@ -21,8 +21,8 @@
 [ext_resource type="Material" uid="uid://c33644pxuf2ds" path="res://assets/materials/gold.tres" id="20_65ggh"]
 [ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="21_cokie"]
 [ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/collision_barrier_3d.gd" id="21_tallblk"]
-[ext_resource type="PackedScene" path="res://island/props/destructable_resource/destroy_shake_trigger.tscn" id="99_destroyshk"]
-[ext_resource type="PackedScene" path="res://island/props/destructable_resource/hurt_shake_trigger.tscn" id="99_hurtshk"]
+[ext_resource type="PackedScene" uid="uid://b42ejh4s3ni40" path="res://island/props/destructable_resource/destroy_shake_trigger.tscn" id="99_destroyshk"]
+[ext_resource type="PackedScene" uid="uid://p8wwjit2trpc" path="res://island/props/destructable_resource/hurt_shake_trigger.tscn" id="99_hurtshk"]
 [ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cokie"]
@@ -144,9 +144,9 @@ hurt_threshold = 8.0
 damage_override = ExtResource("3_xbmh8")
 free_parent_on_death = true
 
-[node name="DestroyShakeTrigger" parent="Health" instance=ExtResource("99_destroyshk")]
+[node name="DestroyShakeTrigger" parent="Health" unique_id=471480972 instance=ExtResource("99_destroyshk")]
 
-[node name="HurtShakeTrigger" parent="Health" instance=ExtResource("99_hurtshk")]
+[node name="HurtShakeTrigger" parent="Health" unique_id=1127554813 instance=ExtResource("99_hurtshk")]
 
 [node name="HurtAnimTrigger" type="Node" parent="Health" unique_id=1514929013 node_paths=PackedStringArray("anim_player")]
 script = ExtResource("6_oxtfi")

@@ -70,7 +70,7 @@
 [ext_resource type="Resource" uid="uid://b70i6rw8hst63" path="res://levels/ending/waves/wave_3_frost_holm.tres" id="wave_3_tres"]
 [ext_resource type="Resource" uid="uid://dvnvj22f0h3p7" path="res://levels/ending/waves/wave_4_ghost_captain.tres" id="wave_4_tres"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_lnj0c"]
+[sub_resource type="ButtonGroup" id="ButtonGroup_rfsud"]
 
 [sub_resource type="Gradient" id="Gradient_eo3xd"]
 
@@ -301,7 +301,7 @@ sun = NodePath("../DirectionalLight3D")
 world_environment = NodePath("../WorldEnvironment")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1902175977]
-transform = Transform3D(-0.94412875, -0.30094677, 0.13435732, 0.1443829, -0.74414426, -0.6522291, 0.29626727, -0.59638953, 0.7460196, 0, 0, 0)
+transform = Transform3D(0.38017622, 0.7901789, 0.48071152, -0.87618023, 0.14119963, 0.46083727, 0.2962673, -0.5963896, 0.74601954, 0, 0, 0)
 layers = 3
 light_color = Color(1, 0.6, 0.68666667, 1)
 light_energy = 0.5
@@ -363,9 +363,6 @@ wave_spawner = NodePath("../../../../WaveSpawner3D")
 target_methods = {
 NodePath(".."): &"refresh"
 }
-
-[node name="PauseMenu" parent="DockingManager1/Player" index="13" unique_id=1163003515]
-visible = false
 
 [node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/CraftingInterface/RecipePanel/RecipeList/Margin/EntryContainer/Entry/Button" parent_id_path=PackedInt32Array(1858460853, 2103479977) index="0" unique_id=2144126531 node_paths=PackedStringArray("signal_players")]
 signal_players = {
@@ -571,10 +568,98 @@ signal_players = {
 &"pressed": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
 }
 
-[node name="InventoryOrganizer" parent="DockingManager1/Player/PauseMenu/CraftingInterface" parent_id_path=PackedInt32Array(1858460853, 1908131253) index="7" unique_id=1412121172 node_paths=PackedStringArray("inventory_display_rows")]
-inventory_display_rows = [NodePath("../../../HotbarInterface/HotbarDisplay"), null, null, null]
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/VSync/CenterContainer/VSyncToggle" parent_id_path=PackedInt32Array(1858460853, 1234740637, 1518537055) index="0" unique_id=1351290583 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
+}
 
-[node name="SignalAudioManager" parent="DockingManager1/Player/PauseMenu" index="3" unique_id=1037296529 node_paths=PackedStringArray("signal_players")]
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/FullScreen/CenterContainer/WindowModeOption" parent_id_path=PackedInt32Array(1858460853, 1234740637, 2049426436) index="1" unique_id=2144126531 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("HoverPlayer"),
+&"mouse_entered": NodePath("HoverPlayer"),
+&"pressed": NodePath("PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/AntiAliasing/AAOption" parent_id_path=PackedInt32Array(1858460853, 1234740637, 630181348) index="1" unique_id=875959311 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/ShadowQuality/ShadowOption" parent_id_path=PackedInt32Array(1858460853, 1234740637, 1710798274) index="1" unique_id=1882629603 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/SSAO/CenterContainer/SSAOToggle" parent_id_path=PackedInt32Array(1858460853, 1234740637, -1293967292) index="0" unique_id=-1293967291 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/Glow/CenterContainer/GlowToggle" parent_id_path=PackedInt32Array(1858460853, 1234740637, -1293967274) index="0" unique_id=-1293967273 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/MaxFPS/MaxFPSOption" parent_id_path=PackedInt32Array(1858460853, 1234740637, -1293967288) index="1" unique_id=-1293967287 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/InvertY/CenterContainer/InvertYToggle" parent_id_path=PackedInt32Array(1858460853, 1234740637, 1517878780) index="0" unique_id=1079694290 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/TutorialHints/CenterContainer/TutorialHintsToggle" parent_id_path=PackedInt32Array(1858460853, 1234740637, 1517878781) index="0" unique_id=1079694291 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenShake/CenterContainer/ScreenShakeToggle" parent_id_path=PackedInt32Array(1858460853, 1234740637, -1293967266) index="0" unique_id=-1293967265 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/Vignette/CenterContainer/VignetteToggle" parent_id_path=PackedInt32Array(1858460853, 1234740637, -1293967261) index="0" unique_id=-1293967260 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenEffects/CenterContainer/ScreenEffectsToggle" parent_id_path=PackedInt32Array(1858460853, 1234740637, -1293967256) index="0" unique_id=-1293967255 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/BackButton" parent_id_path=PackedInt32Array(1858460853, 1234740637, 1546788436) index="0" unique_id=1198217718 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("HoverPlayer"),
+&"mouse_entered": NodePath("HoverPlayer"),
+&"pressed": NodePath("PressPlayer")
+}
+
+[node name="SignalAudioManager" parent="DockingManager1/Player/PauseMenu" parent_id_path=PackedInt32Array(1858460853, 1163003515) index="3" unique_id=1037296529 node_paths=PackedStringArray("signal_players")]
 signal_players = {
 &"updated_pause": NodePath("PausePlayer")
 }
@@ -672,7 +757,7 @@ signal_players = {
 }
 
 [node name="SelectButton" parent="DockingManager1/Player/BoatMenu/IslandOptionContainer/IslandOption0" parent_id_path=PackedInt32Array(1858460853, 1381974933) index="2" unique_id=2011677331]
-button_group = SubResource("ButtonGroup_lnj0c")
+button_group = SubResource("ButtonGroup_rfsud")
 
 [node name="ButtonAudioManager" parent="DockingManager1/Player/BoatMenu/IslandOptionContainer/IslandOption0/SelectButton" index="0" unique_id=513675797 node_paths=PackedStringArray("signal_players")]
 signal_players = {
@@ -682,7 +767,7 @@ signal_players = {
 }
 
 [node name="SelectButton" parent="DockingManager1/Player/BoatMenu/IslandOptionContainer/IslandOption1" parent_id_path=PackedInt32Array(1858460853, 687684142) index="2" unique_id=291589597]
-button_group = SubResource("ButtonGroup_lnj0c")
+button_group = SubResource("ButtonGroup_rfsud")
 
 [node name="ButtonAudioManager" parent="DockingManager1/Player/BoatMenu/IslandOptionContainer/IslandOption1/SelectButton" index="0" unique_id=1488544473 node_paths=PackedStringArray("signal_players")]
 signal_players = {
@@ -692,7 +777,7 @@ signal_players = {
 }
 
 [node name="SelectButton" parent="DockingManager1/Player/BoatMenu/IslandOptionContainer/IslandOption2" parent_id_path=PackedInt32Array(1858460853, 2004637537) index="2" unique_id=1934516890]
-button_group = SubResource("ButtonGroup_lnj0c")
+button_group = SubResource("ButtonGroup_rfsud")
 
 [node name="ButtonAudioManager" parent="DockingManager1/Player/BoatMenu/IslandOptionContainer/IslandOption2/SelectButton" index="0" unique_id=1436596817 node_paths=PackedStringArray("signal_players")]
 signal_players = {
@@ -702,7 +787,7 @@ signal_players = {
 }
 
 [node name="SelectButton" parent="DockingManager1/Player/BoatMenu/IslandOptionContainer/IslandOption3" parent_id_path=PackedInt32Array(1858460853, 1909481650) index="2" unique_id=527816358]
-button_group = SubResource("ButtonGroup_lnj0c")
+button_group = SubResource("ButtonGroup_rfsud")
 
 [node name="ButtonAudioManager" parent="DockingManager1/Player/BoatMenu/IslandOptionContainer/IslandOption3/SelectButton" index="0" unique_id=2133439628 node_paths=PackedStringArray("signal_players")]
 signal_players = {
@@ -731,7 +816,7 @@ signal_players = {
 &"pressed": NodePath("../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
 }
 
-[node name="SignalAudioManager" parent="DockingManager1/Player" index="21" unique_id=1654871572 node_paths=PackedStringArray("signal_players")]
+[node name="SignalAudioManager" parent="DockingManager1/Player" index="25" unique_id=1654871572 node_paths=PackedStringArray("signal_players")]
 signal_players = {
 &"jumped": NodePath("JumpPlayer"),
 &"landed": NodePath("LandPlayer")
@@ -1028,6 +1113,359 @@ ExtResource("34_tmgll"): 8
 })
 populate_on_ready = false
 
+[node name="TreasureChest" type="Node3D" parent="PropGenerator" unique_id=51772479 node_paths=PackedStringArray("interactable", "anim_player", "state_machine", "captain_spawner", "open_particle_spawner") instance=ExtResource("34_odcs8")]
+transform = Transform3D(-0.298665, -0.025704835, 0.95401174, 0.06431257, 0.9968228, 0.046992164, -0.9521886, 0.075389855, -0.2960629, -2.6061776, 8.2, 0.28957528)
+script = ExtResource("36_43yqb")
+key_condition = SubResource("Resource_keycondition")
+interactable = NodePath("Interactable3D")
+anim_player = NodePath("AnimationPlayer")
+state_machine = NodePath("StateMachine")
+captain_spawner = NodePath("CaptainSpawner")
+open_particle_spawner = NodePath("OpenParticleSpawner3D")
+
+[node name="Tree" type="Node3D" parent="PropGenerator" unique_id=1544571203 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("40_rfiti")]
+transform = Transform3D(0.7247709, 0.016372763, 0.1980255, -0.07608914, 0.71474, 0.21939056, -0.18355548, -0.23163266, 0.6909622, 21.138996, 3.3058827, -28.667953)
+script = ExtResource("41_w07ej")
+max_hp = 3
+hurtbox = NodePath("Trunk/Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87741" type="Node3D" parent="PropGenerator" unique_id=1068695007 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("40_rfiti")]
+transform = Transform3D(0.59010226, 0.16817215, 0.49618894, -0.09472872, 0.7692894, -0.14807543, -0.5152784, 0.051166434, 0.59546304, 22.297297, 4.0588236, -18.822393)
+script = ExtResource("41_w07ej")
+max_hp = 3
+hurtbox = NodePath("Trunk/Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87742" type="Node3D" parent="PropGenerator" unique_id=1035915231 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("40_rfiti")]
+transform = Transform3D(-0.5406964, 0.21658914, 0.26955047, 0.13911632, 0.59428835, -0.19846642, -0.31656745, -0.108772285, -0.5476081, 22.297297, 4.0588236, -10.714286)
+script = ExtResource("41_w07ej")
+max_hp = 3
+hurtbox = NodePath("Trunk/Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87743" type="Node3D" parent="PropGenerator" unique_id=405533903 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("40_rfiti")]
+transform = Transform3D(-0.093846984, 0.08528898, 0.59042126, 0.26713273, 0.54041755, -0.035605185, -0.53339624, 0.25564316, -0.1217117, 4.92278, 3.3058827, 33.30116)
+script = ExtResource("41_w07ej")
+max_hp = 3
+hurtbox = NodePath("Trunk/Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87744" type="Node3D" parent="PropGenerator" unique_id=1696534711 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("40_rfiti")]
+transform = Transform3D(-0.5821721, -0.06550949, -0.6597236, -0.06791319, 0.8792549, -0.027378708, 0.6594805, 0.03271547, -0.58520615, -12.451737, 6.647059, 2.0270271)
+script = ExtResource("41_w07ej")
+max_hp = 3
+hurtbox = NodePath("Trunk/Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87745" type="Node3D" parent="PropGenerator" unique_id=1290460425 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("40_rfiti")]
+transform = Transform3D(0.7358335, -0.043165963, -0.0021961639, 0.041506473, 0.71616465, -0.16942382, 0.012055536, 0.16900866, 0.7173631, -15.34749, 3.776471, 17.084942)
+script = ExtResource("41_w07ej")
+max_hp = 3
+hurtbox = NodePath("Trunk/Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87746" type="Node3D" parent="PropGenerator" unique_id=1842910593 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("40_rfiti")]
+transform = Transform3D(0.58871025, -0.061182972, -0.5029766, 0.16461004, 0.7523163, 0.10115515, 0.4791997, -0.18326339, 0.58317304, -3.7644787, 5, -17.664093)
+script = ExtResource("41_w07ej")
+max_hp = 3
+hurtbox = NodePath("Trunk/Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87747" type="Node3D" parent="PropGenerator" unique_id=1609467227 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("40_rfiti")]
+transform = Transform3D(0.92113703, 0.1208905, 0.12130203, -0.10965822, 0.92609626, -0.090237446, -0.13154379, 0.07451988, 0.9246433, 24.6139, 2.647059, 16.50579)
+script = ExtResource("41_w07ej")
+max_hp = 3
+hurtbox = NodePath("Trunk/Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="StatueRootling" type="Node3D" parent="PropGenerator" unique_id=1941244981 instance=ExtResource("35_cw2dw")]
+transform = Transform3D(0.77456975, -0.026910855, 0.63191575, -0.000722765, 0.99905616, 0.043431878, -0.6324881, -0.034097746, 0.7738192, -1.4478765, 1.1882354, -36.776062)
+
+[node name="StatueSnail" type="Node3D" parent="PropGenerator" unique_id=1624054643 instance=ExtResource("36_w0vdk")]
+transform = Transform3D(-0.74073654, 0.024481542, 0.67134935, 0.007924062, 0.9995847, -0.027707977, -0.6717488, -0.015204499, -0.7406228, 12.451737, 1.1882354, 37.355213)
+
+[node name="StatueYeti" type="Node3D" parent="PropGenerator" unique_id=1602759620 instance=ExtResource("37_fqmbj")]
+transform = Transform3D(0.13388592, 0.06502169, -0.9888613, -0.058268685, 0.9966353, 0.057643633, 0.98928225, 0.049901977, 0.13722415, 20.559845, 5, 6.6602316)
+
+[node name="Gravestone" type="Node3D" parent="PropGenerator" unique_id=210328301 instance=ExtResource("38_ycdgd")]
+transform = Transform3D(-0.12884976, -0.033537194, -0.4819471, 0.015130686, 0.498269, -0.03871821, 0.48287556, -0.024562044, -0.1273888, -7.2393823, 6.5529413, -7.2393823)
+
+[node name="@Node3D@87751" type="Node3D" parent="PropGenerator" unique_id=1334153509 instance=ExtResource("38_ycdgd")]
+transform = Transform3D(0.49513802, -0.01739748, -0.06734742, 0.025882823, 0.49542668, 0.062309634, 0.064563364, -0.065190025, 0.49150974, -10.714286, 5.8941174, -11.872587)
+
+[node name="@Node3D@87752" type="Node3D" parent="PropGenerator" unique_id=1760092974 instance=ExtResource("38_ycdgd")]
+transform = Transform3D(0.014594287, 0.08720126, -0.49212086, -0.008516938, 0.49230254, 0.08698087, 0.4997144, 0.0058438787, 0.015854985, 22.297297, 5.282353, 2.6061776)
+
+[node name="@Node3D@87753" type="Node3D" parent="PropGenerator" unique_id=152681628 instance=ExtResource("38_ycdgd")]
+transform = Transform3D(-0.12376768, -0.010875352, -0.48431733, -0.06536711, 0.49567738, 0.0055741747, 0.48000905, 0.06469665, -0.12411947, 12.451737, 6.2705884, 7.818533)
+
+[node name="@Node3D@87754" type="Node3D" parent="PropGenerator" unique_id=466011869 instance=ExtResource("39_rfsud")]
+transform = Transform3D(0.019681394, 0.0037142527, -0.49959868, 0.018319307, 0.4996446, 0.0044362727, 0.49927652, -0.018479226, 0.01953132, 24.03475, 2.3176472, 25.772202)
+
+[node name="@Node3D@87755" type="Node3D" parent="PropGenerator" unique_id=1337645076 instance=ExtResource("39_rfsud")]
+transform = Transform3D(-0.2500805, -0.06505106, -0.4280515, -0.0039728805, 0.49464834, -0.07285073, 0.43294796, -0.033035893, -0.24792069, -2.6061776, 1.3294119, -32.722008)
+
+[node name="@Node3D@87756" type="Node3D" parent="PropGenerator" unique_id=950116116 instance=ExtResource("39_rfsud")]
+transform = Transform3D(-0.48085797, 0.013715722, -0.13633597, 0.03994164, 0.48991463, -0.09158787, 0.1310736, -0.098972484, -0.47225434, 11.872587, 4.2941175, -28.088802)
+
+[node name="@Node3D@87757" type="Node3D" parent="PropGenerator" unique_id=147011592 instance=ExtResource("39_rfsud")]
+transform = Transform3D(0.0012297333, -0.039633047, 0.49842525, -0.05576114, 0.49530664, 0.039522644, -0.49687946, -0.055682722, -0.0032017773, -6.081081, 1.1411766, -30.984556)
+
+[node name="DeadSkeleton" type="Node3D" parent="PropGenerator" unique_id=1174530950 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("40_rlfbr")]
+transform = Transform3D(0.8638183, 0.41824335, -0.2808747, -0.32087553, 0.88654244, 0.33328876, 0.38840315, -0.19777508, 0.9000156, 29.247105, 2.4117649, -2.6061776)
+script = ExtResource("41_w07ej")
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87758" type="Node3D" parent="PropGenerator" unique_id=534360591 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("40_rlfbr")]
+transform = Transform3D(0.0017727019, -0.23577604, -0.9718058, 0.3219458, 0.9202009, -0.22266856, 0.9467565, -0.31247404, 0.07753835, 3.7644787, 3.3058827, -28.088802)
+script = ExtResource("41_w07ej")
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87759" type="Node3D" parent="PropGenerator" unique_id=263435768 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("40_rlfbr")]
+transform = Transform3D(0.7401713, 0.2609549, -0.6197169, -0.045754492, 0.9390337, 0.34076726, 0.6708599, -0.22387134, 0.7069856, 31.563707, 2.4117649, 0.8687259)
+script = ExtResource("41_w07ej")
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="DeadShrub" type="Node3D" parent="PropGenerator" unique_id=830356450 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(0.15484485, 0.10973115, 0.9906409, -0.10999905, 0.99828196, -0.093383834, -0.9906112, -0.09369848, 0.165219, 12.451737, 5.705882, -17.664093)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87760" type="Node3D" parent="PropGenerator" unique_id=853965198 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(0.7991311, 0.027762976, -0.1612883, -0.05831237, 0.7994375, -0.15130958, 0.15291947, 0.15976276, 0.78516674, -17.664093, 1.7058825, 27.509653)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87761" type="Node3D" parent="PropGenerator" unique_id=717488045 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(-0.4383586, 0.0625079, -0.92873687, 0.060780182, 1.0263003, 0.04038642, 0.9288514, -0.03765709, -0.44094726, -32.142857, 1.564706, 32.722008)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87762" type="Node3D" parent="PropGenerator" unique_id=761869732 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(-0.41823798, -0.08583027, 0.78730124, -0.13141292, 0.88552207, 0.02672767, -0.780987, -0.10303829, -0.4261167, -17.664093, 1.3294119, -24.6139)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87763" type="Node3D" parent="PropGenerator" unique_id=69198644 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(0.8633783, 0.20002422, 0.6774825, -0.05795545, 1.0863276, -0.2468763, -0.7040123, 0.15587507, 0.8511662, 16.50579, 4.2941175, 17.664093)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87764" type="Node3D" parent="PropGenerator" unique_id=1579029134 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(-0.46170613, -0.1791791, 0.7975999, -0.1357339, 0.9201101, 0.12812856, -0.8061309, -0.052301757, -0.47839394, -40.830116, 1.0470589, 26.35135)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87765" type="Node3D" parent="PropGenerator" unique_id=1238723637 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(0.6479486, -0.33399647, -0.9229096, 0.39775383, 1.1003603, -0.11896332, 0.8972779, -0.24659027, 0.71919316, -14.189189, 1.4705883, 37.934364)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87766" type="Node3D" parent="PropGenerator" unique_id=956013734 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(0.57451206, 0.41689286, -0.7060579, -0.16851915, 0.9037536, 0.39650017, 0.8024455, -0.10868053, 0.58877105, 33.88031, 1.1882354, -30.984556)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87767" type="Node3D" parent="PropGenerator" unique_id=338465900 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(0.45884004, -0.21648502, 1.0199645, 0.17553584, 1.1144876, 0.157581, -1.0278037, 0.09369546, 0.48225325, -24.6139, 1.3764707, 25.19305)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87768" type="Node3D" parent="PropGenerator" unique_id=1494466020 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(0.6651195, 0.03140397, 0.60225284, 0.09032372, 0.8813001, -0.14570689, -0.5962687, 0.16853091, 0.64972275, 22.876448, 1.5176471, 35.03861)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87769" type="Node3D" parent="PropGenerator" unique_id=198946775 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(0.7063881, -0.2716868, -0.5003934, 0.37030295, 0.8249013, 0.07486678, 0.43253088, -0.26251784, 0.75312203, -11.872587, 3.211765, -19.980696)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87770" type="Node3D" parent="PropGenerator" unique_id=1395506168 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(0.77375656, 0.119402766, -0.2540482, -0.13497986, 0.8114139, -0.02974431, 0.24612588, 0.06962229, 0.78235, 15.34749, 4.5764704, 15.9266405)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87771" type="Node3D" parent="PropGenerator" unique_id=111098313 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(-0.9304518, -0.04186742, 0.10039184, -0.025508171, 0.9244893, 0.14913417, -0.10573899, 0.14539184, -0.9193762, 21.718147, 1.7058825, 33.88031)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87772" type="Node3D" parent="PropGenerator" unique_id=57563974 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(0.48469096, 0.0033599827, -0.8826526, 0.12299156, 0.99689364, 0.071333215, 0.874048, -0.14214098, 0.4794249, -4.92278, 6.4588237, -8.397683)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87773" type="Node3D" parent="PropGenerator" unique_id=62188719 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(-0.1609074, -0.031318154, 0.91309583, 0.09159732, 0.9219244, 0.04776242, -0.90902954, 0.09844029, -0.15681447, -19.980696, 2.2235296, 24.03475)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87774" type="Node3D" parent="PropGenerator" unique_id=1084372618 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(-0.10099759, -0.22488454, 0.8275565, -0.1512107, 0.8248902, 0.20570575, -0.8441316, -0.120857246, -0.13586283, -24.6139, 2.1764708, -11.872587)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87775" type="Node3D" parent="PropGenerator" unique_id=105861347 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(0.7326747, -0.08501616, 0.9120044, 0.26525012, 1.1375297, -0.10705395, -0.87671095, 0.27311248, 0.72978044, -7.818533, 2.1764708, 24.6139)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87776" type="Node3D" parent="PropGenerator" unique_id=228440185 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(-0.6018511, -0.049631014, 0.5979629, 0.12102036, 0.81949264, 0.1898253, -0.5876878, 0.21958216, -0.57328385, -8.397683, 5.8941174, 13.030888)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87777" type="Node3D" parent="PropGenerator" unique_id=592449570 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(0.7581317, -0.09955425, 0.49994466, 0.12735933, 0.90456057, -0.013006021, -0.49359432, 0.080489166, 0.76452965, -13.610039, 1.1411766, 44.88417)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87778" type="Node3D" parent="PropGenerator" unique_id=1121531832 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(-0.9122236, -0.053325776, -0.3460646, -0.009889492, 0.96925694, -0.123286076, 0.35000932, -0.1115958, -0.90542585, 7.818533, 5.705882, -19.980696)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87779" type="Node3D" parent="PropGenerator" unique_id=913286672 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(0.6921471, -0.28951344, 0.66961545, 0.12710035, 0.95677906, 0.28229377, -0.71836513, -0.10966418, 0.6951229, -13.610039, 1.8000002, 38.51351)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87780" type="Node3D" parent="PropGenerator" unique_id=772666922 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(-0.83095944, -0.016842129, -0.4480182, 0.01495885, 0.9419582, -0.06315543, 0.44808504, -0.062679484, -0.8287271, 10.135135, 6.035294, -15.9266405)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87781" type="Node3D" parent="PropGenerator" unique_id=327693926 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(-0.78763384, 0.04302878, -0.46769905, -0.11088072, 0.8703352, 0.26680163, 0.45639822, 0.28570294, -0.7423176, -2.0270271, 1.4705883, 44.88417)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87782" type="Node3D" parent="PropGenerator" unique_id=170774568 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(0.8326005, -0.17494446, -0.4411366, 0.29394612, 0.8894978, 0.2020394, 0.3725624, -0.31083545, 0.82644373, -14.189189, 4.5764704, -14.76834)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="@Node3D@87783" type="Node3D" parent="PropGenerator" unique_id=945275481 node_paths=PackedStringArray("hurtbox", "inventory", "health") instance=ExtResource("41_tmgll")]
+transform = Transform3D(0.5846686, 0.1548691, 0.6986296, 0.041017186, 0.8934333, -0.23237874, -0.71441257, 0.17803887, 0.55841017, 15.9266405, 1.9411767, -36.776062)
+script = ExtResource("41_w07ej")
+min_hp = 1
+max_hp = 2
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1167048051 node_paths=PackedStringArray("island_generator", "prop_populator", "terrain")]
 navigation_mesh = SubResource("NavigationMesh_heikx")
 script = ExtResource("18_i1s1v")
@@ -1108,7 +1546,6 @@ sub_spawners = {
 null: true
 }
 default_parent_mode = 1
-metadata/_custom_type_script = "uid://bvbqrk13ieyil"
 
 [node name="GhostMeleeCoordinator" type="Node" parent="." unique_id=120499790 node_paths=PackedStringArray("player")]
 script = ExtResource("ghost_melee_coordinator_gd")
@@ -1171,6 +1608,9 @@ music = NodePath("../EndingMusicPlayer")
 hud = NodePath("../EndingHUD")
 
 [editable path="DockingManager1/Player"]
+[editable path="DockingManager1/Player/PauseMenu/CraftingInterface/BoatProgressPanel"]
+[editable path="DockingManager1/Player/PauseMenu/SettingsMenu"]
+[editable path="DockingManager1/Player/PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/BackButton/ButtonAudioManager"]
 [editable path="DockingManager1/Dock"]
 [editable path="DockingManager1/Dock/BlenderMeshes"]
 [editable path="DockingManager2/Dock"]

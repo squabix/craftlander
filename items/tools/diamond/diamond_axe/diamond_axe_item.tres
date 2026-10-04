@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://0hdogsshaadp" path="res://items/tools/diamond/diamond_axe/diamond_axe.tscn" id="3_yybd1"]
 [ext_resource type="Script" uid="uid://6x786nnhteca" path="res://items/tools/harvesting_tool.gd" id="4_hjow2"]
 
-
 [resource]
 script = ExtResource("4_hjow2")
 damage = ExtResource("1_8algh")

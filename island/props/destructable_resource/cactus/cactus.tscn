@@ -42,11 +42,6 @@ height = 2.206543
 radius = 0.2
 height = 1.0062256
 
-[sub_resource type="Resource" id="Resource_6ugkb"]
-script = ExtResource("7_6281o")
-item = ExtResource("8_bkkoy")
-metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
-
 [sub_resource type="Animation" id="Animation_5v37a"]
 length = 0.001
 tracks/0/type = "value"
@@ -126,9 +121,9 @@ hurt_threshold = 11.0
 damage_override = ExtResource("3_e6cgp")
 free_parent_on_death = true
 
-[node name="DestroyShakeTrigger" parent="Health" instance=ExtResource("99_destroyshk")]
+[node name="DestroyShakeTrigger" parent="Health" unique_id=684383568 instance=ExtResource("99_destroyshk")]
 
-[node name="HurtShakeTrigger" parent="Health" instance=ExtResource("99_hurtshk")]
+[node name="HurtShakeTrigger" parent="Health" unique_id=339119779 instance=ExtResource("99_hurtshk")]
 
 [node name="HurtAnimTrigger" type="Node" parent="Health" unique_id=1514929013 node_paths=PackedStringArray("anim_player")]
 script = ExtResource("5_ueeso")
@@ -495,11 +490,11 @@ surface_material_override/0 = ExtResource("18_kjjyj")
 visible = false
 mesh = null
 
-[node name="ClimbBlocker" type="StaticBody3D" parent="."]
+[node name="ClimbBlocker" type="StaticBody3D" parent="." unique_id=1686502762]
 collision_layer = 128
 collision_mask = 0
 
-[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" node_paths=PackedStringArray("sample")]
+[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" unique_id=1354453094 node_paths=PackedStringArray("sample")]
 script = ExtResource("19_tallblk")
 sample = NodePath("../../cactus1/Cactus")
 generate_on_ready = true

@@ -116,9 +116,9 @@ hurt_threshold = 8.0
 damage_override = ExtResource("3_ran2n")
 free_parent_on_death = true
 
-[node name="DestroyShakeTrigger" parent="Health" instance=ExtResource("99_destroyshk")]
+[node name="DestroyShakeTrigger" parent="Health" unique_id=622823081 instance=ExtResource("99_destroyshk")]
 
-[node name="HurtShakeTrigger" parent="Health" instance=ExtResource("99_hurtshk")]
+[node name="HurtShakeTrigger" parent="Health" unique_id=139870405 instance=ExtResource("99_hurtshk")]
 
 [node name="HurtAnimTrigger" type="Node" parent="Health" unique_id=1514929013 node_paths=PackedStringArray("anim_player")]
 script = ExtResource("5_dplr8")
