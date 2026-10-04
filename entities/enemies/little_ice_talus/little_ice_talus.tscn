@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://bp5ab438ufrus" path="res://common3d/culling_controller3d.gd" id="5_q62w8"]
 [ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="6_4dt23"]
 [ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="7_tjsg6"]
-[ext_resource type="Script" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 [ext_resource type="Script" uid="uid://byrrmqcy6nc6v" path="res://common/signal_triggrs/signal_state_trigger.gd" id="8_77eyn"]
 [ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="10_ga3fa"]
 [ext_resource type="Script" uid="uid://v1m6kagbghjv" path="res://common3d/radial_sight_3d.gd" id="11_18yax"]
@@ -20,13 +19,12 @@
 [ext_resource type="PackedScene" uid="uid://c5x1hn4vi06bh" path="res://entities/nav_entity_guide3d.tscn" id="18_b0gad"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="19_7yqmn"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="20_1spdq"]
-[ext_resource type="Resource" uid="uid://b37h3pr83pcu4" path="res://items/materials/rock/rock_item.tres" id="21_j2r7q"]
-[ext_resource type="Resource" uid="uid://c5uhmmmlb6tko" path="res://items/materials/minerals/copper_chunk/copper_chunk_item.tres" id="22_b5wlr"]
 [ext_resource type="PackedScene" uid="uid://h3veu2e18ij1" path="res://entities/entity_health_bar.tscn" id="23_pxum5"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="24_xvqxy"]
 [ext_resource type="Script" uid="uid://8kgnmccrqot4" path="res://common3d/inventory/dropper_trigger.gd" id="dropper_trigger_script"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="25_e1qga"]
 [ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="26_q5g8g"]
+[ext_resource type="Resource" path="res://items/materials/ice_cube/ice_cube_item.tres" id="26_r3hfa"]
 [ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="27_r1je1"]
 [ext_resource type="AudioStream" uid="uid://ck0q8lhyrv4xy" path="res://assets/sound/rootling-10.mp3" id="28_ydpld"]
 [ext_resource type="AudioStream" uid="uid://chvu761wd8xc2" path="res://assets/sound/rootling-11.mp3" id="29_kjp1m"]
@@ -41,19 +39,21 @@
 [ext_resource type="AudioStream" uid="uid://dmpw7i1okaklk" path="res://assets/sound/rootling-04.mp3" id="38_upque"]
 [ext_resource type="AudioStream" uid="uid://cxppt2efnqk4e" path="res://assets/sound/rootling-05.mp3" id="39_c4hqp"]
 [ext_resource type="AudioStream" uid="uid://sl2wj5r6v4jx" path="res://assets/sound/rootling-06.mp3" id="40_10bv7"]
-[ext_resource type="PackedScene" uid="uid://cwktpe3hn6xos" path="res://assets/models/entities/little_talus.blend" id="41_81alf"]
+[ext_resource type="PackedScene" uid="uid://cek06alqxy4ha" path="res://assets/models/entities/cube_talus.blend" id="41_81alf"]
 [ext_resource type="Material" uid="uid://c403ng7pn0nqg" path="res://assets/materials/ice.tres" id="42_iyf1a"]
 [ext_resource type="Script" uid="uid://2ow28vm5clst" path="res://common/spawner/projectile_spawner3d.gd" id="43_4kjsw"]
-[ext_resource type="PackedScene" uid="uid://ifqgx7y3fyj1" path="res://entities/projectiles/flying_rock/flying_rock.tscn" id="44_o54g0"]
-[ext_resource type="Resource" uid="uid://sekma2rr06f1" path="res://entities/projectiles/flying_rock/flying_rock_damage.tres" id="45_lgrv3"]
-[ext_resource type="Script" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="46_normconf"]
-[ext_resource type="Script" uid="uid://crtlax17o248r" path="res://entities/enemies/ghosts/ghost_traits.gd" id="gt_script"]
-[ext_resource type="Script" uid="uid://c8o56lvh1smbc" path="res://entities/enemies/ghosts/ghost_entity_guide3d.gd" id="gg_script"]
-[ext_resource type="Material" uid="uid://2v7mrv371h45" path="res://assets/materials/ghosts/ghost_little_ice_talus.tres" id="gt_mat"]
+[ext_resource type="PackedScene" uid="uid://48wrcblqsb1f" path="res://entities/projectiles/flying_ice_cube/flying_ice_cube.tscn" id="44_o54g0"]
+[ext_resource type="Resource" uid="uid://iglj6i7t22ra" path="res://entities/projectiles/flying_ice_cube/flying_ice_cube_damage.tres" id="45_lgrv3"]
+[ext_resource type="Script" uid="uid://h3nqpcog77iq" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="46_normconf"]
+[ext_resource type="Script" uid="uid://cqq5b76xuq0i3" path="res://entities/npc_states/search_trigger.gd" id="99_searchtrigger"]
+[ext_resource type="Script" uid="uid://cke8g2exxgx0y" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 [ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
 [ext_resource type="Script" uid="uid://d2ddr3dd478t7" path="res://difficulty/difficulty_health.gd" id="dhealth_script"]
 [ext_resource type="Script" uid="uid://bqct5adpvfunh" path="res://common3d/hoverer3d.gd" id="eh_script"]
-[ext_resource type="Script" path="res://entities/npc_states/search_trigger.gd" id="99_searchtrigger"]
+[ext_resource type="Script" uid="uid://c8o56lvh1smbc" path="res://entities/enemies/ghosts/ghost_entity_guide3d.gd" id="gg_script"]
+[ext_resource type="Resource" uid="uid://dv277xhyv1vav" path="res://entities/enemies/ghosts/ghost_projectile_acl.tres" id="gt_acl"]
+[ext_resource type="Material" uid="uid://2v7mrv371h45" path="res://assets/materials/ghosts/ghost_little_ice_talus.tres" id="gt_mat"]
+[ext_resource type="Script" uid="uid://crtlax17o248r" path="res://entities/enemies/ghosts/ghost_traits.gd" id="gt_script"]
 
 [sub_resource type="Resource" id="Resource_v53xr"]
 script = ExtResource("3_4884t")
@@ -67,15 +67,12 @@ metadata/_custom_type_script = "uid://cmpyylqqxmqbp"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_37b0g"]
 
-[sub_resource type="Resource" id="Resource_aoox1"]
-script = ExtResource("20_1spdq")
-item = ExtResource("21_j2r7q")
-quantity = 3
-metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+[sub_resource type="Resource" id="Resource_acl"]
+script = ExtResource("acl_script")
 
-[sub_resource type="Resource" id="Resource_uefcv"]
+[sub_resource type="Resource" id="Resource_sx5w5"]
 script = ExtResource("20_1spdq")
-item = ExtResource("22_b5wlr")
+item = ExtResource("26_r3hfa")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Animation" id="Animation_3emv6"]
@@ -538,9 +535,6 @@ stream_3/stream = ExtResource("38_upque")
 stream_4/stream = ExtResource("39_c4hqp")
 stream_5/stream = ExtResource("40_10bv7")
 
-[sub_resource type="Resource" id="Resource_acl"]
-script = ExtResource("acl_script")
-
 [node name="LittleIceTalus" type="CharacterBody3D" unique_id=764734795 node_paths=PackedStringArray("anim_tree", "anim_player", "health", "culling_controller", "horizontal_rotation_target", "vertical_rotation_target")]
 collision_mask = 17
 script = ExtResource("1_iyf1a")
@@ -745,10 +739,16 @@ root = NodePath("../../..")
 nav = NodePath("../../NavigationAgent3D")
 entity = NodePath("../..")
 
+[node name="GhostEntityGuide3D" type="Node" parent="Controller3D" unique_id=326478878 node_paths=PackedStringArray("hoverer", "entity")]
+process_mode = 4
+script = ExtResource("gg_script")
+hoverer = NodePath("../../Hoverer3D")
+entity = NodePath("../..")
+
 [node name="Inventory" type="Node" parent="." unique_id=2020826484]
 unique_name_in_owner = true
 script = ExtResource("19_7yqmn")
-item_instances = Array[ExtResource("20_1spdq")]([SubResource("Resource_aoox1"), SubResource("Resource_uefcv")])
+item_instances = Array[ExtResource("20_1spdq")]([SubResource("Resource_sx5w5")])
 constant = true
 size = 2
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
@@ -864,13 +864,7 @@ projectile_scene = ExtResource("44_o54g0")
 damage = ExtResource("45_lgrv3")
 source = NodePath("../../../..")
 
-[node name="GhostEntityGuide3D" type="Node" parent="Controller3D" node_paths=PackedStringArray("entity", "hoverer")]
-process_mode = 4
-script = ExtResource("gg_script")
-entity = NodePath("../..")
-hoverer = NodePath("../../Hoverer3D")
-
-[node name="Hoverer3D" type="RayCast3D" parent="." node_paths=PackedStringArray("target")]
+[node name="Hoverer3D" type="RayCast3D" parent="." unique_id=1040597462 node_paths=PackedStringArray("target")]
 process_mode = 4
 collision_mask = 64
 script = ExtResource("eh_script")
