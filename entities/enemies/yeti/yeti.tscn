@@ -29,6 +29,7 @@
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="25_ogsve"]
 [ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="26_iw143"]
 [ext_resource type="Script" uid="uid://bwd4jx8u5uct2" path="res://common/inventory_system/item_holder3d.gd" id="27_tt6r6"]
+[ext_resource type="Resource" path="res://items/materials/ice_cube/ice_cube_item.tres" id="29_15ole"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="31_4i62f"]
 [ext_resource type="PackedScene" uid="uid://h3veu2e18ij1" path="res://entities/entity_health_bar.tscn" id="32_ui2qu"]
 [ext_resource type="AudioStream" uid="uid://cwqa0rroqx0ww" path="res://assets/sound/steps_stream.tres" id="33_wno0a"]
@@ -1396,7 +1397,7 @@ unique_name_in_owner = true
 script = ExtResource("18_i5kk2")
 item_instances = Array[ExtResource("31_4i62f")]([SubResource("Resource_mmf2n"), SubResource("Resource_snowball"), SubResource("Resource_8ptwl")])
 constant = true
-size = 2
+size = 3
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 
 [node name="InventoryDropper3D" type="Node3D" parent="." unique_id=2047025503 node_paths=PackedStringArray("inventory")]
