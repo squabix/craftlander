@@ -49,8 +49,8 @@
 [ext_resource type="ArrayMesh" uid="uid://doiyrsd0mnhkf" path="res://assets/models/items/weapons/snowball.res" id="44_41vbo"]
 [ext_resource type="PackedScene" uid="uid://bv58pbog00qt4" path="res://entities/projectiles/snowball/snowball.tscn" id="44_n0bkx"]
 [ext_resource type="Resource" path="res://entities/projectiles/snowball/snowball_damage.tres" id="45_7623f"]
-[ext_resource type="Material" uid="uid://btrvrb7gvvlbr" path="res://assets/materials/crab_shell.tres" id="47_u6i5x"]
 [ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="50_wwywl"]
+[ext_resource type="Material" uid="uid://cjaa3xqqchd63" path="res://assets/materials/carrot.tres" id="55_7ug4v"]
 [ext_resource type="Script" uid="uid://cke8g2exxgx0y" path="res://common/signal_triggrs/mesh_flash_trigger.gd" id="100_flash"]
 [ext_resource type="Script" uid="uid://h3nqpcog77iq" path="res://common3d/normal_conformity_ray_cast_3d.gd" id="101_normconf"]
 [ext_resource type="Script" uid="uid://crtlax17o248r" path="res://entities/enemies/ghosts/ghost_traits.gd" id="gt_script"]
@@ -85,6 +85,11 @@ metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 script = ExtResource("20_wh3u0")
 item = ExtResource("21_snowball")
 quantity = 3
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_carrot"]
+script = ExtResource("20_wh3u0")
+item = ExtResource("carrot_item")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Animation" id="Animation_5fihd"]
@@ -812,7 +817,7 @@ surface_material_override/0 = ExtResource("40_mjqu2")
 transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1, 0, 2.1701887, 0)
 surface_material_override/0 = ExtResource("40_mjqu2")
 surface_material_override/1 = ExtResource("41_u6i5x")
-surface_material_override/2 = ExtResource("47_u6i5x")
+surface_material_override/2 = ExtResource("55_7ug4v")
 surface_material_override/3 = ExtResource("42_m7xa6")
 
 [node name="Hat" parent="Visuals/Head" index="0" unique_id=1362198304]
