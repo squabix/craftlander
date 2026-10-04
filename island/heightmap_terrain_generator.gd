@@ -4,6 +4,8 @@ extends Node3D
 
 signal generated
 
+const CULLING_BOUNDS_PADDING := 1.0 # m
+
 @export_tool_button("Generate", "Noise") var generate_action: Callable = generate
 
 @export var mesh_instance: MeshInstance3D
@@ -58,7 +60,22 @@ func update_shader_texture(image: Image) -> ImageTexture:
 	shader_set(&"heightmap", image_texture)
 	shader_set(&"max_height", map_size.y)
 	shader_set(&"albedo_texture", image_texture)
+	update_culling_bounds()
 	return image_texture
+
+
+func update_culling_bounds() -> void:
+	if mesh_instance == null:
+		return
+
+	var zero_displacement: float = shader_get(&"zero_displacement") as float
+	var lowest := minf(zero_displacement, 0.0) - CULLING_BOUNDS_PADDING
+	var highest := map_size.y + CULLING_BOUNDS_PADDING
+
+	mesh_instance.custom_aabb = AABB(
+		Vector3(-map_size.x / 2.0 - CULLING_BOUNDS_PADDING, lowest, -map_size.z / 2.0 - CULLING_BOUNDS_PADDING),
+		Vector3(map_size.x + CULLING_BOUNDS_PADDING * 2.0, highest - lowest, map_size.z + CULLING_BOUNDS_PADDING * 2.0),
+	)
 
 
 func calculate_single_normal(x: int, y: int, dx: float, dy: float) -> Vector3:
