@@ -63,7 +63,7 @@ length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("BlenderMeshes/Cube:scale")
+tracks/0/path = NodePath("BlenderMeshes/Skull:scale")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -103,7 +103,9 @@ shape = SubResource("ConvexPolygonShape3D_0s5q4")
 collision_layer = 128
 collision_mask = 0
 
-[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" node_paths=PackedStringArray("sample")]
+[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" unique_id=860602351 node_paths=PackedStringArray("sample")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.006700039, 0.14821571, 0.25960004)
+shape = SubResource("ConvexPolygonShape3D_f3x1h")
 script = ExtResource("21_tallblk")
 sample = NodePath("../../BlenderMeshes/Skull")
 generate_on_ready = true
@@ -206,10 +208,12 @@ bus = &"SFX"
 [node name="BlenderMeshes" parent="." unique_id=38551079 instance=ExtResource("18_ejtqu")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
-[node name="Jaw" parent="BlenderMeshes" index="0" unique_id=1615341633]
+[node name="Jaw" parent="BlenderMeshes" index="0" unique_id=524731955]
+transform = Transform3D(1, 0, 0, 0, 0.099311955, -0.99505633, 0, 0.99505633, 0.099311955, 0, 0.31202674, 0.19839726)
 surface_material_override/0 = ExtResource("19_d6jhr")
 
-[node name="Skull" parent="BlenderMeshes" index="1" unique_id=480460847]
+[node name="Skull" parent="BlenderMeshes" index="1" unique_id=1872583757]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.45529208, 0)
 surface_material_override/0 = ExtResource("19_d6jhr")
 surface_material_override/1 = ExtResource("20_ejtqu")
 
