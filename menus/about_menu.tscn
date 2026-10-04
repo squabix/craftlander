@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://xf6ehrtx7yt5"]
 
 [ext_resource type="Script" uid="uid://dvc12hwt0aa4c" path="res://menus/about_menu.gd" id="1_about"]
-[ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://defaults/button_audio_manager.tscn" id="2_audio"]
+[ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://common/sound/sound_button/button_audio_manager.tscn" id="2_audio"]
 
 [node name="AboutMenu" type="Control" unique_id=1118483580 node_paths=PackedStringArray("text_scroll", "back_button")]
 layout_mode = 3

@@ -5,7 +5,7 @@ signal dropped
 
 enum DropMode { EVERYTHING, RANDOM, NEXT, NONE }
 
-static var rigid_item_pickup_scene := load("res://defaults/default_rigid_item_pickup.tscn")
+static var rigid_item_pickup_scene := load("res://common3d/inventory/default_rigid_item_pickup.tscn")
 static var all_dropped_pickups: Array[Node]
 
 @export var inventory: Inventory

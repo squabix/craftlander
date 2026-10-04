@@ -65,7 +65,6 @@ folder_colors={
 "res://boat/ghost_boat/": "purple",
 "res://common/": "yellow",
 "res://common3d/": "red",
-"res://defaults/": "blue",
 "res://entities/": "green",
 "res://entities/enemies/ghosts/": "purple",
 "res://island/": "yellow",

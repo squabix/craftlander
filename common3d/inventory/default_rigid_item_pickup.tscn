@@ -13,7 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://dsfup266yewgk" path="res://assets/sound/water_drip-03.wav" id="13_n0yuo"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="14_spawner"]
 [ext_resource type="PackedScene" uid="uid://ccl7orod872ji" path="res://particles/pickup_sparkle_particles.tscn" id="15_sparkle"]
-[ext_resource type="Script" uid="uid://c6klwkv4b0dhs" path="res://common/signal_triggrs/signal_spawn_trigger.gd" id="16_trigger"]
+[ext_resource type="Script" uid="uid://c6klwkv4b0dhs" path="res://common/signal_triggers/signal_spawn_trigger.gd" id="16_trigger"]
 
 [sub_resource type="Resource" id="Resource_nmw4j"]
 script = ExtResource("5_ncujj")

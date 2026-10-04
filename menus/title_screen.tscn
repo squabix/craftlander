@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://xf6ehrtx7yt5" path="res://menus/about_menu.tscn" id="2_about"]
 [ext_resource type="PackedScene" uid="uid://byosfqwobl3sl" path="res://menus/settings_menu.tscn" id="2_dbvjn"]
 [ext_resource type="Texture2D" uid="uid://bcbbncdb8r7w0" path="res://assets/artwork/craftlander_name_logo.png" id="2_jtp7x"]
-[ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://defaults/button_audio_manager.tscn" id="3_823ok"]
+[ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://common/sound/sound_button/button_audio_manager.tscn" id="3_823ok"]
 [ext_resource type="Script" uid="uid://dlutjgdrcstqh" path="res://menus/save_menu.gd" id="3_eujrm"]
 [ext_resource type="PackedScene" uid="uid://dmhr7q65wwghm" path="res://menus/new_game_settings_menu.tscn" id="4_ngsvm"]
 [ext_resource type="PackedScene" uid="uid://dq4yxxpfn0sbu" path="res://menus/save_inspect_menu.tscn" id="4_svinm"]

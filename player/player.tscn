@@ -81,7 +81,7 @@
 [ext_resource type="Resource" uid="uid://6a5notvdv1ei" path="res://items/weapons/shoddy_mace/shoddy_mace_recipe.tres" id="53_hggc2"]
 [ext_resource type="Script" uid="uid://bubfjagdkgrlq" path="res://player/ui/inventory/inventory_organizer.gd" id="55_jbx34"]
 [ext_resource type="Script" uid="uid://uwx6xnt2vr38" path="res://player/ui/inventory/item_inspector.gd" id="59_b2j0d"]
-[ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://defaults/button_audio_manager.tscn" id="63_0iv1a"]
+[ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://common/sound/sound_button/button_audio_manager.tscn" id="63_0iv1a"]
 [ext_resource type="Script" uid="uid://rroukmbv64vv" path="res://player/ui/boat_menu.gd" id="64_2h6tc"]
 [ext_resource type="Script" uid="uid://b6r50f8akgpp7" path="res://player/ui/island_option.gd" id="64_kewli"]
 [ext_resource type="Script" path="res://player/ui/island_carousel.gd" id="island_carousel_script"]

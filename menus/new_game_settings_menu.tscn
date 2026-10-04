@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dmhr7q65wwghm"]
 
 [ext_resource type="Script" uid="uid://b31xl74j8j11n" path="res://menus/new_game_settings_menu.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://defaults/button_audio_manager.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://common/sound/sound_button/button_audio_manager.tscn" id="2"]
 
 [node name="NewGameSettingsMenu" type="Control" unique_id=486480884 node_paths=PackedStringArray("slot_label", "start_button", "seed_field", "overwrite_warning", "difficulty_slider", "difficulty_name_label", "back_button")]
 layout_mode = 3

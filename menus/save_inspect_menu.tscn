@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dq4yxxpfn0sbu"]
 
 [ext_resource type="Script" uid="uid://bnqpm2lkx2i5v" path="res://menus/save_inspect_menu.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://defaults/button_audio_manager.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://common/sound/sound_button/button_audio_manager.tscn" id="2"]
 
 [node name="SaveInspectMenu" type="Control" unique_id=1678974554 node_paths=PackedStringArray("created_label", "saved_label", "island_label", "boat_level_label", "islands_explored_label", "difficulty_label", "seed_label", "seed_button_copy", "delete_button", "delete_row_confirm", "delete_button_confirm", "delete_button_cancel", "back_button")]
 layout_mode = 3

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://byosfqwobl3sl"]
 
 [ext_resource type="Script" uid="uid://c54p7ksaku8o0" path="res://menus/settings_menu.gd" id="1_83qjl"]
-[ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://defaults/button_audio_manager.tscn" id="2_v0bl3"]
+[ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://common/sound/sound_button/button_audio_manager.tscn" id="2_v0bl3"]
 [ext_resource type="Script" uid="uid://c36fqcfs66yhx" path="res://common/ui/volume_slider.gd" id="3_n4a8d"]
 
 [node name="SettingsMenu" type="Control" unique_id=788547277 node_paths=PackedStringArray("music_slider", "sfx_slider", "vsync_toggle", "window_mode_option", "aa_option", "shadow_option", "ssao_toggle", "glow_toggle", "max_fps_option", "resolution_scale_slider", "invert_y_toggle", "tutorial_hints_toggle", "screen_shake_toggle", "vignette_toggle", "screen_effects_toggle", "look_sensitivity_slider", "fov_slider", "difficulty_row", "difficulty_slider", "difficulty_name_label", "back_button")]
