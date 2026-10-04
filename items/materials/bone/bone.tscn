@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://blfgmdqyt46ve"]
+
+[ext_resource type="PackedScene" uid="uid://brqr8do0bwtkq" path="res://assets/models/items/materials/bone.blend" id="1_model"]
+[ext_resource type="Material" uid="uid://brsw8xc5rh2lv" path="res://assets/materials/bone.tres" id="2_mat"]
+
+[node name="Bone" type="Node3D" unique_id=1306733569]
+
+[node name="Visuals" parent="." unique_id=1619741935 instance=ExtResource("1_model")]
+
+[node name="Bone" parent="Visuals" index="0" unique_id=1316526625]
+surface_material_override/0 = ExtResource("2_mat")
+
+[editable path="Visuals"]

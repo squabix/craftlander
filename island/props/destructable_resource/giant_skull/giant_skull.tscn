@@ -8,10 +8,10 @@
 [ext_resource type="Script" uid="uid://dapeyi3eetek1" path="res://common/signal_triggrs/signal_animation_trigger.gd" id="6_f3x1h"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="9_mf61m"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="10_2hbp3"]
-[ext_resource type="Resource" uid="uid://b37h3pr83pcu4" path="res://items/materials/rock/rock_item.tres" id="11_bnko1"]
 [ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="12_3qpgb"]
 [ext_resource type="ArrayOccluder3D" uid="uid://d17b2teqokgmu" path="res://island/props/destructable_resource/giant_skull/giant_skull.occ" id="13_0s5q4"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="13_3a4e0"]
+[ext_resource type="Resource" path="res://items/materials/bone/bone_item.tres" id="13_f3x1h"]
 [ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="14_w6i3c"]
 [ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="16_88wgr"]
 [ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="17_4du77"]
@@ -33,7 +33,7 @@ points = PackedVector3Array(-0.0035828352, 1.1291897, -1.1591327, -0.0035828352,
 
 [sub_resource type="Resource" id="Resource_5d4n1"]
 script = ExtResource("10_2hbp3")
-item = ExtResource("11_bnko1")
+item = ExtResource("13_f3x1h")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Animation" id="Animation_5v37a"]

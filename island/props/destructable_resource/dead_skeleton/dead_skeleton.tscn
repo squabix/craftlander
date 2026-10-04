@@ -7,9 +7,9 @@
 [ext_resource type="Script" uid="uid://dapeyi3eetek1" path="res://common/signal_triggrs/signal_animation_trigger.gd" id="5_dplr8"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="6_fdfke"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="7_s2i2l"]
-[ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="8_3hh12"]
 [ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="9_5vhrw"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="10_37nxe"]
+[ext_resource type="Resource" path="res://items/materials/bone/bone_item.tres" id="10_rx1cw"]
 [ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="11_074o5"]
 [ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="13_0ek66"]
 [ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="14_7e2uf"]
@@ -28,7 +28,7 @@ size = Vector3(0.10467529, 0.07286072, 0.45257568)
 
 [sub_resource type="Resource" id="Resource_6ugkb"]
 script = ExtResource("7_s2i2l")
-item = ExtResource("8_3hh12")
+item = ExtResource("10_rx1cw")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Animation" id="Animation_5v37a"]

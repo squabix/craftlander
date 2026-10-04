@@ -5,7 +5,7 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_8yfob")
-shader_parameter/albedo = Color(0.7411765, 0.7058824, 0.6745098, 1)
+shader_parameter/albedo = Color(0.8905668, 0.8731092, 0.85767275, 1)
 shader_parameter/hue_variance = 0.030000001425
 shader_parameter/sat_variance = 0.150000007125
 shader_parameter/val_variance = 0.10000000475
