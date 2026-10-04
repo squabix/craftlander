@@ -49,6 +49,10 @@ window/stretch/aspect="expand"
 mouse_cursor/custom_image="uid://eqnnqfimn3ng"
 mouse_cursor/custom_image_hotspot=Vector2(12, 12)
 
+[editor]
+
+movie_writer/movie_file="C:/Users/ubgam/Videos/Godot Movie Maker/craftlander01.avi"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/GDQuest_GDScript_formatter/plugin.cfg", "res://addons/IgnoreFolders/plugin.cfg", "res://addons/godotsteam/plugin.cfg", "res://addons/controller_icons/plugin.cfg")
