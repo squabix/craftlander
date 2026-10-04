@@ -31,11 +31,13 @@ func _ready() -> void:
 
 func _exit_tree() -> void:
 	Main.saving_locked = false
+	Main.autosave_locked = false
 
 
 func begin_lockdown() -> void:
 	Main.root.save_current_game()
 	Main.saving_locked = true
+	Main.autosave_locked = true
 	island.lock_player_boat(true)
 
 

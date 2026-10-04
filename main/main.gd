@@ -26,6 +26,7 @@ static var is_save_loaded := false
 static var current_level_index := 0
 static var trailer_mode := false
 static var saving_locked := false
+static var autosave_locked := false
 static var base_seed := 0:
 	set(to):
 		base_seed = to
