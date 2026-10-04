@@ -294,6 +294,10 @@ toggle_perf_overlay={
 3d_physics/layer_7="ghost_floor"
 3d_physics/layer_8="climb_blocker"
 
+[navigation]
+
+3d/warnings/navmesh_edge_merge_errors=false
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
