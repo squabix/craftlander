@@ -1114,7 +1114,8 @@ script = ExtResource("29_f1q4c")
 player = NodePath("../DockingManager1/Player")
 melee_coordinator = NodePath("../GhostMeleeCoordinator")
 waves = Array[ExtResource("30_ioqp7")]([ExtResource("wave_1_tres"), ExtResource("wave_2_tres"), ExtResource("wave_3_tres"), ExtResource("wave_4_tres")])
-max_concurrent_instances = 10
+max_concurrent_instances = 6
+difficulty_profile_index = 1
 sub_spawners = {
 null: true
 }

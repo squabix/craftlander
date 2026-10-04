@@ -119,6 +119,10 @@ func load_wave(index: int) -> void:
 	_process_wave(wave)
 
 
+func get_concurrent_limit() -> int:
+	return max_concurrent_instances
+
+
 func get_active_instance_count() -> int:
 	return active_instances.size()
 
@@ -174,7 +178,8 @@ func _process_wave(wave: WaveSpawnerWave) -> void:
 			await get_tree().process_frame
 			continue
 
-		if max_concurrent_instances > 0 and active_instances.size() >= max_concurrent_instances:
+		var concurrent_limit := get_concurrent_limit()
+		if concurrent_limit > 0 and active_instances.size() >= concurrent_limit:
 			await get_tree().process_frame
 			continue
 

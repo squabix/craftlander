@@ -30,8 +30,13 @@ damage_taken_multipliers = Dictionary[int, float]({
 0: 1.0,
 1: 1.0,
 2: 1.0,
-3: 1.0,
-4: 1.0
+3: 1.0
+})
+concurrent_enemies_multipliers = Dictionary[int, float]({
+0: 0.7,
+1: 0.8,
+2: 0.9,
+3: 1.0
 })
 
 [resource]

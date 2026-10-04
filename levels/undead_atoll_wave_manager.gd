@@ -1,5 +1,5 @@
 class_name GhostWaveSpawner
-extends WaveSpawner3D
+extends DifficultyWaveSpawner3D
 
 @export var player: Player
 @export var melee_coordinator: GhostMeleeCoordinator

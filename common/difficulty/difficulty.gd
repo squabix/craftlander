@@ -30,6 +30,13 @@ static func get_damage_taken_multiplier(profile_index: int, value: int) -> float
 	return lookup_multiplier(value, profile.damage_taken_multipliers)
 
 
+static func get_concurrent_enemies_multiplier(profile_index: int, value: int) -> float:
+	var profile := get_profile(profile_index)
+	if profile == null:
+		return 1.0
+	return lookup_multiplier(value, profile.concurrent_enemies_multipliers)
+
+
 static func lookup_multiplier(value: int, table: Dictionary) -> float:
 	if table.is_empty():
 		push_error("Difficulty: no multipliers configured")
