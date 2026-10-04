@@ -132,9 +132,13 @@
 [ext_resource type="Resource" uid="uid://vulwxanblunx" path="res://items/tools/copper/copper_axe/copper_axe_item.tres" id="112_wh3n5"]
 [ext_resource type="Resource" uid="uid://b10txfbikrljt" path="res://items/weapons/copper_sword/copper_sword_item.tres" id="113_vuyvy"]
 [ext_resource type="Resource" uid="uid://d1ytk70f3t86d" path="res://items/tools/copper/copper_pickaxe/copper_pickaxe_item.tres" id="114_0yt84"]
+[ext_resource type="Resource" path="res://items/materials/bone/bone_item.tres" id="114_b3dbx"]
+[ext_resource type="Resource" uid="uid://dildagot4v08a" path="res://items/materials/palm_wood/palm_wood.tres" id="115_a11nk"]
 [ext_resource type="Resource" uid="uid://c8f1dnnf2038y" path="res://items/tools/gold/golden_axe/golden_axe_item.tres" id="116_kosww"]
+[ext_resource type="Resource" uid="uid://chwiax8g7xg2" path="res://items/materials/slime_ball/slime_ball_item.tres" id="116_lmpt2"]
 [ext_resource type="Resource" uid="uid://15kkf14ddukd" path="res://items/tools/gold/golden_pickaxe/golden_pickaxe_item.tres" id="117_s15n6"]
 [ext_resource type="Resource" uid="uid://br8x8o2qqedfv" path="res://items/weapons/golden_sword/golden_sword_item.tres" id="118_es2j2"]
+[ext_resource type="Resource" uid="uid://5n0rxogo7ow0" path="res://items/food/candy_cane/candy_cane_item.tres" id="119_5je6m"]
 [ext_resource type="Resource" uid="uid://kf1haxayj2yo" path="res://items/materials/minerals/diamond/diamond_item.tres" id="119_diamnd"]
 [ext_resource type="Resource" uid="uid://cq7uj11i026we" path="res://items/tools/diamond/diamond_axe/diamond_axe_item.tres" id="127_e5mnx"]
 [ext_resource type="Resource" uid="uid://b8eby8tmkueau" path="res://items/tools/diamond/diamond_pickaxe/diamond_pickaxe_item.tres" id="128_dt0ky"]
@@ -551,13 +555,13 @@ corner_detail = 6
 [sub_resource type="Resource" id="Resource_8rogd"]
 script = ExtResource("6_hggc2")
 item = ExtResource("10_s3g0c")
-quantity = 15
+quantity = 12
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Resource" id="Resource_vvji8"]
 script = ExtResource("6_hggc2")
 item = ExtResource("81_mhw2q")
-quantity = 20
+quantity = 15
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Resource" id="Resource_xgxvu"]
@@ -569,19 +573,73 @@ metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 [sub_resource type="Resource" id="Resource_pdnyr"]
 script = ExtResource("6_hggc2")
 item = ExtResource("9_jbx34")
-quantity = 10
+quantity = 5
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_5je6m"]
+script = ExtResource("6_hggc2")
+item = ExtResource("114_b3dbx")
+quantity = 12
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Resource" id="Resource_pgwk2"]
 script = ExtResource("6_hggc2")
 item = ExtResource("12_vuyvy")
+quantity = 25
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_hoe0r"]
+script = ExtResource("6_hggc2")
+item = ExtResource("115_a11nk")
 quantity = 20
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_f0v3p"]
+script = ExtResource("6_hggc2")
+item = ExtResource("116_lmpt2")
+quantity = 3
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_b853o"]
+script = ExtResource("6_hggc2")
+item = ExtResource("10_s3g0c")
+quantity = 5
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_8ix03"]
+script = ExtResource("6_hggc2")
+item = ExtResource("rc_ice_cube_item")
+quantity = 12
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Resource" id="Resource_k8h4n"]
 script = ExtResource("6_hggc2")
 item = ExtResource("119_diamnd")
-quantity = 20
+quantity = 25
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_jkjge"]
+script = ExtResource("6_hggc2")
+item = ExtResource("105_xgxvu")
+quantity = 50
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_o1mcp"]
+script = ExtResource("6_hggc2")
+item = ExtResource("119_5je6m")
+quantity = 15
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_bes41"]
+script = ExtResource("6_hggc2")
+item = ExtResource("10_s3g0c")
+quantity = 10
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_o4h5w"]
+script = ExtResource("6_hggc2")
+item = ExtResource("9_jbx34")
+quantity = 5
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_islandopt"]
@@ -6294,14 +6352,14 @@ metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 
 [node name="UpgradeRequirement2" type="Node" parent="BoatMenu/BottomOptions/HBoxContainer/BoatUpgrader" unique_id=1136310647]
 script = ExtResource("19_c35mf")
-item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_8rogd"), SubResource("Resource_pgwk2"), SubResource("Resource_xgxvu"), SubResource("Resource_pdnyr")])
+item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_5je6m"), SubResource("Resource_pgwk2"), SubResource("Resource_hoe0r"), SubResource("Resource_f0v3p"), SubResource("Resource_b853o")])
 constant = true
 size = 9
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 
 [node name="UpgradeRequirement3" type="Node" parent="BoatMenu/BottomOptions/HBoxContainer/BoatUpgrader" unique_id=1136310648]
 script = ExtResource("19_c35mf")
-item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_8rogd"), SubResource("Resource_k8h4n"), SubResource("Resource_xgxvu"), SubResource("Resource_pdnyr")])
+item_instances = Array[ExtResource("6_hggc2")]([SubResource("Resource_8ix03"), SubResource("Resource_k8h4n"), SubResource("Resource_jkjge"), SubResource("Resource_o1mcp"), SubResource("Resource_bes41"), SubResource("Resource_o4h5w")])
 constant = true
 size = 9
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
