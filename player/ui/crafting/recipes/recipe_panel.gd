@@ -1,6 +1,9 @@
 extends VBoxContainer
 
 const LAYOUT_OFFSET := Vector2i(2, -3)
+const LOCKED_TEXT := "???"
+const CATEGORY_COUNT_TEXT := "%s (%d/%d)"
+const LOCKED_ICON_TINT := Color(0.0, 0.0, 0.0, 0.7)
 
 @export var entry_container: VBoxContainer
 @export var entry_template: Control
@@ -74,11 +77,26 @@ func show_recipes(type: String) -> void:
 	var group: RecipePanelGroup = recipe_groups.get(type, null)
 	if group == null:
 		return
-	for recipe in recipe_learner.known_recipes:
-		if not recipe in group.recipe_entries.keys():
-			continue
-		group.recipe_entries[recipe].show()
+	for recipe in group.recipe_entries:
+		var entry := group.recipe_entries[recipe]
+		refresh_recipe_entry(recipe, entry)
+		entry.show()
 	back_entry.show()
+
+func refresh_recipe_entry(recipe: ItemRecipe, entry: Control) -> void:
+	var known := recipe in recipe_learner.known_recipes
+	var button: Button = entry.get_node(button_path)
+	button.text = recipe.result.item.name if known else LOCKED_TEXT
+	button.disabled = not known
+	var icon_rect: TextureRect = entry.get_node(icon_rect_path)
+	icon_rect.modulate = Color.WHITE if known else LOCKED_ICON_TINT
+
+func count_known_recipes(group: RecipePanelGroup) -> int:
+	var count := 0
+	for recipe in group.recipe_entries:
+		if recipe in recipe_learner.known_recipes:
+			count += 1
+	return count
 
 func set_up_button(entry: Control, text: String, pressed_callable: Callable) -> void:
 	var button: Button = entry.get_node(button_path)
@@ -90,10 +108,11 @@ func set_up_button(entry: Control, text: String, pressed_callable: Callable) -> 
 func show_types() -> void:
 	hide_all()
 	for group in recipe_groups.values():
-		for known_recipe in recipe_learner.known_recipes:
-			if group.recipe_entries.has(known_recipe):
-				group.type_entry.show()
-				break
+		if group.recipe_entries.is_empty():
+			continue
+		var button: Button = group.type_entry.get_node(button_path)
+		button.text = CATEGORY_COUNT_TEXT % [group.name, count_known_recipes(group), group.recipe_entries.size()]
+		group.type_entry.show()
 
 func set_icon(entry: Control, to: Texture) -> void:
 	var icon_rect: TextureRect = entry.get_node(icon_rect_path)
