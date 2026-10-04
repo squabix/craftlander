@@ -647,6 +647,8 @@ collision_mask = 0
 script = ExtResource("7_o8cdm")
 health = NodePath("../Health")
 knockback_entity = NodePath("..")
+size_multiplier = 1.25
+invulnerability_bypass_types = Array[StringName]([&"spore"])
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1941702815]

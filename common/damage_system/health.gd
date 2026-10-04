@@ -25,6 +25,7 @@ signal given_hp(amount: float)
 
 
 var dead := false
+var intangible := false
 var max_hp := 0.0
 var base_max_hp := 0.0
 
@@ -124,8 +125,8 @@ func empty() -> void:
 		hurt(hp)
 
 
-func hurt(amount: float) -> bool:
-	if amount <= 0.0 or amount < hurt_threshold or invulnerable:
+func hurt(amount: float, ignores_invulnerability := false) -> bool:
+	if intangible or amount <= 0.0 or amount < hurt_threshold or (invulnerable and not ignores_invulnerability):
 		return false
 	
 	if damage_override != null:

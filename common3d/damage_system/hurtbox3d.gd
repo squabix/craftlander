@@ -13,6 +13,7 @@ signal was_resisted(damage: Damage)
 @export var type_acl: ACL
 @export var free_parent_on_hurt := false
 @export var size_multiplier := 1.0
+@export var invulnerability_bypass_types: Array[StringName] = []
 
 @export_group("Damage Override")
 @export var damage_override: Damage
@@ -80,7 +81,7 @@ func hurt(damage: Damage, direction: Vector3 = Vector3.ZERO) -> float:
 
 	var dp := scale_damage(damage.sample())
 	
-	var success := not is_instance_valid(health) or health.hurt(dp) 
+	var success := not is_instance_valid(health) or health.hurt(dp, invulnerability_bypass_types.has(damage.type))
 	if not success:
 		if health.invulnerable:
 			was_blocked.emit(damage, direction)
