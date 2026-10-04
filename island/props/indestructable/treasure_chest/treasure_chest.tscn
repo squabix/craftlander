@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cpjmityab1msq" path="res://island/props/indestructable/treasure_chest/treasure_chest.gd" id="1_e3py2"]
 [ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="2_k1bhr"]
-[ext_resource type="Resource" path="res://items/misc/captains_key/captains_key_item.tres" id="2_mvsxc"]
+[ext_resource type="Resource" uid="uid://cljpl8to8am4y" path="res://items/misc/captains_key/captains_key_item.tres" id="2_mvsxc"]
 [ext_resource type="PackedScene" uid="uid://bidtr8j4ohtih" path="res://assets/models/props/chest.blend" id="3_061qj"]
 [ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="4_ccn32"]
 [ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="5_5hnl4"]
@@ -15,6 +15,7 @@
 [ext_resource type="Material" uid="uid://dfpc2asaqlvwr" path="res://assets/materials/emerald.tres" id="11_5hnl4"]
 [ext_resource type="Script" uid="uid://favgu1tbe1tq" path="res://common3d/interactions/interactable3d.gd" id="13_mvsxc"]
 [ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/collision_barrier_3d.gd" id="14_tallblk"]
+[ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="audio_manager_script"]
 [ext_resource type="Script" uid="uid://bl24g1nnncs0d" path="res://island/props/indestructable/treasure_chest/chest_cursed_state.gd" id="chest_cursed_gd"]
 [ext_resource type="Script" uid="uid://bqonxtntgndfr" path="res://common/state_machine/state_machine.gd" id="chest_machine_gd"]
 [ext_resource type="Script" uid="uid://bjsswyax35y3b" path="res://island/props/indestructable/treasure_chest/chest_opened_state.gd" id="chest_opened_gd"]
@@ -23,15 +24,9 @@
 [ext_resource type="Script" uid="uid://cahhppx2qjcc5" path="res://island/props/indestructable/treasure_chest/chest_unlockable_state.gd" id="chest_unlockable_gd"]
 [ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="item_gd"]
 [ext_resource type="Script" uid="uid://bhkngqnpf30n8" path="res://common3d/interactions/interactable_item_condition.gd" id="key_condition_gd"]
-[ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="audio_manager_script"]
 [ext_resource type="AudioStream" uid="uid://o4oflyiwo3e0" path="res://assets/sound/ghost2.mp3" id="locked_sound"]
-[ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="open_particle_spawner_script"]
 [ext_resource type="PackedScene" uid="uid://lyptlia5fnc8" path="res://common3d/boat_upgrade_particles.tscn" id="open_particles"]
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_locked"]
-random_pitch = 1.1
-streams_count = 1
-stream_0/stream = ExtResource("locked_sound")
+[ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="open_particle_spawner_script"]
 
 [sub_resource type="Resource" id="Resource_keycondition"]
 script = ExtResource("key_condition_gd")
@@ -118,6 +113,11 @@ shadow_mesh = SubResource("ArrayMesh_f0ks3")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hjjmf"]
 size = Vector3(2.15, 8.602714, 1.6385498)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_locked"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("locked_sound")
 
 [sub_resource type="Animation" id="Animation_u5f0g"]
 length = 0.001
@@ -332,13 +332,13 @@ collision_layer = 5
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.993147, 0.16927493)
 shape = SubResource("BoxShape3D_hjjmf")
 
-[node name="SignalAudioManager3D" type="Node3D" parent="." node_paths=PackedStringArray("signal_players")]
+[node name="SignalAudioManager3D" type="Node3D" parent="." unique_id=1896821969 node_paths=PackedStringArray("signal_players")]
 script = ExtResource("audio_manager_script")
 signal_players = {
 &"locked": NodePath("LockedSound")
 }
 
-[node name="LockedSound" type="AudioStreamPlayer3D" parent="SignalAudioManager3D"]
+[node name="LockedSound" type="AudioStreamPlayer3D" parent="SignalAudioManager3D" unique_id=1528057354]
 stream = SubResource("AudioStreamRandomizer_locked")
 bus = &"SFX"
 
@@ -358,7 +358,7 @@ metadata/_custom_type_script = "uid://favgu1tbe1tq"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, -0.049)
 shape = SubResource("BoxShape3D_5hnl4")
 
-[node name="OpenParticleSpawner3D" type="Node3D" parent="."]
+[node name="OpenParticleSpawner3D" type="Node3D" parent="." unique_id=1616224936]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 script = ExtResource("open_particle_spawner_script")
 scenes = Array[PackedScene]([ExtResource("open_particles")])
