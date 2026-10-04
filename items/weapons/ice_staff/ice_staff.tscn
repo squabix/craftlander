@@ -7,6 +7,13 @@
 [ext_resource type="Material" uid="uid://bd2wsdvcuat4q" path="res://assets/materials/diamond.tres" id="4_6gf45"]
 [ext_resource type="Material" uid="uid://c403ng7pn0nqg" path="res://assets/materials/ice.tres" id="5_ice"]
 [ext_resource type="AudioStream" uid="uid://cpt2s6883glj2" path="res://assets/sound/spell.mp3" id="6_spell"]
+[ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="7_audio_spawner"]
+[ext_resource type="Script" uid="uid://c6klwkv4b0dhs" path="res://common/signal_triggrs/signal_spawn_trigger.gd" id="8_spawn_trigger"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_spell"]
+random_pitch = 1.0594631
+streams_count = 1
+stream_0/stream = ExtResource("6_spell")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v4bkn"]
 resource_name = "Material.006"
@@ -114,8 +121,17 @@ cap_bottom = false
 script = ExtResource("1_spawner")
 projectile_scene = ExtResource("2_block")
 
-[node name="SpellPlayer" type="AudioStreamPlayer3D" parent="." unique_id=1107093432]
-stream = ExtResource("6_spell")
+[node name="SpellSpawnTrigger" type="Node" parent="ProjectileSpawner" unique_id=1107093433 node_paths=PackedStringArray("spawner")]
+script = ExtResource("8_spawn_trigger")
+spawner = NodePath("../../SpellAudioSpawner")
+signal_name = &"spawned"
+
+[node name="SpellAudioSpawner" type="Node3D" parent="." unique_id=1107093431 node_paths=PackedStringArray("templates")]
+script = ExtResource("7_audio_spawner")
+templates = [NodePath("SpellPlayer")]
+
+[node name="SpellPlayer" type="AudioStreamPlayer3D" parent="SpellAudioSpawner" unique_id=1107093432]
+stream = SubResource("AudioStreamRandomizer_spell")
 bus = &"SFX"
 
 [node name="Visuals" parent="." unique_id=85625797 instance=ExtResource("3_model")]

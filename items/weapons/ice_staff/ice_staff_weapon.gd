@@ -15,13 +15,11 @@ extends ProjectileWeapon
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var ground_search_margin := 0.3
 
 var aim_indicator: Node3D
-var spell_player: AudioStreamPlayer3D
 
 
 func clear_nodes() -> void:
 	super()
 	aim_indicator = null
-	spell_player = null
 
 
 func set_up_scene() -> void:
@@ -29,7 +27,6 @@ func set_up_scene() -> void:
 	if scene_instance == null:
 		return
 	aim_indicator = scene_instance.get_node(^"AimIndicator")
-	spell_player = scene_instance.get_node(^"SpellPlayer")
 
 
 func idle() -> void:
@@ -61,8 +58,6 @@ func start_use() -> bool:
 
 	spawner.global_position = (target_position as Vector3) + Vector3.UP * spawn_height_above_target
 	spawner.spawn()
-	if spell_player != null:
-		spell_player.play()
 	return true
 
 
