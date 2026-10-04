@@ -6,8 +6,8 @@
 
 [resource]
 script = ExtResource("3_food")
-health_restoration = 8.0
-hunger_restoration = 0.05
+health_restoration = 32.0
+hunger_restoration = 0.2
 name = &"Candy Cane"
 max_quantity = 99
 icon = ExtResource("1_icon")
@@ -15,4 +15,6 @@ consumable = true
 type = "Food"
 use_action_name = &"Eat"
 scene = ExtResource("2_scene")
+cooldown_mode = 1
+default_cooldown_length = 0.1
 metadata/_custom_type_script = "uid://bcua33xmbibyi"
