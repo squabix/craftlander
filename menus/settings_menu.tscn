@@ -478,7 +478,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 min_value = 50.0
 max_value = 110.0
-step = 1.0
 value = 75.0
 tick_count = 7
 ticks_on_borders = true
@@ -612,7 +611,7 @@ size_flags_horizontal = 3
 [node name="DifficultySlider" type="HSlider" parent="PanelContainer/CenterContainer/SettingsContainer/Difficulty/VBoxContainer" unique_id=2001000003]
 layout_mode = 2
 size_flags_horizontal = 3
-tick_count = 5
+tick_count = 4
 ticks_on_borders = true
 
 [node name="DifficultyNameLabel" type="Label" parent="PanelContainer/CenterContainer/SettingsContainer/Difficulty/VBoxContainer" unique_id=2001000004]

@@ -31,10 +31,10 @@ static func get_damage_taken_multiplier(profile_index: int, value: int) -> float
 
 
 static func lookup_multiplier(value: int, table: Dictionary) -> float:
-	if table.has(value):
-		return table[value]
-	push_error("Difficulty: no multiplier configured for value %s" % value)
-	return 1.0
+	if table.is_empty():
+		push_error("Difficulty: no multipliers configured")
+		return 1.0
+	return table[clampi(value, table.keys().min(), table.keys().max())]
 
 
 static func get_named_range() -> Vector2i:
