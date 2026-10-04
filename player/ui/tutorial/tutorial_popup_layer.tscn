@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://c505mfi0gc7yj"]
+
+[ext_resource type="Script" uid="uid://c07qmsd7epd0h" path="res://common/ui/popup_display.gd" id="1_yh5hk"]
+[ext_resource type="Shader" uid="uid://of3kag0xs7lt" path="res://player/ui/blur_shader.gdshader" id="2_s387o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_48p26"]
+shader = ExtResource("2_s387o")
+shader_parameter/blur_amount = 2.2500002018750003
+shader_parameter/mix_amount = 0.70000003325
+shader_parameter/color_over = Color(0.05, 0.07083334, 0.1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dt0ky"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_mhw2q"]
+font_size = 20
+
+[node name="TutorialPopupLayer" type="CanvasLayer" unique_id=564228869]
+layer = 20
+visible = false
+
+[node name="PopupDisplay" type="Control" parent="." unique_id=784232982 node_paths=PackedStringArray("title_label", "body_label", "continue_icon_rect")]
+unique_name_in_owner = true
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yh5hk")
+title_label = NodePath("ContentBox/Panel/VBoxContainer/TitleLabel")
+body_label = NodePath("ContentBox/Panel/VBoxContainer/BodyLabel")
+continue_icon_rect = NodePath("ContentBox/CenterContainer/HBoxContainer/ContinueIcon")
+continue_actions = Array[StringName]([&"ui_accept", &"pause"])
+
+[node name="BlurRect" type="ColorRect" parent="PopupDisplay" unique_id=1491973269]
+visible = false
+material = SubResource("ShaderMaterial_48p26")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="ContentBox" type="Control" parent="PopupDisplay" unique_id=1613036424]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -72.5
+offset_right = 220.0
+offset_bottom = 72.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="PopupDisplay/ContentBox" unique_id=265899278]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupDisplay/ContentBox/Panel" unique_id=1705745992]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="PopupDisplay/ContentBox/Panel/VBoxContainer" unique_id=2000278035]
+layout_mode = 2
+text = "Warning"
+label_settings = SubResource("LabelSettings_dt0ky")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="BodyLabel" type="Label" parent="PopupDisplay/ContentBox/Panel/VBoxContainer" unique_id=286421428]
+layout_mode = 2
+size_flags_vertical = 1
+text = "fsaf"
+label_settings = SubResource("LabelSettings_mhw2q")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="PopupDisplay/ContentBox" unique_id=170629077]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -35.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PopupDisplay/ContentBox/CenterContainer" unique_id=1852414541]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Button1" type="Button" parent="PopupDisplay/ContentBox/CenterContainer/HBoxContainer" unique_id=439732479]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+text = "Continue"
+
+[node name="ContinueIcon" type="TextureRect" parent="PopupDisplay/ContentBox/CenterContainer/HBoxContainer" unique_id=791411169]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 4
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Button2" type="Button" parent="PopupDisplay/ContentBox/CenterContainer/HBoxContainer" unique_id=349500660]
+visible = false
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+text = "Continue"

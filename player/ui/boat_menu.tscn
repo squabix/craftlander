@@ -1,0 +1,1089 @@
+[gd_scene format=3 uid="uid://bkk0gmgduaj28"]
+
+[ext_resource type="Script" uid="uid://rroukmbv64vv" path="res://player/ui/boat_menu.gd" id="1_1n8v5"]
+[ext_resource type="Shader" uid="uid://b26au25x8xvc8" path="res://assets/shaders/water_background.gdshader" id="2_2sr61"]
+[ext_resource type="Shader" uid="uid://of3kag0xs7lt" path="res://player/ui/blur_shader.gdshader" id="3_7ci3e"]
+[ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://common/sound/sound_button/button_audio_manager.tscn" id="4_757a6"]
+[ext_resource type="Script" uid="uid://1xbjtbtwn73" path="res://player/ui/island_carousel.gd" id="5_j1p4t"]
+[ext_resource type="Script" uid="uid://b6r50f8akgpp7" path="res://player/ui/island_option.gd" id="6_2djvg"]
+[ext_resource type="Resource" uid="uid://bkvo3ik5y1yom" path="res://island/island_resources/lush_isle.tres" id="7_6wjpu"]
+[ext_resource type="Texture2D" uid="uid://beudtbsirofjr" path="res://assets/ui/lush_isle.png" id="8_uwg4w"]
+[ext_resource type="Resource" uid="uid://bbo58dytvrrts" path="res://island/island_resources/skelly_sandbar.tres" id="9_8kjrt"]
+[ext_resource type="Resource" uid="uid://cccntbp1un6ey" path="res://island/island_resources/frost_holm.tres" id="10_lafue"]
+[ext_resource type="Resource" uid="uid://b0gw02djkff0d" path="res://island/island_resources/undead_atoll.tres" id="11_ctd2w"]
+[ext_resource type="Script" uid="uid://b3snj0gi7akf8" path="res://common/signal_audio_manager.gd" id="12_1sw6c"]
+[ext_resource type="AudioStream" uid="uid://cer4nkd7fukes" path="res://assets/sound/set_sail.mp3" id="13_h0go2"]
+[ext_resource type="Script" uid="uid://blknest0w8djr" path="res://player/ui/boat_upgrader.gd" id="14_03asq"]
+[ext_resource type="Script" uid="uid://b1eix6p0204fp" path="res://common/inventory_system/displays/item_display.gd" id="15_cqjqc"]
+[ext_resource type="Texture2D" uid="uid://752u5qngsxn2" path="res://assets/ui/checkmark.png" id="16_hpb05"]
+[ext_resource type="Texture2D" uid="uid://cfkuouoibr014" path="res://assets/ui/cross.png" id="17_itk7l"]
+[ext_resource type="Texture2D" uid="uid://dejgw2p87pi2y" path="res://assets/materials/cross.png" id="18_qeg3s"]
+[ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="19_m3sx3"]
+[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="20_piccd"]
+[ext_resource type="Resource" uid="uid://b37h3pr83pcu4" path="res://items/materials/rock/rock_item.tres" id="21_x7ndf"]
+[ext_resource type="Resource" uid="uid://c5uhmmmlb6tko" path="res://items/materials/minerals/copper_chunk/copper_chunk_item.tres" id="22_fip4m"]
+[ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="23_80pl6"]
+[ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="24_35dw7"]
+[ext_resource type="Resource" path="res://items/materials/bone/bone_item.tres" id="25_jw7o6"]
+[ext_resource type="Resource" uid="uid://cgr4031ngjynl" path="res://items/materials/minerals/gold_ingot/golden_ingot_item.tres" id="26_bda7u"]
+[ext_resource type="Resource" uid="uid://dildagot4v08a" path="res://items/materials/palm_wood/palm_wood.tres" id="27_8ltn2"]
+[ext_resource type="Resource" uid="uid://chwiax8g7xg2" path="res://items/materials/slime_ball/slime_ball_item.tres" id="28_5utum"]
+[ext_resource type="Resource" path="res://items/materials/ice_cube/ice_cube_item.tres" id="29_sv6gk"]
+[ext_resource type="Resource" uid="uid://kf1haxayj2yo" path="res://items/materials/minerals/diamond/diamond_item.tres" id="30_bjpm5"]
+[ext_resource type="Resource" uid="uid://5n0rxogo7ow0" path="res://items/food/candy_cane/candy_cane_item.tres" id="31_ra5pm"]
+[ext_resource type="AudioStream" uid="uid://bosk8bvvlwxak" path="res://assets/sound/upgrade_boat.mp3" id="32_bodai"]
+[ext_resource type="AudioStream" uid="uid://c03ir843xs060" path="res://assets/sound/error1.wav" id="33_bekq8"]
+[ext_resource type="AudioStream" uid="uid://by0xp4m3kjtsm" path="res://assets/sound/open_drop-04.mp3" id="34_j8bkj"]
+[ext_resource type="AudioStream" uid="uid://daku7up5e3io8" path="res://assets/sound/open_drop-05.mp3" id="35_77kc4"]
+[ext_resource type="AudioStream" uid="uid://cly6uplw8i3a8" path="res://assets/sound/open_drop-06.mp3" id="36_d53xu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hjjmf"]
+shader = ExtResource("2_2sr61")
+shader_parameter/iteration_times = 4
+shader_parameter/speed = 0.30000001425
+shader_parameter/color = Color(0, 0.35, 0.5, 1)
+shader_parameter/intensity = 0.004
+shader_parameter/scale = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pnw6m"]
+shader = ExtResource("3_7ci3e")
+shader_parameter/blur_amount = 2.2500002018750003
+shader_parameter/mix_amount = 0.50000002375
+shader_parameter/color_over = Color(0.035099987, 0.265785, 0.39, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hjjmf"]
+font_size = 33
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.23529412)
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dot_active"]
+bg_color = Color(1, 1, 1, 0.9)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dot_inactive"]
+bg_color = Color(1, 1, 1, 0.25)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="Animation" id="Animation_2h6tc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:offset_transform_rotation")
+tracks/0/interp = 4
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.08726646]
+}
+
+[sub_resource type="Animation" id="Animation_8rogd"]
+resource_name = "float"
+length = 4.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:offset_transform_rotation")
+tracks/0/interp = 4
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.08726646, 0.08726646, -0.08726646]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_48p26"]
+_data = {
+&"RESET": SubResource("Animation_2h6tc"),
+&"float": SubResource("Animation_8rogd")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vvji8"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0.0622, 0.0718, 0.075, 0.8)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.144, 0.276, 0.32, 0.6)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_xgxvu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_48p26"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="Resource" id="Resource_8rogd"]
+script = ExtResource("20_piccd")
+item = ExtResource("21_x7ndf")
+quantity = 12
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_vvji8"]
+script = ExtResource("20_piccd")
+item = ExtResource("22_fip4m")
+quantity = 15
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_xgxvu"]
+script = ExtResource("20_piccd")
+item = ExtResource("23_80pl6")
+quantity = 20
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_pdnyr"]
+script = ExtResource("20_piccd")
+item = ExtResource("24_35dw7")
+quantity = 5
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_5je6m"]
+script = ExtResource("20_piccd")
+item = ExtResource("25_jw7o6")
+quantity = 12
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_pgwk2"]
+script = ExtResource("20_piccd")
+item = ExtResource("26_bda7u")
+quantity = 25
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_hoe0r"]
+script = ExtResource("20_piccd")
+item = ExtResource("27_8ltn2")
+quantity = 20
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_f0v3p"]
+script = ExtResource("20_piccd")
+item = ExtResource("28_5utum")
+quantity = 3
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_b853o"]
+script = ExtResource("20_piccd")
+item = ExtResource("21_x7ndf")
+quantity = 5
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_8ix03"]
+script = ExtResource("20_piccd")
+item = ExtResource("29_sv6gk")
+quantity = 12
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_k8h4n"]
+script = ExtResource("20_piccd")
+item = ExtResource("30_bjpm5")
+quantity = 25
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_jkjge"]
+script = ExtResource("20_piccd")
+item = ExtResource("23_80pl6")
+quantity = 50
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_o1mcp"]
+script = ExtResource("20_piccd")
+item = ExtResource("31_ra5pm")
+quantity = 15
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_bes41"]
+script = ExtResource("20_piccd")
+item = ExtResource("21_x7ndf")
+quantity = 10
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_o4h5w"]
+script = ExtResource("20_piccd")
+item = ExtResource("24_35dw7")
+quantity = 5
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vyxke"]
+random_pitch = 1.0594631
+streams_count = 3
+stream_0/stream = ExtResource("34_j8bkj")
+stream_1/stream = ExtResource("35_77kc4")
+stream_2/stream = ExtResource("36_d53xu")
+
+[node name="BoatMenu" type="Control" unique_id=836490358 node_paths=PackedStringArray("island_carousel", "pause_menu", "boat_upgrader", "sail_button", "level_label")]
+process_mode = 2
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1n8v5")
+island_carousel = NodePath("Panel/Content/CarouselRow/IslandCarousel")
+pause_menu = NodePath("")
+boat_upgrader = NodePath("Panel/Content/BoatUpgrader")
+sail_button = NodePath("Panel/Content/SailContainer/SailButton")
+level_label = NodePath("Panel/Content/LevelLabel")
+
+[node name="BlurRect2" type="ColorRect" parent="." unique_id=1365759057]
+modulate = Color(1, 1, 1, 0.39215687)
+material = SubResource("ShaderMaterial_hjjmf")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="BlurRect" type="ColorRect" parent="." unique_id=818796903]
+material = SubResource("ShaderMaterial_pnw6m")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1153707312]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -1.0
+offset_right = 500.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"MenuPanel"
+
+[node name="Content" type="VBoxContainer" parent="Panel" unique_id=850054970]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HeaderLabel" type="Label" parent="Panel/Content" unique_id=939187507]
+layout_mode = 2
+text = "Choose Your Destination"
+label_settings = SubResource("LabelSettings_hjjmf")
+horizontal_alignment = 1
+
+[node name="LevelLabel" type="Label" parent="Panel/Content" unique_id=1220131052]
+layout_mode = 2
+text = "Boat Level 0 / 3"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel/Content" unique_id=635313530]
+layout_mode = 2
+
+[node name="CarouselRow" type="HBoxContainer" parent="Panel/Content" unique_id=612575738]
+layout_mode = 2
+
+[node name="PreviousButton" type="Button" parent="Panel/Content/CarouselRow" unique_id=468239470]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_font_sizes/font_size = 33
+text = "<"
+
+[node name="ButtonAudioManager" parent="Panel/Content/CarouselRow/PreviousButton" unique_id=2144126531 node_paths=PackedStringArray("signal_players") instance=ExtResource("4_757a6")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="IslandCarousel" type="Control" parent="Panel/Content/CarouselRow" unique_id=375677984 node_paths=PackedStringArray("previous_button", "next_button", "dot_container")]
+custom_minimum_size = Vector2(0, 240)
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("5_j1p4t")
+previous_button = NodePath("../PreviousButton")
+next_button = NodePath("../NextButton")
+dot_container = NodePath("../../DotContainer")
+dot_active_style = SubResource("StyleBoxFlat_dot_active")
+dot_inactive_style = SubResource("StyleBoxFlat_dot_inactive")
+
+[node name="IslandOption0" type="CenterContainer" parent="Panel/Content/CarouselRow/IslandCarousel" unique_id=1757810035 node_paths=PackedStringArray("name_label", "texture_rect", "status_label", "animation_player")]
+layout_mode = 0
+script = ExtResource("6_2djvg")
+island_resource = ExtResource("7_6wjpu")
+name_label = NodePath("Card/NameLabel")
+texture_rect = NodePath("Card/TextureRect")
+status_label = NodePath("Card/StatusLabel")
+animation_player = NodePath("Card/AnimationPlayer")
+
+[node name="Card" type="VBoxContainer" parent="Panel/Content/CarouselRow/IslandCarousel/IslandOption0" unique_id=2059922717]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="NameLabel" type="Label" parent="Panel/Content/CarouselRow/IslandCarousel/IslandOption0/Card" unique_id=412760326]
+layout_mode = 2
+text = "Island Name"
+label_settings = SubResource("LabelSettings_hjjmf")
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Content/CarouselRow/IslandCarousel/IslandOption0/Card" unique_id=1144542309]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_vertical = 3
+offset_transform_enabled = true
+offset_transform_rotation = 6.195919
+offset_transform_pivot_ratio = Vector2(0.5, 1)
+texture = ExtResource("8_uwg4w")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatusLabel" type="Label" parent="Panel/Content/CarouselRow/IslandCarousel/IslandOption0/Card" unique_id=1214770265]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Content/CarouselRow/IslandCarousel/IslandOption0/Card" unique_id=1742913105]
+libraries/ = SubResource("AnimationLibrary_48p26")
+autoplay = &"float"
+
+[node name="IslandOption1" type="CenterContainer" parent="Panel/Content/CarouselRow/IslandCarousel" unique_id=2030309071 node_paths=PackedStringArray("name_label", "texture_rect", "status_label", "animation_player")]
+layout_mode = 0
+script = ExtResource("6_2djvg")
+island_resource = ExtResource("9_8kjrt")
+name_label = NodePath("Card/NameLabel")
+texture_rect = NodePath("Card/TextureRect")
+status_label = NodePath("Card/StatusLabel")
+animation_player = NodePath("Card/AnimationPlayer")
+
+[node name="Card" type="VBoxContainer" parent="Panel/Content/CarouselRow/IslandCarousel/IslandOption1" unique_id=1970563543]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="NameLabel" type="Label" parent="Panel/Content/CarouselRow/IslandCarousel/IslandOption1/Card" unique_id=302950826]
+layout_mode = 2
+text = "Island Name"
+label_settings = SubResource("LabelSettings_hjjmf")
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Content/CarouselRow/IslandCarousel/IslandOption1/Card" unique_id=1418880950]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_vertical = 3
+offset_transform_enabled = true
+offset_transform_rotation = 6.195919
+offset_transform_pivot_ratio = Vector2(0.5, 1)
+texture = ExtResource("8_uwg4w")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatusLabel" type="Label" parent="Panel/Content/CarouselRow/IslandCarousel/IslandOption1/Card" unique_id=1525712357]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Content/CarouselRow/IslandCarousel/IslandOption1/Card" unique_id=1910833708]
+libraries/ = SubResource("AnimationLibrary_48p26")
+autoplay = &"float"
+
+[node name="IslandOption2" type="CenterContainer" parent="Panel/Content/CarouselRow/IslandCarousel" unique_id=1339938076 node_paths=PackedStringArray("name_label", "texture_rect", "status_label", "animation_player")]
+layout_mode = 0
+script = ExtResource("6_2djvg")
+island_resource = ExtResource("10_lafue")
+name_label = NodePath("Card/NameLabel")
+texture_rect = NodePath("Card/TextureRect")
+status_label = NodePath("Card/StatusLabel")
+animation_player = NodePath("Card/AnimationPlayer")
+
+[node name="Card" type="VBoxContainer" parent="Panel/Content/CarouselRow/IslandCarousel/IslandOption2" unique_id=200631522]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="NameLabel" type="Label" parent="Panel/Content/CarouselRow/IslandCarousel/IslandOption2/Card" unique_id=1413837596]
+layout_mode = 2
+text = "Island Name"
+label_settings = SubResource("LabelSettings_hjjmf")
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Content/CarouselRow/IslandCarousel/IslandOption2/Card" unique_id=1792295378]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_vertical = 3
+offset_transform_enabled = true
+offset_transform_rotation = 6.195919
+offset_transform_pivot_ratio = Vector2(0.5, 1)
+texture = ExtResource("8_uwg4w")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatusLabel" type="Label" parent="Panel/Content/CarouselRow/IslandCarousel/IslandOption2/Card" unique_id=1620960268]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Content/CarouselRow/IslandCarousel/IslandOption2/Card" unique_id=499720700]
+libraries/ = SubResource("AnimationLibrary_48p26")
+autoplay = &"float"
+
+[node name="IslandOption3" type="CenterContainer" parent="Panel/Content/CarouselRow/IslandCarousel" unique_id=399021819 node_paths=PackedStringArray("name_label", "texture_rect", "status_label", "animation_player")]
+layout_mode = 0
+script = ExtResource("6_2djvg")
+island_resource = ExtResource("11_ctd2w")
+name_label = NodePath("Card/NameLabel")
+texture_rect = NodePath("Card/TextureRect")
+status_label = NodePath("Card/StatusLabel")
+animation_player = NodePath("Card/AnimationPlayer")
+
+[node name="Card" type="VBoxContainer" parent="Panel/Content/CarouselRow/IslandCarousel/IslandOption3" unique_id=164902944]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="NameLabel" type="Label" parent="Panel/Content/CarouselRow/IslandCarousel/IslandOption3/Card" unique_id=2066494562]
+layout_mode = 2
+text = "Island Name"
+label_settings = SubResource("LabelSettings_hjjmf")
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Content/CarouselRow/IslandCarousel/IslandOption3/Card" unique_id=149447701]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_vertical = 3
+offset_transform_enabled = true
+offset_transform_rotation = 6.195919
+offset_transform_pivot_ratio = Vector2(0.5, 1)
+texture = ExtResource("8_uwg4w")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StatusLabel" type="Label" parent="Panel/Content/CarouselRow/IslandCarousel/IslandOption3/Card" unique_id=605993113]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Content/CarouselRow/IslandCarousel/IslandOption3/Card" unique_id=524326564]
+libraries/ = SubResource("AnimationLibrary_48p26")
+autoplay = &"float"
+
+[node name="NextButton" type="Button" parent="Panel/Content/CarouselRow" unique_id=648795762]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+theme_override_font_sizes/font_size = 33
+text = ">"
+
+[node name="ButtonAudioManager" parent="Panel/Content/CarouselRow/NextButton" unique_id=1324637241 node_paths=PackedStringArray("signal_players") instance=ExtResource("4_757a6")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="DotContainer" type="HBoxContainer" parent="Panel/Content" unique_id=2021788384]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="SailContainer" type="CenterContainer" parent="Panel/Content" unique_id=202080298]
+layout_mode = 2
+
+[node name="SailButton" type="Button" parent="Panel/Content/SailContainer" unique_id=1452185411]
+custom_minimum_size = Vector2(360, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+disabled = true
+text = "Set Sail"
+
+[node name="ButtonAudioManager" parent="Panel/Content/SailContainer/SailButton" unique_id=671284248 node_paths=PackedStringArray("signal_players") instance=ExtResource("4_757a6")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="SignalAudioManager" type="Node" parent="Panel/Content/SailContainer/SailButton" unique_id=1815409009 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("12_1sw6c")
+signal_players = {
+&"pressed": NodePath("")
+}
+metadata/_custom_type_script = "uid://b3snj0gi7akf8"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Panel/Content/SailContainer/SailButton/SignalAudioManager" unique_id=2021533269]
+stream = ExtResource("13_h0go2")
+bus = &"SFX"
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/Content" unique_id=250205645]
+layout_mode = 2
+
+[node name="BoatUpgrader" type="VBoxContainer" parent="Panel/Content" unique_id=909259443 node_paths=PackedStringArray("requirements", "requirement_display_container", "upgrade_button", "title_label", "player_inventory", "boat_menu")]
+layout_mode = 2
+theme_override_constants/separation = 12
+script = ExtResource("14_03asq")
+requirements = {
+1: NodePath(""),
+2: NodePath(""),
+3: NodePath("")
+}
+requirement_display_container = NodePath("RequirementContainer/GridContainer")
+upgrade_button = NodePath("UpgradeButtonContainer/UpgradeButton")
+title_label = NodePath("TitleLabel")
+player_inventory = NodePath("")
+boat_menu = NodePath("../../..")
+
+[node name="TitleLabel" type="Label" parent="Panel/Content/BoatUpgrader" unique_id=562435393]
+layout_mode = 2
+text = "Next Upgrade"
+label_settings = SubResource("LabelSettings_hjjmf")
+horizontal_alignment = 1
+
+[node name="RequirementContainer" type="CenterContainer" parent="Panel/Content/BoatUpgrader" unique_id=394886490]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="Panel/Content/BoatUpgrader/RequirementContainer" unique_id=665038519]
+layout_mode = 2
+columns = 3
+
+[node name="RequirementDisplay1" type="Control" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer" unique_id=1281116464 node_paths=PackedStringArray("fraction_texture_rect", "fraction_progress_bar", "icon_rect", "label")]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+script = ExtResource("15_cqjqc")
+hide_when_empty = true
+auto_set_index_enabled = true
+fraction_is_flipped = true
+fraction_texture_rect = NodePath("HBoxContainer/Indicator")
+fraction_texture_sufficient = ExtResource("16_hpb05")
+fraction_texture_sufficient_modulate = Color(0.23346883, 0.9999996, 0.25140026, 1)
+fraction_texture_insufficient = ExtResource("17_itk7l")
+fraction_texture_insufficient_modulate = Color(1, 0.24000001, 0.24000001, 1)
+fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
+icon_rect = NodePath("HBoxContainer/TextureRect")
+label = NodePath("HBoxContainer/VBoxContainer/Label")
+label_mode = 1
+metadata/_custom_type_script = "uid://b1eix6p0204fp"
+
+[node name="Background" type="PanelContainer" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay1" unique_id=121966080]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"MenuPanel"
+theme_override_styles/panel = SubResource("StyleBoxFlat_vvji8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay1" unique_id=1068476435]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay1/HBoxContainer" unique_id=469453568]
+custom_minimum_size = Vector2(40, 40)
+custom_maximum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("8_uwg4w")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay1/HBoxContainer" unique_id=185911531]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay1/HBoxContainer/VBoxContainer" unique_id=550767200]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Item x 10"
+label_settings = SubResource("LabelSettings_xgxvu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay1/HBoxContainer/VBoxContainer" unique_id=1161244565]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_48p26")
+max_value = 1.0
+show_percentage = false
+
+[node name="Indicator" type="TextureRect" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay1/HBoxContainer" unique_id=49302]
+custom_minimum_size = Vector2(40, 40)
+custom_maximum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("18_qeg3s")
+expand_mode = 4
+
+[node name="RequirementDisplay2" type="Control" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer" unique_id=448019994 node_paths=PackedStringArray("fraction_texture_rect", "fraction_progress_bar", "icon_rect", "label")]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+script = ExtResource("15_cqjqc")
+hide_when_empty = true
+auto_set_index_enabled = true
+fraction_is_flipped = true
+fraction_texture_rect = NodePath("HBoxContainer/Indicator")
+fraction_texture_sufficient = ExtResource("16_hpb05")
+fraction_texture_sufficient_modulate = Color(0.23346883, 0.9999996, 0.25140026, 1)
+fraction_texture_insufficient = ExtResource("17_itk7l")
+fraction_texture_insufficient_modulate = Color(1, 0.24000001, 0.24000001, 1)
+fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
+icon_rect = NodePath("HBoxContainer/TextureRect")
+label = NodePath("HBoxContainer/VBoxContainer/Label")
+label_mode = 1
+metadata/_custom_type_script = "uid://b1eix6p0204fp"
+
+[node name="Background" type="PanelContainer" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay2" unique_id=1274378905]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"MenuPanel"
+theme_override_styles/panel = SubResource("StyleBoxFlat_vvji8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay2" unique_id=596717646]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay2/HBoxContainer" unique_id=1523993998]
+custom_minimum_size = Vector2(40, 40)
+custom_maximum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("8_uwg4w")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay2/HBoxContainer" unique_id=342955222]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay2/HBoxContainer/VBoxContainer" unique_id=1392074480]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Item x 10"
+label_settings = SubResource("LabelSettings_xgxvu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay2/HBoxContainer/VBoxContainer" unique_id=419089007]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_48p26")
+max_value = 1.0
+show_percentage = false
+
+[node name="Indicator" type="TextureRect" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay2/HBoxContainer" unique_id=1163482792]
+custom_minimum_size = Vector2(40, 40)
+custom_maximum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("18_qeg3s")
+expand_mode = 4
+
+[node name="RequirementDisplay3" type="Control" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer" unique_id=520774916 node_paths=PackedStringArray("fraction_texture_rect", "fraction_progress_bar", "icon_rect", "label")]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+script = ExtResource("15_cqjqc")
+hide_when_empty = true
+auto_set_index_enabled = true
+fraction_is_flipped = true
+fraction_texture_rect = NodePath("HBoxContainer/Indicator")
+fraction_texture_sufficient = ExtResource("16_hpb05")
+fraction_texture_sufficient_modulate = Color(0.23346883, 0.9999996, 0.25140026, 1)
+fraction_texture_insufficient = ExtResource("17_itk7l")
+fraction_texture_insufficient_modulate = Color(1, 0.24000001, 0.24000001, 1)
+fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
+icon_rect = NodePath("HBoxContainer/TextureRect")
+label = NodePath("HBoxContainer/VBoxContainer/Label")
+label_mode = 1
+metadata/_custom_type_script = "uid://b1eix6p0204fp"
+
+[node name="Background" type="PanelContainer" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay3" unique_id=2074607077]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"MenuPanel"
+theme_override_styles/panel = SubResource("StyleBoxFlat_vvji8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay3" unique_id=1101155567]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay3/HBoxContainer" unique_id=1814414874]
+custom_minimum_size = Vector2(40, 40)
+custom_maximum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("8_uwg4w")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay3/HBoxContainer" unique_id=400771164]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay3/HBoxContainer/VBoxContainer" unique_id=1489232102]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Item x 10"
+label_settings = SubResource("LabelSettings_xgxvu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay3/HBoxContainer/VBoxContainer" unique_id=1283080138]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_48p26")
+max_value = 1.0
+show_percentage = false
+
+[node name="Indicator" type="TextureRect" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay3/HBoxContainer" unique_id=518963393]
+custom_minimum_size = Vector2(40, 40)
+custom_maximum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("18_qeg3s")
+expand_mode = 4
+
+[node name="RequirementDisplay4" type="Control" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer" unique_id=319269589 node_paths=PackedStringArray("fraction_texture_rect", "fraction_progress_bar", "icon_rect", "label")]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+script = ExtResource("15_cqjqc")
+hide_when_empty = true
+auto_set_index_enabled = true
+fraction_is_flipped = true
+fraction_texture_rect = NodePath("HBoxContainer/Indicator")
+fraction_texture_sufficient = ExtResource("16_hpb05")
+fraction_texture_sufficient_modulate = Color(0.23346883, 0.9999996, 0.25140026, 1)
+fraction_texture_insufficient = ExtResource("17_itk7l")
+fraction_texture_insufficient_modulate = Color(1, 0.24000001, 0.24000001, 1)
+fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
+icon_rect = NodePath("HBoxContainer/TextureRect")
+label = NodePath("HBoxContainer/VBoxContainer/Label")
+label_mode = 1
+metadata/_custom_type_script = "uid://b1eix6p0204fp"
+
+[node name="Background" type="PanelContainer" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay4" unique_id=1045262059]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"MenuPanel"
+theme_override_styles/panel = SubResource("StyleBoxFlat_vvji8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay4" unique_id=2065728444]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay4/HBoxContainer" unique_id=680476803]
+custom_minimum_size = Vector2(40, 40)
+custom_maximum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("8_uwg4w")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay4/HBoxContainer" unique_id=1782702798]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay4/HBoxContainer/VBoxContainer" unique_id=2099901359]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Item x 10"
+label_settings = SubResource("LabelSettings_xgxvu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay4/HBoxContainer/VBoxContainer" unique_id=1041705924]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_48p26")
+max_value = 1.0
+show_percentage = false
+
+[node name="Indicator" type="TextureRect" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay4/HBoxContainer" unique_id=701292873]
+custom_minimum_size = Vector2(40, 40)
+custom_maximum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("18_qeg3s")
+expand_mode = 4
+
+[node name="RequirementDisplay5" type="Control" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer" unique_id=2044248547 node_paths=PackedStringArray("fraction_texture_rect", "fraction_progress_bar", "icon_rect", "label")]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+script = ExtResource("15_cqjqc")
+hide_when_empty = true
+auto_set_index_enabled = true
+fraction_is_flipped = true
+fraction_texture_rect = NodePath("HBoxContainer/Indicator")
+fraction_texture_sufficient = ExtResource("16_hpb05")
+fraction_texture_sufficient_modulate = Color(0.23346883, 0.9999996, 0.25140026, 1)
+fraction_texture_insufficient = ExtResource("17_itk7l")
+fraction_texture_insufficient_modulate = Color(1, 0.24000001, 0.24000001, 1)
+fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
+icon_rect = NodePath("HBoxContainer/TextureRect")
+label = NodePath("HBoxContainer/VBoxContainer/Label")
+label_mode = 1
+metadata/_custom_type_script = "uid://b1eix6p0204fp"
+
+[node name="Background" type="PanelContainer" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay5" unique_id=739547455]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"MenuPanel"
+theme_override_styles/panel = SubResource("StyleBoxFlat_vvji8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay5" unique_id=249568342]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay5/HBoxContainer" unique_id=1576363642]
+custom_minimum_size = Vector2(40, 40)
+custom_maximum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("8_uwg4w")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay5/HBoxContainer" unique_id=156008339]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay5/HBoxContainer/VBoxContainer" unique_id=1679672407]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Item x 10"
+label_settings = SubResource("LabelSettings_xgxvu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay5/HBoxContainer/VBoxContainer" unique_id=236780771]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_48p26")
+max_value = 1.0
+show_percentage = false
+
+[node name="Indicator" type="TextureRect" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay5/HBoxContainer" unique_id=1144512023]
+custom_minimum_size = Vector2(40, 40)
+custom_maximum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("18_qeg3s")
+expand_mode = 4
+
+[node name="RequirementDisplay6" type="Control" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer" unique_id=1557530509 node_paths=PackedStringArray("fraction_texture_rect", "fraction_progress_bar", "icon_rect", "label")]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+script = ExtResource("15_cqjqc")
+hide_when_empty = true
+auto_set_index_enabled = true
+fraction_is_flipped = true
+fraction_texture_rect = NodePath("HBoxContainer/Indicator")
+fraction_texture_sufficient = ExtResource("16_hpb05")
+fraction_texture_sufficient_modulate = Color(0.23346883, 0.9999996, 0.25140026, 1)
+fraction_texture_insufficient = ExtResource("17_itk7l")
+fraction_texture_insufficient_modulate = Color(1, 0.24000001, 0.24000001, 1)
+fraction_progress_bar = NodePath("HBoxContainer/VBoxContainer/ProgressBar")
+icon_rect = NodePath("HBoxContainer/TextureRect")
+label = NodePath("HBoxContainer/VBoxContainer/Label")
+label_mode = 1
+metadata/_custom_type_script = "uid://b1eix6p0204fp"
+
+[node name="Background" type="PanelContainer" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay6" unique_id=239084619]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"MenuPanel"
+theme_override_styles/panel = SubResource("StyleBoxFlat_vvji8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay6" unique_id=287953594]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay6/HBoxContainer" unique_id=321099617]
+custom_minimum_size = Vector2(40, 40)
+custom_maximum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("8_uwg4w")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay6/HBoxContainer" unique_id=153940775]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay6/HBoxContainer/VBoxContainer" unique_id=2097636564]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Item x 10"
+label_settings = SubResource("LabelSettings_xgxvu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay6/HBoxContainer/VBoxContainer" unique_id=1940072420]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_48p26")
+max_value = 1.0
+show_percentage = false
+
+[node name="Indicator" type="TextureRect" parent="Panel/Content/BoatUpgrader/RequirementContainer/GridContainer/RequirementDisplay6/HBoxContainer" unique_id=2079306985]
+custom_minimum_size = Vector2(40, 40)
+custom_maximum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("18_qeg3s")
+expand_mode = 4
+
+[node name="UpgradeButtonContainer" type="CenterContainer" parent="Panel/Content/BoatUpgrader" unique_id=217895159]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="UpgradeButton" type="Button" parent="Panel/Content/BoatUpgrader/UpgradeButtonContainer" unique_id=261894188]
+custom_minimum_size = Vector2(150, 30)
+layout_mode = 2
+text = "Upgrade"
+
+[node name="ButtonAudioManager" parent="Panel/Content/BoatUpgrader/UpgradeButtonContainer/UpgradeButton" unique_id=1594856571 node_paths=PackedStringArray("signal_players") instance=ExtResource("4_757a6")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="UpgradeRequirement1" type="Node" parent="Panel/Content/BoatUpgrader" unique_id=1800519305]
+script = ExtResource("19_m3sx3")
+item_instances = Array[ExtResource("20_piccd")]([SubResource("Resource_8rogd"), SubResource("Resource_vvji8"), SubResource("Resource_xgxvu"), SubResource("Resource_pdnyr")])
+constant = true
+size = 9
+metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
+
+[node name="UpgradeRequirement2" type="Node" parent="Panel/Content/BoatUpgrader" unique_id=1301661319]
+script = ExtResource("19_m3sx3")
+item_instances = Array[ExtResource("20_piccd")]([SubResource("Resource_5je6m"), SubResource("Resource_pgwk2"), SubResource("Resource_hoe0r"), SubResource("Resource_f0v3p"), SubResource("Resource_b853o")])
+constant = true
+size = 9
+metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
+
+[node name="UpgradeRequirement3" type="Node" parent="Panel/Content/BoatUpgrader" unique_id=274735826]
+script = ExtResource("19_m3sx3")
+item_instances = Array[ExtResource("20_piccd")]([SubResource("Resource_8ix03"), SubResource("Resource_k8h4n"), SubResource("Resource_jkjge"), SubResource("Resource_o1mcp"), SubResource("Resource_bes41"), SubResource("Resource_o4h5w")])
+constant = true
+size = 9
+metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
+
+[node name="SignalAudioManager" type="Node" parent="Panel/Content/BoatUpgrader" unique_id=836471642 node_paths=PackedStringArray("signal_players")]
+process_mode = 3
+script = ExtResource("12_1sw6c")
+signal_players = {
+&"failed_upgrade": NodePath(""),
+&"started_upgrade": NodePath("")
+}
+metadata/_custom_type_script = "uid://b3snj0gi7akf8"
+
+[node name="UpgradePlayer" type="AudioStreamPlayer" parent="Panel/Content/BoatUpgrader/SignalAudioManager" unique_id=342985817]
+stream = ExtResource("32_bodai")
+bus = &"UI"
+
+[node name="FailPlayer" type="AudioStreamPlayer" parent="Panel/Content/BoatUpgrader/SignalAudioManager" unique_id=411886145]
+stream = ExtResource("33_bekq8")
+bus = &"UI"
+
+[node name="SignalAudioManager" type="Node" parent="." unique_id=1505177656 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("12_1sw6c")
+signal_players = {
+&"backed_out": NodePath(""),
+&"opened": NodePath("")
+}
+metadata/_custom_type_script = "uid://b3snj0gi7akf8"
+
+[node name="BoatPlayer" type="AudioStreamPlayer" parent="SignalAudioManager" unique_id=1841651029]
+stream = SubResource("AudioStreamRandomizer_vyxke")
+bus = &"SFX"

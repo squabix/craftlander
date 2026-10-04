@@ -1,0 +1,421 @@
+[gd_scene format=3 uid="uid://byfsafyqcn4mi"]
+
+[ext_resource type="Script" uid="uid://ioo6s3m7wbha" path="res://common/inventory_system/inventory_selector.gd" id="1_it7mh"]
+[ext_resource type="Script" uid="uid://b3snj0gi7akf8" path="res://common/signal_audio_manager.gd" id="2_f5ha0"]
+[ext_resource type="AudioStream" uid="uid://k4ldqgj2la57" path="res://assets/sound/click1.mp3" id="3_iexe6"]
+[ext_resource type="FontFile" uid="uid://cbr5ncx4f3a1n" path="res://assets/ui/sineas.otf" id="4_kmuoy"]
+[ext_resource type="Script" uid="uid://barub2aryb0nq" path="res://common/ui/icon_tooltip_label.gd" id="5_icm2t"]
+[ext_resource type="Script" uid="uid://ct3xcqdtjfkcf" path="res://common/ui/action_hint/hotkey_hints.gd" id="6_il2su"]
+[ext_resource type="PackedScene" uid="uid://cgkf2sh6frkfj" path="res://common/ui/action_hint/action_hint.tscn" id="7_v1i2f"]
+[ext_resource type="Script" uid="uid://djjo3m58bs0x2" path="res://player/ui/tutorial/hint_toast.gd" id="8_dnpt3"]
+[ext_resource type="PackedScene" path="res://player/ui/autosave_indicator.tscn" id="9_lq3q4"]
+[ext_resource type="StyleBox" uid="uid://defeb68kadnmc" path="res://assets/ui/stat_bar_background.tres" id="10_1qh5v"]
+[ext_resource type="StyleBox" uid="uid://chib047rjc57t" path="res://assets/ui/health_bar_fill.tres" id="11_g8t4b"]
+[ext_resource type="Script" uid="uid://q5lh058bmpum" path="res://common/damage_system/health_bar.gd" id="12_xa0rp"]
+[ext_resource type="Script" uid="uid://c3xfbb8ay0ghk" path="res://common/interpolated_bar.gd" id="13_43v7k"]
+[ext_resource type="Script" uid="uid://b7pvp0pnngnem" path="res://common/ui/fps_label.gd" id="14_stkg2"]
+[ext_resource type="Script" uid="uid://bec5onipef8yy" path="res://player/day_night_indicator.gd" id="15_hv5il"]
+[ext_resource type="Script" uid="uid://wye585kqw6a6" path="res://player/ui/collected_items_list.gd" id="16_k4clx"]
+[ext_resource type="Shader" uid="uid://clux7d66a4hbi" path="res://common/ui/radial.gdshader" id="17_t7df6"]
+[ext_resource type="Script" uid="uid://ddiytppqbuop1" path="res://common/inventory_system/item_cooldown_radial.gd" id="18_vk1hv"]
+[ext_resource type="Script" uid="uid://dk6do6ua1pycb" path="res://player/ui/boat_upgrade_bar.gd" id="19_uxsc4"]
+[ext_resource type="Script" uid="uid://6bmpcar4ddbv" path="res://player/ui/boat_compass_tracker.gd" id="20_mjqrb"]
+[ext_resource type="Script" uid="uid://bka8v53yqd1j6" path="res://player/ui/enemy_compass_tracker.gd" id="21_kks0l"]
+[ext_resource type="Curve" uid="uid://ckgb7j52s42n3" path="res://player/ui/enemy_marker_size_curve.tres" id="22_eds6u"]
+[ext_resource type="Script" uid="uid://73ya7jxulyl4" path="res://common/interval_staggerer.gd" id="23_jjuq1"]
+[ext_resource type="PackedScene" uid="uid://jswv1syw7ggn" path="res://player/ui/compass.tscn" id="24_lhneb"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_rnncm"]
+random_pitch = 1.0594631
+streams_count = 1
+stream_0/stream = ExtResource("3_iexe6")
+
+[sub_resource type="LabelSettings" id="LabelSettings_7uc20"]
+line_spacing = 0.0
+font_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b8hi5"]
+bg_color = Color(0.89, 0.62299997, 0.35599998, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fjxoa"]
+bg_color = Color(0.538974, 0.8672089, 0.34119555, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="Gradient" id="Gradient_kcq4v"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5601266)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qavcc"]
+gradient = SubResource("Gradient_kcq4v")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j420s"]
+shader = ExtResource("17_t7df6")
+shader_parameter/radius = 0.218000010355
+shader_parameter/thickness = 0.0490000023275
+shader_parameter/angle_offset = -90.0
+shader_parameter/fill_amount = 1.0
+
+[sub_resource type="Gradient" id="Gradient_j420s"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hjjmf"]
+gradient = SubResource("Gradient_j420s")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boatupg"]
+bg_color = Color(0.35599998, 0.62299997, 0.89, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boatupg_full"]
+bg_color = Color(0.98, 0.82, 0.25, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[node name="HUD" type="Control" unique_id=899263510]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HoverInventorySelector" type="Node" parent="." unique_id=835281076 node_paths=PackedStringArray("inventory")]
+script = ExtResource("1_it7mh")
+enabled = false
+reset_selection_on_disable = true
+inventory = NodePath("")
+metadata/_custom_type_script = "uid://ioo6s3m7wbha"
+
+[node name="SignalAudioManager" type="Node" parent="HoverInventorySelector" unique_id=539860488 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("2_f5ha0")
+signal_players = {
+&"selected_new_index": NodePath("")
+}
+metadata/_custom_type_script = "uid://b3snj0gi7akf8"
+
+[node name="SelectPlayer" type="AudioStreamPlayer" parent="HoverInventorySelector/SignalAudioManager" unique_id=861373877]
+stream = SubResource("AudioStreamRandomizer_rnncm")
+volume_db = -10.0
+bus = &"UI"
+
+[node name="TooltipLabel" type="RichTextLabel" parent="." unique_id=1773718056 node_paths=PackedStringArray("interactors")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -10.0
+offset_right = 420.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("4_kmuoy")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+script = ExtResource("5_icm2t")
+icon_size = 30
+interactors = [NodePath(""), NodePath("")]
+
+[node name="ActionHints" type="GridContainer" parent="." unique_id=461563704 node_paths=PackedStringArray("item_holder", "use_hint")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = -41.0
+offset_right = 530.0
+grow_vertical = 0
+columns = 6
+script = ExtResource("6_il2su")
+item_holder = NodePath("")
+use_hint = NodePath("UseHint")
+
+[node name="DropHint" parent="ActionHints" unique_id=706807440 instance=ExtResource("7_v1i2f")]
+layout_mode = 2
+action = &"drop"
+hint_text = "Drop"
+
+[node name="InteractHint" parent="ActionHints" unique_id=837679239 instance=ExtResource("7_v1i2f")]
+layout_mode = 2
+action = &"interact"
+hint_text = "Interact"
+
+[node name="JumpHint" parent="ActionHints" unique_id=705578520 instance=ExtResource("7_v1i2f")]
+layout_mode = 2
+action = &"jump"
+hint_text = "Jump"
+
+[node name="SprintHint" parent="ActionHints" unique_id=624039709 instance=ExtResource("7_v1i2f")]
+layout_mode = 2
+action = &"sprint"
+hint_text = "Sprint"
+
+[node name="PauseHint" parent="ActionHints" unique_id=1263810377 instance=ExtResource("7_v1i2f")]
+layout_mode = 2
+action = &"pause"
+hint_text = "Pause/Inventory"
+
+[node name="UseHint" parent="ActionHints" unique_id=773439232 instance=ExtResource("7_v1i2f")]
+layout_mode = 2
+action = &"use_primary"
+
+[node name="HintToast" type="Control" parent="." unique_id=898922972 node_paths=PackedStringArray("label", "icon")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -260.0
+offset_top = -176.0
+offset_right = 260.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("8_dnpt3")
+label = NodePath("Container/HBoxContainer/Label")
+icon = NodePath("Container/HBoxContainer/Icon")
+
+[node name="Container" type="PanelContainer" parent="HintToast" unique_id=925730874]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HintToast/Container" unique_id=952764844]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="HintToast/Container/HBoxContainer" unique_id=147791630]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_vertical = 4
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HintToast/Container/HBoxContainer" unique_id=1777867573]
+custom_minimum_size = Vector2(360, 0)
+layout_mode = 2
+text = "testestestest
+tetestset
+set"
+label_settings = SubResource("LabelSettings_7uc20")
+autowrap_mode = 3
+
+[node name="AutosaveIndicator" parent="." unique_id=1458461193 instance=ExtResource("9_lq3q4")]
+layout_mode = 1
+
+[node name="BarContainer" type="VBoxContainer" parent="." unique_id=1592315360]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 245.0
+offset_bottom = 162.0
+
+[node name="HealthBar" type="ProgressBar" parent="BarContainer" unique_id=973784293 node_paths=PackedStringArray("health")]
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+theme_override_styles/background = ExtResource("10_1qh5v")
+theme_override_styles/fill = ExtResource("11_g8t4b")
+value = 4.58
+show_percentage = false
+script = ExtResource("12_xa0rp")
+health = NodePath("")
+instant_on_max_hp_change = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BarContainer" unique_id=514088312]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+
+[node name="HungerBar" type="ProgressBar" parent="BarContainer/HBoxContainer" unique_id=771758288]
+custom_minimum_size = Vector2(115, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = ExtResource("10_1qh5v")
+theme_override_styles/fill = SubResource("StyleBoxFlat_b8hi5")
+max_value = 1.0
+value = 0.41
+show_percentage = false
+script = ExtResource("13_43v7k")
+metadata/_custom_type_script = "uid://c3xfbb8ay0ghk"
+
+[node name="StaminaBar" type="ProgressBar" parent="BarContainer/HBoxContainer" unique_id=726216838]
+custom_minimum_size = Vector2(115, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = ExtResource("10_1qh5v")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fjxoa")
+max_value = 1.0
+value = 0.41
+show_percentage = false
+script = ExtResource("13_43v7k")
+fade_when_idle = true
+metadata/_custom_type_script = "uid://c3xfbb8ay0ghk"
+
+[node name="FPSLabel" type="Label" parent="BarContainer" unique_id=646049805]
+visible = false
+layout_mode = 2
+text = "FPS"
+script = ExtResource("14_stkg2")
+
+[node name="DayNightLabel" type="RichTextLabel" parent="BarContainer" unique_id=731935272]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "Day 0"
+fit_content = true
+scroll_active = false
+script = ExtResource("15_hv5il")
+
+[node name="CollectedItemsList" type="VBoxContainer" parent="BarContainer" unique_id=1134936632 node_paths=PackedStringArray("player")]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 4
+alignment = 2
+script = ExtResource("16_k4clx")
+player = NodePath("")
+
+[node name="Cursor2" type="TextureRect" parent="." unique_id=416036061]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_qavcc")
+expand_mode = 1
+
+[node name="Cursor" type="TextureRect" parent="." unique_id=1248414426 node_paths=PackedStringArray("item_holder")]
+material = SubResource("ShaderMaterial_j420s")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_hjjmf")
+expand_mode = 1
+script = ExtResource("18_vk1hv")
+item_holder = NodePath("")
+metadata/_custom_type_script = "uid://ddiytppqbuop1"
+
+[node name="UpgradeBarContainer" type="VBoxContainer" parent="." unique_id=1511404495]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -132.5
+offset_right = 132.5
+offset_bottom = 43.0
+grow_horizontal = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="UpgradeBarContainer" unique_id=136296500]
+layout_mode = 2
+text = "Next Upgrade"
+horizontal_alignment = 1
+
+[node name="BoatUpgradeBar" type="ProgressBar" parent="UpgradeBarContainer" unique_id=2088357448 node_paths=PackedStringArray("boat_upgrader", "player_inventory", "container")]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+theme_override_styles/background = ExtResource("10_1qh5v")
+theme_override_styles/fill = SubResource("StyleBoxFlat_boatupg")
+show_percentage = false
+script = ExtResource("19_uxsc4")
+boat_upgrader = NodePath("")
+player_inventory = NodePath("")
+container = NodePath("..")
+full_fill_style = SubResource("StyleBoxFlat_boatupg_full")
+
+[node name="BoatCompassTracker" type="Node" parent="." unique_id=1238797885 node_paths=PackedStringArray("compass")]
+script = ExtResource("20_mjqrb")
+compass = NodePath("../RightContainer/Compass")
+
+[node name="EnemyCompassTracker" type="Node" parent="." unique_id=562396409 node_paths=PackedStringArray("compass", "center_node")]
+script = ExtResource("21_kks0l")
+compass = NodePath("../RightContainer/Compass")
+center_node = NodePath("")
+size_curve = ExtResource("22_eds6u")
+
+[node name="IntervalStaggerer" type="Node" parent="EnemyCompassTracker" unique_id=1922331806 node_paths=PackedStringArray("target_methods")]
+script = ExtResource("23_jjuq1")
+base_interval = 0.3
+target_methods = {
+NodePath(""): &"refresh"
+}
+
+[node name="RightContainer" type="VBoxContainer" parent="." unique_id=867140569]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -193.0
+offset_right = -3.0
+offset_bottom = 236.0
+grow_horizontal = 0
+
+[node name="Compass" parent="RightContainer" unique_id=771501149 node_paths=PackedStringArray("center_node") instance=ExtResource("24_lhneb")]
+layout_mode = 2
+center_node = NodePath("")
+marker_min_size = 1.5
+marker_max_size = 8.0

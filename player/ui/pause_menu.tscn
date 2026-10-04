@@ -1,0 +1,3151 @@
+[gd_scene format=3 uid="uid://u1yj8rhnppq5"]
+
+[ext_resource type="Script" uid="uid://7qluctwrt8qk" path="res://player/ui/pause_menu.gd" id="1_qedsm"]
+[ext_resource type="Shader" uid="uid://of3kag0xs7lt" path="res://player/ui/blur_shader.gdshader" id="2_furd5"]
+[ext_resource type="PackedScene" uid="uid://cw2ir860alcgt" path="res://player/ui/crafting/environment/crafting_environment.tscn" id="3_rbjai"]
+[ext_resource type="Script" uid="uid://crew0n1e8xk4r" path="res://player/ui/crafting/recipes/recipe_panel.gd" id="4_b503c"]
+[ext_resource type="Script" uid="uid://bwcomtie8q510" path="res://player/ui/crafting/recipes/recipe_panel_group.gd" id="5_6k3g6"]
+[ext_resource type="Texture2D" uid="uid://dhv8ewr4yjk1o" path="res://items/tools/shoddy/shoddy_axe/shoddy_axe.png" id="6_cekq2"]
+[ext_resource type="Texture2D" uid="uid://cjt81ehcvp1ub" path="res://items/food/honeycomb/honeycomb.png" id="7_2iqcl"]
+[ext_resource type="Texture2D" uid="uid://1ysw5k3nfh4u" path="res://items/weapons/copper_sword/copper_sword.png" id="8_ob4sc"]
+[ext_resource type="Texture2D" uid="uid://c3o13o5vrivr" path="res://items/tools/shoddy/shoddy_pickaxe/shoddy_pickaxe.png" id="9_72x7s"]
+[ext_resource type="Texture2D" uid="uid://cr2esjvp5aglv" path="res://items/weapons/ice_staff/ice_staff.png" id="10_s5ejt"]
+[ext_resource type="Texture2D" uid="uid://dst7iet4aksej" path="res://items/materials/rock/rock.png" id="11_n0d40"]
+[ext_resource type="PackedScene" uid="uid://d0uoopq8psjqc" path="res://common/sound/sound_button/button_audio_manager.tscn" id="12_dtqpw"]
+[ext_resource type="Script" uid="uid://cf1x38wu72w8n" path="res://player/ui/crafting/recipes/recipe_display.gd" id="13_xnh7e"]
+[ext_resource type="Texture2D" uid="uid://1xbns4oq6pfw" path="res://player/ui/crafting/crafting_slot.tres" id="14_ayna0"]
+[ext_resource type="Script" uid="uid://bs8sryrpq1j3b" path="res://player/ui/crafting/recipes/recipe_learner.gd" id="15_piyae"]
+[ext_resource type="Script" uid="uid://cpv5s708r1wvo" path="res://items/crafting/recipe_discovery.gd" id="16_j5uc7"]
+[ext_resource type="Script" uid="uid://c5ntwgpouf24m" path="res://items/crafting/item_recipe.gd" id="17_48ffw"]
+[ext_resource type="Resource" uid="uid://c2ysy7ee3bxr6" path="res://items/tools/shoddy/shoddy_axe/shoddy_axe_recipe.tres" id="18_np8ny"]
+[ext_resource type="Resource" uid="uid://b3nw0sd58a2j" path="res://items/tools/shoddy/shoddy_pickaxe/shoddy_pickaxe_recipe.tres" id="19_1ugb7"]
+[ext_resource type="Resource" uid="uid://6a5notvdv1ei" path="res://items/weapons/shoddy_mace/shoddy_mace_recipe.tres" id="20_scjas"]
+[ext_resource type="Resource" uid="uid://cwrsffh7lrj5" path="res://items/materials/stick/stick_item.tres" id="21_jkse6"]
+[ext_resource type="Resource" uid="uid://b37h3pr83pcu4" path="res://items/materials/rock/rock_item.tres" id="22_7h1i8"]
+[ext_resource type="Resource" uid="uid://dafba7ua6hmlh" path="res://items/tools/gold/golden_axe/golden_axe_recipe.tres" id="23_0k8x5"]
+[ext_resource type="Resource" uid="uid://bjm2iw71djl4g" path="res://items/weapons/golden_sword/golden_sword_recipe.tres" id="24_j8j0t"]
+[ext_resource type="Resource" uid="uid://dv1wmurn53f1d" path="res://items/tools/gold/golden_pickaxe/golden_pickaxe_recipe.tres" id="25_x8v5m"]
+[ext_resource type="Resource" uid="uid://cgr4031ngjynl" path="res://items/materials/minerals/gold_ingot/golden_ingot_item.tres" id="26_2kt3w"]
+[ext_resource type="Resource" uid="uid://c2sbskrq16mrn" path="res://items/weapons/copper_sword/copper_sword_recipe.tres" id="27_pjam6"]
+[ext_resource type="Resource" uid="uid://btg6kdime6yya" path="res://items/tools/copper/copper_axe/copper_axe_recipe.tres" id="28_p01cu"]
+[ext_resource type="Resource" uid="uid://bpugfcvnce1ec" path="res://items/tools/copper/copper_pickaxe/copper_pickaxe_recipe.tres" id="29_chvtj"]
+[ext_resource type="Resource" uid="uid://c5uhmmmlb6tko" path="res://items/materials/minerals/copper_chunk/copper_chunk_item.tres" id="30_1wwyl"]
+[ext_resource type="Resource" uid="uid://d3uee3nawxidh" path="res://items/tools/diamond/diamond_axe/diamond_axe_recipe.tres" id="31_hj681"]
+[ext_resource type="Resource" uid="uid://7ka64f30se15" path="res://items/tools/diamond/diamond_pickaxe/diamond_pickaxe_recipe.tres" id="32_jcblm"]
+[ext_resource type="Resource" uid="uid://cbraceyfpgwoj" path="res://items/weapons/diamond_sword/diamond_sword_recipe.tres" id="33_bx0ek"]
+[ext_resource type="Resource" uid="uid://kf1haxayj2yo" path="res://items/materials/minerals/diamond/diamond_item.tres" id="34_pyn0l"]
+[ext_resource type="Resource" uid="uid://bx6wek3vxr34j" path="res://items/weapons/slime_staff/slime_staff_recipe.tres" id="35_hi8jd"]
+[ext_resource type="Resource" uid="uid://chwiax8g7xg2" path="res://items/materials/slime_ball/slime_ball_item.tres" id="36_riwel"]
+[ext_resource type="Resource" uid="uid://bturgkik5ddxy" path="res://items/materials/snail_shell/snail_shell_item.tres" id="37_51ui0"]
+[ext_resource type="Resource" uid="uid://cx014d56i747y" path="res://items/weapons/ice_club/ice_club_recipe.tres" id="38_13tjl"]
+[ext_resource type="Resource" path="res://items/materials/ice_cube/ice_cube_item.tres" id="39_fwsji"]
+[ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="40_7584p"]
+[ext_resource type="Script" uid="uid://hdyfq5riitj7" path="res://player/ui/crafting/complete_crafting_panel.gd" id="41_w4sxt"]
+[ext_resource type="PackedScene" uid="uid://cgkf2sh6frkfj" path="res://common/ui/action_hint/action_hint.tscn" id="42_65pv1"]
+[ext_resource type="Script" uid="uid://b1eix6p0204fp" path="res://common/inventory_system/displays/item_display.gd" id="43_7c3xx"]
+[ext_resource type="Texture2D" uid="uid://douq42dkvsywk" path="res://player/ui/inventory/inventory_slot.tres" id="44_dpwf8"]
+[ext_resource type="LabelSettings" uid="uid://b4f3g1d2cp3py" path="res://player/ui/quantity_label_settings.tres" id="45_1kciq"]
+[ext_resource type="Script" uid="uid://b3snj0gi7akf8" path="res://common/signal_audio_manager.gd" id="46_ci6et"]
+[ext_resource type="AudioStream" uid="uid://dnichdtdyktgu" path="res://assets/sound/save.mp3" id="47_p8w7f"]
+[ext_resource type="Script" uid="uid://bubfjagdkgrlq" path="res://player/ui/inventory/inventory_organizer.gd" id="48_5kvo1"]
+[ext_resource type="Script" uid="uid://2c3hqvv0hv0x" path="res://player/ui/inventory/held_stack.gd" id="49_nyta5"]
+[ext_resource type="Script" uid="uid://uwx6xnt2vr38" path="res://player/ui/inventory/item_inspector.gd" id="50_5rnmg"]
+[ext_resource type="Script" uid="uid://7t0qde2fdjb8" path="res://common/virtual_cursor.gd" id="51_0sr2t"]
+[ext_resource type="PackedScene" path="res://player/ui/boat_progress_panel.tscn" id="52_v2fh6"]
+[ext_resource type="PackedScene" uid="uid://byosfqwobl3sl" path="res://menus/settings_menu.tscn" id="53_3s3tr"]
+[ext_resource type="AudioStream" uid="uid://bsc6k70aubcfq" path="res://assets/sound/open_drop-01.mp3" id="54_ahstb"]
+[ext_resource type="AudioStream" uid="uid://deix0ahce6g3i" path="res://assets/sound/open_drop-02.mp3" id="55_sgw4s"]
+[ext_resource type="AudioStream" uid="uid://dwoi11pb7rbsy" path="res://assets/sound/open_drop-03.mp3" id="56_5pcml"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_48p26"]
+shader = ExtResource("2_furd5")
+shader_parameter/blur_amount = 2.2500002018750003
+shader_parameter/mix_amount = 0.70000003325
+shader_parameter/color_over = Color(0.05, 0.07083334, 0.1, 1)
+
+[sub_resource type="Resource" id="Resource_rcaxes"]
+script = ExtResource("5_6k3g6")
+name = "Axes"
+icon = ExtResource("6_cekq2")
+metadata/_custom_type_script = "uid://bwcomtie8q510"
+
+[sub_resource type="Resource" id="Resource_3dxkp"]
+script = ExtResource("5_6k3g6")
+name = "Food"
+icon = ExtResource("7_2iqcl")
+metadata/_custom_type_script = "uid://bwcomtie8q510"
+
+[sub_resource type="Resource" id="Resource_gkao2"]
+script = ExtResource("5_6k3g6")
+name = "Melee"
+icon = ExtResource("8_ob4sc")
+metadata/_custom_type_script = "uid://bwcomtie8q510"
+
+[sub_resource type="Resource" id="Resource_6wior"]
+script = ExtResource("5_6k3g6")
+name = "Pickaxes"
+icon = ExtResource("9_72x7s")
+metadata/_custom_type_script = "uid://bwcomtie8q510"
+
+[sub_resource type="Resource" id="Resource_rcstaves"]
+script = ExtResource("5_6k3g6")
+name = &"Magic"
+icon = ExtResource("10_s5ejt")
+metadata/_custom_type_script = "uid://bwcomtie8q510"
+
+[sub_resource type="LabelSettings" id="LabelSettings_jbx34"]
+font_size = 26
+
+[sub_resource type="LabelSettings" id="LabelSettings_7crtr"]
+
+[sub_resource type="Resource" id="Resource_b2j0d"]
+script = ExtResource("16_j5uc7")
+item = ExtResource("21_jkse6")
+discovered_recipes = Array[ExtResource("17_48ffw")]([ExtResource("18_np8ny"), ExtResource("19_1ugb7"), ExtResource("20_scjas")])
+metadata/_custom_type_script = "uid://cpv5s708r1wvo"
+
+[sub_resource type="Resource" id="Resource_7l6ig"]
+script = ExtResource("16_j5uc7")
+item = ExtResource("22_7h1i8")
+discovered_recipes = Array[ExtResource("17_48ffw")]([ExtResource("18_np8ny"), ExtResource("19_1ugb7"), ExtResource("20_scjas")])
+metadata/_custom_type_script = "uid://cpv5s708r1wvo"
+
+[sub_resource type="Resource" id="Resource_g3ghg"]
+script = ExtResource("16_j5uc7")
+item = ExtResource("26_2kt3w")
+discovered_recipes = Array[ExtResource("17_48ffw")]([ExtResource("23_0k8x5"), ExtResource("24_j8j0t"), ExtResource("25_x8v5m")])
+metadata/_custom_type_script = "uid://cpv5s708r1wvo"
+
+[sub_resource type="Resource" id="Resource_d2adv"]
+script = ExtResource("16_j5uc7")
+item = ExtResource("30_1wwyl")
+discovered_recipes = Array[ExtResource("17_48ffw")]([ExtResource("27_pjam6"), ExtResource("28_p01cu"), ExtResource("29_chvtj")])
+metadata/_custom_type_script = "uid://cpv5s708r1wvo"
+
+[sub_resource type="Resource" id="Resource_dmnd1"]
+script = ExtResource("16_j5uc7")
+item = ExtResource("34_pyn0l")
+discovered_recipes = Array[ExtResource("17_48ffw")]([ExtResource("31_hj681"), ExtResource("32_jcblm"), ExtResource("33_bx0ek")])
+metadata/_custom_type_script = "uid://cpv5s708r1wvo"
+
+[sub_resource type="Resource" id="Resource_ml76h"]
+script = ExtResource("16_j5uc7")
+item = ExtResource("36_riwel")
+discovered_recipes = Array[ExtResource("17_48ffw")]([ExtResource("35_hi8jd")])
+metadata/_custom_type_script = "uid://cpv5s708r1wvo"
+
+[sub_resource type="Resource" id="Resource_frvh1"]
+script = ExtResource("16_j5uc7")
+item = ExtResource("37_51ui0")
+discovered_recipes = Array[ExtResource("17_48ffw")]([ExtResource("35_hi8jd")])
+metadata/_custom_type_script = "uid://cpv5s708r1wvo"
+
+[sub_resource type="Resource" id="Resource_rcicediscovery"]
+script = ExtResource("16_j5uc7")
+item = ExtResource("39_fwsji")
+discovered_recipes = Array[ExtResource("17_48ffw")]([ExtResource("38_13tjl")])
+metadata/_custom_type_script = "uid://cpv5s708r1wvo"
+
+[sub_resource type="LabelSettings" id="LabelSettings_s3g0c"]
+font_size = 26
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v0nfp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wpyo2"]
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_hggc2"]
+font_size = 20
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6ct4f"]
+random_volume_offset_db = 1.0
+streams_count = 3
+stream_0/stream = ExtResource("54_ahstb")
+stream_1/stream = ExtResource("55_sgw4s")
+stream_2/stream = ExtResource("56_5pcml")
+
+[node name="PauseMenu" type="Control" unique_id=1198001170 node_paths=PackedStringArray("crafting_environment", "recipe_panel", "health", "settings_menu", "button_save", "button_settings", "button_quit", "visibility_proxy", "back_button")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qedsm")
+crafting_environment = NodePath("CraftingInterface/CraftingEnvironment")
+recipe_panel = NodePath("CraftingInterface/RecipePanel")
+health = NodePath("")
+settings_menu = NodePath("SettingsMenu")
+button_save = NodePath("CraftingInterface/OptionsContainer/SaveButton")
+button_settings = NodePath("CraftingInterface/OptionsContainer/SettingsButton")
+button_quit = NodePath("CraftingInterface/OptionsContainer/QuitButton")
+visibility_proxy = NodePath("CraftingInterface")
+back_button = NodePath("CraftingInterface/OptionsContainer/ResumeButton")
+back_action = &"pause"
+
+[node name="BlurRect" type="ColorRect" parent="." unique_id=1915490094]
+material = SubResource("ShaderMaterial_48p26")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="CraftingInterface" type="Control" parent="." unique_id=823737802]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CraftingEnvironment" parent="CraftingInterface" unique_id=2022052365 node_paths=PackedStringArray("slot_fit_regions", "inventory", "selector", "held_stack", "pause_interface") instance=ExtResource("3_rbjai")]
+z_index = 2
+layout_mode = 1
+mouse_filter = 2
+slot_fit_regions = [NodePath("../BackpackPanel"), NodePath("")]
+inventory = NodePath("")
+selector = NodePath("")
+held_stack = NodePath("../HeldStack")
+pause_interface = NodePath("../..")
+
+[node name="RecipePanel" type="VBoxContainer" parent="CraftingInterface" unique_id=442438116 node_paths=PackedStringArray("entry_container", "entry_template", "recipe_display", "recipe_learner", "back_entry")]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 37.0
+offset_right = 331.0
+offset_bottom = -37.0
+script = ExtResource("4_b503c")
+entry_container = NodePath("RecipeList/Margin/EntryContainer")
+entry_template = NodePath("RecipeList/Margin/EntryContainer/Entry")
+recipe_display = NodePath("CenterContainer/RecipeDisplay")
+recipe_learner = NodePath("RecipeLearner")
+back_entry = NodePath("RecipeList/Margin/EntryContainer/BackEntry")
+recipe_groups = Dictionary[StringName, ExtResource("5_6k3g6")]({
+&"Axes": SubResource("Resource_rcaxes"),
+&"Food": SubResource("Resource_3dxkp"),
+&"Melee": SubResource("Resource_gkao2"),
+&"Pickaxes": SubResource("Resource_6wior"),
+&"Staves": SubResource("Resource_rcstaves")
+})
+
+[node name="Label" type="Label" parent="CraftingInterface/RecipePanel" unique_id=1809173570]
+layout_mode = 2
+text = "RECIPE BOOK"
+label_settings = SubResource("LabelSettings_jbx34")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CraftingInterface/RecipePanel" unique_id=1097158514]
+layout_mode = 2
+
+[node name="RecipeList" type="ScrollContainer" parent="CraftingInterface/RecipePanel" unique_id=1227550747]
+layout_mode = 2
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Margin" type="MarginContainer" parent="CraftingInterface/RecipePanel/RecipeList" unique_id=1801449099]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="EntryContainer" type="VBoxContainer" parent="CraftingInterface/RecipePanel/RecipeList/Margin" unique_id=322839801]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Entry" type="HBoxContainer" parent="CraftingInterface/RecipePanel/RecipeList/Margin/EntryContainer" unique_id=1277083658]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/RecipePanel/RecipeList/Margin/EntryContainer/Entry" unique_id=1822463475]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("11_n0d40")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/RecipePanel/RecipeList/Margin/EntryContainer/Entry" unique_id=1600046266]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Item"
+
+[node name="ButtonAudioManager" parent="CraftingInterface/RecipePanel/RecipeList/Margin/EntryContainer/Entry/Button" unique_id=2144126531 node_paths=PackedStringArray("signal_players") instance=ExtResource("12_dtqpw")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="BackEntry" type="CenterContainer" parent="CraftingInterface/RecipePanel/RecipeList/Margin/EntryContainer" unique_id=766660820]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="CraftingInterface/RecipePanel/RecipeList/Margin/EntryContainer/BackEntry" unique_id=768841775]
+custom_minimum_size = Vector2(64, 24)
+layout_mode = 2
+text = "Back"
+
+[node name="ButtonAudioManager" parent="CraftingInterface/RecipePanel/RecipeList/Margin/EntryContainer/BackEntry/Button" unique_id=677746601 node_paths=PackedStringArray("signal_players") instance=ExtResource("12_dtqpw")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CraftingInterface/RecipePanel" unique_id=80037952]
+layout_mode = 2
+
+[node name="RecipeDisplay" type="VBoxContainer" parent="CraftingInterface/RecipePanel/CenterContainer" unique_id=1713613252 node_paths=PackedStringArray("grid_container", "recipe_label")]
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("13_xnh7e")
+grid_container = NodePath("GridContainer")
+recipe_label = NodePath("RecipeLabel")
+
+[node name="RecipeLabel" type="Label" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay" unique_id=934644699]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_7crtr")
+horizontal_alignment = 1
+
+[node name="GridContainer" type="VBoxContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay" unique_id=2001253784]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Row1" type="HBoxContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer" unique_id=1265217632]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ItemTextureContainer" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1" unique_id=799577680]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1/ItemTextureContainer" unique_id=1121118802]
+layout_mode = 2
+expand_mode = 1
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1/ItemTextureContainer" unique_id=1634493623]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="ItemTextureContainer2" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1" unique_id=1960958613]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1/ItemTextureContainer2" unique_id=308733178]
+layout_mode = 2
+
+[node name="BackgroundRect2" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1/ItemTextureContainer2" unique_id=1267375978]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="ItemTextureContainer3" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1" unique_id=1902556302]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1/ItemTextureContainer3" unique_id=1512032930]
+layout_mode = 2
+
+[node name="BackgroundRect3" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1/ItemTextureContainer3" unique_id=1635377856]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="ItemTextureContainer4" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1" unique_id=1604883506]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1/ItemTextureContainer4" unique_id=1458787982]
+layout_mode = 2
+
+[node name="BackgroundRect4" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1/ItemTextureContainer4" unique_id=892421287]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="ItemTextureContainer5" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1" unique_id=1832464699]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1/ItemTextureContainer5" unique_id=705826553]
+layout_mode = 2
+
+[node name="BackgroundRect5" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row1/ItemTextureContainer5" unique_id=1586749221]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="Row2" type="HBoxContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer" unique_id=2023605085]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ItemTextureContainer" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2" unique_id=1086545816]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2/ItemTextureContainer" unique_id=1924155275]
+layout_mode = 2
+expand_mode = 1
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2/ItemTextureContainer" unique_id=1876258933]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="ItemTextureContainer2" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2" unique_id=1710159483]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2/ItemTextureContainer2" unique_id=2140726884]
+layout_mode = 2
+
+[node name="BackgroundRect2" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2/ItemTextureContainer2" unique_id=1980484058]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="ItemTextureContainer3" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2" unique_id=164669116]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2/ItemTextureContainer3" unique_id=1897157791]
+layout_mode = 2
+
+[node name="BackgroundRect3" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2/ItemTextureContainer3" unique_id=506568923]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="ItemTextureContainer4" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2" unique_id=1510821997]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2/ItemTextureContainer4" unique_id=976146588]
+layout_mode = 2
+
+[node name="BackgroundRect4" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2/ItemTextureContainer4" unique_id=636616664]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="ItemTextureContainer5" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2" unique_id=114282434]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2/ItemTextureContainer5" unique_id=993361534]
+layout_mode = 2
+
+[node name="BackgroundRect5" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row2/ItemTextureContainer5" unique_id=1270830457]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="Row3" type="HBoxContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer" unique_id=455491948]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ItemTextureContainer" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3" unique_id=228312104]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3/ItemTextureContainer" unique_id=897531498]
+layout_mode = 2
+expand_mode = 1
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3/ItemTextureContainer" unique_id=1779089835]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="ItemTextureContainer2" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3" unique_id=424398093]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3/ItemTextureContainer2" unique_id=1299871439]
+layout_mode = 2
+
+[node name="BackgroundRect2" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3/ItemTextureContainer2" unique_id=593916923]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="ItemTextureContainer3" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3" unique_id=631248179]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3/ItemTextureContainer3" unique_id=1935909801]
+layout_mode = 2
+
+[node name="BackgroundRect3" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3/ItemTextureContainer3" unique_id=1825185897]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="ItemTextureContainer4" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3" unique_id=941862105]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3/ItemTextureContainer4" unique_id=750679321]
+layout_mode = 2
+
+[node name="BackgroundRect4" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3/ItemTextureContainer4" unique_id=544101411]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="ItemTextureContainer5" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3" unique_id=757379559]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3/ItemTextureContainer5" unique_id=531201456]
+layout_mode = 2
+
+[node name="BackgroundRect5" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row3/ItemTextureContainer5" unique_id=1686442911]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="Row4" type="HBoxContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer" unique_id=518033440]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ItemTextureContainer" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4" unique_id=1824894533]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4/ItemTextureContainer" unique_id=288336914]
+layout_mode = 2
+expand_mode = 1
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4/ItemTextureContainer" unique_id=1175075187]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="ItemTextureContainer2" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4" unique_id=1285783090]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4/ItemTextureContainer2" unique_id=864396046]
+layout_mode = 2
+
+[node name="BackgroundRect2" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4/ItemTextureContainer2" unique_id=513497127]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="ItemTextureContainer3" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4" unique_id=554202309]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4/ItemTextureContainer3" unique_id=1679480679]
+layout_mode = 2
+
+[node name="BackgroundRect3" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4/ItemTextureContainer3" unique_id=263113601]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="ItemTextureContainer4" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4" unique_id=1968871953]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4/ItemTextureContainer4" unique_id=1473780938]
+layout_mode = 2
+
+[node name="BackgroundRect4" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4/ItemTextureContainer4" unique_id=1932536756]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="ItemTextureContainer5" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4" unique_id=524815515]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4/ItemTextureContainer5" unique_id=193996308]
+layout_mode = 2
+
+[node name="BackgroundRect5" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row4/ItemTextureContainer5" unique_id=885980462]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="Row5" type="HBoxContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer" unique_id=1127895534]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ItemTextureContainer" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5" unique_id=1727920191]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5/ItemTextureContainer" unique_id=859935388]
+layout_mode = 2
+expand_mode = 1
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5/ItemTextureContainer" unique_id=387432595]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="ItemTextureContainer2" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5" unique_id=1173907286]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5/ItemTextureContainer2" unique_id=1165012420]
+layout_mode = 2
+
+[node name="BackgroundRect2" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5/ItemTextureContainer2" unique_id=1345876176]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="ItemTextureContainer3" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5" unique_id=1398772928]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5/ItemTextureContainer3" unique_id=2043419251]
+layout_mode = 2
+
+[node name="BackgroundRect3" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5/ItemTextureContainer3" unique_id=973163506]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="ItemTextureContainer4" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5" unique_id=798872396]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5/ItemTextureContainer4" unique_id=182553235]
+layout_mode = 2
+
+[node name="BackgroundRect4" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5/ItemTextureContainer4" unique_id=309472096]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="ItemTextureContainer5" type="CenterContainer" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5" unique_id=1976971495]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5/ItemTextureContainer5" unique_id=159252176]
+layout_mode = 2
+
+[node name="BackgroundRect5" type="TextureRect" parent="CraftingInterface/RecipePanel/CenterContainer/RecipeDisplay/GridContainer/Row5/ItemTextureContainer5" unique_id=814958245]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("14_ayna0")
+expand_mode = 1
+
+[node name="RecipeLearner" type="Node" parent="CraftingInterface/RecipePanel" unique_id=1082211033 node_paths=PackedStringArray("inventory")]
+script = ExtResource("15_piyae")
+inventory = NodePath("")
+all_recipe_discoveries = Array[ExtResource("16_j5uc7")]([SubResource("Resource_b2j0d"), SubResource("Resource_7l6ig"), SubResource("Resource_g3ghg"), SubResource("Resource_d2adv"), SubResource("Resource_dmnd1"), SubResource("Resource_ml76h"), SubResource("Resource_frvh1"), SubResource("Resource_rcicediscovery")])
+
+[node name="NodeSaver" type="Node" parent="CraftingInterface/RecipePanel/RecipeLearner" unique_id=430759932]
+script = ExtResource("40_7584p")
+save_mode = 1
+saver_id = &"recipe_learner"
+saved_properties = Dictionary[StringName, bool]({
+&"known_recipes": true
+})
+metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
+
+[node name="CompletePanel" type="Control" parent="CraftingInterface" unique_id=1491889237 node_paths=PackedStringArray("crafting_environment", "craft_button", "preview_rect", "preview_label", "icon_rect", "label")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -340.0
+offset_top = -136.0
+offset_right = -183.30396
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("41_w4sxt")
+crafting_environment = NodePath("../CraftingEnvironment")
+craft_button = NodePath("CraftButton")
+preview_rect = NodePath("Preview/PreviewRect")
+preview_label = NodePath("Preview/PreviewLabel")
+icon_rect = NodePath("Preview/PreviewRect")
+label = NodePath("Preview/PreviewLabel")
+label_mode = 1
+
+[node name="CraftButton" type="Button" parent="CraftingInterface/CompletePanel" unique_id=372704265]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -19.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "CRAFT"
+expand_icon = true
+
+[node name="ButtonAudioManager" parent="CraftingInterface/CompletePanel/CraftButton" unique_id=97778743 node_paths=PackedStringArray("signal_players") instance=ExtResource("12_dtqpw")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="Preview" type="Control" parent="CraftingInterface/CompletePanel" unique_id=313396205]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 116.0
+grow_horizontal = 2
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/CompletePanel/Preview" unique_id=1858753051]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -30.0
+offset_top = -59.0
+offset_right = 34.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_ayna0")
+
+[node name="PreviewRect" type="TextureRect" parent="CraftingInterface/CompletePanel/Preview" unique_id=1799460119]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -30.0
+offset_right = 34.0
+offset_bottom = 64.0
+grow_horizontal = 2
+scale = Vector2(0.8, 0.8)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("9_72x7s")
+expand_mode = 2
+
+[node name="PreviewLabel" type="Label" parent="CraftingInterface/CompletePanel/Preview" unique_id=1922969283]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "item"
+horizontal_alignment = 1
+
+[node name="BackpackPanel" type="VBoxContainer" parent="CraftingInterface" unique_id=1157632585]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0000001
+anchor_right = 0.5
+anchor_bottom = 1.0000001
+offset_left = -222.0
+offset_top = -228.00006
+offset_right = 223.0
+offset_bottom = -55.999817
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CraftingInterface/BackpackPanel" unique_id=1105199706]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="CraftingInterface/BackpackPanel/HBoxContainer" unique_id=433960908]
+layout_mode = 2
+text = "BACKPACK"
+label_settings = SubResource("LabelSettings_s3g0c")
+
+[node name="HSeparator" type="HSeparator" parent="CraftingInterface/BackpackPanel/HBoxContainer" unique_id=476771407]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SelectHint" parent="CraftingInterface/BackpackPanel/HBoxContainer" unique_id=706807440 instance=ExtResource("42_65pv1")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+action = &"ui_accept"
+hint_text = "Select"
+
+[node name="SecondaryHint" parent="CraftingInterface/BackpackPanel/HBoxContainer" unique_id=1126275113 instance=ExtResource("42_65pv1")]
+layout_mode = 2
+action = &"inventory_secondary"
+hint_text = "Split / Place one"
+
+[node name="CraftHint" parent="CraftingInterface/BackpackPanel/HBoxContainer" unique_id=585985534 instance=ExtResource("42_65pv1")]
+layout_mode = 2
+action = &"craft"
+hint_text = "Craft"
+
+[node name="Container" type="GridContainer" parent="CraftingInterface/BackpackPanel" unique_id=324382476]
+layout_mode = 2
+columns = 10
+
+[node name="ItemDisplay1" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=354355547 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay1" unique_id=707131852]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay1" unique_id=966099002]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay1" unique_id=1150416615]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay1" unique_id=1030963423]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay2" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1745551203 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay2" unique_id=754363583]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay2" unique_id=760233091]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay2" unique_id=1007089312]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay2" unique_id=836066373]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay3" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=2130864228 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay3" unique_id=708018190]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay3" unique_id=73469511]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay3" unique_id=294088661]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay3" unique_id=1997629855]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay4" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=2091665610 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay4" unique_id=427220034]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay4" unique_id=1602249879]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay4" unique_id=1233005066]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay4" unique_id=1616339889]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay5" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1470458088 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay5" unique_id=74863572]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay5" unique_id=756024433]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay5" unique_id=456768430]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay5" unique_id=1774485356]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay6" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1890924949 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay6" unique_id=2004278724]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay6" unique_id=654723958]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay6" unique_id=1661811241]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay6" unique_id=2029281127]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay7" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1903865574 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay7" unique_id=147864779]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay7" unique_id=607064974]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay7" unique_id=1571173870]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay7" unique_id=954497160]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay8" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=696684010 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay8" unique_id=1539025907]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay8" unique_id=477022751]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay8" unique_id=243168939]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay8" unique_id=3558280]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay9" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1484244505 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay9" unique_id=1815414206]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay9" unique_id=354426422]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay9" unique_id=261825873]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay9" unique_id=728209081]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay10" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1552720697 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay10" unique_id=619149102]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay10" unique_id=480306121]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay10" unique_id=1370074851]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay10" unique_id=183905271]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay11" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=661016092 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay11" unique_id=1782182627]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay11" unique_id=2112784076]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay11" unique_id=775375452]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay11" unique_id=1428253449]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay12" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1711310332 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay12" unique_id=1694446334]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay12" unique_id=499097501]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay12" unique_id=1694274438]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay12" unique_id=668349839]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay13" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1229645751 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay13" unique_id=1281168633]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay13" unique_id=2051084716]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay13" unique_id=2015174229]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay13" unique_id=1471659079]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay14" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=941370357 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay14" unique_id=204949591]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay14" unique_id=891684573]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay14" unique_id=1639262259]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay14" unique_id=441023981]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay15" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1685278718 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay15" unique_id=1929357879]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay15" unique_id=581712199]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay15" unique_id=317198470]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay15" unique_id=803626017]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay16" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1763688449 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay16" unique_id=1903538603]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay16" unique_id=1628373288]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay16" unique_id=560897821]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay16" unique_id=1612443506]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay17" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=2013886760 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay17" unique_id=1770546167]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay17" unique_id=1864691139]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay17" unique_id=352576678]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay17" unique_id=904959138]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay18" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1430721138 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay18" unique_id=536779074]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay18" unique_id=1798149773]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay18" unique_id=1975104477]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay18" unique_id=141168438]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay19" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=48178895 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay19" unique_id=1434898982]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay19" unique_id=668359697]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay19" unique_id=397549579]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay19" unique_id=1838310554]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay20" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=2006081237 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay20" unique_id=967459067]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay20" unique_id=1059823878]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay20" unique_id=1389184230]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay20" unique_id=917866685]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay21" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=667492386 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay21" unique_id=143879265]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay21" unique_id=62262025]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay21" unique_id=1152788734]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay21" unique_id=1026439488]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay22" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=368841081 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay22" unique_id=994285491]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay22" unique_id=2056601162]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay22" unique_id=1814035699]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay22" unique_id=260666617]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay23" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1699531618 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay23" unique_id=445281162]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay23" unique_id=1900922248]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay23" unique_id=650216129]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay23" unique_id=741585992]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay24" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=323741432 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay24" unique_id=576213412]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay24" unique_id=326949249]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay24" unique_id=971952824]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay24" unique_id=1653346192]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay25" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1283346996 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay25" unique_id=1817450770]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay25" unique_id=50436658]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay25" unique_id=1443313940]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay25" unique_id=89985277]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay26" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1527609994 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay26" unique_id=704965394]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay26" unique_id=1913015408]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay26" unique_id=970241559]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay26" unique_id=1470304902]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay27" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=630717449 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay27" unique_id=1065200310]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay27" unique_id=527227243]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay27" unique_id=178750758]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay27" unique_id=737665687]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay28" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1048994279 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay28" unique_id=245300495]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay28" unique_id=622751950]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay28" unique_id=765359742]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay28" unique_id=4690842]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay29" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=355544171 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay29" unique_id=2057197656]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay29" unique_id=1905361282]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay29" unique_id=1828601997]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay29" unique_id=913232447]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="ItemDisplay30" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=501669749 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+script = ExtResource("43_7c3xx")
+auto_set_index_enabled = true
+auto_set_index_offset = 10
+inventory_selectors = {
+NodePath(""): 1
+}
+select_button = NodePath("Button")
+modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
+selected_scale_amount = 1.3
+selected_scale_speed = 0.3
+selected_scale_targets = [NodePath("BackgroundRect"), NodePath("IconRect")]
+inventory = NodePath("")
+icon_rect = NodePath("IconRect")
+label = NodePath("QuantityLabel")
+
+[node name="BackgroundRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay30" unique_id=2064996974]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("44_dpwf8")
+expand_mode = 1
+
+[node name="IconRect" type="TextureRect" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay30" unique_id=837639275]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+expand_mode = 1
+
+[node name="QuantityLabel" type="Label" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay30" unique_id=618758331]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -16.0
+offset_right = 20.0
+offset_bottom = -3.9999924
+grow_horizontal = 2
+grow_vertical = 0
+text = "#"
+label_settings = ExtResource("45_1kciq")
+text_overrun_behavior = 1
+
+[node name="Button" type="Button" parent="CraftingInterface/BackpackPanel/Container/ItemDisplay30" unique_id=561450528]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
+action_mode = 0
+flat = true
+
+[node name="HSeparator" type="HSeparator" parent="CraftingInterface/BackpackPanel" unique_id=158081713]
+layout_mode = 2
+
+[node name="CraftingTitle" type="Label" parent="CraftingInterface" unique_id=427469349]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+text = "
+CRAFTING"
+label_settings = SubResource("LabelSettings_wpyo2")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="HBoxContainer" parent="CraftingInterface" unique_id=989938680]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 524.0
+offset_top = 90.0
+offset_right = -545.0
+offset_bottom = 131.0
+grow_horizontal = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CraftingInterface/VBoxContainer" unique_id=1443894286]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlaceHint" parent="CraftingInterface/VBoxContainer/CenterContainer" unique_id=1022402955 instance=ExtResource("42_65pv1")]
+layout_mode = 2
+size_flags_horizontal = 3
+action = &"grid_place"
+hint_text = "Place Item"
+
+[node name="CenterContainer2" type="CenterContainer" parent="CraftingInterface/VBoxContainer" unique_id=1265110754]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RemoveHint" parent="CraftingInterface/VBoxContainer/CenterContainer2" unique_id=1403897005 instance=ExtResource("42_65pv1")]
+layout_mode = 2
+size_flags_horizontal = 3
+action = &"grid_remove"
+hint_text = "Remove Item"
+
+[node name="OptionsContainer" type="VBoxContainer" parent="CraftingInterface" unique_id=461004086]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.753
+anchor_top = 1.0
+anchor_right = 0.94000006
+anchor_bottom = 1.0
+offset_left = -0.4560547
+offset_top = -197.0
+offset_right = -0.00012207031
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ResumeButton" type="Button" parent="CraftingInterface/OptionsContainer" unique_id=394391023]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "BACK TO GAME"
+
+[node name="ButtonAudioManager" parent="CraftingInterface/OptionsContainer/ResumeButton" unique_id=47252267 node_paths=PackedStringArray("signal_players") instance=ExtResource("12_dtqpw")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="SaveButton" type="Button" parent="CraftingInterface/OptionsContainer" unique_id=1591114553]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "SAVE"
+
+[node name="ButtonAudioManager" parent="CraftingInterface/OptionsContainer/SaveButton" unique_id=1050435517 node_paths=PackedStringArray("signal_players") instance=ExtResource("12_dtqpw")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="SignalAudioManager" type="Node" parent="CraftingInterface/OptionsContainer/SaveButton" unique_id=1183960374 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("46_ci6et")
+signal_players = {
+&"pressed": NodePath("")
+}
+metadata/_custom_type_script = "uid://b3snj0gi7akf8"
+
+[node name="SavePlayer" type="AudioStreamPlayer" parent="CraftingInterface/OptionsContainer/SaveButton/SignalAudioManager" unique_id=1063238980]
+stream = ExtResource("47_p8w7f")
+bus = &"UI"
+
+[node name="SettingsButton" type="Button" parent="CraftingInterface/OptionsContainer" unique_id=1062679103]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "SETTINGS"
+
+[node name="ButtonAudioManager" parent="CraftingInterface/OptionsContainer/SettingsButton" unique_id=400475373 node_paths=PackedStringArray("signal_players") instance=ExtResource("12_dtqpw")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="QuitButton" type="Button" parent="CraftingInterface/OptionsContainer" unique_id=1588183712]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+text = "SAVE AND QUIT TO TITLE"
+
+[node name="ButtonAudioManager" parent="CraftingInterface/OptionsContainer/QuitButton" unique_id=2031176336 node_paths=PackedStringArray("signal_players") instance=ExtResource("12_dtqpw")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="InventoryOrganizer" type="Node" parent="CraftingInterface" unique_id=1010831407 node_paths=PackedStringArray("inventory", "held_stack", "held_item_label", "pause_interface", "slot_containers", "crafting_environment", "hover_inventory_selector", "hold_inventory_selector")]
+script = ExtResource("48_5kvo1")
+inventory = NodePath("")
+held_stack = NodePath("../HeldStack")
+held_item_label = NodePath("")
+pause_interface = NodePath("../..")
+slot_containers = [NodePath(""), NodePath("../BackpackPanel/Container")]
+crafting_environment = NodePath("../CraftingEnvironment")
+hover_inventory_selector = NodePath("")
+hold_inventory_selector = NodePath("")
+
+[node name="HeldStack" type="Node" parent="CraftingInterface" unique_id=1906135054 node_paths=PackedStringArray("inventory", "dropper", "pause_interface", "quantity_label")]
+script = ExtResource("49_nyta5")
+inventory = NodePath("")
+dropper = NodePath("")
+pause_interface = NodePath("../..")
+quantity_label = NodePath("../HeldQuantityLabel")
+
+[node name="SignalAudioManager" type="Node" parent="CraftingInterface/HeldStack" unique_id=1640245419 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("46_ci6et")
+signal_players = {
+&"changed": NodePath("")
+}
+
+[node name="HeldQuantityLabel" type="Label" parent="CraftingInterface" unique_id=1194571330]
+z_index = 3
+layout_mode = 0
+text = "2"
+label_settings = ExtResource("45_1kciq")
+
+[node name="ItemInspector" type="PanelContainer" parent="CraftingInterface" unique_id=525515186 node_paths=PackedStringArray("inventory_selector", "name_label", "info_label", "container")]
+z_index = 2
+layout_mode = 0
+offset_left = 542.0
+offset_top = 124.0
+offset_right = 710.0
+offset_bottom = 178.0
+script = ExtResource("50_5rnmg")
+inventory_selector = NodePath("")
+name_label = NodePath("VBoxContainer/NameLabel")
+info_label = NodePath("VBoxContainer/InfoLabel")
+container = NodePath("VBoxContainer")
+mouse_offset = Vector2(8, -8)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CraftingInterface/ItemInspector" unique_id=535545452]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="NameLabel" type="Label" parent="CraftingInterface/ItemInspector/VBoxContainer" unique_id=2086939126]
+layout_mode = 2
+text = "Item Name"
+label_settings = SubResource("LabelSettings_hggc2")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CraftingInterface/ItemInspector/VBoxContainer" unique_id=1951064415]
+layout_mode = 2
+
+[node name="InfoLabel" type="Label" parent="CraftingInterface/ItemInspector/VBoxContainer" unique_id=1383188194]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 18
+text = "Item Namef"
+
+[node name="VirtualCursor" type="CanvasLayer" parent="CraftingInterface" unique_id=821384447]
+script = ExtResource("51_0sr2t")
+min_speed = 70.0
+max_speed = 800.0
+acceleration = 1200.0
+action_up = &"virtual_cursor_up"
+action_down = &"virtual_cursor_down"
+action_left = &"virtual_cursor_left"
+action_right = &"virtual_cursor_right"
+metadata/_custom_type_script = "uid://7t0qde2fdjb8"
+
+[node name="BoatProgressPanel" parent="CraftingInterface" unique_id=1236300494 node_paths=PackedStringArray("boat_upgrader", "player_inventory") instance=ExtResource("52_v2fh6")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -467.75
+offset_top = 20.0
+offset_bottom = 211.0
+grow_horizontal = 0
+scale = Vector2(0.8, 0.8)
+boat_upgrader = NodePath("")
+player_inventory = NodePath("")
+
+[node name="GridContainer" parent="CraftingInterface/BoatProgressPanel/RequirementContainer" index="0"]
+columns = 2
+
+[node name="SettingsMenu" parent="." unique_id=788547277 instance=ExtResource("53_3s3tr")]
+visible = false
+layout_mode = 1
+
+[node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/VSync/CenterContainer/VSyncToggle" parent_id_path=PackedInt32Array(788547277, 1518537055) index="0" unique_id=1351290583 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/FullScreen/CenterContainer/WindowModeOption" parent_id_path=PackedInt32Array(788547277, 2049426436) index="1" unique_id=2144126531 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/AntiAliasing/AAOption" parent_id_path=PackedInt32Array(788547277, 630181348) index="1" unique_id=875959311 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/ShadowQuality/ShadowOption" parent_id_path=PackedInt32Array(788547277, 1710798274) index="1" unique_id=1882629603 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/SSAO/CenterContainer/SSAOToggle" parent_id_path=PackedInt32Array(788547277, -1293967292) index="0" unique_id=-1293967291 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/Glow/CenterContainer/GlowToggle" parent_id_path=PackedInt32Array(788547277, -1293967274) index="0" unique_id=-1293967273 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/MaxFPS/MaxFPSOption" parent_id_path=PackedInt32Array(788547277, -1293967288) index="1" unique_id=-1293967287 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/InvertY/CenterContainer/InvertYToggle" parent_id_path=PackedInt32Array(788547277, 1517878780) index="0" unique_id=1079694290 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/TutorialHints/CenterContainer/TutorialHintsToggle" parent_id_path=PackedInt32Array(788547277, 1517878781) index="0" unique_id=1079694291 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenShake/CenterContainer/ScreenShakeToggle" parent_id_path=PackedInt32Array(788547277, -1293967266) index="0" unique_id=-1293967265 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/Vignette/CenterContainer/VignetteToggle" parent_id_path=PackedInt32Array(788547277, -1293967261) index="0" unique_id=-1293967260 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenEffects/CenterContainer/ScreenEffectsToggle" parent_id_path=PackedInt32Array(788547277, -1293967256) index="0" unique_id=-1293967255 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/BackButton" parent_id_path=PackedInt32Array(788547277, 1546788436) index="0" unique_id=1198217718 node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath(""),
+&"mouse_entered": NodePath(""),
+&"pressed": NodePath("")
+}
+
+[node name="SignalAudioManager" type="Node" parent="." unique_id=1815654649 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("46_ci6et")
+signal_players = {
+&"updated_pause": NodePath("")
+}
+metadata/_custom_type_script = "uid://b3snj0gi7akf8"
+
+[node name="PausePlayer" type="AudioStreamPlayer" parent="SignalAudioManager" unique_id=1738092423]
+stream = SubResource("AudioStreamRandomizer_6ct4f")
+bus = &"UI"
+
+[editable path="CraftingInterface/BoatProgressPanel"]
+[editable path="SettingsMenu"]
+[editable path="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/BackButton/ButtonAudioManager"]
