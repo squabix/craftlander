@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://smjb56dvgbc8"]
+
+[ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/collision_barrier_3d.gd" id="2_lmd00"]
+[ext_resource type="PackedScene" uid="uid://dtmixborolvb0" path="res://assets/models/props/statue_rootling.blend" id="4_wuvgu"]
+[ext_resource type="Material" uid="uid://m5807bchpbmp" path="res://assets/materials/glowing_eye.tres" id="6_sj2fu"]
+[ext_resource type="Material" uid="uid://bh8sv2icydggs" path="res://assets/materials/stone.tres" id="12_nq5wl"]
+[ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="20_uce0c"]
+[ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="21_3p2hv"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_428fn"]
+points = PackedVector3Array(-0.9228542, 1.3657974, -0.39036524, -0.9228542, 1.4481133, -0.39036524, -0.866847, 1.3657974, -0.46563163, -0.6373981, 0.15993501, -0.25045478, -0.74977386, 0.15993501, 0.095603675, -0.866847, 1.4481133, -0.46563163, -0.7947603, 1.49124, -0.233535, -0.4836493, 1.8493799, -0.0019694865, -0.40867192, 2.0228245, -0.00212124, -0.37705493, 2.0755143, -0.0011349022, 0.8666663, 1.3657974, -0.46563163, 0.6372174, 0.15993501, -0.25045478, -0.45546502, 0.15993501, 0.30949065, -0.37235755, 1.8493799, 0.15501252, 0.8666663, 1.4481133, -0.46563163, -0.28617877, 2.0755143, -0.08929974, 0, 2.021512, -0.24734396, -0.30623293, 2.0228245, 0.12860855, -0.2890694, 2.0755143, 0.08854744, 0.9228542, 1.3657974, -0.39036524, 0.74959326, 0.15993501, 0.095603675, 0.45528436, 0.15993501, 0.30949065, 0, 1.8493799, 0.27079526, 0.9228542, 1.4481133, -0.39036524, 0.2859981, 2.0755143, -0.08929974, 0.37687433, 2.0755143, -0.0011349022, 0, 2.0755143, -0.17655411, 0, 2.0228245, 0.22238806, 0, 2.0755143, 0.17822972, 0.7945796, 1.49124, -0.233535, 0.3721769, 1.8493799, 0.15501252, 0.30605233, 2.0228245, 0.12860855, 0.40849125, 2.0228245, -0.00212124, 0.48346865, 1.8493799, -0.0019694865, 0.2888888, 2.0755143, 0.08854744)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dmied"]
+points = PackedVector3Array(0.95105654, 0.12181872, 0.30892718, 0.95105654, -0.25, 0.30892718, 0.95105654, 0.12181872, -0.30912292, 0.82277197, 0.25, 0.2672279, 0.5084838, 0.25, 0.6998825, 0.5876145, 0.12181872, 0.8089272, 0.5876145, -0.25, 0.8089272, 0.95105654, -0.25, -0.30912292, 0.82277197, 0.25, -0.26742363, 0.5876145, 0.12181872, -0.8091229, 0.5084838, 0.25, -0.7000783, -0.0001861453, 0.25, 0.8651135, -0.0001861453, 0.12181872, 1, -0.0001861453, -0.25, 1, 0.5876145, -0.25, -0.8091229, -0.0001861453, 0.12181872, -1, -0.0001861453, 0.25, -0.8653093, -0.50867, 0.25, 0.6998825, -0.5878006, 0.12181872, 0.8089272, -0.5878006, -0.25, 0.8089272, -0.0001861453, -0.25, -1, -0.5878006, 0.12181872, -0.8091229, -0.50867, 0.25, -0.7000783, -0.8229581, 0.25, 0.2672279, -0.95105654, 0.12181872, 0.30892718, -0.95105654, -0.25, 0.30892718, -0.5878006, -0.25, -0.8091229, -0.95105654, 0.12181872, -0.30912292, -0.8229581, 0.25, -0.26742363, -0.95105654, -0.25, -0.30912292)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_84g4f"]
+points = PackedVector3Array(-1.9497533, 0, -0.63344944, -1.9497533, 1000, -0.63344944, -1.20499, 0, -1.6584501, -1.20499, 1000, -1.6584501, 0, 0, -2.05, 0, 1000, -2.05, 1.20499, 0, -1.6584501, 1.20499, 1000, -1.6584501, 1.9497533, 0, -0.63344944, 1.9497533, 1000, -0.63344944, 1.9497533, 0, 0.63344944, 1.9497533, 1000, 0.63344944, 1.20499, 0, 1.6584501, 1.20499, 1000, 1.6584501, 0, 0, 2.05, 0, 1000, 2.05, -1.20499, 0, 1.6584501, -1.20499, 1000, 1.6584501, -1.9497533, 0, 0.63344944, -1.9497533, 1000, 0.63344944, -1.9497533, 0, -0.63344944, -1.9497533, 1000, -0.63344944)
+
+[node name="StatueRootling" type="Node3D" unique_id=51772479]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1012779916]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39999998, 0)
+collision_layer = 5
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=1685213897]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.3741411, 0)
+shape = SubResource("ConvexPolygonShape3D_428fn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1304630862]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.39999998, 0)
+shape = SubResource("ConvexPolygonShape3D_dmied")
+
+[node name="ClimbBlocker" type="StaticBody3D" parent="." unique_id=1246858063]
+collision_layer = 128
+collision_mask = 0
+
+[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" unique_id=298928381 node_paths=PackedStringArray("sample")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("ConvexPolygonShape3D_84g4f")
+script = ExtResource("2_lmd00")
+sample = NodePath("../../Visuals/Cylinder")
+generate_on_ready = true
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=415438826 node_paths=PackedStringArray("mesh_instance")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+visible = false
+radius = 2.0500722
+vertices = PackedVector3Array(-1.9497533, 0, -0.63344944, -1.20499, 0, -1.6584501, 0, 0, -2.05, 1.20499, 0, -1.6584501, 1.9497533, 0, -0.63344944, 1.9497533, 0, 0.63344944, 1.20499, 0, 1.6584501, 0, 0, 2.05, -1.20499, 0, 1.6584501, -1.9497533, 0, 0.63344944, -1.9497533, 0, -0.63344944)
+script = ExtResource("20_uce0c")
+mesh_instance = NodePath("../Visuals/Cylinder")
+generate_on_ready = true
+
+[node name="NodeSaver" type="Node" parent="." unique_id=1812045563]
+script = ExtResource("21_3p2hv")
+save_mode = 2
+saver_id = &"stone"
+saved_properties = Dictionary[StringName, bool]({
+&"global_transform": true
+})
+metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
+
+[node name="Visuals" parent="." unique_id=319619393 instance=ExtResource("4_wuvgu")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="Woodling" parent="Visuals/Armature" parent_id_path=PackedInt32Array(319619393, 625098054) index="0" unique_id=347378732]
+surface_material_override/0 = ExtResource("12_nq5wl")
+surface_material_override/1 = ExtResource("6_sj2fu")
+
+[node name="Woodling_001" parent="Visuals/Armature/Skeleton3D" parent_id_path=PackedInt32Array(319619393, 71275331) index="0" unique_id=572926314]
+visible = false
+
+[node name="Cylinder" parent="Visuals" index="1" unique_id=2041797248]
+surface_material_override/0 = ExtResource("12_nq5wl")
+
+[editable path="Visuals"]

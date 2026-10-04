@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://bnbt4qa77pnta"]
+
+[ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/collision_barrier_3d.gd" id="1_rvrwh"]
+[ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="2_7lme4"]
+[ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="3_tl6jq"]
+[ext_resource type="PackedScene" uid="uid://c1gqm1gbf3i3y" path="res://assets/models/props/statue_yeti.blend" id="4_rvrwh"]
+[ext_resource type="Material" uid="uid://bh8sv2icydggs" path="res://assets/materials/stone.tres" id="5_1yjhl"]
+[ext_resource type="Material" uid="uid://m5807bchpbmp" path="res://assets/materials/glowing_eye.tres" id="6_7lme4"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_rvrwh"]
+points = PackedVector3Array(1.1139083, 0.32947183, -0.88404214, 0.33760637, -0.6974596, 1.0421929, 0.5133303, -0.8140428, 1.0005696, 0.46391433, -1.1644168, 0.8657563, 1.0901229, 0.3265065, -0.9689075, 1.0441928, 0.42997992, -0.9406961, 0.22565168, 0.095837116, -0.047182083, -0.25599992, -0.6144311, 1.0593047, 0.042136014, -0.7887597, 1.0435803, -0.11738926, -1.0977755, 0.9247227, 0.11861795, -1.1430354, 0.885643, 0.108365715, -0.33709717, -1.1483502, 0.12743491, -0.34068674, -1.1409506, 0.27424735, -0.3222707, -1.0422108, 0.9267017, 0.15327036, -0.91595334, 1.0505493, 0.28452396, -0.95873284, 0.26666075, -0.3076002, -1.066491, 0.1659835, -0.24017859, -1.2184162, 1.058341, 0.36380684, -0.99041283, -0.8943061, 0.24488258, -1.3012004, -0.9289588, 0.29919446, -1.2475525, -0.00010329485, 0.16060555, -0.09528005, -0.44915265, -0.7086965, 1.0495927, -0.22585821, 0.095837116, -0.047182083, -0.46227556, -1.0726484, 0.94599676, -0.066743016, -0.26077962, -1.1680057, -0.024298668, -0.2515716, -1.1809552, -0.9185015, 0.19728172, -1.3030503, 0.104879916, -0.021058321, -1.259577, 0.21683472, 0.0011034012, -1.2295158, -0.98083526, 0.17496383, -1.2450088)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dmied"]
+points = PackedVector3Array(0.95105654, 0.12181872, 0.30892718, 0.95105654, -0.25, 0.30892718, 0.95105654, 0.12181872, -0.30912292, 0.82277197, 0.25, 0.2672279, 0.5084838, 0.25, 0.6998825, 0.5876145, 0.12181872, 0.8089272, 0.5876145, -0.25, 0.8089272, 0.95105654, -0.25, -0.30912292, 0.82277197, 0.25, -0.26742363, 0.5876145, 0.12181872, -0.8091229, 0.5084838, 0.25, -0.7000783, -0.0001861453, 0.25, 0.8651135, -0.0001861453, 0.12181872, 1, -0.0001861453, -0.25, 1, 0.5876145, -0.25, -0.8091229, -0.0001861453, 0.12181872, -1, -0.0001861453, 0.25, -0.8653093, -0.50867, 0.25, 0.6998825, -0.5878006, 0.12181872, 0.8089272, -0.5878006, -0.25, 0.8089272, -0.0001861453, -0.25, -1, -0.5878006, 0.12181872, -0.8091229, -0.50867, 0.25, -0.7000783, -0.8229581, 0.25, 0.2672279, -0.95105654, 0.12181872, 0.30892718, -0.95105654, -0.25, 0.30892718, -0.5878006, -0.25, -0.8091229, -0.95105654, 0.12181872, -0.30912292, -0.8229581, 0.25, -0.26742363, -0.95105654, -0.25, -0.30912292)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ea5kd"]
+points = PackedVector3Array(-1.9973515, 0, -0.64915466, -1.9973515, 1000, -0.64915466, -1.2343873, 0, -1.6991522, -1.2343873, 1000, -1.6991522, 0, 0, -2.1, 0, 1000, -2.1, 1.2340826, 0, -1.6991557, 1.2340826, 1000, -1.6991557, 1.9973515, 0, -0.64915466, 1.9973515, 1000, -0.64915466, 1.9973544, 0, 0.64874583, 1.9973544, 1000, 0.64874583, 1.2340872, 0, 1.6987523, 1.2340872, 1000, 1.6987523, 0, 0, 2.1, 0, 1000, 2.1, -1.2343919, 0, 1.6987487, -1.2343919, 1000, 1.6987487, -1.9973544, 0, 0.64874583, -1.9973544, 1000, 0.64874583, -1.9973515, 0, -0.64915466, -1.9973515, 1000, -0.64915466)
+
+[node name="StatueYeti" type="Node3D" unique_id=51772479]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1012779916]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39999998, 0)
+collision_layer = 5
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="StaticBody3D" unique_id=58953924]
+transform = Transform3D(2, 0, 0, 0, 0.76703495, -1.8470672, 0, 1.8470672, 0.76703495, 0, 2.5639505, 0.6910656)
+shape = SubResource("ConvexPolygonShape3D_rvrwh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1304630862]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.39999998, 0)
+shape = SubResource("ConvexPolygonShape3D_dmied")
+
+[node name="ClimbBlocker" type="StaticBody3D" parent="." unique_id=1246858063]
+collision_layer = 128
+collision_mask = 0
+
+[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" unique_id=298928381 node_paths=PackedStringArray("sample")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("ConvexPolygonShape3D_ea5kd")
+script = ExtResource("1_rvrwh")
+sample = NodePath(".")
+generate_on_ready = true
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=415438826]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+visible = false
+radius = 2.0500722
+vertices = PackedVector3Array(-1.9497533, 0, -0.63344944, -1.20499, 0, -1.6584501, 0, 0, -2.05, 1.20499, 0, -1.6584501, 1.9497533, 0, -0.63344944, 1.9497533, 0, 0.63344944, 1.20499, 0, 1.6584501, 0, 0, 2.05, -1.20499, 0, 1.6584501, -1.9497533, 0, 0.63344944, -1.9497533, 0, -0.63344944)
+script = ExtResource("2_7lme4")
+generate_on_ready = true
+
+[node name="NodeSaver" type="Node" parent="." unique_id=1812045563]
+script = ExtResource("3_tl6jq")
+save_mode = 2
+saver_id = &"stone"
+saved_properties = Dictionary[StringName, bool]({
+&"global_transform": true
+})
+metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
+
+[node name="statue_yeti" parent="." unique_id=1475921380 instance=ExtResource("4_rvrwh")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="Yeti" parent="statue_yeti/Armature" parent_id_path=PackedInt32Array(1475921380, 32306670) index="0" unique_id=32401463]
+surface_material_override/0 = ExtResource("5_1yjhl")
+surface_material_override/1 = ExtResource("6_7lme4")
+
+[node name="Yeti_001" parent="statue_yeti/Armature/Skeleton3D" parent_id_path=PackedInt32Array(1475921380, 2062515538) index="0" unique_id=1212638048]
+visible = false
+
+[editable path="statue_yeti"]
