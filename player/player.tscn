@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://dmbp0klxo0b0c"]
 
 [ext_resource type="Script" uid="uid://ucyt6h7yjc6k" path="res://player/player.gd" id="1_g1dw6"]
+[ext_resource type="Script" path="res://player/low_health_indicator.gd" id="low_health_script"]
+[ext_resource type="PackedScene" path="res://player/ui/autosave_indicator.tscn" id="autosave_indicator_scene"]
 [ext_resource type="Script" uid="uid://bh8pcyeueeoey" path="res://common/vectors/bool_vector3.gd" id="2_g1dw6"]
 [ext_resource type="Script" uid="uid://cmpyylqqxmqbp" path="res://common/vectors/range_vector3.gd" id="4_g6k8r"]
 [ext_resource type="Script" uid="uid://chlki14yu5ulm" path="res://player/player_controller.gd" id="4_qjkh3"]
@@ -1125,6 +1127,20 @@ saved_properties = Dictionary[StringName, bool]({
 })
 metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 
+[node name="AutoSaver" type="Timer" parent="." unique_id=770770701 node_paths=PackedStringArray("player", "health", "hunger")]
+wait_time = 180.0
+autostart = true
+script = ExtResource("auto_saver_script")
+player = NodePath("..")
+health = NodePath("../Health")
+hunger = NodePath("../Hunger")
+
+[node name="SavedAnimationTrigger" type="Node" parent="AutoSaver" node_paths=PackedStringArray("anim_player")]
+script = ExtResource("25_j55il")
+anim_player = NodePath("../../HUD/AutosaveIndicator/AnimationPlayer")
+signal_name = &"saved"
+anim_name = &"flash"
+
 [node name="Hunger" type="Node" parent="." unique_id=1790864786 node_paths=PackedStringArray("bar", "health", "stamina")]
 script = ExtResource("31_2uvqg")
 bar = NodePath("../HUD/BarContainer/HBoxContainer/HungerBar")
@@ -1605,6 +1621,9 @@ tetestset
 set"
 label_settings = SubResource("LabelSettings_7uc20")
 autowrap_mode = 3
+
+[node name="AutosaveIndicator" parent="HUD" instance=ExtResource("autosave_indicator_scene")]
+layout_mode = 1
 
 [node name="BarContainer" type="VBoxContainer" parent="HUD" unique_id=1488788714]
 unique_name_in_owner = true
