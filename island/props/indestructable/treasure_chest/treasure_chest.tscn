@@ -326,6 +326,7 @@ sample = NodePath("../../Visuals/Box")
 generate_on_ready = true
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=376416284]
+collision_layer = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=664395285]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.993147, 0.16927493)
