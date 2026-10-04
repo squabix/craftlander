@@ -8,6 +8,8 @@ func _ready() -> void:
 	all_recipes = Util.find_all_resources(&"ItemRecipe", "res://items/")
 	all_recipes.sort_custom(
 		func(a: ItemRecipe, b: ItemRecipe) -> bool:
+			if a.tier != b.tier:
+				return a.tier < b.tier
 			return a.result.item.name < b.result.item.name
 	)
 

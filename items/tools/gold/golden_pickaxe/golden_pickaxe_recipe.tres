@@ -29,4 +29,6 @@ Vector2i(1, 2): 1,
 Vector2i(2, 1): 1
 })
 items = Array[ExtResource("1_agiai")]([ExtResource("2_egab7"), ExtResource("3_kju6h")])
+category = &"Pickaxes"
+tier = 2
 metadata/_custom_type_script = "uid://c5ntwgpouf24m"

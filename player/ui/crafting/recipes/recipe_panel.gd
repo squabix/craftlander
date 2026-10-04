@@ -56,8 +56,8 @@ func add_empty_entry() -> Control:
 func add_recipe_entry(recipe: ItemRecipe) -> Control:
 	var item := recipe.result.item
 	
-	if not recipe_groups.has(item.type):
-		Util.node_error("%s cannot find recipe group of type %s and cannot add entry for %s", self, item.type, recipe)
+	if not recipe_groups.has(recipe.category):
+		Util.node_error("%s cannot find recipe group of category %s and cannot add entry for %s", self, recipe.category, recipe)
 		return
 	
 	var entry := add_empty_entry()
@@ -66,7 +66,7 @@ func add_recipe_entry(recipe: ItemRecipe) -> Control:
 	set_icon(entry, item.icon)
 	set_up_button(entry, item.name, recipe_display.display.bind(recipe))
 	
-	recipe_groups[item.type].add_recipe(recipe, entry)
+	recipe_groups[recipe.category].add_recipe(recipe, entry)
 	return entry
 
 func show_recipes(type: String) -> void:

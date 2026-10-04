@@ -5,6 +5,10 @@ extends Resource
 @export var indexed_layout: Dictionary[Vector2i, int]
 @export var items: Array[Item]
 
+@export_group("Sorting")
+@export var category: StringName = &""
+@export var tier := 0
+
 var ingredients: Dictionary[Item, int]
 
 

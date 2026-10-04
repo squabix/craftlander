@@ -25,4 +25,6 @@ Vector2i(0, 2): 1,
 Vector2i(1, -1): 1
 })
 items = Array[ExtResource("1_x6nse")]([ExtResource("2_aadb7"), ExtResource("3_7dudx")])
+category = &"Melee"
+tier = 3
 metadata/_custom_type_script = "uid://c5ntwgpouf24m"

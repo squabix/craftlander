@@ -27,4 +27,6 @@ Vector2i(1, 1): 1,
 Vector2i(1, 2): 1
 })
 items = Array[ExtResource("1_1iaxq")]([ExtResource("2_1jgrk"), ExtResource("3_if3d6")])
+category = &"Axes"
+tier = 1
 metadata/_custom_type_script = "uid://c5ntwgpouf24m"

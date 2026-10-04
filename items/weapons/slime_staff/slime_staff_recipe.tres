@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemRecipe" format=3 uid="uid://bx6wek3vxr34j"]
+
+[ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="1_w5tra"]
+[ext_resource type="Resource" path="res://items/materials/bone/bone_item.tres" id="2_n6su6"]
+[ext_resource type="Script" uid="uid://c5ntwgpouf24m" path="res://items/crafting/item_recipe.gd" id="2_piixs"]
+[ext_resource type="Resource" uid="uid://bturgkik5ddxy" path="res://items/materials/snail_shell/snail_shell_item.tres" id="3_g3mkv"]
+[ext_resource type="Resource" uid="uid://chwiax8g7xg2" path="res://items/materials/slime_ball/slime_ball_item.tres" id="4_g3mkv"]
+[ext_resource type="Resource" uid="uid://cjunsi1o8hn8q" path="res://items/weapons/slime_staff/slime_staff_item.tres" id="4_g6vl8"]
+[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="5_6i28u"]
+
+[sub_resource type="Resource" id="Resource_koiws"]
+script = ExtResource("5_6i28u")
+item = ExtResource("4_g6vl8")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[resource]
+script = ExtResource("2_piixs")
+result = SubResource("Resource_koiws")
+indexed_layout = Dictionary[Vector2i, int]({
+Vector2i(-1, 1): 2,
+Vector2i(0, -2): 0,
+Vector2i(0, -1): 0,
+Vector2i(0, 0): 0,
+Vector2i(0, 1): 1,
+Vector2i(0, 2): 2,
+Vector2i(1, 1): 2
+})
+items = Array[ExtResource("1_w5tra")]([ExtResource("2_n6su6"), ExtResource("3_g3mkv"), ExtResource("4_g3mkv")])
+category = &"Staves"
+metadata/_custom_type_script = "uid://c5ntwgpouf24m"
