@@ -9,9 +9,9 @@
 [ext_resource type="Material" uid="uid://dk2hwa4l1ovce" path="res://assets/materials/ghost_full.tres" id="7_h6vma"]
 [ext_resource type="Material" uid="uid://ct3rueaspkpix" path="res://assets/materials/darkness.tres" id="8_8hdwc"]
 [ext_resource type="AnimationLibrary" uid="uid://b0ysnecw0daet" path="res://levels/ending/cannon/ghost_cannon_animations.tres" id="9_anims"]
-[ext_resource type="Script" uid="uid://dapeyi3eetek1" path="res://common/signal_triggrs/signal_animation_trigger.gd" id="10_animtrigger"]
+[ext_resource type="Script" uid="uid://dapeyi3eetek1" path="res://common/signal_triggers/signal_animation_trigger.gd" id="10_animtrigger"]
 [ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="11_audio"]
-[ext_resource type="Script" path="res://common/signal_triggrs/signal_spawn_trigger.gd" id="13_spawntrigger"]
+[ext_resource type="Script" path="res://common/signal_triggers/signal_spawn_trigger.gd" id="13_spawntrigger"]
 [ext_resource type="AudioStream" uid="uid://ss43k3v5unu" path="res://assets/sound/cannon.mp3" id="12_cannon_sound"]
 
 [sub_resource type="Resource" id="Resource_damage"]

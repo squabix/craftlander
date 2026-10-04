@@ -1,0 +1,339 @@
+[gd_scene format=3 uid="uid://4btyohag13y3"]
+
+[ext_resource type="Script" uid="uid://cmlllb7wq80s" path="res://island/props/destructible_resource/destructible_resource.gd" id="1_lvuu1"]
+[ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="2_65ggh"]
+[ext_resource type="Resource" uid="uid://bwurefwkj4gjj" path="res://common/damage_system/single_damage.tres" id="3_xbmh8"]
+[ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="4_cokie"]
+[ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="5_npxjp"]
+[ext_resource type="Script" uid="uid://dapeyi3eetek1" path="res://common/signal_triggers/signal_animation_trigger.gd" id="6_oxtfi"]
+[ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="9_2u6o6"]
+[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="10_o85yn"]
+[ext_resource type="Resource" uid="uid://cgr4031ngjynl" path="res://items/materials/minerals/gold_ingot/golden_ingot_item.tres" id="10_xbmh8"]
+[ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="12_qwhj6"]
+[ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="13_bj6ow"]
+[ext_resource type="ArrayOccluder3D" uid="uid://btu3s0w7ufy06" path="res://island/props/destructible_resource/gold_ore/gold_ore1.occ" id="13_lvuu1"]
+[ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="14_m0fy0"]
+[ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="16_tyq2d"]
+[ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="17_4jy40"]
+[ext_resource type="PackedScene" uid="uid://c04ip1y1ylfw8" path="res://assets/models/props/ore2.blend" id="18_65ggh"]
+[ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="18_ya8ro"]
+[ext_resource type="AudioStream" uid="uid://b6f6x800jxpvb" path="res://assets/sound/rock_destroy.mp3" id="19_2rmbx"]
+[ext_resource type="Material" uid="uid://c33644pxuf2ds" path="res://assets/materials/gold.tres" id="20_65ggh"]
+[ext_resource type="Shader" uid="uid://cwuwdquqwhpfa" path="res://assets/shaders/base_shader.gdshader" id="21_cokie"]
+[ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/collision_barrier_3d.gd" id="21_tallblk"]
+[ext_resource type="PackedScene" uid="uid://b42ejh4s3ni40" path="res://island/props/destructible_resource/destroy_shake_trigger.tscn" id="99_destroyshk"]
+[ext_resource type="PackedScene" uid="uid://p8wwjit2trpc" path="res://island/props/destructible_resource/hurt_shake_trigger.tscn" id="99_hurtshk"]
+[ext_resource type="Script" uid="uid://d1c311gtthqqo" path="res://common/access_control_list.gd" id="acl_script"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cokie"]
+points = PackedVector3Array(0.34774315, 0.70833397, -1.4873003, 0.47166932, 1.0824239, -0.36040342, 1.3275012, 0.6678771, -0.79161394, 1.0708221, -0.22979379, -1.2052379, -1.1792669, -0.11187017, -1.3861772, -1.0415713, 0.23228538, -1.3503275, -0.2980144, 0.9554293, -1.0909247, -0.75876546, 1.0904064, -0.080708385, 0.40246832, 0.80321705, 0.6569153, 0.7364687, 0.624336, 0.7766396, 1.2078117, 0.68801475, -0.5839565, 1.380108, 0.040886223, 1.2037917, 1.8387405, -0.13146365, -0.45340955, 1.1011859, -0.62184453, -0.89578086, 0.8339149, -0.65885437, -1.0817933, -0.73440397, -0.6018882, -0.77199805, -1.0549878, -0.6013439, -0.62893766, -1.4182926, -0.16629648, -0.7043572, -1.4670157, 0.2018066, -1.005359, -1.0355692, 0.92803466, -0.70672464, -1.768181, 0.63304424, 0.21217656, -0.89363664, 0.5924059, 1.073583, 0.43212593, 0.4264058, 1.5240713, 0.42788923, 0.60165846, 1.1124765, 1.0499913, 0.24081218, 1.2501258, 0.9998559, -0.080847204, 1.5727726, 0.92429984, -0.76299, 0.93559563, -0.91729206, -0.7040282, 1.2396413, -1.1672628, -0.3292125, 1.353278, -1.3321445, 0.02165562, 1.1834995, -1.136193, -0.09517944, 1.5294825, -0.1716168, -0.7335998, 1.9677953, -1.0800555, -0.41212186, 1.4841632)
+
+[sub_resource type="Resource" id="Resource_acl"]
+script = ExtResource("acl_script")
+
+[sub_resource type="Resource" id="Resource_l7qvu"]
+script = ExtResource("10_o85yn")
+item = ExtResource("10_xbmh8")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Animation" id="Animation_5v37a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlenderMeshes/Stone:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ir3ee"]
+resource_name = "hurt"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlenderMeshes/Stone:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.98, 0.98, 0.98), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5d4n1"]
+_data = {
+&"RESET": SubResource("Animation_5v37a"),
+&"hurt": SubResource("Animation_ir3ee")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_npxjp"]
+render_priority = 0
+shader = ExtResource("21_cokie")
+shader_parameter/albedo = Color(0.5137255, 0.44705883, 0.34901962, 1)
+shader_parameter/hue_variance = 0.0
+shader_parameter/sat_variance = 0.1
+shader_parameter/val_variance = 0.05
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/rim_strength = 0.4
+shader_parameter/rim_power = 3.0
+shader_parameter/rim_color = Color(0, 0, 0, 1)
+shader_parameter/refraction_strength = 0.05
+
+[node name="GoldOre" type="Node3D" unique_id=51772479 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
+script = ExtResource("1_lvuu1")
+min_hp = 5
+max_hp = 7
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1012779916]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39999998, 0)
+collision_layer = 5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1937793454]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.32276815, 0)
+shape = SubResource("ConvexPolygonShape3D_cokie")
+
+[node name="ClimbBlocker" type="StaticBody3D" parent="." unique_id=599536001]
+collision_layer = 128
+collision_mask = 0
+
+[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" unique_id=503513118 node_paths=PackedStringArray("sample")]
+script = ExtResource("21_tallblk")
+sample = NodePath("../../BlenderMeshes/Stone")
+generate_on_ready = true
+
+[node name="Hurtbox3D" type="Area3D" parent="." unique_id=671691308 node_paths=PackedStringArray("health")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39999998, 0)
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("2_65ggh")
+health = NodePath("../Health")
+type_list = Array[StringName]([&"pickaxe"])
+type_acl = SubResource("Resource_acl")
+metadata/_custom_type_script = "uid://4dfurtssrp4f"
+
+[node name="SignalAudioManager3D" type="Node3D" parent="Hurtbox3D" unique_id=650928888 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("4_cokie")
+signal_players = {
+&"was_hurt": NodePath("HurtPlayer")
+}
+metadata/_custom_type_script = "uid://43bqjaemfda5"
+
+[node name="HurtPlayer" type="AudioStreamPlayer3D" parent="Hurtbox3D/SignalAudioManager3D" unique_id=1449022161]
+volume_db = -18.0
+bus = &"SFX"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1286643573]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.32276815, 0)
+shape = SubResource("ConvexPolygonShape3D_cokie")
+
+[node name="Health" type="Node" parent="." unique_id=256948540]
+script = ExtResource("5_npxjp")
+hurt_threshold = 8.0
+damage_override = ExtResource("3_xbmh8")
+free_parent_on_death = true
+
+[node name="DestroyShakeTrigger" parent="Health" unique_id=471480972 instance=ExtResource("99_destroyshk")]
+
+[node name="HurtShakeTrigger" parent="Health" unique_id=1127554813 instance=ExtResource("99_hurtshk")]
+
+[node name="HurtAnimTrigger" type="Node" parent="Health" unique_id=1514929013 node_paths=PackedStringArray("anim_player")]
+script = ExtResource("6_oxtfi")
+anim_player = NodePath("../../AnimationPlayer")
+anim_name = "hurt"
+signal_name = &"was_hurt"
+metadata/_custom_type_script = "uid://dapeyi3eetek1"
+
+[node name="Inventory" type="Node" parent="." unique_id=836906820]
+script = ExtResource("9_2u6o6")
+item_instances = Array[ExtResource("10_o85yn")]([SubResource("Resource_l7qvu")])
+constant = true
+size = 1
+metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1587406583]
+libraries/ = SubResource("AnimationLibrary_5d4n1")
+script = ExtResource("12_qwhj6")
+metadata/_custom_type_script = "uid://c1bce1sw2dgnf"
+
+[node name="ParticleSpawner3D" type="Node3D" parent="." unique_id=1579406573]
+script = ExtResource("13_bj6ow")
+scenes = Array[PackedScene]([ExtResource("14_m0fy0")])
+spawn_on_exit_tree = true
+metadata/_custom_type_script = "uid://bhjxscxhtg2se"
+
+[node name="OccluderInstance3D" type="OccluderInstance3D" parent="." unique_id=374514710]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5692959, 0, 0.67521065)
+occluder = ExtResource("13_lvuu1")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=415438826]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.070500016, -0.8032318, 0.48049998)
+visible = false
+radius = 4.1093893
+height = 3.7067997
+vertices = PackedVector3Array(-3.6568937, 0, -0.05626927, -3.0423875, 0, -2.5230172, -2.4586146, 0, -3.2927637, 0.63440704, 0, -3.5043, 2.1004212, 0, -2.931544, 3.6535685, 0, -1.4048448, 2.7305427, 0, 1.9566233, 1.9592255, 0, 2.705597, -0.41944152, 0, 3.5047455, -2.37632, 0, 2.6159093, -2.775652, 0, 1.9154992, -3.6568937, 0, -0.05626927)
+script = ExtResource("16_tyq2d")
+generate_on_ready = true
+
+[node name="NodeSaver" type="Node" parent="." unique_id=1812045563]
+script = ExtResource("17_4jy40")
+save_mode = 2
+saver_id = &"stone"
+saved_properties = Dictionary[StringName, bool]({
+&"global_transform": true
+})
+metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
+
+[node name="AudioSpawner3D" type="Node3D" parent="." unique_id=2130276450 node_paths=PackedStringArray("templates")]
+script = ExtResource("18_ya8ro")
+templates = [NodePath("DestroyPlayer")]
+spawn_on_exit_tree = true
+metadata/_custom_type_script = "uid://bv2ss5hjacgd3"
+
+[node name="DestroyPlayer" type="AudioStreamPlayer3D" parent="AudioSpawner3D" unique_id=120290710]
+stream = ExtResource("19_2rmbx")
+unit_size = 100.0
+bus = &"SFX"
+
+[node name="BlenderMeshes" parent="." unique_id=287566602 instance=ExtResource("18_65ggh")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="Stone" parent="BlenderMeshes" index="0" unique_id=1070345765]
+surface_material_override/0 = SubResource("ShaderMaterial_npxjp")
+
+[node name="Ore" parent="BlenderMeshes/Stone" index="0" unique_id=1357082601]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore2" parent="BlenderMeshes/Stone" index="1" unique_id=2054966662]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore3" parent="BlenderMeshes/Stone" index="2" unique_id=432519907]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore4" parent="BlenderMeshes/Stone" index="3" unique_id=465442931]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore5" parent="BlenderMeshes/Stone" index="4" unique_id=1591873791]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore6" parent="BlenderMeshes/Stone" index="5" unique_id=450975114]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore7" parent="BlenderMeshes/Stone" index="6" unique_id=170118173]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore8" parent="BlenderMeshes/Stone" index="7" unique_id=233404951]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore9" parent="BlenderMeshes/Stone" index="8" unique_id=754333738]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore10" parent="BlenderMeshes/Stone" index="9" unique_id=1580726628]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore11" parent="BlenderMeshes/Stone" index="10" unique_id=311323762]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore12" parent="BlenderMeshes/Stone" index="11" unique_id=655733687]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore13" parent="BlenderMeshes/Stone" index="12" unique_id=1385402480]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore14" parent="BlenderMeshes/Stone" index="13" unique_id=1983309863]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore15" parent="BlenderMeshes/Stone" index="14" unique_id=1143928714]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore16" parent="BlenderMeshes/Stone" index="15" unique_id=873580250]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore17" parent="BlenderMeshes/Stone" index="16" unique_id=269032908]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore18" parent="BlenderMeshes/Stone" index="17" unique_id=209434311]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore19" parent="BlenderMeshes/Stone" index="18" unique_id=391734845]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore20" parent="BlenderMeshes/Stone" index="19" unique_id=358537943]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore21" parent="BlenderMeshes/Stone" index="20" unique_id=1368355746]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore22" parent="BlenderMeshes/Stone" index="21" unique_id=1583135952]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore23" parent="BlenderMeshes/Stone" index="22" unique_id=1138700453]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore24" parent="BlenderMeshes/Stone" index="23" unique_id=1822213855]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore25" parent="BlenderMeshes/Stone" index="24" unique_id=1588308112]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore26" parent="BlenderMeshes/Stone" index="25" unique_id=1933006448]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore27" parent="BlenderMeshes/Stone" index="26" unique_id=1962737158]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore28" parent="BlenderMeshes/Stone" index="27" unique_id=1080360509]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore29" parent="BlenderMeshes/Stone" index="28" unique_id=531626852]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore30" parent="BlenderMeshes/Stone" index="29" unique_id=1193898464]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore31" parent="BlenderMeshes/Stone" index="30" unique_id=1884947789]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore32" parent="BlenderMeshes/Stone" index="31" unique_id=1089645066]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore33" parent="BlenderMeshes/Stone" index="32" unique_id=1403111209]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore34" parent="BlenderMeshes/Stone" index="33" unique_id=1424541490]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore35" parent="BlenderMeshes/Stone" index="34" unique_id=267867140]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore36" parent="BlenderMeshes/Stone" index="35" unique_id=166775259]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore37" parent="BlenderMeshes/Stone" index="36" unique_id=975158615]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore38" parent="BlenderMeshes/Stone" index="37" unique_id=109006101]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore39" parent="BlenderMeshes/Stone" index="38" unique_id=1705734076]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore40" parent="BlenderMeshes/Stone" index="39" unique_id=1409263537]
+surface_material_override/0 = ExtResource("20_65ggh")
+
+[node name="Ore41" parent="BlenderMeshes" index="1" unique_id=392290048]
+visible = false
+mesh = null
+
+[editable path="BlenderMeshes"]

@@ -47,7 +47,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://island/props/destructable_resource/tree/tree2/tree2_Cube.res",
+"save_to_file/fallback_path": "res://island/props/destructible_resource/tree/tree2/tree2_Cube.res",
 "save_to_file/path": "uid://ci8v5lqpkq181"
 },
 "tree2_Cube_003": {
@@ -56,7 +56,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://island/props/destructable_resource/tree/tree2/tree2_Cube_003.res",
+"save_to_file/fallback_path": "res://island/props/destructible_resource/tree/tree2/tree2_Cube_003.res",
 "save_to_file/path": "uid://n401vdsvwqt4"
 },
 "tree2_Cube_004": {
@@ -65,7 +65,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://island/props/destructable_resource/tree/tree2/tree2_Cube_004.res",
+"save_to_file/fallback_path": "res://island/props/destructible_resource/tree/tree2/tree2_Cube_004.res",
 "save_to_file/path": "uid://cec0vjfexgiy2"
 },
 "tree2_Icosphere": {
@@ -74,7 +74,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://island/props/destructable_resource/tree/tree2/tree2_Icosphere.res",
+"save_to_file/fallback_path": "res://island/props/destructible_resource/tree/tree2/tree2_Icosphere.res",
 "save_to_file/path": "uid://pp7y671firv"
 },
 "tree2_Icosphere_001": {
@@ -83,7 +83,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://island/props/destructable_resource/tree/tree2/tree2_Icosphere_001.res",
+"save_to_file/fallback_path": "res://island/props/destructible_resource/tree/tree2/tree2_Icosphere_001.res",
 "save_to_file/path": "uid://bpl8qm2cp5jsc"
 },
 "tree2_Icosphere_002": {
@@ -92,7 +92,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://island/props/destructable_resource/tree/tree2/tree2_Icosphere_002.res",
+"save_to_file/fallback_path": "res://island/props/destructible_resource/tree/tree2/tree2_Icosphere_002.res",
 "save_to_file/path": "uid://cc05a2oxw20on"
 },
 "tree2_Icosphere_003": {
@@ -101,7 +101,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://island/props/destructable_resource/tree/tree2/tree2_Icosphere_003.res",
+"save_to_file/fallback_path": "res://island/props/destructible_resource/tree/tree2/tree2_Icosphere_003.res",
 "save_to_file/path": "uid://ct77bxphpqdli"
 },
 "tree2_Icosphere_004": {
@@ -110,7 +110,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://island/props/destructable_resource/tree/tree2/tree2_Icosphere_004.res",
+"save_to_file/fallback_path": "res://island/props/destructible_resource/tree/tree2/tree2_Icosphere_004.res",
 "save_to_file/path": "uid://c7bjmx3ytmk77"
 },
 "tree2_Icosphere_005": {
@@ -119,7 +119,7 @@ _subresources={
 "generate/shadow_meshes": 0,
 "lods/normal_merge_angle": 20.0,
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://island/props/destructable_resource/tree/tree2/tree2_Icosphere_005.res",
+"save_to_file/fallback_path": "res://island/props/destructible_resource/tree/tree2/tree2_Icosphere_005.res",
 "save_to_file/path": "uid://3e0r4gwjvr23"
 }
 }

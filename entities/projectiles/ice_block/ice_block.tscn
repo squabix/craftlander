@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="5_8un2i"]
 [ext_resource type="PackedScene" uid="uid://w4nm4moe5341" path="res://particles/ice_block_smash_particles.tscn" id="6_65djb"]
 [ext_resource type="PackedScene" uid="uid://b4sqb68mc8p5f" path="res://particles/puff_particles.tscn" id="7_puff"]
-[ext_resource type="Script" uid="uid://bxjt3nibhkxh8" path="res://common/signal_triggrs/camera_shake_trigger.gd" id="8_b3hui"]
+[ext_resource type="Script" uid="uid://bxjt3nibhkxh8" path="res://common/signal_triggers/camera_shake_trigger.gd" id="8_b3hui"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_iceblock"]
 radius = 2.5

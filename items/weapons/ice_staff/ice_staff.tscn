@@ -8,7 +8,7 @@
 [ext_resource type="Material" uid="uid://c403ng7pn0nqg" path="res://assets/materials/ice.tres" id="5_ice"]
 [ext_resource type="AudioStream" uid="uid://cpt2s6883glj2" path="res://assets/sound/spell.mp3" id="6_spell"]
 [ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="7_audio_spawner"]
-[ext_resource type="Script" uid="uid://c6klwkv4b0dhs" path="res://common/signal_triggrs/signal_spawn_trigger.gd" id="8_spawn_trigger"]
+[ext_resource type="Script" uid="uid://c6klwkv4b0dhs" path="res://common/signal_triggers/signal_spawn_trigger.gd" id="8_spawn_trigger"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_spell"]
 random_pitch = 1.0594631

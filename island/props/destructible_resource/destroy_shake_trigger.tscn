@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b42ejh4s3ni40"]
+
+[ext_resource type="Script" uid="uid://bxjt3nibhkxh8" path="res://common/signal_triggers/camera_shake_trigger.gd" id="1_shake"]
+
+[node name="DestroyShakeTrigger" type="Node" unique_id=2098056896]
+script = ExtResource("1_shake")
+trauma = 0.5
+signal_name = &"died"

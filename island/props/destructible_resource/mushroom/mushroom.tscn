@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://c1wart542qqxr"]
+
+[ext_resource type="Script" uid="uid://0u3oj7ccvr70" path="res://island/props/destructible_resource/pickable_resource.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://4dfurtssrp4f" path="res://common3d/damage_system/hurtbox3d.gd" id="2_hurtbox"]
+[ext_resource type="Material" uid="uid://bntpptj6c08nu" path="res://assets/materials/red_mushroom.tres" id="3_4cb3m"]
+[ext_resource type="Script" uid="uid://43bqjaemfda5" path="res://common3d/signal_audio_manager3d.gd" id="3_signalaudio"]
+[ext_resource type="Material" uid="uid://fs0rcuantoc5" path="res://assets/materials/mushroom_spot.tres" id="4_hcgp1"]
+[ext_resource type="AudioStream" uid="uid://d1te8os5tp3ww" path="res://assets/sound/hit.mp3" id="4_hitsound"]
+[ext_resource type="Material" uid="uid://drfxxufa84pj2" path="res://assets/materials/white_mushroom.tres" id="5_2mqhd"]
+[ext_resource type="Script" uid="uid://cbb5o5ykqwxfp" path="res://common/damage_system/health.gd" id="5_health"]
+[ext_resource type="Resource" uid="uid://bwurefwkj4gjj" path="res://common/damage_system/single_damage.tres" id="6_damageoverride"]
+[ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="8_inventory"]
+[ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="9_iteminstance"]
+[ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="13_nodesaver"]
+[ext_resource type="Script" uid="uid://bv2ss5hjacgd3" path="res://common/spawner/audio_spawner3d.gd" id="14_audiospawner"]
+[ext_resource type="AudioStream" uid="uid://cnvrxek8alx84" path="res://assets/sound/pick_up.mp3" id="15_pickupsound"]
+[ext_resource type="Script" uid="uid://favgu1tbe1tq" path="res://common3d/interactions/interactable3d.gd" id="16_interactable"]
+[ext_resource type="Resource" path="res://items/food/mushroom/mushroom_item.tres" id="17_item"]
+[ext_resource type="PackedScene" uid="uid://cf1vt1van08av" path="res://assets/models/items/food/mushroom.blend" id="18_model"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hurtbox"]
+radius = 0.35
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_interact"]
+radius = 0.3
+
+[sub_resource type="Resource" id="Resource_mushroom"]
+script = ExtResource("9_iteminstance")
+item = ExtResource("17_item")
+
+[node name="Mushroom" type="Node3D" unique_id=1200594382 node_paths=PackedStringArray("interactable", "hurtbox", "inventory", "health")]
+script = ExtResource("1_script")
+interactable = NodePath("Interactable3D")
+min_hp = 1
+max_hp = 1
+hurtbox = NodePath("Hurtbox3D")
+inventory = NodePath("Inventory")
+health = NodePath("Health")
+
+[node name="Visuals" parent="." unique_id=1200594384 instance=ExtResource("18_model")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
+
+[node name="Top" parent="Visuals" index="0" unique_id=1652583776]
+surface_material_override/0 = ExtResource("3_4cb3m")
+surface_material_override/1 = ExtResource("4_hcgp1")
+
+[node name="Stump" parent="Visuals" index="1" unique_id=204783460]
+surface_material_override/0 = ExtResource("5_2mqhd")
+
+[node name="Hurtbox3D" type="Area3D" parent="." unique_id=1200594385 node_paths=PackedStringArray("health")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+script = ExtResource("2_hurtbox")
+health = NodePath("../Health")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1200594386]
+shape = SubResource("SphereShape3D_hurtbox")
+
+[node name="SignalAudioManager3D" type="Node3D" parent="Hurtbox3D" unique_id=1200594387 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("3_signalaudio")
+signal_players = {
+&"was_hurt": NodePath("HurtPlayer")
+}
+
+[node name="HurtPlayer" type="AudioStreamPlayer3D" parent="Hurtbox3D/SignalAudioManager3D" unique_id=1200594388]
+stream = ExtResource("4_hitsound")
+volume_db = -18.0
+bus = &"SFX"
+
+[node name="Interactable3D" type="Area3D" parent="." unique_id=1200594389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("16_interactable")
+tooltip_enabled = "Pick mushroom?"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactable3D" unique_id=1200594390]
+shape = SubResource("SphereShape3D_interact")
+
+[node name="Health" type="Node" parent="." unique_id=1200594391]
+script = ExtResource("5_health")
+hp = 1.0
+damage_override = ExtResource("6_damageoverride")
+one_shot = true
+free_parent_on_death = true
+
+[node name="Inventory" type="Node" parent="." unique_id=1200594392]
+script = ExtResource("8_inventory")
+item_instances = Array[ExtResource("9_iteminstance")]([SubResource("Resource_mushroom")])
+constant = true
+size = 1
+
+[node name="NodeSaver" type="Node" parent="." unique_id=1200594394]
+script = ExtResource("13_nodesaver")
+save_mode = 2
+saver_id = &"mushroom"
+saved_properties = Dictionary[StringName, bool]({
+&"global_transform": true
+})
+
+[node name="AudioSpawner3D" type="Node3D" parent="." unique_id=1200594395 node_paths=PackedStringArray("templates")]
+script = ExtResource("14_audiospawner")
+templates = [NodePath("PickPlayer")]
+spawn_on_exit_tree = true
+
+[node name="PickPlayer" type="AudioStreamPlayer3D" parent="AudioSpawner3D" unique_id=1200594396]
+stream = ExtResource("15_pickupsound")
+unit_size = 20.0
+bus = &"SFX"
+
+[editable path="Visuals"]

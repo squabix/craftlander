@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://p8wwjit2trpc"]
-
-[ext_resource type="Script" uid="uid://bxjt3nibhkxh8" path="res://common/signal_triggrs/camera_shake_trigger.gd" id="1_shake"]
-
-[node name="HurtShakeTrigger" type="Node" unique_id=252964983]
-script = ExtResource("1_shake")
-trauma = 0.25
-signal_name = &"survived_hurt"
