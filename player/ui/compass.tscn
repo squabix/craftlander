@@ -4,15 +4,17 @@
 [ext_resource type="FontFile" uid="uid://cbr5ncx4f3a1n" path="res://assets/ui/sineas.otf" id="2_fgwke"]
 
 [node name="Compass" type="Control" unique_id=771501149]
-custom_minimum_size = Vector2(120, 120)
+custom_minimum_size = Vector2(140, 140)
 layout_mode = 3
 anchors_preset = 0
+offset_right = 120.0
+offset_bottom = 120.0
 mouse_filter = 2
 script = ExtResource("1")
-radius = 32.0
+radius = 44.0
 font = ExtResource("2_fgwke")
 ring_color = Color(1, 1, 1, 1)
-ring_thickness = 2.0
+ring_thickness = 3.0
 ticks_length = 10.0
 directions_offset = -16.0
 pointer_color = Color(1, 1, 1, 1)
