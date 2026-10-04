@@ -120,11 +120,13 @@ func announce_attack(color: Color, tell_seconds: float) -> void:
 func vanish() -> void:
 	visuals.visible = false
 	get_health().invulnerable = true
+	get_health().intangible = true
 
 
 func appear() -> void:
 	visuals.visible = true
 	get_health().invulnerable = false
+	get_health().intangible = false
 
 
 func is_dry(point: Vector3) -> bool:

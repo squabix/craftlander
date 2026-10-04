@@ -155,6 +155,7 @@ func brighten_light(duration: float) -> void:
 func vanish() -> void:
 	visuals.visible = false
 	health.invulnerable = true
+	health.intangible = true
 	if is_instance_valid(beacon):
 		beacon.visible = false
 
@@ -165,6 +166,7 @@ func vanish() -> void:
 func appear() -> void:
 	visuals.visible = true
 	health.invulnerable = false
+	health.intangible = false
 	if is_instance_valid(beacon):
 		beacon.visible = true
 
