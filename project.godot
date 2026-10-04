@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="CRAFTLANDER"
-config/version="1.0"
+config/version="0.1"
 run/main_scene="uid://xw1mkjxlbnke"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="CRAFTLANDER"
