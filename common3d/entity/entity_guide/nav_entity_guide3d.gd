@@ -5,6 +5,7 @@ signal nav_ready
 
 const SAFE_VELOCITY_MIN_LENGTH_SQ := 0.1
 const DIRECTION_MIN_LENGTH_SQ := 0.05
+const PROGRESS_MAX_GAP := 0.5 # s
 
 @export var nav: NavigationAgent3D
 @export_range(0.0, 1.0) var rotation_ratio := 0.25
@@ -12,6 +13,11 @@ const DIRECTION_MIN_LENGTH_SQ := 0.05
 @export_group("Off Navmesh Settings")
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var off_navmesh_threshold: float = 0.3
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var navmesh_ingress_depth: float = 0.4
+
+@export_group("Stuck Detection", "stuck")
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var stuck_check_interval := 1.5
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var stuck_min_progress := 0.75
+@export_custom(PROPERTY_HINT_NONE, "suffix:s") var stuck_avoidance_suppression := 1.5
 
 @export_group("Move Directly", "move_directly")
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var move_directly_range := 3.6
@@ -27,6 +33,11 @@ var has_direct_shot := false
 var is_outside_navmesh := false
 var closest_navmesh_point := Vector3.ZERO
 var _has_closest_navmesh_point := false
+
+var _last_move_time := -INF
+var _progress_check_time := 0.0
+var _progress_distance := INF
+var _avoidance_suppressed_until := 0.0
 
 
 func _init() -> void:
@@ -162,11 +173,15 @@ func get_direction() -> Vector3:
 		return _get_horizontal_direction_to(entity.global_position, target_position)
 	if is_outside_navmesh:
 		return _get_horizontal_direction_to(entity.global_position, get_closest_navmesh_point(true))
-	if safe_velocity.length_squared() > SAFE_VELOCITY_MIN_LENGTH_SQ:
+	if safe_velocity.length_squared() > SAFE_VELOCITY_MIN_LENGTH_SQ and not is_avoidance_suppressed():
 		return safe_velocity.normalized()
 	if not _is_nav_ready:
 		return _get_horizontal_direction_to(entity.global_position, get_closest_navmesh_point(true))
 	return _get_horizontal_direction_to(entity.global_position, nav.get_next_path_position())
+
+
+func is_avoidance_suppressed() -> bool:
+	return _now() < _avoidance_suppressed_until
 
 
 func has_entity() -> bool:
@@ -233,6 +248,7 @@ func move_forward() -> void:
 		return
 
 	nav.velocity = get_nav_velocity()
+	track_progress()
 
 	var move_direction := get_direction()
 	if move_direction.length_squared() < DIRECTION_MIN_LENGTH_SQ:
@@ -240,6 +256,24 @@ func move_forward() -> void:
 
 	var rotated_move_direction := entity.global_transform.basis.inverse() * move_direction
 	entity.move_planar(Util.vec3to2(rotated_move_direction, Util.VECTOR3Y).normalized())
+
+
+func track_progress() -> void:
+	var now := _now()
+	var was_moving_recently := now - _last_move_time <= PROGRESS_MAX_GAP
+	_last_move_time = now
+	if not was_moving_recently:
+		_reset_progress(now)
+		return
+
+	if now - _progress_check_time < stuck_check_interval:
+		return
+
+	var distance := _get_horizontal_distance_to_target()
+	var made_progress := distance <= _progress_distance - stuck_min_progress
+	if not made_progress and not has_direct_shot and distance > move_directly_range:
+		_avoidance_suppressed_until = now + stuck_avoidance_suppression
+	_reset_progress(now)
 
 
 func get_annulus_point(inner_radius: float, outer_radius: float) -> Vector3:
@@ -323,3 +357,18 @@ func _get_move_directly_ray_result(start: Vector3, end: Vector3) -> Dictionary:
 		return { }
 	var query := PhysicsRayQueryParameters3D.create(start, end, 0xFFFFFFFF, [entity.get_rid()])
 	return entity.get_world_3d().direct_space_state.intersect_ray(query)
+
+
+func _reset_progress(now: float) -> void:
+	_progress_check_time = now
+	_progress_distance = _get_horizontal_distance_to_target()
+
+
+func _get_horizontal_distance_to_target() -> float:
+	var offset := target_position - entity.global_position
+	offset.y = 0.0
+	return offset.length()
+
+
+func _now() -> float:
+	return Time.get_ticks_msec() / 1000.0
