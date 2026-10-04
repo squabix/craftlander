@@ -19,7 +19,13 @@
 [ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="17_migq8"]
 [ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="18_b6him"]
 [ext_resource type="Script" uid="uid://ljihr86cv3xk" path="res://common3d/item_visuals_container_3d.gd" id="19_cfrat"]
+[ext_resource type="PackedScene" uid="uid://cvcw12u27jtxt" path="res://assets/models/entities/shroomoid.blend" id="22_1gkyk"]
+[ext_resource type="Material" uid="uid://drfxxufa84pj2" path="res://assets/materials/white_mushroom.tres" id="23_lbni6"]
+[ext_resource type="Material" uid="uid://ct3rueaspkpix" path="res://assets/materials/darkness.tres" id="24_11xnd"]
+[ext_resource type="Material" uid="uid://m5807bchpbmp" path="res://assets/materials/glowing_eye.tres" id="25_bnoi3"]
+[ext_resource type="Material" uid="uid://bntpptj6c08nu" path="res://assets/materials/red_mushroom.tres" id="26_ghg8s"]
 [ext_resource type="Script" uid="uid://6poppt70f3rp" path="res://island/island_water.gd" id="27_ex8q1"]
+[ext_resource type="Material" uid="uid://fs0rcuantoc5" path="res://assets/materials/mushroom_spot.tres" id="27_j0fn8"]
 [ext_resource type="Material" uid="uid://d06u1efqiqr8e" path="res://assets/shaders/water_shader_material.tres" id="28_b2xwv"]
 
 [sub_resource type="Gradient" id="Gradient_eo3xd"]
@@ -347,6 +353,42 @@ transform = Transform3D(0.8660254, -0.5, 2.1855694e-08, 0, -4.371139e-08, -1, 0.
 script = ExtResource("19_cfrat")
 metadata/_custom_type_script = "uid://ljihr86cv3xk"
 
+[node name="Visuals3" parent="." unique_id=2032149025 instance=ExtResource("22_1gkyk")]
+transform = Transform3D(-1.299038, 0, -0.7500001, 0, 1.5, 0, 0.7500001, 0, -1.299038, 0.99796677, 5.4728894, -4.4868975)
+
+[node name="Skeleton3D" parent="Visuals3/Armature" parent_id_path=PackedInt32Array(2032149025, 559426766) index="0" unique_id=1164416661]
+bones/0/rotation = Quaternion(0.13696913, 1.1808578e-07, -1.6327993e-08, 0.9905753)
+bones/2/rotation = Quaternion(4.2381807e-08, -4.261896e-08, 0.6204223, 0.7842679)
+bones/3/rotation = Quaternion(-1.3102502e-07, 1.9494038e-08, -0.52479047, 0.8512314)
+bones/5/rotation = Quaternion(-2.9802319e-08, -5.9604638e-08, -0.6204223, 0.7842679)
+bones/6/rotation = Quaternion(5.029142e-08, -1.09896064e-07, 0.52479047, 0.85123146)
+bones/8/rotation = Quaternion(-0.49999997, 0.5, 0.5, 0.5)
+bones/9/rotation = Quaternion(-0.23331082, 0.09664051, -0.3702799, 0.8939349)
+bones/10/rotation = Quaternion(-5.7976637e-11, -2.910383e-11, 0.06378674, 0.99796355)
+bones/11/rotation = Quaternion(-0.49999997, -0.5, -0.5, 0.5)
+bones/12/rotation = Quaternion(-0.23331082, -0.096640535, 0.37027988, 0.8939349)
+bones/13/rotation = Quaternion(2.5062372e-10, -1.4551915e-11, -0.07041717, 0.99751765)
+
+[node name="Shroomoid" parent="Visuals3/Armature/Skeleton3D" index="0" unique_id=2021697659]
+transform = Transform3D(0.98795986, 0.04085858, 0.14921756, 0, 0.9644961, -0.26409718, -0.15471038, 0.26091743, 0.9528833, -0.5442278, -0.29961902, 1.8100019)
+surface_material_override/0 = ExtResource("23_lbni6")
+surface_material_override/1 = ExtResource("24_11xnd")
+surface_material_override/2 = ExtResource("25_bnoi3")
+surface_material_override/3 = ExtResource("26_ghg8s")
+surface_material_override/4 = ExtResource("27_j0fn8")
+
+[node name="BoneAttachment3D" type="BoneAttachment3D" parent="Visuals3/Armature/Skeleton3D" index="1" unique_id=2140907447]
+transform = Transform3D(0.6134267, 0.71013737, 0.34556118, 0.06865462, -0.48385084, 0.8724534, 0.78676176, -0.51146173, -0.34556118, 0.67585075, 0.4136818, -0.33405036)
+bone_name = "RightHand"
+bone_idx = 13
+
+[node name="ItemVisualsContainer3D" type="Node3D" parent="Visuals3/Armature/Skeleton3D/BoneAttachment3D" unique_id=778955857 node_paths=PackedStringArray("item_holder")]
+transform = Transform3D(0.9396926, -0.34202012, 1.4950174e-08, 0, -4.371139e-08, -1, 0.34202012, 0.9396926, -4.1075268e-08, -0.06221502, 0.1828505, -3.0546938e-09)
+script = ExtResource("19_cfrat")
+item_holder = NodePath("")
+visuals_scale_ratio = 0.8
+metadata/_custom_type_script = "uid://ljihr86cv3xk"
+
 [editable path="tree2"]
 [editable path="Dock"]
 [editable path="Dock/BlenderMeshes"]
@@ -355,3 +397,4 @@ metadata/_custom_type_script = "uid://ljihr86cv3xk"
 [editable path="Bee3/Visuals"]
 [editable path="Visuals"]
 [editable path="Visuals2"]
+[editable path="Visuals3"]
