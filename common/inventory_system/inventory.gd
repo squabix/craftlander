@@ -175,7 +175,7 @@ func add_item(item: Item, quantity: int = 1, must_reach_quantity: bool = false) 
 		return quantity
 
 	if quantity <= 0:
-		Util.node_error("%s cannot add %s with quantity of %s" % self, item, quantity)
+		Util.node_error("%s cannot add %s with quantity of %s", self, item, quantity)
 		return 0
 
 	var original_quantity := quantity
@@ -235,9 +235,7 @@ func create_instance(index: int, item: Item, quantity: int, overwrite_occupied :
 		return null
 
 	var instance := item.instantiate(quantity)
-	instance.emptied.connect(func() -> void: empty_instance(find_instance(instance)))
-	item_instances[index] = instance
-	item_changed.emit(index)
+	set_instance(index, instance)
 	return instance
 
 
@@ -347,6 +345,102 @@ func swap(index1: int, index2: int) -> bool:
 	item_changed.emit(index1)
 	item_changed.emit(index2)
 	return true
+
+
+func set_instance(index: int, instance: ItemInstance) -> void:
+	if not has_index(index):
+		return
+
+	item_instances[index] = instance
+	if instance != null:
+		connect_emptied(instance)
+	item_changed.emit(index)
+
+
+func connect_emptied(instance: ItemInstance) -> void:
+	var callback := on_instance_emptied.bind(instance)
+	if not instance.emptied.is_connected(callback):
+		instance.emptied.connect(callback)
+
+
+func on_instance_emptied(instance: ItemInstance) -> void:
+	var index := find_instance(instance)
+	if index != -1:
+		empty_instance(index)
+
+
+func merge_instance_into(index: int, instance: ItemInstance) -> ItemInstance:
+	if constant or instance == null or not has_index(index):
+		return instance
+
+	if not is_occupied(index):
+		set_instance(index, instance)
+		return null
+
+	var slot := item_instances[index]
+	if not slot.item.equals(instance.item):
+		return instance
+
+	var moved: int = min(instance.quantity, slot.item.max_quantity - slot.quantity)
+	if moved <= 0:
+		return instance
+
+	slot.quantity += moved
+	instance.quantity -= moved
+	instance_changed.emit(index)
+	return instance if instance.quantity > 0 else null
+
+
+func split_half(index: int) -> ItemInstance:
+	if constant or not is_occupied(index):
+		return null
+
+	var slot := item_instances[index]
+	var taken := ceili(slot.quantity / 2.0)
+	if taken >= slot.quantity:
+		return empty_instance(index)
+
+	slot.quantity -= taken
+	instance_changed.emit(index)
+	return slot.item.instantiate(taken)
+
+
+func quick_move(index: int, first: int, last: int) -> void:
+	if constant or not is_occupied(index):
+		return
+
+	var instance := item_instances[index]
+
+	for target in range(first, last + 1):
+		if instance.quantity <= 0:
+			break
+		if target == index or not is_occupied(target):
+			continue
+
+		var slot := item_instances[target]
+		if not slot.item.equals(instance.item):
+			continue
+
+		var moved: int = min(instance.quantity, slot.item.max_quantity - slot.quantity)
+		if moved <= 0:
+			continue
+
+		slot.quantity += moved
+		instance.quantity -= moved
+		instance_changed.emit(target)
+
+	if instance.quantity <= 0:
+		empty_instance(index)
+		return
+
+	for target in range(first, last + 1):
+		if target == index or item_instances[target] != null:
+			continue
+
+		set_instance(target, empty_instance(index))
+		return
+
+	instance_changed.emit(index)
 
 
 func give_everything(to: Inventory) -> void:

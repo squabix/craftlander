@@ -4788,15 +4788,35 @@ signal_players = {
 &"pressed": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
 }
 
-[node name="InventoryOrganizer" type="Node" parent="PauseMenu/CraftingInterface" unique_id=1412121172 node_paths=PackedStringArray("inventory", "inventory_display_rows", "held_item_label", "pause_interface", "primary_inventory_selector", "secondary_inventory_selector", "hold_inventory_selector")]
+[node name="InventoryOrganizer" type="Node" parent="PauseMenu/CraftingInterface" unique_id=1412121172 node_paths=PackedStringArray("inventory", "held_stack", "held_item_label", "pause_interface", "slot_containers", "crafting_environment", "hover_inventory_selector", "hold_inventory_selector")]
 script = ExtResource("55_jbx34")
 inventory = NodePath("../../../Inventory")
-inventory_display_rows = [NodePath("../../../HotbarInterface/HotbarDisplay"), null, null, null]
+held_stack = NodePath("../HeldStack")
 held_item_label = NodePath("../../../HotbarInterface/HeldItemLabel")
 pause_interface = NodePath("../..")
-primary_inventory_selector = NodePath("../../../HUD/PrimaryInventorySelector")
-secondary_inventory_selector = NodePath("../../../HUD/SecondaryInventorySelector")
+slot_containers = [NodePath("../../../HotbarInterface/HotbarDisplay"), NodePath("../BackpackPanel/Container")]
+crafting_environment = NodePath("../CraftingEnvironment")
+hover_inventory_selector = NodePath("../../../HUD/HoverInventorySelector")
 hold_inventory_selector = NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector")
+
+[node name="HeldStack" type="Node" parent="PauseMenu/CraftingInterface" unique_id=884615414 node_paths=PackedStringArray("inventory", "dropper", "pause_interface", "quantity_label")]
+script = ExtResource("held_stack_script")
+inventory = NodePath("../../../Inventory")
+dropper = NodePath("../../../Head/Camera3D/DropperRayCast/InventoryDropper3D")
+pause_interface = NodePath("../..")
+quantity_label = NodePath("../HeldQuantityLabel")
+
+[node name="SignalAudioManager" type="Node" parent="PauseMenu/CraftingInterface/HeldStack" unique_id=998844911 node_paths=PackedStringArray("signal_players")]
+script = ExtResource("84_onxu2")
+signal_players = {
+&"changed": NodePath("../../../../Head/Camera3D/ItemHolder/HoldSelector/SignalAudioManager/SelectPlayer")
+}
+
+[node name="HeldQuantityLabel" type="Label" parent="PauseMenu/CraftingInterface" unique_id=1995390873]
+z_index = 3
+layout_mode = 0
+text = "2"
+label_settings = ExtResource("52_p5tca")
 
 [node name="ItemInspector" type="PanelContainer" parent="PauseMenu/CraftingInterface" unique_id=482564874 node_paths=PackedStringArray("inventory_selector", "name_label", "info_label", "container")]
 z_index = 2
@@ -4806,7 +4826,7 @@ offset_top = 124.0
 offset_right = 710.0
 offset_bottom = 178.0
 script = ExtResource("59_b2j0d")
-inventory_selector = NodePath("../../../HUD/SecondaryInventorySelector")
+inventory_selector = NodePath("../../../HUD/HoverInventorySelector")
 name_label = NodePath("VBoxContainer/NameLabel")
 info_label = NodePath("VBoxContainer/InfoLabel")
 container = NodePath("VBoxContainer")

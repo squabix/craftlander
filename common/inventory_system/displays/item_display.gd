@@ -1,6 +1,8 @@
 class_name ItemDisplay
 extends Control
 
+signal clicked(index: int, secondary: bool, shift: bool)
+
 enum SelectMode { PRESS, HOVER, MANUAL }
 enum LabelMode { QUANTITY, FULL_STRING }
 
@@ -61,9 +63,8 @@ func _ready() -> void:
 	if auto_set_index_enabled:
 		index = get_index() + auto_set_index_offset
 
-	# Connect selection signal
 	if is_instance_valid(select_button):
-		select_button.pressed.connect(press)
+		select_button.gui_input.connect(on_select_button_input)
 		select_button.mouse_entered.connect(hover)
 		select_button.mouse_exited.connect(unhover)
 
@@ -108,10 +109,15 @@ func deselect_self(inventory_selector: InventorySelector) -> bool:
 	return true
 
 
-func press() -> void:
-	for selector in inventory_selectors:
-		if inventory_selectors[selector] == SelectMode.PRESS:
-			select_self(selector)
+func on_select_button_input(event: InputEvent) -> void:
+	if not event is InputEventMouseButton or not event.pressed:
+		return
+
+	match event.button_index:
+		MOUSE_BUTTON_LEFT:
+			clicked.emit(index, false, event.shift_pressed)
+		MOUSE_BUTTON_RIGHT:
+			clicked.emit(index, true, event.shift_pressed)
 
 
 func hover() -> void:
