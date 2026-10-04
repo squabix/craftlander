@@ -28,6 +28,7 @@ static func instantiate(boat_level: int) -> PlayerBoat:
 
 func _ready() -> void:
 	interactable.interacted_with.connect(open_boat_menu)
+	docked.connect(EventBus.trigger.bind(&"player_boat_docked"))
 	super()
 
 

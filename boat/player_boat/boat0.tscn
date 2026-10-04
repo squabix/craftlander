@@ -158,7 +158,7 @@ shape = SubResource("CylinderShape3D_hjjmf")
 
 [node name="UpgradeParticleSpawner" type="Node3D" parent="." unique_id=1621215192]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 3)
 script = ExtResource("99_particlespawner")
 scenes = Array[PackedScene]([ExtResource("99_upgradeparticles")])
 metadata/_custom_type_script = "uid://bhjxscxhtg2se"
