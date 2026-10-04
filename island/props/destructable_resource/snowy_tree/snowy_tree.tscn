@@ -20,7 +20,9 @@
 [ext_resource type="Shader" uid="uid://d0g1tx71qh1wb" path="res://assets/shaders/tree_wind_shader.gdshader" id="18_fy1ww"]
 [ext_resource type="Material" uid="uid://cs4ulhbpklb14" path="res://assets/materials/leaves.tres" id="19_78ryk"]
 [ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/collision_barrier_3d.gd" id="21_sbsjk"]
+[ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="23_gdjh1"]
 [ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="24_cjjnv"]
+[ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="24_etvvk"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="25_yrpb4"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="26_kco7h"]
 [ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="27_tdfff"]
@@ -292,6 +294,10 @@ visible = false
 surface_material_override/0 = SubResource("ShaderMaterial_tklfs")
 surface_material_override/1 = ExtResource("19_78ryk")
 
+[node name="Trunk" parent="Trunk/BlenderMeshes" index="2" unique_id=179831959]
+surface_material_override/0 = ExtResource("23_gdjh1")
+surface_material_override/1 = ExtResource("24_etvvk")
+
 [node name="Stump" parent="Trunk/BlenderMeshes" index="3" unique_id=1318815897]
 visible = false
 
@@ -330,6 +336,10 @@ visible = false
 
 [node name="Trunk" parent="Stump/BlenderMeshes2" index="2" unique_id=179831959]
 visible = false
+
+[node name="Stump" parent="Stump/BlenderMeshes2" index="3" unique_id=1318815897]
+surface_material_override/0 = ExtResource("23_gdjh1")
+surface_material_override/1 = ExtResource("24_etvvk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1286181219]
 libraries/ = SubResource("AnimationLibrary_4ojav")
