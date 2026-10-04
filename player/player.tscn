@@ -69,7 +69,6 @@
 [ext_resource type="Script" uid="uid://hdyfq5riitj7" path="res://player/ui/crafting/complete_crafting_panel.gd" id="43_n0b8q"]
 [ext_resource type="Script" uid="uid://bwcomtie8q510" path="res://player/ui/crafting/recipes/recipe_panel_group.gd" id="44_a1u5o"]
 [ext_resource type="Texture2D" uid="uid://c3o13o5vrivr" path="res://items/tools/shoddy/shoddy_pickaxe/shoddy_pickaxe.png" id="44_jfgyi"]
-[ext_resource type="Texture2D" uid="uid://b02s8vle3kjwk" path="res://items/food/raw_meat/raw_meat.png" id="44_vgvch"]
 [ext_resource type="Script" uid="uid://barub2aryb0nq" path="res://common/ui/icon_tooltip_label.gd" id="46_vvji8"]
 [ext_resource type="Texture2D" uid="uid://douq42dkvsywk" path="res://player/ui/inventory/inventory_slot.tres" id="48_vgvch"]
 [ext_resource type="Script" uid="uid://bs8sryrpq1j3b" path="res://player/ui/crafting/recipes/recipe_learner.gd" id="49_jbx34"]
@@ -97,7 +96,9 @@
 [ext_resource type="Texture2D" uid="uid://beudtbsirofjr" path="res://assets/ui/lush_isle.png" id="71_anp34"]
 [ext_resource type="Resource" uid="uid://bkvo3ik5y1yom" path="res://island/island_resources/lush_isle.tres" id="73_kcq4v"]
 [ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="74_2h6tc"]
+[ext_resource type="Texture2D" uid="uid://cr2esjvp5aglv" path="res://items/weapons/ice_staff/ice_staff.png" id="74_ml76h"]
 [ext_resource type="Resource" uid="uid://dafba7ua6hmlh" path="res://items/tools/gold/golden_axe/golden_axe_recipe.tres" id="75_ckf88"]
+[ext_resource type="Texture2D" uid="uid://cjt81ehcvp1ub" path="res://items/food/honeycomb/honeycomb.png" id="75_frvh1"]
 [ext_resource type="Resource" uid="uid://bbo58dytvrrts" path="res://island/island_resources/skelly_sandbar.tres" id="75_lufic"]
 [ext_resource type="Resource" uid="uid://bjm2iw71djl4g" path="res://items/weapons/golden_sword/golden_sword_recipe.tres" id="76_ciyjg"]
 [ext_resource type="Resource" uid="uid://cccntbp1un6ey" path="res://island/island_resources/frost_holm.tres" id="76_nxclr"]
@@ -125,6 +126,8 @@
 [ext_resource type="AudioStream" uid="uid://bngsjojub1sjy" path="res://assets/sound/swim_stream.tres" id="95_gcmgo"]
 [ext_resource type="Script" uid="uid://djjo3m58bs0x2" path="res://player/ui/tutorial/hint_toast.gd" id="95_hint"]
 [ext_resource type="Shader" uid="uid://b26au25x8xvc8" path="res://assets/shaders/water_background.gdshader" id="96_e5mnx"]
+[ext_resource type="Resource" uid="uid://bx6wek3vxr34j" path="res://items/weapons/slime_staff/slime_staff_recipe.tres" id="96_o4h5w"]
+[ext_resource type="Resource" uid="uid://bturgkik5ddxy" path="res://items/materials/snail_shell/snail_shell_item.tres" id="98_8ix03"]
 [ext_resource type="AudioStream" uid="uid://bctut8ply616f" path="res://assets/sound/swoosh1.mp3" id="100_0iv1a"]
 [ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="105_xgxvu"]
 [ext_resource type="Resource" uid="uid://b0gw02djkff0d" path="res://island/island_resources/undead_atoll.tres" id="109_hioli"]
@@ -143,6 +146,10 @@
 [ext_resource type="Resource" uid="uid://cq7uj11i026we" path="res://items/tools/diamond/diamond_axe/diamond_axe_item.tres" id="127_e5mnx"]
 [ext_resource type="Resource" uid="uid://b8eby8tmkueau" path="res://items/tools/diamond/diamond_pickaxe/diamond_pickaxe_item.tres" id="128_dt0ky"]
 [ext_resource type="Resource" uid="uid://qu7qtupf3uee" path="res://items/weapons/diamond_sword/diamond_sword_item.tres" id="129_mhw2q"]
+[ext_resource type="Resource" uid="uid://d3uee3nawxidh" path="res://items/tools/diamond/diamond_axe/diamond_axe_recipe.tres" id="130_dmaxe"]
+[ext_resource type="Resource" uid="uid://7ka64f30se15" path="res://items/tools/diamond/diamond_pickaxe/diamond_pickaxe_recipe.tres" id="131_dmpick"]
+[ext_resource type="Resource" uid="uid://cbraceyfpgwoj" path="res://items/weapons/diamond_sword/diamond_sword_recipe.tres" id="132_dmsword"]
+[ext_resource type="Resource" uid="uid://xvtksatkf3wl" path="res://items/weapons/ice_club/ice_club_item.tres" id="164_frvh1"]
 [ext_resource type="PackedScene" uid="uid://cgkf2sh6frkfj" path="res://common/ui/action_hint/action_hint.tscn" id="200_ahint"]
 [ext_resource type="Script" uid="uid://ct3xcqdtjfkcf" path="res://common/ui/action_hint/hotkey_hints.gd" id="201_hkhint"]
 [ext_resource type="Script" uid="uid://bec5onipef8yy" path="res://player/day_night_indicator.gd" id="220_dnind"]
@@ -384,22 +391,34 @@ font_size = 32
 [sub_resource type="LabelSettings" id="LabelSettings_mhw2q"]
 font_size = 20
 
+[sub_resource type="Resource" id="Resource_rcaxes"]
+script = ExtResource("44_a1u5o")
+name = "Axes"
+icon = ExtResource("rc_axe_icon")
+metadata/_custom_type_script = "uid://bwcomtie8q510"
+
 [sub_resource type="Resource" id="Resource_3dxkp"]
 script = ExtResource("44_a1u5o")
 name = "Food"
-icon = ExtResource("44_vgvch")
-metadata/_custom_type_script = "uid://bwcomtie8q510"
-
-[sub_resource type="Resource" id="Resource_6wior"]
-script = ExtResource("44_a1u5o")
-name = "Tools"
-icon = ExtResource("44_jfgyi")
+icon = ExtResource("75_frvh1")
 metadata/_custom_type_script = "uid://bwcomtie8q510"
 
 [sub_resource type="Resource" id="Resource_gkao2"]
 script = ExtResource("44_a1u5o")
-name = &"Weapons"
+name = "Melee"
 icon = ExtResource("64_vuyvy")
+metadata/_custom_type_script = "uid://bwcomtie8q510"
+
+[sub_resource type="Resource" id="Resource_6wior"]
+script = ExtResource("44_a1u5o")
+name = "Pickaxes"
+icon = ExtResource("44_jfgyi")
+metadata/_custom_type_script = "uid://bwcomtie8q510"
+
+[sub_resource type="Resource" id="Resource_rcstaves"]
+script = ExtResource("44_a1u5o")
+name = &"Magic"
+icon = ExtResource("74_ml76h")
 metadata/_custom_type_script = "uid://bwcomtie8q510"
 
 [sub_resource type="LabelSettings" id="LabelSettings_jbx34"]
@@ -429,6 +448,30 @@ metadata/_custom_type_script = "uid://cpv5s708r1wvo"
 script = ExtResource("50_or4qq")
 item = ExtResource("81_mhw2q")
 discovered_recipes = Array[ExtResource("50_pjwc4")]([ExtResource("78_hioli"), ExtResource("79_e5mnx"), ExtResource("80_dt0ky")])
+metadata/_custom_type_script = "uid://cpv5s708r1wvo"
+
+[sub_resource type="Resource" id="Resource_dmnd1"]
+script = ExtResource("50_or4qq")
+item = ExtResource("119_diamnd")
+discovered_recipes = Array[ExtResource("50_pjwc4")]([ExtResource("130_dmaxe"), ExtResource("131_dmpick"), ExtResource("132_dmsword")])
+metadata/_custom_type_script = "uid://cpv5s708r1wvo"
+
+[sub_resource type="Resource" id="Resource_ml76h"]
+script = ExtResource("50_or4qq")
+item = ExtResource("116_lmpt2")
+discovered_recipes = Array[ExtResource("50_pjwc4")]([ExtResource("96_o4h5w")])
+metadata/_custom_type_script = "uid://cpv5s708r1wvo"
+
+[sub_resource type="Resource" id="Resource_frvh1"]
+script = ExtResource("50_or4qq")
+item = ExtResource("98_8ix03")
+discovered_recipes = Array[ExtResource("50_pjwc4")]([ExtResource("96_o4h5w")])
+metadata/_custom_type_script = "uid://cpv5s708r1wvo"
+
+[sub_resource type="Resource" id="Resource_rcicediscovery"]
+script = ExtResource("50_or4qq")
+item = ExtResource("rc_ice_cube_item")
+discovered_recipes = Array[ExtResource("50_pjwc4")]([ExtResource("rc_ice_club_recipe")])
 metadata/_custom_type_script = "uid://cpv5s708r1wvo"
 
 [sub_resource type="LabelSettings" id="LabelSettings_s3g0c"]
@@ -1093,7 +1136,7 @@ node_connections = [&"output", 0, &"ItemBlend", &"ItemBlend", 0, &"MoveTransitio
 
 [sub_resource type="Resource" id="Resource_art4l"]
 script = ExtResource("39_dx5ib")
-items = Array[ExtResource("40_a2xo5")]([ExtResource("41_a2xo5"), ExtResource("22_bjvpn"), ExtResource("41_art4l"), ExtResource("112_wh3n5"), ExtResource("113_vuyvy"), ExtResource("114_0yt84"), ExtResource("116_kosww"), ExtResource("117_s15n6"), ExtResource("118_es2j2"), ExtResource("127_e5mnx"), ExtResource("128_dt0ky"), ExtResource("129_mhw2q"), ExtResource("10_hioli"), ExtResource("300_icestf"), ExtResource("301_slmstf")])
+items = Array[ExtResource("40_a2xo5")]([ExtResource("41_a2xo5"), ExtResource("22_bjvpn"), ExtResource("41_art4l"), ExtResource("112_wh3n5"), ExtResource("113_vuyvy"), ExtResource("114_0yt84"), ExtResource("116_kosww"), ExtResource("117_s15n6"), ExtResource("118_es2j2"), ExtResource("127_e5mnx"), ExtResource("128_dt0ky"), ExtResource("129_mhw2q"), ExtResource("10_hioli"), ExtResource("300_icestf"), ExtResource("301_slmstf"), ExtResource("164_frvh1")])
 start_anim = "swing_tool"
 metadata/_custom_type_script = "uid://c622jer80j3sk"
 
@@ -2101,9 +2144,11 @@ recipe_display = NodePath("CenterContainer/RecipeDisplay")
 recipe_learner = NodePath("RecipeLearner")
 back_entry = NodePath("RecipeList/Margin/EntryContainer/BackEntry")
 recipe_groups = Dictionary[StringName, ExtResource("44_a1u5o")]({
+&"Axes": SubResource("Resource_rcaxes"),
 &"Food": SubResource("Resource_3dxkp"),
-&"Tool": SubResource("Resource_6wior"),
-&"Weapon": SubResource("Resource_gkao2")
+&"Melee": SubResource("Resource_gkao2"),
+&"Pickaxes": SubResource("Resource_6wior"),
+&"Staves": SubResource("Resource_rcstaves")
 })
 
 [node name="Label" type="Label" parent="PauseMenu/CraftingInterface/RecipePanel" unique_id=2068748904]
@@ -2543,8 +2588,7 @@ expand_mode = 1
 [node name="RecipeLearner" type="Node" parent="PauseMenu/CraftingInterface/RecipePanel" unique_id=489266171 node_paths=PackedStringArray("inventory")]
 script = ExtResource("49_jbx34")
 inventory = NodePath("../../../../Inventory")
-all_recipe_discoveries = Array[ExtResource("50_or4qq")]([SubResource("Resource_b2j0d"), SubResource("Resource_7l6ig"), SubResource("Resource_g3ghg"), SubResource("Resource_d2adv")])
-known_recipes = Array[ExtResource("50_pjwc4")]([ExtResource("51_or4qq")])
+all_recipe_discoveries = Array[ExtResource("50_or4qq")]([SubResource("Resource_b2j0d"), SubResource("Resource_7l6ig"), SubResource("Resource_g3ghg"), SubResource("Resource_d2adv"), SubResource("Resource_dmnd1"), SubResource("Resource_ml76h"), SubResource("Resource_frvh1"), SubResource("Resource_rcicediscovery")])
 
 [node name="NodeSaver" type="Node" parent="PauseMenu/CraftingInterface/RecipePanel/RecipeLearner" unique_id=287037968]
 script = ExtResource("74_2h6tc")
