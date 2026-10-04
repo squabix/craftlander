@@ -11,10 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://bkpo6b688jo27" path="res://assets/models/boats/boat3.blend" id="11_2mklp"]
 [ext_resource type="Script" uid="uid://8bgokntpuh33" path="res://boat/boat_docked_state.gd" id="11_xablq"]
 [ext_resource type="Script" uid="uid://favgu1tbe1tq" path="res://common3d/interactions/interactable3d.gd" id="12_jense"]
-[ext_resource type="Material" uid="uid://ce4r4yxn7dm3f" path="res://assets/materials/bark.tres" id="12_twa5a"]
 [ext_resource type="Material" uid="uid://burxmpv8yk2pd" path="res://assets/shaders/boat_interaction.tres" id="13_oqrfv"]
 [ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="13_yi5nd"]
+[ext_resource type="Material" uid="uid://g7eorwmb40wm" path="res://assets/materials/palm_bark.tres" id="15_t5yso"]
 [ext_resource type="Shader" uid="uid://d0g1tx71qh1wb" path="res://assets/shaders/tree_wind_shader.gdshader" id="15_uank7"]
+[ext_resource type="Material" uid="uid://brsw8xc5rh2lv" path="res://assets/materials/bone.tres" id="15_yi5nd"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="99_particlespawner"]
 [ext_resource type="PackedScene" uid="uid://lyptlia5fnc8" path="res://common3d/boat_upgrade_particles.tscn" id="99_upgradeparticles"]
 [ext_resource type="Script" uid="uid://bxjt3nibhkxh8" path="res://common/signal_triggrs/camera_shake_trigger.gd" id="99_shaketrigger"]
@@ -206,12 +207,12 @@ surface_material_override/0 = SubResource("StandardMaterial3D_8tukb")
 transform = Transform3D(0.9998477, -0.017452406, 0, 0.017449748, 0.9996954, -0.017452406, 0.00030458646, 0.017449748, 0.9998477, 0, -0.42009234, 3.3911917)
 
 [node name="Cube" parent="Visuals" index="0" unique_id=330923318]
-surface_material_override/0 = ExtResource("12_twa5a")
+surface_material_override/0 = ExtResource("15_t5yso")
 surface_material_override/1 = ExtResource("13_yi5nd")
 surface_material_override/2 = ExtResource("6_2c4gv")
 
 [node name="Flag" parent="Visuals" index="1" unique_id=912980557]
-surface_material_override/1 = ExtResource("12_twa5a")
+surface_material_override/1 = ExtResource("15_yi5nd")
 surface_material_override/2 = ExtResource("6_2c4gv")
 surface_material_override/3 = SubResource("ShaderMaterial_yi5nd")
 

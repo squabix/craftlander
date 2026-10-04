@@ -15,6 +15,7 @@
 [ext_resource type="Material" uid="uid://burxmpv8yk2pd" path="res://assets/shaders/boat_interaction.tres" id="13_2s03i"]
 [ext_resource type="Material" uid="uid://bpn7fgdvdq7v7" path="res://assets/materials/soft_wood.tres" id="13_bee6a"]
 [ext_resource type="Shader" uid="uid://d0g1tx71qh1wb" path="res://assets/shaders/tree_wind_shader.gdshader" id="15_bcrwv"]
+[ext_resource type="Material" uid="uid://c403ng7pn0nqg" path="res://assets/materials/ice.tres" id="18_1s6km"]
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="99_particlespawner"]
 [ext_resource type="PackedScene" uid="uid://lyptlia5fnc8" path="res://common3d/boat_upgrade_particles.tscn" id="99_upgradeparticles"]
 [ext_resource type="Script" uid="uid://bxjt3nibhkxh8" path="res://common/signal_triggrs/camera_shake_trigger.gd" id="99_shaketrigger"]
@@ -210,15 +211,15 @@ surface_material_override/0 = ExtResource("12_bcrwv")
 surface_material_override/1 = ExtResource("13_bee6a")
 surface_material_override/2 = ExtResource("6_64a40")
 
-[node name="Flag" parent="Visuals" index="1" unique_id=656543866]
-surface_material_override/1 = ExtResource("12_bcrwv")
+[node name="Flag" parent="Visuals" index="1" unique_id=901012092]
+surface_material_override/1 = ExtResource("18_1s6km")
 surface_material_override/2 = ExtResource("6_64a40")
 surface_material_override/3 = SubResource("ShaderMaterial_bee6a")
 
-[node name="Circle" parent="Visuals" index="3" unique_id=1297791355]
-surface_material_override/0 = ExtResource("6_64a40")
+[node name="Circle" parent="Visuals" index="3" unique_id=1161416148]
+surface_material_override/0 = ExtResource("18_1s6km")
 
-[node name="Circle_001" parent="Visuals" index="4" unique_id=189739588]
-surface_material_override/0 = ExtResource("6_64a40")
+[node name="Circle_001" parent="Visuals" index="4" unique_id=624417174]
+surface_material_override/0 = ExtResource("18_1s6km")
 
 [editable path="Visuals"]
