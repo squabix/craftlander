@@ -38,7 +38,7 @@
 [ext_resource type="PackedScene" uid="uid://cmyuv1fh2njh5" path="res://island/props/destructible_resource/ice/ice.tscn" id="30_dy6f5"]
 [ext_resource type="Script" uid="uid://c7gxodoedjemm" path="res://island/island_nav_region.gd" id="34_ga7jy"]
 [ext_resource type="Script" uid="uid://dpyn65ul3fu6v" path="res://common3d/mesh_instance_aggregator3d.gd" id="35_popsf"]
-[ext_resource type="Script" uid="uid://dm2twxr0f7ne" path="res://common3d/heightmap_occluder_instance.gd" id="36_1krkx"]
+[ext_resource type="Script" uid="uid://dm2twxr0f7ne" path="res://island/heightmap_occluder_instance.gd" id="36_1krkx"]
 [ext_resource type="Script" uid="uid://dvbfq1ufikwff" path="res://island/entity_populator.gd" id="37_42tlt"]
 [ext_resource type="Script" uid="uid://b0gc85inin6ad" path="res://island/island_entity_resource.gd" id="38_nmmrq"]
 [ext_resource type="Script" uid="uid://6poppt70f3rp" path="res://island/island_water.gd" id="40_to173"]

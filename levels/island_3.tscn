@@ -20,7 +20,7 @@
 [ext_resource type="Resource" uid="uid://tfgt81gsmko4" path="res://island/props/indestructible/treasure_chest/treasure_chest_prop.tres" id="16_xnw05"]
 [ext_resource type="Script" uid="uid://c7gxodoedjemm" path="res://island/island_nav_region.gd" id="18_i1s1v"]
 [ext_resource type="Script" uid="uid://dpyn65ul3fu6v" path="res://common3d/mesh_instance_aggregator3d.gd" id="19_6qly1"]
-[ext_resource type="Script" uid="uid://dm2twxr0f7ne" path="res://common3d/heightmap_occluder_instance.gd" id="20_iiued"]
+[ext_resource type="Script" uid="uid://dm2twxr0f7ne" path="res://island/heightmap_occluder_instance.gd" id="20_iiued"]
 [ext_resource type="Script" uid="uid://dvbfq1ufikwff" path="res://island/entity_populator.gd" id="21_e0ceg"]
 [ext_resource type="Script" uid="uid://6poppt70f3rp" path="res://island/island_water.gd" id="24_a2gly"]
 [ext_resource type="PlaneMesh" uid="uid://ben5kh83ltpe" path="res://main/water_mesh.tres" id="25_ouqo7"]

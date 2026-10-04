@@ -41,7 +41,7 @@
 [ext_resource type="PlaneMesh" uid="uid://ben5kh83ltpe" path="res://main/water_mesh.tres" id="31_kngna"]
 [ext_resource type="PackedScene" uid="uid://ckqbqx6uikqth" path="res://island/props/item_dropper_props/forest_dropper_prop.tscn" id="32_5ey3f"]
 [ext_resource type="PackedScene" uid="uid://bcr3840jq1t5e" path="res://island/props/destructible_resource/bush/bush.tscn" id="34_0el0x"]
-[ext_resource type="Script" uid="uid://dm2twxr0f7ne" path="res://common3d/heightmap_occluder_instance.gd" id="34_xj1bv"]
+[ext_resource type="Script" uid="uid://dm2twxr0f7ne" path="res://island/heightmap_occluder_instance.gd" id="34_xj1bv"]
 [ext_resource type="PackedScene" uid="uid://07efrsy03vgw" path="res://island/props/destructible_resource/dead_shrub/dead_shrub.tscn" id="35_8o4v1"]
 [ext_resource type="Material" uid="uid://cs4ulhbpklb14" path="res://assets/materials/leaves.tres" id="37_vlpox"]
 [ext_resource type="Material" uid="uid://drfxxufa84pj2" path="res://assets/materials/white_mushroom.tres" id="38_ich8q"]
