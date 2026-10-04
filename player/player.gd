@@ -49,6 +49,10 @@ const HURT_SHAKE_TRAUMA := 0.4
 @export var swim_player: CharacterAudioStreamPlayer3D
 @export var eat_player: AudioStreamPlayer
 
+@export_group("Min Spawn", "min_spawn")
+@export_range(0.0, 1.0) var min_spawn_health_ratio := 0.3
+@export_range(0.0, 1.0) var min_spawn_hunger_ratio := 0.3
+
 @export_group("Drowning", "drowning")
 @export_custom(PROPERTY_HINT_NONE, "suffix:dp") var drowning_damage := 25.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var drowning_interval := 1.0
@@ -81,13 +85,12 @@ func _ready() -> void:
 
 
 func _on_health_loaded() -> void:
-	if health.hp <= 0.0:
-		health.hp = health.max_hp
+	health.hp = maxf(health.hp, health.max_hp * min_spawn_health_ratio)
+	health.hp_changed.emit()
 
 
 func _on_hunger_loaded() -> void:
-	if hunger.value <= 0.0:
-		hunger.value = hunger.initial_value
+	hunger.value = maxf(hunger.value, min_spawn_hunger_ratio)
 
 
 func _process(delta: float) -> void:
