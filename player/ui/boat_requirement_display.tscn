@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b1eix6p0204fp" path="res://common/inventory_system/displays/item_display.gd" id="1_display"]
 [ext_resource type="Texture2D" uid="uid://752u5qngsxn2" path="res://assets/ui/checkmark.png" id="2_sufficient"]
 [ext_resource type="Texture2D" uid="uid://cfkuouoibr014" path="res://assets/ui/cross.png" id="3_insufficient"]
-[ext_resource type="Texture2D" uid="uid://cvnfk2w1gki1v" path="res://icon.png" id="4_icon"]
+[ext_resource type="Texture2D" uid="uid://beudtbsirofjr" path="res://assets/ui/lush_isle.png" id="4_icon"]
 [ext_resource type="Texture2D" uid="uid://dejgw2p87pi2y" path="res://assets/materials/cross.png" id="5_indicator"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
