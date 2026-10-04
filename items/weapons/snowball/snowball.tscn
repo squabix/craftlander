@@ -1,0 +1,18 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://common/spawner/projectile_spawner3d.gd" id="1_spawner"]
+[ext_resource type="PackedScene" path="res://entities/projectiles/snowball/snowball.tscn" id="2_projectile"]
+[ext_resource type="ArrayMesh" path="res://assets/models/items/weapons/snowball.res" id="3_mesh"]
+[ext_resource type="Material" path="res://assets/materials/snow.tres" id="4_mat"]
+
+[node name="Snowball" type="Node3D"]
+
+[node name="ProjectileSpawner" type="Node3D" parent="."]
+script = ExtResource("1_spawner")
+projectile_scene = ExtResource("2_projectile")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="Snowball" type="MeshInstance3D" parent="Visuals"]
+mesh = ExtResource("3_mesh")
+surface_material_override/0 = ExtResource("4_mat")

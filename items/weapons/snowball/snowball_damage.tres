@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Damage" format=3 uid="uid://c62g5ewkf5flk"]
+
+[ext_resource type="Script" uid="uid://bl5x717nsijmk" path="res://common/damage_system/damage.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+base_amount = 20.0
+type = &"ranged"
+knockback_force = 5.0
+knockback_angle = 8.0

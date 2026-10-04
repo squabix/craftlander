@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ProjectileWeapon" format=3]
+
+[ext_resource type="Script" path="res://items/weapons/projectile_weapon.gd" id="1_script"]
+[ext_resource type="Resource" path="res://items/weapons/snowball/snowball_damage.tres" id="2_damage"]
+[ext_resource type="PackedScene" path="res://items/weapons/snowball/snowball.tscn" id="3_scene"]
+[ext_resource type="Texture2D" path="res://items/weapons/snowball/snowball.png" id="4_icon"]
+
+[resource]
+script = ExtResource("1_script")
+damage = ExtResource("2_damage")
+name = &"Snowball"
+max_quantity = 99
+icon = ExtResource("4_icon")
+consumable = true
+type = &"Weapon"
+use_action_name = &"Throw"
+scene = ExtResource("3_scene")

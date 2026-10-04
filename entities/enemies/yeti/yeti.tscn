@@ -92,6 +92,16 @@ script = ExtResource("31_4i62f")
 item = ExtResource("21_4uann")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
+[sub_resource type="Resource" id="Resource_snowball"]
+script = ExtResource("31_4i62f")
+item = ExtResource("yeti_snowball")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
+[sub_resource type="Resource" id="Resource_8ptwl"]
+script = ExtResource("31_4i62f")
+item = ExtResource("29_15ole")
+metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
+
 [sub_resource type="Animation" id="Animation_3emv6"]
 length = 0.001
 tracks/0/type = "rotation_3d"
@@ -1383,7 +1393,7 @@ entity = NodePath("../..")
 [node name="Inventory" type="Node" parent="." unique_id=1701695857]
 unique_name_in_owner = true
 script = ExtResource("18_i5kk2")
-item_instances = Array[ExtResource("31_4i62f")]([SubResource("Resource_mmf2n")])
+item_instances = Array[ExtResource("31_4i62f")]([SubResource("Resource_mmf2n"), SubResource("Resource_snowball"), SubResource("Resource_8ptwl")])
 constant = true
 size = 2
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
