@@ -28,8 +28,24 @@
 [ext_resource type="Shader" uid="uid://bjt5jcslbt2k1" path="res://assets/shaders/water.gdshader" id="26_my0e5"]
 [ext_resource type="AudioStream" uid="uid://bcj8kf1cl1icf" path="res://assets/sound/ocean.mp3" id="27_3slef"]
 [ext_resource type="Script" uid="uid://bvnl07wfykf0p" path="res://common3d/audio_stream_curver3d.gd" id="28_dmi3c"]
+[ext_resource type="Resource" uid="uid://dw2vdjgdaj5xu" path="res://island/props/destructable_resource/dead_skeleton/dead_skeleton_prop.tres" id="29_12y11"]
 [ext_resource type="Script" uid="uid://brn3oogq86g4b" path="res://levels/undead_atoll_wave_manager.gd" id="29_f1q4c"]
 [ext_resource type="Script" uid="uid://bprm4lolnfext" path="res://common/spawner/wave_spawner_wave.gd" id="30_ioqp7"]
+[ext_resource type="PackedScene" uid="uid://cbfua5rfmk38g" path="res://island/props/indestructable/treasure_chest/treasure_chest.tscn" id="34_odcs8"]
+[ext_resource type="Resource" uid="uid://26uc1cfbe74m" path="res://island/props/destructable_resource/dead_tree/dead_tree_prop.tres" id="34_tmgll"]
+[ext_resource type="PackedScene" uid="uid://smjb56dvgbc8" path="res://island/props/indestructable/statues/statue_rootling.tscn" id="35_cw2dw"]
+[ext_resource type="Script" uid="uid://cpjmityab1msq" path="res://island/props/indestructable/treasure_chest/treasure_chest.gd" id="36_43yqb"]
+[ext_resource type="PackedScene" uid="uid://bge3rm6kjpn3p" path="res://island/props/indestructable/statues/statue_snail.tscn" id="36_w0vdk"]
+[ext_resource type="Script" uid="uid://bfstlagsbeqe2" path="res://common/inventory_system/item.gd" id="37_f7qxg"]
+[ext_resource type="PackedScene" uid="uid://bnbt4qa77pnta" path="res://island/props/indestructable/statues/statue_yeti.tscn" id="37_fqmbj"]
+[ext_resource type="Resource" uid="uid://cljpl8to8am4y" path="res://items/misc/captains_key/captains_key_item.tres" id="38_4f10l"]
+[ext_resource type="PackedScene" uid="uid://c37nial8eu7my" path="res://island/props/indestructable/gravestones/gravestone1.tscn" id="38_ycdgd"]
+[ext_resource type="Script" uid="uid://bhkngqnpf30n8" path="res://common3d/interactions/interactable_item_condition.gd" id="39_5qs1r"]
+[ext_resource type="PackedScene" uid="uid://cc6x3poiqv40j" path="res://island/props/indestructable/gravestones/gravestone2.tscn" id="39_rfsud"]
+[ext_resource type="PackedScene" uid="uid://bj6770didy7sq" path="res://island/props/destructable_resource/dead_tree/dead_tree.tscn" id="40_rfiti"]
+[ext_resource type="PackedScene" uid="uid://cb5iwf6yqvn20" path="res://island/props/destructable_resource/dead_skeleton/dead_skeleton.tscn" id="40_rlfbr"]
+[ext_resource type="PackedScene" uid="uid://07efrsy03vgw" path="res://island/props/destructable_resource/dead_shrub/dead_shrub.tscn" id="41_tmgll"]
+[ext_resource type="Script" uid="uid://cmlllb7wq80s" path="res://island/props/destructable_resource/destructable_resource.gd" id="41_w07ej"]
 [ext_resource type="PackedScene" path="res://island/skies/day_night_cycle.tscn" id="99_dncscn"]
 [ext_resource type="Resource" uid="uid://dr2s6nrhe1a8l" path="res://island/skies/blood_moon_palette.tres" id="blood_palette_tres"]
 [ext_resource type="PackedScene" uid="uid://pdx4nb37dqj1" path="res://menus/credits.tscn" id="credits_tscn"]
@@ -245,9 +261,11 @@ curse_palette = ExtResource("blood_palette_tres")
 freed_palette = ExtResource("day_palette_tres")
 freed_ground = NodePath("IslandGenerator/MeshInstance3D")
 freed_ground_gradient = ExtResource("day_ground_gradient")
-freed_shrub_prop = ExtResource("16_3exlf")
+dead_shrub_prop = ExtResource("16_3exlf")
+dead_tree_prop = ExtResource("34_tmgll")
+dead_skeleton_prop = ExtResource("29_12y11")
+freed_shrub_props = Array[ExtResource("13_babke")]([ExtResource("freed_bush"), ExtResource("freed_small_mushroom")])
 freed_tree_props = Array[ExtResource("13_babke")]([ExtResource("freed_tree"), ExtResource("freed_tree2"), ExtResource("freed_mushroom")])
-freed_small_props = Array[ExtResource("13_babke")]([ExtResource("freed_bush"), ExtResource("freed_small_mushroom")])
 player_docking_manager = NodePath("DockingManager1")
 ghost_docking_managers = [NodePath("DockingManager2"), NodePath("DockingManager3"), NodePath("DockingManager4")]
 resource = ExtResource("2_msgsa")
