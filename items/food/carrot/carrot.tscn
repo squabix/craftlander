@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c3yhhtdf7x84g"]
+
+[ext_resource type="PackedScene" uid="uid://b5w5r61gieno8" path="res://assets/models/items/food/carrot.blend" id="1_model"]
+[ext_resource type="Material" uid="uid://cjaa3xqqchd63" path="res://assets/materials/carrot.tres" id="2_7jnc4"]
+[ext_resource type="Material" uid="uid://c7uysx7frg14r" path="res://assets/materials/cactus.tres" id="3_38ryp"]
+
+[node name="Carrot" type="Node3D" unique_id=230347686]
+
+[node name="Visuals" parent="." unique_id=566823675 instance=ExtResource("1_model")]
+
+[node name="Carrot" parent="Visuals" index="0" unique_id=1537561009]
+surface_material_override/0 = ExtResource("2_7jnc4")
+
+[node name="Cube" parent="Visuals" index="1" unique_id=1487680899]
+surface_material_override/0 = ExtResource("3_38ryp")
+
+[node name="Cube_001" parent="Visuals" index="2" unique_id=1924864435]
+surface_material_override/0 = ExtResource("3_38ryp")
+
+[node name="Cube_002" parent="Visuals" index="3" unique_id=956137961]
+surface_material_override/0 = ExtResource("3_38ryp")
+
+[editable path="Visuals"]
