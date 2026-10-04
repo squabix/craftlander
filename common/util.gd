@@ -113,7 +113,6 @@ static func iprint(interval_seconds: float, ...args: Array) -> void:
 		print.callv(args)
 
 
-# TODO: Make own node
 static func disable_all_colliders(parent: Node) -> Array[Node]:
 	if not is_instance_valid(parent):
 		return []
@@ -589,7 +588,6 @@ static func distance_sort_3d(nodes: Array, position: Vector3) -> Array[Node3D]:
 	return duplicate
 
 
-# TODO: Make own node
 static func search_up_tree(child: Node, check: Callable, ignore_children: bool = false) -> Node:
 	if not is_instance_valid(child):
 		return null
@@ -606,7 +604,6 @@ static func search_up_tree(child: Node, check: Callable, ignore_children: bool =
 	return search_up_tree(parent, check, ignore_children)
 
 
-# TODO: Make own node
 static func search_down_tree(parent: Node, check: Callable) -> Node:
 	if not is_instance_valid(parent):
 		return null
@@ -677,7 +674,6 @@ static func set_visibility_deep(node: Node, to: bool, exclude: Array[Node] = [])
 		set_visibility_deep(child, to, exclude)
 
 
-# TODO: Make own node
 static func turn_off_all_particles(parent: Node) -> void:
 	if not is_instance_valid(parent):
 		return

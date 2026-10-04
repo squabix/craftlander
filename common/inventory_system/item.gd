@@ -61,7 +61,7 @@ func _to_string() -> String:
 	return name + " Item"
 
 
-## Halts execution using await until this resource has been made unique
+# Halts execution using await until this resource has been made unique
 func ensure_unique() -> void:
 	if is_unique:
 		return
