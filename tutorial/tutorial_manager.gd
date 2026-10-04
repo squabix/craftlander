@@ -3,7 +3,8 @@ extends Node
 enum Tier { TOAST, POPUP }
 
 const LOW_HUNGER_THRESHOLD := 0.35
-const SPRINT_HINT_HOLD_DURATION := 3.0
+const SPRINT_HINT_HOLD_DURATION := 1.5 # s
+const WELCOME_DELAY := 2.0 # s
 const COPPER_ITEM_NAME := &"Copper Chunk"
 
 const WEAK_TOOL_STEPS: Dictionary[StringName, StringName] = {
@@ -12,6 +13,11 @@ const WEAK_TOOL_STEPS: Dictionary[StringName, StringName] = {
 }
 
 const STEPS: Dictionary[StringName, Dictionary] = {
+	&"welcome_goal": {
+		"tier": Tier.POPUP,
+		"title": "You Are Stranded!",
+		"text": "Gather resources, craft better tools and weapons, and upgrade your boat at the dock so you can sail to new islands. Keep sailing until you reach the final island.",
+	},
 	&"item_collecting": {
 		"tier": Tier.TOAST,
 		"text": "Pick up items you find around the island to add them to your inventory.",
@@ -24,8 +30,14 @@ const STEPS: Dictionary[StringName, Dictionary] = {
 	},
 	&"sprinting": {
 		"tier": Tier.TOAST,
-		"text": "Press Sprint to move faster if you have enough Stamina.",
+		"text": "Hold Sprint while moving forward to run faster. Sprinting uses Stamina.",
 		"icon_action": &"sprint",
+	},
+	&"crafting_intro": {
+		"tier": Tier.TOAST,
+		"text": "Open your backpack to craft. Follow your recipe book, place ingredients in the crafting grid, then press CRAFT.",
+		"icon_action": &"pause",
+		"prerequisite": &"harvesting",
 	},
 	&"copper_collected": {
 		"tier": Tier.TOAST,
@@ -53,13 +65,11 @@ const STEPS: Dictionary[StringName, Dictionary] = {
 		"text": "Collect the listed resources to upgrade your ship and travel to the next island.",
 	},
 	&"weak_pickaxe": {
-		"tier": Tier.POPUP,
-		"title": "Too Tough",
+		"tier": Tier.TOAST,
 		"text": "Your pickaxe isn't strong enough to mine this. Craft a stronger pickaxe from better materials.",
 	},
 	&"weak_axe": {
-		"tier": Tier.POPUP,
-		"title": "Too Tough",
+		"tier": Tier.TOAST,
 		"text": "Your axe isn't strong enough to chop this down. Craft a stronger axe from better materials.",
 	},
 }
@@ -73,6 +83,7 @@ func _ready() -> void:
 	EventBus.subscribe(&"player_survived_hurt", _on_player_survived_hurt)
 	EventBus.subscribe(&"resource_harvested", _on_resource_harvested)
 	EventBus.subscribe(&"resource_resisted", _on_resource_resisted)
+	EventBus.subscribe(&"player_boat_docked", _on_player_boat_docked)
 	get_tree().node_added.connect(_on_node_added)
 
 
@@ -159,6 +170,15 @@ func _connect_player(player: Player) -> void:
 		player.boat_menu.opened.connect(_on_boat_menu_opened)
 
 
+func _on_player_boat_docked() -> void:
+	if has_completed(&"item_collecting") or has_completed(&"harvesting"):
+		return
+
+	await get_tree().create_timer(WELCOME_DELAY).timeout
+	if is_instance_valid(_player) and not get_tree().paused:
+		complete_step(&"welcome_goal")
+
+
 func _on_interacted_with(interactable: Interactable3D) -> void:
 	if interactable is ItemPickup3D:
 		complete_step(&"item_collecting")
@@ -170,6 +190,7 @@ func _on_resource_harvested(payload: Dictionary) -> void:
 		return
 
 	complete_step(&"harvesting")
+	complete_step(&"crafting_intro")
 
 	var item: Item = payload.get("item")
 	if is_instance_valid(item) and item.name == COPPER_ITEM_NAME:
