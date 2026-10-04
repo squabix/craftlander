@@ -51,5 +51,10 @@ func _on_entity_tree_exiting(entity: Entity3D) -> void:
 func _untrack(entity: Entity3D) -> void:
 	if not _tracked_markers.has(entity):
 		return
+
+	var exiting_callable := _on_entity_tree_exiting.bind(entity)
+	if entity.tree_exiting.is_connected(exiting_callable):
+		entity.tree_exiting.disconnect(exiting_callable)
+
 	compass.remove_marker(_tracked_markers[entity])
 	_tracked_markers.erase(entity)
