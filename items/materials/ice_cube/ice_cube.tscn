@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bu2ea1rr5mqru"]
+
+[ext_resource type="PackedScene" uid="uid://cfsbca4b7lrw1" path="res://assets/models/items/materials/bevelled_cube.blend" id="1_jv11w"]
+[ext_resource type="Material" uid="uid://c403ng7pn0nqg" path="res://assets/materials/ice.tres" id="1_mat"]
+
+[node name="IceCube" type="Node3D" unique_id=1219556488]
+
+[node name="Visuals" parent="." unique_id=369033380 instance=ExtResource("1_jv11w")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="Cube" parent="Visuals" index="0" unique_id=1978823868]
+surface_material_override/0 = ExtResource("1_mat")
+
+[editable path="Visuals"]
