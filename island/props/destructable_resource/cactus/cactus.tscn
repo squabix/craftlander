@@ -99,6 +99,8 @@ collision_mask = 0
 monitoring = false
 script = ExtResource("2_xdcga")
 health = NodePath("../Health")
+type_list = Array[StringName]([&"axe"])
+type_acl = SubResource("Resource_acl")
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1792495012]
@@ -120,6 +122,7 @@ shape = SubResource("CapsuleShape3D_5373p")
 [node name="Health" type="Node" parent="." unique_id=256948540]
 script = ExtResource("4_t32xe")
 hp = 3.0
+hurt_threshold = 11.0
 damage_override = ExtResource("3_e6cgp")
 free_parent_on_death = true
 

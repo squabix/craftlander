@@ -236,8 +236,6 @@ shadow_mesh = SubResource("ArrayMesh_s33k2")
 
 [node name="Bush" type="Node3D" unique_id=51772479 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
 script = ExtResource("1_1v63u")
-min_hp = 2
-max_hp = 4
 hurtbox = NodePath("Hurtbox3D")
 inventory = NodePath("Inventory")
 health = NodePath("Health")
@@ -257,7 +255,6 @@ shape = SubResource("SphereShape3D_lx2ta")
 
 [node name="Health" type="Node" parent="." unique_id=256948540]
 script = ExtResource("5_inqls")
-hp = 3.0
 damage_override = ExtResource("3_f1rr7")
 free_parent_on_death = true
 

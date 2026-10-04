@@ -29,6 +29,9 @@ points = PackedVector3Array(-0.025318384, 1.0866077, 2.3605456, 1.7467864, 1.911
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_waxo0"]
 points = PackedVector3Array(-2.1561882, 0, -0.96834, -2.1561882, 1000, -0.96834, -1.122422, 0, -1.8486832, -1.122422, 1000, -1.8486832, 1.1929895, 0, -1.7999933, 1.1929895, 1000, -1.7999933, 1.5804898, 0, -1.6587853, 1.5804898, 1000, -1.6587853, 2.1540987, 0, -1.2182539, 2.1540987, 1000, -1.2182539, 1.9107383, 0, 0.62620974, 1.9107383, 1000, 0.62620974, 0.12996185, 0, 1.8558218, 0.12996185, 1000, 1.8558218, -1.2989763, 0, 0.80043006, -1.2989763, 1000, 0.80043006, -2.1561882, 0, -0.96834, -2.1561882, 1000, -0.96834)
 
+[sub_resource type="Resource" id="Resource_acl"]
+script = ExtResource("acl_script")
+
 [sub_resource type="Resource" id="Resource_5d4n1"]
 script = ExtResource("11_236tg")
 item = ExtResource("12_f45ov")
@@ -70,9 +73,6 @@ _data = {
 &"RESET": SubResource("Animation_5v37a"),
 &"hurt": SubResource("Animation_ir3ee")
 }
-
-[sub_resource type="Resource" id="Resource_acl"]
-script = ExtResource("acl_script")
 
 [node name="Ice" type="Node3D" unique_id=51772479 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
 script = ExtResource("1_4o1ty")
@@ -129,6 +129,7 @@ bus = &"SFX"
 
 [node name="Health" type="Node" parent="." unique_id=256948540]
 script = ExtResource("5_du0du")
+hurt_threshold = 12.0
 damage_override = ExtResource("6_l43k0")
 free_parent_on_death = true
 

@@ -135,6 +135,7 @@ health = NodePath("Health")
 
 [node name="Health" type="Node" parent="." unique_id=95922495]
 script = ExtResource("2_aa834")
+hurt_threshold = 15.0
 damage_override = ExtResource("3_vd6dv")
 
 [node name="DestroyShakeTrigger" parent="Health" unique_id=999015153 instance=ExtResource("99_destroyshk")]
