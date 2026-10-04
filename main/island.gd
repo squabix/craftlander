@@ -47,6 +47,10 @@ func _ready() -> void:
 	Util.nodestr_root = self
 	
 	var is_reloading: bool = Main.is_save_loaded and Main.loaded_save.is_current_level_generated()
+	if is_reloading and not has_saved_props():
+		Main.loaded_save.forget_level_generation(Main.loaded_save.current_level_index)
+		is_reloading = false
+
 	var master_bus_index := AudioServer.get_bus_index(&"Master")
 	AudioServer.set_bus_mute(master_bus_index, true)
 	if Main.root.loading_screen != null:
@@ -90,6 +94,13 @@ func _ready() -> void:
 	await get_tree().process_frame
 	AudioServer.set_bus_mute(master_bus_index, false)
 
+func has_saved_props() -> bool:
+	var populator_path := get_path_to(prop_populator)
+	for node_save in Main.loaded_save.get_node_saves(self, NodeSave.Mode.DYNAMIC):
+		if node_save.parent_type == NodeSave.ParentType.RELATIVE and node_save.parent_path == populator_path:
+			return true
+	return false
+
 
 func show_name() -> void:
 	if Main.trailer_mode:
@@ -119,6 +130,15 @@ func initial_save_load() -> void:
 	await prop_populator.populated
 	
 	Main.loaded_save.mark_current_level_as_generated()
+	save_props()
+
+
+func save_props() -> void:
+	NodeSaver.filter_all()
+	for prop in prop_populator.get_children():
+		var saver: NodeSaver = NodeSaver.all.get(prop)
+		if is_instance_valid(saver) and saver.save_mode == NodeSave.Mode.DYNAMIC:
+			saver.save_properties()
 
 
 func connect_player_boat_adder() -> void:
