@@ -132,7 +132,7 @@ subdivide_depth = 800
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jtp7x"]
 
-[node name="TitleScreen" type="Control" unique_id=788547277 node_paths=PackedStringArray("save_submenu", "settings_submenu", "about_submenu", "new_game_button", "load_game_button", "settings_button", "about_button", "quit_button", "visibility_proxy")]
+[node name="TitleScreen" type="Control" unique_id=788547277 node_paths=PackedStringArray("save_submenu", "settings_submenu", "about_submenu", "new_game_button", "load_game_button", "settings_button", "about_button", "quit_button", "feedback_button", "visibility_proxy")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -148,6 +148,7 @@ load_game_button = NodePath("MainPanel/MainButtonContainer/LoadGameButton")
 settings_button = NodePath("MainPanel/MainButtonContainer/HBoxContainer/SettingsButton")
 about_button = NodePath("MainPanel/MainButtonContainer/HBoxContainer/AboutButton")
 quit_button = NodePath("MainPanel/MainButtonContainer/HBoxContainer/QuitButton")
+feedback_button = NodePath("FeedbackButton")
 visibility_proxy = NodePath("MainPanel")
 
 [node name="PreviewCameraPivot" type="Node3D" parent="." unique_id=924350797]
@@ -3283,4 +3284,24 @@ signal_players = {
 &"focus_entered": NodePath("../../../../../SaveMenu/PanelContainer/SaveButtonContainer/SaveRow1/SaveButton1/ButtonAudioManager/HoverPlayer"),
 &"mouse_entered": NodePath("../../../../../SaveMenu/PanelContainer/SaveButtonContainer/SaveRow1/SaveButton1/ButtonAudioManager/HoverPlayer"),
 &"pressed": NodePath("../../../../../SaveMenu/PanelContainer/SaveButtonContainer/SaveRow1/SaveButton1/ButtonAudioManager/PressPlayer")
+}
+
+[node name="FeedbackButton" type="Button" parent="." unique_id=1873204416]
+custom_minimum_size = Vector2(160, 50)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -74.0
+offset_right = 184.0
+offset_bottom = -24.0
+grow_vertical = 0
+text = "FEEDBACK"
+
+[node name="ButtonAudioManager" parent="FeedbackButton" unique_id=1873204417 node_paths=PackedStringArray("signal_players") instance=ExtResource("3_823ok")]
+signal_players = {
+&"focus_entered": NodePath("../../SaveMenu/PanelContainer/SaveButtonContainer/SaveRow1/SaveButton1/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../SaveMenu/PanelContainer/SaveButtonContainer/SaveRow1/SaveButton1/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../SaveMenu/PanelContainer/SaveButtonContainer/SaveRow1/SaveButton1/ButtonAudioManager/PressPlayer")
 }
