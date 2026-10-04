@@ -10,10 +10,10 @@
 script = ExtResource("1_wave")
 name = &"Wave 3"
 pool = Dictionary[PackedScene, int]({
-ExtResource("2_a"): 6,
-ExtResource("3_b"): 6,
-ExtResource("4_c"): 6,
-ExtResource("5_d"): 6
+ExtResource("2_a"): 3,
+ExtResource("3_b"): 4,
+ExtResource("4_c"): 3,
+ExtResource("5_d"): 4
 })
 spawner_distribution = 2
 pause_length_between_spawns = 0.8
