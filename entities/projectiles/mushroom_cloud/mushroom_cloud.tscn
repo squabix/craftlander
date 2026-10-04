@@ -54,11 +54,12 @@ size = Vector2(0.3, 0.3)
 
 [node name="MushroomCloud" type="Area3D" unique_id=285811187]
 collision_layer = 0
-collision_mask = 8
+collision_mask = 13
 script = ExtResource("1_3g5qw")
 speed = 5.0
 gravity_scale = 0.0
 damping = 1.2
+body_collision_speed_multiplier = 0.3
 damage = ExtResource("3_dmg")
 current_mode = 2
 

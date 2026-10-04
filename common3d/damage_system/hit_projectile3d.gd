@@ -8,6 +8,9 @@ extends Hitbox3D
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var lifetime := 4.0
 @export var free_on_collision := false
 
+@export_group("Body Collision", "body_collision")
+@export_range(0.0, 1.0) var body_collision_speed_multiplier := 1.0
+
 var velocity: Vector3
 var _time_alive := 0.0
 
@@ -35,9 +38,13 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 
-func _on_body_entered(_body: Node3D) -> void:
+func _on_body_entered(body: Node3D) -> void:
 	if free_on_collision:
 		queue_free()
+		return
+
+	if body_collision_speed_multiplier < 1.0 and not is_source(body):
+		velocity *= body_collision_speed_multiplier
 
 
 func is_source(body: Node3D) -> bool:
