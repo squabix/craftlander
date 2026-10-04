@@ -22,8 +22,8 @@
 [ext_resource type="Material" uid="uid://c6muf6sqewvq7" path="res://assets/materials/dead_wood.tres" id="21_x88xr"]
 [ext_resource type="Script" uid="uid://c1bce1sw2dgnf" path="res://common/visibility_animation_player.gd" id="28_cfe7b"]
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="29_0dkka"]
+[ext_resource type="Resource" uid="uid://dildagot4v08a" path="res://items/materials/palm_wood/palm_wood.tres" id="30_afxhm"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="30_okiyi"]
-[ext_resource type="Resource" uid="uid://d1ripkpgxv11u" path="res://items/materials/wood/wood_item.tres" id="31_8g2cu"]
 [ext_resource type="ArrayOccluder3D" uid="uid://dxvs6e1pbvl0h" path="res://island/props/destructable_resource/tree/tree.occ" id="33_1444u"]
 [ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="34_q3s4q"]
 [ext_resource type="PackedScene" uid="uid://72lfyk3a5w1s" path="res://assets/models/props/palm_tree1.blend" id="35_jiqyg"]
@@ -142,7 +142,7 @@ _data = {
 
 [sub_resource type="Resource" id="Resource_xgieu"]
 script = ExtResource("30_okiyi")
-item = ExtResource("31_8g2cu")
+item = ExtResource("30_afxhm")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Resource" id="Resource_coconut"]
