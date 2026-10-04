@@ -63,6 +63,11 @@ func _ready() -> void:
 			default_parent_mode = DefaultParentMode.ROOT
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		spawning_enabled = false
+
+
 func get_default_parent() -> Node:
 	if is_instance_valid(default_parent_override):
 		return default_parent_override

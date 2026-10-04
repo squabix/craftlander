@@ -118,6 +118,11 @@ func _ready() -> void:
 	all[target] = self
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		offload_on_free_enabled = false
+
+
 func _exit_tree() -> void:
 	_free_offload()
 	all.erase(target)
