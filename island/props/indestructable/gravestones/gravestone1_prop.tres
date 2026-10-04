@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="IslandProp" format=3 uid="uid://blfwt62wsl2dj"]
+
+[ext_resource type="Script" uid="uid://csprfavexgrle" path="res://island/props/island_prop.gd" id="1_prop"]
+[ext_resource type="PackedScene" uid="uid://c37nial8eu7my" path="res://island/props/indestructable/gravestones/gravestone1.tscn" id="2_scene"]
+
+[resource]
+script = ExtResource("1_prop")
+scene = ExtResource("2_scene")
+radius = 2.5
+min_height = 1.0
+min_scale = 0.5
+max_scale = 0.5
+normal_conformity = 0.8
+metadata/_custom_type_script = "uid://csprfavexgrle"

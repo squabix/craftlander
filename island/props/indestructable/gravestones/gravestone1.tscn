@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://c37nial8eu7my"]
+
+[ext_resource type="Script" uid="uid://bngm0h6qcvbwb" path="res://common3d/collision_barrier_3d.gd" id="1_e5e2n"]
+[ext_resource type="Script" uid="uid://bf4816o00o0s5" path="res://common3d/mesh_navigation_obstacle_3d.gd" id="2_2y0ag"]
+[ext_resource type="Script" uid="uid://b7jfh6p1qykgr" path="res://common/saving/node_saver.gd" id="3_vbkb5"]
+[ext_resource type="PackedScene" uid="uid://djdjiy0y3bcpt" path="res://assets/models/props/gravestone2.blend" id="4_e5e2n"]
+[ext_resource type="Material" uid="uid://bh8sv2icydggs" path="res://assets/materials/stone.tres" id="5_xfvnr"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2y0ag"]
+points = PackedVector3Array(-1.4112308, -0.3396417, -0.66730237, -1.4112308, -0.3396417, 0.66714245, -1.4112308, 0.311684, -0.66730237, -1.2614878, -0.3396417, -0.8172094, -1.2614878, -0.48937172, -0.66730237, -1.2614878, -0.48937172, 0.66714245, -1.2614878, -0.3396417, 0.8172094, -1.4112308, 0.311684, 0.66714245, -1.2614878, 0.311684, -0.8172094, -0.86364675, 2.502377, -0.35004976, -0.7782767, 2.7758126, -0.35004976, -0.7006424, 2.6524637, -0.5001168, 1.2612114, -0.3396417, -0.8172094, 1.2612114, -0.48937172, -0.66730237, 1.2612114, -0.48937172, 0.66714245, 1.2612114, -0.3396417, 0.8172094, -1.2614878, 0.311684, 0.8172094, -0.7006424, 2.6524637, 0.4999569, -0.7782767, 2.7758126, 0.3498898, -0.86364675, 2.502377, 0.3498898, 1.2612114, 0.311684, -0.8172094, -0.45806986, 3.0025465, -0.5001168, -0.60339236, 3.0289276, -0.35004976, 1.4112306, -0.3396417, -0.66730237, 1.4112306, -0.3396417, 0.66714245, 1.2612114, 0.311684, 0.8172094, -0.45806986, 3.0025465, 0.4999569, -0.60339236, 3.0289276, 0.3498898, 1.4112306, 0.311684, -0.66730237, 0.45779347, 3.0025465, -0.5001168, 0.700366, 2.6524637, -0.5001168, -0.36827934, 3.1522768, -0.35004976, 1.4112306, 0.311684, 0.66714245, 0.700366, 2.6524637, 0.4999569, 0.45779347, 3.0025465, 0.4999569, -0.36827934, 3.1522768, 0.3498898, 0.77800035, 2.7758126, -0.35004976, 0.8633704, 2.502377, -0.35004976, 0.3680029, 3.1522768, -0.35004976, 0.60311604, 3.0289276, -0.35004976, 0.8633704, 2.502377, 0.3498898, 0.77800035, 2.7758126, 0.3498898, 0.60311604, 3.0289276, 0.3498898, 0.3680029, 3.1522768, 0.3498898)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_a7k0y"]
+points = PackedVector3Array(-1.0471929, 0, -0.3665175, -1.0471929, 1000, -0.3665175, -0.8775932, 0, -0.5256938, -0.8775932, 1000, -0.5256938, 0.8775932, 0, -0.5256938, 0.8775932, 1000, -0.5256938, 1.0471929, 0, -0.3665175, 1.0471929, 1000, -0.3665175, 1.0471929, 0, 0.3665175, 1.0471929, 1000, 0.3665175, 0.8775932, 0, 0.5256938, 0.8775932, 1000, 0.5256938, -0.8775932, 0, 0.5256938, -0.8775932, 1000, 0.5256938, -1.0471929, 0, 0.3665175, -1.0471929, 1000, 0.3665175, -1.0471929, 0, -0.3665175, -1.0471929, 1000, -0.3665175)
+
+[node name="Gravestone" type="Node3D" unique_id=51772479]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=413476552]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=478179570]
+shape = SubResource("ConvexPolygonShape3D_2y0ag")
+
+[node name="ClimbBlocker" type="StaticBody3D" parent="." unique_id=1246858063]
+collision_layer = 128
+collision_mask = 0
+
+[node name="ClimbBlockerShape" type="CollisionShape3D" parent="ClimbBlocker" unique_id=298928381 node_paths=PackedStringArray("sample")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("ConvexPolygonShape3D_a7k0y")
+script = ExtResource("1_e5e2n")
+sample = NodePath("")
+generate_on_ready = true
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="." unique_id=415438826]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+visible = false
+radius = 2.0500722
+vertices = PackedVector3Array(-1.9497533, 0, -0.63344944, -1.20499, 0, -1.6584501, 0, 0, -2.05, 1.20499, 0, -1.6584501, 1.9497533, 0, -0.63344944, 1.9497533, 0, 0.63344944, 1.20499, 0, 1.6584501, 0, 0, 2.05, -1.20499, 0, 1.6584501, -1.9497533, 0, 0.63344944, -1.9497533, 0, -0.63344944)
+script = ExtResource("2_2y0ag")
+generate_on_ready = true
+
+[node name="NodeSaver" type="Node" parent="." unique_id=1812045563]
+script = ExtResource("3_vbkb5")
+save_mode = 2
+saver_id = &"stone"
+saved_properties = Dictionary[StringName, bool]({
+&"global_transform": true
+})
+metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
+
+[node name="gravestone2" parent="." unique_id=1586181101 instance=ExtResource("4_e5e2n")]
+
+[node name="Cube" parent="gravestone2" index="0" unique_id=1168118267]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+surface_material_override/0 = ExtResource("5_xfvnr")
+
+[editable path="gravestone2"]
