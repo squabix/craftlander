@@ -2,6 +2,7 @@ class_name VirtualCursor
 extends CanvasLayer
 
 const WARP_COOLDOWN_LENGTH := 0.15  # Buffer time to ignore synthetic warp events
+const FOCUS_NAVIGATION_ACTIONS: Array[StringName] = [&"ui_up", &"ui_down", &"ui_left", &"ui_right", &"ui_focus_next", &"ui_focus_prev"]
 
 signal showed_texture
 signal hid_texture
@@ -120,6 +121,10 @@ func warp_mouse() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if is_moving() and is_focus_navigation(event):
+		get_viewport().set_input_as_handled()
+		return
+
 	if event is InputEventMouseMotion:
 		if warp_cooldown > 0.0:
 			return
@@ -168,6 +173,17 @@ func hide_texture() -> void:
 	texture_rect.visible = false
 	texture_visible = false
 	hid_texture.emit()
+
+
+func is_moving() -> bool:
+	return visible and Input.get_vector(action_left, action_right, action_up, action_down).length() > deadzone
+
+
+func is_focus_navigation(event: InputEvent) -> bool:
+	for action in FOCUS_NAVIGATION_ACTIONS:
+		if event.is_action(action):
+			return true
+	return false
 
 
 func receiving_motion_input() -> bool:
