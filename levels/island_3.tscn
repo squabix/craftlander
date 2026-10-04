@@ -16,7 +16,6 @@
 [ext_resource type="Shader" uid="uid://bv7qqp8qrt8qt" path="res://island/heightmap_shader.gdshader" id="11_i8xyj"]
 [ext_resource type="Script" uid="uid://bg82eansdlgrc" path="res://island/prop_populator.gd" id="12_rl17t"]
 [ext_resource type="Script" uid="uid://csprfavexgrle" path="res://island/props/island_prop.gd" id="13_babke"]
-[ext_resource type="Resource" uid="uid://cb30upq44sjbu" path="res://island/props/destructable_resource/stone/stone_prop.tres" id="14_8y6y8"]
 [ext_resource type="Resource" uid="uid://cjar2mtvun61t" path="res://island/props/destructable_resource/dead_shrub/dead_shrub_prop.tres" id="16_3exlf"]
 [ext_resource type="Resource" uid="uid://tfgt81gsmko4" path="res://island/props/indestructable/treasure_chest/treasure_chest_prop.tres" id="16_xnw05"]
 [ext_resource type="Script" uid="uid://c7gxodoedjemm" path="res://island/island_nav_region.gd" id="18_i1s1v"]
@@ -61,6 +60,11 @@
 [ext_resource type="Resource" uid="uid://weqyppvdot2i" path="res://island/props/destructable_resource/tree2/tree2.tres" id="freed_tree2"]
 [ext_resource type="Script" uid="uid://ns4e4mdh7jwf" path="res://entities/enemies/ghosts/ghost_melee_coordinator.gd" id="ghost_melee_coordinator_gd"]
 [ext_resource type="Script" uid="uid://dxx3ryri4rcce" path="res://common/sound/music_player.gd" id="music_player_gd"]
+[ext_resource type="Resource" uid="uid://blfwt62wsl2dj" path="res://island/props/indestructable/gravestones/gravestone1_prop.tres" id="prop_gravestone1"]
+[ext_resource type="Resource" uid="uid://doyavr23ps6t6" path="res://island/props/indestructable/gravestones/gravestone2_prop.tres" id="prop_gravestone2"]
+[ext_resource type="Resource" path="res://island/props/indestructable/statues/statue_rootling_prop.tres" id="prop_statue_rootling"]
+[ext_resource type="Resource" path="res://island/props/indestructable/statues/statue_snail_prop.tres" id="prop_statue_snail"]
+[ext_resource type="Resource" path="res://island/props/indestructable/statues/statue_yeti_prop.tres" id="prop_statue_yeti"]
 [ext_resource type="Resource" uid="uid://cnmcthuebb8yb" path="res://levels/ending/waves/wave_1_lush_isle.tres" id="wave_1_tres"]
 [ext_resource type="Resource" uid="uid://cs7jvqv1n5hi7" path="res://levels/ending/waves/wave_2_skelly_sandbar.tres" id="wave_2_tres"]
 [ext_resource type="Resource" uid="uid://b70i6rw8hst63" path="res://levels/ending/waves/wave_3_frost_holm.tres" id="wave_3_tres"]
@@ -1057,9 +1061,15 @@ shape = SubResource("HeightMapShape3D_rfiti")
 script = ExtResource("12_rl17t")
 island_generator = NodePath("../IslandGenerator")
 prop_quantities = Dictionary[ExtResource("13_babke"), int]({
-ExtResource("14_8y6y8"): 10,
 ExtResource("16_3exlf"): 25,
-ExtResource("16_xnw05"): 1
+ExtResource("16_xnw05"): 1,
+ExtResource("29_12y11"): 3,
+ExtResource("prop_gravestone1"): 4,
+ExtResource("prop_gravestone2"): 4,
+ExtResource("prop_statue_rootling"): 1,
+ExtResource("prop_statue_snail"): 1,
+ExtResource("prop_statue_yeti"): 1,
+ExtResource("34_tmgll"): 8
 })
 populate_on_ready = false
 
