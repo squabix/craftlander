@@ -701,6 +701,7 @@ collision_mask = 0
 script = ExtResource("3_ihgra")
 health = NodePath("../Health")
 knockback_entity = NodePath("..")
+size_multiplier = 1.25
 metadata/_custom_type_script = "uid://4dfurtssrp4f"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox3D" unique_id=1941702815]
@@ -743,8 +744,8 @@ metadata/_custom_type_script = "uid://43bqjaemfda5"
 [node name="Sight3D" type="Node3D" parent="." unique_id=713539717]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("5_nauqg")
-radius = 15.0
-lose_distance = 23.0
+radius = 18.75
+lose_distance = 28.75
 target_collision_mask = 16
 target_groups = Array[StringName]([&"player"])
 target_acl = SubResource("Resource_acl")
