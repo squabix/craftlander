@@ -198,7 +198,7 @@ func set_cutscene_locked(locked: bool) -> void:
 func update_hud_visibility() -> void:
 	var hide_for_trailer := Main.trailer_mode and not get_tree().paused
 	if is_instance_valid(hud):
-		hud.visible = not (hide_for_trailer or cutscene_locked)
+		hud.visible = not (hide_for_trailer or cutscene_locked or get_tree().paused)
 	if is_instance_valid(hotbar_interface):
 		hotbar_interface.visible = not (hide_for_trailer or cutscene_locked)
 
