@@ -13,6 +13,8 @@ const DEFAULT_MOON_DIRECTION := Vector3(0.35, 0.45, -0.82)
 @export var moon_color := Color(0.75, 0.85, 1.0)
 @export var moon_energy := 0.4
 @export_range(1.0, 10.0) var moon_fade_sharpness := 4.0
+@export var moon_orbits_with_sun := true
+@export_custom(PROPERTY_HINT_NONE, "suffix:°") var moon_orbit_tilt := 25.0
 
 @export_group("Adjustments")
 @export var brightness: Curve
@@ -33,11 +35,15 @@ func update_sun(sun: DirectionalLight3D, normalized_time_of_day: float) -> void:
 func update_moon(moon: DirectionalLight3D, normalized_time_of_day: float) -> void:
 	var sun_elevation := sin(normalized_time_of_day * TAU)
 	var night_amount := clampf(-sun_elevation * moon_fade_sharpness, 0.0, 1.0)
+	var moon_direction := _get_moon_direction(normalized_time_of_day)
+
+	if moon_orbits_with_sun and sky_material != null:
+		sky_material.set_shader_parameter("moon_direction", moon_direction)
 
 	moon.light_color = moon_color
 	moon.light_energy = moon_energy * night_amount
 	moon.visible = moon.light_energy > 0.0
-	moon.global_transform.basis = Basis.looking_at(-_get_moon_direction(), Vector3.UP)
+	moon.global_transform.basis = Basis.looking_at(-moon_direction, Vector3.UP)
 
 
 func update_environment(world_environment: WorldEnvironment, normalized_time_of_day: float) -> void:
@@ -61,8 +67,22 @@ func update_environment(world_environment: WorldEnvironment, normalized_time_of_
 		environment.fog_density = fog_density
 
 
-func _get_moon_direction() -> Vector3:
+func _get_moon_direction(normalized_time_of_day: float) -> Vector3:
+	return (
+		_get_orbit_direction(normalized_time_of_day) if moon_orbits_with_sun
+		else _get_fixed_direction()
+	)
+
+
+func _get_orbit_direction(normalized_time_of_day: float) -> Vector3:
+	var phase := normalized_time_of_day * TAU
+	var opposite_sun := Vector3(-cos(phase), -sin(phase), 0.0)
+	return opposite_sun.rotated(Vector3.RIGHT, -deg_to_rad(moon_orbit_tilt)).normalized()
+
+
+func _get_fixed_direction() -> Vector3:
 	var direction: Variant = sky_material.get_shader_parameter("moon_direction") if sky_material != null else null
-	if direction is Vector3 and direction != Vector3.ZERO:
-		return (direction as Vector3).normalized()
-	return DEFAULT_MOON_DIRECTION.normalized()
+	return (
+		(direction as Vector3).normalized() if direction is Vector3 and direction != Vector3.ZERO
+		else DEFAULT_MOON_DIRECTION.normalized()
+	)

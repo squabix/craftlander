@@ -5,7 +5,7 @@ signal day_started
 signal night_started
 
 const HALF_CYCLE_DEGREES := 180.0
-const DAY_START_PHASE_DEGREES := 90.0
+const DAY_START_PHASE_DEGREES := 22.0
 
 static var current_time := 0.0
 static var current_day_number := 0

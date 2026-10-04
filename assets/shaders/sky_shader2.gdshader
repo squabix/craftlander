@@ -33,6 +33,8 @@ group_uniforms Sun;
 uniform float sun_scale = 0.05;
 uniform float sun_strength = 15.0;
 uniform vec4 sun_color : source_color = vec4(1.0,0.9,0.0,1.0);
+uniform float sun_cloud_occlusion : hint_range(0.0, 1.0) = 0.5;
+uniform float sun_cloud_glow = 3.0;
 
 group_uniforms Moon;
 uniform float moon_strength = 0.0;
@@ -82,10 +84,12 @@ void sky() {
 		cloud_value *= smoothstep(0.0, 0.2, EYEDIR.y);
 	}
 
-	float sun_distance = clamp(1.0 - distance(EYEDIR, LIGHT0_DIRECTION) - pow(cloud_value,cloud_occlude_exponent),0.0,1.0);
+	float sun_distance = clamp(1.0 - distance(EYEDIR, LIGHT0_DIRECTION), 0.0, 1.0);
+	float sun_visibility = 1.0 - clamp(pow(cloud_value, cloud_occlude_exponent), 0.0, 1.0) * sun_cloud_occlusion;
 	float sun_disc = clamp(smoothstep(1.0 - sun_scale, 1.0, sun_distance), 0.0, 1.0);
-	float sun_glow = clamp(0.0, 1.0, (pow(sun_distance, 4.0)*0.07));
-	vec3 sun = mix(vec3(0.0), sun_color.rgb * sun_strength, max(sun_disc, sun_glow));
+	float sun_glow = clamp(pow(sun_distance, 4.0) * 0.07, 0.0, 1.0);
+	vec3 sun = sun_color.rgb * sun_strength * max(sun_disc, sun_glow) * sun_visibility;
+	vec3 sun_cloud_light = sun_color.rgb * cloud_value * pow(sun_distance, 6.0) * sun_cloud_glow;
 
 	float night_noise = texture(night_noise_02, (EYEDIR / ((1.0 - abs(t) * 0.05))).xz).r;
 	float stars = smoothstep(0.9, .95, texture(night_noise_01, (EYEDIR / ((1.0 - abs(t) * 0.05))).xz).r);
@@ -110,7 +114,7 @@ void sky() {
 
 	sky = mix(sky, mix(sky_color * 0.5, horizon_color, EYEDIR.y + 1.0).rgb, clamp(pow(1.0 - EYEDIR.y, 2.0), 0.0, 1.0));
 	if(use_directional_light) {
-		sky += sun * clamp(pow(EYEDIR.y + 1.0, 16.0),0.0,1.0);
+		sky += (sun + sun_cloud_light) * clamp(pow(EYEDIR.y + 1.0, 16.0),0.0,1.0);
 	}
 
 	if (moon_strength > 0.0) {
