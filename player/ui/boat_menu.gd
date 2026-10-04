@@ -14,6 +14,7 @@ var current_boat: Boat
 
 func _ready() -> void:
 	hide()
+	super()
 	var options: Array[IslandOption]
 	options.assign(island_option_container.get_children())
 	for option in options:
@@ -25,13 +26,14 @@ func _ready() -> void:
 
 func open_boat(boat: Boat) -> void:
 	if not is_instance_valid(boat):
-		Util.node_error("%s cannot open with invalid boat: ", self, boat)
+		Util.node_error("%s cannot open with invalid boat: %s", self, boat)
 		return
 	sail_button.disabled = true
 	set_pause(true)
 	current_boat = boat
 	boat_upgrader.boat = boat
 	reload_options()
+	auto_focus()
 	opened.emit()
 
 
@@ -49,14 +51,32 @@ func back() -> void:
 		return
 	if not is_instance_valid(current_boat):
 		return
+	
 	set_pause(false)
-	if is_instance_valid(island_option_container):
-		for option in island_option_container.get_children():
-			option.select_button.button_pressed = false
-			option.hide()
-	selected_option = null
-	current_boat = null
-	backed_out.emit()
+
+	if not is_instance_valid(island_option_container):
+		selected_option = null
+		current_boat = null
+		backed_out.emit()
+		return
+	
+	for option in island_option_container.get_children():
+		option.select_button.button_pressed = false
+		option.hide()
+
+
+func auto_focus() -> void:
+	if not boat_upgrader.upgrade_button.disabled:
+		boat_upgrader.upgrade_button.grab_focus()
+		return
+
+	for option: IslandOption in island_option_container.get_children():
+		if not option.visible or option.select_button.disabled:
+			continue
+		option.select_button.grab_focus()
+		return
+
+	super()
 
 
 func set_pause(to: bool) -> void:

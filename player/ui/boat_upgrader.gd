@@ -59,4 +59,5 @@ func upgrade() -> void:
 	Main.root.save_current_game()
 	boat_menu.back()
 	print("Upgraded boat to %s" % current_upgrade_level)
+	EventBus.trigger(&"boat_upgraded", current_upgrade_level)
 	upgraded.emit(current_upgrade_level)

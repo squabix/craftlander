@@ -354,6 +354,18 @@ corner_radius_top_right = 1
 corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boatupg_full"]
+bg_color = Color(0.98, 0.82, 0.25, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_48p26"]
 shader = ExtResource("28_ge24q")
 shader_parameter/blur_amount = 2.2500002018750003
@@ -1727,6 +1739,8 @@ show_percentage = false
 script = ExtResource("500_boatupg")
 boat_upgrader = NodePath("../../../BoatMenu/BottomOptions/HBoxContainer/BoatUpgrader")
 player_inventory = NodePath("../../../Inventory")
+container = NodePath("..")
+full_fill_style = SubResource("StyleBoxFlat_boatupg_full")
 
 [node name="BoatCompassTracker" type="Node" parent="HUD" unique_id=910200002 node_paths=PackedStringArray("compass")]
 script = ExtResource("9102_cmpss2")
@@ -4731,6 +4745,22 @@ action_left = &"look_left"
 action_right = &"look_right"
 metadata/_custom_type_script = "uid://7t0qde2fdjb8"
 
+[node name="BoatProgressPanel" parent="PauseMenu/CraftingInterface" unique_id=1468243080 node_paths=PackedStringArray("boat_upgrader", "player_inventory") instance=ExtResource("boat_progress_panel_scene")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -467.75
+offset_top = 20.0
+offset_bottom = 211.0
+grow_horizontal = 0
+scale = Vector2(0.8, 0.8)
+boat_upgrader = NodePath("../../../BoatMenu/BottomOptions/HBoxContainer/BoatUpgrader")
+player_inventory = NodePath("../../../Inventory")
+
+[node name="GridContainer" parent="PauseMenu/CraftingInterface/BoatProgressPanel/RequirementContainer" index="0"]
+columns = 2
+
 [node name="SettingsMenu" parent="PauseMenu" unique_id=1234740637 instance=ExtResource("39_xcnuv")]
 visible = false
 layout_mode = 1
@@ -6589,5 +6619,6 @@ max_polyphony = 3
 [connection signal="updated_instance" from="Head/Camera3D/ItemHolder" to="HUD" method="_on_item_holder_updated_instance"]
 [connection signal="updated_pause" from="PauseMenu" to="." method="_on_pause_interface_updated_pause"]
 
+[editable path="PauseMenu/CraftingInterface/BoatProgressPanel"]
 [editable path="PauseMenu/SettingsMenu"]
 [editable path="PauseMenu/SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/BackButton/ButtonAudioManager"]

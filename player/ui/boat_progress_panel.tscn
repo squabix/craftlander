@@ -1,0 +1,50 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://player/ui/boat_progress_panel.gd" id="1_panel"]
+[ext_resource type="PackedScene" path="res://player/ui/boat_requirement_display.tscn" id="2_display"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font_size = 26
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.23529412)
+shadow_offset = Vector2(0, 1)
+
+[node name="BoatProgressPanel" type="VBoxContainer" node_paths=PackedStringArray("title_label", "requirement_display_container")]
+mouse_filter = 2
+theme_override_constants/separation = 8
+script = ExtResource("1_panel")
+title_label = NodePath("TitleLabel")
+requirement_display_container = NodePath("RequirementContainer/GridContainer")
+
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Boat Upgrade"
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
+
+[node name="RequirementContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="GridContainer" type="GridContainer" parent="RequirementContainer"]
+layout_mode = 2
+mouse_filter = 2
+columns = 3
+
+[node name="RequirementDisplay1" parent="RequirementContainer/GridContainer" instance=ExtResource("2_display")]
+layout_mode = 2
+
+[node name="RequirementDisplay2" parent="RequirementContainer/GridContainer" instance=ExtResource("2_display")]
+layout_mode = 2
+
+[node name="RequirementDisplay3" parent="RequirementContainer/GridContainer" instance=ExtResource("2_display")]
+layout_mode = 2
+
+[node name="RequirementDisplay4" parent="RequirementContainer/GridContainer" instance=ExtResource("2_display")]
+layout_mode = 2
+
+[node name="RequirementDisplay5" parent="RequirementContainer/GridContainer" instance=ExtResource("2_display")]
+layout_mode = 2
+
+[node name="RequirementDisplay6" parent="RequirementContainer/GridContainer" instance=ExtResource("2_display")]
+layout_mode = 2
