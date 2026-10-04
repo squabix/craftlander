@@ -66,7 +66,7 @@
 
 [sub_resource type="Resource" id="Resource_xl8du"]
 script = ExtResource("2_8i4p0")
-max_speed = Vector2(3.6, 0)
+max_speed = Vector2(3, 0)
 friction_sharpness = Vector2(30, 0)
 metadata/_custom_type_script = "uid://edbvsbdtvgtj"
 

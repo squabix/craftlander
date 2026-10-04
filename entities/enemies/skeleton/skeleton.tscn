@@ -81,12 +81,6 @@ script = ExtResource("acl_script")
 [sub_resource type="Resource" id="Resource_aoox1"]
 script = ExtResource("18_48lup")
 item = ExtResource("19_huyes")
-quantity = 3
-metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
-
-[sub_resource type="Resource" id="Resource_uefcv"]
-script = ExtResource("18_48lup")
-item = ExtResource("20_xos1k")
 metadata/_custom_type_script = "uid://b0hvgv2mjdaxw"
 
 [sub_resource type="Animation" id="Animation_3emv6"]
@@ -963,7 +957,7 @@ entity = NodePath("../..")
 [node name="Inventory" type="Node" parent="." unique_id=2020826484]
 unique_name_in_owner = true
 script = ExtResource("17_orkyh")
-item_instances = Array[ExtResource("18_48lup")]([SubResource("Resource_aoox1"), SubResource("Resource_uefcv")])
+item_instances = Array[ExtResource("18_48lup")]([SubResource("Resource_aoox1")])
 constant = true
 size = 2
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
