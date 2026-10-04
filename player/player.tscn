@@ -1206,6 +1206,7 @@ metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
 
 [node name="Sprinting" type="Node" parent="Controller3D/Default" unique_id=900263776 node_paths=PackedStringArray("stamina", "root")]
 script = ExtResource("10_8t03j")
+camera = NodePath("../../../Head/Camera3D")
 stamina = NodePath("../../../Stamina")
 root = NodePath("../../..")
 metadata/_custom_type_script = "uid://dmd1q78n1xm4s"
