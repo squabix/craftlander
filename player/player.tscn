@@ -2018,9 +2018,14 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CraftingEnvironment" parent="PauseMenu/CraftingInterface" unique_id=651686952 node_paths=PackedStringArray("inventory_selector", "pause_interface") instance=ExtResource("28_q28gw")]
+[node name="CraftingEnvironment" parent="PauseMenu/CraftingInterface" unique_id=651686952 node_paths=PackedStringArray("slot_fit_regions", "inventory", "selector", "held_stack", "pause_interface") instance=ExtResource("28_q28gw")]
+z_index = 2
 layout_mode = 1
-inventory_selector = NodePath("../../../HUD/PrimaryInventorySelector")
+mouse_filter = 2
+slot_fit_regions = [NodePath("../BackpackPanel"), NodePath("../../../HotbarInterface/HotbarDisplay")]
+inventory = NodePath("../../../Inventory")
+selector = NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector")
+held_stack = NodePath("../HeldStack")
 pause_interface = NodePath("../..")
 
 [node name="RecipePanel" type="VBoxContainer" parent="PauseMenu/CraftingInterface" unique_id=219499038 node_paths=PackedStringArray("entry_container", "entry_template", "recipe_display", "recipe_learner", "back_entry")]

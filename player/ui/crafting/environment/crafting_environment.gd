@@ -47,8 +47,15 @@ const RECIPE_LAYOUT_SCALE := 1.0
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var success_drop_sink_depth := 1.5
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var success_drop_duration := 0.35
 
+@export_group("Slot Fit", "slot_fit")
+@export var slot_fit_regions: Array[Control]
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var slot_fit_size := 0.5
+@export_range(0.0, 1.0) var slot_fit_speed := 0.3
+
 @export_group("External Dependencies")
-@export var inventory_selector: InventorySelector
+@export var inventory: Inventory
+@export var selector: InventorySelector
+@export var held_stack: HeldStack
 @export var pause_interface: Control
 @export var is_crafting := false:
 	set(value):
@@ -70,8 +77,8 @@ func _ready() -> void:
 
 	reset_slots()
 
-	if is_instance_valid(inventory_selector):
-		inventory_selector.selected_new_index.connect(update_selection_visuals.unbind(1))
+	if is_instance_valid(held_stack):
+		held_stack.changed.connect(update_selection_visuals)
 	if is_instance_valid(pause_interface):
 		pause_interface.updated_pause.connect(func(_paused: bool): clear())
 
@@ -88,6 +95,7 @@ func _process(_delta: float) -> void:
 
 	if is_instance_valid(selection_visuals):
 		selection_visuals.global_position = selection_visuals.global_position.lerp(mouse, DRAG_SPEED)
+		update_selection_scale()
 		_wiggle_selection()
 
 	if is_tweening_craft_result:
@@ -149,11 +157,11 @@ func update_selection_visuals() -> void:
 	if is_tweening_craft_result:
 		return
 
-	if not is_crafting or not is_instance_valid(inventory_selector):
+	if not is_crafting or not is_instance_valid(held_stack):
 		reset_selection_visuals()
 		return
 
-	var new_instance := inventory_selector.get_current_instance()
+	var new_instance := held_stack.instance
 	if not is_instance_valid(new_instance) or new_instance.item == null:
 		reset_selection_visuals()
 		return
@@ -164,7 +172,27 @@ func update_selection_visuals() -> void:
 	reset_selection_visuals()
 
 	new_instance.item.set_up_scene()
-	selection_visuals = spawn_item(new_instance.item)
+	selection_visuals = spawn_item(new_instance.item, slot_fit_size)
+	selection_visuals.fit_blend = get_slot_fit_target()
+
+
+func update_selection_scale() -> void:
+	if not is_instance_valid(selection_visuals):
+		return
+
+	selection_visuals.fit_blend = lerpf(selection_visuals.fit_blend, get_slot_fit_target(), slot_fit_speed)
+
+
+func get_slot_fit_target() -> float:
+	return 1.0 if is_mouse_over_slot_region() else 0.0
+
+
+func is_mouse_over_slot_region() -> bool:
+	var mouse := get_global_mouse_position()
+	for region in slot_fit_regions:
+		if is_instance_valid(region) and region.is_visible_in_tree() and region.get_global_rect().has_point(mouse):
+			return true
+	return false
 
 
 func get_scaled_mouse_position2d() -> Vector2:
@@ -182,8 +210,9 @@ func get_mouse_position3d() -> Vector3:
 	)
 
 
-func spawn_item(item: Item) -> ItemVisualsContainer3D:
+func spawn_item(item: Item, fit_size := 0.0) -> ItemVisualsContainer3D:
 	var visuals := ItemVisualsContainer3D.from_item(item)
+	visuals.fit_size = fit_size
 	item_origin.add_child(visuals)
 	visuals.scale *= VISUALS_SCALE
 	visuals.rotation_degrees = VISUALS_TILT
@@ -204,23 +233,57 @@ func get_current_slot() -> int:
 	return -1
 
 
-func move_item_to_grid_inventory(item: Item) -> void:
-	inventory_selector.inventory.give_item(item, 1, grid_inventory)
+func move_item_to_grid_inventory() -> Item:
+	var item := held_stack.take_one()
+	if item == null:
+		return null
+
+	grid_inventory.add_item(item, 1)
 	update_selection_visuals()
-	grid_changed.emit()
+	return item
 
 
 func remove_item_from_grid_inventory(item: Item) -> void:
-	grid_inventory.give_item(item, 1, inventory_selector.inventory)
+	grid_inventory.remove_item(item, 1)
+
+	var leftover := 0 if held_stack.try_add_one(item) else return_to_selected_slot(item)
+	if leftover > 0:
+		leftover = inventory.add_item(item, leftover)
+	if leftover > 0:
+		held_stack.drop_leftover(item, leftover)
+
 	update_selection_visuals()
 	grid_changed.emit()
+
+
+func return_to_selected_slot(item: Item) -> int:
+	if not is_instance_valid(selector) or not selector.enabled or selector.selected_index == -1:
+		return 1
+
+	var leftover := selector.inventory.merge_instance_into(selector.selected_index, item.instantiate(1))
+	return 0 if leftover == null else leftover.quantity
+
+
+func can_empty_slot(slot_index: int) -> bool:
+	var old_visuals: ItemVisualsContainer3D = slots_contents[slot_index]
+	if old_visuals == null:
+		return true
+
+	return inventory.has_room(old_visuals.get_item(), 1)
 
 
 func place(slot_index: int) -> void:
 	if is_tweening_craft_result or not is_instance_valid(selection_visuals) or slot_index == -1:
 		return
 
-	if slots_contents[slot_index] != null and slots_contents[slot_index].get_item() == selection_visuals.get_item():
+	if slots_contents[slot_index] != null and slots_contents[slot_index].get_item().equals(selection_visuals.get_item()):
+		return
+
+	if not can_empty_slot(slot_index):
+		return
+
+	if held_stack.is_empty():
+		reset_selection_visuals()
 		return
 
 	empty(slot_index)
@@ -228,14 +291,26 @@ func place(slot_index: int) -> void:
 	var visuals_to_place := selection_visuals
 	selection_visuals = null
 
+	if move_item_to_grid_inventory() == null:
+		Util.safe_free(visuals_to_place)
+		return
+
+	visuals_to_place.fit_blend = 0.0
 	slots_contents[slot_index] = visuals_to_place
-	move_item_to_grid_inventory(visuals_to_place.get_item())
+	grid_changed.emit()
 	update_selection_visuals.call_deferred()
 	placed.emit()
 
 
 func clear() -> void:
-	grid_inventory.give_everything(inventory_selector.inventory)
+	for index in grid_inventory.get_occupied_indicies():
+		var instance := grid_inventory.get_instance(index)
+		var leftover := inventory.add_item(instance.item, instance.quantity)
+		if leftover > 0:
+			held_stack.drop_leftover(instance.item, leftover)
+
+	grid_inventory.clear()
+
 	for i in range(slots_contents.size()):
 		Util.safe_free(slots_contents[i])
 		slots_contents[i] = null
@@ -264,7 +339,7 @@ func empty(slot_index: int) -> void:
 		return
 
 	var old_visuals: ItemVisualsContainer3D = slots_contents[slot_index]
-	if old_visuals == null:
+	if old_visuals == null or not can_empty_slot(slot_index):
 		return
 
 	var item_to_remove = old_visuals.get_item()
@@ -317,8 +392,10 @@ func tween_craft_fail() -> void:
 		turn.call(visual, -fail_wiggle_intensity, step1_time)
 		turn.call(visual, 0.0, step1_time + step2_time)
 
+	tween.tween_interval(fail_wiggle_duration)
 	await tween.finished
 	is_tweening_craft_result = false
+	update_selection_visuals()
 
 
 func emit_craft_particles(spawn_position: Vector3) -> void:
@@ -343,6 +420,7 @@ func tween_craft_success(item: Item) -> void:
 		craft_center = position_sum / visuals_to_animate.size()
 
 	grid_inventory.clear()
+	slots_contents.fill(null)
 	grid_changed.emit()
 
 	var merge_tween := create_tween().set_parallel(true).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
@@ -392,27 +470,33 @@ func tween_craft_success(item: Item) -> void:
 
 	Util.safe_free(crafted_visuals)
 	is_tweening_craft_result = false
+	update_selection_visuals()
 
 
 func craft() -> void:
+	if is_tweening_craft_result:
+		return
+
 	var recipe := RecipeBook.get_recipe(get_recipe_layout())
 	if recipe == null:
 		tween_craft_fail()
 		craft_failed.emit()
 		return
 
-	if not inventory_selector.inventory.has_room(recipe.result.item, recipe.result.quantity):
+	if not inventory.has_room(recipe.result.item, recipe.result.quantity):
 		tween_craft_fail()
 		craft_failed.emit()
 		return
 
 	await tween_craft_success(recipe.result.item)
 
-	inventory_selector.inventory.add_item(
+	var leftover := inventory.add_item(
 		recipe.result.item,
 		recipe.result.quantity,
 		false,
 	)
+	if leftover > 0:
+		held_stack.drop_leftover(recipe.result.item, leftover)
 
 	update_selection_visuals()
 

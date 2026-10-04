@@ -17,7 +17,21 @@ const GHOSTED_ANIMATION_PROPERTIES: PackedStringArray = [
 
 @export_tool_button("Display Item") var display_item_action := display_item
 
+@export_group("Fit")
+@export_custom(PROPERTY_HINT_NONE, "suffix:m") var fit_size := 0.0
+
+var fit_blend := 0.0:
+	set(value):
+		fit_blend = value
+		apply_fit_blend()
+
 var contained_visuals: Node3D
+
+var has_fit_transforms := false
+var natural_scale := Vector3.ONE
+var natural_position := Vector3.ZERO
+var fitted_scale := Vector3.ONE
+var fitted_position := Vector3.ZERO
 
 
 static func from_item(item: Item) -> ItemVisualsContainer3D:
@@ -49,7 +63,8 @@ func reset_visuals() -> void:
 func display_item() -> void:
 	reset_visuals()
 	contained_visuals = null
-	
+	has_fit_transforms = false
+
 	var item: Item = item_override
 	if item == null and item_holder != null and item_holder.initial_item_instance != null:
 		item = item_holder.initial_item_instance.item
@@ -83,6 +98,7 @@ func get_item() -> Item:
 
 func update_visuals() -> void:
 	reset_visuals()
+	has_fit_transforms = false
 
 	var item := get_item()
 
@@ -117,11 +133,66 @@ func update_visuals() -> void:
 	# Transform contained visuals
 	contained_visuals.position = Vector3.ZERO
 	contained_visuals.scale *= visuals_scale_ratio
+	if fit_size > 0.0:
+		cache_fit_transforms()
+		apply_fit_blend()
 
 	# Set visual instances' layers
 	var visual_instances := Util.find_children_of_class(contained_visuals, &"VisualInstance3D")
 	for visual_instance in visual_instances:
 		visual_instance.layers = layers
+
+
+func cache_fit_transforms() -> void:
+	natural_scale = contained_visuals.scale
+	natural_position = contained_visuals.position
+	fitted_scale = natural_scale
+	fitted_position = natural_position
+	has_fit_transforms = true
+
+	var bounds := get_visuals_aabb()
+	var largest := maxf(bounds.size.x, maxf(bounds.size.y, bounds.size.z))
+	if largest <= 0.0:
+		return
+
+	var factor := fit_size / largest
+	fitted_scale = natural_scale * factor
+	fitted_position = (natural_position - bounds.get_center()) * factor
+
+
+func apply_fit_blend() -> void:
+	if not has_fit_transforms or not is_instance_valid(contained_visuals):
+		return
+
+	contained_visuals.scale = natural_scale.lerp(fitted_scale, fit_blend)
+	contained_visuals.position = natural_position.lerp(fitted_position, fit_blend)
+
+
+func get_visuals_aabb() -> AABB:
+	var merged := AABB()
+	var has_bounds := false
+
+	for node in Util.find_children_of_class(contained_visuals, &"MeshInstance3D", true):
+		var mesh_instance := node as MeshInstance3D
+		if mesh_instance.mesh == null or not mesh_instance.is_visible_in_tree():
+			continue
+
+		var bounds := get_relative_transform(mesh_instance) * mesh_instance.get_aabb()
+		merged = merged.merge(bounds) if has_bounds else bounds
+		has_bounds = true
+
+	return merged
+
+
+func get_relative_transform(node: Node3D) -> Transform3D:
+	var result := Transform3D.IDENTITY
+	var current: Node = node
+
+	while current != self and current is Node3D:
+		result = (current as Node3D).transform * result
+		current = current.get_parent()
+
+	return result
 
 
 func disable_shadows() -> void:
