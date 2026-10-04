@@ -22,7 +22,7 @@ extends Menu
 	load_game_button: start_save_selection.bind(SaveMenu.SelectMode.LOAD),
 	settings_button: open_submenu.bind(settings_submenu),
 	about_button: open_submenu.bind(about_submenu),
-	quit_button: get_tree().quit,
+	quit_button: Main.quit_game,
 	feedback_button: open_feedback_form,
 }
 
