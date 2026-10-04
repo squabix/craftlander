@@ -131,7 +131,7 @@ func adjust_head() -> void:
 func drop_selected_item() -> void:
 	if cutscene_locked:
 		return
-	dropper.drop(item_holder.selector.selected_index)
+	dropper.drop_index(item_holder.selector.selected_index)
 
 
 func use_item() -> void:

@@ -25,8 +25,8 @@ const SPAWN_COLOR := Color(0.55, 1.0, 1.0)
 @export_custom(PROPERTY_HINT_NONE, "suffix:s") var spawn_duration := 0.7
 
 @export_group("Multipliers", "multiplier")
-@export var multiplier_damage := 1.3
-@export var multiplier_health := 1.3
+@export var multiplier_damage := 0.65
+@export var multiplier_health := 0.65
 
 @export_group("Movement")
 @export var guide: GhostEntityGuide3D
@@ -199,7 +199,7 @@ func strip_drops() -> void:
 		inventory.item_instances = empty_items
 	
 	if is_instance_valid(dropper):
-		dropper.death_drop_mode = InventoryDropper3D.DeathDropMode.NONE
+		dropper.drop_mode = InventoryDropper3D.DropMode.NONE
 
 
 func restrict_projectile(instance: Node3D) -> void:

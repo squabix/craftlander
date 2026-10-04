@@ -3,12 +3,16 @@ extends Spawner3D
 
 signal dropped
 
-enum DeathDropMode { EVERYTHING, RANDOM, NEXT, NONE }
+enum DropMode { EVERYTHING, RANDOM, NEXT, NONE }
 
 static var rigid_item_pickup_scene := load("res://defaults/default_rigid_item_pickup.tscn")
 static var all_dropped_pickups: Array[Node]
 
 @export var inventory: Inventory
+
+@export_group("Drop")
+@export var drop_mode := DropMode.RANDOM
+@export var drop_quantity := 1
 
 @export_group("Offset")
 @export_custom(PROPERTY_HINT_NONE, "suffix:m") var position_offset: Vector3
@@ -17,11 +21,6 @@ static var all_dropped_pickups: Array[Node]
 @export_group("On Ready")
 @export var drop_on_ready := false
 @export var on_ready_index := -1
-
-@export_group("On Death")
-@export var health: Health
-@export var death_drop_mode: DeathDropMode
-@export var death_drop_quantity := 1
 
 
 static func clear_dropped_pickups() -> void:
@@ -33,10 +32,8 @@ static func clear_dropped_pickups() -> void:
 
 func _ready() -> void:
 	super()
-	if is_instance_valid(health):
-		health.died.connect(die)
 	if drop_on_ready:
-		drop(on_ready_index, false)
+		drop_index(on_ready_index, false)
 
 
 func initialize_instance(instance: Node3D) -> void:
@@ -58,8 +55,26 @@ func add_pickup(item: Item, recovers_from_underground := true) -> RigidItemPicku
 	return pickup
 
 
-func drop(index: int = -1, recovers_from_underground := true) -> Node3D:
-	var instance := get_instance(index)
+func drop(recovers_from_underground := true) -> void:
+	match drop_mode:
+		DropMode.NONE:
+			pass
+
+		DropMode.RANDOM:
+			for i in drop_quantity:
+				drop_index(-1, recovers_from_underground)
+
+		DropMode.NEXT:
+			for i in drop_quantity:
+				drop_index(get_next_index(), recovers_from_underground)
+
+		DropMode.EVERYTHING:
+			drop_everything()
+
+
+func drop_index(index: int, recovers_from_underground := true) -> Node3D:
+	index = resolve_index(index)
+	var instance := inventory.get_instance(index)
 
 	if instance == null:
 		return null
@@ -73,26 +88,14 @@ func drop(index: int = -1, recovers_from_underground := true) -> Node3D:
 	return pickup
 
 
-func get_instance(index: int) -> ItemInstance:
-	return inventory.get_instance(inventory.get_random_index_weighted() if index == -1 else index)
+func resolve_index(index: int) -> int:
+	return inventory.get_random_index_weighted() if index == -1 else index
+
+
+func get_next_index() -> int:
+	var occupied := inventory.get_occupied_indicies()
+	return occupied.front() if not occupied.is_empty() else -1
 
 
 func drop_everything() -> void:
 	push_error("Drop everything is not currently implemented")
-
-
-func die() -> void:
-	match death_drop_mode:
-		DeathDropMode.NONE:
-			pass
-
-		DeathDropMode.RANDOM:
-			for i in death_drop_quantity:
-				drop()
-
-		DeathDropMode.NEXT:
-			for i in death_drop_quantity:
-				drop(inventory.find_empty_index())
-
-		DeathDropMode.EVERYTHING:
-			drop_everything()

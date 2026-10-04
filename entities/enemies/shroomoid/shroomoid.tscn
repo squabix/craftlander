@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://bu0k8q4uctlgf" path="res://common/inventory_system/inventory.gd" id="18_c1oxa"]
 [ext_resource type="Script" uid="uid://b0hvgv2mjdaxw" path="res://common/inventory_system/item_instance.gd" id="19_ayrpf"]
 [ext_resource type="Script" uid="uid://bpmbg0e28ujs7" path="res://common3d/inventory/item_dropper3d.gd" id="22_42y5n"]
+[ext_resource type="Script" uid="uid://8kgnmccrqot4" path="res://common3d/inventory/dropper_trigger.gd" id="dropper_trigger_script"]
 [ext_resource type="Material" uid="uid://m5807bchpbmp" path="res://assets/materials/glowing_eye.tres" id="26_fq6fk"]
 [ext_resource type="Material" uid="uid://ct3rueaspkpix" path="res://assets/materials/darkness.tres" id="27_5vsmy"]
 [ext_resource type="Script" uid="uid://ljihr86cv3xk" path="res://common3d/item_visuals_container_3d.gd" id="28_qc4uf"]
@@ -933,13 +934,16 @@ constant = true
 size = 2
 metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 
-[node name="InventoryDropper3D" type="Node3D" parent="." unique_id=709626360 node_paths=PackedStringArray("inventory", "health")]
+[node name="InventoryDropper3D" type="Node3D" parent="." unique_id=709626360 node_paths=PackedStringArray("inventory")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("22_42y5n")
 inventory = NodePath("../Inventory")
-health = NodePath("../Health")
-death_drop_mode = 1
 metadata/_custom_type_script = "uid://bpmbg0e28ujs7"
+
+[node name="DropperTrigger" type="Node" parent="." node_paths=PackedStringArray("dropper", "health")]
+script = ExtResource("dropper_trigger_script")
+dropper = NodePath("../InventoryDropper3D")
+health = NodePath("../Health")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=1081978445]
 target_desired_distance = 1.5
