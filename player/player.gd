@@ -37,6 +37,7 @@ const HURT_SHAKE_TRAUMA := 0.4
 @export_group("Inventory")
 @export var item_holder: InventoryHolder3D
 @export var dropper: InventoryDropper3D
+@export var inventory_saver: NodeSaver
 
 @export_group("Stats")
 @export var health: Health
@@ -78,6 +79,7 @@ func _ready() -> void:
 	health.died.connect(die)
 	health.survived_hurt.connect(_on_survived_hurt)
 	health.was_hurt.connect(_on_was_hurt)
+	inventory_saver.finished_load.connect(item_holder.selector.update_current_instance, CONNECT_ONE_SHOT)
 	health_saver.finished_load.connect(_on_health_loaded, CONNECT_ONE_SHOT)
 	hunger_saver.finished_load.connect(_on_hunger_loaded, CONNECT_ONE_SHOT)
 
