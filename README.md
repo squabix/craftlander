@@ -13,4 +13,4 @@ I plan to continue adding content and polish to the game. I also plan on packagi
 
 ## License
 
-CRAFTLANDER's source is released under the [MIT License](LICENSE). The game's sound effects and music are not part of this repository and are not covered by it, so a build from source runs silent unless you add your own audio under `assets/sound/`. Third-party components, including GodotSteam, the controller icons addon, and any fonts made by others, keep their own licenses.
+CRAFTLANDER's source is released under the [MIT License](LICENSE). The game's sound effects and music are not part of this repository and are not covered by it, so a build from source runs silent unless you add your own audio under `assets/sound/`. Third-party components, including GodotSteam, the controller icons addon, and any fonts, keep their own licenses.
