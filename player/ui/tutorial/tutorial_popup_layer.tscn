@@ -31,7 +31,7 @@ script = ExtResource("1_yh5hk")
 title_label = NodePath("ContentBox/Panel/VBoxContainer/TitleLabel")
 body_label = NodePath("ContentBox/Panel/VBoxContainer/BodyLabel")
 continue_icon_rect = NodePath("ContentBox/CenterContainer/HBoxContainer/ContinueIcon")
-continue_actions = Array[StringName]([&"ui_accept", &"pause"])
+continue_actions = Array[StringName]([&"ui_accept", &"pause", &"back"])
 
 [node name="BlurRect" type="ColorRect" parent="PopupDisplay" unique_id=1491973269]
 visible = false
@@ -106,6 +106,12 @@ theme_override_constants/separation = 8
 [node name="Button1" type="Button" parent="PopupDisplay/ContentBox/CenterContainer/HBoxContainer" unique_id=439732479]
 custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
 text = "Continue"
 
 [node name="ContinueIcon" type="TextureRect" parent="PopupDisplay/ContentBox/CenterContainer/HBoxContainer" unique_id=791411169]

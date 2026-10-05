@@ -111,7 +111,7 @@ func _process(_delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if not is_crafting or is_tweening_craft_result:
+	if not is_crafting or is_tweening_craft_result or PopupDisplay.any_visible:
 		return
 	if event.is_action_pressed("craft"):
 		craft()

@@ -42,7 +42,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if not is_visible_in_tree():
+	if not is_visible_in_tree() or PopupDisplay.any_visible:
 		return
 		
 	# If a submenu is active, let the submenu process its own input
