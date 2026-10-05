@@ -17,7 +17,6 @@ font_size = 20
 
 [node name="TutorialPopupLayer" type="CanvasLayer" unique_id=564228869]
 layer = 20
-visible = false
 
 [node name="PopupDisplay" type="Control" parent="." unique_id=784232982 node_paths=PackedStringArray("title_label", "body_label", "continue_icon_rect")]
 unique_name_in_owner = true
