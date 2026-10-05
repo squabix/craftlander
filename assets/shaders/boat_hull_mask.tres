@@ -1,7 +1,0 @@
-[gd_resource type="ShaderMaterial" format=3]
-
-[ext_resource type="Shader" path="res://assets/shaders/boat_hull_mask.gdshader" id="1"]
-
-[resource]
-render_priority = -2
-shader = ExtResource("1")

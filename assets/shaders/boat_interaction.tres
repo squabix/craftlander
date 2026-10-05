@@ -1,11 +1,9 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://burxmpv8yk2pd"]
 
 [ext_resource type="Shader" uid="uid://57xb8vymulwe" path="res://assets/shaders/boat_interaction_ring.gdshader" id="1_0tjdo"]
-[ext_resource type="Material" path="res://assets/shaders/boat_interaction_occluded.tres" id="2_occl"]
 
 [resource]
 render_priority = 0
-next_pass = ExtResource("2_occl")
 shader = ExtResource("1_0tjdo")
 shader_parameter/base_color = Color(1, 0.87, 0.22, 0.9)
 shader_parameter/accent_color = Color(0.9999997, 0.9014224, 0.4542904, 0.9019608)
@@ -19,5 +17,5 @@ shader_parameter/edge_softness = 0.06
 shader_parameter/pulse_speed = 1.5
 shader_parameter/pulse_amount = 0.18
 shader_parameter/vertical_fade = 2.865
-shader_parameter/fade_start_distance = 15.0
-shader_parameter/fade_end_distance = 30.0
+shader_parameter/fade_start_distance = 3.0
+shader_parameter/fade_end_distance = 5.0

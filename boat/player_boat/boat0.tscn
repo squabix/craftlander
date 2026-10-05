@@ -18,7 +18,6 @@
 [ext_resource type="Script" uid="uid://bxjt3nibhkxh8" path="res://common/signal_triggers/camera_shake_trigger.gd" id="99_shaketrigger"]
 [ext_resource type="Script" path="res://common3d/signal_audio_manager3d.gd" id="98_dockaudiomgr"]
 [ext_resource type="AudioStream" uid="uid://cr0mkgp3lq1rv" path="res://assets/sound/land.mp3" id="98_dockstream"]
-[ext_resource type="Material" path="res://assets/shaders/boat_hull_mask.tres" id="99_hullmask"]
 
 [sub_resource type="Resource" id="Resource_1blct"]
 script = ExtResource("2_fs7t1")
@@ -91,7 +90,6 @@ collision_layer = 5
 motion_mode = 1
 script = ExtResource("1_nbkj3")
 interactable = NodePath("Interactable3D")
-hull_mask_material = ExtResource("99_hullmask")
 driver_seat = NodePath("DriverSeat")
 state_machine = NodePath("StateMachine")
 type = &"Boat"
