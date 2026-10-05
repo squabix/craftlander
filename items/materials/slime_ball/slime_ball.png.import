@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dgifuh5nmd33d"
 path.s3tc="res://.godot/imported/slime_ball.png-9f0b32c5473b70b1de7c2d0d4c866374.s3tc.ctex"
+path.etc2="res://.godot/imported/slime_ball.png-9f0b32c5473b70b1de7c2d0d4c866374.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://items/materials/slime_ball/slime_ball.png"
-dest_files=["res://.godot/imported/slime_ball.png-9f0b32c5473b70b1de7c2d0d4c866374.s3tc.ctex"]
+dest_files=["res://.godot/imported/slime_ball.png-9f0b32c5473b70b1de7c2d0d4c866374.s3tc.ctex", "res://.godot/imported/slime_ball.png-9f0b32c5473b70b1de7c2d0d4c866374.etc2.ctex"]
 
 [params]
 

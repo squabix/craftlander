@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cvdr5qh306gga"
 path.s3tc="res://.godot/imported/snail_shell.png-373bbb69289726f766ed1dedb24ce6ed.s3tc.ctex"
+path.etc2="res://.godot/imported/snail_shell.png-373bbb69289726f766ed1dedb24ce6ed.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://items/materials/snail_shell/snail_shell.png"
-dest_files=["res://.godot/imported/snail_shell.png-373bbb69289726f766ed1dedb24ce6ed.s3tc.ctex"]
+dest_files=["res://.godot/imported/snail_shell.png-373bbb69289726f766ed1dedb24ce6ed.s3tc.ctex", "res://.godot/imported/snail_shell.png-373bbb69289726f766ed1dedb24ce6ed.etc2.ctex"]
 
 [params]
 

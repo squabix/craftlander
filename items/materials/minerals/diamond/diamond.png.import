@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cxiy3n50lbnpo"
 path.s3tc="res://.godot/imported/diamond.png-4767aa72d872aca4624124d619737bb3.s3tc.ctex"
+path.etc2="res://.godot/imported/diamond.png-4767aa72d872aca4624124d619737bb3.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://items/materials/minerals/diamond/diamond.png"
-dest_files=["res://.godot/imported/diamond.png-4767aa72d872aca4624124d619737bb3.s3tc.ctex"]
+dest_files=["res://.godot/imported/diamond.png-4767aa72d872aca4624124d619737bb3.s3tc.ctex", "res://.godot/imported/diamond.png-4767aa72d872aca4624124d619737bb3.etc2.ctex"]
 
 [params]
 

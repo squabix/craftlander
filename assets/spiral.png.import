@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cox1h2gt8cc53"
 path.s3tc="res://.godot/imported/spiral.png-7b4ce27e9288163acf2d972f1e640bba.s3tc.ctex"
+path.etc2="res://.godot/imported/spiral.png-7b4ce27e9288163acf2d972f1e640bba.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/spiral.png"
-dest_files=["res://.godot/imported/spiral.png-7b4ce27e9288163acf2d972f1e640bba.s3tc.ctex"]
+dest_files=["res://.godot/imported/spiral.png-7b4ce27e9288163acf2d972f1e640bba.s3tc.ctex", "res://.godot/imported/spiral.png-7b4ce27e9288163acf2d972f1e640bba.etc2.ctex"]
 
 [params]
 
