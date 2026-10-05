@@ -335,7 +335,7 @@ shape = SubResource("BoxShape3D_hjjmf")
 [node name="SignalAudioManager3D" type="Node3D" parent="." unique_id=1896821969 node_paths=PackedStringArray("signal_players")]
 script = ExtResource("audio_manager_script")
 signal_players = {
-&"locked": NodePath("LockedSound")
+&"cursed": NodePath("LockedSound")
 }
 
 [node name="LockedSound" type="AudioStreamPlayer3D" parent="SignalAudioManager3D" unique_id=1528057354]

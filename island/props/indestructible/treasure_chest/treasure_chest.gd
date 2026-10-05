@@ -3,6 +3,7 @@ extends Node3D
 
 signal opened
 signal locked
+signal cursed
 
 @export var key_condition: InteractableItemCondition
 
