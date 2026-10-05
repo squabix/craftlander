@@ -20,8 +20,8 @@ const STEPS: Dictionary[StringName, Dictionary] = {
 	},
 	&"item_collecting": {
 		"tier": Tier.TOAST,
-		"text": "Pick up items you find around the island to add them to your inventory.",
-		"icon_action": &"interact",
+		"text": "Open your backpack to craft. Follow your recipe book, place ingredients in the crafting grid, then press CRAFT.",
+		"icon_action": &"pause",
 	},
 	&"harvesting": {
 		"tier": Tier.TOAST,
@@ -32,12 +32,6 @@ const STEPS: Dictionary[StringName, Dictionary] = {
 		"tier": Tier.TOAST,
 		"text": "Press Sprint while moving forward to run faster. Sprinting uses Stamina.",
 		"icon_action": &"sprint",
-	},
-	&"crafting_intro": {
-		"tier": Tier.TOAST,
-		"text": "Open your backpack to craft. Follow your recipe book, place ingredients in the crafting grid, then press CRAFT.",
-		"icon_action": &"pause",
-		"prerequisite": &"harvesting",
 	},
 	&"copper_collected": {
 		"tier": Tier.TOAST,
@@ -190,7 +184,6 @@ func _on_resource_harvested(payload: Dictionary) -> void:
 		return
 
 	complete_step(&"harvesting")
-	complete_step(&"crafting_intro")
 
 	var item: Item = payload.get("item")
 	if is_instance_valid(item) and item.name == COPPER_ITEM_NAME:
