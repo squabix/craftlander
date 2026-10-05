@@ -17,6 +17,8 @@
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="99_particlespawner"]
 [ext_resource type="Script" uid="uid://bxjt3nibhkxh8" path="res://common/signal_triggers/camera_shake_trigger.gd" id="99_shaketrigger"]
 [ext_resource type="PackedScene" uid="uid://lyptlia5fnc8" path="res://common3d/boat_upgrade_particles.tscn" id="99_upgradeparticles"]
+[ext_resource type="Script" path="res://common3d/signal_audio_manager3d.gd" id="98_dockaudiomgr"]
+[ext_resource type="AudioStream" uid="uid://cr0mkgp3lq1rv" path="res://assets/sound/land.mp3" id="98_dockstream"]
 [ext_resource type="Material" path="res://assets/shaders/boat_hull_mask.tres" id="99_hullmask"]
 
 [sub_resource type="Resource" id="Resource_1blct"]
@@ -86,6 +88,11 @@ radius = 0.7
 [sub_resource type="BoxMesh" id="BoxMesh_hjjmf"]
 size = Vector3(5.3583984, 0.5961914, 6.1746826)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_dock"]
+random_pitch = 1.122462
+streams_count = 1
+stream_0/stream = ExtResource("98_dockstream")
+
 [node name="Boat1" type="CharacterBody3D" unique_id=782602740 node_paths=PackedStringArray("interactable", "driver_seat", "state_machine", "seats")]
 collision_layer = 5
 motion_mode = 1
@@ -107,6 +114,19 @@ metadata/_custom_type_script = "uid://sw1ikf32qnw0"
 script = ExtResource("99_shaketrigger")
 trauma = 0.25
 signal_name = &"docked"
+
+[node name="SignalAudioManager3D" type="Node3D" parent="." node_paths=PackedStringArray("signal_players")]
+script = ExtResource("98_dockaudiomgr")
+signal_players = {
+&"docked": NodePath("DockPlayer")
+}
+
+[node name="DockPlayer" type="AudioStreamPlayer3D" parent="SignalAudioManager3D"]
+stream = SubResource("AudioStreamRandomizer_dock")
+volume_db = 3.0
+pitch_scale = 0.6
+unit_size = 20.0
+bus = &"SFX"
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1982546673]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.8275526, 4.3795333)
