@@ -9,8 +9,7 @@ const CRAFT_ACHIEVEMENTS: Dictionary[String, StringName] = {
 	"res://items/weapons/ice_club/ice_club_item.tres": SteamIDs.ACH_BATTER_UP,
 }
 
-const HUNTER_KILL_THRESHOLD := 30
-const SLAYER_KILL_THRESHOLD := 100
+const HUNTER_KILL_THRESHOLD := 50
 const LUMBERJACK_TREE_THRESHOLD := 50
 const CLOSE_CALL_MAX_HP_PERCENT := 0.1
 const SURVIVE_NIGHTS_THRESHOLD := 10
@@ -25,8 +24,6 @@ func _ready() -> void:
 	EventBus.subscribe(&"bee_nest_destroyed", _on_bee_nest_destroyed)
 	EventBus.subscribe(&"island_populated", _on_island_populated)
 	EventBus.subscribe(&"treasure_chest_opened", _on_treasure_chest_opened)
-	EventBus.subscribe(&"boat_upgraded", _on_boat_upgraded)
-	EventBus.subscribe(&"game_beaten", _on_game_beaten)
 
 
 func _on_enemy_died(_entity: Entity3D) -> void:
@@ -34,8 +31,6 @@ func _on_enemy_died(_entity: Entity3D) -> void:
 	var kills := SteamManager.get_stat(SteamIDs.STAT_ENEMIES_KILLED)
 	if kills >= HUNTER_KILL_THRESHOLD:
 		SteamManager.unlock_achievement(SteamIDs.ACH_HUNTER)
-	if kills >= SLAYER_KILL_THRESHOLD:
-		SteamManager.unlock_achievement(SteamIDs.ACH_SLAYER)
 
 
 func _on_player_died(was_in_water: bool) -> void:
@@ -74,14 +69,6 @@ func _on_island_populated() -> void:
 
 func _on_treasure_chest_opened() -> void:
 	SteamManager.unlock_achievement(SteamIDs.ACH_TREASURE_HUNTER)
-
-
-func _on_boat_upgraded(_level: int) -> void:
-	SteamManager.unlock_achievement(SteamIDs.ACH_SET_SAIL)
-
-
-func _on_game_beaten() -> void:
-	SteamManager.unlock_achievement(SteamIDs.ACH_CURSE_BROKEN)
 
 
 func on_day_survived() -> void:
