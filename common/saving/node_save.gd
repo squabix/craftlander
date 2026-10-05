@@ -19,6 +19,7 @@ enum ParentType {
 
 @export var dynamic_uuid: StringName
 @export var scene_file_path: String
+@export var scene_uid: String
 
 @export var parent_type: ParentType
 @export var parent_uuid: StringName
@@ -43,6 +44,7 @@ func make_dynamic(uuid: StringName, target: Node) -> void:
 	mode = Mode.DYNAMIC
 	dynamic_uuid = uuid
 	scene_file_path = target.scene_file_path
+	scene_uid = ResourceUID.path_to_uid(scene_file_path)
 
 	var parent := target.get_parent()
 	var parent_saver: NodeSaver = NodeSaver.all.get(parent, null)
