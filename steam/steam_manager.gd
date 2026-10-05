@@ -108,10 +108,6 @@ func _init_steam() -> void:
 
 	_steam = Engine.get_singleton(&"Steam")
 
-	if _steam.restartAppIfNecessary(APP_ID):
-		get_tree().quit()
-		return
-
 	OS.set_environment("SteamAppId", str(APP_ID))
 	OS.set_environment("SteamGameId", str(APP_ID))
 
