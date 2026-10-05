@@ -2,6 +2,8 @@
 class_name MeshInstanceAggregator3D
 extends Node3D
 
+const OVERLAP_FRAMES := 2
+
 static var aggregated_mesh_instances: Dictionary[MeshInstance3D, MeshInstanceAggregator3D]
 
 @export_tool_button("Aggregate", "MultiMesh") var aggregate_action: Callable = aggregate
@@ -40,6 +42,16 @@ static func disassociate_mesh_instance(instance: MeshInstance3D) -> void:
 
 	if aggregator.invert_instance_visibility and is_instance_valid(instance):
 		instance.show()
+
+
+static func set_multimesh_visibility_deep(node: Node, visibility: bool) -> void:
+	if node is MeshInstance3D:
+		var aggregator: MeshInstanceAggregator3D = aggregated_mesh_instances.get(node, null)
+		if is_instance_valid(aggregator):
+			aggregator.set_instance_visibility(node, visibility)
+
+	for child in node.get_children():
+		set_multimesh_visibility_deep(child, visibility)
 
 
 static func get_material_override(mesh_instance: MeshInstance3D) -> Material:
@@ -260,9 +272,10 @@ func _on_instance_visibility_changed(instance: MeshInstance3D) -> void:
 
 	# If the source mesh is shown, then hide the multimesh element (and vice versa)
 	if instance.is_visible_in_tree():
-		await get_tree().process_frame
-		if not is_instance_valid(instance) or not instance.is_visible_in_tree():
-			return
+		for i in OVERLAP_FRAMES:
+			await get_tree().process_frame
+			if not is_instance_valid(instance) or not instance.is_visible_in_tree():
+				return
 	set_instance_visibility(instance, not instance.is_visible_in_tree())
 
 

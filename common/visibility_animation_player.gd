@@ -49,15 +49,30 @@ func _on_animation_finished(_anim_name: StringName) -> void:
 	if not hide_on_finish:
 		return
 
-	for node in _affected_nodes:
+	var finished_nodes := _affected_nodes.duplicate()
+	_affected_nodes.clear()
+
+	for node in finished_nodes:
+		MeshInstanceAggregator3D.set_multimesh_visibility_deep(node, true)
+
+	for i in MeshInstanceAggregator3D.OVERLAP_FRAMES:
+		await get_tree().process_frame
+
+	if is_playing():
+		for node in finished_nodes:
+			MeshInstanceAggregator3D.set_multimesh_visibility_deep(node, false)
+		return
+
+	if not hide_on_finish:
+		return
+
+	for node in finished_nodes:
 		if not is_instance_valid(node):
 			continue
 		if deep:
 			Util.set_visibility_deep(node, false)
 		else:
 			node.hide()
-
-	_affected_nodes.clear()
 
 
 func show_deep(node: Node, is_target := false) -> void:
