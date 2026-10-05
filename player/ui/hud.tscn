@@ -122,11 +122,8 @@ reset_selection_on_disable = true
 inventory = NodePath("")
 metadata/_custom_type_script = "uid://ioo6s3m7wbha"
 
-[node name="SignalAudioManager" type="Node" parent="HoverInventorySelector" unique_id=539860488 node_paths=PackedStringArray("signal_players")]
+[node name="SignalAudioManager" type="Node" parent="HoverInventorySelector" unique_id=539860488]
 script = ExtResource("2_f5ha0")
-signal_players = {
-&"selected_new_index": NodePath("")
-}
 metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 
 [node name="SelectPlayer" type="AudioStreamPlayer" parent="HoverInventorySelector/SignalAudioManager" unique_id=861373877]
@@ -134,7 +131,7 @@ stream = SubResource("AudioStreamRandomizer_rnncm")
 volume_db = -10.0
 bus = &"UI"
 
-[node name="TooltipLabel" type="RichTextLabel" parent="." unique_id=1773718056 node_paths=PackedStringArray("interactors")]
+[node name="TooltipLabel" type="RichTextLabel" parent="." unique_id=1773718056]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -155,7 +152,6 @@ fit_content = true
 scroll_active = false
 script = ExtResource("5_icm2t")
 icon_size = 30
-interactors = [NodePath(""), NodePath("")]
 
 [node name="ActionHints" type="GridContainer" parent="." unique_id=461563704 node_paths=PackedStringArray("item_holder", "use_hint")]
 layout_mode = 1
@@ -401,7 +397,7 @@ size_curve = ExtResource("22_eds6u")
 script = ExtResource("23_jjuq1")
 base_interval = 0.3
 target_methods = {
-NodePath(""): &"refresh"
+NodePath(".."): &"refresh"
 }
 
 [node name="RightContainer" type="VBoxContainer" parent="." unique_id=867140569]

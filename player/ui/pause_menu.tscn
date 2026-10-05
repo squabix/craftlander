@@ -203,11 +203,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CraftingEnvironment" parent="CraftingInterface" unique_id=2022052365 node_paths=PackedStringArray("slot_fit_regions", "inventory", "selector", "held_stack", "pause_interface") instance=ExtResource("3_rbjai")]
+[node name="CraftingEnvironment" parent="CraftingInterface" unique_id=2022052365 node_paths=PackedStringArray("inventory", "selector", "held_stack", "pause_interface") instance=ExtResource("3_rbjai")]
 z_index = 2
 layout_mode = 1
 mouse_filter = 2
-slot_fit_regions = [NodePath("../BackpackPanel"), NodePath("")]
 inventory = NodePath("")
 selector = NodePath("")
 held_stack = NodePath("../HeldStack")
@@ -280,9 +279,9 @@ text = "Item"
 
 [node name="ButtonAudioManager" parent="CraftingInterface/RecipePanel/RecipeList/Margin/EntryContainer/Entry/Button" unique_id=2144126531 node_paths=PackedStringArray("signal_players") instance=ExtResource("12_dtqpw")]
 signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
+&"focus_entered": NodePath("../../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
 }
 
 [node name="BackEntry" type="CenterContainer" parent="CraftingInterface/RecipePanel/RecipeList/Margin/EntryContainer" unique_id=766660820]
@@ -295,9 +294,9 @@ text = "Back"
 
 [node name="ButtonAudioManager" parent="CraftingInterface/RecipePanel/RecipeList/Margin/EntryContainer/BackEntry/Button" unique_id=677746601 node_paths=PackedStringArray("signal_players") instance=ExtResource("12_dtqpw")]
 signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
+&"focus_entered": NodePath("../../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
 }
 
 [node name="CenterContainer" type="CenterContainer" parent="CraftingInterface/RecipePanel" unique_id=80037952]
@@ -721,9 +720,9 @@ expand_icon = true
 
 [node name="ButtonAudioManager" parent="CraftingInterface/CompletePanel/CraftButton" unique_id=97778743 node_paths=PackedStringArray("signal_players") instance=ExtResource("12_dtqpw")]
 signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
+&"focus_entered": NodePath("HoverPlayer"),
+&"mouse_entered": NodePath("HoverPlayer"),
+&"pressed": NodePath("PressPlayer")
 }
 
 [node name="Preview" type="Control" parent="CraftingInterface/CompletePanel" unique_id=313396205]
@@ -822,15 +821,12 @@ hint_text = "Craft"
 layout_mode = 2
 columns = 10
 
-[node name="ItemDisplay1" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=354355547 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay1" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=354355547 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -889,15 +885,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay2" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1745551203 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay2" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1745551203 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -956,15 +949,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay3" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=2130864228 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay3" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=2130864228 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -1023,15 +1013,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay4" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=2091665610 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay4" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=2091665610 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -1090,15 +1077,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay5" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1470458088 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay5" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1470458088 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -1157,15 +1141,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay6" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1890924949 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay6" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1890924949 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -1224,15 +1205,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay7" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1903865574 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay7" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1903865574 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -1291,15 +1269,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay8" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=696684010 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay8" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=696684010 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -1358,15 +1333,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay9" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1484244505 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay9" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1484244505 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -1425,15 +1397,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay10" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1552720697 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay10" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1552720697 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -1492,15 +1461,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay11" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=661016092 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay11" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=661016092 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -1559,15 +1525,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay12" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1711310332 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay12" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1711310332 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -1626,15 +1589,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay13" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1229645751 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay13" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1229645751 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -1693,15 +1653,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay14" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=941370357 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay14" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=941370357 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -1760,15 +1717,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay15" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1685278718 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay15" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1685278718 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -1827,15 +1781,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay16" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1763688449 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay16" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1763688449 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -1894,15 +1845,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay17" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=2013886760 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay17" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=2013886760 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -1961,15 +1909,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay18" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1430721138 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay18" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1430721138 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -2028,15 +1973,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay19" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=48178895 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay19" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=48178895 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -2095,15 +2037,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay20" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=2006081237 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay20" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=2006081237 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -2162,15 +2101,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay21" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=667492386 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay21" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=667492386 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -2229,15 +2165,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay22" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=368841081 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay22" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=368841081 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -2296,15 +2229,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay23" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1699531618 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay23" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1699531618 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -2363,15 +2293,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay24" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=323741432 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay24" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=323741432 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -2430,15 +2357,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay25" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1283346996 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay25" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1283346996 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -2497,15 +2421,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay26" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1527609994 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay26" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1527609994 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -2564,15 +2485,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay27" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=630717449 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay27" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=630717449 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -2631,15 +2549,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay28" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1048994279 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay28" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=1048994279 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -2698,15 +2613,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay29" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=355544171 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay29" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=355544171 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -2765,15 +2677,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_v0nfp")
 action_mode = 0
 flat = true
 
-[node name="ItemDisplay30" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=501669749 node_paths=PackedStringArray("inventory_selectors", "select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
+[node name="ItemDisplay30" type="Control" parent="CraftingInterface/BackpackPanel/Container" unique_id=501669749 node_paths=PackedStringArray("select_button", "selected_scale_targets", "inventory", "icon_rect", "label")]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 script = ExtResource("43_7c3xx")
 auto_set_index_enabled = true
 auto_set_index_offset = 10
-inventory_selectors = {
-NodePath(""): 1
-}
 select_button = NodePath("Button")
 modulate_selected = Color(1.353256, 1.353256, 1.353256, 1)
 selected_scale_amount = 1.3
@@ -2898,9 +2807,9 @@ text = "BACK TO GAME"
 
 [node name="ButtonAudioManager" parent="CraftingInterface/OptionsContainer/ResumeButton" unique_id=47252267 node_paths=PackedStringArray("signal_players") instance=ExtResource("12_dtqpw")]
 signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
+&"focus_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
 }
 
 [node name="SaveButton" type="Button" parent="CraftingInterface/OptionsContainer" unique_id=1591114553]
@@ -2910,15 +2819,15 @@ text = "SAVE"
 
 [node name="ButtonAudioManager" parent="CraftingInterface/OptionsContainer/SaveButton" unique_id=1050435517 node_paths=PackedStringArray("signal_players") instance=ExtResource("12_dtqpw")]
 signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
+&"focus_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
 }
 
 [node name="SignalAudioManager" type="Node" parent="CraftingInterface/OptionsContainer/SaveButton" unique_id=1183960374 node_paths=PackedStringArray("signal_players")]
 script = ExtResource("46_ci6et")
 signal_players = {
-&"pressed": NodePath("")
+&"pressed": NodePath("SavePlayer")
 }
 metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 
@@ -2933,9 +2842,9 @@ text = "SETTINGS"
 
 [node name="ButtonAudioManager" parent="CraftingInterface/OptionsContainer/SettingsButton" unique_id=400475373 node_paths=PackedStringArray("signal_players") instance=ExtResource("12_dtqpw")]
 signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
+&"focus_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
 }
 
 [node name="QuitButton" type="Button" parent="CraftingInterface/OptionsContainer" unique_id=1588183712]
@@ -2945,18 +2854,17 @@ text = "SAVE AND QUIT TO TITLE"
 
 [node name="ButtonAudioManager" parent="CraftingInterface/OptionsContainer/QuitButton" unique_id=2031176336 node_paths=PackedStringArray("signal_players") instance=ExtResource("12_dtqpw")]
 signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
+&"focus_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
 }
 
-[node name="InventoryOrganizer" type="Node" parent="CraftingInterface" unique_id=1010831407 node_paths=PackedStringArray("inventory", "held_stack", "held_item_label", "pause_interface", "slot_containers", "crafting_environment", "hover_inventory_selector", "hold_inventory_selector")]
+[node name="InventoryOrganizer" type="Node" parent="CraftingInterface" unique_id=1010831407 node_paths=PackedStringArray("inventory", "held_stack", "held_item_label", "pause_interface", "crafting_environment", "hover_inventory_selector", "hold_inventory_selector")]
 script = ExtResource("48_5kvo1")
 inventory = NodePath("")
 held_stack = NodePath("../HeldStack")
 held_item_label = NodePath("")
 pause_interface = NodePath("../..")
-slot_containers = [NodePath(""), NodePath("../BackpackPanel/Container")]
 crafting_environment = NodePath("../CraftingEnvironment")
 hover_inventory_selector = NodePath("")
 hold_inventory_selector = NodePath("")
@@ -2968,11 +2876,8 @@ dropper = NodePath("")
 pause_interface = NodePath("../..")
 quantity_label = NodePath("../HeldQuantityLabel")
 
-[node name="SignalAudioManager" type="Node" parent="CraftingInterface/HeldStack" unique_id=1640245419 node_paths=PackedStringArray("signal_players")]
+[node name="SignalAudioManager" type="Node" parent="CraftingInterface/HeldStack" unique_id=1640245419]
 script = ExtResource("46_ci6et")
-signal_players = {
-&"changed": NodePath("")
-}
 
 [node name="HeldQuantityLabel" type="Label" parent="CraftingInterface" unique_id=1194571330]
 z_index = 3
@@ -3046,99 +2951,99 @@ layout_mode = 1
 
 [node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/VSync/CenterContainer/VSyncToggle" parent_id_path=PackedInt32Array(788547277, 1518537055) index="0" unique_id=1351290583 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
 
 [node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/FullScreen/CenterContainer/WindowModeOption" parent_id_path=PackedInt32Array(788547277, 2049426436) index="1" unique_id=2144126531 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
+&"focus_entered": NodePath("HoverPlayer"),
+&"mouse_entered": NodePath("HoverPlayer"),
+&"pressed": NodePath("PressPlayer")
 }
 
 [node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/AntiAliasing/AAOption" parent_id_path=PackedInt32Array(788547277, 630181348) index="1" unique_id=875959311 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
+&"focus_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
 
 [node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/ShadowQuality/ShadowOption" parent_id_path=PackedInt32Array(788547277, 1710798274) index="1" unique_id=1882629603 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
+&"focus_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
 
 [node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/SSAO/CenterContainer/SSAOToggle" parent_id_path=PackedInt32Array(788547277, -1293967292) index="0" unique_id=-1293967291 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
 
 [node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/Glow/CenterContainer/GlowToggle" parent_id_path=PackedInt32Array(788547277, -1293967274) index="0" unique_id=-1293967273 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
 
 [node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/MaxFPS/MaxFPSOption" parent_id_path=PackedInt32Array(788547277, -1293967288) index="1" unique_id=-1293967287 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
+&"focus_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
 
 [node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/InvertY/CenterContainer/InvertYToggle" parent_id_path=PackedInt32Array(788547277, 1517878780) index="0" unique_id=1079694290 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
 
 [node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/TutorialHints/CenterContainer/TutorialHintsToggle" parent_id_path=PackedInt32Array(788547277, 1517878781) index="0" unique_id=1079694291 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
 
 [node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenShake/CenterContainer/ScreenShakeToggle" parent_id_path=PackedInt32Array(788547277, -1293967266) index="0" unique_id=-1293967265 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
 
 [node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/Vignette/CenterContainer/VignetteToggle" parent_id_path=PackedInt32Array(788547277, -1293967261) index="0" unique_id=-1293967260 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
 
 [node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/GridContainer/ScreenEffects/CenterContainer/ScreenEffectsToggle" parent_id_path=PackedInt32Array(788547277, -1293967256) index="0" unique_id=-1293967255 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
+&"focus_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../FullScreen/CenterContainer/WindowModeOption/ButtonAudioManager/PressPlayer")
 }
 
 [node name="ButtonAudioManager" parent="SettingsMenu/PanelContainer/CenterContainer/SettingsContainer/BackButton" parent_id_path=PackedInt32Array(788547277, 1546788436) index="0" unique_id=1198217718 node_paths=PackedStringArray("signal_players")]
 signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
+&"focus_entered": NodePath("HoverPlayer"),
+&"mouse_entered": NodePath("HoverPlayer"),
+&"pressed": NodePath("PressPlayer")
 }
 
 [node name="SignalAudioManager" type="Node" parent="." unique_id=1815654649 node_paths=PackedStringArray("signal_players")]
 script = ExtResource("46_ci6et")
 signal_players = {
-&"updated_pause": NodePath("")
+&"updated_pause": NodePath("PausePlayer")
 }
 metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 

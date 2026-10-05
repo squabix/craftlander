@@ -655,15 +655,15 @@ interactors = [NodePath("InteractorArea/Interactor3D"), NodePath("Head/Camera3D/
 vignette = NodePath("ScreenEffectContainer/Vignette")
 hurt_effect_trigger = NodePath("Health/SignalAnimationTrigger")
 low_health_indicator = NodePath("ScreenEffectContainer/LowHealthIndicator")
-respawn_button = NodePath("")
-boat_menu = NodePath("")
-pause_menu = NodePath("")
-boat_compass_tracker = NodePath("")
-enemy_compass_tracker = NodePath("")
-hud = NodePath("")
-hotbar_interface = NodePath("")
-player_bars = NodePath("")
-compass = NodePath("")
+respawn_button = NodePath("DeathScreen/OptionsContainer/RespawnButton")
+boat_menu = NodePath("BoatMenu")
+pause_menu = NodePath("PauseMenu")
+boat_compass_tracker = NodePath("HUD/BoatCompassTracker")
+enemy_compass_tracker = NodePath("HUD/EnemyCompassTracker")
+hud = NodePath("HUD")
+hotbar_interface = NodePath("HotbarInterface")
+player_bars = NodePath("HUD/BarContainer")
+compass = NodePath("HUD/RightContainer/Compass")
 viewmodel_container = NodePath("Head/SubViewportContainer")
 item_holder = NodePath("Head/Camera3D/ItemHolder")
 dropper = NodePath("Head/Camera3D/DropperRayCast/InventoryDropper3D")
@@ -721,13 +721,13 @@ hunger = NodePath("../Hunger")
 
 [node name="SavedAnimationTrigger" type="Node" parent="AutoSaver" unique_id=1247630312 node_paths=PackedStringArray("anim_player")]
 script = ExtResource("25_j55il")
-anim_player = NodePath("")
+anim_player = NodePath("../../HUD/AutosaveIndicator/AnimationPlayer")
 anim_name = &"flash"
 signal_name = &"saved"
 
 [node name="Hunger" type="Node" parent="." unique_id=1790864786 node_paths=PackedStringArray("bar", "health", "stamina")]
 script = ExtResource("31_2uvqg")
-bar = NodePath("")
+bar = NodePath("../HUD/BarContainer/HBoxContainer/HungerBar")
 initial_value = 1.0
 loss_per_minute = 0.1
 difficulty_profile_index = 0
@@ -750,7 +750,7 @@ metadata/_custom_type_script = "uid://b7jfh6p1qykgr"
 [node name="Stamina" type="Node" parent="." unique_id=260796409 node_paths=PackedStringArray("bar", "idle_timer", "hunger")]
 unique_name_in_owner = true
 script = ExtResource("10_fjxoa")
-bar = NodePath("")
+bar = NodePath("../HUD/BarContainer/HBoxContainer/StaminaBar")
 idle_timer = NodePath("IdleTimer")
 fill_base_rate = 0.1
 fill_acceleration = 0.01
@@ -1079,17 +1079,20 @@ animation_player = NodePath("../LowHealth/AnimationPlayer")
 
 [node name="TutorialPopupLayer" parent="." unique_id=564228869 instance=ExtResource("45_anp34")]
 
-[node name="PauseMenu" parent="." unique_id=1198001170 instance=ExtResource("46_jdjat")]
+[node name="PauseMenu" parent="." unique_id=1198001170 node_paths=PackedStringArray("health") instance=ExtResource("46_jdjat")]
+health = NodePath("../Health")
 visible = false
 
 [node name="HotbarInterface" parent="." unique_id=1409031778 instance=ExtResource("47_j420s")]
 unique_name_in_owner = true
 visible = false
 
-[node name="BoatMenu" parent="." unique_id=836490358 instance=ExtResource("48_kcq4v")]
+[node name="BoatMenu" parent="." unique_id=836490358 node_paths=PackedStringArray("pause_menu") instance=ExtResource("48_kcq4v")]
+pause_menu = NodePath("../PauseMenu")
 visible = false
 
-[node name="DeathScreen" parent="." unique_id=150543375 instance=ExtResource("49_qavcc")]
+[node name="DeathScreen" parent="." unique_id=150543375 node_paths=PackedStringArray("health") instance=ExtResource("49_qavcc")]
+health = NodePath("../Health")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1780880928]
 libraries/ = SubResource("AnimationLibrary_tqiix")
@@ -1179,4 +1182,372 @@ stream = SubResource("AudioStreamRandomizer_g1goj")
 pitch_scale = 1.2
 max_polyphony = 3
 
+[node name="HoverInventorySelector" parent="HUD" node_paths=PackedStringArray("inventory")]
+inventory = NodePath("../../Inventory")
+
+[node name="SignalAudioManager" parent="HUD/HoverInventorySelector" node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"selected_new_index": NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector/SignalAudioManager/SelectPlayer")
+}
+
+[node name="TooltipLabel" parent="HUD" node_paths=PackedStringArray("interactors")]
+interactors = [NodePath("../../InteractorArea/Interactor3D"), NodePath("../../Head/Camera3D/InteratorRay/Interactor")]
+
+[node name="ActionHints" parent="HUD" node_paths=PackedStringArray("item_holder")]
+item_holder = NodePath("../../Head/Camera3D/ItemHolder")
+
+[node name="HealthBar" parent="HUD/BarContainer" node_paths=PackedStringArray("health")]
+health = NodePath("../../../Health")
+
+[node name="CollectedItemsList" parent="HUD/BarContainer" node_paths=PackedStringArray("player")]
+player = NodePath("../../..")
+
+[node name="Cursor" parent="HUD" node_paths=PackedStringArray("item_holder")]
+item_holder = NodePath("../../Head/Camera3D/ItemHolder")
+
+[node name="BoatUpgradeBar" parent="HUD/UpgradeBarContainer" node_paths=PackedStringArray("boat_upgrader", "player_inventory")]
+boat_upgrader = NodePath("../../../BoatMenu/Panel/Content/BoatUpgrader")
+player_inventory = NodePath("../../../Inventory")
+
+[node name="EnemyCompassTracker" parent="HUD" node_paths=PackedStringArray("center_node")]
+center_node = NodePath("../..")
+
+[node name="Compass" parent="HUD/RightContainer" node_paths=PackedStringArray("center_node")]
+center_node = NodePath("../../..")
+
+[node name="CraftingEnvironment" parent="PauseMenu/CraftingInterface" node_paths=PackedStringArray("slot_fit_regions", "inventory", "selector")]
+slot_fit_regions = [NodePath("../BackpackPanel"), NodePath("../../../HotbarInterface/HotbarDisplay")]
+inventory = NodePath("../../../Inventory")
+selector = NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector")
+
+[node name="RecipeLearner" parent="PauseMenu/CraftingInterface/RecipePanel" node_paths=PackedStringArray("inventory")]
+inventory = NodePath("../../../../Inventory")
+
+[node name="ItemDisplay1" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay2" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay3" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay4" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay5" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay6" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay7" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay8" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay9" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay10" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay11" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay12" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay13" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay14" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay15" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay16" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay17" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay18" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay19" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay20" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay21" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay22" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay23" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay24" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay25" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay26" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay27" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay28" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay29" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="ItemDisplay30" parent="PauseMenu/CraftingInterface/BackpackPanel/Container" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../../../HUD/HoverInventorySelector"): 1
+}
+inventory = NodePath("../../../../../Inventory")
+
+[node name="InventoryOrganizer" parent="PauseMenu/CraftingInterface" node_paths=PackedStringArray("inventory", "held_item_label", "slot_containers", "hover_inventory_selector", "hold_inventory_selector")]
+inventory = NodePath("../../../Inventory")
+held_item_label = NodePath("../../../HotbarInterface/HeldItemLabel")
+slot_containers = [NodePath("../../../HotbarInterface/HotbarDisplay"), NodePath("../BackpackPanel/Container")]
+hover_inventory_selector = NodePath("../../../HUD/HoverInventorySelector")
+hold_inventory_selector = NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector")
+
+[node name="HeldStack" parent="PauseMenu/CraftingInterface" node_paths=PackedStringArray("inventory", "dropper")]
+inventory = NodePath("../../../Inventory")
+dropper = NodePath("../../../Head/Camera3D/DropperRayCast/InventoryDropper3D")
+
+[node name="SignalAudioManager" parent="PauseMenu/CraftingInterface/HeldStack" node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"changed": NodePath("../../../../Head/Camera3D/ItemHolder/HoldSelector/SignalAudioManager/SelectPlayer")
+}
+
+[node name="ItemInspector" parent="PauseMenu/CraftingInterface" node_paths=PackedStringArray("inventory_selector")]
+inventory_selector = NodePath("../../../HUD/HoverInventorySelector")
+
+[node name="BoatProgressPanel" parent="PauseMenu/CraftingInterface" node_paths=PackedStringArray("boat_upgrader", "player_inventory")]
+boat_upgrader = NodePath("../../../BoatMenu/Panel/Content/BoatUpgrader")
+player_inventory = NodePath("../../../Inventory")
+
+[node name="HeldItemLabel" parent="HotbarInterface" node_paths=PackedStringArray("item_holder")]
+item_holder = NodePath("../../Head/Camera3D/ItemHolder")
+
+[node name="ItemDisplay1" parent="HotbarInterface/HotbarDisplay" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../HUD/HoverInventorySelector"): 1,
+NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+inventory = NodePath("../../../Inventory")
+
+[node name="ItemDisplay2" parent="HotbarInterface/HotbarDisplay" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../HUD/HoverInventorySelector"): 1,
+NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+inventory = NodePath("../../../Inventory")
+
+[node name="ItemDisplay3" parent="HotbarInterface/HotbarDisplay" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../HUD/HoverInventorySelector"): 1,
+NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+inventory = NodePath("../../../Inventory")
+
+[node name="ItemDisplay4" parent="HotbarInterface/HotbarDisplay" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../HUD/HoverInventorySelector"): 1,
+NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+inventory = NodePath("../../../Inventory")
+
+[node name="ItemDisplay5" parent="HotbarInterface/HotbarDisplay" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../HUD/HoverInventorySelector"): 1,
+NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+inventory = NodePath("../../../Inventory")
+
+[node name="ItemDisplay6" parent="HotbarInterface/HotbarDisplay" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../HUD/HoverInventorySelector"): 1,
+NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+inventory = NodePath("../../../Inventory")
+
+[node name="ItemDisplay7" parent="HotbarInterface/HotbarDisplay" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../HUD/HoverInventorySelector"): 1,
+NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+inventory = NodePath("../../../Inventory")
+
+[node name="ItemDisplay8" parent="HotbarInterface/HotbarDisplay" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../HUD/HoverInventorySelector"): 1,
+NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+inventory = NodePath("../../../Inventory")
+
+[node name="ItemDisplay9" parent="HotbarInterface/HotbarDisplay" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../HUD/HoverInventorySelector"): 1,
+NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+inventory = NodePath("../../../Inventory")
+
+[node name="ItemDisplay10" parent="HotbarInterface/HotbarDisplay" node_paths=PackedStringArray("inventory_selectors", "inventory")]
+inventory_selectors = {
+NodePath("../../../HUD/HoverInventorySelector"): 1,
+NodePath("../../../Head/Camera3D/ItemHolder/HoldSelector"): 2
+}
+inventory = NodePath("../../../Inventory")
+
+[node name="ButtonAudioManager" parent="BoatMenu/Panel/Content/CarouselRow/PreviousButton" node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="BoatMenu/Panel/Content/CarouselRow/NextButton" node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="BoatMenu/Panel/Content/SailContainer/SailButton" node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
+[node name="BoatUpgrader" parent="BoatMenu/Panel/Content" node_paths=PackedStringArray("player_inventory")]
+player_inventory = NodePath("../../../../Inventory")
+
+[node name="ButtonAudioManager" parent="BoatMenu/Panel/Content/BoatUpgrader/UpgradeButtonContainer/UpgradeButton" node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DeathScreen/OptionsContainer/RespawnButton" node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
+[node name="ButtonAudioManager" parent="DeathScreen/OptionsContainer/QuitButton" node_paths=PackedStringArray("signal_players")]
+signal_players = {
+&"focus_entered": NodePath("../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"mouse_entered": NodePath("../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/HoverPlayer"),
+&"pressed": NodePath("../../../../PauseMenu/CraftingInterface/CompletePanel/CraftButton/ButtonAudioManager/PressPlayer")
+}
+
 [connection signal="updated_pause" from="PauseMenu" to="." method="_on_pause_interface_updated_pause"]
+
+[editable path="BoatMenu"]
+[editable path="DeathScreen"]
+[editable path="HUD"]
+[editable path="HotbarInterface"]
+[editable path="PauseMenu"]

@@ -322,12 +322,7 @@ focus_mode = 0
 theme_override_font_sizes/font_size = 33
 text = "<"
 
-[node name="ButtonAudioManager" parent="Panel/Content/CarouselRow/PreviousButton" unique_id=2144126531 node_paths=PackedStringArray("signal_players") instance=ExtResource("4_757a6")]
-signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
-}
+[node name="ButtonAudioManager" parent="Panel/Content/CarouselRow/PreviousButton" unique_id=2144126531 instance=ExtResource("4_757a6")]
 
 [node name="IslandCarousel" type="Control" parent="Panel/Content/CarouselRow" unique_id=375677984 node_paths=PackedStringArray("previous_button", "next_button", "dot_container")]
 custom_minimum_size = Vector2(0, 240)
@@ -501,12 +496,7 @@ focus_mode = 0
 theme_override_font_sizes/font_size = 33
 text = ">"
 
-[node name="ButtonAudioManager" parent="Panel/Content/CarouselRow/NextButton" unique_id=1324637241 node_paths=PackedStringArray("signal_players") instance=ExtResource("4_757a6")]
-signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
-}
+[node name="ButtonAudioManager" parent="Panel/Content/CarouselRow/NextButton" unique_id=1324637241 instance=ExtResource("4_757a6")]
 
 [node name="DotContainer" type="HBoxContainer" parent="Panel/Content" unique_id=2021788384]
 layout_mode = 2
@@ -523,17 +513,12 @@ theme_override_font_sizes/font_size = 33
 disabled = true
 text = "Set Sail"
 
-[node name="ButtonAudioManager" parent="Panel/Content/SailContainer/SailButton" unique_id=671284248 node_paths=PackedStringArray("signal_players") instance=ExtResource("4_757a6")]
-signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
-}
+[node name="ButtonAudioManager" parent="Panel/Content/SailContainer/SailButton" unique_id=671284248 instance=ExtResource("4_757a6")]
 
 [node name="SignalAudioManager" type="Node" parent="Panel/Content/SailContainer/SailButton" unique_id=1815409009 node_paths=PackedStringArray("signal_players")]
 script = ExtResource("12_1sw6c")
 signal_players = {
-&"pressed": NodePath("")
+&"pressed": NodePath("AudioStreamPlayer")
 }
 metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 
@@ -549,9 +534,9 @@ layout_mode = 2
 theme_override_constants/separation = 12
 script = ExtResource("14_03asq")
 requirements = {
-1: NodePath(""),
-2: NodePath(""),
-3: NodePath("")
+1: NodePath("UpgradeRequirement1"),
+2: NodePath("UpgradeRequirement2"),
+3: NodePath("UpgradeRequirement3")
 }
 requirement_display_container = NodePath("RequirementContainer/GridContainer")
 upgrade_button = NodePath("UpgradeButtonContainer/UpgradeButton")
@@ -1031,12 +1016,7 @@ custom_minimum_size = Vector2(150, 30)
 layout_mode = 2
 text = "Upgrade"
 
-[node name="ButtonAudioManager" parent="Panel/Content/BoatUpgrader/UpgradeButtonContainer/UpgradeButton" unique_id=1594856571 node_paths=PackedStringArray("signal_players") instance=ExtResource("4_757a6")]
-signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
-}
+[node name="ButtonAudioManager" parent="Panel/Content/BoatUpgrader/UpgradeButtonContainer/UpgradeButton" unique_id=1594856571 instance=ExtResource("4_757a6")]
 
 [node name="UpgradeRequirement1" type="Node" parent="Panel/Content/BoatUpgrader" unique_id=1800519305]
 script = ExtResource("19_m3sx3")
@@ -1063,8 +1043,8 @@ metadata/_custom_type_script = "uid://bu0k8q4uctlgf"
 process_mode = 3
 script = ExtResource("12_1sw6c")
 signal_players = {
-&"failed_upgrade": NodePath(""),
-&"started_upgrade": NodePath("")
+&"failed_upgrade": NodePath("FailPlayer"),
+&"started_upgrade": NodePath("UpgradePlayer")
 }
 metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 
@@ -1079,8 +1059,8 @@ bus = &"UI"
 [node name="SignalAudioManager" type="Node" parent="." unique_id=1505177656 node_paths=PackedStringArray("signal_players")]
 script = ExtResource("12_1sw6c")
 signal_players = {
-&"backed_out": NodePath(""),
-&"opened": NodePath("")
+&"backed_out": NodePath("BoatPlayer"),
+&"opened": NodePath("BoatPlayer")
 }
 metadata/_custom_type_script = "uid://b3snj0gi7akf8"
 

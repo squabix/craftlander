@@ -214,12 +214,7 @@ theme_override_styles/disabled = SubResource("StyleBoxFlat_deathbtn_disabled")
 theme_override_styles/focus = SubResource("StyleBoxFlat_deathbtn_hover")
 text = "Respawn"
 
-[node name="ButtonAudioManager" parent="OptionsContainer/RespawnButton" unique_id=2144126531 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_gaeyt")]
-signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
-}
+[node name="ButtonAudioManager" parent="OptionsContainer/RespawnButton" unique_id=2144126531 instance=ExtResource("2_gaeyt")]
 
 [node name="QuitButton" type="Button" parent="OptionsContainer" unique_id=617760411]
 layout_mode = 2
@@ -235,9 +230,4 @@ theme_override_styles/disabled = SubResource("StyleBoxFlat_deathbtn_disabled")
 theme_override_styles/focus = SubResource("StyleBoxFlat_deathbtn_hover")
 text = "Quit to Title Screen"
 
-[node name="ButtonAudioManager" parent="OptionsContainer/QuitButton" unique_id=323907116 node_paths=PackedStringArray("signal_players") instance=ExtResource("2_gaeyt")]
-signal_players = {
-&"focus_entered": NodePath(""),
-&"mouse_entered": NodePath(""),
-&"pressed": NodePath("")
-}
+[node name="ButtonAudioManager" parent="OptionsContainer/QuitButton" unique_id=323907116 instance=ExtResource("2_gaeyt")]
