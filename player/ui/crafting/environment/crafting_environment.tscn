@@ -27,6 +27,24 @@ size = Vector2(1, 1)
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4aq3d"]
 height = 0.01
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_craft"]
+
+[sub_resource type="Sky" id="Sky_craft"]
+sky_material = SubResource("ProceduralSkyMaterial_craft")
+
+[sub_resource type="Environment" id="Environment_craft"]
+sky = SubResource("Sky_craft")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.5
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_white = 16.0
+adjustment_enabled = true
+adjustment_brightness = 1.1
+adjustment_contrast = 1.15
+adjustment_saturation = 1.1
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_18auj"]
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
@@ -38,26 +56,6 @@ proximity_fade_enabled = true
 material = SubResource("StandardMaterial3D_18auj")
 radial_segments = 16
 rings = 8
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_craft"]
-
-[sub_resource type="Sky" id="Sky_craft"]
-sky_material = SubResource("ProceduralSkyMaterial_craft")
-
-[sub_resource type="Environment" id="Environment_craft"]
-sky = SubResource("Sky_craft")
-ambient_light_source = 3
-ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_sky_contribution = 0.5
-ambient_light_energy = 1.2
-reflected_light_source = 2
-tonemap_mode = 3
-tonemap_exposure = 1.0
-tonemap_white = 16.0
-adjustment_enabled = true
-adjustment_brightness = 1.1
-adjustment_contrast = 1.15
-adjustment_saturation = 1.1
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1mrey"]
 random_pitch = 1.122462
@@ -404,25 +402,13 @@ mesh = SubResource("PlaneMesh_xy7ao")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Space/Grid/GridSlot25" unique_id=762334412]
 shape = SubResource("CylinderShape3D_4aq3d")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="SubViewport/Space" unique_id=1511305085]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-layers = 2
-light_energy = 3.0
-shadow_enabled = true
-shadow_caster_mask = 4293918722
-omni_range = 10.0
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport/Space" unique_id=1733801142]
 environment = SubResource("Environment_craft")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport/Space" unique_id=1733801143]
-transform = Transform3D(0.8660254, -0.35355338, 0.35355338, 0, 0.70710677, 0.70710677, -0.5, -0.6123724, 0.6123724, 0, 5, 0)
-layers = 3
-light_energy = 1.75
-
-[node name="FillLight" type="DirectionalLight3D" parent="SubViewport/Space" unique_id=1733801144]
-rotation_degrees = Vector3(-50, -35, 0)
-light_energy = 0.7
+transform = Transform3D(0.8660254, -0.49852633, -0.03835948, 0, -0.07671896, 0.99705267, -0.5, -0.86347294, -0.06644057, 0, 5, 0)
+layers = 2
+light_energy = 0.4
 
 [node name="Cursor3D" type="RayCast3D" parent="SubViewport/Space" unique_id=101020664]
 target_position = Vector3(0, 0.1, 0)
