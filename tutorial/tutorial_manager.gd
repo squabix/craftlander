@@ -30,7 +30,7 @@ const STEPS: Dictionary[StringName, Dictionary] = {
 	},
 	&"sprinting": {
 		"tier": Tier.TOAST,
-		"text": "Hold Sprint while moving forward to run faster. Sprinting uses Stamina.",
+		"text": "Press Sprint while moving forward to run faster. Sprinting uses Stamina.",
 		"icon_action": &"sprint",
 	},
 	&"crafting_intro": {
