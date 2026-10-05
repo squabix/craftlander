@@ -5,6 +5,7 @@ const BOAT_SCENE_PATH_FORMAT := "res://boat/player_boat/boat%s.tscn"
 
 @export var level := 0
 @export var interactable: Interactable3D
+@export var hull_mask_material: Material
 
 
 static func instantiate(boat_level: int) -> PlayerBoat:
@@ -28,6 +29,7 @@ static func instantiate(boat_level: int) -> PlayerBoat:
 
 func _ready() -> void:
 	interactable.interacted_with.connect(open_boat_menu)
+	apply_hull_mask()
 	docked.connect(EventBus.trigger.bind(&"player_boat_docked"))
 	super()
 
@@ -69,3 +71,12 @@ func play_upgrade_particles() -> void:
 	var spawner := get_node_or_null(^"%UpgradeParticleSpawner") as ParticleSpawner3D
 	if is_instance_valid(spawner):
 		spawner.spawn()
+
+
+func apply_hull_mask() -> void:
+	if hull_mask_material == null:
+		return
+
+	for node in Util.find_children_of_class(self, &"MeshInstance3D"):
+		if not interactable.is_ancestor_of(node):
+			(node as MeshInstance3D).material_overlay = hull_mask_material

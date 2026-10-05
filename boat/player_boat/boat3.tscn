@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://bhjxscxhtg2se" path="res://common/spawner/particle_spawner3d.gd" id="99_particlespawner"]
 [ext_resource type="Script" uid="uid://bxjt3nibhkxh8" path="res://common/signal_triggers/camera_shake_trigger.gd" id="99_shaketrigger"]
 [ext_resource type="PackedScene" uid="uid://lyptlia5fnc8" path="res://common3d/boat_upgrade_particles.tscn" id="99_upgradeparticles"]
+[ext_resource type="Material" path="res://assets/shaders/boat_hull_mask.tres" id="99_hullmask"]
 
 [sub_resource type="Resource" id="Resource_1blct"]
 script = ExtResource("3_fqixs")
@@ -117,6 +118,7 @@ motion_mode = 1
 script = ExtResource("1_64a40")
 level = 3
 interactable = NodePath("Interactable3D")
+hull_mask_material = ExtResource("99_hullmask")
 driver_seat = NodePath("DriverSeat")
 state_machine = NodePath("StateMachine")
 seats = [NodePath("DriverSeat")]
