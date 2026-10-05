@@ -95,12 +95,13 @@ shader_parameter/refraction_strength = 0.05
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
 
-[node name="BeeNest" type="Node3D" unique_id=51772479 node_paths=PackedStringArray("hurtbox", "inventory", "health")]
+[node name="BeeNest" type="Node3D" unique_id=51772479 node_paths=PackedStringArray("hurtbox", "inventory", "health", "bee_spawners")]
 script = ExtResource("1_3jy1h")
 max_hp = 8
 hurtbox = NodePath("Hurtbox3D")
 inventory = NodePath("Inventory")
 health = NodePath("Health")
+bee_spawners = [NodePath("BeeSpawner1"), NodePath("BeeSpawner2"), NodePath("BeeSpawner3"), NodePath("BeeSpawner4"), NodePath("BeeSpawner5")]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1012779916]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39999998, 0)
