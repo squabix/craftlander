@@ -1,9 +1,12 @@
 class_name GameAchievements
 extends Node
 
-const CRAFT_ACHIEVEMENTS: Dictionary[String, StringName] = {
+const PICKUP_ACHIEVEMENTS: Dictionary[String, StringName] = {
 	"res://items/weapons/mushroom_staff/mushroom_staff_item.tres": SteamIDs.ACH_MUSHROOM_STAFF,
 	"res://items/weapons/ice_staff/ice_staff_item.tres": SteamIDs.ACH_ICE_STAFF,
+}
+
+const CRAFT_ACHIEVEMENTS: Dictionary[String, StringName] = {
 	"res://items/weapons/slime_staff/slime_staff_item.tres": SteamIDs.ACH_SLIME_STAFF,
 	"res://items/tools/diamond/diamond_pickaxe/diamond_pickaxe_item.tres": SteamIDs.ACH_DIAMOND_AGE,
 	"res://items/weapons/ice_club/ice_club_item.tres": SteamIDs.ACH_BATTER_UP,
@@ -20,6 +23,7 @@ func _ready() -> void:
 	EventBus.subscribe(&"player_died", _on_player_died)
 	EventBus.subscribe(&"player_survived_hurt", _on_player_survived_hurt)
 	EventBus.subscribe(&"item_crafted", _on_item_crafted)
+	EventBus.subscribe(&"item_picked_up", _on_item_picked_up)
 	EventBus.subscribe(&"tree_chopped", _on_tree_chopped)
 	EventBus.subscribe(&"bee_nest_destroyed", _on_bee_nest_destroyed)
 	EventBus.subscribe(&"island_populated", _on_island_populated)
@@ -51,6 +55,12 @@ func _on_item_crafted(item: Item) -> void:
 	var item_path := item.resource_path
 	if item_path in CRAFT_ACHIEVEMENTS:
 		SteamManager.unlock_achievement(CRAFT_ACHIEVEMENTS[item_path])
+
+
+func _on_item_picked_up(item: Item) -> void:
+	var item_path := item.resource_path
+	if item_path in PICKUP_ACHIEVEMENTS:
+		SteamManager.unlock_achievement(PICKUP_ACHIEVEMENTS[item_path])
 
 
 func _on_tree_chopped() -> void:

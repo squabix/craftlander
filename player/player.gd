@@ -78,6 +78,9 @@ func _ready() -> void:
 	health.died.connect(die)
 	health.survived_hurt.connect(_on_survived_hurt)
 	health.was_hurt.connect(_on_was_hurt)
+	for interactor in interactors:
+		if is_instance_valid(interactor):
+			interactor.interacted_with.connect(_on_interacted_with)
 	inventory_saver.finished_load.connect(item_holder.selector.update_current_instance, CONNECT_ONE_SHOT)
 	health_saver.finished_load.connect(_on_health_loaded, CONNECT_ONE_SHOT)
 	hunger_saver.finished_load.connect(_on_hunger_loaded, CONNECT_ONE_SHOT)
@@ -163,6 +166,11 @@ func die() -> void:
 
 func _on_survived_hurt() -> void:
 	EventBus.trigger(&"player_survived_hurt", health.to_percent_max(health.hp))
+
+
+func _on_interacted_with(interactable: Interactable3D) -> void:
+	if interactable is ItemPickup3D and interactable.is_queued_for_deletion():
+		EventBus.trigger(&"item_picked_up", interactable.item)
 
 
 func _on_was_hurt() -> void:
